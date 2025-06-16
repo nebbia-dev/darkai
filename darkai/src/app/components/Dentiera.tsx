@@ -1,6 +1,5 @@
 import * as THREE from 'three';
 import {useFBX, useTexture} from "@react-three/drei";
-import {useEffect} from "react";
 
 export default function Dentiera({envMap}) {
     const fbx = useFBX('/models/Dentiera.fbx');

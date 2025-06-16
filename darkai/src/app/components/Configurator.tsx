@@ -1,6 +1,5 @@
 'use client'
-import {Canvas} from '@react-three/fiber';
-import {Environment, OrbitControls, useEnvironment} from '@react-three/drei';
+import {OrbitControls, useEnvironment} from '@react-three/drei';
 import Dentiera from "@/app/components/Dentiera";
 import Teeth from "@/app/components/Teeth";
 

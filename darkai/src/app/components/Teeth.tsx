@@ -3,7 +3,6 @@ import {useFBX, useTexture} from "@react-three/drei";
 
 export default function Teeth({envMap}) {
     const fbx = useFBX('/models/MOD_Dentiera_Completa.fbx');
-
     // FULL
     const propsYGoldFull = useTexture({
         map: 'textures/full/DefaultMaterial_Base_color.webp',
@@ -538,23 +537,12 @@ export default function Teeth({envMap}) {
         envMap: envMap
     })
 
-    // fbx.children[0].visible = false;
-    fbx.children[1].visible = false;
-    fbx.children[2].visible = false;
-    fbx.children[3].visible = false;
-    // fbx.children[4].visible = false;
-
-    fbx.children[0].children[2].material = yGoldFullMaterial;
-    fbx.children[0].children[3].material = rGoldFullMaterial;
-    fbx.children[0].children[8].material = yGoldFullMaterial;
-    fbx.children[0].children[9].material = rGoldFullMaterial;
-
-    fbx.children[4].children[0].material = sapphire;
-    fbx.children[4].children[1].material = ruby;
-    fbx.children[4].children[2].material = emerald;
-    fbx.children[4].children[3].material = amethyst;
-
     console.log(fbx);
 
-    return <primitive object={fbx}/>
+    return (
+        <>
+            <mesh geometry={fbx.children[0].children[2].geometry} material={yGoldFullMaterial}/>
+            <mesh geometry={fbx.children[0].children[5].geometry} material={yGoldFullMaterial} visible={false} onClick={()=>console.log('quaso')}/>
+        </>
+    )
 }
