@@ -1,15 +1,9 @@
-import {useFBX} from "@react-three/drei";
 import {memo, useMemo, useState} from "react";
 import FullMaterial from "@/app/components/FullMaterial";
+import teeth from "@/app/components/teeth";
 export default function IlsDx({envMap}) {
-    const tooth = useMemo(() => {
-        const fbx = useFBX('/models/MOD_Dentiera_Completa.fbx');
-        console.log('dentifbx 2')
-        return {
-            ilsdx: fbx.children[0].children[0].geometry,
-        };
-    }, []);
     const [visible, setVisible] = useState<boolean>(false);
+    const tooth = useMemo(() => teeth(), []);
     const ILSDX = memo(({visible}) => {
         console.log('halo 2')
         return (

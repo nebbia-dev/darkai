@@ -1,7 +1,13 @@
 import * as THREE from 'three';
-import {useTexture} from "@react-three/drei";
+import {useFBX, useTexture} from "@react-three/drei";
 
-export default function Teeth() {
+export default function teeth() {
+    const fbx = useFBX('/models/MOD_Dentiera_Completa.fbx');
+    console.log('dentifbx 1');
+    return {
+        ilsdx: fbx.children[0].children[0].geometry,
+        ilidx: fbx.children[0].children[1].geometry,
+    };
 
     // FULL DIAMOND
     const propsYGDiamondFull = useTexture({
@@ -493,10 +499,6 @@ export default function Teeth() {
         // HIGHLIGHT MATERIAL
         const highlightMaterial = new THREE.MeshBasicMaterial({color: 0xff0000});
 
-    console.log('render');
-
-    return (
-        <>
             {/*FULL*/}
             {/*FRAME DIAMONDS*/}
             {/*<group>*/}
@@ -550,6 +552,4 @@ export default function Teeth() {
             {/*    <mesh geometry={fbx.children[4].children[2].geometry} material={yGoldFullMaterial} visible={false}/>*/}
             {/*    <mesh geometry={fbx.children[4].children[3].geometry} material={yGoldFullMaterial} visible={false}/>*/}
             {/*</group>*/}
-        </>
-    )
 }
