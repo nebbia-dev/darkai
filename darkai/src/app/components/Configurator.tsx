@@ -1,7 +1,8 @@
 'use client'
 import {OrbitControls, useEnvironment} from '@react-three/drei';
 import Dentiera from "@/app/components/Dentiera";
-import Teeth from "@/app/components/Teeth";
+import IlsDx from "@/app/components/IlsDx";
+import IliDx from "@/app/components/IliDx";
 
 export default function Configurator() {
 
@@ -10,7 +11,8 @@ export default function Configurator() {
     return (
         <>
             <OrbitControls/>
-            <Teeth envMap={envMap}/>
+            <IlsDx envMap={envMap}/>
+            <IliDx envMap={envMap}/>
             <Dentiera envMap={envMap}/>
         </>
     );

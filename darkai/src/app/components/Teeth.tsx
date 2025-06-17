@@ -1,58 +1,7 @@
 import * as THREE from 'three';
-import {useFBX, useTexture} from "@react-three/drei";
-import {memo, useMemo, useState} from "react";
-import {MeshBasicMaterial, MeshStandardMaterial} from "three";
+import {useTexture} from "@react-three/drei";
 
-export default function Teeth({envMap}) {
-    const tooth = useMemo(() => {
-        const fbx = useFBX('/models/MOD_Dentiera_Completa.fbx');
-        console.log('dentifbx')
-        return fbx.children[0].children[0].geometry;
-    }, []);
-    const [visible, setVisible] = useState<boolean>(false);
-    const FullMaterial = ({color}) => {
-            const propsYGoldFull = useTexture({
-                map: 'textures/full/DefaultMaterial_Base_color.webp',
-                normalMap: 'textures/full/DefaultMaterial_Normal.webp',
-                metalnessMap: 'textures/full/DefaultMaterial_Metallic.webp',
-                roughnessMap: 'textures/full/DefaultMaterial_Roughness.webp',
-                aoMap: 'textures/full/DefaultMaterial_Mixed_AO.webp',
-            });
-            propsYGoldFull.map.colorSpace = THREE.SRGBColorSpace;
-            const propsRGoldFull = useTexture({
-                map: 'textures/full/DefaultMaterial_Base_colorRose.webp',
-            });
-            propsRGoldFull.map.colorSpace = THREE.SRGBColorSpace;
-            const propsWGoldFull = useTexture({
-                map: 'textures/full/DefaultMaterial_Base_colorWhite.webp',
-            });
-            propsWGoldFull.map.colorSpace = THREE.SRGBColorSpace;
-            console.log('quaso');
-            return (<meshStandardMaterial
-                map={color === 'gold'
-                    ? propsYGoldFull.map
-                    : color === 'rose'
-                        ? propsRGoldFull.map
-                        : propsWGoldFull.map}
-                normalMap={propsYGoldFull.normalMap}
-                metalnessMap = {propsYGoldFull.metalnessMap}
-                roughnessMap = {propsYGoldFull.roughnessMap}
-                aoMap = {propsYGoldFull.aoMap}
-                metalness = {1}
-                roughness = {0.5}
-                envMap = {envMap}
-                onUpdate={(self) => (self.needsUpdate = true)}
-            />)
-        }
-    const ILSDX = memo(({visible}) => {
-            console.log('halo')
-            return (
-                <mesh geometry={tooth}
-                      onClick={log}>
-                    {visible ? <FullMaterial color="gold"/> : <meshBasicMaterial color="red"/>}
-                </mesh>
-            )
-        })
+export default function Teeth() {
 
     // FULL DIAMOND
     const propsYGDiamondFull = useTexture({
@@ -546,39 +495,9 @@ export default function Teeth({envMap}) {
 
     console.log('render');
 
-    function log() {
-        setVisible(!visible);
-    }
-
     return (
         <>
             {/*FULL*/}
-            <group>
-                <ILSDX visible={visible} color="gold"/>
-
-                {/*<mesh geometry={fbx.children[0].children[1].geometry} material={color} visible={visible}*/}
-                {/*      onClick={(event) => log(fbx.children[0].children[1], event)}/>*/}
-                {/*<mesh geometry={fbx.children[0].children[2].geometry} material={color} visible={visible}*/}
-                {/*      onClick={(event) => log(fbx.children[0].children[2], event)}/>*/}
-                {/*<mesh geometry={fbx.children[0].children[3].geometry} material={color} visible={visible}*/}
-                {/*      onClick={(event) => log(fbx.children[0].children[3], event)}/>*/}
-                {/*<mesh geometry={fbx.children[0].children[4].geometry} material={color} visible={visible}*/}
-                {/*      onClick={(event) => log(fbx.children[0].children[4], event)}/>*/}
-                {/*<mesh geometry={fbx.children[0].children[5].geometry} material={color} visible={visible}*/}
-                {/*      onClick={(event) => log(fbx.children[0].children[5], event)}/>*/}
-                {/*<mesh geometry={fbx.children[0].children[6].geometry} material={color} visible={visible}*/}
-                {/*      onClick={(event) => log(fbx.children[0].children[6], event)}/>*/}
-                {/*<mesh geometry={fbx.children[0].children[7].geometry} material={color} visible={visible}*/}
-                {/*      onClick={(event) => log(fbx.children[0].children[7], event)}/>*/}
-                {/*<mesh geometry={fbx.children[0].children[8].geometry} material={color} visible={visible}*/}
-                {/*      onClick={(event) => log(fbx.children[0].children[8], event)}/>*/}
-                {/*<mesh geometry={fbx.children[0].children[9].geometry} material={color} visible={visible}*/}
-                {/*      onClick={(event) => log(fbx.children[0].children[9], event)}/>*/}
-                {/*<mesh geometry={fbx.children[0].children[10].geometry} material={color} visible={visible}*/}
-                {/*      onClick={(event) => log(fbx.children[0].children[10], event)}/>*/}
-                {/*<mesh geometry={fbx.children[0].children[11].geometry} material={color} visible={visible}*/}
-                {/*      onClick={(event) => log(fbx.children[0].children[11], event)}/>*/}
-            </group>
             {/*FRAME DIAMONDS*/}
             {/*<group>*/}
             {/*    <mesh geometry={fbx.children[1].children[0].children[0].geometry} material={yGoldFullMaterial} visible={false}/>*/}
