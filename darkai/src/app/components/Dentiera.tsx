@@ -1,8 +1,9 @@
 import * as THREE from 'three';
 import {useFBX, useTexture} from "@react-three/drei";
+import {useMemo} from "react";
 
 export default function Dentiera({envMap}) {
-    const fbx = useFBX('/models/Dentiera.fbx');
+    const fbx = useMemo(() => useFBX('/models/Dentiera.fbx'), []);
     const props = useTexture({
         map: 'textures/dentieraBase/DefaultMaterial_Base_color.webp',
         normalMap: 'textures/dentieraBase/DefaultMaterial_Normal.webp',
@@ -22,6 +23,6 @@ export default function Dentiera({envMap}) {
         envMap: envMap
     });
     fbx.children[0].material = dentieraMaterial;
-
+    console.log('dentiera')
     return <primitive object={fbx}/>
 }

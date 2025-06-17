@@ -1,62 +1,63 @@
 import * as THREE from 'three';
 import {useFBX, useTexture} from "@react-three/drei";
-import {useState} from "react";
+import {memo, useMemo, useState} from "react";
 import {MeshBasicMaterial, MeshStandardMaterial} from "three";
 
 export default function Teeth({envMap}) {
+    const tooth = useMemo(() => {
         const fbx = useFBX('/models/MOD_Dentiera_Completa.fbx');
-        // FULL
-        const propsYGoldFull = useTexture({
-            map: 'textures/full/DefaultMaterial_Base_color.webp',
-            normalMap: 'textures/full/DefaultMaterial_Normal.webp',
-            metalnessMap: 'textures/full/DefaultMaterial_Metallic.webp',
-            roughnessMap: 'textures/full/DefaultMaterial_Roughness.webp',
-            aoMap: 'textures/full/DefaultMaterial_Mixed_AO.webp',
-        });
-        propsYGoldFull.map.colorSpace = THREE.SRGBColorSpace;
-        const propsRGoldFull = useTexture({
-            map: 'textures/full/DefaultMaterial_Base_colorRose.webp',
-        });
-        propsRGoldFull.map.colorSpace = THREE.SRGBColorSpace;
-        const propsWGoldFull = useTexture({
-            map: 'textures/full/DefaultMaterial_Base_colorWhite.webp',
-        });
-        propsWGoldFull.map.colorSpace = THREE.SRGBColorSpace;
-        const yGoldFullMaterial = new THREE.MeshStandardMaterial({
-            map: propsYGoldFull.map,
-            normalMap: propsYGoldFull.normalMap,
-            metalnessMap: propsYGoldFull.metalnessMap,
-            roughnessMap: propsYGoldFull.roughnessMap,
-            aoMap: propsYGoldFull.aoMap,
-            metalness: 1,
-            roughness: 0.5,
-            envMap: envMap
-        });
-        const rGoldFullMaterial = new THREE.MeshStandardMaterial({
-            map: propsRGoldFull.map,
-            normalMap: propsYGoldFull.normalMap,
-            metalnessMap: propsYGoldFull.metalnessMap,
-            roughnessMap: propsYGoldFull.roughnessMap,
-            aoMap: propsYGoldFull.aoMap,
-            metalness: 1,
-            roughness: 0.5,
-            envMap: envMap
-        });
-        const wGoldFullMaterial = new THREE.MeshStandardMaterial({
-            map: propsWGoldFull.map,
-            normalMap: propsYGoldFull.normalMap,
-            metalnessMap: propsYGoldFull.metalnessMap,
-            roughnessMap: propsYGoldFull.roughnessMap,
-            aoMap: propsYGoldFull.aoMap,
-            metalness: 1,
-            roughness: 0.5,
-            envMap: envMap
-        });
+        console.log('dentifbx')
+        return fbx.children[0].children[0].geometry;
+    }, []);
+    const [visible, setVisible] = useState<boolean>(false);
+    const FullMaterial = ({color}) => {
+            const propsYGoldFull = useTexture({
+                map: 'textures/full/DefaultMaterial_Base_color.webp',
+                normalMap: 'textures/full/DefaultMaterial_Normal.webp',
+                metalnessMap: 'textures/full/DefaultMaterial_Metallic.webp',
+                roughnessMap: 'textures/full/DefaultMaterial_Roughness.webp',
+                aoMap: 'textures/full/DefaultMaterial_Mixed_AO.webp',
+            });
+            propsYGoldFull.map.colorSpace = THREE.SRGBColorSpace;
+            const propsRGoldFull = useTexture({
+                map: 'textures/full/DefaultMaterial_Base_colorRose.webp',
+            });
+            propsRGoldFull.map.colorSpace = THREE.SRGBColorSpace;
+            const propsWGoldFull = useTexture({
+                map: 'textures/full/DefaultMaterial_Base_colorWhite.webp',
+            });
+            propsWGoldFull.map.colorSpace = THREE.SRGBColorSpace;
+            console.log('quaso');
+            return (<meshStandardMaterial
+                map={color === 'gold'
+                    ? propsYGoldFull.map
+                    : color === 'rose'
+                        ? propsRGoldFull.map
+                        : propsWGoldFull.map}
+                normalMap={propsYGoldFull.normalMap}
+                metalnessMap = {propsYGoldFull.metalnessMap}
+                roughnessMap = {propsYGoldFull.roughnessMap}
+                aoMap = {propsYGoldFull.aoMap}
+                metalness = {1}
+                roughness = {0.5}
+                envMap = {envMap}
+                onUpdate={(self) => (self.needsUpdate = true)}
+            />)
+        }
+    const ILSDX = memo(({visible}) => {
+            console.log('halo')
+            return (
+                <mesh geometry={tooth}
+                      onClick={log}>
+                    {visible ? <FullMaterial color="gold"/> : <meshBasicMaterial color="red"/>}
+                </mesh>
+            )
+        })
 
-        // FULL DIAMOND
-        const propsYGDiamondFull = useTexture({
-            map: 'textures/diamondFull/Difuse_Diamanti.webp',
-            normalMap: 'textures/diamondFull/Normal_Diamanti.webp',
+    // FULL DIAMOND
+    const propsYGDiamondFull = useTexture({
+        map: 'textures/diamondFull/Difuse_Diamanti.webp',
+        normalMap: 'textures/diamondFull/Normal_Diamanti.webp',
             metalnessMap: 'textures/diamondFull/Metalness_Diamanti.webp',
             roughnessMap: 'textures/diamondFull/Metalness_Diamanti.webp',
             aoMap: 'textures/diamondFull/MixedAO_Diamanti.webp',
@@ -543,97 +544,93 @@ export default function Teeth({envMap}) {
         // HIGHLIGHT MATERIAL
         const highlightMaterial = new THREE.MeshBasicMaterial({color: 0xff0000});
 
-    const [color, setColor] = useState<MeshBasicMaterial|MeshStandardMaterial>(yGoldFullMaterial);
-    const [visible, setVisible] = useState<boolean>(false);
-    console.log(fbx);
+    console.log('render');
 
-    function log(tooth, e) {
-        setColor(highlightMaterial);
+    function log() {
         setVisible(!visible);
-        console.log(e.currentTarget);
     }
 
     return (
         <>
             {/*FULL*/}
             <group>
-                <mesh geometry={fbx.children[0].children[0].geometry} material={color} visible={visible}
-                      onClick={(event) => log(fbx.children[0].children[0], event)}/>
-                <mesh geometry={fbx.children[0].children[1].geometry} material={color} visible={visible}
-                      onClick={(event) => log(fbx.children[0].children[1], event)}/>
-                <mesh geometry={fbx.children[0].children[2].geometry} material={color} visible={visible}
-                      onClick={(event) => log(fbx.children[0].children[2], event)}/>
-                <mesh geometry={fbx.children[0].children[3].geometry} material={color} visible={visible}
-                      onClick={(event) => log(fbx.children[0].children[3], event)}/>
-                <mesh geometry={fbx.children[0].children[4].geometry} material={color} visible={visible}
-                      onClick={(event) => log(fbx.children[0].children[4], event)}/>
-                <mesh geometry={fbx.children[0].children[5].geometry} material={color} visible={visible}
-                      onClick={(event) => log(fbx.children[0].children[5], event)}/>
-                <mesh geometry={fbx.children[0].children[6].geometry} material={color} visible={visible}
-                      onClick={(event) => log(fbx.children[0].children[6], event)}/>
-                <mesh geometry={fbx.children[0].children[7].geometry} material={color} visible={visible}
-                      onClick={(event) => log(fbx.children[0].children[7], event)}/>
-                <mesh geometry={fbx.children[0].children[8].geometry} material={color} visible={visible}
-                      onClick={(event) => log(fbx.children[0].children[8], event)}/>
-                <mesh geometry={fbx.children[0].children[9].geometry} material={color} visible={visible}
-                      onClick={(event) => log(fbx.children[0].children[9], event)}/>
-                <mesh geometry={fbx.children[0].children[10].geometry} material={color} visible={visible}
-                      onClick={(event) => log(fbx.children[0].children[10], event)}/>
-                <mesh geometry={fbx.children[0].children[11].geometry} material={color} visible={visible}
-                      onClick={(event) => log(fbx.children[0].children[11], event)}/>
+                <ILSDX visible={visible} color="gold"/>
+
+                {/*<mesh geometry={fbx.children[0].children[1].geometry} material={color} visible={visible}*/}
+                {/*      onClick={(event) => log(fbx.children[0].children[1], event)}/>*/}
+                {/*<mesh geometry={fbx.children[0].children[2].geometry} material={color} visible={visible}*/}
+                {/*      onClick={(event) => log(fbx.children[0].children[2], event)}/>*/}
+                {/*<mesh geometry={fbx.children[0].children[3].geometry} material={color} visible={visible}*/}
+                {/*      onClick={(event) => log(fbx.children[0].children[3], event)}/>*/}
+                {/*<mesh geometry={fbx.children[0].children[4].geometry} material={color} visible={visible}*/}
+                {/*      onClick={(event) => log(fbx.children[0].children[4], event)}/>*/}
+                {/*<mesh geometry={fbx.children[0].children[5].geometry} material={color} visible={visible}*/}
+                {/*      onClick={(event) => log(fbx.children[0].children[5], event)}/>*/}
+                {/*<mesh geometry={fbx.children[0].children[6].geometry} material={color} visible={visible}*/}
+                {/*      onClick={(event) => log(fbx.children[0].children[6], event)}/>*/}
+                {/*<mesh geometry={fbx.children[0].children[7].geometry} material={color} visible={visible}*/}
+                {/*      onClick={(event) => log(fbx.children[0].children[7], event)}/>*/}
+                {/*<mesh geometry={fbx.children[0].children[8].geometry} material={color} visible={visible}*/}
+                {/*      onClick={(event) => log(fbx.children[0].children[8], event)}/>*/}
+                {/*<mesh geometry={fbx.children[0].children[9].geometry} material={color} visible={visible}*/}
+                {/*      onClick={(event) => log(fbx.children[0].children[9], event)}/>*/}
+                {/*<mesh geometry={fbx.children[0].children[10].geometry} material={color} visible={visible}*/}
+                {/*      onClick={(event) => log(fbx.children[0].children[10], event)}/>*/}
+                {/*<mesh geometry={fbx.children[0].children[11].geometry} material={color} visible={visible}*/}
+                {/*      onClick={(event) => log(fbx.children[0].children[11], event)}/>*/}
             </group>
             {/*FRAME DIAMONDS*/}
-            <group>
-                <mesh geometry={fbx.children[1].children[0].children[0].geometry} material={yGoldFullMaterial} visible={false}/>
-                <mesh geometry={fbx.children[1].children[0].children[1].geometry} material={yGoldFullMaterial} visible={false}/>
-                <mesh geometry={fbx.children[1].children[0].children[2].geometry} material={yGoldFullMaterial} visible={false}/>
-                <mesh geometry={fbx.children[1].children[0].children[3].geometry} material={yGoldFullMaterial} visible={false}/>
-                <mesh geometry={fbx.children[1].children[0].children[4].geometry} material={yGoldFullMaterial} visible={false}/>
-                <mesh geometry={fbx.children[1].children[0].children[5].geometry} material={yGoldFullMaterial} visible={false}/>
-                <mesh geometry={fbx.children[1].children[0].children[6].geometry} material={yGoldFullMaterial} visible={false}/>
-                <mesh geometry={fbx.children[1].children[0].children[7].geometry} material={yGoldFullMaterial} visible={false}/>
-                <mesh geometry={fbx.children[1].children[0].children[8].geometry} material={yGoldFullMaterial} visible={false}/>
-                <mesh geometry={fbx.children[1].children[0].children[9].geometry} material={yGoldFullMaterial} visible={false}/>
-                <mesh geometry={fbx.children[1].children[0].children[10].geometry} material={yGoldFullMaterial} visible={false}/>
-                <mesh geometry={fbx.children[1].children[0].children[11].geometry} material={yGoldFullMaterial} visible={false}/>
-            </group>
+            {/*<group>*/}
+            {/*    <mesh geometry={fbx.children[1].children[0].children[0].geometry} material={yGoldFullMaterial} visible={false}/>*/}
+            {/*    <mesh geometry={fbx.children[1].children[0].children[1].geometry} material={yGoldFullMaterial} visible={false}/>*/}
+            {/*    <mesh geometry={fbx.children[1].children[0].children[2].geometry} material={yGoldFullMaterial} visible={false}/>*/}
+            {/*    <mesh geometry={fbx.children[1].children[0].children[3].geometry} material={yGoldFullMaterial} visible={false}/>*/}
+            {/*    <mesh geometry={fbx.children[1].children[0].children[4].geometry} material={yGoldFullMaterial} visible={false}/>*/}
+            {/*    <mesh geometry={fbx.children[1].children[0].children[5].geometry} material={yGoldFullMaterial} visible={false}/>*/}
+            {/*    <mesh geometry={fbx.children[1].children[0].children[6].geometry} material={yGoldFullMaterial} visible={false}/>*/}
+            {/*    <mesh geometry={fbx.children[1].children[0].children[7].geometry} material={yGoldFullMaterial} visible={false}/>*/}
+            {/*    <mesh geometry={fbx.children[1].children[0].children[8].geometry} material={yGoldFullMaterial} visible={false}/>*/}
+            {/*    <mesh geometry={fbx.children[1].children[0].children[9].geometry} material={yGoldFullMaterial} visible={false}/>*/}
+            {/*    <mesh geometry={fbx.children[1].children[0].children[10].geometry} material={yGoldFullMaterial} visible={false}/>*/}
+            {/*    <mesh geometry={fbx.children[1].children[0].children[11].geometry} material={yGoldFullMaterial} visible={false}/>*/}
+            {/*</group>*/}
             {/*FULL DIAMONDS*/}
-            <group>
-                <mesh geometry={fbx.children[1].children[1].children[0].geometry} material={yGoldFullMaterial} visible={false}/>
-                <mesh geometry={fbx.children[1].children[1].children[1].geometry} material={yGoldFullMaterial} visible={false}/>
-                <mesh geometry={fbx.children[1].children[1].children[2].geometry} material={yGoldFullMaterial} visible={false}/>
-                <mesh geometry={fbx.children[1].children[1].children[3].geometry} material={yGoldFullMaterial} visible={false}/>
-                <mesh geometry={fbx.children[1].children[1].children[4].geometry} material={yGoldFullMaterial} visible={false}/>
-                <mesh geometry={fbx.children[1].children[1].children[5].geometry} material={yGoldFullMaterial} visible={false}/>
-                <mesh geometry={fbx.children[1].children[1].children[6].geometry} material={yGoldFullMaterial} visible={false}/>
-                <mesh geometry={fbx.children[1].children[1].children[7].geometry} material={yGoldFullMaterial} visible={false}/>
-                <mesh geometry={fbx.children[1].children[1].children[8].geometry} material={yGoldFullMaterial} visible={false}/>
-                <mesh geometry={fbx.children[1].children[1].children[9].geometry} material={yGoldFullMaterial} visible={false}/>
-                <mesh geometry={fbx.children[1].children[1].children[10].geometry} material={yGoldFullMaterial} visible={false}/>
-                <mesh geometry={fbx.children[1].children[1].children[11].geometry} material={yGoldFullMaterial} visible={false}/>
-            </group>
+            {/*<group>*/}
+            {/*    <mesh geometry={fbx.children[1].children[1].children[0].geometry} material={yGoldFullMaterial} visible={false}/>*/}
+            {/*    <mesh geometry={fbx.children[1].children[1].children[1].geometry} material={yGoldFullMaterial} visible={false}/>*/}
+            {/*    <mesh geometry={fbx.children[1].children[1].children[2].geometry} material={yGoldFullMaterial} visible={false}/>*/}
+            {/*    <mesh geometry={fbx.children[1].children[1].children[3].geometry} material={yGoldFullMaterial} visible={false}/>*/}
+            {/*    <mesh geometry={fbx.children[1].children[1].children[4].geometry} material={yGoldFullMaterial} visible={false}/>*/}
+            {/*    <mesh geometry={fbx.children[1].children[1].children[5].geometry} material={yGoldFullMaterial} visible={false}/>*/}
+            {/*    <mesh geometry={fbx.children[1].children[1].children[6].geometry} material={yGoldFullMaterial} visible={false}/>*/}
+            {/*    <mesh geometry={fbx.children[1].children[1].children[7].geometry} material={yGoldFullMaterial} visible={false}/>*/}
+            {/*    <mesh geometry={fbx.children[1].children[1].children[8].geometry} material={yGoldFullMaterial} visible={false}/>*/}
+            {/*    <mesh geometry={fbx.children[1].children[1].children[9].geometry} material={yGoldFullMaterial} visible={false}/>*/}
+            {/*    <mesh geometry={fbx.children[1].children[1].children[10].geometry} material={yGoldFullMaterial} visible={false}/>*/}
+            {/*    <mesh geometry={fbx.children[1].children[1].children[11].geometry} material={yGoldFullMaterial} visible={false}/>*/}
+            {/*</group>*/}
             {/*FRAME*/}
-            <group>
-                <mesh geometry={fbx.children[2].children[0].geometry} material={yGoldFullMaterial} visible={false}/>
-                <mesh geometry={fbx.children[2].children[1].geometry} material={yGoldFullMaterial} visible={false}/>
-                <mesh geometry={fbx.children[2].children[2].geometry} material={yGoldFullMaterial} visible={false}/>
-                <mesh geometry={fbx.children[2].children[3].geometry} material={yGoldFullMaterial} visible={false}/>
-            </group>
+            {/*<group>*/}
+            {/*    <mesh geometry={fbx.children[2].children[0].geometry} material={yGoldFullMaterial} visible={false}/>*/}
+            {/*    <mesh geometry={fbx.children[2].children[1].geometry} material={yGoldFullMaterial} visible={false}/>*/}
+            {/*    <mesh geometry={fbx.children[2].children[2].geometry} material={yGoldFullMaterial} visible={false}/>*/}
+            {/*    <mesh geometry={fbx.children[2].children[3].geometry} material={yGoldFullMaterial} visible={false}/>*/}
+            {/*</group>*/}
             {/*BAR*/}
-            <group>
-                <mesh geometry={fbx.children[3].children[0].geometry} material={yGoldFullMaterial} visible={false}/>
-                <mesh geometry={fbx.children[3].children[1].geometry} material={yGoldFullMaterial} visible={false}/>
-                <mesh geometry={fbx.children[3].children[2].geometry} material={yGoldFullMaterial} visible={false}/>
-                <mesh geometry={fbx.children[3].children[3].geometry} material={yGoldFullMaterial} visible={false}/>
-                <mesh geometry={fbx.children[3].children[4].geometry} material={yGoldFullMaterial} visible={false}/>
-            </group>
+            {/*<group>*/}
+            {/*    <mesh geometry={fbx.children[3].children[0].geometry} material={yGoldFullMaterial} visible={false}/>*/}
+            {/*    <mesh geometry={fbx.children[3].children[1].geometry} material={yGoldFullMaterial} visible={false}/>*/}
+            {/*    <mesh geometry={fbx.children[3].children[2].geometry} material={yGoldFullMaterial} visible={false}/>*/}
+            {/*    <mesh geometry={fbx.children[3].children[3].geometry} material={yGoldFullMaterial} visible={false}/>*/}
+            {/*    <mesh geometry={fbx.children[3].children[4].geometry} material={yGoldFullMaterial} visible={false}/>*/}
+            {/*</group>*/}
             {/*STONE*/}
-            <group>
-                <mesh geometry={fbx.children[4].children[0].geometry} material={yGoldFullMaterial} visible={false}/>
-                <mesh geometry={fbx.children[4].children[1].geometry} material={yGoldFullMaterial} visible={false}/>
-                <mesh geometry={fbx.children[4].children[2].geometry} material={yGoldFullMaterial} visible={false}/>
-                <mesh geometry={fbx.children[4].children[3].geometry} material={yGoldFullMaterial} visible={false}/>
-            </group>
+            {/*<group>*/}
+            {/*    <mesh geometry={fbx.children[4].children[0].geometry} material={yGoldFullMaterial} visible={false}/>*/}
+            {/*    <mesh geometry={fbx.children[4].children[1].geometry} material={yGoldFullMaterial} visible={false}/>*/}
+            {/*    <mesh geometry={fbx.children[4].children[2].geometry} material={yGoldFullMaterial} visible={false}/>*/}
+            {/*    <mesh geometry={fbx.children[4].children[3].geometry} material={yGoldFullMaterial} visible={false}/>*/}
+            {/*</group>*/}
         </>
     )
 }
