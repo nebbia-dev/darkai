@@ -1,16 +1,15 @@
-import {useFBX} from "@react-three/drei";
-import {memo, useMemo, useState} from "react";
+import {memo, useState} from "react";
 import FullMaterial from "@/app/components/FullMaterial";
-import teeth from "@/app/components/teeth";
+import {useChosenOptions} from "@/app/contexts/ChosenOptionsContext";
 
-export default function IliDx({envMap}) {
+export default function IliDx({envMap, fbx}) {
+    const {chosenOptions} = useChosenOptions();
     const [visible, setVisible] = useState<boolean>(false);
-    const tooth = useMemo(() => teeth(), []);
     const ILIDX = memo(({visible}) => {
         console.log('halo 1')
         return (
-            <mesh geometry={tooth.ilidx} onClick={log}>
-            {visible? <FullMaterial envMap={envMap} color="gold"/> : <FullMaterial envMap={envMap} color="base"/>}
+            <mesh geometry={fbx.ilidx} onClick={log} visible={visible}>
+                <FullMaterial envMap={envMap} color={chosenOptions.ilidx}/>
             </mesh>
     )
     })

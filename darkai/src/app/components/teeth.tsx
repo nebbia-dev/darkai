@@ -1,13 +1,7 @@
 import * as THREE from 'three';
-import {useFBX, useTexture} from "@react-three/drei";
+import {useTexture} from "@react-three/drei";
 
 export default function teeth() {
-    const fbx = useFBX('/models/MOD_Dentiera_Completa.fbx');
-    console.log('dentifbx 1');
-    return {
-        ilsdx: fbx.children[0].children[0].geometry,
-        ilidx: fbx.children[0].children[1].geometry,
-    };
 
     // FULL DIAMOND
     const propsYGDiamondFull = useTexture({
