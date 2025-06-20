@@ -6,7 +6,7 @@ export default function IlsDx({envMap, fbx}) {
     const ILSDX = memo(({visible}) => {
         console.log('halo 2')
         return (
-            <mesh geometry={fbx.ilsdx} onClick={log} visible={visible}>
+            <mesh geometry={fbx} onClick={log} visible={visible}>
                 <FullMaterial envMap={envMap} color='gold'/>
             </mesh>
         )
