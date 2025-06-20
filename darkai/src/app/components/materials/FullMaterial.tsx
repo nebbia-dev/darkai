@@ -1,3 +1,4 @@
+'use client'
 import * as THREE from 'three';
 import {useTexture} from "@react-three/drei";
 
@@ -19,7 +20,7 @@ export default function FullMaterial({envMap, color}) {
             map: 'textures/full/DefaultMaterial_Base_colorWhite.webp',
         });
         propsWGoldFull.map.colorSpace = THREE.SRGBColorSpace;
-        console.log('quaso 2');
+        console.log(color);
         return (<meshStandardMaterial
             map={color === 'gold'
                 ? propsYGoldFull.map

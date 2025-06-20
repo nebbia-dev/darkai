@@ -1,15 +1,15 @@
+'use client'
 import {memo, useState} from "react";
-import FullMaterial from "@/app/components/FullMaterial";
-import {useChosenOptions} from "@/app/contexts/ChosenOptionsContext";
+import FullMaterial from "@/app/components/materials/FullMaterial";
 
 export default function IliDx({envMap, fbx}) {
-    const {chosenOptions} = useChosenOptions();
     const [visible, setVisible] = useState<boolean>(false);
+    // const {chosenOptions} = useChosenOptions();
     const ILIDX = memo(({visible}) => {
         console.log('halo 1')
         return (
             <mesh geometry={fbx.ilidx} onClick={log} visible={visible}>
-                <FullMaterial envMap={envMap} color={chosenOptions.ilidx}/>
+                <FullMaterial envMap={envMap} color='gold'/>
             </mesh>
     )
     })
