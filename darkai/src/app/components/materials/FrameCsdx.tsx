@@ -2,7 +2,7 @@
 import * as THREE from 'three';
 import {useTexture} from "@react-three/drei";
 
-export default function Frame01({envMap, color}) {
+export default function FrameCsdx({envMap, color}) {
 
         const propsYFrame01 = useTexture({
             map: 'textures/frame/01/DefaultMaterial_Base_color.webp',

@@ -9,7 +9,6 @@ export default function FrameDiamond({envMap, color}) {
             normalMap: 'textures/frame/diamond/DefaultMaterial_Normal.webp',
             metalnessMap: 'textures/frame/diamond/DefaultMaterial_Metallic.webp',
             roughnessMap: 'textures/frame/diamond/DefaultMaterial_Roughness.webp',
-            aoMap: 'textures/frame/diamond/DefaultMaterial_Mixed_AO.webp',
         });
         propsYFrameDiamond.map.colorSpace = THREE.SRGBColorSpace;
         const propsRFrameDiamond = useTexture({
@@ -32,7 +31,6 @@ export default function FrameDiamond({envMap, color}) {
             normalMap={color !== 'base' ? propsYFrameDiamond.normalMap : ''}
             metalnessMap = {color !== 'base' ? propsYFrameDiamond.metalnessMap : ''}
             roughnessMap = {color !== 'base' ? propsYFrameDiamond.roughnessMap : ''}
-            aoMap = {color !== 'base' ? propsYFrameDiamond.aoMap : ''}
             metalness = {color !== 'base' ? 1 : 0}
             roughness = {color !== 'base' ? 0.5 : 1}
             envMap = {envMap}

@@ -2,14 +2,20 @@
 import {OrbitControls, useEnvironment, useFBX} from '@react-three/drei';
 import Dentiera from "@/app/components/Dentiera";
 import {useMemo} from "react";
+import BarDiamond from "@/app/components/materials/BarDiamond";
+import BarIlsdxR from "@/app/components/materials/BarIlsdxR";
+import BarIlsdxL from "@/app/components/materials/BarIlsdxL";
+import BarIlssxL from "@/app/components/materials/BarIlssxL";
+import BarIlssxR from "@/app/components/materials/BarIlssxR";
+import FrameCsdx from "@/app/components/materials/FrameCsdx";
+import FrameCidx from "@/app/components/materials/FrameCidx";
+import FrameCssx from "@/app/components/materials/FrameCssx";
 
 export default function Configurator() {
     const envMap = useEnvironment({files: "envMaps/HDR_Light_Studio_Free_HDRI_Design_13.exr"})
     const fbx = useFBX('/models/MOD_Dentiera_Completa_180_Phong.fbx');
-    console.log(fbx)
     const teeth = useMemo(() => {
         const fbx = useFBX('/models/MOD_Dentiera_Completa_180_Phong.fbx');
-        console.log(fbx);
         return {
             // INCISIVI CENTRALI
             icsdx: {
@@ -52,14 +58,13 @@ export default function Configurator() {
                         left: fbx.children[3].children[2].children[0],
                         right: fbx.children[3].children[2].children[1],
                     },
-                    // DA RIVEDERE, children[0].children[1] e children[1].children[1] SONO UGUALI
                     diamond: {
-                        left:{
-                            base: fbx.children[3].children[1].children[1].children[0].geometry,
+                        right:{
+                            base: fbx.children[3].children[1].children[0].children[0].geometry,
                             full: fbx.children[3].children[1].children[0].children[1].geometry
                         },
-                        right: {
-                            base: fbx.children[3].children[1].children[0].children[0].geometry,
+                        left: {
+                            base: fbx.children[3].children[1].children[1].children[0].geometry,
                             full: fbx.children[3].children[1].children[1].children[1].geometry
                         }
                     }
@@ -183,12 +188,6 @@ export default function Configurator() {
     return (
         <>
             <OrbitControls/>
-            <mesh geometry={fbx.children[3].children[1].children[0].children[0].geometry}>
-                <meshBasicMaterial color='red'/>
-            </mesh>
-            <mesh geometry={fbx.children[3].children[1].children[0].children[1].geometry}>
-                <meshBasicMaterial color='blue'/>
-            </mesh>
             <Dentiera envMap={envMap}/>
         </>
     );

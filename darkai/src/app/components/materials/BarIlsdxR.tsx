@@ -2,7 +2,7 @@
 import * as THREE from 'three';
 import {useTexture} from "@react-three/drei";
 
-export default function Bar01({envMap, color}) {
+export default function BarIlsdxR({envMap, color}) {
 
         const propsYBar01 = useTexture({
             map: 'textures/bar/01/DefaultMaterial_Base_color.webp',

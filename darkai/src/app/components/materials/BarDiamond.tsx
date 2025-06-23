@@ -9,7 +9,6 @@ export default function BarDiamond({envMap, color}) {
             normalMap: 'textures/bar/diamond/DefaultMaterial_Normal.webp',
             metalnessMap: 'textures/bar/diamond/DefaultMaterial_Metallic.webp',
             roughnessMap: 'textures/bar/diamond/DefaultMaterial_Roughness.webp',
-            aoMap: 'textures/bar/diamond/DefaultMaterial_Mixed_AO.webp',
         });
         propsYBarDiamond.map.colorSpace = THREE.SRGBColorSpace;
         const propsRBarDiamond = useTexture({
@@ -32,7 +31,6 @@ export default function BarDiamond({envMap, color}) {
             normalMap={color !== 'base' ? propsYBarDiamond.normalMap : ''}
             metalnessMap = {color !== 'base' ? propsYBarDiamond.metalnessMap : ''}
             roughnessMap = {color !== 'base' ? propsYBarDiamond.roughnessMap : ''}
-            aoMap = {color !== 'base' ? propsYBarDiamond.aoMap : ''}
             metalness = {color !== 'base' ? 1 : 0}
             roughness = {color !== 'base' ? 0.5 : 1}
             envMap = {envMap}
