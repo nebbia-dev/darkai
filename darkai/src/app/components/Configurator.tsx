@@ -2,20 +2,16 @@
 import {OrbitControls, useEnvironment, useFBX} from '@react-three/drei';
 import Dentiera from "@/app/components/Dentiera";
 import {useMemo} from "react";
-import BarDiamond from "@/app/components/materials/BarDiamond";
-import BarIlsdxR from "@/app/components/materials/BarIlsdxR";
-import BarIlsdxL from "@/app/components/materials/BarIlsdxL";
-import BarIlssxL from "@/app/components/materials/BarIlssxL";
-import BarIlssxR from "@/app/components/materials/BarIlssxR";
-import FrameCsdx from "@/app/components/materials/FrameCsdx";
-import FrameCidx from "@/app/components/materials/FrameCidx";
-import FrameCssx from "@/app/components/materials/FrameCssx";
+import {useTeethStore} from "@/app/stores/teeth";
+import IliDx from "@/app/components/teeth/IliDx";
+import IlsDx from "@/app/components/teeth/IlsDx";
 
 export default function Configurator() {
     const envMap = useEnvironment({files: "envMaps/HDR_Light_Studio_Free_HDRI_Design_13.exr"})
-    const fbx = useFBX('/models/MOD_Dentiera_Completa_180_Phong.fbx');
+    const fbx = useMemo(() => useFBX('/models/MOD_Dentiera_Completa_180_Phong.fbx'), []);
     const teeth = useMemo(() => {
         const fbx = useFBX('/models/MOD_Dentiera_Completa_180_Phong.fbx');
+        console.log(fbx.children[1].children[0].children[4])
         return {
             // INCISIVI CENTRALI
             icsdx: {
@@ -184,10 +180,16 @@ export default function Configurator() {
             },
         }
     }, []);
+    const setTeeth = useTeethStore((state) => state.setGeometry);
+    setTeeth(teeth);
+    const savedTeeth = useTeethStore((state) => state.teethGeometry);
+    console.log(savedTeeth);
     console.log('envMap');
     return (
         <>
             <OrbitControls/>
+            {savedTeeth && <IliDx envMap={envMap}/>}
+            {savedTeeth && <IlsDx envMap={envMap}/>}
             <Dentiera envMap={envMap}/>
         </>
     );
