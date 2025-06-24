@@ -17,6 +17,20 @@ export const useTeethStore = create((set) => ({
         cidx: 'base',
         cisx: 'base',
     },
+    teethJewelType: {
+        icsdx: 'full',
+        icssx: 'full',
+        icidx: 'full',
+        icisx: 'full',
+        ilsdx: 'full',
+        ilssx: 'full',
+        ilidx: 'full',
+        ilisx: 'full',
+        csdx: 'full',
+        cssx: 'full',
+        cidx: 'full',
+        cisx: 'full',
+    },
     setGeometry: (fbx) => {
         set({teethGeometry: fbx});
     },
@@ -25,5 +39,11 @@ export const useTeethStore = create((set) => ({
             produce((state) => {
                 state.teethMaterial[tooth] = color
             }),
-        )
+        ),
+    setType: (tooth, type) =>
+        set(
+            produce((state) => {
+                state.teethJewelType[tooth] = type;
+            }),
+        ),
 }))
