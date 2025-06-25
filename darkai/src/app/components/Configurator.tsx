@@ -6,12 +6,13 @@ import IlsDx from "@/app/components/teeth/IlsDx";
 import IlsSx from "@/app/components/teeth/IlsSx";
 import LoadedMaterials from "@/app/components/LoadedMaterials";
 import {useMemo} from "react";
+import FBX from "@/app/types/FBX";
 
 export default function Configurator() {
     const envMap = useEnvironment({files: "envMaps/HDR_Light_Studio_Free_HDRI_Design_13.exr"})
     // Se voglio piazzare anche l'fbx in LoadedMaterials, verosimilmente devo usare qui uno useEffect
     const fbx = useMemo(() => useFBX('/models/MOD_Dentiera_Completa_180_Phong.fbx'), []);
-    const teeth = useMemo(() => {
+    const teeth = useMemo((): FBX => {
         const fbx = useFBX('/models/MOD_Dentiera_Completa_180_Phong.fbx');
         console.log(fbx.children[3])
         return {

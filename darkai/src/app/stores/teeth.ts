@@ -48,17 +48,52 @@ export const useTeethStore = create((set) => ({
     setGeometry: (fbx) => {
         set({teethGeometry: fbx});
     },
-   setMaterial: (tooth, color) =>
+    setMaterial: (tooth, color) =>
         set(
             produce((state) => {
-                state.teethMaterial[tooth] = color
+                state.teethMaterial[tooth] = color;
+                if(!state.teethVisibility[tooth]) {
+                    state.teethVisibility[tooth] = true;
+                }
             }),
         ),
     setType: (tooth, type) =>
         set(
             produce((state) => {
                 state.teethJewelType[tooth] = type;
+                if(!state.teethVisibility[tooth]) {
+                    state.teethVisibility[tooth] = true;
+                    state.teethMaterial[tooth] = 'gold';
+                }
             }),
+        ),
+    setDiamond: (tooth) =>
+        set(
+            produce((state) => {
+                if(!state.teethVisibility[tooth] || state.teethMaterial[tooth] === 'base') {
+                    return;
+                }
+                    switch (state.teethJewelType[tooth]) {
+                        case 'full':
+                            state.teethJewelType[tooth] = 'fullDiamond';
+                            break;
+                        case 'bar':
+                            state.teethJewelType[tooth] = 'barDiamond';
+                            break;
+                        case 'barDiamond':
+                            state.teethJewelType[tooth] = 'bar';
+                            break;
+                        case 'fullDiamond':
+                            state.teethJewelType[tooth] = 'full';
+                            break;
+                        case 'frame':
+                            state.teethJewelType[tooth] = 'frameDiamond';
+                            break;
+                        case 'frameDiamond':
+                            state.teethJewelType[tooth] = 'frame';
+                            break;
+                    }
+            })
         ),
     setVisibility: (tooth) =>
         set(

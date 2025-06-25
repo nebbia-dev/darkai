@@ -6,6 +6,7 @@ import BarIlsdxL from "@/app/components/materials/BarIlsdxL";
 import BarIlsdxR from "@/app/components/materials/BarIlsdxR";
 import BaseFullDiamond from "@/app/components/materials/BaseFullDiamond";
 import FullDiamond from "@/app/components/materials/FullDiamond";
+import BarDiamond from "@/app/components/materials/BarDiamond";
 
 
 export default function IlsDx({envMap}) {
@@ -29,11 +30,15 @@ export default function IlsDx({envMap}) {
                 geometry = [toothGeometry.bar.full.left, toothGeometry.bar.full.right];
                 material = [<BarIlsdxL envMap={envMap} color={toothMaterial}/>, <BarIlsdxR envMap={envMap} color={toothMaterial}/>]
                 break;
+            case 'barDiamond':
+                geometry = [toothGeometry.bar.diamond.left.base, toothGeometry.bar.diamond.right.base, toothGeometry.bar.diamond.left.full, toothGeometry.bar.diamond.right.full];
+                material = [<BarIlsdxL envMap={envMap} color={toothMaterial}/>, <BarIlsdxR envMap={envMap} color={toothMaterial}/>, <BarDiamond envMap={envMap} color={toothMaterial}/>]
+                break;
             default:
                 geometry = [toothGeometry.full];
                 material = [<FullMaterial envMap={envMap} color={toothMaterial}/>]
         }
-        if(geometry.length > 1) {
+        if(geometry.length === 2) {
             return (
                 <>
                     <mesh geometry={geometry[0]} visible={visible}>
@@ -45,6 +50,24 @@ export default function IlsDx({envMap}) {
                 </>
             )
         }
+        if(geometry.length === 4) {
+            return (
+                <>
+                    <mesh geometry={geometry[0]} visible={visible}>
+                        {material[0]}
+                    </mesh>
+                    <mesh geometry={geometry[1]} visible={visible}>
+                        {material[1]}
+                    </mesh>
+                    <mesh geometry={geometry[2]} visible={visible}>
+                        {material[2]}
+                    </mesh>
+                    <mesh geometry={geometry[3]} visible={visible}>
+                        {material[2]}
+                    </mesh>
+                </>
+            )
+        }
         return (
             <mesh geometry={geometry[0]} onClick={() => toggleVisibility('ilsdx')} visible={visible}>
                 {material[0]}
@@ -52,7 +75,7 @@ export default function IlsDx({envMap}) {
         )
     })
 
-    console.log('render 1')
+    console.log('render 2')
 
     return <ILSDX visible={toothVisibility} type={toothJewelType} mat={toothMaterial}/>
 }

@@ -2,8 +2,11 @@
 import {JSX, memo} from "react";
 import FullMaterial from "@/app/components/materials/FullMaterial";
 import {useTeethStore} from "@/app/stores/teeth";
-import BarIlssxR from "@/app/components/materials/BarIlssxR";
+import BaseFullDiamond from "@/app/components/materials/BaseFullDiamond";
+import FullDiamond from "@/app/components/materials/FullDiamond";
+import BarDiamond from "@/app/components/materials/BarDiamond";
 import BarIlssxL from "@/app/components/materials/BarIlssxL";
+import BarIlssxR from "@/app/components/materials/BarIlssxR";
 
 
 export default function IlsSx({envMap}) {
@@ -19,15 +22,23 @@ export default function IlsSx({envMap}) {
                 geometry = [toothGeometry.full];
                 material = [<FullMaterial envMap={envMap} color={toothMaterial}/>]
                 break;
+            case 'fullDiamond':
+                geometry = [toothGeometry.fullDiamond.base, toothGeometry.fullDiamond.full];
+                material = [<BaseFullDiamond envMap={envMap} color={toothMaterial}/>, <FullDiamond envMap={envMap} color={toothMaterial}/>]
+                break;
             case 'bar':
                 geometry = [toothGeometry.bar.full.left, toothGeometry.bar.full.right];
                 material = [<BarIlssxL envMap={envMap} color={toothMaterial}/>, <BarIlssxR envMap={envMap} color={toothMaterial}/>]
+                break;
+            case 'barDiamond':
+                geometry = [toothGeometry.bar.diamond.left.base, toothGeometry.bar.diamond.right.base, toothGeometry.bar.diamond.left.full, toothGeometry.bar.diamond.right.full];
+                material = [<BarIlssxL envMap={envMap} color={toothMaterial}/>, <BarIlssxR envMap={envMap} color={toothMaterial}/>, <BarDiamond envMap={envMap} color={toothMaterial}/>]
                 break;
             default:
                 geometry = [toothGeometry.full];
                 material = [<FullMaterial envMap={envMap} color={toothMaterial}/>]
         }
-        if(geometry.length > 1) {
+        if(geometry.length === 2) {
             return (
                 <>
                     <mesh geometry={geometry[0]} visible={visible}>
@@ -39,6 +50,24 @@ export default function IlsSx({envMap}) {
                 </>
             )
         }
+        if(geometry.length === 4) {
+            return (
+                <>
+                    <mesh geometry={geometry[0]} visible={visible}>
+                        {material[0]}
+                    </mesh>
+                    <mesh geometry={geometry[1]} visible={visible}>
+                        {material[1]}
+                    </mesh>
+                    <mesh geometry={geometry[2]} visible={visible}>
+                        {material[2]}
+                    </mesh>
+                    <mesh geometry={geometry[3]} visible={visible}>
+                        {material[2]}
+                    </mesh>
+                </>
+            )
+        }
         return (
             <mesh geometry={geometry[0]} onClick={() => toggleVisibility('ilssx')} visible={visible}>
                 {material[0]}
@@ -46,7 +75,7 @@ export default function IlsSx({envMap}) {
         )
     })
 
-    console.log('render 1')
+    console.log('render 2')
 
     return <ILSSX visible={toothVisibility} type={toothJewelType} mat={toothMaterial}/>
 }
