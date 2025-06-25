@@ -10,7 +10,7 @@ export default function Selection() {
                 className="w-[40vw] h-[90vh] flex flex-col align-center justify-center text-center bg-white my-auto rounded text-black">
                 <p>Welcome to the DARKAI Grillz Configurator</p>
                 <p>Choose the grillz perfect for you!</p>
-                <div>
+                <div className="flex">
                     <div className="p-4">
                         <p className="text-left">ILS DX Material</p>
                         <div className="w-[48px] h-[48px] bg-yellow-200"
@@ -23,18 +23,29 @@ export default function Selection() {
                     <div className="p-4">
                         <p className="text-left">ILS DX Geometry</p>
                         <div className="w-[48px] h-[48px]"
-                             onClick={() => changeJewelType('ilsdx', 'full')}>F</div>
+                             onClick={() => changeJewelType('ilsdx', 'full')}>F
+                        </div>
                         <div className="w-[48px] h-[48px]"
-                             onClick={() => changeJewelType('ilsdx', 'bar')}>B</div>
+                             onClick={() => changeJewelType('ilsdx', 'bar')}>B
+                        </div>
                     </div>
                     <div className="p-4">
-                        <p className="text-left">ILI DX</p>
+                        <p className="text-left">ILS SX Material</p>
                         <div className="w-[48px] h-[48px] bg-yellow-200"
-                             onClick={() => changeMaterial('ilidx', 'gold')}></div>
+                             onClick={() => changeMaterial('ilssx', 'gold')}></div>
                         <div className="w-[48px] h-[48px] bg-pink-300"
-                             onClick={() => changeMaterial('ilidx', 'rose')}></div>
+                             onClick={() => changeMaterial('ilssx', 'rose')}></div>
                         <div className="w-[48px] h-[48px] bg-zinc-400"
-                             onClick={() => changeMaterial('ilidx', 'white')}></div>
+                             onClick={() => changeMaterial('ilssx', 'white')}></div>
+                    </div>
+                    <div className="p-4">
+                        <p className="text-left">ILS SX Geometry</p>
+                        <div className="w-[48px] h-[48px]"
+                             onClick={() => changeJewelType('ilssx', 'full')}>F
+                        </div>
+                        <div className="w-[48px] h-[48px]"
+                             onClick={() => changeJewelType('ilssx', 'bar')}>B
+                        </div>
                     </div>
                 </div>
             </div>

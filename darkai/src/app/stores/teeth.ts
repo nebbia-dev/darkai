@@ -31,6 +31,20 @@ export const useTeethStore = create((set) => ({
         cidx: 'full',
         cisx: 'full',
     },
+    teethVisibility: {
+        icsdx: false,
+        icssx: false,
+        icidx: false,
+        icisx: false,
+        ilsdx: false,
+        ilssx: false,
+        ilidx: false,
+        ilisx: false,
+        csdx: false,
+        cssx: false,
+        cidx: false,
+        cisx: false,
+    },
     setGeometry: (fbx) => {
         set({teethGeometry: fbx});
     },
@@ -44,6 +58,12 @@ export const useTeethStore = create((set) => ({
         set(
             produce((state) => {
                 state.teethJewelType[tooth] = type;
+            }),
+        ),
+    setVisibility: (tooth) =>
+        set(
+            produce((state) => {
+                state.teethVisibility[tooth] = !state.teethVisibility[tooth];
             }),
         ),
 }))

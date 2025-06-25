@@ -3,15 +3,19 @@ import {OrbitControls, useEnvironment, useFBX} from '@react-three/drei';
 import Dentiera from "@/app/components/Dentiera";
 import {useMemo} from "react";
 import {useTeethStore} from "@/app/stores/teeth";
-import IliDx from "@/app/components/teeth/IliDx";
 import IlsDx from "@/app/components/teeth/IlsDx";
+import IlsSx from "@/app/components/teeth/IlsSx";
+import BarIlsdxL from "@/app/components/materials/BarIlsdxL";
+import BarIlsdxR from "@/app/components/materials/BarIlsdxR";
+import BarIlssxL from "@/app/components/materials/BarIlssxL";
+import BarIlssxR from "@/app/components/materials/BarIlssxR";
 
 export default function Configurator() {
     const envMap = useEnvironment({files: "envMaps/HDR_Light_Studio_Free_HDRI_Design_13.exr"})
     const fbx = useMemo(() => useFBX('/models/MOD_Dentiera_Completa_180_Phong.fbx'), []);
     const teeth = useMemo(() => {
         const fbx = useFBX('/models/MOD_Dentiera_Completa_180_Phong.fbx');
-        console.log(fbx.children[1].children[0].children[4])
+        console.log(fbx.children[3])
         return {
             // INCISIVI CENTRALI
             icsdx: {
@@ -51,8 +55,8 @@ export default function Configurator() {
                 },
                 bar: {
                     full: {
-                        left: fbx.children[3].children[2].children[0],
-                        right: fbx.children[3].children[2].children[1],
+                        left: fbx.children[3].children[2].children[0].geometry,
+                        right: fbx.children[3].children[2].children[1].geometry,
                     },
                     diamond: {
                         right:{
@@ -74,8 +78,8 @@ export default function Configurator() {
                 },
                   bar: {
                     full: {
-                        left: fbx.children[3].children[2].children[2],
-                        right: fbx.children[3].children[2].children[3],
+                        left: fbx.children[3].children[2].children[2].geometry,
+                        right: fbx.children[3].children[2].children[3].geometry,
                     },
                       diamond: {
                         left:{
@@ -185,10 +189,27 @@ export default function Configurator() {
     const savedTeeth = useTeethStore((state) => state.teethGeometry);
     console.log(savedTeeth);
     console.log('envMap');
+
     return (
         <>
             <OrbitControls/>
-            {savedTeeth && <IliDx envMap={envMap}/>}
+            <mesh position={[0, -10, 0]} visible={false}>
+                <planeGeometry args={[1, 1]}/>
+                <BarIlsdxL envMap={envMap} color='gold'/>
+            </mesh>
+            <mesh position={[0, -10, 0]} visible={false}>
+                <planeGeometry args={[1, 1]}/>
+                <BarIlsdxR envMap={envMap} color='gold'/>
+            </mesh>
+            <mesh position={[0, -10, 0]} visible={false}>
+                <planeGeometry args={[1, 1]}/>
+                <BarIlssxL envMap={envMap} color='gold'/>
+            </mesh>
+            <mesh position={[0, -10, 0]} visible={false}>
+                <planeGeometry args={[1, 1]}/>
+                <BarIlssxR envMap={envMap} color='gold'/>
+            </mesh>
+            {savedTeeth && <IlsSx envMap={envMap}/>}
             {savedTeeth && <IlsDx envMap={envMap}/>}
             <Dentiera envMap={envMap}/>
         </>
