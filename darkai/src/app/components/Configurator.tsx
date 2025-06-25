@@ -1,17 +1,15 @@
 'use client'
 import {OrbitControls, useEnvironment, useFBX} from '@react-three/drei';
 import Dentiera from "@/app/components/Dentiera";
-import {useMemo} from "react";
 import {useTeethStore} from "@/app/stores/teeth";
 import IlsDx from "@/app/components/teeth/IlsDx";
 import IlsSx from "@/app/components/teeth/IlsSx";
-import BarIlsdxL from "@/app/components/materials/BarIlsdxL";
-import BarIlsdxR from "@/app/components/materials/BarIlsdxR";
-import BarIlssxL from "@/app/components/materials/BarIlssxL";
-import BarIlssxR from "@/app/components/materials/BarIlssxR";
+import LoadedMaterials from "@/app/components/LoadedMaterials";
+import {useMemo} from "react";
 
 export default function Configurator() {
     const envMap = useEnvironment({files: "envMaps/HDR_Light_Studio_Free_HDRI_Design_13.exr"})
+    // Se voglio piazzare anche l'fbx in LoadedMaterials, verosimilmente devo usare qui uno useEffect
     const fbx = useMemo(() => useFBX('/models/MOD_Dentiera_Completa_180_Phong.fbx'), []);
     const teeth = useMemo(() => {
         const fbx = useFBX('/models/MOD_Dentiera_Completa_180_Phong.fbx');
@@ -76,17 +74,17 @@ export default function Configurator() {
                     base: fbx.children[1].children[0].children[7].geometry,
                     full: fbx.children[1].children[1].children[6].geometry
                 },
-                  bar: {
+                bar: {
                     full: {
                         left: fbx.children[3].children[2].children[2].geometry,
                         right: fbx.children[3].children[2].children[3].geometry,
                     },
-                      diamond: {
+                    diamond: {
                         left:{
                             base: fbx.children[3].children[1].children[2].children[0].geometry,
                             full: fbx.children[3].children[1].children[2].children[1].geometry
                         },
-                          right: {
+                        right: {
                             base: fbx.children[3].children[1].children[3].children[0].geometry,
                             full: fbx.children[3].children[1].children[3].children[1].geometry
                         }
@@ -132,8 +130,8 @@ export default function Configurator() {
                 frame: {
                     full: fbx.children[2].children[3].geometry,
                     diamond: {
-                         base: fbx.children[2].children[0].children[3].geometry,
-                         full: fbx.children[2].children[0].children[0].children[2].geometry
+                        base: fbx.children[2].children[0].children[3].geometry,
+                        full: fbx.children[2].children[0].children[0].children[2].geometry
                     }
                 },
                 stone: fbx.children[4].children[1].geometry,
@@ -177,8 +175,8 @@ export default function Configurator() {
                 bar: {
                     full: fbx.children[3].children[3].geometry,
                     diamond: {
-                         base: fbx.children[3].children[0].children[0].geometry,
-                         full: fbx.children[3].children[0].children[1].geometry
+                        base: fbx.children[3].children[0].children[0].geometry,
+                        full: fbx.children[3].children[0].children[1].geometry
                     }
                 }
             },
@@ -193,22 +191,8 @@ export default function Configurator() {
     return (
         <>
             <OrbitControls/>
-            <mesh position={[0, -10, 0]} visible={false}>
-                <planeGeometry args={[1, 1]}/>
-                <BarIlsdxL envMap={envMap} color='gold'/>
-            </mesh>
-            <mesh position={[0, -10, 0]} visible={false}>
-                <planeGeometry args={[1, 1]}/>
-                <BarIlsdxR envMap={envMap} color='gold'/>
-            </mesh>
-            <mesh position={[0, -10, 0]} visible={false}>
-                <planeGeometry args={[1, 1]}/>
-                <BarIlssxL envMap={envMap} color='gold'/>
-            </mesh>
-            <mesh position={[0, -10, 0]} visible={false}>
-                <planeGeometry args={[1, 1]}/>
-                <BarIlssxR envMap={envMap} color='gold'/>
-            </mesh>
+            <LoadedMaterials envMap={envMap}/>
+            {/*<primitive object={fbx} visible={false} position={[0, -10, 0]}/>*/}
             {savedTeeth && <IlsSx envMap={envMap}/>}
             {savedTeeth && <IlsDx envMap={envMap}/>}
             <Dentiera envMap={envMap}/>

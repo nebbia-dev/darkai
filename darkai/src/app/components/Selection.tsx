@@ -3,7 +3,18 @@ import {useTeethStore} from "@/app/stores/teeth";
 export default function Selection() {
     const changeMaterial = useTeethStore((state) => state.setMaterial);
     const changeJewelType = useTeethStore((state) => state.setType);
-
+    const teethJewelType = useTeethStore((state) => state.teethJewelType);
+    function diamondOrNot(tooth) {
+        if(teethJewelType[tooth] === 'full') {
+            return 'fullDiamond'
+        } else if(teethJewelType[tooth] === 'bar') {
+            return 'barDiamond'
+        } else if(teethJewelType[tooth] === 'fullDiamond') {
+            return 'full'
+        } else if(teethJewelType[tooth] === 'barDiamond') {
+            return 'bar'
+        }
+    }
     return (
         <>
             <div
@@ -19,6 +30,8 @@ export default function Selection() {
                              onClick={() => changeMaterial('ilsdx', 'rose')}></div>
                         <div className="w-[48px] h-[48px] bg-zinc-400"
                              onClick={() => changeMaterial('ilsdx', 'white')}></div>
+                        <div className="w-[48px] h-[48px] bg-yellow-100"
+                             onClick={() => changeJewelType('ilsdx', diamondOrNot('ilsdx'))}></div>
                     </div>
                     <div className="p-4">
                         <p className="text-left">ILS DX Geometry</p>

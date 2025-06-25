@@ -1,5 +1,5 @@
 'use client'
-import {memo} from "react";
+import {JSX, memo} from "react";
 import FullMaterial from "@/app/components/materials/FullMaterial";
 import {useTeethStore} from "@/app/stores/teeth";
 import BarIlssxR from "@/app/components/materials/BarIlssxR";
@@ -12,7 +12,7 @@ export default function IlsSx({envMap}) {
     const toothMaterial = useTeethStore((state) => state.teethMaterial.ilssx);
     const toothVisibility = useTeethStore((state) => state.teethVisibility.ilssx);
     const toggleVisibility = useTeethStore((state) => state.setVisibility);
-    const ILSSX = memo(({visible, type, mat}) => {
+    const ILSSX = memo(({visible, type, mat} : {visible: boolean, type: string, mat: string}): JSX.Element => {
         let geometry, material;
         switch(type) {
             case 'full':

@@ -1,9 +1,11 @@
 'use client'
-import {memo} from "react";
+import {JSX, memo} from "react";
 import FullMaterial from "@/app/components/materials/FullMaterial";
 import {useTeethStore} from "@/app/stores/teeth";
 import BarIlsdxL from "@/app/components/materials/BarIlsdxL";
 import BarIlsdxR from "@/app/components/materials/BarIlsdxR";
+import BaseFullDiamond from "@/app/components/materials/BaseFullDiamond";
+import FullDiamond from "@/app/components/materials/FullDiamond";
 
 
 export default function IlsDx({envMap}) {
@@ -12,12 +14,16 @@ export default function IlsDx({envMap}) {
     const toothMaterial = useTeethStore((state) => state.teethMaterial.ilsdx);
     const toothVisibility = useTeethStore((state) => state.teethVisibility.ilsdx);
     const toggleVisibility = useTeethStore((state) => state.setVisibility);
-    const ILSDX = memo(({visible, type, mat}) => {
+    const ILSDX = memo(({visible, type, mat} : {visible: boolean, type: string, mat: string}): JSX.Element => {
         let geometry, material;
         switch(type) {
             case 'full':
                 geometry = [toothGeometry.full];
                 material = [<FullMaterial envMap={envMap} color={toothMaterial}/>]
+                break;
+            case 'fullDiamond':
+                geometry = [toothGeometry.fullDiamond.base, toothGeometry.fullDiamond.full];
+                material = [<BaseFullDiamond envMap={envMap} color={toothMaterial}/>, <FullDiamond envMap={envMap} color={toothMaterial}/>]
                 break;
             case 'bar':
                 geometry = [toothGeometry.bar.full.left, toothGeometry.bar.full.right];
