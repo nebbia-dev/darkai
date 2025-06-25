@@ -13,6 +13,8 @@ export default function Selection() {
                     <ToothConfig tooth='icssx'/>
                     <ToothConfig tooth='ilsdx'/>
                     <ToothConfig tooth='ilssx'/>
+                    <ToothConfig tooth='csdx'/>
+                    <ToothConfig tooth='cssx'/>
                     {/*DENTI INFERIORI*/}
                     <ToothConfig tooth='icidx'/>
                     <ToothConfig tooth='icisx'/>

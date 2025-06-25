@@ -5,7 +5,7 @@ import {useTeethStore} from "@/app/stores/teeth";
 import IlsDx from "@/app/components/teeth/IlsDx";
 import IlsSx from "@/app/components/teeth/IlsSx";
 import LoadedMaterials from "@/app/components/LoadedMaterials";
-import {useMemo} from "react";
+import {useEffect, useMemo} from "react";
 import FBX from "@/app/types/FBX";
 import IcsSx from "@/app/components/teeth/IcsSx";
 import IcsDx from "@/app/components/teeth/IcsDx";
@@ -13,14 +13,15 @@ import IliSx from "@/app/components/teeth/IliSx";
 import IliDx from "@/app/components/teeth/IliDx";
 import IciSx from "@/app/components/teeth/IciSx";
 import IciDx from "@/app/components/teeth/IciDx";
+import CsDx from "@/app/components/teeth/CsDx";
+import CsSx from "@/app/components/teeth/CsSx";
 
 export default function Configurator() {
     const envMap = useEnvironment({files: "envMaps/HDR_Light_Studio_Free_HDRI_Design_13.exr"})
+    // const fbx = useMemo(() => useFBX('/models/MOD_Dentiera_Completa_180_Phong.fbx'), []);
     // Se voglio piazzare anche l'fbx in LoadedMaterials, verosimilmente devo usare qui uno useEffect
-    const fbx = useMemo(() => useFBX('/models/MOD_Dentiera_Completa_180_Phong.fbx'), []);
     const teeth = useMemo((): FBX => {
         const fbx = useFBX('/models/MOD_Dentiera_Completa_180_Phong.fbx');
-        console.log(fbx.children[3])
         return {
             // INCISIVI CENTRALI
             icsdx: {
@@ -190,27 +191,36 @@ export default function Configurator() {
         }
     }, []);
     const setTeeth = useTeethStore((state) => state.setGeometry);
-    setTeeth(teeth);
     const savedTeeth = useTeethStore((state) => state.teethGeometry);
-    console.log(savedTeeth);
+
+    useEffect(() => {
+        setTeeth(teeth);
+    }, []);
+
     console.log('envMap');
 
     return (
         <>
             <OrbitControls/>
-            <LoadedMaterials envMap={envMap}/>
+            {/*<LoadedMaterials envMap={envMap}/>*/}
             {/*<primitive object={fbx} visible={false} position={[0, -10, 0]}/>*/}
-            {/*DENTI SUPERIORI*/}
-            {savedTeeth && <IlsSx envMap={envMap}/>}
-            {savedTeeth && <IlsDx envMap={envMap}/>}
-            {savedTeeth && <IcsSx envMap={envMap}/>}
-            {savedTeeth && <IcsDx envMap={envMap}/>}
-            {/*DENTI INFERIORI*/}
-            {savedTeeth && <IliSx envMap={envMap}/>}
-            {savedTeeth && <IliDx envMap={envMap}/>}
-            {savedTeeth && <IciSx envMap={envMap}/>}
-            {savedTeeth && <IciDx envMap={envMap}/>}
-            <Dentiera envMap={envMap}/>
+            {savedTeeth &&
+                <>
+                {/*DENTI SUPERIORI*/}
+                    <IlsSx envMap={envMap}/>
+                    <IlsDx envMap={envMap}/>
+                    <IcsSx envMap={envMap}/>
+                    <IcsDx envMap={envMap}/>
+                    <CsDx envMap={envMap}/>
+                    <CsSx envMap={envMap}/>}
+                {/*DENTI INFERIORI*/}
+                    <IliSx envMap={envMap}/>
+                    <IliDx envMap={envMap}/>
+                    <IciSx envMap={envMap}/>
+                    <IciDx envMap={envMap}/>}
+                    <Dentiera envMap={envMap}/>
+                </>
+            }
         </>
     );
 }
