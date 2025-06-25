@@ -7,6 +7,12 @@ import IlsSx from "@/app/components/teeth/IlsSx";
 import LoadedMaterials from "@/app/components/LoadedMaterials";
 import {useMemo} from "react";
 import FBX from "@/app/types/FBX";
+import IcsSx from "@/app/components/teeth/IcsSx";
+import IcsDx from "@/app/components/teeth/IcsDx";
+import IliSx from "@/app/components/teeth/IliSx";
+import IliDx from "@/app/components/teeth/IliDx";
+import IciSx from "@/app/components/teeth/IciSx";
+import IciDx from "@/app/components/teeth/IciDx";
 
 export default function Configurator() {
     const envMap = useEnvironment({files: "envMaps/HDR_Light_Studio_Free_HDRI_Design_13.exr"})
@@ -194,8 +200,16 @@ export default function Configurator() {
             <OrbitControls/>
             <LoadedMaterials envMap={envMap}/>
             {/*<primitive object={fbx} visible={false} position={[0, -10, 0]}/>*/}
+            {/*DENTI SUPERIORI*/}
             {savedTeeth && <IlsSx envMap={envMap}/>}
             {savedTeeth && <IlsDx envMap={envMap}/>}
+            {savedTeeth && <IcsSx envMap={envMap}/>}
+            {savedTeeth && <IcsDx envMap={envMap}/>}
+            {/*DENTI INFERIORI*/}
+            {savedTeeth && <IliSx envMap={envMap}/>}
+            {savedTeeth && <IliDx envMap={envMap}/>}
+            {savedTeeth && <IciSx envMap={envMap}/>}
+            {savedTeeth && <IciDx envMap={envMap}/>}
             <Dentiera envMap={envMap}/>
         </>
     );
