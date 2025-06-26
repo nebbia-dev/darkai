@@ -10,10 +10,10 @@ export default function CsSxStone() {
         return(
             <group position={tooth.position} quaternion={tooth.quaternion}>
                 <mesh
-                    geometry={tooth.children[1].geometry}
+                    geometry={tooth.children[0].geometry}
                     visible={visible}
-                    position={tooth.children[1].position}
-                    quaternion={tooth.children[1].quaternion}
+                    position={tooth.children[0].position}
+                    quaternion={tooth.children[0].quaternion}
                 >
                     <StonesMaterial color={toothStone}/>
                 </mesh>

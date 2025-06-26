@@ -2,21 +2,19 @@
 import {useTeethStore} from "@/app/stores/teeth";
 import StonesMaterial from "@/app/components/materials/StonesMaterial";
 import {JSX, memo} from "react";
-
 export default function CiSxStone() {
     const tooth = useTeethStore((state) => state.teethGeometry.cisx.stone);
+    const toothGroup = useTeethStore((state) => state.teethGeometry.cssx.stone);
+    console.log(tooth)
     const toothStone =  useTeethStore((state) => state.teethStones.cisx);
     const CISXstone = memo(({visible}): JSX.Element => {
         return(
-            <group position={tooth.position} quaternion={tooth.quaternion}>
-                <mesh
-                    geometry={tooth.children[3].geometry}
+            <group position={toothGroup.position} quaternion={toothGroup.quaternion}>
+                <primitive object={tooth}
                     visible={visible}
-                    position={tooth.children[3].position}
-                    quaternion={tooth.children[3].quaternion}
                 >
                     <StonesMaterial color={toothStone}/>
-                </mesh>
+                </primitive>
             </group>
         )
     })

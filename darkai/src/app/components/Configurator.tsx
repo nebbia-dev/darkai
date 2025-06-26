@@ -1,5 +1,4 @@
 'use client'
-import * as THREE from 'three'
 import {OrbitControls, useEnvironment, useFBX} from '@react-three/drei';
 import Dentiera from "@/app/components/Dentiera";
 import {useTeethStore} from "@/app/stores/teeth";
@@ -19,14 +18,17 @@ import CsSx from "@/app/components/teeth/CsSx";
 import CsDxStone from "@/app/components/teeth/CsDxStone";
 import CsSxStone from "@/app/components/teeth/CsSxStone";
 import CiDxStone from "@/app/components/teeth/CiDxStone";
+import CiDx from "@/app/components/teeth/CiDx";
+import CiSx from "@/app/components/teeth/CiSx";
 import CiSxStone from "@/app/components/teeth/CiSxStone";
+import Stones from "@/app/components/teeth/Stones";
 
 export default function Configurator() {
     const envMap = useEnvironment({files: "envMaps/HDR_Light_Studio_Free_HDRI_Design_13.exr"})
     // const fbx = useMemo(() => useFBX('/models/MOD_Dentiera_Completa_180_Phong.fbx'), []);
     // Se voglio piazzare anche l'fbx in LoadedMaterials, verosimilmente devo usare qui uno useEffect
     const teeth = useMemo((): FBX => {
-        const fbx = useFBX('/models/MOD_Dentiera_Completa_180_Phong.fbx');
+        const fbx = useFBX('/models/MOD_Dentiera_Completa_180_Phong_Scala_1 (1).fbx');
         return {
             // INCISIVI CENTRALI
             icsdx: {
@@ -184,7 +186,7 @@ export default function Configurator() {
                         full: fbx.children[2].children[0].children[0].children[3].geometry
                     }
                 },
-                stone: fbx.children[4],
+                stone: fbx.children[4].children[0],
                 bar: {
                     full: fbx.children[3].children[3].geometry,
                     diamond: {
@@ -228,7 +230,9 @@ export default function Configurator() {
                     <IliDx/>
                     <IciSx/>
                     <IciDx/>
+                    <CiDx/>
                     <CiDxStone/>
+                    <CiSx/>
                     <CiSxStone/>
                     {/*BASE*/}
                     <Dentiera/>

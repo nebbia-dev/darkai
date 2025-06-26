@@ -20,6 +20,8 @@ export default function Selection() {
                     <ToothConfig tooth='icisx'/>
                     <ToothConfig tooth='ilidx'/>
                     <ToothConfig tooth='ilisx'/>
+                    <ToothConfig tooth='cidx'/>
+                    <ToothConfig tooth='cisx'/>
                 </div>
             </div>
 
