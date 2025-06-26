@@ -32,6 +32,12 @@ export const useTeethStore = create((set) => ({
         cidx: 'full',
         cisx: 'full',
     },
+    teethStones: {
+        csdx: null,
+        cssx: null,
+        cidx: null,
+        cisx: null,
+    },
     teethVisibility: {
         icsdx: false,
         icssx: false,
@@ -98,6 +104,16 @@ export const useTeethStore = create((set) => ({
                             break;
                     }
             })
+        ),
+    setStone: (tooth, stone) =>
+        set(
+            produce((state) => {
+                if(state.teethStones[tooth] === stone) {
+                    state.teethStones[tooth] = null
+                } else {
+                    state.teethStones[tooth] = stone;
+                }
+            }),
         ),
     setVisibility: (tooth) =>
         set(

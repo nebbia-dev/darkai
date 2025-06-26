@@ -1,4 +1,5 @@
 'use client'
+import * as THREE from 'three'
 import {OrbitControls, useEnvironment, useFBX} from '@react-three/drei';
 import Dentiera from "@/app/components/Dentiera";
 import {useTeethStore} from "@/app/stores/teeth";
@@ -15,6 +16,10 @@ import IciSx from "@/app/components/teeth/IciSx";
 import IciDx from "@/app/components/teeth/IciDx";
 import CsDx from "@/app/components/teeth/CsDx";
 import CsSx from "@/app/components/teeth/CsSx";
+import CsDxStone from "@/app/components/teeth/CsDxStone";
+import CsSxStone from "@/app/components/teeth/CsSxStone";
+import CiDxStone from "@/app/components/teeth/CiDxStone";
+import CiSxStone from "@/app/components/teeth/CiSxStone";
 
 export default function Configurator() {
     const envMap = useEnvironment({files: "envMaps/HDR_Light_Studio_Free_HDRI_Design_13.exr"})
@@ -127,7 +132,7 @@ export default function Configurator() {
                         full: fbx.children[2].children[0].children[0].children[0].geometry
                     }
                 },
-                stone: fbx.children[4].children[2].geometry,
+                stone: fbx.children[4],
             },
             cssx: {
                 full: fbx.children[0].children[8].geometry,
@@ -142,7 +147,7 @@ export default function Configurator() {
                         full: fbx.children[2].children[0].children[0].children[2].geometry
                     }
                 },
-                stone: fbx.children[4].children[1].geometry,
+                stone: fbx.children[4],
             },
             cidx: {
                 full: fbx.children[0].children[3].geometry,
@@ -157,7 +162,7 @@ export default function Configurator() {
                         full: fbx.children[2].children[0].children[0].children[1].geometry
                     }
                 },
-                stone: fbx.children[4].children[0].geometry,
+                stone: fbx.children[4],
                 bar: {
                     full: fbx.children[3].children[3].geometry,
                     diamond: {
@@ -179,7 +184,7 @@ export default function Configurator() {
                         full: fbx.children[2].children[0].children[0].children[3].geometry
                     }
                 },
-                stone: fbx.children[4].children[3].geometry,
+                stone: fbx.children[4],
                 bar: {
                     full: fbx.children[3].children[3].geometry,
                     diamond: {
@@ -205,24 +210,28 @@ export default function Configurator() {
     return (
         <>
             <OrbitControls/>
-            {savedEnvMap && <LoadedMaterials />}
+            {savedEnvMap && <LoadedMaterials/>}
             {/*<primitive object={fbx} visible={false} position={[0, -10, 0]}/>*/}
             {savedTeeth && savedEnvMap &&
                 <>
-                {/*DENTI SUPERIORI*/}
-                    <IlsSx />
-                    <IlsDx />
-                    <IcsSx />
-                    <IcsDx />
-                    <CsDx />
-                    <CsSx />
-                {/*DENTI INFERIORI*/}
-                    <IliSx />
-                    <IliDx />
-                    <IciSx />
-                    <IciDx />
-                {/*BASE*/}
-                    <Dentiera />
+                    {/*DENTI SUPERIORI*/}
+                    <IlsSx/>
+                    <IlsDx/>
+                    <IcsSx/>
+                    <IcsDx/>
+                    <CsDx/>
+                    <CsDxStone/>
+                    <CsSx/>
+                    <CsSxStone/>
+                    {/*DENTI INFERIORI*/}
+                    <IliSx/>
+                    <IliDx/>
+                    <IciSx/>
+                    <IciDx/>
+                    <CiDxStone/>
+                    <CiSxStone/>
+                    {/*BASE*/}
+                    <Dentiera/>
                 </>
             }
         </>

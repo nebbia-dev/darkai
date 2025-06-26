@@ -1,5 +1,6 @@
 import {useTeethStore} from "@/app/stores/teeth";
 import DiamondToggler from "@/app/components/DiamondToggler";
+import StoneSelector from "@/app/components/StoneSelector";
 
 export default function ToothConfig({tooth}) {
     const changeMaterial = useTeethStore((state) => state.setMaterial);
@@ -16,6 +17,9 @@ export default function ToothConfig({tooth}) {
                 <div className="w-[48px] h-[48px] bg-zinc-400"
                      onClick={() => changeMaterial(tooth, 'white')}></div>
                 <DiamondToggler tooth={tooth}/>
+                {(tooth === 'csdx' || tooth === 'cssx' || tooth === 'cidx' || tooth === 'cisx') &&
+                    <StoneSelector tooth={tooth}/>
+                }
             </div>
             <div className="p-4">
                 <p className="text-left">{tooth.toUpperCase()} Geometry</p>
@@ -28,9 +32,11 @@ export default function ToothConfig({tooth}) {
                     </div>
                 }
                 {(tooth === 'csdx' || tooth === 'cssx' || tooth === 'cidx' || tooth === 'cisx') &&
-                    <div className="w-[48px] h-[48px]"
-                         onClick={() => changeJewelType(tooth, 'frame')}>Frame
-                    </div>
+                    <>
+                        <div className="w-[48px] h-[48px]"
+                             onClick={() => changeJewelType(tooth, 'frame')}>Frame
+                        </div>
+                    </>
                 }
             </div>
         </div>

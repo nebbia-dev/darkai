@@ -36,6 +36,7 @@ export default function CsDx() {
                 geometry = [toothGeometry.full];
                 material = [<FullMaterial color={toothMaterial}/>]
         }
+
         if(geometry.length === 2) {
             return (
                 <>

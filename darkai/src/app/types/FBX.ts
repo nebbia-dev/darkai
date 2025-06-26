@@ -104,7 +104,7 @@ export default interface FBX {
                     full: THREE.BufferGeometry
             }
         },
-        stone: THREE.BufferGeometry,
+        stone: THREE.Object3D,
     },
     cssx: {
         full: THREE.BufferGeometry,
@@ -119,7 +119,7 @@ export default interface FBX {
                     full: THREE.BufferGeometry
             }
         },
-        stone: THREE.BufferGeometry,
+        stone: THREE.Object3D,
     },
     cidx: {
         full: THREE.BufferGeometry,
@@ -134,7 +134,7 @@ export default interface FBX {
                     full: THREE.BufferGeometry
             }
         },
-        stone: THREE.BufferGeometry,
+        stone: THREE.Object3D,
             bar: {
             full: THREE.BufferGeometry,
                 diamond: {
@@ -156,7 +156,7 @@ export default interface FBX {
                     full: THREE.BufferGeometry
             }
         },
-        stone: THREE.BufferGeometry,
+        stone: THREE.Object3D,
             bar: {
             full: THREE.BufferGeometry,
                 diamond: {
