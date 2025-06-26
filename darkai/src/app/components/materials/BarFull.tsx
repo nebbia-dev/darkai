@@ -1,9 +1,10 @@
 'use client'
 import * as THREE from 'three';
 import {useTexture} from "@react-three/drei";
+import {useTeethStore} from "@/app/stores/teeth";
 
-export default function BarFull({envMap, color}) {
-
+export default function BarFull({color}) {
+    const envMap = useTeethStore((state) => state.envMap);
         const propsYBarFull = useTexture({
             map: 'textures/bar/full/DefaultMaterial_Base_color.webp',
             normalMap: 'textures/bar/full/DefaultMaterial_Normal.webp',

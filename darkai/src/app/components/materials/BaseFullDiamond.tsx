@@ -1,9 +1,10 @@
 'use client'
 import * as THREE from 'three';
 import {useTexture} from "@react-three/drei";
+import {useTeethStore} from "@/app/stores/teeth";
 
-export default function BaseFullDiamond({envMap, color}) {
-
+export default function BaseFullDiamond({color}) {
+    const envMap = useTeethStore((state) => state.envMap);
         const propsYBaseFullDiamond = useTexture({
             map: 'textures/diamondFull/frameDiamond/DefaultMaterial_Base_color.webp',
             normalMap: 'textures/diamondFull/frameDiamond/DefaultMaterial_Normal.webp',

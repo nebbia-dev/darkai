@@ -1,9 +1,10 @@
 'use client'
 import * as THREE from 'three';
 import {useTexture} from "@react-three/drei";
+import {useTeethStore} from "@/app/stores/teeth";
 
-export default function FrameCsdx({envMap, color}) {
-
+export default function FrameCsdx({color}) {
+    const envMap = useTeethStore((state) => state.envMap);
         const propsYFrame01 = useTexture({
             map: 'textures/frame/01/DefaultMaterial_Base_color.webp',
             normalMap: 'textures/frame/01/DefaultMaterial_Normal.webp',

@@ -14,29 +14,28 @@ export default function IlsDx() {
     const toothMaterial = useTeethStore((state) => state.teethMaterial.ilsdx);
     const toothVisibility = useTeethStore((state) => state.teethVisibility.ilsdx);
     const toggleVisibility = useTeethStore((state) => state.setVisibility);
-    const envMap = useTeethStore((state) => state.envMap);
     const ILSDX = memo(({visible, type, mat} : {visible: boolean, type: string, mat: string}): JSX.Element => {
         let geometry, material;
         switch(type) {
             case 'full':
                 geometry = [toothGeometry.full];
-                material = [<FullMaterial envMap={envMap} color={toothMaterial}/>]
+                material = [<FullMaterial color={toothMaterial}/>]
                 break;
             case 'fullDiamond':
                 geometry = [toothGeometry.fullDiamond.base, toothGeometry.fullDiamond.full];
-                material = [<BaseFullDiamond envMap={envMap} color={toothMaterial}/>, <FullDiamond envMap={envMap} color={toothMaterial}/>]
+                material = [<BaseFullDiamond color={toothMaterial}/>, <FullDiamond color={toothMaterial}/>]
                 break;
             case 'bar':
                 geometry = [toothGeometry.bar.full.left, toothGeometry.bar.full.right];
-                material = [<BarIlsdxL envMap={envMap} color={toothMaterial}/>, <BarIlsdxR envMap={envMap} color={toothMaterial}/>]
+                material = [<BarIlsdxL color={toothMaterial}/>, <BarIlsdxR color={toothMaterial}/>]
                 break;
             case 'barDiamond':
                 geometry = [toothGeometry.bar.diamond.left.base, toothGeometry.bar.diamond.right.base, toothGeometry.bar.diamond.left.full, toothGeometry.bar.diamond.right.full];
-                material = [<BarIlsdxL envMap={envMap} color={toothMaterial}/>, <BarIlsdxR envMap={envMap} color={toothMaterial}/>, <BarDiamond envMap={envMap} color={toothMaterial}/>]
+                material = [<BarIlsdxL color={toothMaterial}/>, <BarIlsdxR color={toothMaterial}/>, <BarDiamond color={toothMaterial}/>]
                 break;
             default:
                 geometry = [toothGeometry.full];
-                material = [<FullMaterial envMap={envMap} color={toothMaterial}/>]
+                material = [<FullMaterial color={toothMaterial}/>]
         }
         if(geometry.length === 2) {
             return (

@@ -205,7 +205,7 @@ export default function Configurator() {
     return (
         <>
             <OrbitControls/>
-            {/*<LoadedMaterials envMap={envMap}/>*/}
+            {savedEnvMap && <LoadedMaterials />}
             {/*<primitive object={fbx} visible={false} position={[0, -10, 0]}/>*/}
             {savedTeeth && savedEnvMap &&
                 <>
@@ -221,6 +221,7 @@ export default function Configurator() {
                     <IliDx />
                     <IciSx />
                     <IciDx />
+                {/*BASE*/}
                     <Dentiera />
                 </>
             }

@@ -14,21 +14,21 @@ export default function IciDx() {
     const toothMaterial = useTeethStore((state) => state.teethMaterial.icidx);
     const toothVisibility = useTeethStore((state) => state.teethVisibility.icidx);
     const toggleVisibility = useTeethStore((state) => state.setVisibility);
-    const envMap = useTeethStore((state) => state.envMap);
+
     const ICIDX = memo(({visible, type, mat} : {visible: boolean, type: string, mat: string}): JSX.Element => {
         let geometry, material;
         switch(type) {
             case 'full':
                 geometry = [toothGeometry.full];
-                material = [<FullMaterial envMap={envMap} color={toothMaterial}/>]
+                material = [<FullMaterial color={toothMaterial}/>]
                 break;
             case 'fullDiamond':
                 geometry = [toothGeometry.fullDiamond.base, toothGeometry.fullDiamond.full];
-                material = [<BaseFullDiamond envMap={envMap} color={toothMaterial}/>, <FullDiamond envMap={envMap} color={toothMaterial}/>]
+                material = [<BaseFullDiamond color={toothMaterial}/>, <FullDiamond color={toothMaterial}/>]
                 break;
             default:
                 geometry = [toothGeometry.full];
-                material = [<FullMaterial envMap={envMap} color={toothMaterial}/>]
+                material = [<FullMaterial color={toothMaterial}/>]
         }
         if(geometry.length === 2) {
             return (

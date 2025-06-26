@@ -13,29 +13,28 @@ export default function CsDx() {
     const toothMaterial = useTeethStore((state) => state.teethMaterial.csdx);
     const toothVisibility = useTeethStore((state) => state.teethVisibility.csdx);
     const toggleVisibility = useTeethStore((state) => state.setVisibility);
-    const envMap = useTeethStore((state) => state.envMap);
     const CSDX = memo(({visible, type, mat} : {visible: boolean, type: string, mat: string}): JSX.Element => {
         let geometry, material;
         switch(type) {
             case 'full':
                 geometry = [toothGeometry.full];
-                material = [<FullMaterial envMap={envMap} color={toothMaterial}/>]
+                material = [<FullMaterial color={toothMaterial}/>]
                 break;
             case 'fullDiamond':
                 geometry = [toothGeometry.fullDiamond.base, toothGeometry.fullDiamond.full];
-                material = [<BaseFullDiamond envMap={envMap} color={toothMaterial}/>, <FullDiamond envMap={envMap} color={toothMaterial}/>]
+                material = [<BaseFullDiamond color={toothMaterial}/>, <FullDiamond color={toothMaterial}/>]
                 break;
             case 'frame':
                 geometry = [toothGeometry.frame.full];
-                material = [<FrameCsdx envMap={envMap} color={toothMaterial}/>]
+                material = [<FrameCsdx color={toothMaterial}/>]
                 break;
             case 'frameDiamond':
                 geometry = [toothGeometry.frame.diamond.base, toothGeometry.frame.diamond.full];
-                material = [<FrameCsdx envMap={envMap} color={toothMaterial}/>, <FrameDiamond envMap={envMap} color={toothMaterial}/>]
+                material = [<FrameCsdx color={toothMaterial}/>, <FrameDiamond color={toothMaterial}/>]
                 break;
             default:
                 geometry = [toothGeometry.full];
-                material = [<FullMaterial envMap={envMap} color={toothMaterial}/>]
+                material = [<FullMaterial color={toothMaterial}/>]
         }
         if(geometry.length === 2) {
             return (

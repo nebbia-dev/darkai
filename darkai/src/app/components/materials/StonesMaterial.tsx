@@ -1,8 +1,10 @@
 'use client'
 
-export default function StonesMaterial({envMap, color}) {
+import {useTeethStore} from "@/app/stores/teeth";
 
-        return (<meshBasicdMaterial
+export default function StonesMaterial({color}) {
+    const envMap = useTeethStore((state) => state.envMap);
+        return (<meshBasicMaterial
             color={color === 'sapphire'
                 ? 0x5773ff
                 : color === 'ruby'

@@ -12,58 +12,63 @@ import FrameCsdx from "@/app/components/materials/FrameCsdx";
 import FrameCssx from "@/app/components/materials/FrameCssx";
 import FrameCidx from "@/app/components/materials/FrameCidx";
 import FrameCisx from "@/app/components/materials/FrameCisx";
+import {useTeethStore} from "@/app/stores/teeth";
+import StonesMaterial from "@/app/components/materials/StonesMaterial";
 
-export default function LoadedMaterials({envMap}) {
-
+export default function LoadedMaterials() {
     return(
         <>
             <mesh position={[0, -10, 0]} visible={false}>
                 <planeGeometry args={[1, 1]}/>
-                <BarIlsdxL envMap={envMap} color='gold'/>
+                <BarIlsdxL color='gold'/>
             </mesh>
             <mesh position={[0, -10, 0]} visible={false}>
                 <planeGeometry args={[1, 1]}/>
-                <BarIlsdxR envMap={envMap} color='gold'/>
+                <BarIlsdxR color='gold'/>
             </mesh>
             <mesh position={[0, -10, 0]} visible={false}>
                 <planeGeometry args={[1, 1]}/>
-                <BarIlssxL envMap={envMap} color='gold'/>
+                <BarIlssxL color='gold'/>
             </mesh>
             <mesh position={[0, -10, 0]} visible={false}>
                 <planeGeometry args={[1, 1]}/>
-                <BarIlssxR envMap={envMap} color='gold'/>
+                <BarIlssxR color='gold'/>
             </mesh>
             <mesh position={[0, -10, 0]} visible={false}>
                 <planeGeometry args={[1, 1]}/>
-                <BaseFullDiamond envMap={envMap} color='gold'/>
+                <BaseFullDiamond color='gold'/>
             </mesh>
             <mesh position={[0, -10, 0]} visible={false}>
                 <planeGeometry args={[1, 1]}/>
-                <FullDiamond envMap={envMap} color='gold'/>
+                <FullDiamond color='gold'/>
             </mesh>
             <mesh position={[0, -10, 0]} visible={false}>
                 <planeGeometry args={[1, 1]}/>
-                <BarDiamond envMap={envMap} color='gold'/>
+                <BarDiamond color='gold'/>
             </mesh>
             <mesh position={[0, -10, 0]} visible={false}>
                 <planeGeometry args={[1, 1]}/>
-                <FrameDiamond envMap={envMap} color='gold'/>
+                <FrameDiamond color='gold'/>
             </mesh>
             <mesh position={[0, -10, 0]} visible={false}>
                 <planeGeometry args={[1, 1]}/>
-                <FrameCsdx envMap={envMap} color='gold'/>
+                <FrameCsdx color='gold'/>
             </mesh>
             <mesh position={[0, -10, 0]} visible={false}>
                 <planeGeometry args={[1, 1]}/>
-                <FrameCssx envMap={envMap} color='gold'/>
+                <FrameCssx color='gold'/>
             </mesh>
             <mesh position={[0, -10, 0]} visible={false}>
                 <planeGeometry args={[1, 1]}/>
-                <FrameCidx envMap={envMap} color='gold'/>
+                <FrameCidx color='gold'/>
             </mesh>
             <mesh position={[0, -10, 0]} visible={false}>
                 <planeGeometry args={[1, 1]}/>
-                <FrameCisx envMap={envMap} color='gold'/>
+                <FrameCisx color='gold'/>
+            </mesh>
+            <mesh position={[0, -10, 0]} visible={false}>
+                <planeGeometry args={[1, 1]}/>
+                <StonesMaterial color='sapphire'/>
             </mesh>
         </>
     )
