@@ -38,6 +38,13 @@ export default function ToothConfig({tooth}) {
                         </div>
                     </>
                 }
+                {(tooth === 'cidx' || tooth === 'cisx') &&
+                    <>
+                        <div className="w-[48px] h-[48px]"
+                             onClick={() => changeJewelType(tooth, 'bigBar')}>Big Bar
+                        </div>
+                    </>
+                }
             </div>
         </div>
 )

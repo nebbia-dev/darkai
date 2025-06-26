@@ -70,10 +70,23 @@ export const useTeethStore = create((set) => ({
     setType: (tooth, type) =>
         set(
             produce((state) => {
-                state.teethJewelType[tooth] = type;
-                if(!state.teethVisibility[tooth]) {
-                    state.teethVisibility[tooth] = true;
-                    state.teethMaterial[tooth] = 'gold';
+                if(type === 'bigBar' || type === 'bigBarDiamond') {
+                    state.teethJewelType.cidx = type;
+                    state.teethJewelType.cisx = type;
+                    if(!state.teethVisibility.cidx) {
+                        state.teethVisibility.cidx = true;
+                        state.teethMaterial.cidx = 'gold';
+                    }
+                    if(!state.teethVisibility.cisx) {
+                        state.teethVisibility.cisx = true;
+                        state.teethMaterial.cisx = 'gold';
+                    }
+                } else {
+                    state.teethJewelType[tooth] = type;
+                    if(!state.teethVisibility[tooth]) {
+                        state.teethVisibility[tooth] = true;
+                        state.teethMaterial[tooth] = 'gold';
+                    }
                 }
             }),
         ),
@@ -95,6 +108,14 @@ export const useTeethStore = create((set) => ({
                             break;
                         case 'fullDiamond':
                             state.teethJewelType[tooth] = 'full';
+                            break;
+                        case 'bigBar':
+                            state.teethJewelType.cidx = 'bigBarDiamond';
+                            state.teethJewelType.cisx = 'bigBarDiamond';
+                            break;
+                        case 'bigBarDiamond':
+                            state.teethJewelType.cidx = 'bigBar';
+                            state.teethJewelType.cisx = 'bigBar';
                             break;
                         case 'frame':
                             state.teethJewelType[tooth] = 'frameDiamond';

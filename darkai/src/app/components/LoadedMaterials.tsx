@@ -14,6 +14,7 @@ import FrameCidx from "@/app/components/materials/FrameCidx";
 import FrameCisx from "@/app/components/materials/FrameCisx";
 import {useTeethStore} from "@/app/stores/teeth";
 import StonesMaterial from "@/app/components/materials/StonesMaterial";
+import BarFull from "@/app/components/materials/BarFull";
 
 export default function LoadedMaterials() {
     return(
@@ -69,6 +70,14 @@ export default function LoadedMaterials() {
             <mesh position={[0, -10, 0]} visible={false}>
                 <planeGeometry args={[1, 1]}/>
                 <StonesMaterial color='sapphire'/>
+            </mesh>
+            <mesh position={[0, -10, 0]} visible={false}>
+                <planeGeometry args={[1, 1]}/>
+                <BarFull color='gold'/>
+            </mesh>
+            <mesh position={[0, -10, 0]} visible={false}>
+                <planeGeometry args={[1, 1]}/>
+                <BarDiamond color='gold'/>
             </mesh>
         </>
     )

@@ -6,6 +6,8 @@ import BaseFullDiamond from "@/app/components/materials/BaseFullDiamond";
 import FullDiamond from "@/app/components/materials/FullDiamond";
 import FrameDiamond from "@/app/components/materials/FrameDiamond";
 import FrameCidx from "@/app/components/materials/FrameCidx";
+import BarFull from "@/app/components/materials/BarFull";
+import BarDiamond from "@/app/components/materials/BarDiamond";
 
 export default function CiDx() {
     const toothGeometry = useTeethStore((state) => state.teethGeometry.cidx);
@@ -31,6 +33,14 @@ export default function CiDx() {
             case 'frameDiamond':
                 geometry = [toothGeometry.frame.diamond.base, toothGeometry.frame.diamond.full];
                 material = [<FrameCidx color={toothMaterial}/>, <FrameDiamond color={toothMaterial}/>]
+                break;
+            case 'bigBar':
+                geometry = [toothGeometry.bar.full];
+                material = [<BarFull color={toothMaterial}/>]
+                break;
+            case 'bigBarDiamond':
+                geometry = [toothGeometry.bar.diamond.base, toothGeometry.bar.diamond.full];
+                material = [<BarFull color={toothMaterial}/>, <BarDiamond color={toothMaterial}/>]
                 break;
             default:
                 geometry = [toothGeometry.full];

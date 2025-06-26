@@ -6,6 +6,8 @@ import BaseFullDiamond from "@/app/components/materials/BaseFullDiamond";
 import FullDiamond from "@/app/components/materials/FullDiamond";
 import FrameDiamond from "@/app/components/materials/FrameDiamond";
 import FrameCisx from "@/app/components/materials/FrameCisx";
+import BarFull from "@/app/components/materials/BarFull";
+import BarDiamond from "@/app/components/materials/BarDiamond";
 
 export default function CiSx() {
     const toothGeometry = useTeethStore((state) => state.teethGeometry.cisx);
@@ -32,6 +34,14 @@ export default function CiSx() {
                 geometry = [toothGeometry.frame.diamond.base, toothGeometry.frame.diamond.full];
                 material = [<FrameCisx color={toothMaterial}/>, <FrameDiamond color={toothMaterial}/>]
                 break;
+            case 'bigBar':
+                geometry = [];
+                material = []
+                break;
+            case 'bigBarDiamond':
+                geometry = [];
+                material = []
+                break;
             default:
                 geometry = [toothGeometry.full];
                 material = [<FullMaterial color={toothMaterial}/>]
@@ -49,6 +59,7 @@ export default function CiSx() {
                 </>
             )
         }
+        if(geometry.length === 0) return <></>
         return (
             <mesh geometry={geometry[0]} onClick={() => toggleVisibility('cisx')} visible={visible}>
                 {material[0]}
