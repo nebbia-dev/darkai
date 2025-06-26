@@ -10,12 +10,14 @@ import BarDiamond from "@/app/components/materials/BarDiamond";
 import FrameCsdx from "@/app/components/materials/FrameCsdx";
 import FrameDiamond from "@/app/components/materials/FrameDiamond";
 import FrameCssx from "@/app/components/materials/FrameCssx";
-export default function CsSx({envMap}) {
+
+export default function CsSx() {
     const toothGeometry = useTeethStore((state) => state.teethGeometry.cssx);
     const toothJewelType = useTeethStore((state) => state.teethJewelType.cssx);
     const toothMaterial = useTeethStore((state) => state.teethMaterial.cssx);
     const toothVisibility = useTeethStore((state) => state.teethVisibility.cssx);
     const toggleVisibility = useTeethStore((state) => state.setVisibility);
+    const envMap = useTeethStore((state) => state.envMap);
     const CSSX = memo(({visible, type, mat} : {visible: boolean, type: string, mat: string}): JSX.Element => {
         let geometry, material;
         switch(type) {

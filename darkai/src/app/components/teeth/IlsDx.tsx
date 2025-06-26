@@ -8,13 +8,13 @@ import BaseFullDiamond from "@/app/components/materials/BaseFullDiamond";
 import FullDiamond from "@/app/components/materials/FullDiamond";
 import BarDiamond from "@/app/components/materials/BarDiamond";
 
-
-export default function IlsDx({envMap}) {
+export default function IlsDx() {
     const toothGeometry = useTeethStore((state) => state.teethGeometry.ilsdx);
     const toothJewelType = useTeethStore((state) => state.teethJewelType.ilsdx);
     const toothMaterial = useTeethStore((state) => state.teethMaterial.ilsdx);
     const toothVisibility = useTeethStore((state) => state.teethVisibility.ilsdx);
     const toggleVisibility = useTeethStore((state) => state.setVisibility);
+    const envMap = useTeethStore((state) => state.envMap);
     const ILSDX = memo(({visible, type, mat} : {visible: boolean, type: string, mat: string}): JSX.Element => {
         let geometry, material;
         switch(type) {

@@ -7,12 +7,14 @@ import FullDiamond from "@/app/components/materials/FullDiamond";
 import BarDiamond from "@/app/components/materials/BarDiamond";
 import BarIlssxL from "@/app/components/materials/BarIlssxL";
 import BarIlssxR from "@/app/components/materials/BarIlssxR";
-export default function IciSx({envMap}) {
+
+export default function IciSx() {
     const toothGeometry = useTeethStore((state) => state.teethGeometry.icisx);
     const toothJewelType = useTeethStore((state) => state.teethJewelType.icisx);
     const toothMaterial = useTeethStore((state) => state.teethMaterial.icisx);
     const toothVisibility = useTeethStore((state) => state.teethVisibility.icisx);
     const toggleVisibility = useTeethStore((state) => state.setVisibility);
+    const envMap = useTeethStore((state) => state.envMap);
     const ICISX = memo(({visible, type, mat} : {visible: boolean, type: string, mat: string}): JSX.Element => {
         let geometry, material;
         switch(type) {

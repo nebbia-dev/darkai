@@ -8,13 +8,13 @@ import BarDiamond from "@/app/components/materials/BarDiamond";
 import BarIlssxL from "@/app/components/materials/BarIlssxL";
 import BarIlssxR from "@/app/components/materials/BarIlssxR";
 
-
-export default function IlsSx({envMap}) {
+export default function IlsSx() {
     const toothGeometry = useTeethStore((state) => state.teethGeometry.ilssx);
     const toothJewelType = useTeethStore((state) => state.teethJewelType.ilssx);
     const toothMaterial = useTeethStore((state) => state.teethMaterial.ilssx);
     const toothVisibility = useTeethStore((state) => state.teethVisibility.ilssx);
     const toggleVisibility = useTeethStore((state) => state.setVisibility);
+    const envMap = useTeethStore((state) => state.envMap);
     const ILSSX = memo(({visible, type, mat} : {visible: boolean, type: string, mat: string}): JSX.Element => {
         let geometry, material;
         switch(type) {

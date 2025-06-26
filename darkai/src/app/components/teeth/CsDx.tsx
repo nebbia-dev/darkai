@@ -2,19 +2,18 @@
 import {JSX, memo} from "react";
 import FullMaterial from "@/app/components/materials/FullMaterial";
 import {useTeethStore} from "@/app/stores/teeth";
-import BarIlsdxL from "@/app/components/materials/BarIlsdxL";
-import BarIlsdxR from "@/app/components/materials/BarIlsdxR";
 import BaseFullDiamond from "@/app/components/materials/BaseFullDiamond";
 import FullDiamond from "@/app/components/materials/FullDiamond";
-import BarDiamond from "@/app/components/materials/BarDiamond";
 import FrameCsdx from "@/app/components/materials/FrameCsdx";
 import FrameDiamond from "@/app/components/materials/FrameDiamond";
-export default function CsDx({envMap}) {
+
+export default function CsDx() {
     const toothGeometry = useTeethStore((state) => state.teethGeometry.csdx);
     const toothJewelType = useTeethStore((state) => state.teethJewelType.csdx);
     const toothMaterial = useTeethStore((state) => state.teethMaterial.csdx);
     const toothVisibility = useTeethStore((state) => state.teethVisibility.csdx);
     const toggleVisibility = useTeethStore((state) => state.setVisibility);
+    const envMap = useTeethStore((state) => state.envMap);
     const CSDX = memo(({visible, type, mat} : {visible: boolean, type: string, mat: string}): JSX.Element => {
         let geometry, material;
         switch(type) {

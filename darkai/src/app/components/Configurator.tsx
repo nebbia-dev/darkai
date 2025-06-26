@@ -190,11 +190,14 @@ export default function Configurator() {
             },
         }
     }, []);
-    const setTeeth = useTeethStore((state) => state.setGeometry);
     const savedTeeth = useTeethStore((state) => state.teethGeometry);
+    const setTeeth = useTeethStore((state) => state.setGeometry);
+    const savedEnvMap = useTeethStore((state) => state.envMap);
+    const setEnvMap = useTeethStore((state) => state.setEnvMap);
 
     useEffect(() => {
         setTeeth(teeth);
+        setEnvMap(envMap);
     }, []);
 
     console.log('envMap');
@@ -204,21 +207,21 @@ export default function Configurator() {
             <OrbitControls/>
             {/*<LoadedMaterials envMap={envMap}/>*/}
             {/*<primitive object={fbx} visible={false} position={[0, -10, 0]}/>*/}
-            {savedTeeth &&
+            {savedTeeth && savedEnvMap &&
                 <>
                 {/*DENTI SUPERIORI*/}
-                    <IlsSx envMap={envMap}/>
-                    <IlsDx envMap={envMap}/>
-                    <IcsSx envMap={envMap}/>
-                    <IcsDx envMap={envMap}/>
-                    <CsDx envMap={envMap}/>
-                    <CsSx envMap={envMap}/>}
+                    <IlsSx />
+                    <IlsDx />
+                    <IcsSx />
+                    <IcsDx />
+                    <CsDx />
+                    <CsSx />
                 {/*DENTI INFERIORI*/}
-                    <IliSx envMap={envMap}/>
-                    <IliDx envMap={envMap}/>
-                    <IciSx envMap={envMap}/>
-                    <IciDx envMap={envMap}/>}
-                    <Dentiera envMap={envMap}/>
+                    <IliSx />
+                    <IliDx />
+                    <IciSx />
+                    <IciDx />
+                    <Dentiera />
                 </>
             }
         </>

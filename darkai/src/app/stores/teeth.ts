@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import {produce} from "immer";
 
 export const useTeethStore = create((set) => ({
+    envMap: null,
     teethGeometry: null,
     teethMaterial: {
         icsdx: 'base',
@@ -44,6 +45,9 @@ export const useTeethStore = create((set) => ({
         cssx: false,
         cidx: false,
         cisx: false,
+    },
+    setEnvMap: (em) => {
+        set({envMap: em})
     },
     setGeometry: (fbx) => {
         set({teethGeometry: fbx});
