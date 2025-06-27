@@ -1,10 +1,14 @@
 import {useTeethStore} from "@/app/stores/teeth";
 import DiamondToggler from "@/app/components/DiamondToggler";
 import StoneSelector from "@/app/components/StoneSelector";
+import {Accordion, AccordionDetails, AccordionSummary} from "@mui/material";
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ColorSelector from "@/app/components/ColorSelector";
 
 export default function ToothConfig({tooth}) {
     const changeMaterial = useTeethStore((state) => state.setMaterial);
     const changeJewelType = useTeethStore((state) => state.setType);
+    const firstChild = tooth === 'icsdx' ? '' : '1px solid #9ca3af';
     let title;
 
     if(tooth.length === 4) {
@@ -44,20 +48,24 @@ export default function ToothConfig({tooth}) {
         }
     }
 
-    console.log('oh no')
+    console.log('oh no');
+
     return (
-        <div className="w-100">
-            <h3 className="text-left px-4 font-bold">{title}</h3>
-            <div className="w-100 flex gap-8">
+        <Accordion elevation={0} sx={{backgroundColor: '#f9fafb', '&:before':{height:'0px'}}}>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />} sx={{height: '100px', borderTop: firstChild, px: 8}}>
+                {title}
+            </AccordionSummary>
+            <AccordionDetails sx={{borderTop: '1px solid #9ca3af'}}>
+                <div className="w-full">
+            <div className="w-full flex gap-8">
                 <div className="p-4">
                     <p className="text-left">Base</p>
-                    <div className="w-[48px] h-[48px] bg-yellow-200"
-                         onClick={() => changeMaterial(tooth, 'gold')}></div>
-                    <div className="w-[48px] h-[48px] bg-pink-300"
-                         onClick={() => changeMaterial(tooth, 'rose')}></div>
-                    <div className="w-[48px] h-[48px] bg-zinc-400"
-                         onClick={() => changeMaterial(tooth, 'white')}></div>
-                    <DiamondToggler tooth={tooth}/>
+                    <div className="flex gap-2">
+                        <ColorSelector tooth={tooth} color="gold"/>
+                        <ColorSelector tooth={tooth} color="rose"/>
+                        <ColorSelector tooth={tooth} color="white"/>
+                        <DiamondToggler tooth={tooth}/>
+                    </div>
                 </div>
                 <div className="p-4 whitespace-nowrap">
                     <p className="text-left">Jewel</p>
@@ -92,5 +100,7 @@ export default function ToothConfig({tooth}) {
                 }
             </div>
         </div>
-)
+            </AccordionDetails>
+        </Accordion>
+    )
 }

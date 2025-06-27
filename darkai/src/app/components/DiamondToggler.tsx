@@ -9,9 +9,11 @@ export default function DiamondToggler({tooth}) {
     }
     console.log('ouch')
     return (
-        <button className="bg-yellow-100"
+        <button className="w-[48px] h-[48px] rounded"
                 onClick={log}
                 disabled={material === 'base'}
-        >Diamonds</button>
+        >
+            <img src="/textures/diamondFull/Difuse_Diamanti.webp" className="rounded object-cover"/>
+        </button>
     )
 }

@@ -9,11 +9,13 @@ export default function Home() {
   return (
       <>
           <Suspense fallback={<Loading/>}>
-              <div className="w-[60vw] h-[100vh]">
+              <div className="w-[50vw]">
                   <Scene/>
               </div>
-              <Selection/>
+              <div className="w-[50vw]">
+                  <Selection/>
+              </div>
           </Suspense>
       </>
-  );
+);
 }
