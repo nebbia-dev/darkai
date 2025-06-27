@@ -2,13 +2,13 @@
 
 import BarIlsdxL from "@/app/components/materials/BarIlsdxL";
 import BarIlsdxR from "@/app/components/materials/BarIlsdxR";
-import BarIlssxL from "@/app/components/materials/BarIlssxL";
+import BarSmall from "@/app/components/materials/BarSmall";
 import BarIlssxR from "@/app/components/materials/BarIlssxR";
 import BaseFullDiamond from "@/app/components/materials/BaseFullDiamond";
 import FullDiamond from "@/app/components/materials/FullDiamond";
 import BarDiamond from "@/app/components/materials/BarDiamond";
 import FrameDiamond from "@/app/components/materials/FrameDiamond";
-import FrameCsdx from "@/app/components/materials/FrameCsdx";
+import FrameFull from "@/app/components/materials/FrameFull";
 import FrameCssx from "@/app/components/materials/FrameCssx";
 import FrameCidx from "@/app/components/materials/FrameCidx";
 import FrameCisx from "@/app/components/materials/FrameCisx";
@@ -21,19 +21,7 @@ export default function LoadedMaterials() {
         <>
             <mesh position={[0, -10, 0]} visible={false}>
                 <planeGeometry args={[1, 1]}/>
-                <BarIlsdxL color='gold'/>
-            </mesh>
-            <mesh position={[0, -10, 0]} visible={false}>
-                <planeGeometry args={[1, 1]}/>
-                <BarIlsdxR color='gold'/>
-            </mesh>
-            <mesh position={[0, -10, 0]} visible={false}>
-                <planeGeometry args={[1, 1]}/>
-                <BarIlssxL color='gold'/>
-            </mesh>
-            <mesh position={[0, -10, 0]} visible={false}>
-                <planeGeometry args={[1, 1]}/>
-                <BarIlssxR color='gold'/>
+                <BarSmall color='gold'/>
             </mesh>
             <mesh position={[0, -10, 0]} visible={false}>
                 <planeGeometry args={[1, 1]}/>
@@ -53,19 +41,7 @@ export default function LoadedMaterials() {
             </mesh>
             <mesh position={[0, -10, 0]} visible={false}>
                 <planeGeometry args={[1, 1]}/>
-                <FrameCsdx color='gold'/>
-            </mesh>
-            <mesh position={[0, -10, 0]} visible={false}>
-                <planeGeometry args={[1, 1]}/>
-                <FrameCssx color='gold'/>
-            </mesh>
-            <mesh position={[0, -10, 0]} visible={false}>
-                <planeGeometry args={[1, 1]}/>
-                <FrameCidx color='gold'/>
-            </mesh>
-            <mesh position={[0, -10, 0]} visible={false}>
-                <planeGeometry args={[1, 1]}/>
-                <FrameCisx color='gold'/>
+                <FrameFull color='gold'/>
             </mesh>
             <mesh position={[0, -10, 0]} visible={false}>
                 <planeGeometry args={[1, 1]}/>

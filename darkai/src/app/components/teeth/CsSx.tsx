@@ -2,14 +2,10 @@
 import {JSX, memo} from "react";
 import FullMaterial from "@/app/components/materials/FullMaterial";
 import {useTeethStore} from "@/app/stores/teeth";
-import BarIlsdxL from "@/app/components/materials/BarIlsdxL";
-import BarIlsdxR from "@/app/components/materials/BarIlsdxR";
 import BaseFullDiamond from "@/app/components/materials/BaseFullDiamond";
 import FullDiamond from "@/app/components/materials/FullDiamond";
-import BarDiamond from "@/app/components/materials/BarDiamond";
-import FrameCsdx from "@/app/components/materials/FrameCsdx";
+import FrameFull from "@/app/components/materials/FrameFull";
 import FrameDiamond from "@/app/components/materials/FrameDiamond";
-import FrameCssx from "@/app/components/materials/FrameCssx";
 
 export default function CsSx() {
     const toothGeometry = useTeethStore((state) => state.teethGeometry.cssx);
@@ -30,11 +26,11 @@ export default function CsSx() {
                 break;
             case 'frame':
                 geometry = [toothGeometry.frame.full];
-                material = [<FrameCssx color={toothMaterial}/>]
+                material = [<FrameFull color={toothMaterial}/>]
                 break;
             case 'frameDiamond':
                 geometry = [toothGeometry.frame.diamond.base, toothGeometry.frame.diamond.full];
-                material = [<FrameCssx color={toothMaterial}/>, <FrameDiamond color={toothMaterial}/>]
+                material = [<FrameFull color={toothMaterial}/>, <FrameDiamond color={toothMaterial}/>]
                 break;
             default:
                 geometry = [toothGeometry.full];

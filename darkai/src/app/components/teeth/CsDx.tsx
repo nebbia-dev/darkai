@@ -4,7 +4,7 @@ import FullMaterial from "@/app/components/materials/FullMaterial";
 import {useTeethStore} from "@/app/stores/teeth";
 import BaseFullDiamond from "@/app/components/materials/BaseFullDiamond";
 import FullDiamond from "@/app/components/materials/FullDiamond";
-import FrameCsdx from "@/app/components/materials/FrameCsdx";
+import FrameFull from "@/app/components/materials/FrameFull";
 import FrameDiamond from "@/app/components/materials/FrameDiamond";
 
 export default function CsDx() {
@@ -26,11 +26,11 @@ export default function CsDx() {
                 break;
             case 'frame':
                 geometry = [toothGeometry.frame.full];
-                material = [<FrameCsdx color={toothMaterial}/>]
+                material = [<FrameFull color={toothMaterial}/>]
                 break;
             case 'frameDiamond':
                 geometry = [toothGeometry.frame.diamond.base, toothGeometry.frame.diamond.full];
-                material = [<FrameCsdx color={toothMaterial}/>, <FrameDiamond color={toothMaterial}/>]
+                material = [<FrameFull color={toothMaterial}/>, <FrameDiamond color={toothMaterial}/>]
                 break;
             default:
                 geometry = [toothGeometry.full];

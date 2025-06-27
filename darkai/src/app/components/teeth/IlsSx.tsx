@@ -5,8 +5,7 @@ import {useTeethStore} from "@/app/stores/teeth";
 import BaseFullDiamond from "@/app/components/materials/BaseFullDiamond";
 import FullDiamond from "@/app/components/materials/FullDiamond";
 import BarDiamond from "@/app/components/materials/BarDiamond";
-import BarIlssxL from "@/app/components/materials/BarIlssxL";
-import BarIlssxR from "@/app/components/materials/BarIlssxR";
+import BarSmall from "@/app/components/materials/BarSmall";
 
 export default function IlsSx() {
     const toothGeometry = useTeethStore((state) => state.teethGeometry.ilssx);
@@ -27,11 +26,11 @@ export default function IlsSx() {
                 break;
             case 'bar':
                 geometry = [toothGeometry.bar.full.left, toothGeometry.bar.full.right];
-                material = [<BarIlssxL color={toothMaterial}/>, <BarIlssxR color={toothMaterial}/>]
+                material = [<BarSmall color={toothMaterial}/>, <BarSmall color={toothMaterial}/>]
                 break;
             case 'barDiamond':
                 geometry = [toothGeometry.bar.diamond.left.base, toothGeometry.bar.diamond.right.base, toothGeometry.bar.diamond.left.full, toothGeometry.bar.diamond.right.full];
-                material = [<BarIlssxL color={toothMaterial}/>, <BarIlssxR color={toothMaterial}/>, <BarDiamond color={toothMaterial}/>]
+                material = [<BarSmall color={toothMaterial}/>, <BarSmall color={toothMaterial}/>, <BarDiamond color={toothMaterial}/>]
                 break;
             default:
                 geometry = [toothGeometry.full];

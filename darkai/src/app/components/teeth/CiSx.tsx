@@ -5,9 +5,7 @@ import {useTeethStore} from "@/app/stores/teeth";
 import BaseFullDiamond from "@/app/components/materials/BaseFullDiamond";
 import FullDiamond from "@/app/components/materials/FullDiamond";
 import FrameDiamond from "@/app/components/materials/FrameDiamond";
-import FrameCisx from "@/app/components/materials/FrameCisx";
-import BarFull from "@/app/components/materials/BarFull";
-import BarDiamond from "@/app/components/materials/BarDiamond";
+import FrameFull from "@/app/components/materials/FrameFull";
 
 export default function CiSx() {
     const toothGeometry = useTeethStore((state) => state.teethGeometry.cisx);
@@ -28,11 +26,11 @@ export default function CiSx() {
                 break;
             case 'frame':
                 geometry = [toothGeometry.frame.full];
-                material = [<FrameCisx color={toothMaterial}/>]
+                material = [<FrameFull color={toothMaterial}/>]
                 break;
             case 'frameDiamond':
                 geometry = [toothGeometry.frame.diamond.base, toothGeometry.frame.diamond.full];
-                material = [<FrameCisx color={toothMaterial}/>, <FrameDiamond color={toothMaterial}/>]
+                material = [<FrameFull color={toothMaterial}/>, <FrameDiamond color={toothMaterial}/>]
                 break;
             case 'bigBar':
                 geometry = [];

@@ -4,9 +4,6 @@ import FullMaterial from "@/app/components/materials/FullMaterial";
 import {useTeethStore} from "@/app/stores/teeth";
 import BaseFullDiamond from "@/app/components/materials/BaseFullDiamond";
 import FullDiamond from "@/app/components/materials/FullDiamond";
-import BarDiamond from "@/app/components/materials/BarDiamond";
-import BarIlssxL from "@/app/components/materials/BarIlssxL";
-import BarIlssxR from "@/app/components/materials/BarIlssxR";
 
 export default function IciSx() {
     const toothGeometry = useTeethStore((state) => state.teethGeometry.icisx);
