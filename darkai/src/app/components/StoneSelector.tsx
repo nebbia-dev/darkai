@@ -7,7 +7,7 @@ export default function StoneSelector({tooth}) {
     const disabled = type === 'frame' || type === 'bar' || type === 'barDiamond' || type === 'bigBar' || type === 'bigBarDiamond' || material === 'base'
     console.log('stoned')
     return (
-        <div className="flex gap-2">
+        <div className="flex flex-col gap-2">
             <button className="bg-blue-700"
                     onClick={() => selectStone(tooth, 'sapphire')}
                     disabled={disabled}
