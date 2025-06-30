@@ -75,9 +75,29 @@ export const useTeethStore = create((set) => ({
     setType: (tooth, type) =>
         set(
             produce((state) => {
+                if(state.teethVisibility[tooth] && (
+                    (state.teethJewelType[tooth] === 'fullDiamond' && type === 'full')
+                    || (state.teethJewelType[tooth] === 'barDiamond' && type === 'bar')
+                    || (state.teethJewelType[tooth] === 'bigBarDiamond' && type === 'bigBar')
+                    || (state.teethJewelType[tooth] === 'frameDiamond' && type === 'frame')
+                    || state.teethJewelType[tooth] === type
+                )) {
+                    if(type === 'bigBar') {
+                        state.teethVisibility.cidx = false;
+                        state.teethVisibility.cisx = false;
+                        state.teethJewelType.cidx = 'full';
+                        state.teethJewelType.cisx = 'full';
+                        return;
+                    }
+                    state.teethVisibility[tooth] = false;
+                    state.teethJewelType[tooth] = 'full';
+                    return;
+                }
+
                 if(type !== 'full' && type !== 'fullDiamond') {
                     state.teethStones[tooth] = null;
                 }
+
                 if(type === 'bigBar' || type === 'bigBarDiamond') {
                     state.teethJewelType.cidx = type;
                     state.teethJewelType.cisx = type;
@@ -123,34 +143,35 @@ export const useTeethStore = create((set) => ({
                 if(!state.teethVisibility[tooth] || state.teethMaterial[tooth] === 'base') {
                     return;
                 }
-                    switch (state.teethJewelType[tooth]) {
-                        case 'full':
-                            state.teethJewelType[tooth] = 'fullDiamond';
-                            break;
-                        case 'bar':
-                            state.teethJewelType[tooth] = 'barDiamond';
-                            break;
-                        case 'barDiamond':
-                            state.teethJewelType[tooth] = 'bar';
-                            break;
-                        case 'fullDiamond':
-                            state.teethJewelType[tooth] = 'full';
-                            break;
-                        case 'bigBar':
-                            state.teethJewelType.cidx = 'bigBarDiamond';
-                            state.teethJewelType.cisx = 'bigBarDiamond';
-                            break;
-                        case 'bigBarDiamond':
-                            state.teethJewelType.cidx = 'bigBar';
-                            state.teethJewelType.cisx = 'bigBar';
-                            break;
-                        case 'frame':
-                            state.teethJewelType[tooth] = 'frameDiamond';
-                            break;
-                        case 'frameDiamond':
-                            state.teethJewelType[tooth] = 'frame';
-                            break;
-                    }
+
+                switch (state.teethJewelType[tooth]) {
+                    case 'full':
+                        state.teethJewelType[tooth] = 'fullDiamond';
+                        break;
+                    case 'bar':
+                        state.teethJewelType[tooth] = 'barDiamond';
+                        break;
+                    case 'barDiamond':
+                        state.teethJewelType[tooth] = 'bar';
+                        break;
+                    case 'fullDiamond':
+                        state.teethJewelType[tooth] = 'full';
+                        break;
+                    case 'bigBar':
+                        state.teethJewelType.cidx = 'bigBarDiamond';
+                        state.teethJewelType.cisx = 'bigBarDiamond';
+                        break;
+                    case 'bigBarDiamond':
+                        state.teethJewelType.cidx = 'bigBar';
+                        state.teethJewelType.cisx = 'bigBar';
+                        break;
+                    case 'frame':
+                        state.teethJewelType[tooth] = 'frameDiamond';
+                        break;
+                    case 'frameDiamond':
+                        state.teethJewelType[tooth] = 'frame';
+                        break;
+                }
             })
         ),
     setStone: (tooth, stone) =>
