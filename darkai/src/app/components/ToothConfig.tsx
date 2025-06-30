@@ -3,7 +3,7 @@ import DiamondToggler from "@/app/components/DiamondToggler";
 import StoneSelector from "@/app/components/StoneSelector";
 import {Accordion, AccordionDetails, AccordionSummary} from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import ColorSelector from "@/app/components/ColorSelector";
+import ToothSelector from "@/app/components/ToothSelector";
 
 export default function ToothConfig({tooth}) {
     const changeMaterial = useTeethStore((state) => state.setMaterial);
@@ -57,49 +57,54 @@ export default function ToothConfig({tooth}) {
             </AccordionSummary>
             <AccordionDetails sx={{borderTop: '1px solid #9ca3af'}}>
                 <div className="w-full">
-            <div className="w-full flex gap-8">
-                <div className="p-4">
-                    <p className="text-left">Base</p>
-                    <div className="flex gap-2">
-                        <ColorSelector tooth={tooth} color="gold"/>
-                        <ColorSelector tooth={tooth} color="rose"/>
-                        <ColorSelector tooth={tooth} color="white"/>
-                        <DiamondToggler tooth={tooth}/>
-                    </div>
-                </div>
-                <div className="p-4 whitespace-nowrap">
-                    <p className="text-left">Jewel</p>
-                    <div className="w-[48px] h-[48px]"
-                         onClick={() => changeJewelType(tooth, 'full')}>Full
-                    </div>
-                    {(tooth === 'ilsdx' || tooth === 'ilssx') &&
-                        <div className="w-[48px] h-[48px]"
-                          onClick={() => changeJewelType(tooth, 'bar')}>Bar
+                    <div className="w-full flex gap-8">
+                        <div className="p-4">
+                            <p className="text-left">Full</p>
+                            <div className="flex gap-2">
+                                <ToothSelector tooth={tooth} type="full" color="gold" title={title}/>
+                                <ToothSelector tooth={tooth} type="full" color="rose" title={title}/>
+                                <ToothSelector tooth={tooth} type="full" color="white" title={title}/>
+                                <DiamondToggler tooth={tooth}/>
+                            </div>
+                            {(tooth === 'ilsdx' || tooth === 'ilssx') &&
+                                <>
+                                    <p className="text-left">Bar</p>
+                                    <div className="flex gap-2">
+                                        <ToothSelector tooth={tooth} type="bar" color="gold" title={title}/>
+                                        <ToothSelector tooth={tooth} type="bar" color="rose" title={title}/>
+                                        <ToothSelector tooth={tooth} type="bar" color="white" title={title}/>
+                                    </div>
+                                </>
+                            }
+                            {(tooth === 'csdx' || tooth === 'cssx' || tooth === 'cidx' || tooth === 'cisx') &&
+                                <>
+                                    <p className="text-left">Frame</p>
+                                    <div className="flex gap-2">
+                                        <ToothSelector tooth={tooth} type="frame" color="gold" title={title}/>
+                                        <ToothSelector tooth={tooth} type="frame" color="rose" title={title}/>
+                                        <ToothSelector tooth={tooth} type="frame" color="white" title={title}/>
+                                    </div>
+                                </>
+                            }
+                            {(tooth === 'cidx' || tooth === 'cisx') &&
+                                <>
+                                    <p className="text-left">Bar</p>
+                                    <div className="flex gap-2">
+                                        <ToothSelector tooth={tooth} type="bigBar" color="gold" title={title}/>
+                                        <ToothSelector tooth={tooth} type="bigBar" color="rose" title={title}/>
+                                        <ToothSelector tooth={tooth} type="bigBar" color="white" title={title}/>
+                                    </div>
+                                </>
+                            }
+                            {(tooth === 'csdx' || tooth === 'cssx' || tooth === 'cidx' || tooth === 'cisx') &&
+                                <div className="p-4">
+                                    <p className="text-left">Stones</p>
+                                    <StoneSelector tooth={tooth}/>
+                                </div>
+                            }
                         </div>
-                    }
-                    {(tooth === 'csdx' || tooth === 'cssx' || tooth === 'cidx' || tooth === 'cisx') &&
-                        <>
-                            <div className="w-[48px] h-[48px]"
-                                 onClick={() => changeJewelType(tooth, 'frame')}>Frame
-                            </div>
-                        </>
-                    }
-                    {(tooth === 'cidx' || tooth === 'cisx') &&
-                        <>
-                            <div className="w-[48px] h-[48px]"
-                                 onClick={() => changeJewelType(tooth, 'bigBar')}>Big Bar
-                            </div>
-                        </>
-                    }
-                </div>
-                {(tooth === 'csdx' || tooth === 'cssx' || tooth === 'cidx' || tooth === 'cisx') &&
-                    <div className="p-4">
-                        <p className="text-left">Stones</p>
-                        <StoneSelector tooth={tooth}/>
                     </div>
-                }
-            </div>
-        </div>
+                </div>
             </AccordionDetails>
         </Accordion>
     )

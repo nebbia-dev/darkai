@@ -169,4 +169,55 @@ export const useTeethStore = create((set) => ({
                 state.teethVisibility[tooth] = !state.teethVisibility[tooth];
             }),
         ),
+    setWholeTooth: (tooth, color, type) =>
+        set(
+        produce((state) => {
+            if(type !== 'full' && type !== 'fullDiamond') {
+                state.teethStones[tooth] = null;
+            }
+
+            if((type === 'bigBar' || type === 'bigBarDiamond') && (state.teethJewelType.cidx !== type || state.teethJewelType.cisx !== type)) {
+                state.teethJewelType.cidx = type;
+                state.teethJewelType.cisx = type;
+                if(!state.teethVisibility.cidx) {
+                    state.teethVisibility.cidx = true;
+                    state.teethMaterial.cidx = 'gold';
+                }
+                if(!state.teethVisibility.cisx) {
+                    state.teethVisibility.cisx = true;
+                    state.teethMaterial.cisx = 'gold';
+                }
+            } else {
+                if(state.teethJewelType[tooth] === 'bigBar' || state.teethJewelType[tooth] === 'bigBarDiamond') {
+                    state.teethMaterial.cisx = color;
+                    state.teethMaterial.cidx = color;
+                    switch(tooth) {
+                        case 'cidx':
+                            state.teethJewelType.cidx = type;
+                            state.teethJewelType.cisx = 'full';
+                            state.teethVisibility.cisx = false;
+                            state.teethMaterial.cisx = 'base';
+                            break;
+                        case 'cisx':
+                            state.teethJewelType.cisx = type;
+                            state.teethJewelType.cidx = 'full';
+                            state.teethVisibility.cidx = false;
+                            state.teethMaterial.cidx = 'base';
+                            break;
+                    }
+                } else {
+                    if(state.teethJewelType[tooth] !== type) {
+                        state.teethJewelType[tooth] = type;
+                    }
+                    if(state.teethMaterial[tooth] !== color) {
+                        state.teethMaterial[tooth] = color;
+                    }
+                    if(!state.teethVisibility[tooth]) {
+                        state.teethVisibility[tooth] = true;
+                        state.teethMaterial[tooth] = 'gold';
+                    }
+                }
+            }
+        }),
+    ),
 }))
