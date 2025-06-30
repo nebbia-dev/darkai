@@ -1,4 +1,5 @@
 import {useTeethStore} from "@/app/stores/teeth";
+import SelectorButton from "@/app/components/SelectorButton";
 
 export default function StoneSelector({tooth}) {
     const type = useTeethStore((state) => state.teethJewelType[tooth]);
@@ -7,27 +8,12 @@ export default function StoneSelector({tooth}) {
     const disabled = type === 'frame' || type === 'bar' || type === 'barDiamond' || type === 'bigBar' || type === 'bigBarDiamond' || material === 'base'
     console.log('stoned')
     return (
-        <div className="flex flex-col gap-2">
-            <button className="bg-blue-700"
-                    onClick={() => selectStone(tooth, 'sapphire')}
-                    disabled={disabled}
-            >Sapphire
-            </button>
-            <button className="bg-red-700"
-                    onClick={() => selectStone(tooth, 'ruby')}
-                    disabled={disabled}
-            >Ruby
-            </button>
-            <button className="bg-emerald-700"
-                    onClick={() => selectStone(tooth, 'emerald')}
-                    disabled={disabled}
-            >Emerald
-            </button>
-            <button className="bg-violet-700"
-                    onClick={() => selectStone(tooth, 'amethyst')}
-                    disabled={disabled}
-            >Amethyst
-            </button>
+        <div className="flex gap-2">
+            <SelectorButton click={() => selectStone(tooth, 'sapphire')} disabled={disabled} selection="sapphire"/>
+            <SelectorButton click={() => selectStone(tooth, 'ruby')} disabled={disabled} selection="ruby"/>
+            <SelectorButton click={() => selectStone(tooth, 'emerald')} disabled={disabled} selection="emerald"/>
+            <SelectorButton click={() => selectStone(tooth, 'amethyst')} disabled={disabled} selection="amethyst"/>
+
         </div>
     )
 }

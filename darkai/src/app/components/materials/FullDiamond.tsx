@@ -15,29 +15,29 @@ export default function FullDiamond({color}) {
         propsYDiamondFull.map.colorSpace = THREE.SRGBColorSpace;
 
         propsYDiamondFull.map.wrapS = propsYDiamondFull.map.wrapT = THREE.RepeatWrapping;
-        propsYDiamondFull.map.repeat.set(5, 5);
+        propsYDiamondFull.map.repeat.set(6, 6);
         propsYDiamondFull.normalMap.wrapS = propsYDiamondFull.normalMap.wrapT = THREE.RepeatWrapping;
-        propsYDiamondFull.normalMap.repeat.set(5, 5);
+        propsYDiamondFull.normalMap.repeat.set(6, 6);
         propsYDiamondFull.metalnessMap.wrapS = propsYDiamondFull.metalnessMap.wrapT = THREE.RepeatWrapping;
-        propsYDiamondFull.metalnessMap.repeat.set(5, 5);
+        propsYDiamondFull.metalnessMap.repeat.set(6, 6);
 
         const propsRDiamondFull = useTexture({
-            map: 'textures/diamondFull/Difuse_Diamanti.webp',
+            map: 'textures/diamondFull/Difuse_Diamanti_Rosa.webp',
         });
 
         propsRDiamondFull.map.colorSpace = THREE.SRGBColorSpace;
 
         propsRDiamondFull.map.wrapS = propsRDiamondFull.map.wrapT = THREE.RepeatWrapping;
-        propsRDiamondFull.map.repeat.set(5, 5);
+        propsRDiamondFull.map.repeat.set(6, 6);
 
         const propsWDiamondFull = useTexture({
-            map: 'textures/diamondFull/Difuse_Diamanti.webp',
+            map: 'textures/diamondFull/Metalness_Diamanti.webp',
         });
 
         propsWDiamondFull.map.colorSpace = THREE.SRGBColorSpace;
 
         propsWDiamondFull.map.wrapS = propsWDiamondFull.map.wrapT = THREE.RepeatWrapping;
-        propsWDiamondFull.map.repeat.set(5, 5);
+        propsWDiamondFull.map.repeat.set(6, 6);
 
         console.log(color);
         return (<meshStandardMaterial
@@ -52,7 +52,7 @@ export default function FullDiamond({color}) {
             metalnessMap = {color !== 'base' ? propsYDiamondFull.metalnessMap : ''}
             roughnessMap = {color !== 'base' ? propsYDiamondFull.roughnessMap : ''}
             metalness = {color !== 'base' ? 1 : 0}
-            roughness = {color !== 'base' ? 0.5 : 1}
+            roughness = {color !== 'base' ? 0 : 1}
             envMap = {envMap}
             color={color !== 'base' ? '' : 'grey'}
             onUpdate={(self) => (self.needsUpdate = true)}

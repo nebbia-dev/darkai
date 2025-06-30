@@ -3,7 +3,8 @@ import DiamondToggler from "@/app/components/DiamondToggler";
 import StoneSelector from "@/app/components/StoneSelector";
 import {Accordion, AccordionDetails, AccordionSummary} from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import ToothSelector from "@/app/components/ToothSelector";
+import ColorSelector from "@/app/components/ColorSelector";
+import SelectorButton from "@/app/components/SelectorButton";
 
 export default function ToothConfig({tooth}) {
     const changeMaterial = useTeethStore((state) => state.setMaterial);
@@ -57,55 +58,50 @@ export default function ToothConfig({tooth}) {
             </AccordionSummary>
             <AccordionDetails sx={{borderTop: '1px solid #9ca3af'}}>
                 <div className="w-full">
-                    <div className="w-full flex gap-8">
+                    <div className="w-full flex flex-col gap-8">
+
                         <div className="p-4">
-                            <p className="text-left">Full</p>
+                            <p className="text-left">Jewel type</p>
                             <div className="flex gap-2">
-                                <ToothSelector tooth={tooth} type="full" color="gold" title={title}/>
-                                <ToothSelector tooth={tooth} type="full" color="rose" title={title}/>
-                                <ToothSelector tooth={tooth} type="full" color="white" title={title}/>
-                                <DiamondToggler tooth={tooth}/>
+                                <SelectorButton adjust={true} click={() => changeJewelType(tooth, 'full')}
+                                                disabled={false} selection="full"/>
+
+                                {(tooth === 'ilsdx' || tooth === 'ilssx') &&
+                                    <SelectorButton adjust={true} click={() => changeJewelType(tooth, 'bar')}
+                                                    disabled={false} selection="bar"/>
+                                }
+                                {(tooth === 'csdx' || tooth === 'cssx' || tooth === 'cidx' || tooth === 'cisx') &&
+                                    <SelectorButton adjust={true} click={() => changeJewelType(tooth, 'frame')}
+                                                    disabled={false} selection="frame"/>
+                                }
+                                {(tooth === 'cidx' || tooth === 'cisx') &&
+                                    <SelectorButton adjust={true} click={() => changeJewelType(tooth, 'bigBar')}
+                                                    disabled={false} selection="bigBar"/>
+                                }
                             </div>
-                            {(tooth === 'ilsdx' || tooth === 'ilssx') &&
-                                <>
-                                    <p className="text-left">Bar</p>
-                                    <div className="flex gap-2">
-                                        <ToothSelector tooth={tooth} type="bar" color="gold" title={title}/>
-                                        <ToothSelector tooth={tooth} type="bar" color="rose" title={title}/>
-                                        <ToothSelector tooth={tooth} type="bar" color="white" title={title}/>
-                                    </div>
-                                </>
-                            }
-                            {(tooth === 'csdx' || tooth === 'cssx' || tooth === 'cidx' || tooth === 'cisx') &&
-                                <>
-                                    <p className="text-left">Frame</p>
-                                    <div className="flex gap-2">
-                                        <ToothSelector tooth={tooth} type="frame" color="gold" title={title}/>
-                                        <ToothSelector tooth={tooth} type="frame" color="rose" title={title}/>
-                                        <ToothSelector tooth={tooth} type="frame" color="white" title={title}/>
-                                    </div>
-                                </>
-                            }
-                            {(tooth === 'cidx' || tooth === 'cisx') &&
-                                <>
-                                    <p className="text-left">Bar</p>
-                                    <div className="flex gap-2">
-                                        <ToothSelector tooth={tooth} type="bigBar" color="gold" title={title}/>
-                                        <ToothSelector tooth={tooth} type="bigBar" color="rose" title={title}/>
-                                        <ToothSelector tooth={tooth} type="bigBar" color="white" title={title}/>
-                                    </div>
-                                </>
-                            }
-                            {(tooth === 'csdx' || tooth === 'cssx' || tooth === 'cidx' || tooth === 'cisx') &&
-                                <div className="p-4">
-                                    <p className="text-left">Stones</p>
-                                    <StoneSelector tooth={tooth}/>
-                                </div>
-                            }
+                        </div>
+
+                        <div className="p-4">
+                            <p className="text-left">Material</p>
+                            <div className="flex gap-2">
+                                <ColorSelector tooth={tooth} color="gold"/>
+                                <ColorSelector tooth={tooth} color="rose"/>
+                                <ColorSelector tooth={tooth} color="white"/>
+                            </div>
+                        </div>
+
+                        <div className="p-4">
+                            <p className="text-left">Stones</p>
+                            <div className="flex gap-4">
+                                <DiamondToggler tooth={tooth}/>
+                                {(tooth === 'csdx' || tooth === 'cssx' || tooth === 'cidx' || tooth === 'cisx') &&
+                                    <StoneSelector tooth={tooth}/>}
+                            </div>
                         </div>
                     </div>
                 </div>
             </AccordionDetails>
+
         </Accordion>
     )
 }

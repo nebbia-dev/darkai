@@ -1,4 +1,5 @@
 import {useTeethStore} from "@/app/stores/teeth";
+import SelectorButton from "@/app/components/SelectorButton";
 
 export default function DiamondToggler({tooth}) {
     const material = useTeethStore((state) => state.teethMaterial[tooth]);
@@ -9,11 +10,6 @@ export default function DiamondToggler({tooth}) {
     }
     console.log('ouch')
     return (
-        <button className="w-[48px] h-[48px] rounded"
-                onClick={log}
-                disabled={material === 'base'}
-        >
-            <img src="/textures/diamondFull/Difuse_Diamanti.webp" className="rounded object-cover"/>
-        </button>
+        <SelectorButton click={log} disabled={material === 'base'} selection="diamond"/>
     )
 }
