@@ -288,6 +288,16 @@ export const useTeethStore = create((set, get) => ({
                 }
             })
         ),
+    redo: () =>
+        set(
+            produce((state) => {
+                state.currentHistory = state.currentHistory + 1;
+                for(const tooth of state.history[state.currentHistory - 1].teeth) {
+                    state.teethVisibility[tooth] = true;
+                    state.teethMaterial[tooth] = state.history[state.currentHistory - 1].which
+                }
+            })
+        ),
     reset: () => {
         set({
             teethMaterial: {

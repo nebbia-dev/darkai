@@ -6,12 +6,20 @@ import {Redo} from "@/app/components/icons/Redo";
 
 export default function ActionBar() {
     const current = useTeethStore((state) => state.currentHistory);
+    const history = useTeethStore((state) => state.history);
     const reset = useTeethStore((state) => state.reset);
     const undo = useTeethStore((state) => state.undo);
+    const redo = useTeethStore((state) => state.redo);
 
     function doUndo() {
         if(current > 1) {
             undo();
+        }
+    }
+
+    function doRedo() {
+        if(current < history.length) {
+            redo();
         }
     }
 
@@ -21,7 +29,7 @@ export default function ActionBar() {
                 <button onClick={doUndo} className="rounded-full border p-2 cursor-pointer">
                     <Undo className="w-8 h-8"/>
                 </button>
-                <button className="rounded-full border p-2 cursor-pointer">
+                <button onClick={doRedo} className="rounded-full border p-2 cursor-pointer">
                     <Redo className="w-8 h-8"/>
                 </button>
                 <button className="rounded-full border p-2 cursor-pointer">
