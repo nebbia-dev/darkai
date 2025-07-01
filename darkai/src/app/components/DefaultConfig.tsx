@@ -1,14 +1,9 @@
 import {useTeethStore} from "@/app/stores/teeth";
-import DiamondToggler from "@/app/components/DiamondToggler";
-import StoneSelector from "@/app/components/StoneSelector";
 import {Accordion, AccordionDetails, AccordionSummary} from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import ColorSelector from "@/app/components/ColorSelector";
-import SelectorButton from "@/app/components/SelectorButton";
 import DefaultConfigButton from "@/app/components/DefaultConfigButton";
 
 export default function DefaultConfig({teeth}) {
-    const changeJewelType = useTeethStore((state) => state.setType);
     const firstChild = teeth === 'full' ? '' : '1px solid #9ca3af';
     let title;
 

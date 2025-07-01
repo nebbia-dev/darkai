@@ -52,6 +52,8 @@ export const useTeethStore = create((set, get) => ({
         cidx: false,
         cisx: false,
     },
+    history: [],
+    currentHistory: 0,
     setEnvMap: (em) => {
         set({envMap: em})
     },
@@ -64,8 +66,21 @@ export const useTeethStore = create((set, get) => ({
                 if(state.teethJewelType[tooth] === 'bigBar' || state.teethJewelType[tooth] === 'bigBarDiamond') {
                     state.teethMaterial.cisx = color;
                     state.teethMaterial.cidx = color;
+                    if(state.currentHistory < state.history.length) {
+                        state.history.splice(state.currentHistory - 1);
+                    }
+                    state.history = [...state.history, {teeth: ['cisx', 'cidx'], what: 'material', which: color, visibility: true}];
+                    state.currentHistory++;
+
                 } else {
                     state.teethMaterial[tooth] = color;
+                    if(state.currentHistory < state.history.length) {
+                        console.log(state.currentHistory, state.history.length)
+                        state.history = state.history.splice(0, state.currentHistory);
+                    }
+                    state.history = [...state.history, {teeth: [tooth], what: 'material', which: color, visibility: true}];
+                    state.currentHistory++;
+                    console.log(state.history, state.currentHistory)
                     if(!state.teethVisibility[tooth]) {
                         state.teethVisibility[tooth] = true;
                     }
@@ -261,6 +276,16 @@ export const useTeethStore = create((set, get) => ({
                 state.teethVisibility[tooth] = true;
                 state.teethMaterial[tooth] = color;
                 state.teethJewelType[tooth] = type;
+            })
+        ),
+    undo: () =>
+        set(
+            produce((state) => {
+                state.currentHistory = state.currentHistory - 1;
+                for(const tooth of state.history[state.currentHistory - 1].teeth) {
+                    state.teethVisibility[tooth] = true;
+                    state.teethMaterial[tooth] = state.history[state.currentHistory - 1].which
+                }
             })
         ),
     reset: () => {
