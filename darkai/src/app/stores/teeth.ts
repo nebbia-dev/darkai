@@ -190,6 +190,58 @@ export const useTeethStore = create((set) => ({
                 state.teethVisibility[tooth] = !state.teethVisibility[tooth];
             }),
         ),
+    reset: () => {
+        set({
+            teethMaterial: {
+                icsdx: 'base',
+                icssx: 'base',
+                icidx: 'base',
+                icisx: 'base',
+                ilsdx: 'base',
+                ilssx: 'base',
+                ilidx: 'base',
+                ilisx: 'base',
+                csdx: 'base',
+                cssx: 'base',
+                cidx: 'base',
+                cisx: 'base',
+            },
+            teethJewelType: {
+                icsdx: 'full',
+                icssx: 'full',
+                icidx: 'full',
+                icisx: 'full',
+                ilsdx: 'full',
+                ilssx: 'full',
+                ilidx: 'full',
+                ilisx: 'full',
+                csdx: 'full',
+                cssx: 'full',
+                cidx: 'full',
+                cisx: 'full',
+            },
+            teethStones: {
+                csdx: null,
+                cssx: null,
+                cidx: null,
+                cisx: null,
+            },
+            teethVisibility: {
+                icsdx: false,
+                icssx: false,
+                icidx: false,
+                icisx: false,
+                ilsdx: false,
+                ilssx: false,
+                ilidx: false,
+                ilisx: false,
+                csdx: false,
+                cssx: false,
+                cidx: false,
+                cisx: false,
+            },
+        })
+    }
     // setWholeTooth: (tooth, color, type) =>
     //     set(
     //     produce((state) => {

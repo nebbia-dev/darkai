@@ -7,7 +7,6 @@ import ColorSelector from "@/app/components/ColorSelector";
 import SelectorButton from "@/app/components/SelectorButton";
 
 export default function ToothConfig({tooth}) {
-    const changeMaterial = useTeethStore((state) => state.setMaterial);
     const changeJewelType = useTeethStore((state) => state.setType);
     const firstChild = tooth === 'icsdx' ? '' : '1px solid #9ca3af';
     let title;

@@ -3,6 +3,7 @@ import Scene from "@/app/components/Scene";
 import Selection from "@/app/components/Selection";
 import {Suspense} from "react";
 import Loading from "@/app/components/Loading";
+import ActionBar from "@/app/components/ActionBar";
 
 export default function Home() {
 
@@ -11,6 +12,7 @@ export default function Home() {
           <Suspense fallback={<Loading/>}>
               <div className="w-[50vw]">
                   <Scene/>
+                  <ActionBar/>
               </div>
               <div className="w-[50vw]">
                   <Selection/>
