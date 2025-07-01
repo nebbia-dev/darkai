@@ -56,8 +56,7 @@ export default function ToothConfig({tooth}) {
                 {title}
             </AccordionSummary>
             <AccordionDetails sx={{borderTop: '1px solid #9ca3af'}}>
-                <div className="w-full">
-                    <div className="w-full flex flex-col gap-8">
+                <div className="w-full flex flex-col gap-8">
 
                         <div className="p-4">
                             <p className="text-left">Jewel type</p>
@@ -98,7 +97,6 @@ export default function ToothConfig({tooth}) {
                             </div>
                         </div>
                     </div>
-                </div>
             </AccordionDetails>
 
         </Accordion>

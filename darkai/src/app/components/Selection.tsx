@@ -1,6 +1,7 @@
 import ToothConfig from "@/app/components/ToothConfig";
 import {ReactNode, SyntheticEvent, useState} from "react";
 import {Box, Tab, Tabs} from "@mui/material";
+import DefaultConfig from "@/app/components/DefaultConfig";
 interface TabPanelProps {
     children?: ReactNode;
     index: number;
@@ -40,14 +41,19 @@ export default function Selection() {
                 </Tabs>
             </div>
             <CustomTabPanel value={value} index={0}>
-                <div
-                    className="w-full h-[90vh] flex flex-col align-center justify-center text-center bg-gray-50 my-auto rounded text-black">
-                        Item One
+                <div className="w-full h-[90vh] flex flex-col align-center justify-start text-center bg-gray-50 my-auto rounded text-black">
+                    <div className="overflow-y-auto">
+                        <DefaultConfig teeth="full" />
+                        <DefaultConfig teeth="bar" />
+                        <DefaultConfig teeth="frame" />
+                        <DefaultConfig teeth="canines" />
+                        <DefaultConfig teeth="stones" />
+                    </div>
                 </div>
             </CustomTabPanel>
             <CustomTabPanel value={value} index={1}>
                 <div
-                    className="w-full h-[90vh] flex flex-col align-center justify-center text-center bg-gray-50 my-auto rounded text-black">
+                    className="w-full h-[90vh] flex flex-col align-center justify-start text-center bg-gray-50 my-auto rounded text-black">
                     <div className="overflow-y-auto">
                         {/*DENTI SUPERIORI*/}
                         <ToothConfig tooth='icsdx'/>

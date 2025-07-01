@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import {produce} from "immer";
 
-export const useTeethStore = create((set) => ({
+export const useTeethStore = create((set, get) => ({
     envMap: null,
     teethGeometry: null,
     teethMaterial: {
@@ -189,6 +189,79 @@ export const useTeethStore = create((set) => ({
             produce((state) => {
                 state.teethVisibility[tooth] = !state.teethVisibility[tooth];
             }),
+        ),
+    setDefaultConfig: (config, color) => {
+        get().reset();
+        switch (config) {
+            case 'full':
+            case 'fullDiamond':
+                get().setTooth('icsdx', config, color);
+                get().setTooth('icidx', config, color);
+                get().setTooth('ilsdx', config, color);
+                get().setTooth('ilidx', config, color);
+                get().setTooth('csdx', config, color);
+                get().setTooth('cidx', config, color);
+                get().setTooth('icssx', config, color);
+                get().setTooth('icisx', config, color);
+                get().setTooth('ilssx', config, color);
+                get().setTooth('ilisx', config, color);
+                get().setTooth('cssx', config, color);
+                get().setTooth('cisx', config, color);
+                break;
+            case 'bar':
+            case 'barDiamond':
+                get().setTooth('ilsdx', config, color);
+                get().setTooth('ilssx', config, color);
+                if (config === 'bar') {
+                    get().setTooth('cidx', 'bigBar', color);
+                    get().setTooth('cisx', 'bigBar', color);
+                } else {
+                    get().setTooth('cidx', 'bigBarDiamond', color);
+                    get().setTooth('cisx', 'bigBarDiamond', color);
+                }
+                break;
+            case 'frame':
+            case 'frameDiamond':
+                get().setTooth('csdx', 'full', color);
+                get().setTooth('cidx', 'full', color);
+                get().setTooth('cssx', 'full', color);
+                get().setTooth('cisx', 'full', color);
+                break;
+            case 'canines':
+            case 'stones':
+                get().setTooth('csdx', 'full', color);
+                get().setTooth('cidx', 'full', color);
+                get().setTooth('cssx', 'full', color);
+                get().setTooth('cisx', 'full', color);
+                if (config === 'stones') {
+                    get().setStone('csdx', 'sapphire');
+                    get().setStone('cidx', 'sapphire');
+                    get().setStone('cssx', 'sapphire');
+                    get().setStone('cisx', 'sapphire')
+                }
+                break;
+            case 'caninesDiamond':
+            case 'stonesDiamond':
+                get().setTooth('csdx', 'fullDiamond', color);
+                get().setTooth('cidx', 'fullDiamond', color);
+                get().setTooth('cssx', 'fullDiamond', color);
+                get().setTooth('cisx', 'fullDiamond', color);
+                if (config === 'stones') {
+                    get().setStone('csdx', 'sapphire');
+                    get().setStone('cidx', 'sapphire');
+                    get().setStone('cssx', 'sapphire');
+                    get().setStone('cisx', 'sapphire')
+                }
+                break;
+        }
+    },
+    setTooth: (tooth, type, color) =>
+        set(
+            produce((state) => {
+                state.teethVisibility[tooth] = true;
+                state.teethMaterial[tooth] = color;
+                state.teethJewelType[tooth] = type;
+            })
         ),
     reset: () => {
         set({
