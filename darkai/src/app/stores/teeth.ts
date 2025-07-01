@@ -63,33 +63,69 @@ export const useTeethStore = create((set, get) => ({
     setMaterial: (tooth, color) =>
         set(
             produce((state) => {
+                if(state.currentHistory < state.history.length) {
+                    state.history.splice(state.currentHistory - 1);
+                }
+                state.currentHistory++;
+
                 if(state.teethJewelType[tooth] === 'bigBar' || state.teethJewelType[tooth] === 'bigBarDiamond') {
                     state.teethMaterial.cisx = color;
                     state.teethMaterial.cidx = color;
-                    if(state.currentHistory < state.history.length) {
-                        state.history.splice(state.currentHistory - 1);
-                    }
-                    state.history = [...state.history, {teeth: ['cisx', 'cidx'], what: 'material', which: color, visibility: true}];
-                    state.currentHistory++;
+                    state.history = [...state.history,
+                        [{
+                            tooth: 'cisx',
+                            type: state.teethJewelType[tooth],
+                            material: color,
+                            stones: state.teethStones[tooth],
+                            visibility: true,
+                            visibleTeeth: state.teethVisibility
+                        },
+                        {
+                            tooth: 'cidx',
+                            type: state.teethJewelType[tooth],
+                            material: color,
+                            stones: state.teethStones[tooth],
+                            visibility: true,
+                            visibleTeeth: state.teethVisibility
+                        }]
+                    ];
 
                 } else {
                     state.teethMaterial[tooth] = color;
-                    if(state.currentHistory < state.history.length) {
-                        console.log(state.currentHistory, state.history.length)
-                        state.history = state.history.splice(0, state.currentHistory);
-                    }
-                    state.history = [...state.history, {teeth: [tooth], what: 'material', which: color, visibility: true}];
-                    state.currentHistory++;
-                    console.log(state.history, state.currentHistory)
+
                     if(!state.teethVisibility[tooth]) {
                         state.teethVisibility[tooth] = true;
+                        state.history = [...state.history,  [{
+                            tooth: tooth,
+                            type: 'full',
+                            material: color,
+                            stones: state.teethStones[tooth] ?? null,
+                            visibility: true,
+                            visibleTeeth: state.teethVisibility
+                        }]];
+                    } else {
+                        state.history = [...state.history,  [{
+                            tooth: tooth,
+                            type: state.teethJewelType[tooth],
+                            material: color,
+                            stones: state.teethStones[tooth] ?? null,
+                            visibility: true,
+                            visibleTeeth: state.teethVisibility
+                        }]];
                     }
                 }
+                console.log(state.history, state.currentHistory)
             }),
         ),
     setType: (tooth, type) =>
         set(
             produce((state) => {
+                if(state.currentHistory < state.history.length) {
+                    console.log(state.currentHistory, state.history.length)
+                    state.history = state.history.splice(0, state.currentHistory);
+                }
+                state.currentHistory++;
+
                 if(state.teethVisibility[tooth] && (
                     (state.teethJewelType[tooth] === 'fullDiamond' && type === 'full')
                     || (state.teethJewelType[tooth] === 'barDiamond' && type === 'bar')
@@ -97,23 +133,70 @@ export const useTeethStore = create((set, get) => ({
                     || (state.teethJewelType[tooth] === 'frameDiamond' && type === 'frame')
                     || state.teethJewelType[tooth] === type
                 )) {
-                    if(type === 'bigBar') {
-                        state.teethVisibility.cidx = false;
-                        state.teethVisibility.cisx = false;
-                        state.teethJewelType.cidx = 'full';
-                        state.teethJewelType.cisx = 'full';
-                        return;
-                    }
-                    state.teethVisibility[tooth] = false;
-                    state.teethJewelType[tooth] = 'full';
-                    return;
-                }
+                        if(type === 'bigBar') {
+                            state.teethVisibility.cidx = false;
+                            state.teethVisibility.cisx = false;
+                            state.teethJewelType.cidx = 'full';
+                            state.teethJewelType.cisx = 'full';
 
-                if(type !== 'full' && type !== 'fullDiamond') {
-                    state.teethStones[tooth] = null;
+                            state.history = [...state.history,
+                                [{
+                                    tooth: 'cisx',
+                                    type: 'full',
+                                    material: 'base',
+                                    stones: null,
+                                    visibility: false,
+                                    visibleTeeth: state.teethVisibility
+                                }, {
+                                    tooth: 'cidx',
+                                    type: 'full',
+                                    material: 'base',
+                                    stones: null,
+                                    visibility: false,
+                                    visibleTeeth: state.teethVisibility
+                                }]
+                            ];
+
+                            return;
+                        }
+
+                        state.teethVisibility[tooth] = false;
+                        state.teethJewelType[tooth] = 'full';
+
+                        state.history = [...state.history,
+                            [{
+                                tooth: tooth,
+                                type: 'full',
+                                material: 'base',
+                                stones: null,
+                                visibility: false,
+                                visibleTeeth: state.teethVisibility
+                            }]
+                        ];
+
+                        return;
                 }
 
                 if(type === 'bigBar' || type === 'bigBarDiamond') {
+
+                    state.history = [...state.history,
+                        [{
+                            tooth: 'cidx',
+                            type: type,
+                            material: state.teethMaterial.cidx === 'base' ? 'gold' : state.teethMaterial.cidx,
+                            stones: null,
+                            visibility: true,
+                            visibleTeeth: state.teethVisibility
+                        }, {
+                            tooth: 'cisx',
+                            type: type,
+                            material: state.teethMaterial.cisx === 'base' ? 'gold' : state.teethMaterial.cisx,
+                            stones: null,
+                            visibility: true,
+                            visibleTeeth: state.teethVisibility
+                        }]
+                    ];
+
                     state.teethJewelType.cidx = type;
                     state.teethJewelType.cisx = type;
                     state.teethStones.cidx = null;
@@ -126,6 +209,7 @@ export const useTeethStore = create((set, get) => ({
                         state.teethVisibility.cisx = true;
                         state.teethMaterial.cisx = 'gold';
                     }
+
                 } else {
                     if(state.teethJewelType[tooth] === 'bigBar' || state.teethJewelType[tooth] === 'bigBarDiamond') {
                         switch(tooth) {
@@ -134,22 +218,98 @@ export const useTeethStore = create((set, get) => ({
                                 state.teethJewelType.cisx = 'full';
                                 state.teethVisibility.cisx = false;
                                 state.teethMaterial.cisx = 'base';
+
+                                state.history = [...state.history,
+                                    [{
+                                        tooth: 'cidx',
+                                        type: type,
+                                        material: state.teethMaterial.cidx,
+                                        stones: null,
+                                        visibility: true,
+                                        visibleTeeth: state.teethVisibility
+                                    }, {
+                                        tooth: 'cisx',
+                                        type: 'full',
+                                        material: 'base',
+                                        stones: null,
+                                        visibility: false,
+                                        visibleTeeth: state.teethVisibility
+                                    }]
+                                ];
                                 break;
                             case 'cisx':
                                 state.teethJewelType.cisx = type;
                                 state.teethJewelType.cidx = 'full';
                                 state.teethVisibility.cidx = false;
                                 state.teethMaterial.cidx = 'base';
+                                state.history = [...state.history,
+                                    [{
+                                        tooth: 'cisx',
+                                        type: type,
+                                        material: state.teethMaterial.cisx,
+                                        stones: null,
+                                        visibility: true,
+                                        visibleTeeth: state.teethVisibility
+                                    }, {
+                                        tooth: 'cidx',
+                                        type: 'full',
+                                        material: 'base',
+                                        stones: null,
+                                        visibility: false,
+                                        visibleTeeth: state.teethVisibility
+                                    }]
+                                ];
                                 break;
                         }
                     } else {
                         state.teethJewelType[tooth] = type;
+
                         if(!state.teethVisibility[tooth]) {
                             state.teethVisibility[tooth] = true;
                             state.teethMaterial[tooth] = 'gold';
+
+                            state.history = [...state.history,
+                                [{
+                                    tooth: tooth,
+                                    type: type,
+                                    material: 'gold',
+                                    stones: state.teethStones[tooth] ?? null,
+                                    visibility: true,
+                                    visibleTeeth: state.teethVisibility
+                                }]
+                            ];
+
+                        } else {
+                            if(type !== 'full' && type !== 'fullDiamond') {
+                                state.teethStones[tooth] = null;
+
+                                state.history = [...state.history,
+                                    [{
+                                        tooth: tooth,
+                                        material: state.teethMaterial[tooth],
+                                        type: type,
+                                        stones: null,
+                                        visibility: true,
+                                        visibleTeeth: state.teethVisibility
+                                    }]
+                                ];
+
+                            } else {
+                                state.history = [...state.history,
+                                    [{
+                                        tooth: tooth,
+                                        type: type,
+                                        material: state.teethMaterial[tooth],
+                                        stones: state.teethStones[tooth] ?? null,
+                                        visibility: true,
+                                        visibleTeeth: state.teethVisibility
+                                    }]
+                                ];
+                            }
                         }
                     }
                 }
+                console.log(state.history, state.currentHistory)
             }),
         ),
     setDiamond: (tooth) =>
@@ -158,33 +318,132 @@ export const useTeethStore = create((set, get) => ({
                 if(!state.teethVisibility[tooth] || state.teethMaterial[tooth] === 'base') {
                     return;
                 }
+                if(state.currentHistory < state.history.length) {
+                    console.log(state.currentHistory, state.history.length)
+                    state.history = state.history.splice(0, state.currentHistory);
+                }
+                state.currentHistory++;
 
                 switch (state.teethJewelType[tooth]) {
                     case 'full':
                         state.teethJewelType[tooth] = 'fullDiamond';
+                        state.history = [...state.history,
+                            [{
+                                tooth: tooth,
+                                type: 'fullDiamond',
+                                material: state.teethMaterial[tooth],
+                                stones: state.teethStones[tooth] ?? null,
+                                visibility: true,
+                                visibleTeeth: state.teethVisibility
+                            }]
+                        ];
                         break;
                     case 'bar':
                         state.teethJewelType[tooth] = 'barDiamond';
+                        state.history = [...state.history,
+                            [{
+                                tooth: tooth,
+                                type: 'barDiamond',
+                                material: state.teethMaterial[tooth],
+                                stones: state.teethStones[tooth] ?? null,
+                                visibility: true,
+                                visibleTeeth: state.teethVisibility
+                            }]
+                        ];
                         break;
                     case 'barDiamond':
                         state.teethJewelType[tooth] = 'bar';
+                        state.history = [...state.history,
+                            [{
+                                tooth: tooth,
+                                type: 'bar',
+                                material: state.teethMaterial[tooth],
+                                stones: state.teethStones[tooth] ?? null,
+                                visibility: true,
+                                visibleTeeth: state.teethVisibility
+                            }]
+                        ];
                         break;
                     case 'fullDiamond':
                         state.teethJewelType[tooth] = 'full';
+                        state.history = [...state.history,
+                            [{
+                                tooth: tooth,
+                                type: 'full',
+                                material: state.teethMaterial[tooth],
+                                stones: state.teethStones[tooth] ?? null,
+                                visibility: true,
+                                visibleTeeth: state.teethVisibility
+                            }]
+                        ];
                         break;
                     case 'bigBar':
                         state.teethJewelType.cidx = 'bigBarDiamond';
                         state.teethJewelType.cisx = 'bigBarDiamond';
+                        state.history = [...state.history,
+                            [{
+                                tooth: 'cisx',
+                                type: 'bigBarDiamond',
+                                material: state.teethMaterial.cisx,
+                                stones: state.teethStones.cisx,
+                                visibility: true,
+                                visibleTeeth: state.teethVisibility
+                            }, {
+                                tooth: 'cidx',
+                                type: 'bigBarDiamond',
+                                material: state.teethMaterial.cidx,
+                                stones: state.teethStones.cidx,
+                                visibility: true,
+                                visibleTeeth: state.teethVisibility
+                            }]
+                        ];
                         break;
                     case 'bigBarDiamond':
                         state.teethJewelType.cidx = 'bigBar';
                         state.teethJewelType.cisx = 'bigBar';
+                        state.history = [...state.history,
+                            [{
+                                tooth: 'cisx',
+                                type: 'bigBar',
+                                material: state.teethMaterial.cisx,
+                                stones: state.teethStones.cisx,
+                                visibility: true,
+                                visibleTeeth: state.teethVisibility
+                            }, {
+                                tooth: 'cidx',
+                                type: 'bigBar',
+                                material: state.teethMaterial.cidx,
+                                stones: state.teethStones.cidx,
+                                visibility: true,
+                                visibleTeeth: state.teethVisibility
+                            }]
+                        ];
                         break;
                     case 'frame':
                         state.teethJewelType[tooth] = 'frameDiamond';
+                        state.history = [...state.history,
+                            [{
+                                tooth: tooth,
+                                type: 'frameDiamond',
+                                material: state.teethMaterial[tooth],
+                                stones: state.teethStones[tooth] ?? null,
+                                visibility: true,
+                                visibleTeeth: state.teethVisibility
+                            }]
+                        ];
                         break;
                     case 'frameDiamond':
                         state.teethJewelType[tooth] = 'frame';
+                        state.history = [...state.history,
+                            [{
+                                tooth: tooth,
+                                type: 'frame',
+                                material: state.teethMaterial[tooth],
+                                stones: state.teethStones[tooth] ?? null,
+                                visibility: true,
+                                visibleTeeth: state.teethVisibility
+                            }]
+                        ];
                         break;
                 }
             })
@@ -193,9 +452,29 @@ export const useTeethStore = create((set, get) => ({
         set(
             produce((state) => {
                 if(state.teethStones[tooth] === stone) {
-                    state.teethStones[tooth] = null
+                    state.teethStones[tooth] = null;
+                    state.history = [...state.history,
+                        [{
+                            tooth: tooth,
+                            material: state.teethMaterial[tooth],
+                            type: state.teethJewelType[tooth],
+                            stones: null,
+                            visibility: true,
+                            visibleTeeth: state.teethVisibility
+                        }]
+                    ];
                 } else {
                     state.teethStones[tooth] = stone;
+                    state.history = [...state.history,
+                        [{
+                            tooth: tooth,
+                            material: state.teethMaterial[tooth],
+                            type: state.teethJewelType[tooth],
+                            stones: stone,
+                            visibility: true,
+                            visibleTeeth: state.teethVisibility
+                        }]
+                    ];
                 }
             }),
         ),
@@ -282,9 +561,19 @@ export const useTeethStore = create((set, get) => ({
         set(
             produce((state) => {
                 state.currentHistory = state.currentHistory - 1;
-                for(const tooth of state.history[state.currentHistory - 1].teeth) {
-                    state.teethVisibility[tooth] = true;
-                    state.teethMaterial[tooth] = state.history[state.currentHistory - 1].which
+                for(const tooth of state.history[state.currentHistory - 1]) {
+                    if(tooth.type) {
+                        state.teethJewelType[tooth.tooth] = tooth.type;
+                    }
+                    if(tooth.material) {
+                        state.teethMaterial[tooth.tooth] = tooth.material;
+                    }
+                    if(tooth.stones) {
+                        state.teethStones[tooth.tooth] = tooth.stones;
+                    }
+                    for(const [key, value] of Object.entries(tooth.visibleTeeth)) {
+                        state.teethVisibility[key] = value
+                    }
                 }
             })
         ),
@@ -292,9 +581,19 @@ export const useTeethStore = create((set, get) => ({
         set(
             produce((state) => {
                 state.currentHistory = state.currentHistory + 1;
-                for(const tooth of state.history[state.currentHistory - 1].teeth) {
-                    state.teethVisibility[tooth] = true;
-                    state.teethMaterial[tooth] = state.history[state.currentHistory - 1].which
+                for(const tooth of state.history[state.currentHistory - 1]) {
+                    if(tooth.type) {
+                        state.teethJewelType[tooth.tooth] = tooth.type;
+                    }
+                    if(tooth.material) {
+                        state.teethMaterial[tooth.tooth] = tooth.material;
+                    }
+                    if(tooth.stones) {
+                        state.teethStones[tooth.tooth] = tooth.stones;
+                    }
+                    for(const [key, value] of Object.entries(tooth.visibleTeeth)) {
+                        state.teethVisibility[key] = value
+                    }
                 }
             })
         ),
