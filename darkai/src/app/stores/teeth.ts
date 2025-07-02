@@ -139,6 +139,39 @@ export const useTeethStore = create((set, get) => ({
                         return;
                 }
 
+                if((state.teethJewelType[tooth] === 'fullDiamond' && type === 'frame')
+                    || (state.teethJewelType[tooth] === 'frameDiamond' && type === 'full')
+                    || (state.teethJewelType[tooth] === 'fullDiamond' && type === 'bar')
+                    || (state.teethJewelType[tooth] === 'barDiamond' && type === 'full')
+                ) {
+                    state.teethJewelType[tooth] = type + 'Diamond';
+                    state.history = [...state.history,
+                        [{
+                            type: state.teethJewelType,
+                            material: state.teethMaterial,
+                            stones: state.teethStones,
+                            visible: state.teethVisibility
+                        }]
+                    ];
+                    return;
+                }
+
+                if((state.teethJewelType[tooth] === 'frameDiamond' && type === 'bigBar')
+                || (state.teethJewelType[tooth] === 'fullDiamond' && type === 'bigBar')
+                ) {
+                    state.teethJewelType.cidx = type + 'Diamond';
+                    state.teethJewelType.cisx = type + 'Diamond';
+                    state.history = [...state.history,
+                        [{
+                            type: state.teethJewelType,
+                            material: state.teethMaterial,
+                            stones: state.teethStones,
+                            visible: state.teethVisibility
+                        }]
+                    ];
+                    return;
+                }
+
                 if(type === 'bigBar' || type === 'bigBarDiamond') {
 
                     state.teethJewelType.cidx = type;
@@ -158,13 +191,21 @@ export const useTeethStore = create((set, get) => ({
                     if(state.teethJewelType[tooth] === 'bigBar' || state.teethJewelType[tooth] === 'bigBarDiamond') {
                         switch(tooth) {
                             case 'cidx':
-                                state.teethJewelType.cidx = type;
+                                if(state.teethJewelType[tooth] === 'bigBarDiamond') {
+                                    state.teethJewelType.cidx = type + 'Diamond';
+                                } else {
+                                    state.teethJewelType.cidx = type;
+                                }
                                 state.teethJewelType.cisx = 'full';
                                 state.teethVisibility.cisx = false;
                                 state.teethMaterial.cisx = 'base';
                                 break;
                             case 'cisx':
-                                state.teethJewelType.cisx = type;
+                                if(state.teethJewelType[tooth] === 'bigBarDiamond') {
+                                    state.teethJewelType.cisx = type + 'Diamond';
+                                } else {
+                                    state.teethJewelType.cisx = type;
+                                }
                                 state.teethJewelType.cidx = 'full';
                                 state.teethVisibility.cidx = false;
                                 state.teethMaterial.cidx = 'base';
@@ -180,7 +221,6 @@ export const useTeethStore = create((set, get) => ({
                         } else {
                             if(type !== 'full' && type !== 'fullDiamond') {
                                 state.teethStones[tooth] = null;
-
                             }
                         }
                     }

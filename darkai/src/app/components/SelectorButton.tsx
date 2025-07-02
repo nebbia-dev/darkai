@@ -1,6 +1,6 @@
-export default function SelectorButton({click, disabled, selection, adjust}) {
+export default function SelectorButton({click, disabled, selection, adjust, active}) {
     return (
-        <button className="rounded-2xl bg-stone-200 pb-2 px-1 pt-1 cursor-pointer"
+        <button className={`rounded-2xl ${active ? 'bg-stone-400' : 'bg-stone-200'} pb-2 px-1 pt-1 cursor-pointer`}
                 onClick={click}
                 disabled={disabled}
         >
