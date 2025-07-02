@@ -1,6 +1,5 @@
 import {useTeethStore} from "@/app/stores/teeth";
 import {Reset} from "@/app/components/icons/Reset";
-import {Copy} from "@/app/components/icons/Copy";
 import {Undo} from "@/app/components/icons/Undo";
 import {Redo} from "@/app/components/icons/Redo";
 
@@ -31,9 +30,6 @@ export default function ActionBar() {
                 </button>
                 <button onClick={doRedo} className="rounded-full border p-2 cursor-pointer">
                     <Redo className="w-8 h-8"/>
-                </button>
-                <button className="rounded-full border p-2 cursor-pointer">
-                    <Copy className="w-8 h-8"/>
                 </button>
                 <button onClick={reset} className="rounded-full border p-2 cursor-pointer">
                     <Reset className="w-8 h-8"/>

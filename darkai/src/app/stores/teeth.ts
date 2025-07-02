@@ -55,6 +55,15 @@ export const useTeethStore = create((set, get) => ({
     history: [],
     currentHistory: 0,
     activeDefault: null,
+    teethTypeOptions: {
+        full: ['icsdx', 'icssx', 'icidx', 'icisx', 'ilsdx', 'ilssx', 'ilidx', 'ilisx', 'csdx', 'cssx', 'cidx', 'cisx'],
+        fullDiamond: ['icsdx', 'icssx', 'icidx', 'icisx', 'ilsdx', 'ilssx', 'ilidx', 'ilisx', 'csdx', 'cssx', 'cidx', 'cisx'],
+        bar: ['ilsdx', 'ilssx'],
+        barDiamond: ['ilsdx', 'ilssx'],
+        frame: ['csdx', 'cssx', 'cidx', 'cisx'],
+        frameDiamond: ['csdx', 'cssx', 'cidx', 'cisx'],
+        stones: ['csdx', 'cssx', 'cidx', 'cisx']
+    },
     setEnvMap: (em) => {
         set({envMap: em})
     },
@@ -389,6 +398,18 @@ export const useTeethStore = create((set, get) => ({
         ),
     setActiveDefault: (active, color) =>
         set({activeDefault: active + color}),
+    setCopy: (copied, original) =>
+        set(
+            produce((state) => {
+                state.teethJewelType[copied] = state.teethJewelType[original];
+                state.teethMaterial[copied] = state.teethMaterial[original];
+                state.teethVisibility[copied] = state.teethVisibility[original];
+                if(state.teethStones[original]) {
+                    state.teethStones[copied] = state.teethStones[original];
+
+                }
+            })
+        ),
     undo: () =>
         set(
             produce((state) => {
