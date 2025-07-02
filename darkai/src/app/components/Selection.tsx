@@ -1,5 +1,5 @@
 import ToothConfig from "@/app/components/ToothConfig";
-import {ReactNode, SyntheticEvent, useState} from "react";
+import {ReactNode, SyntheticEvent, useRef, useState} from "react";
 import {Box, Tab, Tabs} from "@mui/material";
 import DefaultConfig from "@/app/components/DefaultConfig";
 interface TabPanelProps {
@@ -56,19 +56,19 @@ export default function Selection() {
                     className="w-full h-[90vh] flex flex-col align-center justify-start text-center bg-gray-50 my-auto rounded text-black">
                     <div className="overflow-y-auto">
                         {/*DENTI SUPERIORI*/}
-                        <ToothConfig tooth='icsdx'/>
-                        <ToothConfig tooth='icssx'/>
-                        <ToothConfig tooth='ilsdx'/>
-                        <ToothConfig tooth='ilssx'/>
-                        <ToothConfig tooth='csdx'/>
-                        <ToothConfig tooth='cssx'/>
+                        <ToothConfig tooth='icsdx' />
+                        <ToothConfig tooth='icssx' />
+                        <ToothConfig tooth='ilsdx' />
+                        <ToothConfig tooth='ilssx' />
+                        <ToothConfig tooth='csdx' />
+                        <ToothConfig tooth='cssx' />
                         {/*DENTI INFERIORI*/}
-                        <ToothConfig tooth='icidx'/>
-                        <ToothConfig tooth='icisx'/>
-                        <ToothConfig tooth='ilidx'/>
-                        <ToothConfig tooth='ilisx'/>
-                        <ToothConfig tooth='cidx'/>
-                        <ToothConfig tooth='cisx'/>
+                        <ToothConfig tooth='icidx' />
+                        <ToothConfig tooth='icisx' />
+                        <ToothConfig tooth='ilidx' />
+                        <ToothConfig tooth='ilisx' />
+                        <ToothConfig tooth='cidx' />
+                        <ToothConfig tooth='cisx' />
                     </div>
                 </div>
             </CustomTabPanel>

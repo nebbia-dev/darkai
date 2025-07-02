@@ -321,6 +321,7 @@ export const useTeethStore = create((set, get) => ({
         set(
             produce((state) => {
                 state.teethVisibility[tooth] = !state.teethVisibility[tooth];
+                setTimeout(() => document.getElementById(tooth).scrollIntoView({behavior: 'smooth', block:'center'}), 300)
             }),
         ),
     setDefaultConfig: (config, color) => {

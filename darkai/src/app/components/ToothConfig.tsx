@@ -21,6 +21,7 @@ export default function ToothConfig({tooth}) {
     const setActiveDefault = useTeethStore((state) => state.setActiveDefault);
     const firstChild = tooth === 'icsdx' ? '' : '1px solid #9ca3af';
     const [showCopy, setShowCopy] = useState<boolean>(false);
+    const [expanded, setExpanded] = useState<boolean>(false);
     let title;
 
     if(tooth.length === 4) {
@@ -82,67 +83,71 @@ export default function ToothConfig({tooth}) {
     console.log('oh no');
 
     return (
-        <Accordion elevation={0} sx={{backgroundColor: '#f9fafb', '&:before':{height:'0px'}}}>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />} sx={{height: '100px', borderTop: firstChild, px: 8}}>
+        <Accordion elevation={0} sx={{backgroundColor: '#f9fafb', '&:before': {height: '0px'}}}
+                   expanded={visible || expanded}>
+            <AccordionSummary expandIcon={<ExpandMoreIcon/>} sx={{height: '100px', borderTop: firstChild, px: 8}}
+                              onClick={() => setExpanded((prev) => !prev)}>
                 {title}
             </AccordionSummary>
             <AccordionDetails sx={{borderTop: '1px solid #9ca3af'}}>
                 <div className="w-full flex flex-col gap-8 relative text-right">
                     <div className={`${visible && material !== 'base' ? 'block' : 'hidden'} absolute top-4 right-4`}>
-                        <button className=" rounded-full border p-2 cursor-pointer w-fit" onClick={() => setShowCopy((prev) => !prev)}>
+                        <button className=" rounded-full border p-2 cursor-pointer w-fit"
+                                onClick={() => setShowCopy((prev) => !prev)}>
                             <Copy className="w-8 h-8"/>
                         </button>
-                        <div className={`${showCopy && availableTypes[jewelType]? 'block' : 'hidden'} border p-4 rounded mt-2`}>
+                        <div
+                            className={`${showCopy && availableTypes[jewelType] ? 'block' : 'hidden'} border p-4 rounded mt-2`}>
                             <ul>
                                 {availableTypes[jewelType] && availableTypes[(stones ? 'stones' : jewelType)].map((data, i) => {
                                     let opt;
 
-                                    if(data.length === 4) {
+                                    if (data.length === 4) {
                                         opt = 'Canino';
 
-                                        if(data[1] === 's') {
+                                        if (data[1] === 's') {
                                             opt += ' superiore';
                                         } else {
                                             opt += ' inferiore';
                                         }
 
-                                        if(data[2] === 'd') {
+                                        if (data[2] === 'd') {
                                             opt += ' destro';
                                         } else {
                                             opt += ' sinistro';
                                         }
 
-                                    } else if(data.length === 5) {
+                                    } else if (data.length === 5) {
                                         opt = 'Incisivo';
 
-                                        if(data[1] === 'c') {
+                                        if (data[1] === 'c') {
                                             opt += ' centrale';
                                         } else {
                                             opt += ' laterale';
                                         }
 
-                                        if(data[2] === 's') {
+                                        if (data[2] === 's') {
                                             opt += ' superiore';
                                         } else {
                                             opt += ' inferiore';
                                         }
 
-                                        if(data[3] === 'd') {
+                                        if (data[3] === 'd') {
                                             opt += ' destro';
                                         } else {
                                             opt += ' sinistro';
                                         }
                                     }
-                                        return (
-                                            <li key={data + tooth + i}>
-                                                { data !== tooth &&
-                                                    <button onClick={() => copy(data, tooth)}>
-                                                        {opt}
-                                                    </button>
-                                                 }
-                                            </li>
-                                        )
-                                    })
+                                    return (
+                                        <li key={data + tooth + i}>
+                                            {data !== tooth &&
+                                                <button onClick={() => copy(data, tooth)}>
+                                                    {opt}
+                                                </button>
+                                            }
+                                        </li>
+                                    )
+                                })
                                 }
                             </ul>
                         </div>
@@ -183,6 +188,7 @@ export default function ToothConfig({tooth}) {
                             <SelectorButton disabled={false} selection="white"
                                             active={visible && (material === 'white')}
                                             click={() => selectMaterial('white')}/>
+                            <div aria-hidden={true} id={tooth}></div>
                         </div>
                     </div>
 
@@ -210,7 +216,6 @@ export default function ToothConfig({tooth}) {
                     </div>
                 </div>
             </AccordionDetails>
-
         </Accordion>
     )
 }
