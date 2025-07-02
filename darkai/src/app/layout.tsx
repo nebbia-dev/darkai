@@ -13,13 +13,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-        <body className="bg-gray-50 h-[100vh]">
+        <body className="bg-gray-50">
             <div className="w-[100vw] bg-gray-50 flex justify-center border-b-1 border-gray-400">
                 <img className="py-4" src="/logo.webp" alt="darkai logo"/>
             </div>
-            <div className="flex w-[100vw] mx-auto bg-gray-50">
-                {children}
-            </div>
+            {children}
         </body>
     </html>
   );
