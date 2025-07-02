@@ -54,6 +54,7 @@ export const useTeethStore = create((set, get) => ({
     },
     history: [],
     currentHistory: 0,
+    activeDefault: null,
     setEnvMap: (em) => {
         set({envMap: em})
     },
@@ -386,6 +387,8 @@ export const useTeethStore = create((set, get) => ({
                 state.teethJewelType[tooth] = type;
             })
         ),
+    setActiveDefault: (active, color) =>
+        set({activeDefault: active + color}),
     undo: () =>
         set(
             produce((state) => {

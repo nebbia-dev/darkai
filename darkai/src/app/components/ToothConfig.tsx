@@ -28,6 +28,7 @@ export default function ToothConfig({tooth}) {
     const changeMaterial = useTeethStore((state) => state.setMaterial);
     const toggleDiamond = useTeethStore((state) => state.setDiamond);
     const changeStone = useTeethStore((state) => state.setStone);
+    const setActiveDefault = useTeethStore((state) => state.setActiveDefault);
     const firstChild = tooth === 'icsdx' ? '' : '1px solid #9ca3af';
     let title;
 
@@ -69,10 +70,12 @@ export default function ToothConfig({tooth}) {
     }
 
     function selectType(type) {
+        setActiveDefault(null, null);
         changeJewelType(tooth, type);
     }
 
     function selectMaterial(material) {
+        setActiveDefault(null, null);
         changeMaterial(tooth, material);
     }
 
