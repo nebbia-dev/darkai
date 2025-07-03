@@ -3,7 +3,7 @@ import {Reset} from "@/app/components/icons/Reset";
 import {Undo} from "@/app/components/icons/Undo";
 import {Redo} from "@/app/components/icons/Redo";
 
-export default function ActionBar() {
+export default function ActionBar({ui}) {
     const current = useTeethStore((state) => state.currentHistory);
     const history = useTeethStore((state) => state.history);
     const reset = useTeethStore((state) => state.reset);
@@ -23,8 +23,8 @@ export default function ActionBar() {
     }
 
     return(
-        <div className="relative">
-            <div className="absolute bottom-30 left-[50%] translate-x-[-50%] w-2/4 flex align-center justify-center gap-4">
+        <div className={`relative z-30 ${ui ? 'top-[-50%]' : ''}`}>
+            <div className={`absolute flex items-center justify-center gap-4 ${!ui ? 'absolute bottom-30 left-[50%] translate-x-[-50%] w-2/4' : 'flex-col translate-y-[-50%] left-[10%]'}`}>
                 <button onClick={doUndo} className="rounded-full border p-2 cursor-pointer">
                     <Undo className="w-8 h-8"/>
                 </button>

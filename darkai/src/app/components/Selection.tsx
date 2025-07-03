@@ -1,7 +1,9 @@
 import ToothConfig from "@/app/components/ToothConfig";
 import {ReactNode, SyntheticEvent, useState} from "react";
-import {Box, Tab, Tabs} from "@mui/material";
+import {Box, MenuItem, Select, SelectChangeEvent, Tab, Tabs} from "@mui/material";
 import DefaultConfig from "@/app/components/DefaultConfig";
+import elabToothName from "@/app/helpers/elabToothName";
+import ToothSelector from "@/app/components/ToothSelector";
 interface TabPanelProps {
     children?: ReactNode;
     index: number;
@@ -10,6 +12,8 @@ interface TabPanelProps {
 
 export default function Selection({ui}) {
     const [value, setValue] = useState<number>(0);
+    const [arch, setArch] = useState<string>('Arcata superiore');
+    const [tooth, setTooth] = useState<string>('');
     const changeTab = (event: SyntheticEvent, newValue: number) => {
         setValue(newValue);
     };
@@ -26,16 +30,21 @@ export default function Selection({ui}) {
                 aria-labelledby={`simple-tab-${index}`}
                 {...other}
             >
-                {value === index && <Box sx={{height: 1, display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', gap: '1rem'}}>{children}</Box>}
+                {value === index && ui && <Box sx={{height: 1, display:'grid', gridTemplateRows:'80% 10% 10%', gridTemplateColumns:'15% 60% 25%'}}>{children}</Box>}
+                {value === index && !ui && <Box>{children}</Box>}
             </div>
         );
+    }
+
+    function handleChange(event: SelectChangeEvent) {
+        setArch(event.target.value as string);
     }
 
     return (
         <>
         { !ui ?
-            <div className="w-full border-l-1 border-gray-400">
-                <div className="w-full">
+            <div className="border-l-1 border-gray-400">
+                <div>
                     <Tabs
                         value={value} onChange={changeTab} aria-label="tabs" sx={{
                         width: 1,
@@ -49,7 +58,7 @@ export default function Selection({ui}) {
                 </div>
                 <CustomTabPanel value={value} index={0}>
                     <div
-                        className="w-full h-[90vh] flex flex-col align-center justify-start text-center bg-gray-50 my-auto rounded text-black">
+                        className="w-full h-[calc(100vh-54px-48px-0.2rem)] flex flex-col align-center justify-start text-center bg-gray-50 my-auto rounded text-black">
                         <div className="overflow-y-auto">
                             <DefaultConfig teeth="full"/>
                             <DefaultConfig teeth="bar"/>
@@ -61,7 +70,7 @@ export default function Selection({ui}) {
                 </CustomTabPanel>
                 <CustomTabPanel value={value} index={1}>
                     <div
-                        className="w-full h-[90vh] flex flex-col align-center justify-start text-center bg-gray-50 my-auto rounded text-black">
+                        className="w-full h-[calc(100vh-54px-48px-0.2rem)] flex flex-col align-center justify-start text-center bg-gray-50 my-auto rounded text-black">
                         <div className="overflow-y-auto">
                             {/*DENTI SUPERIORI*/}
                             <ToothConfig tooth='icsdx'/>
@@ -97,56 +106,80 @@ export default function Selection({ui}) {
                     </Tabs>
                 </div>
                 <CustomTabPanel value={value} index={0}>
-                    <div className="flex align-center justify-center gap-8">
-                        <select>
-                            <option>Arcata superiore</option>
-                            <option>Arcata inferiore</option>
-                        </select>
-                        <div className="flex">
-                            <button>ICSDX</button>
-                            <button>ICSSX</button>
-                            <button>ILSDX</button>
-                            <button>ILSSX</button>
-                            <button>CSDX</button>
-                            <button>CSSX</button>
+                    <div className="flex items-center justify-center gap-8 col-start-2 col-end-2 row-start-1 row-end-1">
+
+                        <Select
+                            value={arch}
+                            onChange={handleChange}
+                            sx={{width: 0.175, backgroundColor:'#030712', color: '#f9fafb', borderRadius: 'calc(infinity * 1px)', '& .css-lohd6h-MuiSvgIcon-root-MuiSelect-icon': {color: '#f9fafb'}}}
+                        >
+                            <MenuItem value="Arcata superiore">Arcata superiore</MenuItem>
+                            <MenuItem value="Arcata inferiore">Arcata inferiore</MenuItem>
+                        </Select>
+
+                        <div className={`flex justify-between ${arch ? 'block' : 'hidden'} border rounded-full w-full`}>
+                            <ToothSelector tooth='icsdx' active={tooth==='icsdx'} click={() => setTooth('icsdx')}/>
+                            <ToothSelector tooth='icssx' active={tooth==='icssx'} click={() => setTooth('icssx')}/>
+                            <ToothSelector tooth='ilsdx' active={tooth==='ilsdx'} click={() => setTooth('ilsdx')}/>
+                            <ToothSelector tooth='ilssx' active={tooth==='ilssx'} click={() => setTooth('ilssx')}/>
+                            <ToothSelector tooth='csdx' active={tooth==='csdx'} click={() => setTooth('csdx')}/>
+                            <ToothSelector tooth='cssx' active={tooth==='cssx'} click={() => setTooth('cssx')}/>
                         </div>
-                        <div className="flex">
-                            <button>ICIDX</button>
-                            <button>ICISX</button>
-                            <button>ILIDX</button>
-                            <button>ILISX</button>
-                            <button>CIDX</button>
-                            <button>CISX</button>
+                        <div className={`flex justify-between ${!arch ? 'block' : 'hidden'} border rounded-full w-full`}>
+                            <ToothSelector tooth='icidx' active={tooth==='icidx'} click={() => setTooth('icidx')}/>
+                            <ToothSelector tooth='icisx' active={tooth==='icisx'} click={() => setTooth('icisx')}/>
+                            <ToothSelector tooth='ilidx' active={tooth==='ilidx'} click={() => setTooth('ilidx')}/>
+                            <ToothSelector tooth='ilisx' active={tooth==='ilisx'} click={() => setTooth('ilisx')}/>
+                            <ToothSelector tooth='cidx' active={tooth==='cidx'} click={() => setTooth('cidx')}/>
+                            <ToothSelector tooth='cisx' active={tooth==='cisx'} click={() => setTooth('cisx')}/>
                         </div>
                     </div>
-                    <button>Continua</button>
+                    <div className="flex items-end justify-start col-start-3 col-end-3 row-start-2 row-end-2">
+                        <button className="w-[40%] mb-[4vh] ml-4 bg-gray-950 text-gray-50 p-[1rem] rounded-full text-right flex items-center justify-between">Continua <span className="inline-block">&rarr;</span></button>
+                    </div>
                 </CustomTabPanel>
                 <CustomTabPanel value={value} index={1}>
-                    <div className="flex align-center justify-center gap-8">
-                        <button>Full</button>
-                        <button>Bar</button>
-                        <button>Frame</button>
-                        <button>Big Bar</button>
-                    </div>
-                    <button>Continua</button>
-                </CustomTabPanel>
-                <CustomTabPanel value={value} index={2}>
-                    <div className="flex align-center justify-center gap-8">
-                        <button>Gold</button>
-                        <button>Rose</button>
-                        <button>White</button>
-                    </div>
-                    <button>Continua</button>
+                    {tooth !== ''
+                        ?
+                        <>
+                            <div className="flex items-center justify-center gap-8 col-start-2 col-end-2 row-start-1 row-end-1">
+                                <button>Full</button>
+                                <button>Bar</button>
+                                <button>Frame</button>
+                                <button>Big Bar</button>
+                            </div>
+                            <div className="flex items-end justify-start col-start-3 col-end-3 row-start-2 row-end-2">
+                                <button className="w-[40%] mb-[4vh] ml-4 bg-gray-950 text-gray-50 p-[1rem] rounded-full text-right flex items-center justify-between">Continua <span className="inline-block">&rarr;</span></button>
+                            </div>
+                        </>
+                        : <p className="flex items-center justify-center col-start-2 col-end-2 row-start-1 row-end-1">Prima scegli un dente</p>
+                    }
+                    </CustomTabPanel>
+                    <CustomTabPanel value={value} index={2}>
+                        <div className="flex items-center justify-center gap-8 col-start-2 col-end-2 row-start-1 row-end-1">
+                            <button>Gold</button>
+                            <button>Rose</button>
+                            <button>White</button>
+                        </div>
+                        <div className="flex items-end justify-start col-start-3 col-end-3 row-start-2 row-end-2">
+                            <button
+                                className="w-[40%] mb-[4vh] ml-4 bg-gray-950 text-gray-50 p-[1rem] rounded-full text-right flex items-center justify-between">Continua <span
+                                className="inline-block">&rarr;</span></button>
+                        </div>
                 </CustomTabPanel>
                 <CustomTabPanel value={value} index={3}>
-                    <div className="flex align-center justify-center gap-8">
+                    <div className="flex items-center justify-center gap-8 col-start-2 col-end-2 row-start-1 row-end-1">
                         <button>Diamonds</button>
                         <button>Sapphire</button>
                         <button>Ruby</button>
                         <button>Emerald</button>
                         <button>Amethyst</button>
                     </div>
-                    <button>Continua</button>
+                    <div className="flex items-end justify-start col-start-3 col-end-3 row-start-2 row-end-2">
+                        <button
+                            className="w-[40%] mb-[4vh] ml-4 bg-gray-950 text-gray-50 p-[1rem] rounded-full text-right flex items-center justify-between">Termina <span
+                            className="inline-block">&rarr;</span></button>
+                    </div>
                 </CustomTabPanel>
             </div>
         }

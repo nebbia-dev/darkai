@@ -6,6 +6,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import SelectorButton from "@/app/components/SelectorButton";
 import {Copy} from "@/app/components/icons/Copy";
 import {useState} from "react";
+import elabToothName from "@/app/helpers/elabToothName";
 
 export default function ToothConfig({tooth}) {
     const jewelType = useTeethStore((state) => state.teethJewelType[tooth]);
@@ -22,44 +23,7 @@ export default function ToothConfig({tooth}) {
     const firstChild = tooth === 'icsdx' ? '' : '1px solid #9ca3af';
     const [showCopy, setShowCopy] = useState<boolean>(false);
     const [expanded, setExpanded] = useState<boolean>(false);
-    let title;
-
-    if(tooth.length === 4) {
-        title = 'Canino';
-
-        if(tooth[1] === 's') {
-            title += ' superiore';
-        } else {
-            title += ' inferiore';
-        }
-
-        if(tooth[2] === 'd') {
-            title += ' destro';
-        } else {
-            title += ' sinistro';
-        }
-
-    } else if(tooth.length === 5) {
-        title = 'Incisivo';
-
-        if(tooth[1] === 'c') {
-            title += ' centrale';
-        } else {
-            title += ' laterale';
-        }
-
-        if(tooth[2] === 's') {
-            title += ' superiore';
-        } else {
-            title += ' inferiore';
-        }
-
-        if(tooth[3] === 'd') {
-            title += ' destro';
-        } else {
-            title += ' sinistro';
-        }
-    }
+    const title = elabToothName(tooth, false);
 
     function selectType(type) {
         setActiveDefault(null, null);
@@ -100,44 +64,8 @@ export default function ToothConfig({tooth}) {
                             className={`${showCopy && availableTypes[jewelType] ? 'block' : 'hidden'} border p-4 rounded mt-2`}>
                             <ul>
                                 {availableTypes[jewelType] && availableTypes[(stones ? 'stones' : jewelType)].map((data, i) => {
-                                    let opt;
+                                    const opt = elabToothName(data, false);
 
-                                    if (data.length === 4) {
-                                        opt = 'Canino';
-
-                                        if (data[1] === 's') {
-                                            opt += ' superiore';
-                                        } else {
-                                            opt += ' inferiore';
-                                        }
-
-                                        if (data[2] === 'd') {
-                                            opt += ' destro';
-                                        } else {
-                                            opt += ' sinistro';
-                                        }
-
-                                    } else if (data.length === 5) {
-                                        opt = 'Incisivo';
-
-                                        if (data[1] === 'c') {
-                                            opt += ' centrale';
-                                        } else {
-                                            opt += ' laterale';
-                                        }
-
-                                        if (data[2] === 's') {
-                                            opt += ' superiore';
-                                        } else {
-                                            opt += ' inferiore';
-                                        }
-
-                                        if (data[3] === 'd') {
-                                            opt += ' destro';
-                                        } else {
-                                            opt += ' sinistro';
-                                        }
-                                    }
                                     return (
                                         <li key={data + tooth + i}>
                                             {data !== tooth &&
