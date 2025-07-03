@@ -55,6 +55,7 @@ export const useTeethStore = create((set, get) => ({
     history: [],
     currentHistory: 0,
     activeDefault: null,
+    currentTooth: null,
     teethTypeOptions: {
         full: ['icsdx', 'icssx', 'icidx', 'icisx', 'ilsdx', 'ilssx', 'ilidx', 'ilisx', 'csdx', 'cssx', 'cidx', 'cisx'],
         fullDiamond: ['icsdx', 'icssx', 'icidx', 'icisx', 'ilsdx', 'ilssx', 'ilidx', 'ilisx', 'csdx', 'cssx', 'cidx', 'cisx'],
@@ -121,6 +122,8 @@ export const useTeethStore = create((set, get) => ({
                             state.teethVisibility.cisx = false;
                             state.teethJewelType.cidx = 'full';
                             state.teethJewelType.cisx = 'full';
+                            state.teethMaterial.cidx = 'base';
+                            state.teethMaterial.cisx = 'base';
 
                             state.history = [...state.history,
                                 [{
@@ -136,6 +139,7 @@ export const useTeethStore = create((set, get) => ({
 
                         state.teethVisibility[tooth] = false;
                         state.teethJewelType[tooth] = 'full';
+                        state.teethMaterial[tooth] = 'base';
 
                         state.history = [...state.history,
                             [{
@@ -320,8 +324,14 @@ export const useTeethStore = create((set, get) => ({
     setVisibility: (tooth) =>
         set(
             produce((state) => {
-                state.teethVisibility[tooth] = !state.teethVisibility[tooth];
-                setTimeout(() => document.getElementById(tooth).scrollIntoView({behavior: 'smooth', block:'center'}), 300)
+                if(state.currentTooth !== tooth && state.teethMaterial[state.currentTooth] === 'base') {
+                    state.teethVisibility[state.currentTooth] = false;
+                }
+                if(state.teethMaterial[tooth] === 'base') {
+                    state.teethVisibility[tooth] = !state.teethVisibility[tooth];
+                }
+                state.currentTooth = tooth;
+                // setTimeout(() => document.getElementById(tooth).scrollIntoView({behavior: 'smooth', block:'center'}), 300)
             }),
         ),
     setDefaultConfig: (config, color) => {
