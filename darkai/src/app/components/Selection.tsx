@@ -95,6 +95,9 @@ export default function Selection({ui}) {
                             width: 0.2,
                             '& .MuiTabs-indicator': {left: 50, backgroundColor: '#030712', height: '0.2rem'},
                             height: 1,
+                            paddingTop: '0.2rem',
+                            borderTop: '1px solid #9ca3af',
+                            borderRight: '1px solid #9ca3af',
                             '& .Mui-selected': {color: '#030712 !important'}
                         }}>
                             <Tab label="DEFAULT" sx={{width: 1}}/>

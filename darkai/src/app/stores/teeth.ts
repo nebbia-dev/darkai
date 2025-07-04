@@ -56,6 +56,7 @@ export const useTeethStore = create((set, get) => ({
     currentHistory: 0,
     activeDefault: null,
     currentTooth: null,
+    ui: false,
     teethTypeOptions: {
         full: ['icsdx', 'icssx', 'icidx', 'icisx', 'ilsdx', 'ilssx', 'ilidx', 'ilisx', 'csdx', 'cssx', 'cidx', 'cisx'],
         fullDiamond: ['icsdx', 'icssx', 'icidx', 'icisx', 'ilsdx', 'ilssx', 'ilidx', 'ilisx', 'csdx', 'cssx', 'cidx', 'cisx'],
@@ -335,7 +336,12 @@ export const useTeethStore = create((set, get) => ({
                 } else {
                     state.currentTooth = tooth;
                 }
-                // setTimeout(() => document.getElementById(tooth).scrollIntoView({behavior: 'smooth', block:'start'}), 300)
+                if(!state.ui){
+                    setTimeout(() => document.getElementById(tooth).scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    }), 300)
+                }
             }),
         ),
     setDefaultConfig: (config, color) => {
@@ -425,6 +431,7 @@ export const useTeethStore = create((set, get) => ({
                 }
             })
         ),
+    setUI: () => set((state) => ({ui: !state.ui})),
     undo: () =>
         set(
             produce((state) => {

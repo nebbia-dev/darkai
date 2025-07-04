@@ -33,7 +33,7 @@ export default function IciDx() {
                     <mesh geometry={geometry[0]} visible={visible}>
                         {material[0]}
                     </mesh>
-                    <mesh geometry={geometry[1]} visible={visible}>
+                    <mesh geometry={geometry[1]} visible={visible} onClick={() => toggleVisibility('icidx')}>
                         {material[1]}
                     </mesh>
                 </>

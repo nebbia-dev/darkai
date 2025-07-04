@@ -43,6 +43,10 @@ export default function ToothConfig({tooth}) {
     function selectStone(stone) {
         changeStone(tooth, stone);
     }
+    function setCopy(newTooth, oldTooth) {
+        copy(newTooth, oldTooth);
+        setShowCopy(false);
+    }
 
     console.log('oh no');
 
@@ -69,7 +73,7 @@ export default function ToothConfig({tooth}) {
                                     return (
                                         <li key={data + tooth + i}>
                                             {data !== tooth &&
-                                                <button onClick={() => copy(data, tooth)}>
+                                                <button onClick={() => setCopy(data, tooth)}>
                                                     {opt}
                                                 </button>
                                             }

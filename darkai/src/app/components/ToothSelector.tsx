@@ -5,6 +5,7 @@ import elabToothName from "@/app/helpers/elabToothName";
 import SelectorButtonPill from "@/app/components/SelectorButtonPill";
 import DiamondTogglerPill from "@/app/components/DiamondTogglerPill";
 import StoneSelectorPill from "@/app/components/StoneSelectorPill";
+import {Copy} from "@/app/components/icons/Copy";
 interface TabPanelProps {
     children?: ReactNode;
     index: number;
@@ -49,6 +50,11 @@ export default function ToothSelector({tooth}) {
     const changeTab = (event: SyntheticEvent, newValue: number) => {
         setValue(newValue);
     };
+
+    function setCopy(newTooth, oldTooth) {
+        copy(newTooth, oldTooth);
+        setShowCopy(false);
+    }
     function CustomTabPanel(props: TabPanelProps) {
         const { children, value, index, ...other } = props;
 
@@ -76,6 +82,7 @@ export default function ToothSelector({tooth}) {
                     width: 1,
                     '& .MuiTabs-indicator': {top: 0, backgroundColor: '#030712', height: '0.2rem'},
                     borderBottom: '1px solid #9ca3af',
+                    borderTop: '1px solid #9ca3af',
                     backgroundColor: '#f9fafb',
                     '& .Mui-selected': {color: '#030712 !important'}
                 }}>
@@ -86,50 +93,75 @@ export default function ToothSelector({tooth}) {
             </div>
 
             <CustomTabPanel value={value} index={0}>
+                <div className={`${visible && material !== 'base' ? 'flex' : 'hidden'} relative items-center justify-center col-start-1 col-end-1 row-start-1 row-end-1`}>
+                    <button className=" rounded-full border p-2 cursor-pointer w-fit"
+                            onClick={() => setShowCopy((prev) => !prev)}>
+                        <Copy className="w-8 h-8"/>
+                    </button>
+                    <div
+                        className={`${showCopy && availableTypes[jewelType] ? 'block' : 'hidden'} absolute border p-4 rounded mt-2 bg-gray-50 z-10 top-[-75%] max-h-[100px] overflow-y-auto`}>
+                        <ul>
+                            {availableTypes[jewelType] && availableTypes[(stones ? 'stones' : jewelType)].map((data, i) => {
+                                const opt = elabToothName(data, false);
+
+                                return (
+                                    <li key={data + tooth + i}>
+                                        {data !== tooth &&
+                                            <button onClick={() => setCopy(data, tooth)}>
+                                                {opt}
+                                            </button>
+                                        }
+                                    </li>
+                                )
+                            })
+                            }
+                        </ul>
+                    </div>
+                </div>
                 <div className="flex items-center justify-center gap-8 col-start-2 col-end-2 row-start-1 row-end-1">
                     <div className="flex gap-2">
                         <SelectorButtonPill adjust={true} click={() => selectType('full')}
-                                        disabled={false} selection="full"
-                                        active={visible && (jewelType === 'full' || jewelType === 'fullDiamond')}/>
+                                            disabled={false} selection="full"
+                                            active={visible && (jewelType === 'full' || jewelType === 'fullDiamond')}/>
 
                         {(tooth === 'ilsdx' || tooth === 'ilssx') &&
                             <SelectorButtonPill adjust={true} click={() => selectType('bar')}
-                                            disabled={false} selection="bar"
-                                            active={visible && (jewelType === 'bar' || jewelType === 'barDiamond')}/>
+                                                disabled={false} selection="bar"
+                                                active={visible && (jewelType === 'bar' || jewelType === 'barDiamond')}/>
                         }
                         {(tooth === 'csdx' || tooth === 'cssx' || tooth === 'cidx' || tooth === 'cisx') &&
                             <SelectorButtonPill adjust={true} click={() => selectType('frame')}
-                                            disabled={false} selection="frame"
-                                            active={visible && (jewelType === 'frame' || jewelType === 'frameDiamond')}/>
+                                                disabled={false} selection="frame"
+                                                active={visible && (jewelType === 'frame' || jewelType === 'frameDiamond')}/>
                         }
                         {(tooth === 'cidx' || tooth === 'cisx') &&
                             <SelectorButtonPill adjust={true} click={() => selectType('bigBar')}
-                                            disabled={false} selection="bigBar"
-                                            active={visible && (jewelType === 'bigBar' || jewelType === 'bigBarDiamond')}/>
+                                                disabled={false} selection="bigBar"
+                                                active={visible && (jewelType === 'bigBar' || jewelType === 'bigBarDiamond')}/>
                         }
                     </div>
                 </div>
 
             </CustomTabPanel>
             <CustomTabPanel value={value} index={1}>
-            <div className="flex items-center justify-center gap-8 col-start-2 col-end-2 row-start-1 row-end-1">
-                <div className="flex gap-2">
-                    <SelectorButtonPill disabled={false} selection="gold" active={visible && (material === 'gold')}
-                                    click={() => selectMaterial('gold')}/>
-                    <SelectorButtonPill disabled={false} selection="rose" active={visible && (material === 'rose')}
-                                    click={() => selectMaterial('rose')}/>
-                    <SelectorButtonPill disabled={false} selection="white"
-                                    active={visible && (material === 'white')}
-                                    click={() => selectMaterial('white')}/>
+                <div className="flex items-center justify-center gap-8 col-start-2 col-end-2 row-start-1 row-end-1">
+                    <div className="flex gap-2">
+                        <SelectorButtonPill disabled={false} selection="gold" active={visible && (material === 'gold')}
+                                            click={() => selectMaterial('gold')}/>
+                        <SelectorButtonPill disabled={false} selection="rose" active={visible && (material === 'rose')}
+                                            click={() => selectMaterial('rose')}/>
+                        <SelectorButtonPill disabled={false} selection="white"
+                                            active={visible && (material === 'white')}
+                                            click={() => selectMaterial('white')}/>
+                    </div>
                 </div>
-            </div>
 
             </CustomTabPanel>
             <CustomTabPanel value={value} index={2}>
                 <div className="flex items-center justify-center gap-8 col-start-2 col-end-2 row-start-1 row-end-1">
                     <div className="flex gap-4">
                         <DiamondTogglerPill tooth={tooth} onclick={selectDiamond}
-                                        active={visible && (jewelType === 'fullDiamond' || jewelType === 'barDiamond' || jewelType === 'frameDiamond' || jewelType === 'bigBarDiamond')}/>
+                                            active={visible && (jewelType === 'fullDiamond' || jewelType === 'barDiamond' || jewelType === 'frameDiamond' || jewelType === 'bigBarDiamond')}/>
                         {(tooth === 'csdx' || tooth === 'cssx' || tooth === 'cidx' || tooth === 'cisx') &&
                             <div className="flex gap-2">
                                 <StoneSelectorPill tooth={tooth} stone="sapphire"

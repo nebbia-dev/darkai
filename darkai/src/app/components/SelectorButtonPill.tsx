@@ -1,9 +1,10 @@
 export default function SelectorButtonPill({click, disabled, selection, adjust, active}) {
     return (
         <button
-            className={`${active ? 'bg-gray-950 text-gray-50' : 'bg-gray-50 text-gray-950'} min-w-[200px] rounded-full py-1 pl-1 pr-3 flex items-center justify-between`}
+            className={`${active ? 'bg-gray-950 text-gray-50' : 'bg-gray-50 text-gray-950'} min-w-[200px] rounded-full py-1 pr-1 pl-4 flex items-center justify-between gap-4`}
             onClick={click}
             disabled={disabled}>
+            {selection[0].toUpperCase() + selection.slice(1)}
             <span
                 className={`${
                     selection === 'gold' 
@@ -23,8 +24,7 @@ export default function SelectorButtonPill({click, disabled, selection, adjust, 
                                                 : selection === 'amethyst'
                                                     ? 'bg-violet-500'
                                                     : 'border-1'
-                } inline-block w-8 h-8 rounded-full`}></span>
-            {selection[0].toUpperCase() + selection.slice(1)}
+                } inline-block w-full h-8 rounded-full`}></span>
         </button>
 
 )

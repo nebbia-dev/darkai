@@ -32,7 +32,7 @@ export default function IliSx() {
                     <mesh geometry={geometry[0]} visible={visible}>
                         {material[0]}
                     </mesh>
-                    <mesh geometry={geometry[1]} visible={visible}>
+                    <mesh geometry={geometry[1]} visible={visible} onClick={() => toggleVisibility('ilisx')}>
                         {material[1]}
                     </mesh>
                 </>

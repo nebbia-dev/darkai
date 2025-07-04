@@ -42,7 +42,7 @@ export default function IlsSx() {
                     <mesh geometry={geometry[0]} visible={visible}>
                         {material[0]}
                     </mesh>
-                    <mesh geometry={geometry[1]} visible={visible}>
+                    <mesh geometry={geometry[1]} visible={visible} onClick={() => toggleVisibility('ilssx')}>
                         {material[1]}
                     </mesh>
                 </>
@@ -51,16 +51,16 @@ export default function IlsSx() {
         if(geometry.length === 4) {
             return (
                 <>
-                    <mesh geometry={geometry[0]} visible={visible}>
+                    <mesh geometry={geometry[0]} visible={visible} onClick={() => toggleVisibility('ilssx')}>
                         {material[0]}
                     </mesh>
-                    <mesh geometry={geometry[1]} visible={visible}>
+                    <mesh geometry={geometry[1]} visible={visible} onClick={() => toggleVisibility('ilssx')}>
                         {material[1]}
                     </mesh>
-                    <mesh geometry={geometry[2]} visible={visible}>
+                    <mesh geometry={geometry[2]} visible={visible} onClick={() => toggleVisibility('ilssx')}>
                         {material[2]}
                     </mesh>
-                    <mesh geometry={geometry[3]} visible={visible}>
+                    <mesh geometry={geometry[3]} visible={visible} onClick={() => toggleVisibility('ilssx')}>
                         {material[2]}
                     </mesh>
                 </>
