@@ -1,6 +1,5 @@
 import {useTeethStore} from "@/app/stores/teeth";
 import {Box, Tab, Tabs} from "@mui/material";
-import DefaultConfigButton from "@/app/components/DefaultConfigButton";
 import {ReactNode, SyntheticEvent, useState} from "react";
 import DefaultConfigSelector from "@/app/components/DefaultConfigSelector";
 interface TabPanelProps {
@@ -10,7 +9,6 @@ interface TabPanelProps {
 }
 export default function DefaultSelector() {
     const [value, setValue] = useState<number>(0);
-    const activeTooth = useTeethStore((state) => state.currentTooth);
     const changeTab = (event: SyntheticEvent, newValue: number) => {
         setValue(newValue);
     };

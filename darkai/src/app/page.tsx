@@ -1,7 +1,7 @@
 'use client'
 import Scene from "@/app/components/Scene";
 import Selection from "@/app/components/Selection";
-import {Suspense, useState} from "react";
+import {Suspense} from "react";
 import Loading from "@/app/components/Loading";
 import ActionBar from "@/app/components/ActionBar";
 import {useTeethStore} from "@/app/stores/teeth";

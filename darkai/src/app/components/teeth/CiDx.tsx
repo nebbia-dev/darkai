@@ -1,5 +1,5 @@
 'use client'
-import {JSX, memo, useEffect} from "react";
+import {JSX, memo} from "react";
 import FullMaterial from "@/app/components/materials/FullMaterial";
 import {useTeethStore} from "@/app/stores/teeth";
 import BaseFullDiamond from "@/app/components/materials/BaseFullDiamond";
