@@ -50,7 +50,7 @@ export default function ToothConfig({tooth}) {
         <Accordion elevation={0} sx={{backgroundColor: '#f9fafb', '&:before': {height: '0px'}}}
                    expanded={visible || expanded}>
             <AccordionSummary expandIcon={<ExpandMoreIcon/>} sx={{height: '100px', borderTop: firstChild, px: 8}}
-                              onClick={() => setExpanded((prev) => !prev)}>
+                              onClick={() => setExpanded((prev) => !prev)} id={tooth}>
                 {title}
             </AccordionSummary>
             <AccordionDetails sx={{borderTop: '1px solid #9ca3af'}}>
@@ -116,7 +116,6 @@ export default function ToothConfig({tooth}) {
                             <SelectorButton disabled={false} selection="white"
                                             active={visible && (material === 'white')}
                                             click={() => selectMaterial('white')}/>
-                            <div aria-hidden={true} id={tooth}></div>
                         </div>
                     </div>
 

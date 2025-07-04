@@ -330,8 +330,12 @@ export const useTeethStore = create((set, get) => ({
                 if(state.teethMaterial[tooth] === 'base') {
                     state.teethVisibility[tooth] = !state.teethVisibility[tooth];
                 }
-                state.currentTooth = tooth;
-                // setTimeout(() => document.getElementById(tooth).scrollIntoView({behavior: 'smooth', block:'center'}), 300)
+                if(state.currentTooth === tooth) {
+                    state.currentTooth = null;
+                } else {
+                    state.currentTooth = tooth;
+                }
+                // setTimeout(() => document.getElementById(tooth).scrollIntoView({behavior: 'smooth', block:'start'}), 300)
             }),
         ),
     setDefaultConfig: (config, color) => {

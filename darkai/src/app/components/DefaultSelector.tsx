@@ -2,6 +2,7 @@ import {useTeethStore} from "@/app/stores/teeth";
 import {Box, Tab, Tabs} from "@mui/material";
 import DefaultConfigButton from "@/app/components/DefaultConfigButton";
 import {ReactNode, SyntheticEvent, useState} from "react";
+import DefaultConfigSelector from "@/app/components/DefaultConfigSelector";
 interface TabPanelProps {
     children?: ReactNode;
     index: number;
@@ -20,13 +21,13 @@ export default function DefaultSelector() {
         return (
             <div
                 role="tabpanel"
-                className="w-full bg-stone-200 h-full"
+                className="w-full bg-stone-200 h-[calc(100%-48px-0.2rem)]"
                 hidden={value !== index}
                 id={`simple-tabpanel-${index}`}
                 aria-labelledby={`simple-tab-${index}`}
                 {...other}
             >
-                {value === index && <Box sx={{height: 1, width: 1}}>{children}</Box>}
+                {value === index && <Box sx={{height: 1, width: 1, display:'grid', gridTemplateRows:'80% 10% 10%', gridTemplateColumns:'25% 50% 25%'}}>{children}</Box>}
             </div>
         );
     }
@@ -39,6 +40,7 @@ export default function DefaultSelector() {
                     width: 1,
                     '& .MuiTabs-indicator': {top: 0, backgroundColor: '#030712', height: '0.2rem'},
                     borderBottom: '1px solid #9ca3af',
+                    backgroundColor: '#f9fafb',
                     '& .Mui-selected': {color: '#030712 !important'}
                 }}>
                     <Tab label="Full mouth" sx={{width: 0.2, maxWidth: 1}}/>
@@ -50,54 +52,54 @@ export default function DefaultSelector() {
             </div>
 
             <CustomTabPanel value={value} index={0}>
-                <div className="flex items-center justify-center">
-                    <div className="w-full flex gap-8">
-                        <DefaultConfigButton teeth="full" color="gold"/>
-                        <DefaultConfigButton teeth="full" color="rose"/>
-                        <DefaultConfigButton teeth="full" color="white"/>
-                        <DefaultConfigButton teeth="full" color="diamond"/>
+                <div className="flex items-center justify-center h-full w-full col-start-2 col-end-2 row-start-1 row-end-1">
+                    <div className="w-full flex gap-8 justify-center">
+                        <DefaultConfigSelector teeth="full" color="gold"/>
+                        <DefaultConfigSelector teeth="full" color="rose"/>
+                        <DefaultConfigSelector teeth="full" color="white"/>
+                        <DefaultConfigSelector teeth="full" color="diamond"/>
                     </div>
                 </div>
 
             </CustomTabPanel>
             <CustomTabPanel value={value} index={1}>
-                <div className="flex items-center justify-center">
-                    <div className="w-full flex gap-8">
-                        <DefaultConfigButton teeth="bar" color="gold"/>
-                        <DefaultConfigButton teeth="bar" color="rose"/>
-                        <DefaultConfigButton teeth="bar" color="white"/>
-                        <DefaultConfigButton teeth="bar" color="diamond"/>
+                <div className="flex items-center justify-center h-full w-full col-start-2 col-end-2 row-start-1 row-end-1">
+                    <div className="w-full flex gap-8 justify-center">
+                        <DefaultConfigSelector teeth="bar" color="gold"/>
+                        <DefaultConfigSelector teeth="bar" color="rose"/>
+                        <DefaultConfigSelector teeth="bar" color="white"/>
+                        <DefaultConfigSelector teeth="bar" color="diamond"/>
                     </div>
                 </div>
 
             </CustomTabPanel>
             <CustomTabPanel value={value} index={2}>
-                <div className="flex items-center justify-center">
-                    <div className="w-full flex gap-8">
-                        <DefaultConfigButton teeth="frame" color="gold"/>
-                        <DefaultConfigButton teeth="frame" color="rose"/>
-                        <DefaultConfigButton teeth="frame" color="white"/>
-                        <DefaultConfigButton teeth="frame" color="diamond"/>
+                <div className="flex items-center justify-center h-full w-full col-start-2 col-end-2 row-start-1 row-end-1">
+                    <div className="w-full flex gap-8 justify-center">
+                        <DefaultConfigSelector teeth="frame" color="gold"/>
+                        <DefaultConfigSelector teeth="frame" color="rose"/>
+                        <DefaultConfigSelector teeth="frame" color="white"/>
+                        <DefaultConfigSelector teeth="frame" color="diamond"/>
                     </div>
                 </div>
             </CustomTabPanel>
             <CustomTabPanel value={value} index={3}>
-                <div className="flex items-center justify-center">
-                    <div className="w-full flex gap-8">
-                        <DefaultConfigButton teeth="canines" color="gold"/>
-                        <DefaultConfigButton teeth="canines" color="rose"/>
-                        <DefaultConfigButton teeth="canines" color="white"/>
-                        <DefaultConfigButton teeth="canines" color="diamond"/>
+                <div className="flex items-center justify-center h-full w-full col-start-2 col-end-2 row-start-1 row-end-1">
+                    <div className="w-full flex gap-8 justify-center">
+                        <DefaultConfigSelector teeth="canines" color="gold"/>
+                        <DefaultConfigSelector teeth="canines" color="rose"/>
+                        <DefaultConfigSelector teeth="canines" color="white"/>
+                        <DefaultConfigSelector teeth="canines" color="diamond"/>
                     </div>
                 </div>
             </CustomTabPanel>
             <CustomTabPanel value={value} index={4}>
-                <div className="flex items-center justify-center">
-                    <div className="w-full flex gap-8">
-                        <DefaultConfigButton teeth="stones" color="gold"/>
-                        <DefaultConfigButton teeth="stones" color="rose"/>
-                        <DefaultConfigButton teeth="stones" color="white"/>
-                        <DefaultConfigButton teeth="stones" color="diamond"/>
+                <div className="flex items-center justify-center h-full w-full col-start-2 col-end-2 row-start-1 row-end-1">
+                    <div className="w-full flex gap-8 justify-center">
+                        <DefaultConfigSelector teeth="stones" color="gold"/>
+                        <DefaultConfigSelector teeth="stones" color="rose"/>
+                        <DefaultConfigSelector teeth="stones" color="white"/>
+                        <DefaultConfigSelector teeth="stones" color="diamond"/>
                     </div>
                 </div>
             </CustomTabPanel>

@@ -1,0 +1,11 @@
+import {useTeethStore} from "@/app/stores/teeth";
+import SelectorButtonPill from "@/app/components/SelectorButtonPill";
+
+export default function DiamondTogglerPill({tooth, onclick, active}) {
+    const material = useTeethStore((state) => state.teethMaterial[tooth]);
+    console.log('ouch');
+
+    return (
+        <SelectorButtonPill click={onclick} disabled={material === 'base'} selection="diamond" active={active}/>
+    )
+}

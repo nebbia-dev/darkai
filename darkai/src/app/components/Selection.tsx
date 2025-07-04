@@ -4,6 +4,7 @@ import {Box, Tab, Tabs} from "@mui/material";
 import DefaultConfig from "@/app/components/DefaultConfig";
 import ToothSelector from "@/app/components/ToothSelector";
 import DefaultSelector from "@/app/components/DefaultSelector";
+import {useTeethStore} from "@/app/stores/teeth";
 
 interface TabPanelProps {
     children?: ReactNode;
@@ -13,6 +14,7 @@ interface TabPanelProps {
 
 export default function Selection({ui}) {
     const [value, setValue] = useState<number>(0);
+    const activeTooth = useTeethStore((state) => state.currentTooth);
     const changeTab = (event: SyntheticEvent, newValue: number) => {
         setValue(newValue);
     };
@@ -23,7 +25,7 @@ export default function Selection({ui}) {
         return (
             <div
                 role="tabpanel"
-                className={`w-full ${ui ? 'bg-stone-200 h-[calc(100%-48px-0.2rem)]' : ''}`}
+                className={`w-full ${ui ? 'bg-stone-200 h-full' : ''}`}
                 hidden={value !== index}
                 id={`simple-tabpanel-${index}`}
                 aria-labelledby={`simple-tab-${index}`}
@@ -100,27 +102,52 @@ export default function Selection({ui}) {
                         </Tabs>
 
                     <CustomTabPanel value={value} index={0}>
-                        <div
-                            className="w-full h-[calc(100vh-54px-48px-0.2rem)] flex flex-col align-center justify-start text-center bg-gray-50 my-auto rounded text-black">
-                            <DefaultSelector/>
-                        </div>
+                        <DefaultSelector/>
                     </CustomTabPanel>
-                    <CustomTabPanel value={value} index={1}>
-                        {/*DENTI SUPERIORI*/}
-                        <ToothSelector tooth='icsdx'/>
-                        <ToothSelector tooth='icssx'/>
-                        <ToothSelector tooth='ilsdx'/>
-                        <ToothSelector tooth='ilssx'/>
-                        <ToothSelector tooth='csdx'/>
-                        <ToothSelector tooth='cssx'/>
-                        {/*DENTI INFERIORI*/}
-                        <ToothSelector tooth='icidx'/>
-                        <ToothSelector tooth='icisx'/>
-                        <ToothSelector tooth='ilidx'/>
-                        <ToothSelector tooth='ilisx'/>
-                        <ToothSelector tooth='cidx'/>
-                        <ToothSelector tooth='cisx'/>
-                    </CustomTabPanel>
+                        <>
+                            {!activeTooth
+                                ? <CustomTabPanel value={value} index={1}>
+                                    <div className="w-full">
+                                        <Tabs
+                                            value={0} aria-label="tabs" sx={{
+                                            width: 1,
+                                            '& .MuiTabs-indicator': {
+                                                top: 0,
+                                                backgroundColor: '#030712',
+                                                height: '0.2rem'
+                                            },
+                                            borderBottom: '1px solid #9ca3af',
+                                            backgroundColor: '#f9fafb',
+                                            '& .Mui-selected': {color: '#030712 !important'}
+                                        }}>
+                                            <Tab sx={{width: 1, maxWidth: 1}}/>
+                                        </Tabs>
+                                    </div>
+                                    <Box sx={{height: 'calc(100% - 48px - 0.2rem)', display:'grid', gridTemplateRows:'80% 10% 10%', gridTemplateColumns:'25% 50% 25%'}}>
+                                        <div className="w-full h-full bg-stone-200 flex flex-col items-center justify-center my-auto rounded text-black col-start-2 col-end-2 row-start-1 row-end-1">
+                                            <p>Prima scegli un dente</p>
+                                        </div>
+                                    </Box>
+                                </CustomTabPanel>
+
+                                : <CustomTabPanel value={value} index={1}>
+                                        {/*DENTI SUPERIORI*/}
+                                        <ToothSelector tooth='icsdx'/>
+                                        <ToothSelector tooth='icssx'/>
+                                        <ToothSelector tooth='ilsdx'/>
+                                        <ToothSelector tooth='ilssx'/>
+                                        <ToothSelector tooth='csdx'/>
+                                        <ToothSelector tooth='cssx'/>
+                                        {/*DENTI INFERIORI*/}
+                                        <ToothSelector tooth='icidx'/>
+                                        <ToothSelector tooth='icisx'/>
+                                        <ToothSelector tooth='ilidx'/>
+                                        <ToothSelector tooth='ilisx'/>
+                                        <ToothSelector tooth='cidx'/>
+                                        <ToothSelector tooth='cisx'/>
+                                    </CustomTabPanel>
+                            }
+                        </>
                     </Box>
                 </div>
             }

@@ -1,6 +1,6 @@
 import {useTeethStore} from "@/app/stores/teeth";
 
-export default function DefaultConfigButton({teeth, color}) {
+export default function DefaultConfigSelector({teeth, color}) {
     const setDefaultConfig = useTeethStore((state) => state.setDefaultConfig);
     const activeDefault = useTeethStore((state) => state.activeDefault);
     const setActiveDefault = useTeethStore((state) => state.setActiveDefault);
@@ -13,10 +13,9 @@ export default function DefaultConfigButton({teeth, color}) {
         return setDefaultConfig(teeth, color);
     }
     return(
-        <div>
-            <button className={`${activeDefault === teeth + color ? 'bg-stone-400' : 'bg-stone-200'} max-w-[300px] rounded-2xl p-4`} onClick={setConfig}>
-                <img src={`/default/${teeth}${color === 'gold' ? 'Y' : color === 'rose' ? 'R' : color === 'white' ? 'W' : 'Diamond'}.webp`} alt={`${teeth} ${color}`}/>
+            <button className={`${activeDefault === teeth + color ? 'bg-gray-950 text-gray-50' : 'bg-gray-50 text-gray-950'} min-w-[200px] rounded-full py-1 pl-1 pr-3 flex items-center justify-between`} onClick={setConfig}>
+                <span className={`${color === 'gold' ? 'bg-yellow-200' : color === 'rose' ? 'bg-pink-200' : color === 'white' ? 'bg-zinc-200' : 'bg-orange-200'} inline-block w-8 h-8 rounded-full`}></span>
+                {color[0].toUpperCase() + color.slice(1)}
             </button>
-        </div>
     )
 }
