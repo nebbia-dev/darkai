@@ -90,18 +90,17 @@ export default function Selection({ui}) {
                 : <div className="w-full h-full">
                     <Box sx={{display:'flex', height: 1}}>
                         <Tabs
-                            orientation={`${!ui ? 'horizontal' : 'vertical'}`}
+                            orientation="vertical"
                             value={value} onChange={changeTab} aria-label="tabs" sx={{
                             width: 0.2,
-                            '& .MuiTabs-indicator': {left: 50, backgroundColor: '#030712', height: '0.2rem'},
-                            height: 1,
-                            paddingTop: '0.2rem',
+                            '& .MuiTabs-indicator': {left:10, backgroundColor: '#030712', height: '0.2rem'},
                             borderTop: '1px solid #9ca3af',
                             borderRight: '1px solid #9ca3af',
-                            '& .Mui-selected': {color: '#030712 !important'}
+                            '& .Mui-selected': {color: '#030712 !important'},
+                            '& .css-1ondbrm-MuiTabs-list': {height: 1}
                         }}>
-                            <Tab label="DEFAULT" sx={{width: 1}}/>
-                            <Tab label="CUSTOM" sx={{width: 1}}/>
+                            <Tab label="DEFAULT" sx={{width: 1, height: 0.5}}/>
+                            <Tab label="CUSTOM" sx={{width: 1, height: 0.5}}/>
                         </Tabs>
 
                     <CustomTabPanel value={value} index={0}>

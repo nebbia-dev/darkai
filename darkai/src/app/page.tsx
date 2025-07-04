@@ -5,6 +5,7 @@ import {Suspense, useState} from "react";
 import Loading from "@/app/components/Loading";
 import ActionBar from "@/app/components/ActionBar";
 import {useTeethStore} from "@/app/stores/teeth";
+import TeethMap from "@/app/components/TeethMap";
 
 export default function Home() {
     const ui = useTeethStore((state) => state.ui);
@@ -16,6 +17,7 @@ export default function Home() {
                   <div className={`${!ui ? 'w-[50vw] h-[calc(100vh-54px)]' : 'w-full h-[70vh]'}`}>
                       <Scene/>
                       <ActionBar ui={ui}/>
+                      {ui && <TeethMap/>}
                   </div>
                   <div className={`${!ui ? 'w-[50vw] h-[calc(100vh-54px)]' : 'w-full h-[calc(30vh-54px)]'}`}>
                       <Selection ui={ui}/>
