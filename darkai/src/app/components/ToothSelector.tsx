@@ -19,19 +19,15 @@ export default function ToothSelector({tooth}) {
     const material = useTeethStore((state) => state.teethMaterial[tooth]);
     const stones = useTeethStore((state) => state.teethStones[tooth]);
     const visible = useTeethStore((state) => state.teethVisibility[tooth]);
-    const availableTypes = useTeethStore((state) => state.teethTypeOptions);
     const changeJewelType = useTeethStore((state) => state.setType);
     const changeMaterial = useTeethStore((state) => state.setMaterial);
     const toggleDiamond = useTeethStore((state) => state.setDiamond);
     const changeStone = useTeethStore((state) => state.setStone);
-    const copy = useTeethStore((state) => state.setCopy);
     const setActiveDefault = useTeethStore((state) => state.setActiveDefault);
-    const [showCopy, setShowCopy] = useState<boolean>(false);
 
 
     function selectType(type) {
         setActiveDefault(null, null);
-        setShowCopy(false);
         changeJewelType(tooth, type);
     }
 
@@ -51,10 +47,6 @@ export default function ToothSelector({tooth}) {
         setValue(newValue);
     };
 
-    function setCopy(newTooth, oldTooth) {
-        copy(newTooth, oldTooth);
-        setShowCopy(false);
-    }
     function CustomTabPanel(props: TabPanelProps) {
         const { children, value, index, ...other } = props;
 
@@ -72,9 +64,7 @@ export default function ToothSelector({tooth}) {
         );
     }
     return(
-        // <button className={`${active ? 'bg-gray-50' : ''} p-[1rem] rounded-full cursor-pointer w-full`} onClick={click}>
-        //     {tooth}
-        // </button>
+
         <div className={`${activeTooth === tooth ? 'block h-full' : 'hidden'}`}>
             <div className="w-full">
                 <Tabs
@@ -93,31 +83,31 @@ export default function ToothSelector({tooth}) {
             </div>
 
             <CustomTabPanel value={value} index={0}>
-                <div className={`${visible && material !== 'base' ? 'flex' : 'hidden'} relative items-center justify-center col-start-1 col-end-1 row-start-1 row-end-1`}>
-                    <button className=" rounded-full border p-2 cursor-pointer w-fit"
-                            onClick={() => setShowCopy((prev) => !prev)}>
-                        <Copy className="w-8 h-8"/>
-                    </button>
-                    <div
-                        className={`${showCopy && availableTypes[jewelType] ? 'block' : 'hidden'} absolute border p-4 rounded mt-2 bg-gray-50 z-10 top-[-75%] max-h-[100px] overflow-y-auto`}>
-                        <ul>
-                            {availableTypes[jewelType] && availableTypes[(stones ? 'stones' : jewelType)].map((data, i) => {
-                                const opt = elabToothName(data, false);
+                {/*<div className={`${visible && material !== 'base' ? 'flex' : 'hidden'} relative items-center justify-center col-start-1 col-end-1 row-start-1 row-end-1`}>*/}
+                {/*    <button className=" rounded-full border p-2 cursor-pointer w-fit"*/}
+                {/*            onClick={() => setShowCopy((prev) => !prev)}>*/}
+                {/*        <Copy className="w-8 h-8"/>*/}
+                {/*    </button>*/}
+                {/*    <div*/}
+                {/*        className={`${showCopy && availableTypes[jewelType] ? 'block' : 'hidden'} absolute border p-4 rounded mt-2 bg-gray-50 z-10 top-[-75%] max-h-[100px] overflow-y-auto`}>*/}
+                {/*        <ul>*/}
+                {/*            {availableTypes[jewelType] && availableTypes[(stones ? 'stones' : jewelType)].map((data, i) => {*/}
+                {/*                const opt = elabToothName(data, false);*/}
 
-                                return (
-                                    <li key={data + tooth + i}>
-                                        {data !== tooth &&
-                                            <button onClick={() => setCopy(data, tooth)}>
-                                                {opt}
-                                            </button>
-                                        }
-                                    </li>
-                                )
-                            })
-                            }
-                        </ul>
-                    </div>
-                </div>
+                {/*                return (*/}
+                {/*                    <li key={data + tooth + i}>*/}
+                {/*                        {data !== tooth &&*/}
+                {/*                            <button onClick={() => setCopy(data, tooth)}>*/}
+                {/*                                {opt}*/}
+                {/*                            </button>*/}
+                {/*                        }*/}
+                {/*                    </li>*/}
+                {/*                )*/}
+                {/*            })*/}
+                {/*            }*/}
+                {/*        </ul>*/}
+                {/*    </div>*/}
+                {/*</div>*/}
                 <div className="flex items-center justify-center gap-8 col-start-2 col-end-2 row-start-1 row-end-1">
                     <div className="flex gap-2">
                         <SelectorButtonPill adjust={true} click={() => selectType('full')}

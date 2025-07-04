@@ -65,15 +65,18 @@ export default function ToothConfig({tooth}) {
                             <Copy className="w-8 h-8"/>
                         </button>
                         <div
-                            className={`${showCopy && availableTypes[jewelType] ? 'block' : 'hidden'} border p-4 rounded mt-2`}>
-                            <ul>
+                            className={`${showCopy && availableTypes[jewelType] ? 'block' : 'hidden'} border bg-gray-50 rounded mt-2`}>
+                            <h3 className="bg-gray-950 p-4 text-gray-50">Copia su...</h3>
+                            <ul className="pb-2">
                                 {availableTypes[jewelType] && availableTypes[(stones ? 'stones' : jewelType)].map((data, i) => {
                                     const opt = elabToothName(data, false);
 
                                     return (
-                                        <li key={data + tooth + i}>
+                                        <li className="hover:bg-stone-200 hover:rounded px-4 py-1"
+                                            key={data + tooth + i}>
                                             {data !== tooth &&
-                                                <button onClick={() => setCopy(data, tooth)}>
+                                                <button className="cursor-pointer"
+                                                        onClick={() => setCopy(data, tooth)}>
                                                     {opt}
                                                 </button>
                                             }

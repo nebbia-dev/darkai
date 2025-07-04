@@ -25,6 +25,6 @@ export default function Dentiera() {
         envMap: envMap
     });
     fbx.children[0].material = dentieraMaterial;
-    console.log('dentiera');
+    console.log('dentiera: ', fbx);
     return <primitive object={fbx}/>
 }
