@@ -10,7 +10,7 @@ export default function IciSx() {
     const toothJewelType = useTeethStore((state) => state.teethJewelType.icisx);
     const toothMaterial = useTeethStore((state) => state.teethMaterial.icisx);
     const toothVisibility = useTeethStore((state) => state.teethVisibility.icisx);
-    const toggleVisibility = useTeethStore((state) => state.setVisibility);
+
     const ICISX = memo(({visible, type, mat} : {visible: boolean, type: string, mat: string}): JSX.Element => {
         let geometry, material;
         switch(type) {
@@ -32,14 +32,14 @@ export default function IciSx() {
                     <mesh geometry={geometry[0]} visible={visible}>
                         {material[0]}
                     </mesh>
-                    <mesh geometry={geometry[1]} visible={visible} onClick={() => toggleVisibility('icisx')}>
+                    <mesh geometry={geometry[1]} visible={visible}>
                         {material[1]}
                     </mesh>
                 </>
             )
         }
         return (
-            <mesh geometry={geometry[0]} onClick={() => toggleVisibility('icisx')} visible={visible}>
+            <mesh geometry={geometry[0]} visible={visible}>
                 {material[0]}
             </mesh>
         )

@@ -5,6 +5,7 @@ export default function StoneSelector({tooth, stone, onclick, active}) {
     const type = useTeethStore((state) => state.teethJewelType[tooth]);
     const material = useTeethStore((state) => state.teethMaterial[tooth]);
     const disabled = type === 'frame' || type === 'bar' || type === 'barDiamond' || type === 'bigBar' || type === 'bigBarDiamond' || material === 'base'
+    console.log('oops')
     return (
         <SelectorButton click={onclick} disabled={disabled} selection={stone} active={active}/>
     )

@@ -12,29 +12,29 @@ export default function IlsSx() {
     const toothJewelType = useTeethStore((state) => state.teethJewelType.ilssx);
     const toothMaterial = useTeethStore((state) => state.teethMaterial.ilssx);
     const toothVisibility = useTeethStore((state) => state.teethVisibility.ilssx);
-    const toggleVisibility = useTeethStore((state) => state.setVisibility);
+
     const ILSSX = memo(({visible, type, mat} : {visible: boolean, type: string, mat: string}): JSX.Element => {
         let geometry, material;
         switch(type) {
             case 'full':
                 geometry = [toothGeometry.full];
-                material = [<FullMaterial color={toothMaterial}/>]
+                material = [<FullMaterial color={mat}/>]
                 break;
             case 'fullDiamond':
                 geometry = [toothGeometry.fullDiamond.base, toothGeometry.fullDiamond.full];
-                material = [<BaseFullDiamond color={toothMaterial}/>, <FullDiamond color={toothMaterial}/>]
+                material = [<BaseFullDiamond color={mat}/>, <FullDiamond color={mat}/>]
                 break;
             case 'bar':
                 geometry = [toothGeometry.bar.full.left, toothGeometry.bar.full.right];
-                material = [<BarSmall color={toothMaterial}/>, <BarSmall color={toothMaterial}/>]
+                material = [<BarSmall color={mat}/>, <BarSmall color={mat}/>]
                 break;
             case 'barDiamond':
                 geometry = [toothGeometry.bar.diamond.left.base, toothGeometry.bar.diamond.right.base, toothGeometry.bar.diamond.left.full, toothGeometry.bar.diamond.right.full];
-                material = [<BarSmall color={toothMaterial}/>, <BarSmall color={toothMaterial}/>, <BarDiamond color={toothMaterial}/>]
+                material = [<BarSmall color={mat}/>, <BarSmall color={mat}/>, <BarDiamond color={mat}/>]
                 break;
             default:
                 geometry = [toothGeometry.full];
-                material = [<FullMaterial color={toothMaterial}/>]
+                material = [<FullMaterial color={mat}/>]
         }
         if(geometry.length === 2) {
             return (
@@ -42,7 +42,7 @@ export default function IlsSx() {
                     <mesh geometry={geometry[0]} visible={visible}>
                         {material[0]}
                     </mesh>
-                    <mesh geometry={geometry[1]} visible={visible} onClick={() => toggleVisibility('ilssx')}>
+                    <mesh geometry={geometry[1]} visible={visible}>
                         {material[1]}
                     </mesh>
                 </>
@@ -51,23 +51,23 @@ export default function IlsSx() {
         if(geometry.length === 4) {
             return (
                 <>
-                    <mesh geometry={geometry[0]} visible={visible} onClick={() => toggleVisibility('ilssx')}>
+                    <mesh geometry={geometry[0]} visible={visible}>
                         {material[0]}
                     </mesh>
-                    <mesh geometry={geometry[1]} visible={visible} onClick={() => toggleVisibility('ilssx')}>
+                    <mesh geometry={geometry[1]} visible={visible}>
                         {material[1]}
                     </mesh>
-                    <mesh geometry={geometry[2]} visible={visible} onClick={() => toggleVisibility('ilssx')}>
+                    <mesh geometry={geometry[2]} visible={visible}>
                         {material[2]}
                     </mesh>
-                    <mesh geometry={geometry[3]} visible={visible} onClick={() => toggleVisibility('ilssx')}>
+                    <mesh geometry={geometry[3]} visible={visible}>
                         {material[2]}
                     </mesh>
                 </>
             )
         }
         return (
-            <mesh geometry={geometry[0]} onClick={() => toggleVisibility('ilssx')} visible={visible}>
+            <mesh geometry={geometry[0]} visible={visible}>
                 {material[0]}
             </mesh>
         )

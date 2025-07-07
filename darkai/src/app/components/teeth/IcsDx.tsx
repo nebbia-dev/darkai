@@ -10,7 +10,7 @@ export default function IcsDx() {
     const toothJewelType = useTeethStore((state) => state.teethJewelType.icsdx);
     const toothMaterial = useTeethStore((state) => state.teethMaterial.icsdx);
     const toothVisibility = useTeethStore((state) => state.teethVisibility.icsdx);
-    const toggleVisibility = useTeethStore((state) => state.setVisibility);
+
     const ICSDX = memo(({visible, type, mat} : {visible: boolean, type: string, mat: string}): JSX.Element => {
         let geometry, material;
         switch(type) {
@@ -32,14 +32,14 @@ export default function IcsDx() {
                     <mesh geometry={geometry[0]} visible={visible}>
                         {material[0]}
                     </mesh>
-                    <mesh geometry={geometry[1]} visible={visible} onClick={() => toggleVisibility('icsdx')}>
+                    <mesh geometry={geometry[1]} visible={visible}>
                         {material[1]}
                     </mesh>
                 </>
             )
         }
         return (
-            <mesh geometry={geometry[0]} onClick={() => toggleVisibility('icsdx')} visible={visible}>
+            <mesh geometry={geometry[0]} visible={visible}>
                 {material[0]}
             </mesh>
         )

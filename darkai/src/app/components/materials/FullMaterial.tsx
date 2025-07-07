@@ -37,7 +37,9 @@ export default function FullMaterial({color}) {
             metalness = {color !== 'base' ? 1 : 0}
             roughness = {color !== 'base' ? 0.5 : 1}
             envMap = {envMap}
-            color={color !== 'base' ? '' : 'grey'}
+            color={color !== 'base' ? '' : 'white'}
+            transparent={color === 'base'}
+            opacity={color !== 'base' ? 1 : 0}
             onUpdate={(self) => (self.needsUpdate = true)}
             attach='material'
         />)

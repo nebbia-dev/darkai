@@ -12,7 +12,7 @@ export default function IlsDx() {
     const toothJewelType = useTeethStore((state) => state.teethJewelType.ilsdx);
     const toothMaterial = useTeethStore((state) => state.teethMaterial.ilsdx);
     const toothVisibility = useTeethStore((state) => state.teethVisibility.ilsdx);
-    const toggleVisibility = useTeethStore((state) => state.setVisibility);
+
     const ILSDX = memo(({visible, type, mat} : {visible: boolean, type: string, mat: string}): JSX.Element => {
         let geometry, material;
         switch(type) {
@@ -42,7 +42,7 @@ export default function IlsDx() {
                     <mesh geometry={geometry[0]} visible={visible}>
                         {material[0]}
                     </mesh>
-                    <mesh geometry={geometry[1]} visible={visible} onClick={() => toggleVisibility('ilsdx')}>
+                    <mesh geometry={geometry[1]} visible={visible}>
                         {material[1]}
                     </mesh>
                 </>
@@ -51,23 +51,23 @@ export default function IlsDx() {
         if(geometry.length === 4) {
             return (
                 <>
-                    <mesh geometry={geometry[0]} visible={visible} onClick={() => toggleVisibility('ilsdx')}>
+                    <mesh geometry={geometry[0]} visible={visible}>
                         {material[0]}
                     </mesh>
-                    <mesh geometry={geometry[1]} visible={visible} onClick={() => toggleVisibility('ilsdx')}>
+                    <mesh geometry={geometry[1]} visible={visible}>
                         {material[1]}
                     </mesh>
-                    <mesh geometry={geometry[2]} visible={visible} onClick={() => toggleVisibility('ilsdx')}>
+                    <mesh geometry={geometry[2]} visible={visible}>
                         {material[2]}
                     </mesh>
-                    <mesh geometry={geometry[3]} visible={visible} onClick={() => toggleVisibility('ilsdx')}>
+                    <mesh geometry={geometry[3]} visible={visible}>
                         {material[2]}
                     </mesh>
                 </>
             )
         }
         return (
-            <mesh geometry={geometry[0]} onClick={() => toggleVisibility('ilsdx')} visible={visible}>
+            <mesh geometry={geometry[0]} visible={visible}>
                 {material[0]}
             </mesh>
         )
