@@ -13,10 +13,11 @@ interface TabPanelProps {
 }
 
 export default function Selection({ui}) {
-    const [value, setValue] = useState<number>(0);
     const activeTooth = useTeethStore((state) => state.currentTooth);
+    const activeTab = useTeethStore((state) => state.activeTab);
+    const setActiveTab = useTeethStore((state) => state.setActiveTab);
     const changeTab = (event: SyntheticEvent, newValue: number) => {
-        setValue(newValue);
+        setActiveTab(newValue);
     };
 
     function CustomTabPanel(props: TabPanelProps) {
@@ -43,7 +44,7 @@ export default function Selection({ui}) {
                 ? <div className="border-l-1 border-gray-400">
                     <div>
                         <Tabs
-                            value={value} onChange={changeTab} aria-label="tabs" sx={{
+                            value={activeTab} onChange={changeTab} aria-label="tabs" sx={{
                             width: 1,
                             '& .MuiTabs-indicator': {top: 0, backgroundColor: '#030712', height: '0.2rem'},
                             borderBottom: '1px solid #9ca3af',
@@ -53,7 +54,7 @@ export default function Selection({ui}) {
                             <Tab label="CUSTOM" sx={{width: 0.5, maxWidth: 1}}/>
                         </Tabs>
                     </div>
-                    <CustomTabPanel value={value} index={0}>
+                    <CustomTabPanel value={activeTab} index={0}>
                         <div
                             className="w-full h-[calc(100vh-54px-48px-0.2rem)] flex flex-col align-center justify-start text-center bg-gray-50 my-auto rounded text-black">
                             <div className="overflow-y-auto">
@@ -65,7 +66,7 @@ export default function Selection({ui}) {
                             </div>
                         </div>
                     </CustomTabPanel>
-                    <CustomTabPanel value={value} index={1}>
+                    <CustomTabPanel value={activeTab} index={1}>
                         <div
                             className="w-full h-[calc(100vh-54px-48px-0.2rem)] flex flex-col align-center justify-start text-center bg-gray-50 my-auto rounded text-black">
                             <div className="overflow-y-auto">
@@ -91,7 +92,7 @@ export default function Selection({ui}) {
                     <Box sx={{display:'flex', height: 1}}>
                         <Tabs
                             orientation="vertical"
-                            value={value} onChange={changeTab} aria-label="tabs" sx={{
+                            value={activeTab} onChange={changeTab} aria-label="tabs" sx={{
                             width: 0.2,
                             '& .MuiTabs-indicator': {left:10, backgroundColor: '#030712', height: '0.2rem'},
                             borderTop: '1px solid #9ca3af',
@@ -103,12 +104,12 @@ export default function Selection({ui}) {
                             <Tab label="CUSTOM" sx={{width: 1, height: 0.5}}/>
                         </Tabs>
 
-                    <CustomTabPanel value={value} index={0}>
+                    <CustomTabPanel value={activeTab} index={0}>
                         <DefaultSelector/>
                     </CustomTabPanel>
                         <>
                             {!activeTooth
-                                ? <CustomTabPanel value={value} index={1}>
+                                ? <CustomTabPanel value={activeTab} index={1}>
                                     <div className="w-full">
                                         <Tabs
                                             value={0} aria-label="tabs" sx={{
@@ -132,7 +133,7 @@ export default function Selection({ui}) {
                                     </Box>
                                 </CustomTabPanel>
 
-                                : <CustomTabPanel value={value} index={1}>
+                                : <CustomTabPanel value={activeTab} index={1}>
                                         {/*DENTI SUPERIORI*/}
                                         <ToothSelector tooth='icsdx'/>
                                         <ToothSelector tooth='icssx'/>

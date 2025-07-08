@@ -66,6 +66,8 @@ export const useTeethStore = create((set, get) => ({
         frameDiamond: ['csdx', 'cssx', 'cidx', 'cisx'],
         stones: ['csdx', 'cssx', 'cidx', 'cisx']
     },
+    activeTab: 0,
+    setActiveTab: (value) => set(() => ({activeTab: value})),
     setEnvMap: (em) => {
         set({envMap: em})
     },
@@ -102,6 +104,7 @@ export const useTeethStore = create((set, get) => ({
                 console.log(state.history, state.currentHistory)
             }),
         ),
+    // SETTARE IL TIPO ATTIVA/DISATTIVA LA VISIBILITA', MA NON CAMBIA L'ACTIVE TOOTH
     setType: (tooth, type) =>
         set(
             produce((state) => {
@@ -322,9 +325,13 @@ export const useTeethStore = create((set, get) => ({
                 ];
             }),
         ),
+    // SEPARARE L'ACTIVE TOOTH DALLA VISIBILITA'
     setVisibility: (tooth) =>
         set(
             produce((state) => {
+                if(state.activeTab === 0) {
+                    state.activeTab = 1;
+                }
                 if(state.currentTooth !== tooth && state.teethMaterial[state.currentTooth] === 'base') {
                     state.teethVisibility[state.currentTooth] = false;
                 }

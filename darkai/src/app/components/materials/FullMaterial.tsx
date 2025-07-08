@@ -38,6 +38,7 @@ export default function FullMaterial({color}) {
             roughness = {color !== 'base' ? 0.5 : 1}
             envMap = {envMap}
             color={color !== 'base' ? '' : 'white'}
+            {/*NO TRASPARENZA, IL COLORE BASE E' GRIGIO OPACO*/}
             transparent={color === 'base'}
             opacity={color !== 'base' ? 1 : 0}
             onUpdate={(self) => (self.needsUpdate = true)}
