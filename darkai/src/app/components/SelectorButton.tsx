@@ -4,8 +4,8 @@ export default function SelectorButton({click, disabled, selection, adjust, acti
                 onClick={click}
                 disabled={disabled}
         >
-            <img src={`/png/${selection}.png`} alt={`${selection} texture`} className={`${adjust ? 'rounded-2xl w-[103px] h-[84px] object-cover' : ''}`}/>
-            <span className="pt-2 inline-block">{selection[0].toUpperCase() + selection.slice(1)}</span>
+            <img src={`/png/${selection}.png`} alt={`${selection} texture`} className={`${adjust ? 'rounded-2xl w-[103px] h-[84px] object-cover' : ''} ${disabled ? 'opacity-50' : ''}`}/>
+            <span className={`pt-2 inline-block ${disabled ? 'text-stone-400' : 'text-gray-950'}`}>{selection[0].toUpperCase() + selection.slice(1)}</span>
         </button>
     )
 }

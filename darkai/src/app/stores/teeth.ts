@@ -93,6 +93,8 @@ export const useTeethStore = create((set, get) => ({
                         state.teethVisibility[tooth] = true;
                     }
                 }
+                state.currentTooth = tooth;
+
                 state.history = [...state.history,
                     [{
                         type: state.teethJewelType,
@@ -101,6 +103,14 @@ export const useTeethStore = create((set, get) => ({
                         visible: state.teethVisibility
                     }]
                 ];
+
+                if(!state.ui){
+                    setTimeout(() => document.getElementById(tooth).scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    }), 300)
+                }
+
                 console.log(state.history, state.currentHistory)
             }),
         ),
@@ -122,6 +132,7 @@ export const useTeethStore = create((set, get) => ({
                     || state.teethJewelType[tooth] === type
                 )) {
                         if(type === 'bigBar') {
+                            state.currentTooth = tooth;
                             state.teethVisibility.cidx = false;
                             state.teethVisibility.cisx = false;
                             state.teethJewelType.cidx = 'full';
@@ -132,7 +143,7 @@ export const useTeethStore = create((set, get) => ({
                             state.history = [...state.history,
                                 [{
                                     type: state.teethJewelType,
-                                    material: state.teethJewelType,
+                                    material: state.teethMaterial,
                                     stones: state.teethStones,
                                     visible: state.teethVisibility
                                 }]
@@ -148,7 +159,7 @@ export const useTeethStore = create((set, get) => ({
                         state.history = [...state.history,
                             [{
                                 type: state.teethJewelType,
-                                material: state.teethJewelType,
+                                material: state.teethMaterial,
                                 stones: state.teethStones,
                                 visible: state.teethVisibility
                             }]
@@ -192,17 +203,18 @@ export const useTeethStore = create((set, get) => ({
 
                 if(type === 'bigBar' || type === 'bigBarDiamond') {
 
+                    state.currentTooth = tooth;
                     state.teethJewelType.cidx = type;
                     state.teethJewelType.cisx = type;
+                    state.teethVisibility.cidx = true;
+                    state.teethVisibility.cisx = true;
                     state.teethStones.cidx = null;
                     state.teethStones.cisx = null;
-                    if(!state.teethVisibility.cidx) {
-                        state.teethVisibility.cidx = true;
-                        state.teethMaterial.cidx = 'gold';
+                    if(tooth === 'cidx') {
+                        state.teethMaterial.cisx = state.teethMaterial.cidx;
                     }
-                    if(!state.teethVisibility.cisx) {
-                        state.teethVisibility.cisx = true;
-                        state.teethMaterial.cisx = 'gold';
+                    if(tooth === 'cisx') {
+                        state.teethMaterial.cidx = state.teethMaterial.cisx;
                     }
 
                 } else {
@@ -229,10 +241,13 @@ export const useTeethStore = create((set, get) => ({
                                 state.teethMaterial.cidx = 'base';
                                 break;
                         }
+                        state.currentTooth = tooth;
                     } else {
+                        state.teethVisibility[tooth] = true;
                         state.teethJewelType[tooth] = type;
 
                         if(!state.teethVisibility[tooth]) {
+                            state.currentTooth = tooth;
                             state.teethVisibility[tooth] = true;
                             state.teethMaterial[tooth] = 'gold';
 
@@ -243,6 +258,14 @@ export const useTeethStore = create((set, get) => ({
                         }
                     }
                 }
+
+                if(!state.ui){
+                    setTimeout(() => document.getElementById(tooth).scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    }), 300)
+                }
+
                 state.history = [...state.history,
                     [{
                         type: state.teethJewelType,
@@ -325,31 +348,27 @@ export const useTeethStore = create((set, get) => ({
                 ];
             }),
         ),
-    // SEPARARE L'ACTIVE TOOTH DALLA VISIBILITA'
-    setVisibility: (tooth) =>
+    setActiveTooth: (tooth) =>
         set(
             produce((state) => {
                 if(state.activeTab === 0) {
                     state.activeTab = 1;
                 }
-                if(state.currentTooth !== tooth && state.teethMaterial[state.currentTooth] === 'base') {
-                    state.teethVisibility[state.currentTooth] = false;
-                }
-                if(state.teethMaterial[tooth] === 'base') {
-                    state.teethVisibility[tooth] = !state.teethVisibility[tooth];
-                }
+
                 if(state.currentTooth === tooth) {
                     state.currentTooth = null;
                 } else {
                     state.currentTooth = tooth;
                 }
+
                 if(!state.ui){
                     setTimeout(() => document.getElementById(tooth).scrollIntoView({
                         behavior: 'smooth',
                         block: 'start'
                     }), 300)
                 }
-            }),
+
+            })
         ),
     setDefaultConfig: (config, color) => {
         get().reset();

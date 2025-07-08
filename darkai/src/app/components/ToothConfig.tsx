@@ -13,6 +13,7 @@ export default function ToothConfig({tooth}) {
     const material = useTeethStore((state) => state.teethMaterial[tooth]);
     const stones = useTeethStore((state) => state.teethStones[tooth]);
     const visible = useTeethStore((state) => state.teethVisibility[tooth]);
+    const activeTooth = useTeethStore((state) => state.currentTooth);
     const availableTypes = useTeethStore((state) => state.teethTypeOptions);
     const changeJewelType = useTeethStore((state) => state.setType);
     const changeMaterial = useTeethStore((state) => state.setMaterial);
@@ -52,8 +53,7 @@ export default function ToothConfig({tooth}) {
 
     return (
         <Accordion elevation={0} sx={{backgroundColor: '#f9fafb', '&:before': {height: '0px'}}}
-                   {/*E' ESPANSO SE COINCIDE L'ACTIVE TOOTH, NON SE IL DENTE E' VISIBILE*/}
-                   expanded={visible || expanded}>
+                   expanded={activeTooth === tooth || expanded}>
             <AccordionSummary expandIcon={<ExpandMoreIcon/>} sx={{height: '100px', borderTop: firstChild, px: 8}}
                               onClick={() => setExpanded((prev) => !prev)} id={tooth}>
                 {title}
@@ -154,3 +154,4 @@ export default function ToothConfig({tooth}) {
         </Accordion>
     )
 }
+{/*E' ESPANSO SE COINCIDE L'ACTIVE TOOTH, NON SE IL DENTE E' VISIBILE*/}
