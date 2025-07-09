@@ -6,6 +6,6 @@ export default function StoneSelectorPill({tooth, stone, onclick, active}) {
     const material = useTeethStore((state) => state.teethMaterial[tooth]);
     const disabled = type === 'frame' || type === 'bar' || type === 'barDiamond' || type === 'bigBar' || type === 'bigBarDiamond' || material === 'base'
     return (
-        <SelectorButtonPill click={onclick} disabled={disabled} selection={stone} active={active}/>
+        <SelectorButtonPill click={onclick} disabled={disabled} selection={stone} active={active} stones={true}/>
     )
 }

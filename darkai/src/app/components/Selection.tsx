@@ -88,26 +88,24 @@ export default function Selection({ui}) {
                         </div>
                     </CustomTabPanel>
                 </div>
-                : <div className="w-full h-full">
-                    <Box sx={{display:'flex', height: 1}}>
+                : <div className="w-full h-full relative">
+                    <>
                         <Tabs
-                            orientation="vertical"
                             value={activeTab} onChange={changeTab} aria-label="tabs" sx={{
-                            width: 0.2,
-                            '& .MuiTabs-indicator': {left:10, backgroundColor: '#030712', height: '0.2rem'},
-                            borderTop: '1px solid #9ca3af',
-                            borderRight: '1px solid #9ca3af',
+                            width: 1,
+                            '& .MuiTabs-indicator': {backgroundColor: '#030712', height: '0.2rem'},
                             '& .Mui-selected': {color: '#030712 !important'},
-                            '& .css-1ondbrm-MuiTabs-list': {height: 1}
+                            position: 'absolute',
+                            top: '-60vh'
                         }}>
-                            <Tab label="DEFAULT" sx={{width: 1, height: 0.5}}/>
-                            <Tab label="CUSTOM" sx={{width: 1, height: 0.5}}/>
+                            <Tab label="DEFAULT" sx={{width: 0.5, maxWidth: 1}}/>
+                            <Tab label="CUSTOM" sx={{width:  0.5, maxWidth: 1}}/>
                         </Tabs>
 
-                    <CustomTabPanel value={activeTab} index={0}>
-                        <DefaultSelector/>
-                    </CustomTabPanel>
-                        <>
+                        <CustomTabPanel value={activeTab} index={0}>
+                            <DefaultSelector/>
+                        </CustomTabPanel>
+                            <>
                             {!activeTooth
                                 ? <CustomTabPanel value={activeTab} index={1}>
                                     <div className="w-full">
@@ -151,7 +149,7 @@ export default function Selection({ui}) {
                                     </CustomTabPanel>
                             }
                         </>
-                    </Box>
+                    </>
                 </div>
             }
         </>

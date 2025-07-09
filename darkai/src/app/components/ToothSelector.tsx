@@ -1,11 +1,12 @@
 import {Box, Tab, Tabs} from "@mui/material";
 import {ReactNode, SyntheticEvent, useState} from "react";
 import {useTeethStore} from "@/app/stores/teeth";
-import elabToothName from "@/app/helpers/elabToothName";
 import SelectorButtonPill from "@/app/components/SelectorButtonPill";
 import DiamondTogglerPill from "@/app/components/DiamondTogglerPill";
 import StoneSelectorPill from "@/app/components/StoneSelectorPill";
-import {Copy} from "@/app/components/icons/Copy";
+import {Shape} from "@/app/components/icons/Shape";
+import {Metal} from "@/app/components/icons/Metal";
+import {Gem} from "@/app/components/icons/Gem";
 interface TabPanelProps {
     children?: ReactNode;
     index: number;
@@ -59,7 +60,7 @@ export default function ToothSelector({tooth}) {
                 aria-labelledby={`simple-tab-${index}`}
                 {...other}
             >
-                {value === index && <Box sx={{height: 1, display:'grid', gridTemplateRows:'80% 10% 10%', gridTemplateColumns:'25% 50% 25%'}}>{children}</Box>}
+                {value === index && <Box sx={{height: 1, display:'grid', gridTemplateColumns:`${ value === 2 ? '15% 70% 15%' : '25% 50% 25%'}`}}>{children}</Box>}
             </div>
         );
     }
@@ -70,72 +71,79 @@ export default function ToothSelector({tooth}) {
                 <Tabs
                     value={value} onChange={changeTab} aria-label="tabs" sx={{
                     width: 1,
-                    '& .MuiTabs-indicator': {top: 0, backgroundColor: '#030712', height: '0.2rem'},
+                    '& .MuiTabs-indicator': {display: 'none'},
                     borderBottom: '1px solid #9ca3af',
-                    borderTop: '1px solid #9ca3af',
                     backgroundColor: '#f9fafb',
-                    '& .Mui-selected': {color: '#030712 !important'}
+                    '& .Mui-selected': {color: '#f9fafb !important', fontWeight: '800'},
+                    '& .MuiTab-root': {height: '48px', minHeight: '48px', minWidth: '48px'},
                 }}>
-                    <Tab label="Tipo" sx={{width: 0.33, maxWidth: 1}}/>
-                    <Tab label="Metallo" sx={{width: 0.33, maxWidth: 1}}/>
-                    <Tab label="Pietre" sx={{width: 0.33, maxWidth: 1}}/>
+                    <Tab icon={<Shape />} label={`${value === 0 ? 'Tipo' : ''}`} sx={{
+                        width: value === 0 ? 0.6 : 0.2,
+                        paddingLeft: value === 0 ? '1rem' : '0.5rem',
+                        paddingRight: value === 0 ? '1rem' : '0.5rem',
+                        maxWidth: 1,
+                        display: 'flex',
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        gap: '4px',
+                        backgroundColor: `${value === 0 ? '#030712' : '#f9fafb'}`,
+                        '& .MuiTab-icon': {marginBottom: 0},
+                    }}/>
+                    <Tab icon={<Metal />} label={`${value === 1 ? 'Metallo' : ''}`} sx={{
+                        width: value === 1 ? 0.6 : 0.2,
+                        paddingLeft: value === 1 ? '1rem' : '0.5rem',
+                        paddingRight: value === 1 ? '1rem' : '0.5rem',
+                        maxWidth: 1,
+                        display: 'flex',
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        gap: '4px',
+                        backgroundColor: `${value === 1 ? '#030712' : '#f9fafb'}`,
+                        '& .MuiTab-icon': {marginBottom: 0},
+                    }}/>
+                    <Tab icon={<Gem />} label={`${value === 2 ? 'Pietre' : ''}`} sx={{
+                        width: value === 2 ? 0.6 : 0.2,
+                        paddingLeft: value === 2 ? '1rem' : '0.5rem',
+                        paddingRight: value === 2 ? '1rem' : '0.5rem',
+                        maxWidth: 1,
+                        display: 'flex',
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        gap: '4px',
+                        backgroundColor: `${value === 2 ? '#030712' : '#f9fafb'}`,
+                        '& .MuiTab-icon': {marginBottom: 0},
+                    }}/>
                 </Tabs>
             </div>
 
             <CustomTabPanel value={value} index={0}>
-                {/*<div className={`${visible && material !== 'base' ? 'flex' : 'hidden'} relative items-center justify-center col-start-1 col-end-1 row-start-1 row-end-1`}>*/}
-                {/*    <button className=" rounded-full border p-2 cursor-pointer w-fit"*/}
-                {/*            onClick={() => setShowCopy((prev) => !prev)}>*/}
-                {/*        <Copy className="w-8 h-8"/>*/}
-                {/*    </button>*/}
-                {/*    <div*/}
-                {/*        className={`${showCopy && availableTypes[jewelType] ? 'block' : 'hidden'} absolute border p-4 rounded mt-2 bg-gray-50 z-10 top-[-75%] max-h-[100px] overflow-y-auto`}>*/}
-                {/*        <ul>*/}
-                {/*            {availableTypes[jewelType] && availableTypes[(stones ? 'stones' : jewelType)].map((data, i) => {*/}
-                {/*                const opt = elabToothName(data, false);*/}
-
-                {/*                return (*/}
-                {/*                    <li key={data + tooth + i}>*/}
-                {/*                        {data !== tooth &&*/}
-                {/*                            <button onClick={() => setCopy(data, tooth)}>*/}
-                {/*                                {opt}*/}
-                {/*                            </button>*/}
-                {/*                        }*/}
-                {/*                    </li>*/}
-                {/*                )*/}
-                {/*            })*/}
-                {/*            }*/}
-                {/*        </ul>*/}
-                {/*    </div>*/}
-                {/*</div>*/}
-                <div className="flex items-center justify-center gap-8 col-start-2 col-end-2 row-start-1 row-end-1">
-                    <div className="flex gap-2">
-                        <SelectorButtonPill adjust={true} click={() => selectType('full')}
+                <div className="flex items-center justify-center gap-8 col-start-2 col-end-2">
+                    <div className="w-full flex flex-col gap-2 justify-center h-full">
+                        <SelectorButtonPill click={() => selectType('full')}
                                             disabled={false} selection="full"
                                             active={visible && (jewelType === 'full' || jewelType === 'fullDiamond')}/>
 
                         {(tooth === 'ilsdx' || tooth === 'ilssx') &&
-                            <SelectorButtonPill adjust={true} click={() => selectType('bar')}
+                            <SelectorButtonPill click={() => selectType('bar')}
                                                 disabled={false} selection="bar"
                                                 active={visible && (jewelType === 'bar' || jewelType === 'barDiamond')}/>
                         }
                         {(tooth === 'csdx' || tooth === 'cssx' || tooth === 'cidx' || tooth === 'cisx') &&
-                            <SelectorButtonPill adjust={true} click={() => selectType('frame')}
+                            <SelectorButtonPill click={() => selectType('frame')}
                                                 disabled={false} selection="frame"
                                                 active={visible && (jewelType === 'frame' || jewelType === 'frameDiamond')}/>
                         }
                         {(tooth === 'cidx' || tooth === 'cisx') &&
-                            <SelectorButtonPill adjust={true} click={() => selectType('bigBar')}
+                            <SelectorButtonPill click={() => selectType('bigBar')}
                                                 disabled={false} selection="bigBar"
                                                 active={visible && (jewelType === 'bigBar' || jewelType === 'bigBarDiamond')}/>
                         }
                     </div>
                 </div>
-
             </CustomTabPanel>
             <CustomTabPanel value={value} index={1}>
-                <div className="flex items-center justify-center gap-8 col-start-2 col-end-2 row-start-1 row-end-1">
-                    <div className="flex gap-2">
+                <div className="flex items-center justify-center gap-8 col-start-2 col-end-2">
+                    <div className="w-full flex flex-col gap-2 justify-center h-full">
                         <SelectorButtonPill disabled={false} selection="gold" active={visible && (material === 'gold')}
                                             click={() => selectMaterial('gold')}/>
                         <SelectorButtonPill disabled={false} selection="rose" active={visible && (material === 'rose')}
@@ -148,12 +156,10 @@ export default function ToothSelector({tooth}) {
 
             </CustomTabPanel>
             <CustomTabPanel value={value} index={2}>
-                <div className="flex items-center justify-center gap-8 col-start-2 col-end-2 row-start-1 row-end-1">
-                    <div className="flex gap-4">
-                        <DiamondTogglerPill tooth={tooth} onclick={selectDiamond}
-                                            active={visible && (jewelType === 'fullDiamond' || jewelType === 'barDiamond' || jewelType === 'frameDiamond' || jewelType === 'bigBarDiamond')}/>
+                <div className="flex items-center justify-center gap-8 col-start-2 col-end-2 h-full">
+                    <div className="w-full grid grid-cols-2 grid-rows-[15%_15%_15%] gap-2 h-full relative top-[50%] translate-y-[-25%]">
                         {(tooth === 'csdx' || tooth === 'cssx' || tooth === 'cidx' || tooth === 'cisx') &&
-                            <div className="flex gap-2">
+                            <>
                                 <StoneSelectorPill tooth={tooth} stone="sapphire"
                                                active={visible && (stones === 'sapphire')}
                                                onclick={() => selectStone('sapphire')}/>
@@ -165,8 +171,11 @@ export default function ToothSelector({tooth}) {
                                 <StoneSelectorPill tooth={tooth} stone="amethyst"
                                                active={visible && (stones === 'amethyst')}
                                                onclick={() => selectStone('amethyst')}/>
-                            </div>
+                            </>
                         }
+                        <DiamondTogglerPill tooth={tooth} onclick={selectDiamond} stones={true}
+                                            active={visible && (jewelType === 'fullDiamond' || jewelType === 'barDiamond' || jewelType === 'frameDiamond' || jewelType === 'bigBarDiamond')}/>
+
                     </div>
                 </div>
 

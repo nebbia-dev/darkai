@@ -39,19 +39,19 @@ export default function ActionBar({ui}) {
     }
 
     return(
-        <div className={`relative z-30 ${ui ? 'top-[-50%]' : ''}`}>
+        <div className="relative z-30">
             <div
-                className={`absolute flex items-center justify-center gap-4 ${!ui ? 'absolute bottom-30 left-[50%] translate-x-[-50%] w-2/4' : 'flex-col translate-y-[-50%] left-[10%]'}`}>
+                className={`absolute flex items-center justify-center gap-4 ${ui ? 'bottom-5' : 'bottom-30'} left-[50%] translate-x-[-50%] w-2/4`}>
                 <button onClick={doUndo} className="rounded-full border p-2 cursor-pointer">
-                    <Undo className="w-8 h-8"/>
+                    <Undo className={`${ui ? 'w-6 h-6' : 'w-8 h-8'}`}/>
                 </button>
                 <button onClick={doRedo} className="rounded-full border p-2 cursor-pointer">
-                    <Redo className="w-8 h-8"/>
+                    <Redo className={`${ui ? 'w-6 h-6' : 'w-8 h-8'}`}/>
                 </button>
                 <div className={`${visible && material !== 'base' && ui ? 'flex' : 'hidden'} relative items-center justify-center col-start-1 col-end-1 row-start-1 row-end-1`}>
                     <button className=" rounded-full border p-2 cursor-pointer w-fit"
                             onClick={() => setShowCopy((prev) => !prev)}>
-                        <Copy className="w-8 h-8"/>
+                        <Copy className={`${ui ? 'w-6 h-6' : 'w-8 h-8'}`}/>
                     </button>
                     <div
                         className={`${showCopy && availableTypes[jewelType] ? 'block' : 'hidden'} absolute border rounded mt-2 bg-gray-50 z-10 left-[125%] w-[25vw]`}>
@@ -75,7 +75,7 @@ export default function ActionBar({ui}) {
                     </div>
                 </div>
                 <button onClick={reset} className="rounded-full border p-2 cursor-pointer">
-                    <Reset className="w-8 h-8"/>
+                    <Reset className={`${ui ? 'w-6 h-6' : 'w-8 h-8'}`}/>
                 </button>
             </div>
         </div>
