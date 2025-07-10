@@ -87,7 +87,21 @@ export default function ToothSelector({tooth}) {
                         alignItems: 'center',
                         gap: '4px',
                         backgroundColor: `${value === 0 ? '#030712' : '#f9fafb'}`,
+                        transition: 'all 0.5s',
                         '& .MuiTab-icon': {marginBottom: 0},
+                        fontSize: '0.875rem',
+                        "@media (min-width: 400px)": {
+                            fontSize: '1rem',
+                        },
+                        "@media (min-width: 600px)": {
+                            fontSize: '1.125rem',
+                        },
+                        "@media (min-width: 800px)": {
+                            fontSize: '1.25rem',
+                        },
+                        "@media (min-width: 900px)": {
+                            fontSize: '1.5rem',
+                        }
                     }}/>
                     <Tab icon={<Metal />} label={`${value === 1 ? 'Metallo' : ''}`} sx={{
                         width: value === 1 ? 0.6 : 0.2,
@@ -99,7 +113,21 @@ export default function ToothSelector({tooth}) {
                         alignItems: 'center',
                         gap: '4px',
                         backgroundColor: `${value === 1 ? '#030712' : '#f9fafb'}`,
+                        transition: 'all 0.5s',
                         '& .MuiTab-icon': {marginBottom: 0},
+                        fontSize: '0.875rem',
+                        "@media (min-width: 400px)": {
+                            fontSize: '1rem',
+                        },
+                        "@media (min-width: 600px)": {
+                            fontSize: '1.125rem',
+                        },
+                        "@media (min-width: 800px)": {
+                            fontSize: '1.25rem',
+                        },
+                        "@media (min-width: 900px)": {
+                            fontSize: '1.5rem',
+                        }
                     }}/>
                     <Tab icon={<Gem />} label={`${value === 2 ? 'Pietre' : ''}`} sx={{
                         width: value === 2 ? 0.6 : 0.2,
@@ -111,7 +139,21 @@ export default function ToothSelector({tooth}) {
                         alignItems: 'center',
                         gap: '4px',
                         backgroundColor: `${value === 2 ? '#030712' : '#f9fafb'}`,
+                        transition: 'all 0.5s',
                         '& .MuiTab-icon': {marginBottom: 0},
+                        fontSize: '0.875rem',
+                        "@media (min-width: 400px)": {
+                            fontSize: '1rem',
+                        },
+                        "@media (min-width: 600px)": {
+                            fontSize: '1.125rem',
+                        },
+                        "@media (min-width: 800px)": {
+                            fontSize: '1.25rem',
+                        },
+                        "@media (min-width: 900px)": {
+                            fontSize: '1.5rem',
+                        }
                     }}/>
                 </Tabs>
             </div>

@@ -54,19 +54,16 @@ export default function ActionBar({ui}) {
                         <Copy className={`${ui ? 'w-6 h-6' : 'w-8 h-8'}`}/>
                     </button>
                     <div
-                        className={`${showCopy && availableTypes[jewelType] ? 'block' : 'hidden'} absolute border rounded mt-2 bg-gray-50 z-10 left-[125%] w-[25vw]`}>
+                        className={`${showCopy && availableTypes[jewelType] ? 'block' : 'hidden'} absolute border rounded mt-2 bg-gray-50 z-10 translate-y-[-96px] w-[75vw] text-sm min-[400px]:text-base min-[600px]:text-lg min-[800px]:text-xl min-[900px]:text-2xl`}>
                         <h3 className="bg-gray-950 p-4 text-gray-50">Copia su...</h3>
-                        <ul className="pb-2">
+                        <ul className="py-2 flex overflow-x-scroll">
                             {availableTypes[jewelType] && availableTypes[(stones ? 'stones' : jewelType)].map((data, i) => {
                                 const opt = elabToothName(data, false);
-
-                                return (
+                                if(data !== activeTooth) return (
                                     <li className="hover:bg-stone-200 hover:rounded px-4 py-1" key={data + activeTooth + i}>
-                                        {data !== activeTooth &&
-                                            <button className="cursor-pointer" onClick={() => setCopy(data, activeTooth)}>
-                                                {opt}
-                                            </button>
-                                        }
+                                        <button className="cursor-pointer whitespace-nowrap" onClick={() => setCopy(data, activeTooth)}>
+                                            {opt}
+                                        </button>
                                     </li>
                                 )
                             })

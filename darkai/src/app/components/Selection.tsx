@@ -98,8 +98,40 @@ export default function Selection({ui}) {
                             position: 'absolute',
                             top: '-60vh'
                         }}>
-                            <Tab label="DEFAULT" sx={{width: 0.5, maxWidth: 1}}/>
-                            <Tab label="CUSTOM" sx={{width:  0.5, maxWidth: 1}}/>
+                            <Tab label="DEFAULT" sx={{
+                                width: 0.5,
+                                maxWidth: 1,
+                                fontSize: '0.875rem',
+                                "@media (min-width: 400px)": {
+                                    fontSize: '1rem',
+                                },
+                                "@media (min-width: 600px)": {
+                                    fontSize: '1.125rem',
+                                },
+                                "@media (min-width: 800px)": {
+                                    fontSize: '1.25rem',
+                                },
+                                "@media (min-width: 900px)": {
+                                    fontSize: '1.5rem',
+                                }
+                            }}/>
+                            <Tab label="CUSTOM" sx={{
+                                width:  0.5,
+                                maxWidth: 1,
+                                fontSize: '0.875rem',
+                                "@media (min-width: 400px)": {
+                                    fontSize: '1rem',
+                                },
+                                "@media (min-width: 600px)": {
+                                    fontSize: '1.125rem',
+                                },
+                                "@media (min-width: 800px)": {
+                                    fontSize: '1.25rem',
+                                },
+                                "@media (min-width: 900px)": {
+                                    fontSize: '1.5rem',
+                                }
+                            }}/>
                         </Tabs>
 
                         <CustomTabPanel value={activeTab} index={0}>
