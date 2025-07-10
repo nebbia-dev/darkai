@@ -333,6 +333,15 @@ export const useTeethStore = create((set, get) => ({
     setStone: (tooth, stone) =>
         set(
             produce((state) => {
+                if(!state.teethVisibility[tooth] || state.teethMaterial[tooth] === 'base') {
+                    return;
+                }
+                if(state.currentHistory < state.history.length) {
+                    console.log(state.currentHistory, state.history.length)
+                    state.history = state.history.splice(0, state.currentHistory);
+                }
+                state.currentHistory++;
+
                 if(state.teethStones[tooth] === stone) {
                     state.teethStones[tooth] = null;
                 } else {
@@ -347,6 +356,7 @@ export const useTeethStore = create((set, get) => ({
                         visible: state.teethVisibility
                     }]
                 ];
+                console.log(state.history, state.currentHistory)
             }),
         ),
     setActiveTooth: (tooth) =>
