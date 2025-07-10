@@ -60,7 +60,7 @@ export default function ToothSelector({tooth}) {
                 aria-labelledby={`simple-tab-${index}`}
                 {...other}
             >
-                {value === index && <Box sx={{height: 1, display:'grid', gridTemplateColumns:`${ value === 2 ? '15% 70% 15%' : '25% 50% 25%'}`}}>{children}</Box>}
+                {value === index && <Box sx={{height: 1, display:'grid', gridTemplateColumns:`${ value === 2 && (tooth === 'csdx' || tooth === 'cssx' || tooth === 'cidx' || tooth === 'cisx') ? '15% 70% 15%' : '25% 50% 25%'}`}}>{children}</Box>}
             </div>
         );
     }
@@ -156,8 +156,11 @@ export default function ToothSelector({tooth}) {
 
             </CustomTabPanel>
             <CustomTabPanel value={value} index={2}>
-                <div className="flex items-center justify-center gap-8 col-start-2 col-end-2 h-full">
-                    <div className="w-full grid grid-cols-2 grid-rows-[15%_15%_15%] gap-2 h-full relative top-[50%] translate-y-[-25%]">
+                <div className={`flex items-center justify-center gap-8 col-start-2 col-end-2 ${tooth === 'csdx' || tooth === 'cssx' || tooth === 'cidx' || tooth === 'cisx' ? 'h-full' : ''}`}>
+                    <div className={`${tooth === 'csdx' || tooth === 'cssx' || tooth === 'cidx' || tooth === 'cisx'
+                                        ? 'w-full grid grid-cols-2 grid-rows-[15%_15%_15%] gap-2 h-full relative top-[50%] translate-y-[-25%]'
+                                        : 'w-full flex flex-col gap-2 justify-center h-full'
+                    }`}>
                         {(tooth === 'csdx' || tooth === 'cssx' || tooth === 'cidx' || tooth === 'cisx') &&
                             <>
                                 <StoneSelectorPill tooth={tooth} stone="sapphire"
@@ -173,7 +176,7 @@ export default function ToothSelector({tooth}) {
                                                onclick={() => selectStone('amethyst')}/>
                             </>
                         }
-                        <DiamondTogglerPill tooth={tooth} onclick={selectDiamond} stones={true}
+                        <DiamondTogglerPill tooth={tooth} onclick={selectDiamond} stones={tooth === 'csdx' || tooth === 'cssx' || tooth === 'cidx' || tooth === 'cisx'}
                                             active={visible && (jewelType === 'fullDiamond' || jewelType === 'barDiamond' || jewelType === 'frameDiamond' || jewelType === 'bigBarDiamond')}/>
 
                     </div>

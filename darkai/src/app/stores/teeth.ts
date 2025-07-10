@@ -67,6 +67,7 @@ export const useTeethStore = create((set, get) => ({
         stones: ['csdx', 'cssx', 'cidx', 'cisx']
     },
     activeTab: 0,
+    loaded: false,
     setActiveTab: (value) => set(() => ({activeTab: value})),
     setEnvMap: (em) => {
         set({envMap: em})
@@ -457,7 +458,8 @@ export const useTeethStore = create((set, get) => ({
                 }
             })
         ),
-    setUI: () => set((state) => ({ui: !state.ui})),
+    setLoaded: (bool) => set(() => ({loaded: bool})),
+    setUI: (bool) => set({ui: bool}),
     undo: () =>
         set(
             produce((state) => {

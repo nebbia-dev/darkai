@@ -1,10 +1,18 @@
 'use client'
 import {Canvas} from '@react-three/fiber';
 import Configurator from "@/app/components/Configurator";
-import {Suspense} from "react";
+import {Suspense, useEffect} from "react";
 import Loading from "@/app/components/Loading";
+import {useTeethStore} from "@/app/stores/teeth";
 
 export default function Scene() {
+
+    const setLoaded = useTeethStore((state) => state.setLoaded);
+
+    useEffect(() => {
+        setTimeout(() => setLoaded(true), 1000);
+    }, []);
+
     return (
         <>
             {/*<Suspense fallback={<Loading/>}>*/}

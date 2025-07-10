@@ -24,7 +24,7 @@ export default function SelectorButtonPill({click, disabled, selection, active, 
                                                 : selection === 'amethyst'
                                                     ? 'bg-violet-500'
                                                     : 'border-1'
-                } ${disabled ? 'opacity-50' : ''} inline-block w-full max-w-[50%] h-full rounded-full`}></span>
+                } ${disabled ? 'opacity-50' : ''} inline-block ${stones && selection !== 'diamond' ? 'h-full aspect-square' : 'w-full max-w-[50%] h-full'} rounded-full`}></span>
         </button>
 
 )

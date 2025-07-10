@@ -1,7 +1,7 @@
 'use client'
 import * as THREE from 'three';
 import {Outlines, useFBX, useTexture} from "@react-three/drei";
-import {JSX, memo, useMemo, useState} from "react";
+import {JSX, memo, useEffect, useMemo, useState} from "react";
 import {useTeethStore} from "@/app/stores/teeth";
 
 export default function Dentiera() {
