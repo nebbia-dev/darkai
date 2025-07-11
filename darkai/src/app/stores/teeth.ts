@@ -156,6 +156,7 @@ export const useTeethStore = create((set, get) => ({
                         state.teethVisibility[tooth] = false;
                         state.teethJewelType[tooth] = 'full';
                         state.teethMaterial[tooth] = 'base';
+                        state.teethStones[tooth] = null;
 
                         state.history = [...state.history,
                             [{
