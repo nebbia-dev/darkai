@@ -383,6 +383,16 @@ export const useTeethStore = create((set, get) => ({
         ),
     setDefaultConfig: (config, color) => {
         get().reset();
+
+        if(config.search(/(Diamond)/) >= 0) {
+            const configName = config.replace('Diamond', '');
+            get().setActiveDefault(configName, 'diamond');
+            console.log('quaso')
+        } else {
+            get().setActiveDefault(config, color);
+            console.log('halo')
+        }
+
         switch (config) {
             case 'full':
             case 'fullDiamond':
@@ -413,10 +423,10 @@ export const useTeethStore = create((set, get) => ({
                 break;
             case 'frame':
             case 'frameDiamond':
-                get().setTooth('csdx', 'full', color);
-                get().setTooth('cidx', 'full', color);
-                get().setTooth('cssx', 'full', color);
-                get().setTooth('cisx', 'full', color);
+                get().setTooth('csdx', config, color);
+                get().setTooth('cidx', config, color);
+                get().setTooth('cssx', config, color);
+                get().setTooth('cisx', config, color);
                 break;
             case 'canines':
             case 'stones':
@@ -437,7 +447,7 @@ export const useTeethStore = create((set, get) => ({
                 get().setTooth('cidx', 'fullDiamond', color);
                 get().setTooth('cssx', 'fullDiamond', color);
                 get().setTooth('cisx', 'fullDiamond', color);
-                if (config === 'stones') {
+                if (config === 'stonesDiamond') {
                     get().setStone('csdx', 'sapphire');
                     get().setStone('cidx', 'sapphire');
                     get().setStone('cssx', 'sapphire');
@@ -560,6 +570,8 @@ export const useTeethStore = create((set, get) => ({
                 cidx: false,
                 cisx: false,
             },
+            currentTooth: null,
+            activeDefault: null
         })
     }
     // setWholeTooth: (tooth, color, type) =>
