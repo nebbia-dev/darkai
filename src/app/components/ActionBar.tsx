@@ -10,12 +10,12 @@ import State from "@/app/types/State";
 export default function ActionBar({ui} : {ui: boolean}) {
     const current = useTeethStore((state:State) => state.currentHistory);
     const history = useTeethStore((state:State) => state.history);
-    const activeTooth = useTeethStore((state:State) => state.currentTooth);
-    const jewelType = useTeethStore((state:State) => state.teethJewelType[activeTooth]);
-    const material = useTeethStore((state:State) => state.teethMaterial[activeTooth]);
-    const stones = useTeethStore((state:State) => state.teethStones[activeTooth]);
+    const activeTooth: string|null = useTeethStore((state:State) => state.currentTooth);
+    const jewelType: string|null = useTeethStore((state:State) => activeTooth !== null ? state.teethJewelType[activeTooth] : null);
+    const material: string|null = useTeethStore((state:State) => activeTooth !== null ? state.teethMaterial[activeTooth] : null);
+    const stones: string|null = useTeethStore((state:State) => activeTooth !== null ? state.teethStones[activeTooth] : null);
     const availableTypes = useTeethStore((state:State) => state.teethTypeOptions);
-    const visible = useTeethStore((state:State) => state.teethVisibility[activeTooth]);
+    const visible: boolean|null = useTeethStore((state:State) => activeTooth !== null ? state.teethVisibility[activeTooth] : null);
     const copy = useTeethStore((state:State) => state.setCopy);
     const reset = useTeethStore((state:State) => state.reset);
     const undo = useTeethStore((state:State) => state.undo);
@@ -34,7 +34,7 @@ export default function ActionBar({ui} : {ui: boolean}) {
         }
     }
 
-    function setCopy(newTooth, oldTooth) {
+    function setCopy(newTooth: string, oldTooth: string) {
         copy(newTooth, oldTooth);
         setShowCopy(false);
     }
@@ -55,12 +55,12 @@ export default function ActionBar({ui} : {ui: boolean}) {
                         <Copy className={`${ui ? 'w-6 h-6' : 'w-8 h-8'}`}/>
                     </button>
                     <div
-                        className={`${showCopy && availableTypes[jewelType] ? 'block' : 'hidden'} absolute border rounded mt-2 bg-gray-50 z-10 translate-y-[-96px] w-[75vw] text-sm min-[400px]:text-base min-[600px]:text-lg min-[800px]:text-xl min-[900px]:text-2xl`}>
+                        className={`${showCopy && jewelType && availableTypes[jewelType] ? 'block' : 'hidden'} absolute border rounded mt-2 bg-gray-50 z-10 translate-y-[-96px] w-[75vw] text-sm min-[400px]:text-base min-[600px]:text-lg min-[800px]:text-xl min-[900px]:text-2xl`}>
                         <h3 className="bg-gray-950 p-4 text-gray-50">Copia su...</h3>
                         <ul className="py-2 flex overflow-x-scroll">
-                            {availableTypes[jewelType] && availableTypes[(stones ? 'stones' : jewelType)].map((data, i) => {
+                            {jewelType && availableTypes[jewelType] && availableTypes[(stones ? 'stones' : jewelType)].map((data, i) => {
                                 const opt = elabToothName(data, false);
-                                if(data !== activeTooth) return (
+                                if(activeTooth && data !== activeTooth) return (
                                     <li className="hover:bg-stone-200 hover:rounded px-4 py-1" key={data + activeTooth + i}>
                                         <button className="cursor-pointer whitespace-nowrap" onClick={() => setCopy(data, activeTooth)}>
                                             {opt}

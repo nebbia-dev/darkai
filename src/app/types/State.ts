@@ -2,6 +2,7 @@ import {CubeTexture, Texture} from "three";
 import FBX from "@/app/types/FBX";
 
 interface Materials {
+    [key: string]: string
     icsdx: string,
     icssx: string,
     icidx: string,
@@ -16,6 +17,7 @@ interface Materials {
     cisx: string,
 }
 interface JewelTypes {
+    [key: string]: string
     icsdx: string,
     icssx: string,
     icidx: string,
@@ -30,6 +32,7 @@ interface JewelTypes {
     cisx: string,
 }
 interface Visibility {
+    [key: string]: boolean
     icsdx: boolean,
     icssx: boolean,
     icidx: boolean,
@@ -44,6 +47,7 @@ interface Visibility {
     cisx: boolean,
 }
 interface Stones {
+    [key: string]: string | null
     csdx: string | null,
     cssx: string | null,
     cidx: string | null,
@@ -58,7 +62,7 @@ interface History {
 
 export default interface State {
     envMap: Texture | CubeTexture | null,
-    teethGeometry: FBX | null,
+    teethGeometry: FBX,
     teethMaterial: Materials,
     teethJewelType: JewelTypes,
     teethStones: Stones,
@@ -69,6 +73,7 @@ export default interface State {
     currentTooth: string| null,
     ui: boolean,
     teethTypeOptions: {
+        [key: string]: string[]
         full: string[],
         fullDiamond: string[],
         bar: string[],

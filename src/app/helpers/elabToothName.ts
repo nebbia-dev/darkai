@@ -1,4 +1,4 @@
-export default function elabToothName(tooth, short) {
+export default function elabToothName(tooth: string, short: boolean) {
     let title;
     if(tooth.length === 4) {
         title = 'Canino';

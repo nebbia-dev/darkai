@@ -27,13 +27,13 @@ export default function ToothConfig({tooth} : {tooth: string}) {
     const [expanded, setExpanded] = useState<boolean>(false);
     const title = elabToothName(tooth, false);
 
-    function selectType(type) {
+    function selectType(type: string) {
         setActiveDefault(null, null);
         setShowCopy(false);
         changeJewelType(tooth, type);
     }
 
-    function selectMaterial(material) {
+    function selectMaterial(material: string) {
         setActiveDefault(null, null);
         changeMaterial(tooth, material);
     }
@@ -42,10 +42,10 @@ export default function ToothConfig({tooth} : {tooth: string}) {
         toggleDiamond(tooth);
     }
 
-    function selectStone(stone) {
+    function selectStone(stone: string) {
         changeStone(tooth, stone);
     }
-    function setCopy(newTooth, oldTooth) {
+    function setCopy(newTooth: string, oldTooth: string) {
         copy(newTooth, oldTooth);
         setShowCopy(false);
     }
@@ -119,12 +119,12 @@ export default function ToothConfig({tooth} : {tooth: string}) {
                         <p className="text-left">Material</p>
                         <div className="flex gap-2">
                             <SelectorButton disabled={false} selection="gold" active={visible && (material === 'gold')}
-                                            click={() => selectMaterial('gold')}/>
+                                            click={() => selectMaterial('gold')} adjust={false}/>
                             <SelectorButton disabled={false} selection="rose" active={visible && (material === 'rose')}
-                                            click={() => selectMaterial('rose')}/>
+                                            click={() => selectMaterial('rose')} adjust={false}/>
                             <SelectorButton disabled={false} selection="white"
                                             active={visible && (material === 'white')}
-                                            click={() => selectMaterial('white')}/>
+                                            click={() => selectMaterial('white')} adjust={false}/>
                         </div>
                     </div>
 

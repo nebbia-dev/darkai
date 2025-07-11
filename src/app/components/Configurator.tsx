@@ -21,8 +21,8 @@ import CiDxStone from "@/app/components/teeth/CiDxStone";
 import CiDx from "@/app/components/teeth/CiDx";
 import CiSx from "@/app/components/teeth/CiSx";
 import CiSxStone from "@/app/components/teeth/CiSxStone";
-import Stones from "@/app/components/teeth/Stones";
 import State from "@/app/types/State";
+import * as THREE from 'three'
 
 export default function Configurator() {
     const envMap = useEnvironment({files: "envMaps/HDR_Light_Studio_Free_HDRI_Design_13.exr"})
@@ -30,169 +30,170 @@ export default function Configurator() {
     // Se voglio piazzare anche l'fbx in LoadedMaterials, verosimilmente devo usare qui uno useEffect
     const teeth = useMemo((): FBX => {
         const fbx = useFBX('/models/MOD_Dentiera_Completa_180_Phong_Scala_1 (1).fbx');
+        console.log(fbx);
         return {
             // INCISIVI CENTRALI
             icsdx: {
-                full: fbx.children[0].children[5].geometry,
+                full: (fbx.children[0].children[5] as THREE.Mesh).geometry,
                 fullDiamond: {
-                    base: fbx.children[1].children[0].children[0].geometry,
-                    full: fbx.children[1].children[1].children[2].geometry
+                    base: (fbx.children[1].children[0].children[0] as THREE.Mesh).geometry,
+                    full: (fbx.children[1].children[1].children[2] as THREE.Mesh).geometry
                 }
             },
             icssx: {
-                full: fbx.children[0].children[11].geometry,
+                full: (fbx.children[0].children[11] as THREE.Mesh).geometry,
                 fullDiamond: {
-                    base: fbx.children[1].children[0].children[6].geometry,
-                    full: fbx.children[1].children[1].children[8].geometry
+                    base: (fbx.children[1].children[0].children[6] as THREE.Mesh).geometry,
+                    full: (fbx.children[1].children[1].children[8] as THREE.Mesh).geometry
                 }
             },
             icidx: {
-                full: fbx.children[0].children[4].geometry,
+                full: (fbx.children[0].children[4] as THREE.Mesh).geometry,
                 fullDiamond: {
-                    base: fbx.children[1].children[0].children[2].geometry,
-                    full: fbx.children[1].children[1].children[5].geometry
+                    base: (fbx.children[1].children[0].children[2] as THREE.Mesh).geometry,
+                    full: (fbx.children[1].children[1].children[5] as THREE.Mesh).geometry
                 }
             },
             icisx: {
-                full: fbx.children[0].children[10].geometry,
+                full: (fbx.children[0].children[10] as THREE.Mesh).geometry,
                 fullDiamond: {
-                    base: fbx.children[1].children[0].children[8].geometry,
-                    full: fbx.children[1].children[1].children[11].geometry
+                    base: (fbx.children[1].children[0].children[8] as THREE.Mesh).geometry,
+                    full: (fbx.children[1].children[1].children[11] as THREE.Mesh).geometry
                 }
             },
             // INCISIVI LATERALI
             ilsdx: {
-                full: fbx.children[0].children[0].geometry,
+                full: (fbx.children[0].children[0] as THREE.Mesh).geometry,
                 fullDiamond: {
-                    base: fbx.children[1].children[0].children[1].geometry,
-                    full: fbx.children[1].children[1].children[0].geometry
+                    base: (fbx.children[1].children[0].children[1] as THREE.Mesh).geometry,
+                    full: (fbx.children[1].children[1].children[0] as THREE.Mesh).geometry
                 },
                 bar: {
                     full: {
-                        left: fbx.children[3].children[2].children[0].geometry,
-                        right: fbx.children[3].children[2].children[1].geometry,
+                        left: (fbx.children[3].children[2].children[0] as THREE.Mesh).geometry,
+                        right: (fbx.children[3].children[2].children[1] as THREE.Mesh).geometry,
                     },
                     diamond: {
                         right:{
-                            base: fbx.children[3].children[1].children[0].children[0].geometry,
-                            full: fbx.children[3].children[1].children[0].children[1].geometry
+                            base: (fbx.children[3].children[1].children[0].children[0] as THREE.Mesh).geometry,
+                            full: (fbx.children[3].children[1].children[0].children[1] as THREE.Mesh).geometry
                         },
                         left: {
-                            base: fbx.children[3].children[1].children[1].children[0].geometry,
-                            full: fbx.children[3].children[1].children[1].children[1].geometry
+                            base: (fbx.children[3].children[1].children[1].children[0] as THREE.Mesh).geometry,
+                            full: (fbx.children[3].children[1].children[1].children[1] as THREE.Mesh).geometry
                         }
                     }
                 }
             },
             ilssx: {
-                full: fbx.children[0].children[6].geometry,
+                full: (fbx.children[0].children[6] as THREE.Mesh).geometry,
                 fullDiamond: {
-                    base: fbx.children[1].children[0].children[7].geometry,
-                    full: fbx.children[1].children[1].children[6].geometry
+                    base: (fbx.children[1].children[0].children[7] as THREE.Mesh).geometry,
+                    full: (fbx.children[1].children[1].children[6] as THREE.Mesh).geometry
                 },
                 bar: {
                     full: {
-                        left: fbx.children[3].children[2].children[2].geometry,
-                        right: fbx.children[3].children[2].children[3].geometry,
+                        left: (fbx.children[3].children[2].children[2] as THREE.Mesh).geometry,
+                        right: (fbx.children[3].children[2].children[3] as THREE.Mesh).geometry,
                     },
                     diamond: {
                         left:{
-                            base: fbx.children[3].children[1].children[2].children[0].geometry,
-                            full: fbx.children[3].children[1].children[2].children[1].geometry
+                            base: (fbx.children[3].children[1].children[2].children[0] as THREE.Mesh).geometry,
+                            full: (fbx.children[3].children[1].children[2].children[1] as THREE.Mesh).geometry
                         },
                         right: {
-                            base: fbx.children[3].children[1].children[3].children[0].geometry,
-                            full: fbx.children[3].children[1].children[3].children[1].geometry
+                            base: (fbx.children[3].children[1].children[3].children[0] as THREE.Mesh).geometry,
+                            full: (fbx.children[3].children[1].children[3].children[1] as THREE.Mesh).geometry
                         }
                     }
                 }
             },
             ilidx: {
-                full: fbx.children[0].children[1].geometry,
+                full: (fbx.children[0].children[1] as THREE.Mesh).geometry,
                 fullDiamond: {
-                    base: fbx.children[1].children[0].children[5].geometry,
-                    full: fbx.children[1].children[1].children[1].geometry
+                    base: (fbx.children[1].children[0].children[5] as THREE.Mesh).geometry,
+                    full: (fbx.children[1].children[1].children[1] as THREE.Mesh).geometry
                 }
             },
             ilisx: {
-                full: fbx.children[0].children[7].geometry,
+                full: (fbx.children[0].children[7] as THREE.Mesh).geometry,
                 fullDiamond: {
-                    base: fbx.children[1].children[0].children[11].geometry,
-                    full: fbx.children[1].children[1].children[7].geometry
+                    base: (fbx.children[1].children[0].children[11] as THREE.Mesh).geometry,
+                    full: (fbx.children[1].children[1].children[7] as THREE.Mesh).geometry
                 }
             },
             // CANINI
             csdx: {
-                full: fbx.children[0].children[2].geometry,
+                full: (fbx.children[0].children[2] as THREE.Mesh).geometry,
                 fullDiamond: {
-                    base: fbx.children[1].children[0].children[4].geometry,
-                    full: fbx.children[1].children[1].children[3].geometry
+                    base: (fbx.children[1].children[0].children[4] as THREE.Mesh).geometry,
+                    full: (fbx.children[1].children[1].children[3] as THREE.Mesh).geometry
                 },
                 frame: {
-                    full: fbx.children[2].children[1].geometry,
+                    full: (fbx.children[2].children[1] as THREE.Mesh).geometry,
                     diamond: {
-                        base: fbx.children[2].children[0].children[1].geometry,
-                        full: fbx.children[2].children[0].children[0].children[0].geometry
+                        base: (fbx.children[2].children[0].children[1] as THREE.Mesh).geometry,
+                        full: (fbx.children[2].children[0].children[0].children[0] as THREE.Mesh).geometry
                     }
                 },
                 stone: fbx.children[4],
             },
             cssx: {
-                full: fbx.children[0].children[8].geometry,
+                full: (fbx.children[0].children[8] as THREE.Mesh).geometry,
                 fullDiamond: {
-                    base: fbx.children[1].children[0].children[10].geometry,
-                    full: fbx.children[1].children[1].children[9].geometry
+                    base: (fbx.children[1].children[0].children[10] as THREE.Mesh).geometry,
+                    full: (fbx.children[1].children[1].children[9] as THREE.Mesh).geometry
                 },
                 frame: {
-                    full: fbx.children[2].children[3].geometry,
+                    full: (fbx.children[2].children[3] as THREE.Mesh).geometry,
                     diamond: {
-                        base: fbx.children[2].children[0].children[3].geometry,
-                        full: fbx.children[2].children[0].children[0].children[2].geometry
+                        base: (fbx.children[2].children[0].children[3] as THREE.Mesh).geometry,
+                        full: (fbx.children[2].children[0].children[0].children[2] as THREE.Mesh).geometry
                     }
                 },
                 stone: fbx.children[4],
             },
             cidx: {
-                full: fbx.children[0].children[3].geometry,
+                full: (fbx.children[0].children[3] as THREE.Mesh).geometry,
                 fullDiamond: {
-                    base: fbx.children[1].children[0].children[3].geometry,
-                    full: fbx.children[1].children[1].children[4].geometry
+                    base: (fbx.children[1].children[0].children[3] as THREE.Mesh).geometry,
+                    full: (fbx.children[1].children[1].children[4] as THREE.Mesh).geometry
                 },
                 frame: {
-                    full: fbx.children[2].children[2].geometry,
+                    full: (fbx.children[2].children[2] as THREE.Mesh).geometry,
                     diamond: {
-                        base: fbx.children[2].children[0].children[2].geometry,
-                        full: fbx.children[2].children[0].children[0].children[1].geometry
+                        base: (fbx.children[2].children[0].children[2] as THREE.Mesh).geometry,
+                        full: (fbx.children[2].children[0].children[0].children[1] as THREE.Mesh).geometry
                     }
                 },
                 stone: fbx.children[4],
                 bar: {
-                    full: fbx.children[3].children[3].geometry,
+                    full: (fbx.children[3].children[3] as THREE.Mesh).geometry,
                     diamond: {
-                        base: fbx.children[3].children[0].children[0].geometry,
-                        full: fbx.children[3].children[0].children[1].geometry
+                        base: (fbx.children[3].children[0].children[0] as THREE.Mesh).geometry,
+                        full: (fbx.children[3].children[0].children[1] as THREE.Mesh).geometry
                     }
                 }
             },
             cisx: {
-                full: fbx.children[0].children[9].geometry,
+                full: (fbx.children[0].children[9] as THREE.Mesh).geometry,
                 fullDiamond: {
-                    base: fbx.children[1].children[0].children[9].geometry,
-                    full: fbx.children[1].children[1].children[10].geometry
+                    base: (fbx.children[1].children[0].children[9] as THREE.Mesh).geometry,
+                    full: (fbx.children[1].children[1].children[10] as THREE.Mesh).geometry
                 },
                 frame: {
-                    full: fbx.children[2].children[4].geometry,
+                    full: (fbx.children[2].children[4] as THREE.Mesh).geometry,
                     diamond: {
-                        base: fbx.children[2].children[0].children[4].geometry,
-                        full: fbx.children[2].children[0].children[0].children[3].geometry
+                        base: (fbx.children[2].children[0].children[4] as THREE.Mesh).geometry,
+                        full: (fbx.children[2].children[0].children[0].children[3] as THREE.Mesh).geometry
                     }
                 },
                 stone: fbx.children[4].children[0],
                 bar: {
-                    full: fbx.children[3].children[3].geometry,
+                    full: (fbx.children[3].children[3] as THREE.Mesh).geometry,
                     diamond: {
-                        base: fbx.children[3].children[0].children[0].geometry,
-                        full: fbx.children[3].children[0].children[1].geometry
+                        base: (fbx.children[3].children[0].children[0] as THREE.Mesh).geometry,
+                        full: (fbx.children[3].children[0].children[1] as THREE.Mesh).geometry
                     }
                 }
             },

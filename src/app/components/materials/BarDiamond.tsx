@@ -28,14 +28,14 @@ export default function BarDiamond({color} : {color: string}) {
                     ? propsRBarDiamond.map
                     : color === 'white'
                         ? propsWBarDiamond.map
-                        : ''}
-            normalMap={color !== 'base' ? propsYBarDiamond.normalMap : ''}
-            metalnessMap = {color !== 'base' ? propsYBarDiamond.metalnessMap : ''}
-            roughnessMap = {color !== 'base' ? propsYBarDiamond.roughnessMap : ''}
+                        : undefined}
+            normalMap={color !== 'base' ? propsYBarDiamond.normalMap : undefined}
+            metalnessMap = {color !== 'base' ? propsYBarDiamond.metalnessMap : undefined}
+            roughnessMap = {color !== 'base' ? propsYBarDiamond.roughnessMap : undefined}
             metalness = {color !== 'base' ? 1 : 0}
             roughness = {color !== 'base' ? 0.5 : 1}
             envMap = {envMap}
-            color={color !== 'base' ? '' : 'grey'}
+            color={color !== 'base' ? undefined : 'grey'}
             onUpdate={(self) => (self.needsUpdate = true)}
             attach='material'
         />)

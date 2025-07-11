@@ -6,14 +6,17 @@ import BaseFullDiamond from "@/app/components/materials/BaseFullDiamond";
 import FullDiamond from "@/app/components/materials/FullDiamond";
 import FrameFull from "@/app/components/materials/FrameFull";
 import FrameDiamond from "@/app/components/materials/FrameDiamond";
+import State from "@/app/types/State";
+import * as THREE from "three";
 
 export default function CsSx() {
-    const toothGeometry = useTeethStore((state) => state.teethGeometry.cssx);
-    const toothJewelType = useTeethStore((state) => state.teethJewelType.cssx);
-    const toothMaterial = useTeethStore((state) => state.teethMaterial.cssx);
-    const toothVisibility = useTeethStore((state) => state.teethVisibility.cssx);
+    const toothGeometry = useTeethStore((state: State) => state.teethGeometry.cssx);
+    const toothJewelType = useTeethStore((state: State) => state.teethJewelType.cssx);
+    const toothMaterial = useTeethStore((state: State) => state.teethMaterial.cssx);
+    const toothVisibility = useTeethStore((state: State) => state.teethVisibility.cssx);
     const CSSX = memo(({visible, type, mat} : {visible: boolean, type: string, mat: string}): JSX.Element => {
-        let geometry, material;
+        if(!toothGeometry) return <></>
+        let geometry:THREE.BufferGeometry[], material:JSX.Element[];
         switch(type) {
             case 'full':
                 geometry = [toothGeometry.full];

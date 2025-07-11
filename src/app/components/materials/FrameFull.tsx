@@ -29,15 +29,15 @@ export default function FrameFull({color} : {color: string}) {
                     ? propsRFrame01.map
                     : color === 'white'
                         ? propsWFrame01.map
-                        : ''}
-            normalMap={color !== 'base' ? propsYFrame01.normalMap : ''}
-            metalnessMap = {color !== 'base' ? propsYFrame01.metalnessMap : ''}
-            roughnessMap = {color !== 'base' ? propsYFrame01.roughnessMap : ''}
-            aoMap = {color !== 'base' ? propsYFrame01.aoMap : ''}
+                        : undefined}
+            normalMap={color !== 'base' ? propsYFrame01.normalMap : undefined}
+            metalnessMap = {color !== 'base' ? propsYFrame01.metalnessMap : undefined}
+            roughnessMap = {color !== 'base' ? propsYFrame01.roughnessMap : undefined}
+            aoMap = {color !== 'base' ? propsYFrame01.aoMap : undefined}
             metalness = {color !== 'base' ? 1 : 0}
             roughness = {color !== 'base' ? 0.5 : 1}
             envMap = {envMap}
-            color={color !== 'base' ? '' : 'grey'}
+            color={color !== 'base' ? undefined : 'grey'}
             onUpdate={(self) => (self.needsUpdate = true)}
             attach='material'
         />)

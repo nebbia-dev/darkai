@@ -28,14 +28,14 @@ export default function FrameDiamond({color} : {color: string}) {
                     ? propsRFrameDiamond.map
                     : color === 'white'
                         ? propsWFrameDiamond.map
-                        : ''}
-            normalMap={color !== 'base' ? propsYFrameDiamond.normalMap : ''}
-            metalnessMap = {color !== 'base' ? propsYFrameDiamond.metalnessMap : ''}
-            roughnessMap = {color !== 'base' ? propsYFrameDiamond.roughnessMap : ''}
+                        : undefined}
+            normalMap={color !== 'base' ? propsYFrameDiamond.normalMap : undefined}
+            metalnessMap = {color !== 'base' ? propsYFrameDiamond.metalnessMap : undefined}
+            roughnessMap = {color !== 'base' ? propsYFrameDiamond.roughnessMap : undefined}
             metalness = {color !== 'base' ? 1 : 0}
             roughness = {color !== 'base' ? 0.5 : 1}
             envMap = {envMap}
-            color={color !== 'base' ? '' : 'grey'}
+            color={color !== 'base' ? undefined : 'grey'}
             onUpdate={(self) => (self.needsUpdate = true)}
             attach='material'
         />)

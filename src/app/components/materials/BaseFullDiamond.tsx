@@ -29,15 +29,15 @@ export default function BaseFullDiamond({color} : {color: string}) {
                     ? propsRBaseFullDiamond.map
                     : color === 'white'
                         ? propsWBaseFullDiamond.map
-                        : ''}
-            normalMap={color !== 'base' ? propsYBaseFullDiamond.normalMap : ''}
-            metalnessMap = {color !== 'base' ? propsYBaseFullDiamond.metalnessMap : ''}
-            roughnessMap = {color !== 'base' ? propsYBaseFullDiamond.roughnessMap : ''}
-            aoMap = {color !== 'base' ? propsYBaseFullDiamond.aoMap : ''}
+                        : undefined}
+            normalMap={color !== 'base' ? propsYBaseFullDiamond.normalMap : undefined}
+            metalnessMap = {color !== 'base' ? propsYBaseFullDiamond.metalnessMap : undefined}
+            roughnessMap = {color !== 'base' ? propsYBaseFullDiamond.roughnessMap : undefined}
+            aoMap = {color !== 'base' ? propsYBaseFullDiamond.aoMap : undefined}
             metalness = {color !== 'base' ? 1 : 0}
             roughness = {color !== 'base' ? 0.5 : 1}
             envMap = {envMap}
-            color={color !== 'base' ? '' : 'grey'}
+            color={color !== 'base' ? undefined : 'grey'}
             onUpdate={(self) => (self.needsUpdate = true)}
             attach='material'
         />)

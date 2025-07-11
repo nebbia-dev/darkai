@@ -8,6 +8,6 @@ export default function StoneSelector({tooth, stone, onclick, active} : {onclick
     const disabled = type === 'frame' || type === 'bar' || type === 'barDiamond' || type === 'bigBar' || type === 'bigBarDiamond' || material === 'base'
     console.log('oops')
     return (
-        <SelectorButton click={onclick} disabled={disabled} selection={stone} active={active}/>
+        <SelectorButton click={onclick} disabled={disabled} selection={stone} active={active} adjust={false}/>
     )
 }

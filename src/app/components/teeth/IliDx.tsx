@@ -4,15 +4,18 @@ import FullMaterial from "@/app/components/materials/FullMaterial";
 import {useTeethStore} from "@/app/stores/teeth";
 import BaseFullDiamond from "@/app/components/materials/BaseFullDiamond";
 import FullDiamond from "@/app/components/materials/FullDiamond";
+import State from "@/app/types/State";
+import * as THREE from "three";
 
 export default function IliDx() {
-    const toothGeometry = useTeethStore((state) => state.teethGeometry.ilidx);
-    const toothJewelType = useTeethStore((state) => state.teethJewelType.ilidx);
-    const toothMaterial = useTeethStore((state) => state.teethMaterial.ilidx);
-    const toothVisibility = useTeethStore((state) => state.teethVisibility.ilidx);
+    const toothGeometry = useTeethStore((state: State) => state.teethGeometry.ilidx);
+    const toothJewelType = useTeethStore((state: State) => state.teethJewelType.ilidx);
+    const toothMaterial = useTeethStore((state: State) => state.teethMaterial.ilidx);
+    const toothVisibility = useTeethStore((state: State) => state.teethVisibility.ilidx);
 
     const ILIDX = memo(({visible, type, mat} : {visible: boolean, type: string, mat: string}): JSX.Element => {
-        let geometry, material;
+        if(!toothGeometry) return <></>
+        let geometry:THREE.BufferGeometry[], material:JSX.Element[];
         switch(type) {
             case 'full':
                 geometry = [toothGeometry.full];

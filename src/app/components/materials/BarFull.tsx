@@ -29,15 +29,15 @@ export default function BarFull({color} : {color: string}) {
                     ? propsRBarFull.map
                     : color === 'white'
                         ? propsWBarFull.map
-                        : ''}
-            normalMap={color !== 'base' ? propsYBarFull.normalMap : ''}
-            metalnessMap = {color !== 'base' ? propsYBarFull.metalnessMap : ''}
-            roughnessMap = {color !== 'base' ? propsYBarFull.roughnessMap : ''}
-            aoMap = {color !== 'base' ? propsYBarFull.aoMap : ''}
+                        : undefined}
+            normalMap={color !== 'base' ? propsYBarFull.normalMap : undefined}
+            metalnessMap = {color !== 'base' ? propsYBarFull.metalnessMap : undefined}
+            roughnessMap = {color !== 'base' ? propsYBarFull.roughnessMap : undefined}
+            aoMap = {color !== 'base' ? propsYBarFull.aoMap : undefined}
             metalness = {color !== 'base' ? 1 : 0}
             roughness = {color !== 'base' ? 0.5 : 1}
             envMap = {envMap}
-            color={color !== 'base' ? '' : 'grey'}
+            color={color !== 'base' ? undefined : 'grey'}
             onUpdate={(self) => (self.needsUpdate = true)}
             attach='material'
         />)

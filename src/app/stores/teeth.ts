@@ -4,7 +4,20 @@ import State from "@/app/types/State";
 
 export const useTeethStore = create<State>((set, get) => ({
     envMap: null,
-    teethGeometry: null,
+    teethGeometry: {
+        icsdx: null,
+        icssx: null,
+        icidx: null,
+        icisx: null,
+        ilsdx: null,
+        ilssx: null,
+        ilidx: null,
+        ilisx: null,
+        csdx: null,
+        cssx: null,
+        cidx: null,
+        cisx: null,
+    },
     teethMaterial: {
         icsdx: 'base',
         icssx: 'base',
@@ -114,8 +127,10 @@ export const useTeethStore = create<State>((set, get) => ({
                     }]
                 ];
 
-                if(!state.ui){
-                    setTimeout(() => document.getElementById(tooth).scrollIntoView({
+                const box = document.getElementById(tooth);
+
+                if(!state.ui && box){
+                    setTimeout(() => box.scrollIntoView({
                         behavior: 'smooth',
                         block: 'start'
                     }), 300)
@@ -270,8 +285,10 @@ export const useTeethStore = create<State>((set, get) => ({
                     }
                 }
 
-                if(!state.ui){
-                    setTimeout(() => document.getElementById(tooth).scrollIntoView({
+                const box = document.getElementById(tooth);
+
+                if(!state.ui && box){
+                    setTimeout(() => box.scrollIntoView({
                         behavior: 'smooth',
                         block: 'start'
                     }), 300)
@@ -382,8 +399,10 @@ export const useTeethStore = create<State>((set, get) => ({
                     state.currentTooth = tooth;
                 }
 
-                if(!state.ui){
-                    setTimeout(() => document.getElementById(tooth).scrollIntoView({
+                const box = document.getElementById(tooth);
+
+                if(!state.ui && box){
+                    setTimeout(() => box.scrollIntoView({
                         behavior: 'smooth',
                         block: 'start'
                     }), 300)
@@ -474,8 +493,15 @@ export const useTeethStore = create<State>((set, get) => ({
                 state.teethJewelType[tooth] = type;
             })
         ),
-    setActiveDefault: (active, color) =>
-        set({activeDefault: active + color}),
+    setActiveDefault: (active, color) => {
+        switch (active) {
+            case null:
+                set({activeDefault: null});
+                break;
+            default:
+                set({activeDefault: active + color})
+        }
+    },
     setCopy: (copied, original) =>
         set(
             produce((state) => {

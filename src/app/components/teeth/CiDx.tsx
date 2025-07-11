@@ -8,14 +8,17 @@ import FrameDiamond from "@/app/components/materials/FrameDiamond";
 import BarFull from "@/app/components/materials/BarFull";
 import BarDiamond from "@/app/components/materials/BarDiamond";
 import FrameFull from "@/app/components/materials/FrameFull";
+import State from "@/app/types/State";
+import * as THREE from 'three'
 
 export default function CiDx() {
-    const toothGeometry = useTeethStore((state) => state.teethGeometry.cidx);
-    const toothJewelType = useTeethStore((state) => state.teethJewelType.cidx);
-    const toothMaterial = useTeethStore((state) => state.teethMaterial.cidx);
-    const toothVisibility = useTeethStore((state) => state.teethVisibility.cidx);
+    const toothGeometry = useTeethStore((state: State) => state.teethGeometry.cidx);
+    const toothJewelType = useTeethStore((state: State) => state.teethJewelType.cidx);
+    const toothMaterial = useTeethStore((state: State) => state.teethMaterial.cidx);
+    const toothVisibility = useTeethStore((state: State) => state.teethVisibility.cidx);
     const CIDX = memo(({visible, type, mat} : {visible: boolean, type: string, mat: string}): JSX.Element => {
-        let geometry, material;
+        if(!toothGeometry) return <></>
+        let geometry:THREE.BufferGeometry[], material:JSX.Element[];
         switch(type) {
             case 'full':
                 geometry = [toothGeometry.full];

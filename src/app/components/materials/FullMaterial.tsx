@@ -29,15 +29,15 @@ export default function FullMaterial({color} : {color: string}) {
                     ? propsRGoldFull.map
                     : color === 'white'
                         ? propsWGoldFull.map
-                        : ''}
-            normalMap={color !== 'base' ? propsYGoldFull.normalMap : ''}
-            metalnessMap = {color !== 'base' ? propsYGoldFull.metalnessMap : ''}
-            roughnessMap = {color !== 'base' ? propsYGoldFull.roughnessMap : ''}
-            aoMap = {color !== 'base' ? propsYGoldFull.aoMap : ''}
+                        : undefined}
+            normalMap={color !== 'base' ? propsYGoldFull.normalMap : undefined}
+            metalnessMap = {color !== 'base' ? propsYGoldFull.metalnessMap : undefined}
+            roughnessMap = {color !== 'base' ? propsYGoldFull.roughnessMap : undefined}
+            aoMap = {color !== 'base' ? propsYGoldFull.aoMap : undefined}
             metalness = {color !== 'base' ? 1 : 0}
             roughness = {color !== 'base' ? 0.5 : 1}
             envMap = {envMap}
-            color={color !== 'base' ? '' : 'grey'}
+            color={color !== 'base' ? undefined : 'grey'}
             onUpdate={(self) => (self.needsUpdate = true)}
             attach='material'
         />)

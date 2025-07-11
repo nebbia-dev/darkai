@@ -29,15 +29,15 @@ export default function BarSmall({color} : {color: string}) {
                     ? propsRBar03.map
                     : color === 'white'
                         ? propsWBar03.map
-                        : ''}
-            normalMap={color !== 'base' ? propsYBar03.normalMap : ''}
-            metalnessMap = {color !== 'base' ? propsYBar03.metalnessMap : ''}
-            roughnessMap = {color !== 'base' ? propsYBar03.roughnessMap : ''}
-            aoMap = {color !== 'base' ? propsYBar03.aoMap : ''}
+                        : undefined}
+            normalMap={color !== 'base' ? propsYBar03.normalMap : undefined}
+            metalnessMap = {color !== 'base' ? propsYBar03.metalnessMap : undefined}
+            roughnessMap = {color !== 'base' ? propsYBar03.roughnessMap : undefined}
+            aoMap = {color !== 'base' ? propsYBar03.aoMap : undefined}
             metalness = {color !== 'base' ? 1 : 0}
             roughness = {color !== 'base' ? 0.5 : 1}
             envMap = {envMap}
-            color={color !== 'base' ? '' : 'grey'}
+            color={color !== 'base' ? undefined : 'grey'}
             onUpdate={(self) => (self.needsUpdate = true)}
             attach='material'
         />)

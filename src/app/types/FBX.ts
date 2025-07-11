@@ -3,38 +3,38 @@ export default interface FBX {
     // INCISIVI CENTRALI
     icsdx: {
         full: THREE.BufferGeometry,
-            fullDiamond: {
+        fullDiamond: {
             base: THREE.BufferGeometry,
-                full: THREE.BufferGeometry
+            full: THREE.BufferGeometry
         }
-    },
+    } | null,
     icssx: {
         full: THREE.BufferGeometry,
-            fullDiamond: {
+        fullDiamond: {
             base: THREE.BufferGeometry,
-                full: THREE.BufferGeometry
+            full: THREE.BufferGeometry
         }
-    },
+    } | null,
     icidx: {
         full: THREE.BufferGeometry,
-            fullDiamond: {
+        fullDiamond: {
             base: THREE.BufferGeometry,
-                full: THREE.BufferGeometry
+            full: THREE.BufferGeometry
         }
-    },
+    } | null,
     icisx: {
         full: THREE.BufferGeometry,
-            fullDiamond: {
+        fullDiamond: {
             base: THREE.BufferGeometry,
-                full: THREE.BufferGeometry
+            full: THREE.BufferGeometry
         }
-    },
+    } | null,
     // INCISIVI LATERALI
     ilsdx: {
         full: THREE.BufferGeometry,
-            fullDiamond: {
+        fullDiamond: {
             base: THREE.BufferGeometry,
-                full: THREE.BufferGeometry
+            full: THREE.BufferGeometry
         },
         bar: {
             full: {
@@ -52,12 +52,12 @@ export default interface FBX {
                 }
             }
         }
-    },
+    } | null,
     ilssx: {
         full: THREE.BufferGeometry,
-            fullDiamond: {
+        fullDiamond: {
             base: THREE.BufferGeometry,
-                full: THREE.BufferGeometry
+            full: THREE.BufferGeometry
         },
         bar: {
             full: {
@@ -75,94 +75,94 @@ export default interface FBX {
                 }
             }
         }
-    },
+    } | null,
     ilidx: {
         full: THREE.BufferGeometry,
-            fullDiamond: {
+        fullDiamond: {
             base: THREE.BufferGeometry,
-                full: THREE.BufferGeometry
+            full: THREE.BufferGeometry
         }
-    },
+    } | null,
     ilisx: {
         full: THREE.BufferGeometry,
-            fullDiamond: {
+        fullDiamond: {
             base: THREE.BufferGeometry,
-                full: THREE.BufferGeometry
+            full: THREE.BufferGeometry
         }
-    },
+    } | null,
     // CANINI
     csdx: {
         full: THREE.BufferGeometry,
-            fullDiamond: {
+        fullDiamond: {
             base: THREE.BufferGeometry,
-                full: THREE.BufferGeometry
+            full: THREE.BufferGeometry
         },
         frame: {
             full: THREE.BufferGeometry,
-                diamond: {
+            diamond: {
                 base: THREE.BufferGeometry,
-                    full: THREE.BufferGeometry
+                full: THREE.BufferGeometry
             }
         },
         stone: THREE.Object3D,
-    },
+    } | null,
     cssx: {
         full: THREE.BufferGeometry,
-            fullDiamond: {
+        fullDiamond: {
             base: THREE.BufferGeometry,
-                full: THREE.BufferGeometry
+            full: THREE.BufferGeometry
         },
         frame: {
             full: THREE.BufferGeometry,
-                diamond: {
+            diamond: {
                 base: THREE.BufferGeometry,
-                    full: THREE.BufferGeometry
+                full: THREE.BufferGeometry
             }
         },
         stone: THREE.Object3D,
-    },
+    } | null,
     cidx: {
         full: THREE.BufferGeometry,
-            fullDiamond: {
+        fullDiamond: {
             base: THREE.BufferGeometry,
-                full: THREE.BufferGeometry
+            full: THREE.BufferGeometry
         },
         frame: {
             full: THREE.BufferGeometry,
-                diamond: {
+            diamond: {
                 base: THREE.BufferGeometry,
-                    full: THREE.BufferGeometry
+                full: THREE.BufferGeometry
             }
         },
-        stone: THREE.Object3D,
+        stone: THREE.Object3D ,
             bar: {
             full: THREE.BufferGeometry,
-                diamond: {
-                    base: THREE.BufferGeometry,
-                    full: THREE.BufferGeometry
+            diamond: {
+                base: THREE.BufferGeometry,
+                full: THREE.BufferGeometry
             }
         }
-    },
+    } | null,
     cisx: {
         full: THREE.BufferGeometry,
-            fullDiamond: {
+        fullDiamond: {
             base: THREE.BufferGeometry,
-                full: THREE.BufferGeometry
+            full: THREE.BufferGeometry
         },
         frame: {
             full: THREE.BufferGeometry,
-                diamond: {
+            diamond: {
                 base: THREE.BufferGeometry,
-                    full: THREE.BufferGeometry
+                full: THREE.BufferGeometry
             }
         },
         stone: THREE.Object3D,
-            bar: {
+        bar: {
             full: THREE.BufferGeometry,
-                diamond: {
+            diamond: {
                 base: THREE.BufferGeometry,
-                    full: THREE.BufferGeometry
+                full: THREE.BufferGeometry
             }
         }
-    }
+    }  | null
 }

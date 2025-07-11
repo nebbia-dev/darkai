@@ -7,6 +7,6 @@ export default function DiamondToggler({tooth, onclick, active} : {tooth: string
     console.log('ouch');
 
     return (
-        <SelectorButton click={onclick} disabled={material === 'base'} selection="diamond" active={active}/>
+        <SelectorButton click={onclick} disabled={material === 'base'} selection="diamond" active={active} adjust={false}/>
     )
 }

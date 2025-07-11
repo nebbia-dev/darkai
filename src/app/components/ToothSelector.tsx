@@ -28,12 +28,12 @@ export default function ToothSelector({tooth} : {tooth: string}) {
     const setActiveDefault = useTeethStore((state: State) => state.setActiveDefault);
 
 
-    function selectType(type) {
+    function selectType(type: string) {
         setActiveDefault(null, null);
         changeJewelType(tooth, type);
     }
 
-    function selectMaterial(material) {
+    function selectMaterial(material: string) {
         setActiveDefault(null, null);
         changeMaterial(tooth, material);
     }
@@ -42,7 +42,7 @@ export default function ToothSelector({tooth} : {tooth: string}) {
         toggleDiamond(tooth);
     }
 
-    function selectStone(stone) {
+    function selectStone(stone: string) {
         changeStone(tooth, stone);
     }
     const changeTab = (event: SyntheticEvent, newValue: number) => {
@@ -163,22 +163,22 @@ export default function ToothSelector({tooth} : {tooth: string}) {
                 <div className="flex items-center justify-center gap-8 col-start-2 col-end-2">
                     <div className="w-full flex flex-col gap-2 justify-center h-full">
                         <SelectorButtonPill click={() => selectType('full')}
-                                            disabled={false} selection="full"
+                                            disabled={false} selection="full" stones={false}
                                             active={visible && (jewelType === 'full' || jewelType === 'fullDiamond')}/>
 
                         {(tooth === 'ilsdx' || tooth === 'ilssx') &&
                             <SelectorButtonPill click={() => selectType('bar')}
-                                                disabled={false} selection="bar"
+                                                disabled={false} selection="bar" stones={false}
                                                 active={visible && (jewelType === 'bar' || jewelType === 'barDiamond')}/>
                         }
                         {(tooth === 'csdx' || tooth === 'cssx' || tooth === 'cidx' || tooth === 'cisx') &&
                             <SelectorButtonPill click={() => selectType('frame')}
-                                                disabled={false} selection="frame"
+                                                disabled={false} selection="frame" stones={false}
                                                 active={visible && (jewelType === 'frame' || jewelType === 'frameDiamond')}/>
                         }
                         {(tooth === 'cidx' || tooth === 'cisx') &&
                             <SelectorButtonPill click={() => selectType('bigBar')}
-                                                disabled={false} selection="bigBar"
+                                                disabled={false} selection="bigBar" stones={false}
                                                 active={visible && (jewelType === 'bigBar' || jewelType === 'bigBarDiamond')}/>
                         }
                     </div>
@@ -197,12 +197,12 @@ export default function ToothSelector({tooth} : {tooth: string}) {
                 <div className="flex items-center justify-center gap-8 col-start-2 col-end-2">
                     <div className="w-full flex flex-col gap-2 justify-center h-full">
                         <SelectorButtonPill disabled={false} selection="gold" active={visible && (material === 'gold')}
-                                            click={() => selectMaterial('gold')}/>
+                                            click={() => selectMaterial('gold')} stones={false}/>
                         <SelectorButtonPill disabled={false} selection="rose" active={visible && (material === 'rose')}
-                                            click={() => selectMaterial('rose')}/>
+                                            click={() => selectMaterial('rose')} stones={false}/>
                         <SelectorButtonPill disabled={false} selection="white"
                                             active={visible && (material === 'white')}
-                                            click={() => selectMaterial('white')}/>
+                                            click={() => selectMaterial('white')} stones={false}/>
                     </div>
                 </div>
                 <div className="flex items-center justify-center gap-8 col-start-3 col-end-3">

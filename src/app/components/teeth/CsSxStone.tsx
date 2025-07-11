@@ -2,15 +2,18 @@
 import {useTeethStore} from "@/app/stores/teeth";
 import StonesMaterial from "@/app/components/materials/StonesMaterial";
 import {JSX, memo} from "react";
+import State from "@/app/types/State";
+import * as THREE from 'three'
 
 export default function CsSxStone() {
-    const tooth = useTeethStore((state) => state.teethGeometry.cssx.stone);
-    const toothStone =  useTeethStore((state) => state.teethStones.cssx);
-    const CSSXstone = memo(({visible}): JSX.Element => {
+    const tooth = useTeethStore((state: State) => state.teethGeometry.cssx ? state.teethGeometry.cssx.stone : null);
+    const toothStone =  useTeethStore((state: State) => state.teethStones.cssx);
+    const CSSXstone = memo(({visible} : {visible: boolean}): JSX.Element => {
+        if(!tooth) return <></>
         return(
             <group position={tooth.position} quaternion={tooth.quaternion}>
                 <mesh
-                    geometry={tooth.children[0].geometry}
+                    geometry={(tooth.children[0] as THREE.Mesh).geometry}
                     visible={visible}
                     position={tooth.children[0].position}
                     quaternion={tooth.children[0].quaternion}
