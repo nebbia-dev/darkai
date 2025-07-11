@@ -68,7 +68,15 @@ export const useTeethStore = create((set, get) => ({
     },
     activeTab: 0,
     loaded: false,
-    setActiveTab: (value) => set(() => ({activeTab: value})),
+    setActiveTab: (value) =>
+        set(
+            produce((state) => {
+                state.activeTab = value;
+                if(value === 0) {
+                    state.currentTooth = null;
+                }
+            })
+        ),
     setEnvMap: (em) => {
         set({envMap: em})
     },

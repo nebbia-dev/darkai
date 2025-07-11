@@ -75,125 +75,137 @@ export default function Dentiera() {
         }
     }
 
-    const Icsdx = memo(({outline} : {outline: boolean}) : JSX.Element => {
+    const Icsdx = memo(({outline, hovered} : {outline: boolean, hovered: boolean}) : JSX.Element => {
         return (
             <mesh onClick={log} onPointerOver={() => setHover('icsdx')} onPointerOut={() => setHover(null)}
                   geometry={fbx.children[0].children[11].geometry}
                   material={dentieraMaterial}
                   name={fbx.children[0].children[11].name}>
                   {outline && <Outlines thickness={10} color="hotpink"/>}
+                  {hovered && <Outlines thickness={10} color="yellow"/>}
             </mesh>
         )
     })
-    const Icssx = memo(({outline} : {outline: boolean}) : JSX.Element => {
+    const Icssx = memo(({outline, hovered} : {outline: boolean, hovered: boolean}) : JSX.Element => {
         return (
             <mesh onClick={log} onPointerOver={() => setHover('icssx')} onPointerOut={() => setHover(null)}
                   geometry={fbx.children[0].children[8].geometry}
                   material={dentieraMaterial}
                   name={fbx.children[0].children[8].name}>
                   {outline && <Outlines thickness={10} color="hotpink"/>}
+                  {hovered && <Outlines thickness={10} color="yellow"/>}
             </mesh>
         )
     })
-    const Icisx = memo(({outline} : {outline: boolean}) : JSX.Element => {
+    const Icisx = memo(({outline, hovered} : {outline: boolean, hovered: boolean}) : JSX.Element => {
         return (
             <mesh onClick={log} onPointerOver={() => setHover('icisx')} onPointerOut={() => setHover(null)}
                   geometry={fbx.children[0].children[0].geometry}
                   material={dentieraMaterial}
                   name={fbx.children[0].children[0].name}>
                   {outline && <Outlines thickness={10} color="hotpink"/>}
+                  {hovered && <Outlines thickness={10} color="yellow"/>}
             </mesh>
         )
     })
-    const Icidx = memo(({outline} : {outline: boolean}) : JSX.Element => {
+    const Icidx = memo(({outline, hovered} : {outline: boolean, hovered: boolean}) : JSX.Element => {
         return (
             <mesh onClick={log} onPointerOver={() => setHover('icidx')} onPointerOut={() => setHover(null)}
                   geometry={fbx.children[0].children[1].geometry}
                   material={dentieraMaterial}
                   name={fbx.children[0].children[1].name}>
                   {outline && <Outlines thickness={10} color="hotpink"/>}
+                  {hovered && <Outlines thickness={10} color="yellow"/>}
             </mesh>
         )
     })
 
-    const Csdx = memo(({outline} : {outline: boolean}) : JSX.Element => {
+    const Csdx = memo(({outline, hovered} : {outline: boolean, hovered: boolean}) : JSX.Element => {
         return (
             <mesh onClick={log} onPointerOver={() => setHover('csdx')} onPointerOut={() => setHover(null)}
                   geometry={fbx.children[0].children[9].geometry}
                   material={dentieraMaterial}
                   name={fbx.children[0].children[9].name}>
                   {outline && <Outlines thickness={10} color="hotpink"/>}
+                  {hovered && <Outlines thickness={10} color="yellow"/>}
             </mesh>
         )
     })
-    const Cssx = memo(({outline} : {outline: boolean}) : JSX.Element => {
+    const Cssx = memo(({outline, hovered} : {outline: boolean, hovered: boolean}) : JSX.Element => {
         return (
             <mesh onClick={log} onPointerOver={() => setHover('cssx')} onPointerOut={() => setHover(null)}
                   geometry={fbx.children[0].children[6].geometry}
                   material={dentieraMaterial}
                   name={fbx.children[0].children[6].name}>
                   {outline && <Outlines thickness={10} color="hotpink"/>}
+                  {hovered && <Outlines thickness={10} color="yellow"/>}
             </mesh>
         )
     })
-    const Cisx = memo(({outline} : {outline: boolean}) : JSX.Element => {
+    const Cisx = memo(({outline, hovered} : {outline: boolean, hovered: boolean}) : JSX.Element => {
         return (
             <mesh onClick={log} onPointerOver={() => setHover('cisx')} onPointerOut={() => setHover(null)}
                   geometry={fbx.children[0].children[4].geometry}
                   material={dentieraMaterial}
                   name={fbx.children[0].children[4].name}>
                   {outline && <Outlines thickness={10} color="hotpink"/>}
+                  {hovered && <Outlines thickness={10} color="yellow"/>}
             </mesh>
         )
     })
-    const Cidx = memo(({outline} : {outline: boolean}) : JSX.Element => {
+    const Cidx = memo(({outline, hovered} : {outline: boolean, hovered: boolean}) : JSX.Element => {
         return (
             <mesh onClick={log} onPointerOver={() => setHover('cidx')} onPointerOut={() => setHover(null)}
                   geometry={fbx.children[0].children[5].geometry}
                   material={dentieraMaterial}
                   name={fbx.children[0].children[5].name}>
                   {outline && <Outlines thickness={10} color="hotpink"/>}
+                  {hovered && <Outlines thickness={10} color="yellow"/>}
             </mesh>
         )
     })
 
-    const Ilsdx = memo(({outline} : {outline: boolean}) : JSX.Element => {
+    const Ilsdx = memo(({outline, hovered} : {outline: boolean, hovered: boolean}) : JSX.Element => {
         return (
             <mesh onClick={log} onPointerOver={() => setHover('ilsdx')} onPointerOut={() => setHover(null)}
                   geometry={fbx.children[0].children[10].geometry}
                   material={dentieraMaterial}
                   name={fbx.children[0].children[10].name}>
                   {outline && <Outlines thickness={10} color="hotpink"/>}
+                  {hovered && <Outlines thickness={10} color="yellow"/>}
             </mesh>
         )
     })
-    const Ilssx = memo(({outline} : {outline: boolean}) : JSX.Element => {
+    const Ilssx = memo(({outline, hovered} : {outline: boolean, hovered: boolean}) : JSX.Element => {
         return (
             <mesh onClick={log} onPointerOver={() => setHover('ilssx')} onPointerOut={() => setHover(null)}
                   geometry={fbx.children[0].children[7].geometry}
                   material={dentieraMaterial}
                   name={fbx.children[0].children[7].name}>
                   {outline && <Outlines thickness={10} color="hotpink"/>}
+                  {hovered && <Outlines thickness={10} color="yellow"/>}
             </mesh>
         )
     })
-    const Ilisx = memo(({outline} : {outline: boolean}) : JSX.Element => {
+    const Ilisx = memo(({outline, hovered} : {outline: boolean, hovered: boolean}) : JSX.Element => {
         return (
             <mesh onClick={log} onPointerOver={() => setHover('ilisx')} onPointerOut={() => setHover(null)}
                   geometry={fbx.children[0].children[2].geometry}
                   material={dentieraMaterial}
                   name={fbx.children[0].children[2].name}>
                   {outline && <Outlines thickness={10} color="hotpink"/>}
+                  {hovered && <Outlines thickness={10} color="yellow"/>}
             </mesh>
         )
     })
-    const Ilidx = memo(({outline} : {outline: boolean}) : JSX.Element => {
+    const Ilidx = memo(({outline, hovered} : {outline: boolean, hovered: boolean}) : JSX.Element => {
         return (
             <mesh onClick={log} onPointerOver={() => setHover('ilidx')} onPointerOut={() => setHover(null)}
                   geometry={fbx.children[0].children[3].geometry}
                   material={dentieraMaterial}
                   name={fbx.children[0].children[3].name}>
                   {outline && <Outlines thickness={10} color="hotpink"/>}
+                  {hovered && <Outlines thickness={10} color="yellow"/>}
             </mesh>
         )
     })
@@ -214,20 +226,20 @@ export default function Dentiera() {
         <>
             <Base/>
 
-            <Icisx outline={activeTooth === 'icisx' || hovered === 'icisx'}/>
-            <Icidx outline={activeTooth === 'icidx' || hovered === 'icidx'}/>
-            <Icssx outline={activeTooth === 'icssx' || hovered === 'icssx'}/>
-            <Icsdx outline={activeTooth === 'icsdx' || hovered === 'icsdx'}/>
+            <Icisx outline={activeTooth === 'icisx'} hovered={hovered === 'icisx'}/>
+            <Icidx outline={activeTooth === 'icidx'} hovered={hovered === 'icidx'}/>
+            <Icssx outline={activeTooth === 'icssx'} hovered={hovered === 'icssx'}/>
+            <Icsdx outline={activeTooth === 'icsdx'} hovered={hovered === 'icsdx'}/>
 
-            <Ilisx outline={activeTooth === 'ilisx' || hovered === 'ilisx'}/>
-            <Ilidx outline={activeTooth === 'ilidx' || hovered === 'ilidx'}/>
-            <Ilssx outline={activeTooth === 'ilssx' || hovered === 'ilssx'}/>
-            <Ilsdx outline={activeTooth === 'ilsdx' || hovered === 'ilsdx'}/>
+            <Ilisx outline={activeTooth === 'ilisx'} hovered={hovered === 'ilisx'}/>
+            <Ilidx outline={activeTooth === 'ilidx'} hovered={hovered === 'ilidx'}/>
+            <Ilssx outline={activeTooth === 'ilssx'} hovered={hovered === 'ilssx'}/>
+            <Ilsdx outline={activeTooth === 'ilsdx'} hovered={hovered === 'ilsdx'}/>
 
-            <Cisx outline={activeTooth === 'cisx' || hovered === 'cisx'}/>
-            <Cidx outline={activeTooth === 'cidx' || hovered === 'cidx'}/>
-            <Cssx outline={activeTooth === 'cssx' || hovered === 'cssx'}/>
-            <Csdx outline={activeTooth === 'csdx' || hovered === 'csdx'}/>
+            <Cisx outline={activeTooth === 'cisx'} hovered={hovered === 'cisx'}/>
+            <Cidx outline={activeTooth === 'cidx'} hovered={hovered === 'cidx'}/>
+            <Cssx outline={activeTooth === 'cssx'} hovered={hovered === 'cssx'}/>
+            <Csdx outline={activeTooth === 'csdx'} hovered={hovered === 'csdx'}/>
         </>
     )
 }
