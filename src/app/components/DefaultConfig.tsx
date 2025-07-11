@@ -1,9 +1,8 @@
-import {useTeethStore} from "@/app/stores/teeth";
 import {Accordion, AccordionDetails, AccordionSummary} from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import DefaultConfigButton from "@/app/components/DefaultConfigButton";
 
-export default function DefaultConfig({teeth}) {
+export default function DefaultConfig({teeth} : {teeth: string}) {
     const firstChild = teeth === 'full' ? '' : '1px solid #9ca3af';
     let title;
 

@@ -1,7 +1,7 @@
 import {useTeethStore} from "@/app/stores/teeth";
 import SelectorButtonPill from "@/app/components/SelectorButtonPill";
 
-export default function StoneSelectorPill({tooth, stone, onclick, active}) {
+export default function StoneSelectorPill({tooth, stone, onclick, active} : {onclick: () => void, tooth: string, active: boolean, stone: string}) {
     const type = useTeethStore((state) => state.teethJewelType[tooth]);
     const material = useTeethStore((state) => state.teethMaterial[tooth]);
     const disabled = type === 'frame' || type === 'bar' || type === 'barDiamond' || type === 'bigBar' || type === 'bigBarDiamond' || material === 'base'

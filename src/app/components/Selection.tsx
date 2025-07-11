@@ -1,5 +1,5 @@
 import ToothConfig from "@/app/components/ToothConfig";
-import {ReactNode, SyntheticEvent, useState} from "react";
+import {ReactNode, SyntheticEvent} from "react";
 import {Box, Tab, Tabs} from "@mui/material";
 import DefaultConfig from "@/app/components/DefaultConfig";
 import ToothSelector from "@/app/components/ToothSelector";
@@ -12,7 +12,7 @@ interface TabPanelProps {
     value: number;
 }
 
-export default function Selection({ui}) {
+export default function Selection({ui} : {ui:boolean}) {
     const activeTooth = useTeethStore((state) => state.currentTooth);
     const activeTab = useTeethStore((state) => state.activeTab);
     const setActiveTab = useTeethStore((state) => state.setActiveTab);

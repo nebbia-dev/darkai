@@ -8,7 +8,7 @@ import {Copy} from "@/app/components/icons/Copy";
 import {useState} from "react";
 import elabToothName from "@/app/helpers/elabToothName";
 
-export default function ToothConfig({tooth}) {
+export default function ToothConfig({tooth} : {tooth: string}) {
     const jewelType = useTeethStore((state) => state.teethJewelType[tooth]);
     const material = useTeethStore((state) => state.teethMaterial[tooth]);
     const stones = useTeethStore((state) => state.teethStones[tooth]);

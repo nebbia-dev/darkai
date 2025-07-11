@@ -6,7 +6,7 @@ import {Copy} from "@/app/components/icons/Copy";
 import elabToothName from "@/app/helpers/elabToothName";
 import {useState} from "react";
 
-export default function ActionBar({ui}) {
+export default function ActionBar({ui} : {ui: boolean}) {
     const current = useTeethStore((state) => state.currentHistory);
     const history = useTeethStore((state) => state.history);
     const activeTooth = useTeethStore((state) => state.currentTooth);

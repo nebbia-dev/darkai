@@ -1,4 +1,4 @@
-export default function SelectorButtonPill({click, disabled, selection, active, stones}) {
+export default function SelectorButtonPill({click, disabled, selection, active, stones} : {click: () => void, disabled: boolean, selection: string, active: boolean, stones: boolean}) {
     return (
         <button
             className={`

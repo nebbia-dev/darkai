@@ -12,7 +12,7 @@ interface TabPanelProps {
     index: number;
     value: number;
 }
-export default function ToothSelector({tooth}) {
+export default function ToothSelector({tooth} : {tooth: string}) {
     const [value, setValue] = useState<number>(0);
     const activeTooth = useTeethStore((state) => state.currentTooth);
 
