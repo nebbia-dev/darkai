@@ -127,13 +127,16 @@ export const useTeethStore = create<State>((set, get) => ({
                     }]
                 ];
 
-                const box = document.getElementById(tooth);
-
-                if(!state.ui && box){
-                    setTimeout(() => box.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    }), 300)
+                if(!state.ui){
+                    setTimeout(() => {
+                        const box = document.getElementById(tooth);
+                        if(box) {
+                            box.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            })
+                        }
+                    }, 300)
                 }
 
                 console.log(state.history, state.currentHistory)
@@ -285,13 +288,16 @@ export const useTeethStore = create<State>((set, get) => ({
                     }
                 }
 
-                const box = document.getElementById(tooth);
-
-                if(!state.ui && box){
-                    setTimeout(() => box.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    }), 300)
+                if(!state.ui){
+                    setTimeout(() => {
+                        const box = document.getElementById(tooth);
+                        if(box) {
+                            box.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            })
+                        }
+                    }, 300)
                 }
 
                 state.history = [...state.history,
@@ -399,13 +405,16 @@ export const useTeethStore = create<State>((set, get) => ({
                     state.currentTooth = tooth;
                 }
 
-                const box = document.getElementById(tooth);
-
-                if(!state.ui && box){
-                    setTimeout(() => box.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    }), 300)
+                if(!state.ui){
+                    setTimeout(() => {
+                        const box = document.getElementById(tooth);
+                        if(box) {
+                            box.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            })
+                        }
+                    }, 300)
                 }
 
             })
