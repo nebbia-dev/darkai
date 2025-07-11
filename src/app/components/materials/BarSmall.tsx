@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import {useTexture} from "@react-three/drei";
 import {useTeethStore} from "@/app/stores/teeth";
 
-export default function BarSmall({color}) {
+export default function BarSmall({color} : {color: string}) {
     const envMap = useTeethStore((state) => state.envMap);
         const propsYBar03 = useTexture({
             map: 'textures/bar/03/DefaultMaterial_Base_color.webp',

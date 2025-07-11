@@ -1,9 +1,10 @@
 import {useTeethStore} from "@/app/stores/teeth";
+import State from "@/app/types/State";
 
 export default function DefaultConfigSelector({teeth, color} : {teeth: string, color: string}) {
-    const setDefaultConfig = useTeethStore((state) => state.setDefaultConfig);
-    const activeDefault = useTeethStore((state) => state.activeDefault);
-    const setActiveDefault = useTeethStore((state) => state.setActiveDefault);
+    const setDefaultConfig = useTeethStore((state: State) => state.setDefaultConfig);
+    const activeDefault = useTeethStore((state: State) => state.activeDefault);
+    const setActiveDefault = useTeethStore((state: State) => state.setActiveDefault);
     function setConfig() {
         if(color === 'diamond') {
             setActiveDefault(teeth, color);

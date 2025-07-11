@@ -1,8 +1,9 @@
 import {useTeethStore} from "@/app/stores/teeth";
+import State from "@/app/types/State";
 
 export default function TeethMap() {
 
-    const activeTooth = useTeethStore((state) => state.currentTooth);
+    const activeTooth = useTeethStore((state: State) => state.currentTooth);
 
     return(
         <div className={`${activeTooth ? 'relative z-30 top-[-50%]' : 'hidden'}`}>

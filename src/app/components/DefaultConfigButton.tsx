@@ -1,8 +1,9 @@
 import {useTeethStore} from "@/app/stores/teeth";
+import State from "@/app/types/State";
 
 export default function DefaultConfigButton({teeth, color} : {teeth: string, color: string}) {
-    const setDefaultConfig = useTeethStore((state) => state.setDefaultConfig);
-    const activeDefault = useTeethStore((state) => state.activeDefault);
+    const setDefaultConfig = useTeethStore((state: State) => state.setDefaultConfig);
+    const activeDefault = useTeethStore((state: State) => state.activeDefault);
     function setConfig() {
         if(color === 'diamond') {
             return setDefaultConfig(teeth + color[0].toUpperCase() + color.slice(1), 'gold');

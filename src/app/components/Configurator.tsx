@@ -22,6 +22,7 @@ import CiDx from "@/app/components/teeth/CiDx";
 import CiSx from "@/app/components/teeth/CiSx";
 import CiSxStone from "@/app/components/teeth/CiSxStone";
 import Stones from "@/app/components/teeth/Stones";
+import State from "@/app/types/State";
 
 export default function Configurator() {
     const envMap = useEnvironment({files: "envMaps/HDR_Light_Studio_Free_HDRI_Design_13.exr"})
@@ -197,10 +198,10 @@ export default function Configurator() {
             },
         }
     }, []);
-    const savedTeeth = useTeethStore((state) => state.teethGeometry);
-    const setTeeth = useTeethStore((state) => state.setGeometry);
-    const savedEnvMap = useTeethStore((state) => state.envMap);
-    const setEnvMap = useTeethStore((state) => state.setEnvMap);
+    const savedTeeth = useTeethStore((state : State) => state.teethGeometry);
+    const setTeeth = useTeethStore((state : State) => state.setGeometry);
+    const savedEnvMap = useTeethStore((state : State) => state.envMap);
+    const setEnvMap = useTeethStore((state : State) => state.setEnvMap);
 
     useEffect(() => {
         setTeeth(teeth);

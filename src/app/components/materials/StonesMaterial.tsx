@@ -2,7 +2,7 @@
 
 import {useTeethStore} from "@/app/stores/teeth";
 
-export default function StonesMaterial({color}) {
+export default function StonesMaterial({color} : {color: string}) {
     const envMap = useTeethStore((state) => state.envMap);
         return (<meshBasicMaterial
             color={color === 'sapphire'

@@ -1,7 +1,8 @@
 import { create } from 'zustand';
 import {produce} from "immer";
+import State from "@/app/types/State";
 
-export const useTeethStore = create((set, get) => ({
+export const useTeethStore = create<State>((set, get) => ({
     envMap: null,
     teethGeometry: null,
     teethMaterial: {
@@ -583,57 +584,4 @@ export const useTeethStore = create((set, get) => ({
             activeDefault: null
         })
     }
-    // setWholeTooth: (tooth, color, type) =>
-    //     set(
-    //     produce((state) => {
-    //         if(type !== 'full' && type !== 'fullDiamond') {
-    //             state.teethStones[tooth] = null;
-    //         }
-    //
-    //         if(type === 'bigBar' || type === 'bigBarDiamond') {
-    //             state.teethJewelType.cidx = type;
-    //             state.teethJewelType.cisx = type;
-    //             state.teethMaterial.cisx = color;
-    //             state.teethMaterial.cidx = color;
-    //             if(!state.teethVisibility.cidx) {
-    //                 state.teethVisibility.cidx = true;
-    //                 state.teethMaterial.cidx = 'gold';
-    //             }
-    //             if(!state.teethVisibility.cisx) {
-    //                 state.teethVisibility.cisx = true;
-    //                 state.teethMaterial.cisx = 'gold';
-    //             }
-    //         } else {
-    //             if(state.teethJewelType[tooth] === 'bigBar' || state.teethJewelType[tooth] === 'bigBarDiamond') {
-    //                 switch(tooth) {
-    //                     case 'cidx':
-    //                         state.teethMaterial.cidx = color;
-    //                         state.teethJewelType.cidx = type;
-    //                         state.teethJewelType.cisx = 'full';
-    //                         state.teethVisibility.cisx = false;
-    //                         state.teethMaterial.cisx = 'base';
-    //                         break;
-    //                     case 'cisx':
-    //                         state.teethMaterial.cisx = color;
-    //                         state.teethJewelType.cisx = type;
-    //                         state.teethJewelType.cidx = 'full';
-    //                         state.teethVisibility.cidx = false;
-    //                         state.teethMaterial.cidx = 'base';
-    //                         break;
-    //                 }
-    //             } else {
-    //                 if(state.teethJewelType[tooth] !== type) {
-    //                     state.teethJewelType[tooth] = type;
-    //                 }
-    //                 if(state.teethMaterial[tooth] !== color) {
-    //                     state.teethMaterial[tooth] = color;
-    //                 }
-    //                 if(!state.teethVisibility[tooth]) {
-    //                     state.teethVisibility[tooth] = true;
-    //                     state.teethMaterial[tooth] = 'gold';
-    //                 }
-    //             }
-    //         }
-    //     }),
-    // ),
 }))

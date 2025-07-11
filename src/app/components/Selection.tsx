@@ -5,6 +5,7 @@ import DefaultConfig from "@/app/components/DefaultConfig";
 import ToothSelector from "@/app/components/ToothSelector";
 import DefaultSelector from "@/app/components/DefaultSelector";
 import {useTeethStore} from "@/app/stores/teeth";
+import State from "@/app/types/State";
 
 interface TabPanelProps {
     children?: ReactNode;
@@ -13,9 +14,9 @@ interface TabPanelProps {
 }
 
 export default function Selection({ui} : {ui:boolean}) {
-    const activeTooth = useTeethStore((state) => state.currentTooth);
-    const activeTab = useTeethStore((state) => state.activeTab);
-    const setActiveTab = useTeethStore((state) => state.setActiveTab);
+    const activeTooth = useTeethStore((state: State) => state.currentTooth);
+    const activeTab = useTeethStore((state: State) => state.activeTab);
+    const setActiveTab = useTeethStore((state: State) => state.setActiveTab);
     const changeTab = (event: SyntheticEvent, newValue: number) => {
         setActiveTab(newValue);
     };

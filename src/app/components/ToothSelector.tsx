@@ -7,6 +7,7 @@ import StoneSelectorPill from "@/app/components/StoneSelectorPill";
 import {Shape} from "@/app/components/icons/Shape";
 import {Metal} from "@/app/components/icons/Metal";
 import {Gem} from "@/app/components/icons/Gem";
+import State from "@/app/types/State";
 interface TabPanelProps {
     children?: ReactNode;
     index: number;
@@ -14,17 +15,17 @@ interface TabPanelProps {
 }
 export default function ToothSelector({tooth} : {tooth: string}) {
     const [value, setValue] = useState<number>(0);
-    const activeTooth = useTeethStore((state) => state.currentTooth);
+    const activeTooth = useTeethStore((state: State) => state.currentTooth);
 
-    const jewelType = useTeethStore((state) => state.teethJewelType[tooth]);
-    const material = useTeethStore((state) => state.teethMaterial[tooth]);
-    const stones = useTeethStore((state) => state.teethStones[tooth]);
-    const visible = useTeethStore((state) => state.teethVisibility[tooth]);
-    const changeJewelType = useTeethStore((state) => state.setType);
-    const changeMaterial = useTeethStore((state) => state.setMaterial);
-    const toggleDiamond = useTeethStore((state) => state.setDiamond);
-    const changeStone = useTeethStore((state) => state.setStone);
-    const setActiveDefault = useTeethStore((state) => state.setActiveDefault);
+    const jewelType = useTeethStore((state: State) => state.teethJewelType[tooth]);
+    const material = useTeethStore((state: State) => state.teethMaterial[tooth]);
+    const stones = useTeethStore((state: State) => state.teethStones[tooth]);
+    const visible = useTeethStore((state: State) => state.teethVisibility[tooth]);
+    const changeJewelType = useTeethStore((state: State) => state.setType);
+    const changeMaterial = useTeethStore((state: State) => state.setMaterial);
+    const toggleDiamond = useTeethStore((state: State) => state.setDiamond);
+    const changeStone = useTeethStore((state: State) => state.setStone);
+    const setActiveDefault = useTeethStore((state: State) => state.setActiveDefault);
 
 
     function selectType(type) {

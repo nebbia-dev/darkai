@@ -5,20 +5,21 @@ import {Redo} from "@/app/components/icons/Redo";
 import {Copy} from "@/app/components/icons/Copy";
 import elabToothName from "@/app/helpers/elabToothName";
 import {useState} from "react";
+import State from "@/app/types/State";
 
 export default function ActionBar({ui} : {ui: boolean}) {
-    const current = useTeethStore((state) => state.currentHistory);
-    const history = useTeethStore((state) => state.history);
-    const activeTooth = useTeethStore((state) => state.currentTooth);
-    const jewelType = useTeethStore((state) => state.teethJewelType[activeTooth]);
-    const material = useTeethStore((state) => state.teethMaterial[activeTooth]);
-    const stones = useTeethStore((state) => state.teethStones[activeTooth]);
-    const availableTypes = useTeethStore((state) => state.teethTypeOptions);
-    const visible = useTeethStore((state) => state.teethVisibility[activeTooth]);
-    const copy = useTeethStore((state) => state.setCopy);
-    const reset = useTeethStore((state) => state.reset);
-    const undo = useTeethStore((state) => state.undo);
-    const redo = useTeethStore((state) => state.redo);
+    const current = useTeethStore((state:State) => state.currentHistory);
+    const history = useTeethStore((state:State) => state.history);
+    const activeTooth = useTeethStore((state:State) => state.currentTooth);
+    const jewelType = useTeethStore((state:State) => state.teethJewelType[activeTooth]);
+    const material = useTeethStore((state:State) => state.teethMaterial[activeTooth]);
+    const stones = useTeethStore((state:State) => state.teethStones[activeTooth]);
+    const availableTypes = useTeethStore((state:State) => state.teethTypeOptions);
+    const visible = useTeethStore((state:State) => state.teethVisibility[activeTooth]);
+    const copy = useTeethStore((state:State) => state.setCopy);
+    const reset = useTeethStore((state:State) => state.reset);
+    const undo = useTeethStore((state:State) => state.undo);
+    const redo = useTeethStore((state:State) => state.redo);
     const [showCopy, setShowCopy] = useState<boolean>(false);
 
     function doUndo() {

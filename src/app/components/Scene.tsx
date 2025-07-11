@@ -3,10 +3,11 @@ import {Canvas} from '@react-three/fiber';
 import Configurator from "@/app/components/Configurator";
 import {useEffect} from "react";
 import {useTeethStore} from "@/app/stores/teeth";
+import State from "@/app/types/State";
 
 export default function Scene() {
 
-    const setLoaded = useTeethStore((state) => state.setLoaded);
+    const setLoaded = useTeethStore((state: State) => state.setLoaded);
 
     useEffect(() => {
         setTimeout(() => setLoaded(true), 1000);

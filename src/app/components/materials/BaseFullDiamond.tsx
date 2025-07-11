@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import {useTexture} from "@react-three/drei";
 import {useTeethStore} from "@/app/stores/teeth";
 
-export default function BaseFullDiamond({color}) {
+export default function BaseFullDiamond({color} : {color: string}) {
     const envMap = useTeethStore((state) => state.envMap);
         const propsYBaseFullDiamond = useTexture({
             map: 'textures/diamondFull/frameDiamond/DefaultMaterial_Base_color.webp',

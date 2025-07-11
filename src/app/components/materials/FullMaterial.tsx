@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import {useTexture} from "@react-three/drei";
 import {useTeethStore} from "@/app/stores/teeth";
 
-export default function FullMaterial({color}) {
+export default function FullMaterial({color} : {color: string}) {
     const envMap = useTeethStore((state) => state.envMap);
         const propsYGoldFull = useTexture({
             map: 'textures/full/DefaultMaterial_Base_color.webp',

@@ -3,15 +3,16 @@ import * as THREE from 'three';
 import {Outlines, useFBX, useTexture} from "@react-three/drei";
 import {JSX, memo, useEffect, useMemo, useState} from "react";
 import {useTeethStore} from "@/app/stores/teeth";
+import State from "@/app/types/State";
 
 export default function Dentiera() {
     const fbx = useMemo(() => {
         console.log('dentiera')
         return useFBX('/models/Dentiera_Separata.fbx')
     }, []);
-    const envMap = useTeethStore((state) => state.envMap);
-    const setActive = useTeethStore((state) => state.setActiveTooth);
-    const activeTooth = useTeethStore((state) => state.currentTooth);
+    const envMap = useTeethStore((state: State) => state.envMap);
+    const setActive = useTeethStore((state: State) => state.setActiveTooth);
+    const activeTooth = useTeethStore((state: State) => state.currentTooth);
     const props = useTexture({
         map: 'textures/dentieraBase/DefaultMaterial_Base_color.webp',
         normalMap: 'textures/dentieraBase/DefaultMaterial_Normal.webp',
