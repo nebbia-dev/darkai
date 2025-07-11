@@ -42,14 +42,14 @@ export default function ActionBar({ui}) {
         <div className="relative z-30">
             <div
                 className={`absolute flex items-center justify-center gap-4 ${ui ? 'bottom-5' : 'bottom-30'} left-[50%] translate-x-[-50%] w-2/4`}>
-                <button onClick={doUndo} className="rounded-full border p-2 cursor-pointer">
+                <button onClick={doUndo} className="rounded-full border p-2 cursor-pointer bg-gray-50/50">
                     <Undo className={`${ui ? 'w-6 h-6' : 'w-8 h-8'}`}/>
                 </button>
-                <button onClick={doRedo} className="rounded-full border p-2 cursor-pointer">
+                <button onClick={doRedo} className="rounded-full border p-2 cursor-pointer bg-gray-50/50">
                     <Redo className={`${ui ? 'w-6 h-6' : 'w-8 h-8'}`}/>
                 </button>
                 <div className={`${visible && material !== 'base' && ui ? 'flex' : 'hidden'} relative items-center justify-center col-start-1 col-end-1 row-start-1 row-end-1`}>
-                    <button className=" rounded-full border p-2 cursor-pointer w-fit"
+                    <button className="bg-gray-50/50 rounded-full border p-2 cursor-pointer w-fit"
                             onClick={() => setShowCopy((prev) => !prev)}>
                         <Copy className={`${ui ? 'w-6 h-6' : 'w-8 h-8'}`}/>
                     </button>
@@ -71,7 +71,7 @@ export default function ActionBar({ui}) {
                         </ul>
                     </div>
                 </div>
-                <button onClick={reset} className="rounded-full border p-2 cursor-pointer">
+                <button onClick={reset} className="bg-gray-50/50 rounded-full border p-2 cursor-pointer">
                     <Reset className={`${ui ? 'w-6 h-6' : 'w-8 h-8'}`}/>
                 </button>
             </div>
