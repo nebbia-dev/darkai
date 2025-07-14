@@ -13,7 +13,7 @@ export default function Home() {
     const [isMounted, setIsMounted] = useState(false);
 
     useEffect(() => {
-        setTimeout(() => setIsMounted(true), 1000);
+        setTimeout(() => setIsMounted(true), 100);
     });
 
     useEffect(() => {
