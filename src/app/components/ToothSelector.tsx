@@ -220,7 +220,7 @@ export default function ToothSelector({tooth} : {tooth: string}) {
                 <div
                     className={`flex items-center justify-center gap-8 col-start-2 col-end-2 ${tooth === 'csdx' || tooth === 'cssx' || tooth === 'cidx' || tooth === 'cisx' ? 'h-full' : ''}`}>
                     <div className={`${tooth === 'csdx' || tooth === 'cssx' || tooth === 'cidx' || tooth === 'cisx'
-                        ? 'w-full grid grid-cols-2 grid-rows-[15%_15%_15%] gap-2 h-full relative top-[50%] translate-y-[-25%]'
+                        ? 'w-full grid grid-cols-2 h-[50%] gap-2 items-center justify-center'
                         : 'w-full flex flex-col gap-2 justify-center h-full'
                     }`}>
                         {(tooth === 'csdx' || tooth === 'cssx' || tooth === 'cidx' || tooth === 'cisx') &&

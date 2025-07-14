@@ -130,26 +130,29 @@ export default function ToothConfig({tooth} : {tooth: string}) {
 
                     <div className="p-4">
                         <p className="text-left">Stones</p>
-                        <div className="flex gap-4">
+                        <div className="flex gap-2">
                             <DiamondToggler tooth={tooth} onclick={selectDiamond}
                                             active={visible && (jewelType === 'fullDiamond' || jewelType === 'barDiamond' || jewelType === 'frameDiamond' || jewelType === 'bigBarDiamond')}/>
-                            {(tooth === 'csdx' || tooth === 'cssx' || tooth === 'cidx' || tooth === 'cisx') &&
-                                <div className="flex gap-2">
-                                    <StoneSelector tooth={tooth} stone="sapphire"
-                                                   active={visible && (stones === 'sapphire')}
-                                                   onclick={() => selectStone('sapphire')}/>
-                                    <StoneSelector tooth={tooth} stone="ruby" active={visible && (stones === 'ruby')}
-                                                   onclick={() => selectStone('ruby')}/>
-                                    <StoneSelector tooth={tooth} stone="emerald"
-                                                   active={visible && (stones === 'emerald')}
-                                                   onclick={() => selectStone('emerald')}/>
-                                    <StoneSelector tooth={tooth} stone="amethyst"
-                                                   active={visible && (stones === 'amethyst')}
-                                                   onclick={() => selectStone('amethyst')}/>
-                                </div>
-                            }
                         </div>
                     </div>
+                            {(tooth === 'csdx' || tooth === 'cssx' || tooth === 'cidx' || tooth === 'cisx') &&
+                                <div className="p-4">
+                                    <p className="text-left">Gems</p>
+                                    <div className="flex gap-2">
+                                        <StoneSelector tooth={tooth} stone="sapphire"
+                                                       active={visible && (stones === 'sapphire')}
+                                                       onclick={() => selectStone('sapphire')}/>
+                                        <StoneSelector tooth={tooth} stone="ruby" active={visible && (stones === 'ruby')}
+                                                       onclick={() => selectStone('ruby')}/>
+                                        <StoneSelector tooth={tooth} stone="emerald"
+                                                       active={visible && (stones === 'emerald')}
+                                                       onclick={() => selectStone('emerald')}/>
+                                        <StoneSelector tooth={tooth} stone="amethyst"
+                                                       active={visible && (stones === 'amethyst')}
+                                                       onclick={() => selectStone('amethyst')}/>
+                                    </div>
+                                </div>
+                            }
                 </div>
             </AccordionDetails>
         </Accordion>
