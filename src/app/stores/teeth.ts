@@ -101,7 +101,7 @@ export const useTeethStore = create<State>((set, get) => ({
         set(
             produce((state) => {
                 if(state.currentHistory < state.history.length) {
-                    state.history.splice(state.currentHistory - 1);
+                    state.history = state.history.splice(0, state.currentHistory);
                 }
                 state.currentHistory++;
 
@@ -472,12 +472,6 @@ export const useTeethStore = create<State>((set, get) => ({
                 get().setTooth('cidx', 'full', color);
                 get().setTooth('cssx', 'full', color);
                 get().setTooth('cisx', 'full', color);
-                if (config === 'stones') {
-                    get().setStone('csdx', 'sapphire');
-                    get().setStone('cidx', 'sapphire');
-                    get().setStone('cssx', 'sapphire');
-                    get().setStone('cisx', 'sapphire')
-                }
                 break;
             case 'caninesDiamond':
             case 'stonesDiamond':
@@ -485,15 +479,32 @@ export const useTeethStore = create<State>((set, get) => ({
                 get().setTooth('cidx', 'fullDiamond', color);
                 get().setTooth('cssx', 'fullDiamond', color);
                 get().setTooth('cisx', 'fullDiamond', color);
-                if (config === 'stonesDiamond') {
-                    get().setStone('csdx', 'sapphire');
-                    get().setStone('cidx', 'sapphire');
-                    get().setStone('cssx', 'sapphire');
-                    get().setStone('cisx', 'sapphire')
-                }
                 break;
         }
-    },
+        set(
+            produce((state) => {
+            if(state.currentHistory < state.history.length) {
+                state.history = state.history.splice(0, state.currentHistory);
+            }
+            state.currentHistory++;
+
+            if(config === 'stonesDiamond' || config === 'stones') {
+                state.teethStones.csdx = 'sapphire';
+                state.teethStones.cidx = 'sapphire';
+                state.teethStones.cssx = 'sapphire';
+                state.teethStones.cisx = 'sapphire';
+            }
+
+            state.history = [...state.history,
+                [{
+                    type: state.teethJewelType,
+                    material: state.teethMaterial,
+                    stones: state.teethStones,
+                    visible: state.teethVisibility
+                }]
+            ];
+            console.log(state.currentHistory, 'history: ', state.history)
+        }))},
     setTooth: (tooth, type, color) =>
         set(
             produce((state) => {
@@ -543,6 +554,7 @@ export const useTeethStore = create<State>((set, get) => ({
                         state.teethVisibility[key] = value;
                     }
                 }
+                console.log(state.currentHistory, state.history)
             })
         ),
     redo: () =>
@@ -563,6 +575,7 @@ export const useTeethStore = create<State>((set, get) => ({
                         state.teethVisibility[key] = value;
                     }
                 }
+                console.log(state.currentHistory, state.history)
             })
         ),
     reset: () => {
