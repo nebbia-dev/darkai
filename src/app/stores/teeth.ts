@@ -167,6 +167,8 @@ export const useTeethStore = create<State>((set, get) => ({
                             state.teethJewelType.cisx = 'full';
                             state.teethMaterial.cidx = 'base';
                             state.teethMaterial.cisx = 'base';
+                            state.teethStones.cidx = null;
+                            state.teethStones.cisx = null;
 
                             state.history = [...state.history,
                                 [{
@@ -203,6 +205,7 @@ export const useTeethStore = create<State>((set, get) => ({
                     || (state.teethJewelType[tooth] === 'barDiamond' && type === 'full')
                 ) {
                     state.teethJewelType[tooth] = type + 'Diamond';
+                    state.teethStones[tooth] = null;
                     state.history = [...state.history,
                         [{
                             type: state.teethJewelType,
@@ -219,6 +222,8 @@ export const useTeethStore = create<State>((set, get) => ({
                 ) {
                     state.teethJewelType.cidx = type + 'Diamond';
                     state.teethJewelType.cisx = type + 'Diamond';
+                    state.teethStones.cisx = null;
+                    state.teethStones.cidx = null;
                     state.history = [...state.history,
                         [{
                             type: state.teethJewelType,
