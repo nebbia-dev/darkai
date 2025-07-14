@@ -525,6 +525,12 @@ export const useTeethStore = create<State>((set, get) => ({
     setCopy: (copied, original) =>
         set(
             produce((state) => {
+                if(state.currentHistory < state.history.length) {
+                    console.log(state.currentHistory, state.history.length)
+                    state.history = state.history.splice(0, state.currentHistory);
+                }
+                state.currentHistory++;
+
                 state.teethJewelType[copied] = state.teethJewelType[original];
                 state.teethMaterial[copied] = state.teethMaterial[original];
                 state.teethVisibility[copied] = state.teethVisibility[original];
@@ -532,6 +538,15 @@ export const useTeethStore = create<State>((set, get) => ({
                     state.teethStones[copied] = state.teethStones[original];
 
                 }
+
+                state.history = [...state.history,
+                    [{
+                        type: state.teethJewelType,
+                        material: state.teethMaterial,
+                        stones: state.teethStones,
+                        visible: state.teethVisibility
+                    }]
+                ];
             })
         ),
     setLoaded: (bool) => set(() => ({loaded: bool})),
