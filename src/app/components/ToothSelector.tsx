@@ -29,12 +29,12 @@ export default function ToothSelector({tooth} : {tooth: string}) {
 
 
     function selectType(type: string) {
-        setActiveDefault(null, null);
+        setActiveDefault(undefined, undefined);
         changeJewelType(tooth, type);
     }
 
     function selectMaterial(material: string) {
-        setActiveDefault(null, null);
+        setActiveDefault(undefined, undefined);
         changeMaterial(tooth, material);
     }
 

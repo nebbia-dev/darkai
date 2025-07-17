@@ -1,22 +1,23 @@
 import { create } from 'zustand';
 import {produce} from "immer";
 import State from "@/app/types/State";
+import {createClient} from "@/utils/supabase/client";
 
 export const useTeethStore = create<State>((set, get) => ({
-    envMap: null,
+    envMap: undefined,
     teethGeometry: {
-        icsdx: null,
-        icssx: null,
-        icidx: null,
-        icisx: null,
-        ilsdx: null,
-        ilssx: null,
-        ilidx: null,
-        ilisx: null,
-        csdx: null,
-        cssx: null,
-        cidx: null,
-        cisx: null,
+        icsdx: undefined,
+        icssx: undefined,
+        icidx: undefined,
+        icisx: undefined,
+        ilsdx: undefined,
+        ilssx: undefined,
+        ilidx: undefined,
+        ilisx: undefined,
+        csdx: undefined,
+        cssx: undefined,
+        cidx: undefined,
+        cisx: undefined,
     },
     teethMaterial: {
         icsdx: 'base',
@@ -47,10 +48,10 @@ export const useTeethStore = create<State>((set, get) => ({
         cisx: 'full',
     },
     teethStones: {
-        csdx: null,
-        cssx: null,
-        cidx: null,
-        cisx: null,
+        csdx: undefined,
+        cssx: undefined,
+        cidx: undefined,
+        cisx: undefined,
     },
     teethVisibility: {
         icsdx: false,
@@ -68,8 +69,8 @@ export const useTeethStore = create<State>((set, get) => ({
     },
     history: [],
     currentHistory: 0,
-    activeDefault: null,
-    currentTooth: null,
+    activeDefault: undefined,
+    currentTooth: undefined,
     ui: false,
     teethTypeOptions: {
         full: ['icsdx', 'icssx', 'icidx', 'icisx', 'ilsdx', 'ilssx', 'ilidx', 'ilisx', 'csdx', 'cssx', 'cidx', 'cisx'],
@@ -82,12 +83,14 @@ export const useTeethStore = create<State>((set, get) => ({
     },
     activeTab: 0,
     loaded: false,
+    prices: undefined,
+    pricesAdds: undefined,
     setActiveTab: (value) =>
         set(
             produce((state) => {
                 state.activeTab = value;
                 if(value === 0) {
-                    state.currentTooth = null;
+                    state.currentTooth = undefined;
                 }
             })
         ),
@@ -167,8 +170,8 @@ export const useTeethStore = create<State>((set, get) => ({
                             state.teethJewelType.cisx = 'full';
                             state.teethMaterial.cidx = 'base';
                             state.teethMaterial.cisx = 'base';
-                            state.teethStones.cidx = null;
-                            state.teethStones.cisx = null;
+                            state.teethStones.cidx = undefined;
+                            state.teethStones.cisx = undefined;
 
                             state.history = [...state.history,
                                 [{
@@ -185,7 +188,7 @@ export const useTeethStore = create<State>((set, get) => ({
                         state.teethVisibility[tooth] = false;
                         state.teethJewelType[tooth] = 'full';
                         state.teethMaterial[tooth] = 'base';
-                        state.teethStones[tooth] = null;
+                        state.teethStones[tooth] = undefined;
 
                         state.history = [...state.history,
                             [{
@@ -205,7 +208,7 @@ export const useTeethStore = create<State>((set, get) => ({
                     || (state.teethJewelType[tooth] === 'barDiamond' && type === 'full')
                 ) {
                     state.teethJewelType[tooth] = type + 'Diamond';
-                    state.teethStones[tooth] = null;
+                    state.teethStones[tooth] = undefined;
                     state.history = [...state.history,
                         [{
                             type: state.teethJewelType,
@@ -222,8 +225,8 @@ export const useTeethStore = create<State>((set, get) => ({
                 ) {
                     state.teethJewelType.cidx = type + 'Diamond';
                     state.teethJewelType.cisx = type + 'Diamond';
-                    state.teethStones.cisx = null;
-                    state.teethStones.cidx = null;
+                    state.teethStones.cisx = undefined;
+                    state.teethStones.cidx = undefined;
                     state.history = [...state.history,
                         [{
                             type: state.teethJewelType,
@@ -242,8 +245,8 @@ export const useTeethStore = create<State>((set, get) => ({
                     state.teethJewelType.cisx = type;
                     state.teethVisibility.cidx = true;
                     state.teethVisibility.cisx = true;
-                    state.teethStones.cidx = null;
-                    state.teethStones.cisx = null;
+                    state.teethStones.cidx = undefined;
+                    state.teethStones.cisx = undefined;
                     if(tooth === 'cidx') {
                         state.teethMaterial.cisx = state.teethMaterial.cidx;
                     }
@@ -287,7 +290,7 @@ export const useTeethStore = create<State>((set, get) => ({
 
                         } else {
                             if(type !== 'full' && type !== 'fullDiamond') {
-                                state.teethStones[tooth] = null;
+                                state.teethStones[tooth] = undefined;
                             }
                         }
                     }
@@ -381,7 +384,7 @@ export const useTeethStore = create<State>((set, get) => ({
                 state.currentHistory++;
 
                 if(state.teethStones[tooth] === stone) {
-                    state.teethStones[tooth] = null;
+                    state.teethStones[tooth] = undefined;
                 } else {
                     state.teethStones[tooth] = stone;
                 }
@@ -405,7 +408,7 @@ export const useTeethStore = create<State>((set, get) => ({
                 }
 
                 if(state.currentTooth === tooth) {
-                    state.currentTooth = null;
+                    state.currentTooth = undefined;
                 } else {
                     state.currentTooth = tooth;
                 }
@@ -520,8 +523,8 @@ export const useTeethStore = create<State>((set, get) => ({
         ),
     setActiveDefault: (active, color) => {
         switch (active) {
-            case null:
-                set({activeDefault: null});
+            case undefined:
+                set({activeDefault: undefined});
                 break;
             default:
                 set({activeDefault: active + color})
@@ -556,6 +559,16 @@ export const useTeethStore = create<State>((set, get) => ({
         ),
     setLoaded: (bool) => set(() => ({loaded: bool})),
     setUI: (bool) => set({ui: bool}),
+    fetchPrices: async() => {
+        const supabase = await createClient();
+        let { data: base, error: errorBase } = await supabase
+            .from('Prices_base')
+            .select('*');
+        let { data: addons, error: errorAddons } = await supabase
+            .from('Prices_addons')
+            .select('*');
+        set({prices: base, pricesAdds: addons});
+    },
     undo: () =>
         set(
             produce((state) => {
@@ -629,10 +642,10 @@ export const useTeethStore = create<State>((set, get) => ({
                 cisx: 'full',
             },
             teethStones: {
-                csdx: null,
-                cssx: null,
-                cidx: null,
-                cisx: null,
+                csdx: undefined,
+                cssx: undefined,
+                cidx: undefined,
+                cisx: undefined,
             },
             teethVisibility: {
                 icsdx: false,
@@ -648,8 +661,10 @@ export const useTeethStore = create<State>((set, get) => ({
                 cidx: false,
                 cisx: false,
             },
-            currentTooth: null,
-            activeDefault: null
+            currentTooth: undefined,
+            activeDefault: undefined
         })
     }
 }))
+
+useTeethStore.getState().fetchPrices();

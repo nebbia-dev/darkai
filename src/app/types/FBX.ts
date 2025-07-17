@@ -7,28 +7,28 @@ export default interface FBX {
             base: THREE.BufferGeometry,
             full: THREE.BufferGeometry
         }
-    } | null,
+    } | undefined,
     icssx: {
         full: THREE.BufferGeometry,
         fullDiamond: {
             base: THREE.BufferGeometry,
             full: THREE.BufferGeometry
         }
-    } | null,
+    } | undefined,
     icidx: {
         full: THREE.BufferGeometry,
         fullDiamond: {
             base: THREE.BufferGeometry,
             full: THREE.BufferGeometry
         }
-    } | null,
+    } | undefined,
     icisx: {
         full: THREE.BufferGeometry,
         fullDiamond: {
             base: THREE.BufferGeometry,
             full: THREE.BufferGeometry
         }
-    } | null,
+    } | undefined,
     // INCISIVI LATERALI
     ilsdx: {
         full: THREE.BufferGeometry,
@@ -52,7 +52,7 @@ export default interface FBX {
                 }
             }
         }
-    } | null,
+    } | undefined,
     ilssx: {
         full: THREE.BufferGeometry,
         fullDiamond: {
@@ -75,21 +75,21 @@ export default interface FBX {
                 }
             }
         }
-    } | null,
+    } | undefined,
     ilidx: {
         full: THREE.BufferGeometry,
         fullDiamond: {
             base: THREE.BufferGeometry,
             full: THREE.BufferGeometry
         }
-    } | null,
+    } | undefined,
     ilisx: {
         full: THREE.BufferGeometry,
         fullDiamond: {
             base: THREE.BufferGeometry,
             full: THREE.BufferGeometry
         }
-    } | null,
+    } | undefined,
     // CANINI
     csdx: {
         full: THREE.BufferGeometry,
@@ -105,7 +105,7 @@ export default interface FBX {
             }
         },
         stone: THREE.Object3D,
-    } | null,
+    } | undefined,
     cssx: {
         full: THREE.BufferGeometry,
         fullDiamond: {
@@ -120,7 +120,7 @@ export default interface FBX {
             }
         },
         stone: THREE.Object3D,
-    } | null,
+    } | undefined,
     cidx: {
         full: THREE.BufferGeometry,
         fullDiamond: {
@@ -142,7 +142,7 @@ export default interface FBX {
                 full: THREE.BufferGeometry
             }
         }
-    } | null,
+    } | undefined,
     cisx: {
         full: THREE.BufferGeometry,
         fullDiamond: {
@@ -164,5 +164,5 @@ export default interface FBX {
                 full: THREE.BufferGeometry
             }
         }
-    }  | null
+    }  | undefined
 }

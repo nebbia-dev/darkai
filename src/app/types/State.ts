@@ -47,11 +47,11 @@ interface Visibility {
     cisx: boolean,
 }
 interface Stones {
-    [key: string]: string | null
-    csdx: string | null,
-    cssx: string | null,
-    cidx: string | null,
-    cisx: string | null,
+    [key: string]: string | undefined
+    csdx: string | undefined,
+    cssx: string | undefined,
+    cidx: string | undefined,
+    cisx: string | undefined,
 }
 interface History {
     material: Materials,
@@ -59,9 +59,40 @@ interface History {
     type: JewelTypes,
     visible: Visibility
 }
+interface BasePrices {
+    barDiamond: number | null,
+    barGold: number | null,
+    barRose: number | null,
+    barWhite: number | null,
+    bigBarDiamond: number | null,
+    bigBarGold: number | null,
+    bigBarRose: number | null,
+    bigBarWhite: number | null,
+    created_at: Date,
+    frameDiamond: number | null,
+    frameGold: number | null,
+    frameRose: number | null,
+    frameWhite: number | null,
+    fullDiamond: number | null,
+    fullGold: number | null,
+    fullRose: number | null,
+    fullWhite: number | null,
+    id: number,
+    tooth: string
+}
+
+interface AddonsPrices {
+    tearShape: number | null,
+    diamondShape: number | null,
+    heartShape: number | null,
+    circleShape: number | null,
+    created_at: Date,
+    id: number,
+    stone: string
+}
 
 export default interface State {
-    envMap: Texture | CubeTexture | null,
+    envMap: Texture | CubeTexture | undefined,
     teethGeometry: FBX,
     teethMaterial: Materials,
     teethJewelType: JewelTypes,
@@ -69,8 +100,8 @@ export default interface State {
     teethVisibility: Visibility,
     history: History[][],
     currentHistory: number,
-    activeDefault: string | null,
-    currentTooth: string| null,
+    activeDefault: string | undefined,
+    currentTooth: string | undefined,
     ui: boolean,
     teethTypeOptions: {
         [key: string]: string[]
@@ -84,6 +115,8 @@ export default interface State {
     },
     activeTab: number,
     loaded: boolean,
+    prices: BasePrices[] | undefined,
+    pricesAdds: AddonsPrices[] | undefined,
     setActiveTab: (value:number) => void,
     setEnvMap: (em: Texture | CubeTexture) => void,
     setGeometry: (fbx:FBX) => void,
@@ -94,10 +127,11 @@ export default interface State {
     setActiveTooth: (tooth:string) => void,
     setDefaultConfig: (config:string, color:string) => void,
     setTooth: (tooth:string, type:string, color:string) => void,
-    setActiveDefault: (active:string|null, color:string|null) => void,
+    setActiveDefault: (active:string|undefined, color:string|undefined) => void,
     setCopy: (copied:string, original:string) =>void,
     setLoaded: (bool:boolean) => void,
     setUI: (bool:boolean) => void,
+    fetchPrices: () => void,
     undo: () => void,
     redo: () => void,
     reset: () => void

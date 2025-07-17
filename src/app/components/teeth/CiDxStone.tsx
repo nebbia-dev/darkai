@@ -5,7 +5,7 @@ import {JSX, memo} from "react";
 import State from "@/app/types/State";
 import * as THREE from 'three'
 export default function CiDxStone() {
-    const tooth = useTeethStore((state: State) => state.teethGeometry.cidx ? state.teethGeometry.cidx.stone : null);
+    const tooth = useTeethStore((state: State) => state.teethGeometry.cidx ? state.teethGeometry.cidx.stone : undefined);
     console.log(tooth)
     const toothStone =  useTeethStore((state: State) => state.teethStones.cidx);
     const CIDXstone = memo(({visible} : {visible: boolean}): JSX.Element => {
@@ -23,5 +23,5 @@ export default function CiDxStone() {
             </group>
         )
     })
-    return <CIDXstone visible={toothStone !== null}/>
+    return <CIDXstone visible={toothStone !== undefined}/>
 }

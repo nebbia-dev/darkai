@@ -4,8 +4,8 @@ import StonesMaterial from "@/app/components/materials/StonesMaterial";
 import {JSX, memo} from "react";
 import State from "@/app/types/State";
 export default function CiSxStone() {
-    const tooth = useTeethStore((state: State) => state.teethGeometry.cisx ? state.teethGeometry.cisx.stone : null);
-    const toothGroup = useTeethStore((state: State) => state.teethGeometry.cssx ? state.teethGeometry.cssx.stone : null);
+    const tooth = useTeethStore((state: State) => state.teethGeometry.cisx ? state.teethGeometry.cisx.stone : undefined);
+    const toothGroup = useTeethStore((state: State) => state.teethGeometry.cssx ? state.teethGeometry.cssx.stone : undefined);
     console.log(tooth)
     const toothStone =  useTeethStore((state: State) => state.teethStones.cisx);
     const CISXstone = memo(({visible} : {visible: boolean}): JSX.Element => {
@@ -20,5 +20,5 @@ export default function CiSxStone() {
             </group>
         )
     })
-    return <CISXstone visible={toothStone !== null}/>
+    return <CISXstone visible={toothStone !== undefined}/>
 }

@@ -6,7 +6,7 @@ import State from "@/app/types/State";
 import * as THREE from 'three'
 
 export default function CsDxStone() {
-    const tooth = useTeethStore((state: State) => state.teethGeometry.csdx ? state.teethGeometry.csdx.stone : null);
+    const tooth = useTeethStore((state: State) => state.teethGeometry.csdx ? state.teethGeometry.csdx.stone : undefined);
     const toothStone =  useTeethStore((state: State) => state.teethStones.csdx);
     const CSDXstone = memo(({visible} : {visible: boolean}): JSX.Element => {
         if(!tooth) return <></>
@@ -23,5 +23,5 @@ export default function CsDxStone() {
             </group>
         )
     })
-    return <CSDXstone visible={toothStone !== null}/>
+    return <CSDXstone visible={toothStone !== undefined}/>
 }

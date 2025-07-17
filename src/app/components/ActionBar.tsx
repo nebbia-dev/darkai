@@ -10,12 +10,12 @@ import State from "@/app/types/State";
 export default function ActionBar({ui} : {ui: boolean}) {
     const current = useTeethStore((state:State) => state.currentHistory);
     const history = useTeethStore((state:State) => state.history);
-    const activeTooth: string|null = useTeethStore((state:State) => state.currentTooth);
-    const jewelType: string|null = useTeethStore((state:State) => activeTooth !== null ? state.teethJewelType[activeTooth] : null);
-    const material: string|null = useTeethStore((state:State) => activeTooth !== null ? state.teethMaterial[activeTooth] : null);
-    const stones: string|null = useTeethStore((state:State) => activeTooth !== null ? state.teethStones[activeTooth] : null);
+    const activeTooth: string|undefined = useTeethStore((state:State) => state.currentTooth);
+    const jewelType: string|undefined = useTeethStore((state:State) => activeTooth !== undefined ? state.teethJewelType[activeTooth] : undefined);
+    const material: string|undefined = useTeethStore((state:State) => activeTooth !== undefined ? state.teethMaterial[activeTooth] : undefined);
+    const stones: string|undefined = useTeethStore((state:State) => activeTooth !== undefined ? state.teethStones[activeTooth] : undefined);
     const availableTypes = useTeethStore((state:State) => state.teethTypeOptions);
-    const visible: boolean|null = useTeethStore((state:State) => activeTooth !== null ? state.teethVisibility[activeTooth] : null);
+    const visible: boolean|undefined = useTeethStore((state:State) => activeTooth !== undefined ? state.teethVisibility[activeTooth] : undefined);
     const copy = useTeethStore((state:State) => state.setCopy);
     const reset = useTeethStore((state:State) => state.reset);
     const undo = useTeethStore((state:State) => state.undo);
