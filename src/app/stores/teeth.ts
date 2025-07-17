@@ -67,6 +67,20 @@ export const useTeethStore = create<State>((set, get) => ({
         cidx: false,
         cisx: false,
     },
+    teethPrices: {
+        icsdx: 0,
+        icssx: 0,
+        icidx: 0,
+        icisx: 0,
+        ilsdx: 0,
+        ilssx: 0,
+        ilidx: 0,
+        ilisx: 0,
+        csdx: 0,
+        cssx: 0,
+        cidx: 0,
+        cisx: 0,
+    },
     history: [],
     currentHistory: 0,
     activeDefault: undefined,
@@ -85,6 +99,7 @@ export const useTeethStore = create<State>((set, get) => ({
     loaded: false,
     prices: undefined,
     pricesAdds: undefined,
+    total: 0,
     setActiveTab: (value) =>
         set(
             produce((state) => {
@@ -121,12 +136,42 @@ export const useTeethStore = create<State>((set, get) => ({
                 }
                 state.currentTooth = tooth;
 
+                // calc total
+                for (const [key, value] of Object.entries(state.teethMaterial)) {
+                    if(value !== 'base') {
+                        const toothPriceList = state.prices.filter(el => el.tooth === key + 'sx' || key + 'dx')[0];
+                        switch(state.teethJewelType[key]) {
+                            case 'full':
+                            case 'frame':
+                            case 'bar':
+                            case 'bigBar':
+                                state.teethPrices[key] = toothPriceList[state.teethJewelType[key] + value[0].toUpperCase() + value.slice(1)];
+                                break;
+                            case 'fullDiamond':
+                            case 'frameDiamond':
+                            case 'barDiamond':
+                            case 'bigBarDiamond':
+                                state.teethPrices[key] = toothPriceList[state.teethJewelType[key] + value[0].toUpperCase() + value.slice(1)] + toothPriceList[state.teethJewelType[key] + 'Diamond'];
+                                break;
+                        }
+                    } else {
+                        state.teethPrices[key] = 0
+                    }
+                    console.log(state.teethPrices)
+                }
+
+                state.total = 0;
+                for (const [key, value] of Object.entries(state.teethPrices)) {
+                    state.total = state.total + value
+                }
+
                 state.history = [...state.history,
                     [{
                         type: state.teethJewelType,
                         material: state.teethMaterial,
                         stones: state.teethStones,
-                        visible: state.teethVisibility
+                        visible: state.teethVisibility,
+                        prices: state.teethPrices
                     }]
                 ];
 

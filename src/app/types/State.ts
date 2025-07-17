@@ -31,6 +31,22 @@ interface JewelTypes {
     cidx: string,
     cisx: string,
 }
+
+interface Prices {
+    [key: string]: number
+    icsdx: number,
+    icssx: number,
+    icidx: number,
+    icisx: number,
+    ilsdx: number,
+    ilssx: number,
+    ilidx: number,
+    ilisx: number,
+    csdx: number,
+    cssx: number,
+    cidx: number,
+    cisx: number,
+}
 interface Visibility {
     [key: string]: boolean
     icsdx: boolean,
@@ -57,7 +73,8 @@ interface History {
     material: Materials,
     stones: Stones,
     type: JewelTypes,
-    visible: Visibility
+    visible: Visibility,
+    prices: Prices
 }
 interface BasePrices {
     barDiamond: number | null,
@@ -98,6 +115,7 @@ export default interface State {
     teethJewelType: JewelTypes,
     teethStones: Stones,
     teethVisibility: Visibility,
+    teethPrices: Prices,
     history: History[][],
     currentHistory: number,
     activeDefault: string | undefined,
@@ -117,6 +135,7 @@ export default interface State {
     loaded: boolean,
     prices: BasePrices[] | undefined,
     pricesAdds: AddonsPrices[] | undefined,
+    total: number,
     setActiveTab: (value:number) => void,
     setEnvMap: (em: Texture | CubeTexture) => void,
     setGeometry: (fbx:FBX) => void,

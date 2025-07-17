@@ -9,6 +9,7 @@ import State from "@/app/types/State";
 
 export default function ActionBar({ui} : {ui: boolean}) {
     const current = useTeethStore((state:State) => state.currentHistory);
+    const total = useTeethStore((state:State) => state.total);
     const history = useTeethStore((state:State) => state.history);
     const activeTooth: string|undefined = useTeethStore((state:State) => state.currentTooth);
     const jewelType: string|undefined = useTeethStore((state:State) => activeTooth !== undefined ? state.teethJewelType[activeTooth] : undefined);
@@ -75,6 +76,7 @@ export default function ActionBar({ui} : {ui: boolean}) {
                 <button onClick={reset} className="bg-gray-50/50 rounded-full border p-2 cursor-pointer">
                     <Reset className={`${ui ? 'w-6 h-6' : 'w-8 h-8'}`}/>
                 </button>
+                <div>{total}€</div>
             </div>
         </div>
     )
