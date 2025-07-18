@@ -137,43 +137,7 @@ export const useTeethStore = create<State>((set, get) => ({
                 state.currentTooth = tooth;
 
                 // calc total
-                for (const [key, value] of Object.entries(state.teethMaterial)) {
-                    if(value !== 'base') {
-                        const toothPriceList = state.prices.filter(el => el.tooth === key + 'sx' || key + 'dx')[0];
-                        switch(state.teethJewelType[key]) {
-                            case 'full':
-                            case 'frame':
-                            case 'bar':
-                            case 'bigBar':
-                                state.teethPrices[key] = toothPriceList[state.teethJewelType[key] + value[0].toUpperCase() + value.slice(1)];
-                                break;
-                            case 'fullDiamond':
-                            case 'frameDiamond':
-                            case 'barDiamond':
-                            case 'bigBarDiamond':
-                                state.teethPrices[key] = toothPriceList[state.teethJewelType[key] + value[0].toUpperCase() + value.slice(1)] + toothPriceList[state.teethJewelType[key] + 'Diamond'];
-                                break;
-                        }
-                    } else {
-                        state.teethPrices[key] = 0
-                    }
-                    console.log(state.teethPrices)
-                }
-
-                state.total = 0;
-                for (const [key, value] of Object.entries(state.teethPrices)) {
-                    state.total = state.total + value
-                }
-
-                state.history = [...state.history,
-                    [{
-                        type: state.teethJewelType,
-                        material: state.teethMaterial,
-                        stones: state.teethStones,
-                        visible: state.teethVisibility,
-                        prices: state.teethPrices
-                    }]
-                ];
+                get().calcTotal(state);
 
                 if(!state.ui){
                     setTimeout(() => {
@@ -218,14 +182,8 @@ export const useTeethStore = create<State>((set, get) => ({
                             state.teethStones.cidx = undefined;
                             state.teethStones.cisx = undefined;
 
-                            state.history = [...state.history,
-                                [{
-                                    type: state.teethJewelType,
-                                    material: state.teethMaterial,
-                                    stones: state.teethStones,
-                                    visible: state.teethVisibility
-                                }]
-                            ];
+                            // calc total
+                            get().calcTotal(state);
 
                             return;
                         }
@@ -235,14 +193,8 @@ export const useTeethStore = create<State>((set, get) => ({
                         state.teethMaterial[tooth] = 'base';
                         state.teethStones[tooth] = undefined;
 
-                        state.history = [...state.history,
-                            [{
-                                type: state.teethJewelType,
-                                material: state.teethMaterial,
-                                stones: state.teethStones,
-                                visible: state.teethVisibility
-                            }]
-                        ];
+                        // calc total
+                        get().calcTotal(state);
 
                         return;
                 }
@@ -254,14 +206,9 @@ export const useTeethStore = create<State>((set, get) => ({
                 ) {
                     state.teethJewelType[tooth] = type + 'Diamond';
                     state.teethStones[tooth] = undefined;
-                    state.history = [...state.history,
-                        [{
-                            type: state.teethJewelType,
-                            material: state.teethMaterial,
-                            stones: state.teethStones,
-                            visible: state.teethVisibility
-                        }]
-                    ];
+
+                    // calc total
+                    get().calcTotal(state);
                     return;
                 }
 
@@ -272,14 +219,8 @@ export const useTeethStore = create<State>((set, get) => ({
                     state.teethJewelType.cisx = type + 'Diamond';
                     state.teethStones.cisx = undefined;
                     state.teethStones.cidx = undefined;
-                    state.history = [...state.history,
-                        [{
-                            type: state.teethJewelType,
-                            material: state.teethMaterial,
-                            stones: state.teethStones,
-                            visible: state.teethVisibility
-                        }]
-                    ];
+                    // calc total
+                    get().calcTotal(state);
                     return;
                 }
 
@@ -353,15 +294,8 @@ export const useTeethStore = create<State>((set, get) => ({
                     }, 300)
                 }
 
-                state.history = [...state.history,
-                    [{
-                        type: state.teethJewelType,
-                        material: state.teethMaterial,
-                        stones: state.teethStones,
-                        visible: state.teethVisibility
-                    }]
-                ];
-                console.log(state.history, state.currentHistory)
+                // calc total
+                get().calcTotal(state);
             }),
         ),
     setDiamond: (tooth) =>
@@ -405,15 +339,8 @@ export const useTeethStore = create<State>((set, get) => ({
                         break;
                 }
 
-                state.history = [...state.history,
-                    [{
-                        type: state.teethJewelType,
-                        material: state.teethMaterial,
-                        stones: state.teethStones,
-                        visible: state.teethVisibility
-                    }]
-                ];
-                console.log(state.history, state.currentHistory)
+                // calc total
+                get().calcTotal(state);
             })
         ),
     setStone: (tooth, stone) =>
@@ -434,15 +361,8 @@ export const useTeethStore = create<State>((set, get) => ({
                     state.teethStones[tooth] = stone;
                 }
 
-                state.history = [...state.history,
-                    [{
-                        type: state.teethJewelType,
-                        material: state.teethMaterial,
-                        stones: state.teethStones,
-                        visible: state.teethVisibility
-                    }]
-                ];
-                console.log(state.history, state.currentHistory)
+                // calc total
+                get().calcTotal(state);
             }),
         ),
     setActiveTooth: (tooth) =>
@@ -709,6 +629,59 @@ export const useTeethStore = create<State>((set, get) => ({
             currentTooth: undefined,
             activeDefault: undefined
         })
+    },
+    calcTotal: (state) => {
+        for (const [key, value] of Object.entries(state.teethMaterial)) {
+            if(value !== 'base') {
+                const toothPriceList = state.prices.filter(el => el.tooth + 'sx' === key || el.tooth + 'dx' === key)[0];
+                switch(state.teethJewelType[key]) {
+                    case 'full':
+                    case 'frame':
+                    case 'bar':
+                        state.teethPrices[key] = toothPriceList[state.teethJewelType[key] + value[0].toUpperCase() + value.slice(1)];
+                        break;
+                    case 'fullDiamond':
+                    case 'frameDiamond':
+                    case 'barDiamond':
+                        const baseType = state.teethJewelType[key].slice();
+                        state.teethPrices[key] = toothPriceList[baseType.split('D').shift() + value[0].toUpperCase() + value.slice(1)] + toothPriceList[state.teethJewelType[key]];
+                        break;
+                    case 'bigBar':
+                        state.teethPrices.cidx = toothPriceList[state.teethJewelType[key] + value[0].toUpperCase() + value.slice(1)] / 2;
+                        state.teethPrices.cisx = toothPriceList[state.teethJewelType[key] + value[0].toUpperCase() + value.slice(1)] / 2;
+                        break;
+                    case 'bigBarDiamond':
+                        const barType = state.teethJewelType[key].slice();
+                        state.teethPrices.cidx = toothPriceList[barType.split('D').shift() + value[0].toUpperCase() + value.slice(1)] / 2 + toothPriceList[state.teethJewelType[key]] / 2;
+                        state.teethPrices.cisx = toothPriceList[barType.split('D').shift() + value[0].toUpperCase() + value.slice(1)] / 2 + toothPriceList[state.teethJewelType[key]] / 2;
+                        break;
+                }
+            } else {
+                state.teethPrices[key] = 0
+            }
+            console.log(state.teethPrices)
+        }
+
+        for (const [key, value] of Object.entries(state.teethStones)) {
+            if(value) {
+                state.teethPrices[key] = state.teethPrices[key] + state.pricesAdds.filter(el => el.stone === value)[0].tearShape;
+            }
+        }
+
+        state.total = 0;
+        for (const [key, value] of Object.entries(state.teethPrices)) {
+            state.total = state.total + value;
+        }
+
+        state.history = [...state.history,
+            [{
+                type: state.teethJewelType,
+                material: state.teethMaterial,
+                stones: state.teethStones,
+                visible: state.teethVisibility,
+                prices: state.teethPrices
+            }]
+        ];
     }
 }))
 

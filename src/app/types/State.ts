@@ -153,5 +153,6 @@ export default interface State {
     fetchPrices: () => void,
     undo: () => void,
     redo: () => void,
-    reset: () => void
+    reset: () => void,
+    calcTotal: (state:State) => void
 }
