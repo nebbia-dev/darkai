@@ -6,6 +6,7 @@ import ToothSelector from "@/app/components/ToothSelector";
 import DefaultSelector from "@/app/components/DefaultSelector";
 import {useTeethStore} from "@/app/stores/teeth";
 import State from "@/app/types/State";
+import Link from 'next/link'
 
 interface TabPanelProps {
     children?: ReactNode;
@@ -14,6 +15,7 @@ interface TabPanelProps {
 }
 
 export default function Selection({ui} : {ui:boolean}) {
+    const total = useTeethStore((state:State) => state.total);
     const activeTooth = useTeethStore((state: State) => state.currentTooth);
     const activeTab = useTeethStore((state: State) => state.activeTab);
     const setActiveTab = useTeethStore((state: State) => state.setActiveTab);
@@ -57,7 +59,7 @@ export default function Selection({ui} : {ui:boolean}) {
                     </div>
                     <CustomTabPanel value={activeTab} index={0}>
                         <div
-                            className="w-full h-[calc(100vh-54px-48px-0.2rem)] flex flex-col align-center justify-start text-center bg-gray-50 my-auto rounded text-black">
+                            className="w-full h-[calc(100vh-54px-48px-0.2rem-15vh)] flex flex-col align-center justify-start text-center bg-gray-50 my-auto rounded text-black">
                             <div className="overflow-y-auto">
                                 <DefaultConfig teeth="full"/>
                                 <DefaultConfig teeth="bar"/>
@@ -69,7 +71,7 @@ export default function Selection({ui} : {ui:boolean}) {
                     </CustomTabPanel>
                     <CustomTabPanel value={activeTab} index={1}>
                         <div
-                            className="w-full h-[calc(100vh-54px-48px-0.2rem)] flex flex-col align-center justify-start text-center bg-gray-50 my-auto rounded text-black">
+                            className="w-full h-[calc(100vh-54px-48px-0.2rem-15vh)] flex flex-col align-center justify-start text-center bg-gray-50 my-auto rounded text-black">
                             <div className="overflow-y-auto">
                                 {/*DENTI SUPERIORI*/}
                                 <ToothConfig tooth='icsdx'/>
@@ -88,6 +90,12 @@ export default function Selection({ui} : {ui:boolean}) {
                             </div>
                         </div>
                     </CustomTabPanel>
+                    <div className="w-full h-[15vh] bg-stone-200">
+                        <div className="h-full flex items-center justify-between w-[90%] mx-auto">
+                            <p>Total: {total}€</p>
+                            <Link href="/checkout/recap" className="bg-gray-950 py-2 px-4 rounded-full text-gray-50">Continue &rarr;</Link>
+                        </div>
+                    </div>
                 </div>
                 : <div className="w-full h-full relative">
                     <>
