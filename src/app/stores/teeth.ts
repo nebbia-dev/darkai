@@ -632,7 +632,7 @@ export const useTeethStore = create<State>((set, get) => ({
     },
     calcTotal: (state) => {
         for (const [key, value] of Object.entries(state.teethMaterial)) {
-            if(value !== 'base') {
+            if(value !== 'base' && state.prices) {
                 const toothPriceList = state.prices.filter(el => el.tooth + 'sx' === key || el.tooth + 'dx' === key)[0];
                 switch(state.teethJewelType[key]) {
                     case 'full':
@@ -663,7 +663,7 @@ export const useTeethStore = create<State>((set, get) => ({
         }
 
         for (const [key, value] of Object.entries(state.teethStones)) {
-            if(value) {
+            if(value && state.pricesAdds) {
                 state.teethPrices[key] = state.teethPrices[key] + state.pricesAdds.filter(el => el.stone === value)[0].tearShape;
             }
         }
