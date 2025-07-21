@@ -25,12 +25,19 @@ import State from "@/app/types/State";
 import * as THREE from 'three'
 
 export default function Configurator() {
-    const envMap = useEnvironment({files: "envMaps/HDR_Light_Studio_Free_HDRI_Design_13.exr"})
+    const envMap = useEnvironment({
+        files: "envMaps/HDR_Light_Studio_Free_HDRI_Design_13.exr"
+    })
+    const geometry = useTeethStore((state:State) => state.teethGeometry);
     // const fbx = useMemo(() => useFBX('/models/MOD_Dentiera_Completa_180_Phong.fbx'), []);
     // Se voglio piazzare anche l'fbx in LoadedMaterials, verosimilmente devo usare qui uno useEffect
     const teeth = useMemo((): FBX => {
         const fbx = useFBX('/models/MOD_Dentiera_Completa_180_Phong_Scala_1 (1).fbx');
-        console.log(fbx);
+        if(!geometry.cisx){
+            fbx.children[4].children[0].matrix.makeScale(fbx.children[4].children[0].scale.x / 10, fbx.children[4].children[0].scale.y / 10, fbx.children[4].children[0].scale.z / 10);
+            fbx.children[4].children[0].geometry.applyMatrix4(fbx.children[4].children[0].matrix);
+        }
+        console.log('geom: ', fbx.children[4].children[0].geometry.attributes)
         return {
             // INCISIVI CENTRALI
             icsdx: {
@@ -188,7 +195,8 @@ export default function Configurator() {
                         full: (fbx.children[2].children[0].children[0].children[3] as THREE.Mesh).geometry
                     }
                 },
-                stone: fbx.children[4].children[0],
+                // stone: fbx.children[4].children[0],
+                stone: fbx.children[4],
                 bar: {
                     full: (fbx.children[3].children[3] as THREE.Mesh).geometry,
                     diamond: {

@@ -13,10 +13,10 @@ export default function CiDxStone() {
         return(
             <group position={tooth.position} quaternion={tooth.quaternion}>
                 <mesh
-                    geometry={(tooth.children[2]as THREE.Mesh).geometry}
+                    geometry={(tooth.children[3]as THREE.Mesh).geometry}
                     visible={visible}
-                    position={tooth.children[2].position}
-                    quaternion={tooth.children[2].quaternion}
+                    position={tooth.children[3].position}
+                    quaternion={tooth.children[3].quaternion}
                 >
                     <StonesMaterial color={toothStone}/>
                 </mesh>
