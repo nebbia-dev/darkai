@@ -136,6 +136,8 @@ export default interface State {
     prices: BasePrices[] | undefined,
     pricesAdds: AddonsPrices[] | undefined,
     total: number,
+    isScreenshotNeeded: boolean | undefined,
+    setIsScreenshotNeeded: (value:boolean|undefined) => void,
     setActiveTab: (value:number) => void,
     setEnvMap: (em: Texture | CubeTexture) => void,
     setGeometry: (fbx:FBX) => void,

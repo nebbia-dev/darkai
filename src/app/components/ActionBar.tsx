@@ -42,7 +42,7 @@ export default function ActionBar({ui} : {ui: boolean}) {
     return(
         <div className="relative z-30">
             <div
-                className={`absolute flex items-center justify-center gap-4 ${ui ? 'bottom-5' : 'bottom-30'} left-[50%] translate-x-[-50%] w-2/4`}>
+                className={`absolute flex items-center justify-center gap-4 ${ui ? 'bottom-5' : 'bottom-20'} left-[50%] translate-x-[-50%] w-2/4`}>
                 <button onClick={doUndo} className="rounded-full border p-2 cursor-pointer bg-gray-50/50">
                     <Undo className={`${ui ? 'w-6 h-6' : 'w-8 h-8'}`}/>
                 </button>

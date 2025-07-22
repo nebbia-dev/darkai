@@ -100,6 +100,8 @@ export const useTeethStore = create<State>((set, get) => ({
     prices: undefined,
     pricesAdds: undefined,
     total: 0,
+    isScreenshotNeeded: undefined,
+    setIsScreenshotNeeded: (value) => set({isScreenshotNeeded: value}),
     setActiveTab: (value) =>
         set(
             produce((state) => {

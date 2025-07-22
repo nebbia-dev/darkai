@@ -5,7 +5,7 @@ import {useTeethStore} from "@/app/stores/teeth";
 import IlsDx from "@/app/components/teeth/IlsDx";
 import IlsSx from "@/app/components/teeth/IlsSx";
 import LoadedMaterials from "@/app/components/LoadedMaterials";
-import {useEffect, useMemo} from "react";
+import {useEffect, useMemo, useRef} from "react";
 import FBX from "@/app/types/FBX";
 import IcsSx from "@/app/components/teeth/IcsSx";
 import IcsDx from "@/app/components/teeth/IcsDx";
@@ -23,6 +23,8 @@ import CiSx from "@/app/components/teeth/CiSx";
 import CiSxStone from "@/app/components/teeth/CiSxStone";
 import State from "@/app/types/State";
 import * as THREE from 'three'
+import {useThree} from "@react-three/fiber";
+import {button, useControls} from "leva";
 
 export default function Configurator() {
     const envMap = useEnvironment({
@@ -211,6 +213,25 @@ export default function Configurator() {
     const setTeeth = useTeethStore((state : State) => state.setGeometry);
     const savedEnvMap = useTeethStore((state : State) => state.envMap);
     const setEnvMap = useTeethStore((state : State) => state.setEnvMap);
+    const screenshot = useTeethStore((state : State) => state.isScreenshotNeeded);
+    const resetScreenShot = useTeethStore((state : State) => state.setIsScreenshotNeeded);
+    const orbitRef = useRef();
+    const { gl, scene, camera } = useThree();
+
+    useEffect(() => {
+        if(screenshot) {
+            console.log('say cheese')
+            orbitRef.current.reset();
+            setTimeout(() => {
+                const link = document.createElement('a');
+                link.setAttribute('download', 'canvas.png');
+                gl.render(scene, camera);
+                link.setAttribute('href', gl.domElement.toDataURL('image/png').replace('image/png', 'image/octet-stream'));
+                link.click();
+                resetScreenShot(undefined);
+            }, 200)
+        }
+    }, [screenshot])
 
     useEffect(() => {
         setTeeth(teeth);
@@ -221,7 +242,8 @@ export default function Configurator() {
 
     return (
         <>
-            <OrbitControls/>
+            <OrbitControls maxDistance={35} minDistance={22} minPolarAngle={Math.PI / 3}
+                           maxPolarAngle={Math.PI - Math.PI / 3} ref={orbitRef}/>
             {savedEnvMap && <LoadedMaterials/>}
             {/*<primitive object={fbx} visible={false} position={[0, -10, 0]}/>*/}
             {savedTeeth && savedEnvMap &&

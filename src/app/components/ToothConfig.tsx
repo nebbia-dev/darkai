@@ -5,7 +5,7 @@ import {Accordion, AccordionDetails, AccordionSummary} from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import SelectorButton from "@/app/components/SelectorButton";
 import {Copy} from "@/app/components/icons/Copy";
-import {RefObject, useEffect, useRef, useState} from "react";
+import {RefObject, useEffect, useState} from "react";
 import elabToothName from "@/app/helpers/elabToothName";
 import State from "@/app/types/State";
 
