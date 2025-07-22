@@ -35,9 +35,9 @@ export default function Configurator() {
         const fbx = useFBX('/models/MOD_Dentiera_Completa_180_Phong_Scala_1 (1).fbx');
         if(!geometry.cisx){
             fbx.children[4].children[0].matrix.makeScale(fbx.children[4].children[0].scale.x / 10, fbx.children[4].children[0].scale.y / 10, fbx.children[4].children[0].scale.z / 10);
-            fbx.children[4].children[0].geometry.applyMatrix4(fbx.children[4].children[0].matrix);
+            (fbx.children[4].children[0] as THREE.Mesh).geometry.applyMatrix4(fbx.children[4].children[0].matrix);
         }
-        console.log('geom: ', fbx.children[4].children[0].geometry.attributes)
+
         return {
             // INCISIVI CENTRALI
             icsdx: {

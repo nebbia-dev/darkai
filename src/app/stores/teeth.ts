@@ -139,18 +139,6 @@ export const useTeethStore = create<State>((set, get) => ({
                 // calc total
                 get().calcTotal(state);
 
-                if(!state.ui){
-                    setTimeout(() => {
-                        const box = document.getElementById(tooth);
-                        if(box) {
-                            box.scrollIntoView({
-                                behavior: 'smooth',
-                                block: 'start'
-                            })
-                        }
-                    }, 300)
-                }
-
                 console.log(state.history, state.currentHistory)
             }),
         ),
@@ -233,6 +221,7 @@ export const useTeethStore = create<State>((set, get) => ({
                     state.teethVisibility.cisx = true;
                     state.teethStones.cidx = undefined;
                     state.teethStones.cisx = undefined;
+                    state.teethMaterial[tooth] = 'gold';
                     if(tooth === 'cidx') {
                         state.teethMaterial.cisx = state.teethMaterial.cidx;
                     }
@@ -268,6 +257,7 @@ export const useTeethStore = create<State>((set, get) => ({
                     } else {
                         state.teethVisibility[tooth] = true;
                         state.teethJewelType[tooth] = type;
+                        state.teethMaterial[tooth] = 'gold';
 
                         if(!state.teethVisibility[tooth]) {
                             state.currentTooth = tooth;
@@ -280,18 +270,6 @@ export const useTeethStore = create<State>((set, get) => ({
                             }
                         }
                     }
-                }
-
-                if(!state.ui){
-                    setTimeout(() => {
-                        const box = document.getElementById(tooth);
-                        if(box) {
-                            box.scrollIntoView({
-                                behavior: 'smooth',
-                                block: 'start'
-                            })
-                        }
-                    }, 300)
                 }
 
                 // calc total
@@ -376,18 +354,6 @@ export const useTeethStore = create<State>((set, get) => ({
                     state.currentTooth = undefined;
                 } else {
                     state.currentTooth = tooth;
-                }
-
-                if(!state.ui){
-                    setTimeout(() => {
-                        const box = document.getElementById(tooth);
-                        if(box) {
-                            box.scrollIntoView({
-                                behavior: 'smooth',
-                                block: 'start'
-                            })
-                        }
-                    }, 300)
                 }
 
             })
@@ -659,7 +625,6 @@ export const useTeethStore = create<State>((set, get) => ({
             } else {
                 state.teethPrices[key] = 0
             }
-            console.log(state.teethPrices)
         }
 
         for (const [key, value] of Object.entries(state.teethStones)) {

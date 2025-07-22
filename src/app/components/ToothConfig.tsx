@@ -5,11 +5,11 @@ import {Accordion, AccordionDetails, AccordionSummary} from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import SelectorButton from "@/app/components/SelectorButton";
 import {Copy} from "@/app/components/icons/Copy";
-import {useState} from "react";
+import {RefObject, useEffect, useRef, useState} from "react";
 import elabToothName from "@/app/helpers/elabToothName";
 import State from "@/app/types/State";
 
-export default function ToothConfig({tooth} : {tooth: string}) {
+export default function ToothConfig({tooth, ref, position} : {tooth: string, ref:RefObject<any>, position:RefObject<any>}) {
     const prices = useTeethStore((state: State) => state.prices);
     const pricesAdds = useTeethStore((state: State) => state.pricesAdds);
     const jewelType = useTeethStore((state: State) => state.teethJewelType[tooth]);
@@ -18,6 +18,7 @@ export default function ToothConfig({tooth} : {tooth: string}) {
     const visible = useTeethStore((state: State) => state.teethVisibility[tooth]);
     const activeTooth = useTeethStore((state: State) => state.currentTooth);
     const availableTypes = useTeethStore((state: State) => state.teethTypeOptions);
+    const setActiveTooth = useTeethStore((state: State) => state.setActiveTooth);
     const changeJewelType = useTeethStore((state: State) => state.setType);
     const changeMaterial = useTeethStore((state: State) => state.setMaterial);
     const toggleDiamond = useTeethStore((state: State) => state.setDiamond);
@@ -26,25 +27,35 @@ export default function ToothConfig({tooth} : {tooth: string}) {
     const setActiveDefault = useTeethStore((state: State) => state.setActiveDefault);
     const firstChild = tooth === 'icsdx' ? '' : '1px solid #9ca3af';
     const [showCopy, setShowCopy] = useState<boolean>(false);
-    const [expanded, setExpanded] = useState<boolean>(false);
     const title = elabToothName(tooth, false);
 
+    useEffect(() => {
+        if (position.current !== null && ref.current) {
+            ref.current.scrollTop = position.current;
+            position.current = null;
+        }
+    }, [jewelType, material, stones]);
+
     function selectType(type: string) {
+        position.current = ref.current.scrollTop;
         setActiveDefault(undefined, undefined);
         setShowCopy(false);
         changeJewelType(tooth, type);
     }
 
     function selectMaterial(material: string) {
+        position.current = ref.current.scrollTop;
         setActiveDefault(undefined, undefined);
         changeMaterial(tooth, material);
     }
 
     function selectDiamond() {
+        position.current = ref.current.scrollTop;
         toggleDiamond(tooth);
     }
 
     function selectStone(stone: string) {
+        position.current = ref.current.scrollTop;
         changeStone(tooth, stone);
     }
     function setCopy(newTooth: string, oldTooth: string) {
@@ -55,14 +66,14 @@ export default function ToothConfig({tooth} : {tooth: string}) {
     console.log('oh no');
 
     return (
-        <Accordion elevation={0} sx={{backgroundColor: '#f9fafb', '&:before': {height: '0px'}}}
-                   expanded={activeTooth === tooth || expanded}>
+        <Accordion elevation={0} sx={{backgroundColor: '#f9fafb', '&:before': {height: '0px'}, '&.Mui-expanded': {margin: 0}}}
+                   expanded={activeTooth === tooth}>
             <AccordionSummary expandIcon={<ExpandMoreIcon/>} sx={{height: '100px', borderTop: firstChild, px: 8}}
-                              onClick={() => setExpanded((prev) => !prev)} id={tooth}>
+                              onClick={() => setActiveTooth(tooth)} id={tooth}>
                 {title}
             </AccordionSummary>
-            <AccordionDetails sx={{borderTop: '1px solid #9ca3af'}}>
-                <div className="w-full flex flex-col gap-8 relative text-right">
+            <AccordionDetails sx={{borderTop: '1px solid #9ca3af', height: 'calc(100% - 100px - 15vh)'}}>
+                <div className="w-full flex flex-col gap-2 relative text-right">
                     <div className={`${visible && material !== 'base' ? 'block' : 'hidden'} absolute top-4 right-4`}>
                         <button className=" rounded-full border p-2 cursor-pointer w-fit"
                                 onClick={() => setShowCopy((prev) => !prev)}>

@@ -1,5 +1,5 @@
 import ToothConfig from "@/app/components/ToothConfig";
-import {ReactNode, SyntheticEvent} from "react";
+import {ReactNode, SyntheticEvent, useRef} from "react";
 import {Box, Tab, Tabs} from "@mui/material";
 import DefaultConfig from "@/app/components/DefaultConfig";
 import ToothSelector from "@/app/components/ToothSelector";
@@ -16,9 +16,13 @@ interface TabPanelProps {
 
 export default function Selection({ui} : {ui:boolean}) {
     const total = useTeethStore((state:State) => state.total);
+    const visibleTeeth = useTeethStore((state:State) => state.teethVisibility);
     const activeTooth = useTeethStore((state: State) => state.currentTooth);
     const activeTab = useTeethStore((state: State) => state.activeTab);
     const setActiveTab = useTeethStore((state: State) => state.setActiveTab);
+
+    const accordionContainer = useRef<null|HTMLDivElement>(null);
+    const scrollPosition = useRef(null);
     const changeTab = (event: SyntheticEvent, newValue: number) => {
         setActiveTab(newValue);
     };
@@ -72,27 +76,27 @@ export default function Selection({ui} : {ui:boolean}) {
                     <CustomTabPanel value={activeTab} index={1}>
                         <div
                             className="w-full h-[calc(100vh-54px-48px-0.2rem-15vh)] flex flex-col align-center justify-start text-center bg-gray-50 my-auto rounded text-black">
-                            <div className="overflow-y-auto">
+                            <div className="overflow-y-auto" ref={accordionContainer}>
                                 {/*DENTI SUPERIORI*/}
-                                <ToothConfig tooth='icsdx'/>
-                                <ToothConfig tooth='icssx'/>
-                                <ToothConfig tooth='ilsdx'/>
-                                <ToothConfig tooth='ilssx'/>
-                                <ToothConfig tooth='csdx'/>
-                                <ToothConfig tooth='cssx'/>
+                                {(activeTooth === 'icsdx' || visibleTeeth.icsdx) && <ToothConfig tooth='icsdx'  ref={accordionContainer} position={scrollPosition}/> }
+                                {(activeTooth === 'icssx' || visibleTeeth.icssx) && <ToothConfig tooth='icssx' ref={accordionContainer} position={scrollPosition}/>}
+                                {(activeTooth === 'ilsdx' || visibleTeeth.ilsdx) && <ToothConfig tooth='ilsdx' ref={accordionContainer} position={scrollPosition}/>}
+                                {(activeTooth === 'ilssx' || visibleTeeth.ilssx) && <ToothConfig tooth='ilssx' ref={accordionContainer} position={scrollPosition}/>}
+                                {(activeTooth === 'csdx' || visibleTeeth.csdx) && <ToothConfig tooth='csdx' ref={accordionContainer} position={scrollPosition}/>}
+                                {(activeTooth === 'cssx' || visibleTeeth.cssx) && <ToothConfig tooth='cssx' ref={accordionContainer} position={scrollPosition}/>}
                                 {/*DENTI INFERIORI*/}
-                                <ToothConfig tooth='icidx'/>
-                                <ToothConfig tooth='icisx'/>
-                                <ToothConfig tooth='ilidx'/>
-                                <ToothConfig tooth='ilisx'/>
-                                <ToothConfig tooth='cidx'/>
-                                <ToothConfig tooth='cisx'/>
+                                {(activeTooth === 'icidx' || visibleTeeth.icidx) && <ToothConfig tooth='icidx' ref={accordionContainer} position={scrollPosition}/>}
+                                {(activeTooth === 'icisx' || visibleTeeth.icisx) && <ToothConfig tooth='icisx' ref={accordionContainer} position={scrollPosition}/>}
+                                {(activeTooth === 'ilidx' || visibleTeeth.ilidx) && <ToothConfig tooth='ilidx' ref={accordionContainer} position={scrollPosition}/>}
+                                {(activeTooth === 'ilisx' || visibleTeeth.ilisx) && <ToothConfig tooth='ilisx' ref={accordionContainer} position={scrollPosition}/>}
+                                {(activeTooth === 'cidx' || visibleTeeth.cidx) && <ToothConfig tooth='cidx' ref={accordionContainer} position={scrollPosition}/>}
+                                {(activeTooth === 'cisx' || visibleTeeth.cisx) && <ToothConfig tooth='cisx' ref={accordionContainer} position={scrollPosition}/>}
                             </div>
                         </div>
                     </CustomTabPanel>
                     <div className="w-full h-[15vh] bg-stone-200">
                         <div className="h-full flex items-center justify-between w-[90%] mx-auto">
-                            <p>Total: {total}€</p>
+                            <p>{total !== 0 && <span>Starting from {total}€</span>}</p>
                             <Link href="/checkout/recap" className="bg-gray-950 py-2 px-4 rounded-full text-gray-50">Continue &rarr;</Link>
                         </div>
                     </div>
