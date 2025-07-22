@@ -485,6 +485,29 @@ export const useTeethStore = create<State>((set, get) => ({
                 state.teethJewelType[tooth] = type;
             })
         ),
+    resetTooth: (tooth) =>
+        set(
+            produce((state) => {
+                if(state.teethJewelType[tooth] === 'bigBar' || state.teethJewelType[tooth] === 'bigBarDiamond') {
+                    state.teethJewelType.cidx = 'full';
+                    state.teethJewelType.cisx = 'full';
+                    state.teethMaterial.cidx = 'base';
+                    state.teethMaterial.cisx = 'base';
+                    state.teethVisibility.cidx = false;
+                    state.teethVisibility.cisx = false;
+                } else {
+                    state.teethVisibility[tooth] = false;
+                    state.teethMaterial[tooth] = 'base';
+                    state.teethJewelType[tooth] = 'full';
+                    if(state.teethStones[tooth]) {
+                        state.teethStones[tooth] = undefined;
+                    }
+                }
+                if(state.currentTooth === tooth) {
+                    state.currentTooth = undefined;
+                }
+            })
+        ),
     setActiveDefault: (active, color) => {
         switch (active) {
             case undefined:

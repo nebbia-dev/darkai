@@ -5,6 +5,7 @@ import {Accordion, AccordionDetails, AccordionSummary} from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import SelectorButton from "@/app/components/SelectorButton";
 import {Copy} from "@/app/components/icons/Copy";
+import {Close} from "@/app/components/icons/Close";
 import {RefObject, useEffect, useState} from "react";
 import elabToothName from "@/app/helpers/elabToothName";
 import State from "@/app/types/State";
@@ -19,13 +20,13 @@ export default function ToothConfig({tooth, ref, position} : {tooth: string, ref
     const activeTooth = useTeethStore((state: State) => state.currentTooth);
     const availableTypes = useTeethStore((state: State) => state.teethTypeOptions);
     const setActiveTooth = useTeethStore((state: State) => state.setActiveTooth);
+    const resetTooth = useTeethStore((state: State) => state.resetTooth);
     const changeJewelType = useTeethStore((state: State) => state.setType);
     const changeMaterial = useTeethStore((state: State) => state.setMaterial);
     const toggleDiamond = useTeethStore((state: State) => state.setDiamond);
     const changeStone = useTeethStore((state: State) => state.setStone);
     const copy = useTeethStore((state: State) => state.setCopy);
     const setActiveDefault = useTeethStore((state: State) => state.setActiveDefault);
-    const firstChild = tooth === 'icsdx' ? '' : '1px solid #9ca3af';
     const [showCopy, setShowCopy] = useState<boolean>(false);
     const title = elabToothName(tooth, false);
 
@@ -68,10 +69,17 @@ export default function ToothConfig({tooth, ref, position} : {tooth: string, ref
     return (
         <Accordion elevation={0} sx={{backgroundColor: '#f9fafb', '&:before': {height: '0px'}, '&.Mui-expanded': {margin: 0}}}
                    expanded={activeTooth === tooth}>
-            <AccordionSummary expandIcon={<ExpandMoreIcon/>} sx={{height: '100px', borderTop: firstChild, px: 8}}
-                              onClick={() => setActiveTooth(tooth)} id={tooth}>
-                {title}
-            </AccordionSummary>
+            <div className="flex items-center justify-between">
+                <div className="w-[10%] flex justify-center">
+                    {material !== 'base' &&
+                            <Close className="cursor-pointer" onClick={() => resetTooth(tooth)}/>
+                    }
+                </div>
+                <AccordionSummary expandIcon={<ExpandMoreIcon/>} sx={{height: '100px', px: 8, width:'90%', '&.MuiAccordionSummary-root':{paddingLeft:'2rem', paddingRight:'2rem'}}}
+                                  onClick={() => setActiveTooth(tooth)} id={tooth}>
+                    {title}
+                </AccordionSummary>
+            </div>
             <AccordionDetails sx={{borderTop: '1px solid #9ca3af', height: 'calc(100% - 100px - 15vh)'}}>
                 <div className="w-full flex flex-col gap-2 relative text-right">
                     <div className={`${visible && material !== 'base' ? 'block' : 'hidden'} absolute top-4 right-4`}>
