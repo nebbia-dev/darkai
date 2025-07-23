@@ -24,7 +24,6 @@ import CiSxStone from "@/app/components/teeth/CiSxStone";
 import State from "@/app/types/State";
 import * as THREE from 'three'
 import {useThree} from "@react-three/fiber";
-import {button, useControls} from "leva";
 
 export default function Configurator() {
     const envMap = useEnvironment({

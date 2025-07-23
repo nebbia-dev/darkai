@@ -152,7 +152,7 @@ export default interface State {
     setTooth: (tooth:string, type:string, color:string) => void,
     resetTooth: (tooth:string) => void,
     setActiveDefault: (active:string|undefined, color:string|undefined) => void,
-    setCopy: (copied:string, original:string) =>void,
+    setCopy: (copied:string, original:string|undefined) =>void,
     setLoaded: (bool:boolean) => void,
     setUI: (bool:boolean) => void,
     fetchPrices: () => void,
