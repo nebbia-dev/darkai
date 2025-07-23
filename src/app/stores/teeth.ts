@@ -4,7 +4,36 @@ import State from "@/app/types/State";
 import {createClient} from "@/utils/supabase/client";
 
 export const useTeethStore = create<State>((set, get) => ({
+
+    // state and method to take a screenshot of the Canvas when needed
+    // (the useThree hook needed to perform this task can be used only inside the Canvas)
+    isScreenshotNeeded: undefined,
+    setIsScreenshotNeeded: (value) => set({isScreenshotNeeded: value}),
+
+    // state and method to reset OrbitControls when needed
+    // (the useThree hook needed to perform this task can be used only inside the Canvas)
+    resetControls: undefined,
+    setResetControls: (value) => set({resetControls: value}),
+
+    // state and method to change between the DEFAULT and the CUSTOM tab
+    activeTab: 0,
+    setActiveTab: (value) =>
+        set(
+            produce((state) => {
+                state.activeTab = value;
+                if(value === 0) {
+                    state.currentTooth = undefined;
+                }
+            })
+        ),
+
+    // state and method to set the envMap when everything is loaded the first time
     envMap: undefined,
+    setEnvMap: (em) => {
+        set({envMap: em})
+    },
+
+    // state and method to set all the jewels geometries when everything is loaded the first time
     teethGeometry: {
         icsdx: undefined,
         icssx: undefined,
@@ -19,40 +48,11 @@ export const useTeethStore = create<State>((set, get) => ({
         cidx: undefined,
         cisx: undefined,
     },
-    teethMaterial: {
-        icsdx: 'base',
-        icssx: 'base',
-        icidx: 'base',
-        icisx: 'base',
-        ilsdx: 'base',
-        ilssx: 'base',
-        ilidx: 'base',
-        ilisx: 'base',
-        csdx: 'base',
-        cssx: 'base',
-        cidx: 'base',
-        cisx: 'base',
+    setGeometry: (fbx) => {
+        set({teethGeometry: fbx});
     },
-    teethJewelType: {
-        icsdx: 'full',
-        icssx: 'full',
-        icidx: 'full',
-        icisx: 'full',
-        ilsdx: 'full',
-        ilssx: 'full',
-        ilidx: 'full',
-        ilisx: 'full',
-        csdx: 'full',
-        cssx: 'full',
-        cidx: 'full',
-        cisx: 'full',
-    },
-    teethStones: {
-        csdx: undefined,
-        cssx: undefined,
-        cidx: undefined,
-        cisx: undefined,
-    },
+
+    // state to save the visibility status of each tooth
     teethVisibility: {
         icsdx: false,
         icssx: false,
@@ -67,66 +67,34 @@ export const useTeethStore = create<State>((set, get) => ({
         cidx: false,
         cisx: false,
     },
-    teethPrices: {
-        icsdx: 0,
-        icssx: 0,
-        icidx: 0,
-        icisx: 0,
-        ilsdx: 0,
-        ilssx: 0,
-        ilidx: 0,
-        ilisx: 0,
-        csdx: 0,
-        cssx: 0,
-        cidx: 0,
-        cisx: 0,
-    },
-    history: [],
-    currentHistory: 0,
-    activeDefault: undefined,
-    currentTooth: undefined,
-    ui: false,
-    teethTypeOptions: {
-        full: ['icsdx', 'icssx', 'icidx', 'icisx', 'ilsdx', 'ilssx', 'ilidx', 'ilisx', 'csdx', 'cssx', 'cidx', 'cisx'],
-        fullDiamond: ['icsdx', 'icssx', 'icidx', 'icisx', 'ilsdx', 'ilssx', 'ilidx', 'ilisx', 'csdx', 'cssx', 'cidx', 'cisx'],
-        bar: ['ilsdx', 'ilssx'],
-        barDiamond: ['ilsdx', 'ilssx'],
-        frame: ['csdx', 'cssx', 'cidx', 'cisx'],
-        frameDiamond: ['csdx', 'cssx', 'cidx', 'cisx'],
-        stones: ['csdx', 'cssx', 'cidx', 'cisx']
-    },
-    activeTab: 0,
-    loaded: false,
-    prices: undefined,
-    pricesAdds: undefined,
-    total: 0,
-    isScreenshotNeeded: undefined,
-    setIsScreenshotNeeded: (value) => set({isScreenshotNeeded: value}),
-    resetControls: undefined,
-    setResetControls: (value) => set({resetControls: value}),
-    setActiveTab: (value) =>
-        set(
-            produce((state) => {
-                state.activeTab = value;
-                if(value === 0) {
-                    state.currentTooth = undefined;
-                }
-            })
-        ),
-    setEnvMap: (em) => {
-        set({envMap: em})
-    },
-    setGeometry: (fbx) => {
-        set({teethGeometry: fbx});
+
+    // state and method to set the material (gold, rose or white) of each jewel
+    teethMaterial: {
+        icsdx: 'base',
+        icssx: 'base',
+        icidx: 'base',
+        icisx: 'base',
+        ilsdx: 'base',
+        ilssx: 'base',
+        ilidx: 'base',
+        ilisx: 'base',
+        csdx: 'base',
+        cssx: 'base',
+        cidx: 'base',
+        cisx: 'base',
     },
     setMaterial: (tooth, color) =>
         set(
             produce((state) => {
+
+                // set new history step
                 if(state.currentHistory < state.history.length) {
                     state.history = state.history.splice(0, state.currentHistory);
                 }
                 state.currentHistory++;
 
+                // if the user is changing a bigBar material, both cisx and cidx materials are changed,
+                // otherwise only the parameter tooth material is changed
                 if(state.teethJewelType[tooth] === 'bigBar' || state.teethJewelType[tooth] === 'bigBarDiamond') {
                     state.teethMaterial.cisx = color;
                     state.teethMaterial.cidx = color;
@@ -134,9 +102,14 @@ export const useTeethStore = create<State>((set, get) => ({
                 } else {
                     state.teethMaterial[tooth] = color;
 
+                    // if the user clicks on the material and the tooth isn't visible, the tooth becomes visible
+                    // with a default full jewel type on it; if this happens on a lower tooth when  the lower canines
+                    // already have a bigBar on them, the bigBar is deactivated and the lower canines reset
                     if(!state.teethVisibility[tooth]) {
                         state.teethVisibility[tooth] = true;
-                        if(state.teethJewelType.cidx === 'bigBar' || state.teethJewelType.cidx === 'bigBarDiamond') {
+                        if((state.teethJewelType.cidx === 'bigBar' || state.teethJewelType.cidx === 'bigBarDiamond')
+                            && (tooth === 'icidx' || tooth === 'icisx' || tooth === 'ilidx' || tooth === 'ilisx')
+                        ) {
                             state.teethJewelType.cidx = 'full';
                             state.teethJewelType.cisx = 'full';
                             state.teethVisibility.cidx = false;
@@ -146,6 +119,7 @@ export const useTeethStore = create<State>((set, get) => ({
                         }
                     }
                 }
+                // the tooth for which a material is chosen becomes automatically the active tooth
                 state.currentTooth = tooth;
 
                 // calc total
@@ -154,7 +128,23 @@ export const useTeethStore = create<State>((set, get) => ({
                 console.log(state.history, state.currentHistory)
             }),
         ),
-    // SETTARE IL TIPO ATTIVA/DISATTIVA LA VISIBILITA', MA NON CAMBIA L'ACTIVE TOOTH
+
+    // state and methods to set the jewel type of each tooth
+    // adding the diamonds changes the jewel type, not the material, since the gold base is needed anyway
+    teethJewelType: {
+        icsdx: 'full',
+        icssx: 'full',
+        icidx: 'full',
+        icisx: 'full',
+        ilsdx: 'full',
+        ilssx: 'full',
+        ilidx: 'full',
+        ilisx: 'full',
+        csdx: 'full',
+        cssx: 'full',
+        cidx: 'full',
+        cisx: 'full',
+    },
     setType: (tooth, type) =>
         set(
             produce((state) => {
@@ -356,6 +346,14 @@ export const useTeethStore = create<State>((set, get) => ({
                 get().calcTotal(state);
             })
         ),
+
+    // state and methods to set the gems
+    teethStones: {
+        csdx: undefined,
+        cssx: undefined,
+        cidx: undefined,
+        cisx: undefined,
+    },
     setStone: (tooth, stone) =>
         set(
             produce((state) => {
@@ -378,6 +376,9 @@ export const useTeethStore = create<State>((set, get) => ({
                 get().calcTotal(state);
             }),
         ),
+
+    // state and method to set the active tooth
+    currentTooth: undefined,
     setActiveTooth: (tooth) =>
         set(
             produce((state) => {
@@ -393,6 +394,8 @@ export const useTeethStore = create<State>((set, get) => ({
 
             })
         ),
+
+    // state and methods to set the active default configuration
     setDefaultConfig: (config, color) => {
         get().reset();
 
@@ -472,6 +475,16 @@ export const useTeethStore = create<State>((set, get) => ({
             get().calcTotal(state);
             console.log(state.activeDefault, state.currentHistory, 'history: ', state.history)
         }))},
+    activeDefault: undefined,
+    setActiveDefault: (active, color) => {
+        switch (active) {
+            case undefined:
+                set({activeDefault: undefined});
+                break;
+            default:
+                set({activeDefault: active + color})
+        }
+    },
     setTooth: (tooth, type, color) =>
         set(
             produce((state) => {
@@ -480,6 +493,8 @@ export const useTeethStore = create<State>((set, get) => ({
                 state.teethJewelType[tooth] = type;
             })
         ),
+
+    // method to remove the configuration from a tooth
     resetTooth: (tooth) =>
         set(
             produce((state) => {
@@ -503,14 +518,17 @@ export const useTeethStore = create<State>((set, get) => ({
                 }
             })
         ),
-    setActiveDefault: (active, color) => {
-        switch (active) {
-            case undefined:
-                set({activeDefault: undefined});
-                break;
-            default:
-                set({activeDefault: active + color})
-        }
+
+    // state with the list of all the available jewel types for each tooth
+    // method to copy the configuration from a tooth to another one
+    teethTypeOptions: {
+        full: ['icsdx', 'icssx', 'icidx', 'icisx', 'ilsdx', 'ilssx', 'ilidx', 'ilisx', 'csdx', 'cssx', 'cidx', 'cisx'],
+        fullDiamond: ['icsdx', 'icssx', 'icidx', 'icisx', 'ilsdx', 'ilssx', 'ilidx', 'ilisx', 'csdx', 'cssx', 'cidx', 'cisx'],
+        bar: ['ilsdx', 'ilssx'],
+        barDiamond: ['ilsdx', 'ilssx'],
+        frame: ['csdx', 'cssx', 'cidx', 'cisx'],
+        frameDiamond: ['csdx', 'cssx', 'cidx', 'cisx'],
+        stones: ['csdx', 'cssx', 'cidx', 'cisx']
     },
     setCopy: (copied, original) =>
         set(
@@ -539,8 +557,18 @@ export const useTeethStore = create<State>((set, get) => ({
                 ];
             })
         ),
+
+    // state and method to manage the initial loading screens
+    loaded: false,
     setLoaded: (bool) => set(() => ({loaded: bool})),
+
+    // state and method to switch between desktop and mobile UIs
+    ui: false,
     setUI: (bool) => set({ui: bool}),
+
+    // states and method to fetch and save the prices from the db
+    prices: undefined,
+    pricesAdds: undefined,
     fetchPrices: async() => {
         const supabase = await createClient();
         let { data: base, error: errorBase } = await supabase
@@ -551,6 +579,11 @@ export const useTeethStore = create<State>((set, get) => ({
             .select('*');
         set({prices: base, pricesAdds: addons});
     },
+
+    // states and methods to navigate among the various step of the user experience
+    // the add of a new element in the history array is included in the calcTotal method below
+    history: [],
+    currentHistory: 0,
     undo: () =>
         set(
             produce((state) => {
@@ -649,6 +682,24 @@ export const useTeethStore = create<State>((set, get) => ({
             activeDefault: undefined
         })
     },
+
+    // states and method to calculate the total price of the current configuration
+    // the method also saves a new History element
+    teethPrices: {
+        icsdx: 0,
+        icssx: 0,
+        icidx: 0,
+        icisx: 0,
+        ilsdx: 0,
+        ilssx: 0,
+        ilidx: 0,
+        ilisx: 0,
+        csdx: 0,
+        cssx: 0,
+        cidx: 0,
+        cisx: 0,
+    },
+    total: 0,
     calcTotal: (state) => {
         for (const [key, value] of Object.entries(state.teethMaterial)) {
             if(value !== 'base' && state.prices) {
@@ -703,4 +754,5 @@ export const useTeethStore = create<State>((set, get) => ({
     }
 }))
 
+// initial data fetch
 useTeethStore.getState().fetchPrices();
