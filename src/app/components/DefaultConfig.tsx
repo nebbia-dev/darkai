@@ -1,9 +1,14 @@
 import {Accordion, AccordionDetails, AccordionSummary} from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import DefaultConfigButton from "@/app/components/DefaultConfigButton";
+import {useTeethStore} from "@/app/stores/teeth";
+import State from "@/app/types/State";
+import {useState} from "react";
 
 export default function DefaultConfig({teeth} : {teeth: string}) {
     const firstChild = teeth === 'full' ? '' : '1px solid #9ca3af';
+    const activeDefault = useTeethStore((state:State) => state.activeDefault);
+    const [expanded, setExpanded] = useState<boolean>(false);
     let title;
 
     switch(teeth) {
@@ -26,10 +31,11 @@ export default function DefaultConfig({teeth} : {teeth: string}) {
             title = 'Default';
     }
 
-
     return (
-        <Accordion elevation={0} sx={{backgroundColor: '#f9fafb', '&:before':{height:'0px'}}}>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />} sx={{height: '100px', borderTop: firstChild, px: 8}}>
+        <Accordion elevation={0} sx={{backgroundColor: '#f9fafb', '&:before':{height:'0px'}}}
+                   expanded={activeDefault?.includes(teeth) || expanded}>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />} sx={{height: '100px', borderTop: firstChild, px: 8}}
+                              onClick={() => setExpanded(prev => !prev)}>
                 {title}
             </AccordionSummary>
             <AccordionDetails sx={{borderTop: '1px solid #9ca3af'}}>

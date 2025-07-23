@@ -3,11 +3,9 @@ import {useTeethStore} from "@/app/stores/teeth";
 import State from "@/app/types/State";
 
 export default function Recap() {
-    const screenshot = useTeethStore((state : State) => state.isScreenshotNeeded);
     const takeScreenshot = useTeethStore((state:State) => state.setIsScreenshotNeeded);
     function download() {
         takeScreenshot(true);
-        console.log(screenshot)
     }
 
     // questa in realta' e' nella stessa pagina del configuratore

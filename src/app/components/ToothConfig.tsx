@@ -67,15 +67,15 @@ export default function ToothConfig({tooth, ref, position} : {tooth: string, ref
     console.log('oh no');
 
     return (
-        <Accordion elevation={0} sx={{backgroundColor: '#f9fafb', '&:before': {height: '0px'}, '&.Mui-expanded': {margin: 0}}}
+        <Accordion elevation={0} sx={{backgroundColor: '#f9fafb', '&:before': {height: '0px'}, '&.Mui-expanded': {margin: 0}, marginBottom:'1rem'}}
                    expanded={activeTooth === tooth}>
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between bg-stone-100">
                 <div className="w-[10%] flex justify-center">
                     {material !== 'base' &&
                             <Close className="cursor-pointer" onClick={() => resetTooth(tooth)}/>
                     }
                 </div>
-                <AccordionSummary expandIcon={<ExpandMoreIcon/>} sx={{height: '100px', px: 8, width:'90%', '&.MuiAccordionSummary-root':{paddingLeft:'2rem', paddingRight:'2rem'}}}
+                <AccordionSummary expandIcon={<ExpandMoreIcon/>} sx={{height: '100px', px: 8, width:'90%', '&.MuiAccordionSummary-root':{paddingLeft:'2rem', paddingRight:'2rem'}, backgroundColor: '#f5f5f4'}}
                                   onClick={() => setActiveTooth(tooth)} id={tooth}>
                     {title}
                 </AccordionSummary>

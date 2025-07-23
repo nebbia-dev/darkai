@@ -102,6 +102,8 @@ export const useTeethStore = create<State>((set, get) => ({
     total: 0,
     isScreenshotNeeded: undefined,
     setIsScreenshotNeeded: (value) => set({isScreenshotNeeded: value}),
+    resetControls: undefined,
+    setResetControls: (value) => set({resetControls: value}),
     setActiveTab: (value) =>
         set(
             produce((state) => {
@@ -467,15 +469,8 @@ export const useTeethStore = create<State>((set, get) => ({
                 state.teethStones.cisx = 'sapphire';
             }
 
-            state.history = [...state.history,
-                [{
-                    type: state.teethJewelType,
-                    material: state.teethMaterial,
-                    stones: state.teethStones,
-                    visible: state.teethVisibility
-                }]
-            ];
-            console.log(state.currentHistory, 'history: ', state.history)
+            get().calcTotal(state);
+            console.log(state.activeDefault, state.currentHistory, 'history: ', state.history)
         }))},
     setTooth: (tooth, type, color) =>
         set(
@@ -574,6 +569,7 @@ export const useTeethStore = create<State>((set, get) => ({
                         state.teethVisibility[key] = value;
                     }
                 }
+                get().calcTotal(state);
                 console.log(state.currentHistory, state.history)
             })
         ),
@@ -595,6 +591,7 @@ export const useTeethStore = create<State>((set, get) => ({
                         state.teethVisibility[key] = value;
                     }
                 }
+                get().calcTotal(state);
                 console.log(state.currentHistory, state.history)
             })
         ),

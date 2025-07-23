@@ -215,6 +215,8 @@ export default function Configurator() {
     const setEnvMap = useTeethStore((state : State) => state.setEnvMap);
     const screenshot = useTeethStore((state : State) => state.isScreenshotNeeded);
     const resetScreenShot = useTeethStore((state : State) => state.setIsScreenshotNeeded);
+    const resetControls = useTeethStore((state : State) => state.resetControls);
+    const doResetControls = useTeethStore((state : State) => state.setResetControls);
     const orbitRef = useRef();
     const { gl, scene, camera } = useThree();
 
@@ -231,7 +233,14 @@ export default function Configurator() {
                 resetScreenShot(undefined);
             }, 200)
         }
-    }, [screenshot])
+    }, [screenshot]);
+
+    useEffect(() => {
+        if(resetControls) {
+            orbitRef.current.reset();
+            doResetControls(undefined);
+        }
+    }, [resetControls])
 
     useEffect(() => {
         setTeeth(teeth);

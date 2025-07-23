@@ -45,8 +45,6 @@ export default function Selection({ui} : {ui:boolean}) {
         );
     }
 
-    console.log(activeTooth, visibleTeeth);
-
     return (
         <>
             {!ui
