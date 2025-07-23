@@ -596,6 +596,10 @@ export const useTeethStore = create<State>((set, get) => ({
     ui: false,
     setUI: (bool) => set({ui: bool}),
 
+    // state and method to get back and forth the recap view
+    recap: false,
+    setRecap: (bool) => set({recap: bool}),
+
     // states and method to fetch and save the prices from the db
     prices: undefined,
     pricesAdds: undefined,
