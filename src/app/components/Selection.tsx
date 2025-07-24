@@ -36,9 +36,11 @@ export default function Selection({ui} : {ui:boolean}) {
     function checkDiamonds() {
         for(const tooth of Object.keys(jewelType)) {
             if(jewelType[tooth].includes('Diamond')) {
+                console.log('Me diamond!!')
                 return true;
             }
         }
+        console.log('Me NOT diamond!!')
         return false;
     }
     const changeTab = (event: SyntheticEvent, newValue: number) => {
@@ -133,52 +135,71 @@ export default function Selection({ui} : {ui:boolean}) {
                                 </div>
                             </div>
                         </>
-                        : <div className="h-[calc(100vh-54px)] flex flex-col w-[90%] mx-auto">
-                            <div>
+                        : <div className="h-[calc(100vh-54px)] flex flex-col w-[75%] mx-auto">
+                            <div className="h-[calc(100%-15vh-7.5vh)] overflow-y-auto mt-[48px] w-full mx-auto">
                                 {
                                     Object.keys(visibleTeeth).map((tooth, i) => {
                                         if (!visibleTeeth[tooth]) return null
                                         return (
-                                            <div key={i} className="flex flex-col">
-                                                {elabToothName(tooth, false)}:
-                                                <ul>
-                                                    <li>{jewelType[tooth]}</li>
-                                                    <li>{material[tooth]}</li>
-                                                    {stones[tooth] && <li>{stones[tooth]}</li>}
+                                            <div key={i} className="flex flex-col mb-4">
+                                                <span className="w-full py-1 px-3 bg-stone-200 mb-1">{elabToothName(tooth, false)}</span>
+                                                <ul className="ml-4">
+                                                    <li>Jewel type: {jewelType[tooth].includes('Diamond') ? jewelType[tooth].split('D')[0][0].toUpperCase() + jewelType[tooth].split('D')[0].slice(1) + ' with diamonds' : jewelType[tooth][0].toUpperCase() + jewelType[tooth].slice(1)}</li>
+                                                    <li>Material: {material[tooth][0].toUpperCase() + material[tooth].slice(1)}</li>
+                                                    {stones[tooth] && <li>Gem: {stones[tooth][0].toUpperCase() + stones[tooth].slice(1)}</li>}
                                                 </ul>
-                                                <span>{teethPrices[tooth]}€</span>
+                                                <span className="w-full text-right py-1 px-3 mt-2 border-t-1">{teethPrices[tooth]}€</span>
                                             </div>
                                         )
                                     })
                                 }
-                                <div>
-                                    Gold carats
-                                    <label htmlFor="18k">18K</label>
-                                    <input type="radio" id="18k" name="carats"/>
-                                    <label htmlFor="14k">14K</label>
-                                    <input type="radio" id="14k" name="carats"/>
+                                <div className="mb-4">
+                                    <span className="w-full py-1 px-3 bg-stone-200 mb-1 block">Gold carats</span>
+                                    <div className="ml-4">
+                                        <label htmlFor="18k" className="flex items-center gap-2">
+                                            <input type="radio" id="18k" name="carats"/>
+                                            18K
+                                        </label>
+                                        <label htmlFor="14k" className="flex items-center gap-2">
+                                            <input type="radio" id="14k" name="carats"/>
+                                            14K
+                                        </label>
+                                    </div>
                                 </div>
-                                {checkDiamonds() ?? <div>Diamonds type
-                                    <label htmlFor="natural">Natural</label>
-                                    <input type="radio" id="natural" name="diamonds"/>
-                                    <label htmlFor="lab">Lab</label>
-                                    <input type="radio" id="lab" name="diamonds"/>
-                                    <label htmlFor="mois">Moissanite</label>
-                                    <input type="radio" id="mois" name="diamonds"/>
-                                </div>}
-                                <div>Total: {total}€</div>
+                                {checkDiamonds() &&
+                                    <div>
+                                        <span className="w-full py-1 px-3 bg-stone-200 mb-1 block">Diamonds type</span>
+                                        <div className="ml-4">
+                                            <label htmlFor="natural" className="flex items-center gap-2">
+                                                <input type="radio" id="natural" name="diamonds"/>
+                                                Natural
+                                            </label>
+                                            <label htmlFor="lab" className="flex items-center gap-2">
+                                                <input type="radio" id="lab" name="diamonds"/>
+                                                Lab
+                                            </label>
+                                            <label htmlFor="mois" className="flex items-center gap-2">
+                                                <input type="radio" id="mois" name="diamonds"/>
+                                                Moissanite
+                                            </label>
+                                        </div>
+                                    </div>
+                                }
                             </div>
-                            <div className="flex items-center justify-between w-[90%] h-[15vh] mx-auto">
-                            <button onClick={() => setRecap(false)}
-                                        className="bg-gray-50 py-2 px-4 rounded-full text-gray-950 border cursor-pointer">&larr; Back
-                                </button>
-                                <div className="flex gap-4">
-                                    <button onClick={download}
-                                            className="bg-gray-50 py-2 px-4 rounded-full text-gray-950 border cursor-pointer">Save
+                            <div className="flex flex-col items-center">
+                                <div className="flex justify-end w-full px-3 h-[7.5vh] items-center bg-stone-200 text-right mt-4">Total: {total}€</div>
+                                <div className="flex items-center justify-between w-full h-[15vh] mx-auto">
+                                    <button onClick={() => setRecap(false)}
+                                            className="bg-gray-50 py-2 px-4 rounded-full text-gray-950 border cursor-pointer">&larr; Back
                                     </button>
-                                    <button onClick={download}
-                                            className="bg-gray-950 py-2 px-4 rounded-full text-gray-50 cursor-pointer">Proceed &rarr;
-                                    </button>
+                                    <div className="flex gap-4">
+                                        <button onClick={download}
+                                                className="bg-gray-50 py-2 px-4 rounded-full text-gray-950 border cursor-pointer">Save
+                                        </button>
+                                        <button onClick={download}
+                                                className="bg-gray-950 py-2 px-4 rounded-full text-gray-50 cursor-pointer">Proceed &rarr;
+                                        </button>
+                                </div>
                                 </div>
                             </div>
                         </div>

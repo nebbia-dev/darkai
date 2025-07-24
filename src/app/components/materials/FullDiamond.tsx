@@ -15,11 +15,11 @@ export default function FullDiamond({color} : {color: string}) {
         propsYDiamondFull.map.colorSpace = THREE.SRGBColorSpace;
 
         propsYDiamondFull.map.wrapS = propsYDiamondFull.map.wrapT = THREE.RepeatWrapping;
-        propsYDiamondFull.map.repeat.set(6, 6);
+        propsYDiamondFull.map.repeat.set(4,4);
         propsYDiamondFull.normalMap.wrapS = propsYDiamondFull.normalMap.wrapT = THREE.RepeatWrapping;
-        propsYDiamondFull.normalMap.repeat.set(6, 6);
+        propsYDiamondFull.normalMap.repeat.set(4,4);
         propsYDiamondFull.metalnessMap.wrapS = propsYDiamondFull.metalnessMap.wrapT = THREE.RepeatWrapping;
-        propsYDiamondFull.metalnessMap.repeat.set(6, 6);
+        propsYDiamondFull.metalnessMap.repeat.set(4,4);
 
         const propsRDiamondFull = useTexture({
             map: 'textures/diamondFull/Difuse_Diamanti_Rosa.webp',
