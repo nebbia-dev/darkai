@@ -7,6 +7,7 @@ import DefaultSelector from "@/app/components/DefaultSelector";
 import {useTeethStore} from "@/app/stores/teeth";
 import State from "@/app/types/State";
 import elabToothName from "@/app/helpers/elabToothName";
+import Link from 'next/link';
 
 interface TabPanelProps {
     children?: ReactNode;
@@ -214,9 +215,9 @@ export default function Selection({ui} : {ui:boolean}) {
                                         <button onClick={download}
                                                 className="bg-gray-50 py-2 px-4 rounded-full text-gray-950 border cursor-pointer">Save
                                         </button>
-                                        <button onClick={download}
+                                        <Link href="/checkout/upload"
                                                 className="bg-gray-950 py-2 px-4 rounded-full text-gray-50 cursor-pointer">Proceed &rarr;
-                                        </button>
+                                        </Link>
                                 </div>
                                 </div>
                             </div>

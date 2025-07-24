@@ -377,12 +377,24 @@ export const useTeethStore = create<State>((set, get) => ({
 
     // state and methods to set the gems
     teethStones: {
-        csdx: undefined,
-        cssx: undefined,
-        cidx: undefined,
-        cisx: undefined,
+        csdx: {
+            shape: undefined,
+            color: undefined
+        },
+        cssx: {
+            shape: undefined,
+            color: undefined
+        },
+        cidx: {
+            shape: undefined,
+            color: undefined
+        },
+        cisx: {
+            shape: undefined,
+            color: undefined
+        },
     },
-    setStone: (tooth, stone) =>
+    setStone: (tooth, shape, color) =>
         set(
             produce((state) => {
                 // if the tooth is not visible or no material has been chosen, no diamond is set
@@ -399,10 +411,18 @@ export const useTeethStore = create<State>((set, get) => ({
                 state.currentHistory++;
 
                 // stone toggler
-                if(state.teethStones[tooth] === stone) {
-                    state.teethStones[tooth] = undefined;
+                if(state.teethStones[tooth].shape === shape) {
+                    state.teethStones[tooth].shape = undefined;
+                    state.teethStones[tooth].color = undefined;
                 } else {
-                    state.teethStones[tooth] = stone;
+                    if(shape === 'prev') {
+                        state.teethStones[tooth].color = color;
+                    } else {
+                        state.teethStones[tooth].shape = shape;
+                        if(state.teethStones[tooth].color === undefined) {
+                            state.teethStones[tooth].color = 'sapphire';
+                        }
+                    }
                 }
 
                 // calc total and set history step
@@ -612,6 +632,7 @@ export const useTeethStore = create<State>((set, get) => ({
             .from('Prices_addons')
             .select('*');
         set({prices: base, pricesAdds: addons});
+        console.log(addons)
     },
 
     // states and methods to navigate among the various step of the user experience
@@ -765,11 +786,11 @@ export const useTeethStore = create<State>((set, get) => ({
             }
         }
 
-        for (const [key, value] of Object.entries(state.teethStones)) {
-            if(value && state.pricesAdds) {
-                state.teethPrices[key] = state.teethPrices[key] + state.pricesAdds.filter(el => el.stone === value)[0].tearShape;
-            }
-        }
+        // for (const [key, value] of Object.entries(state.teethStones)) {
+        //     if(value && state.pricesAdds) {
+        //         state.teethPrices[key] = state.teethPrices[key] + state.pricesAdds.filter(el => el.stone === value)[0].tearShape;
+        //     }
+        // }
 
         state.total = 0;
         for (const [key, value] of Object.entries(state.teethPrices)) {

@@ -62,12 +62,16 @@ interface Visibility {
     cidx: boolean,
     cisx: boolean,
 }
+interface Stone {
+    shape: string | undefined,
+    color: string | undefined
+}
 interface Stones {
-    [key: string]: string | undefined
-    csdx: string | undefined,
-    cssx: string | undefined,
-    cidx: string | undefined,
-    cisx: string | undefined,
+    [key: string]: Stone
+    csdx: Stone,
+    cssx: Stone,
+    cidx: Stone,
+    cisx: Stone,
 }
 interface History {
     material: Materials,
@@ -99,6 +103,7 @@ interface BasePrices {
 }
 
 interface AddonsPrices {
+    marquiseShape: number | null,
     tearShape: number | null,
     diamondShape: number | null,
     heartShape: number | null,
@@ -150,7 +155,7 @@ export default interface State {
     setMaterial: (tooth:string, color:string) => void,
     setType: (tooth:string, type:string) => void,
     setDiamond: (tooth:string) => void,
-    setStone: (tooth:string, stone:string) => void,
+    setStone: (tooth:string, shape:string, color:string) => void,
     setActiveTooth: (tooth:string) => void,
     setDefaultConfig: (config:string, color:string) => void,
     setTooth: (tooth:string, type:string, color:string) => void,

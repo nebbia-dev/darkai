@@ -5,23 +5,44 @@ import {JSX, memo} from "react";
 import State from "@/app/types/State";
 import * as THREE from 'three'
 export default function CiDxStone() {
-    const tooth = useTeethStore((state: State) => state.teethGeometry.cidx ? state.teethGeometry.cidx.stone : undefined);
-    console.log(tooth)
-    const toothStone =  useTeethStore((state: State) => state.teethStones.cidx);
-    const CIDXstone = memo(({visible} : {visible: boolean}): JSX.Element => {
-        if(!tooth) return <></>
+    const tooth = useTeethStore((state: State) => state.teethGeometry.cidx ? state.teethGeometry.cidx.stones : undefined);
+    const toothStone =  useTeethStore((state: State) => state.teethStones.cidx ? state.teethStones.cidx : undefined);
+    const CIDXstone = memo(({visible, type} : {visible: boolean, type: string|undefined}): JSX.Element => {
+        if(!tooth || !toothStone?.shape) return <></>
+        let shape;
+        switch(type) {
+            case 'marquise':
+                shape = [tooth.marquise];
+                break;
+            case 'heart':
+                shape = [tooth.heart];
+                break;
+            case 'circle':
+                shape = [tooth.circle];
+                break;
+            case 'tear':
+                shape = [tooth.tear];
+                break;
+            case 'square':
+                shape = [tooth.square];
+                break;
+        }
+
+        const posVec = new THREE.Vector3;
+        const pos = shape[0].getWorldPosition(posVec);
+        const quatVec = new THREE.Quaternion;
+        const quat = shape[0].getWorldQuaternion(quatVec);
+
         return(
-            <group position={tooth.position} quaternion={tooth.quaternion}>
-                <mesh
-                    geometry={(tooth.children[3]as THREE.Mesh).geometry}
-                    visible={visible}
-                    position={tooth.children[3].position}
-                    quaternion={tooth.children[3].quaternion}
-                >
-                    <StonesMaterial color={toothStone}/>
-                </mesh>
-            </group>
+            <mesh
+                geometry={shape[0].geometry}
+                visible={visible}
+                position={pos}
+                quaternion={quat}
+            >
+                <StonesMaterial color={toothStone.color}/>
+            </mesh>
         )
     })
-    return <CIDXstone visible={toothStone !== undefined}/>
+    return <CIDXstone visible={toothStone !== undefined} type={toothStone?.shape}/>
 }
