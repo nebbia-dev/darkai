@@ -139,6 +139,8 @@ export default interface State {
     isScreenshotNeeded: boolean | undefined,
     resetControls: boolean | undefined,
     recap: boolean,
+    totalPreciousness: number,
+    calcPreciousness: (gold:string, diamond:string) => void,
     setRecap: (bool:boolean) => void,
     setIsScreenshotNeeded: (value:boolean|undefined) => void,
     setResetControls: (value:boolean|undefined) => void,

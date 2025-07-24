@@ -1,5 +1,5 @@
 import ToothConfig from "@/app/components/ToothConfig";
-import {ReactNode, SyntheticEvent, useRef} from "react";
+import {ReactNode, SyntheticEvent, useEffect, useRef, useState} from "react";
 import {Box, Tab, Tabs} from "@mui/material";
 import DefaultConfig from "@/app/components/DefaultConfig";
 import ToothSelector from "@/app/components/ToothSelector";
@@ -16,6 +16,8 @@ interface TabPanelProps {
 
 export default function Selection({ui} : {ui:boolean}) {
     const total = useTeethStore((state:State) => state.total);
+    const totalPreciousness = useTeethStore((state:State) => state.totalPreciousness);
+    const calcPreciousness = useTeethStore((state:State) => state.calcPreciousness);
     const visibleTeeth = useTeethStore((state:State) => state.teethVisibility);
     const jewelType = useTeethStore((state: State) => state.teethJewelType);
     const material = useTeethStore((state: State) => state.teethMaterial);
@@ -27,6 +29,9 @@ export default function Selection({ui} : {ui:boolean}) {
     const recap = useTeethStore((state:State) => state.recap);
     const setRecap = useTeethStore((state:State) => state.setRecap);
     const takeScreenshot = useTeethStore((state:State) => state.setIsScreenshotNeeded);
+
+    const [gold, setGold] = useState<string>('14k');
+    const [diamond, setDiamond] = useState<string>('mois');
 
     const accordionContainer = useRef<null|HTMLDivElement>(null);
     const scrollPosition = useRef(null);
@@ -42,6 +47,10 @@ export default function Selection({ui} : {ui:boolean}) {
         }
         console.log('Me NOT diamond!!')
         return false;
+    }
+    function showRecap() {
+        setRecap(true);
+        calcPreciousness(gold, diamond);
     }
     const changeTab = (event: SyntheticEvent, newValue: number) => {
         setActiveTab(newValue);
@@ -63,6 +72,10 @@ export default function Selection({ui} : {ui:boolean}) {
             </div>
         );
     }
+
+    useEffect(() => {
+        calcPreciousness(gold, diamond);
+    }, [gold, diamond]);
 
     return (
         <>
@@ -131,7 +144,7 @@ export default function Selection({ui} : {ui:boolean}) {
                             <div className="w-full h-[15vh] bg-stone-200">
                                 <div className="h-full flex items-center justify-between w-[90%] mx-auto">
                                     <p>{total !== 0 && <span>Starting from {total}€</span>}</p>
-                                    <button onClick={() => setRecap(true)} className="bg-gray-950 py-2 px-4 rounded-full text-gray-50 cursor-pointer">Continue &rarr;</button>
+                                    <button onClick={() => showRecap()} className="bg-gray-950 py-2 px-4 rounded-full text-gray-50 cursor-pointer">Continue &rarr;</button>
                                 </div>
                             </div>
                         </>
@@ -157,11 +170,13 @@ export default function Selection({ui} : {ui:boolean}) {
                                     <span className="w-full py-1 px-3 bg-stone-200 mb-1 block">Gold carats</span>
                                     <div className="ml-4">
                                         <label htmlFor="18k" className="flex items-center gap-2">
-                                            <input type="radio" id="18k" name="carats"/>
+                                            <input type="radio" id="18k" name="carats" checked={gold === '18k'}
+                                                   value="18k" onChange={(e) => setGold(e.target.value)}/>
                                             18K
                                         </label>
                                         <label htmlFor="14k" className="flex items-center gap-2">
-                                            <input type="radio" id="14k" name="carats"/>
+                                            <input type="radio" id="14k" name="carats" checked={gold === '14k'}
+                                                   value="14k" onChange={(e) => setGold(e.target.value)}/>
                                             14K
                                         </label>
                                     </div>
@@ -171,15 +186,18 @@ export default function Selection({ui} : {ui:boolean}) {
                                         <span className="w-full py-1 px-3 bg-stone-200 mb-1 block">Diamonds type</span>
                                         <div className="ml-4">
                                             <label htmlFor="natural" className="flex items-center gap-2">
-                                                <input type="radio" id="natural" name="diamonds"/>
+                                                <input type="radio" id="natural" name="diamonds" checked={diamond === 'natural'}
+                                                       value="natural" onChange={(e) => setDiamond(e.target.value)}/>
                                                 Natural
                                             </label>
                                             <label htmlFor="lab" className="flex items-center gap-2">
-                                                <input type="radio" id="lab" name="diamonds"/>
+                                                <input type="radio" id="lab" name="diamonds" checked={diamond === 'lab'}
+                                                       value="lab" onChange={(e) => setDiamond(e.target.value)}/>
                                                 Lab
                                             </label>
                                             <label htmlFor="mois" className="flex items-center gap-2">
-                                                <input type="radio" id="mois" name="diamonds"/>
+                                                <input type="radio" id="mois" name="diamonds" checked={diamond === 'mois'}
+                                                       value="mois" onChange={(e) => setDiamond(e.target.value)}/>
                                                 Moissanite
                                             </label>
                                         </div>
@@ -187,7 +205,7 @@ export default function Selection({ui} : {ui:boolean}) {
                                 }
                             </div>
                             <div className="flex flex-col items-center">
-                                <div className="flex justify-end w-full px-3 h-[7.5vh] items-center bg-stone-200 text-right mt-4">Total: {total}€</div>
+                                <div className="flex justify-end w-full px-3 h-[7.5vh] items-center bg-stone-200 text-right mt-4">Total: {total + totalPreciousness}€</div>
                                 <div className="flex items-center justify-between w-full h-[15vh] mx-auto">
                                     <button onClick={() => setRecap(false)}
                                             className="bg-gray-50 py-2 px-4 rounded-full text-gray-950 border cursor-pointer">&larr; Back

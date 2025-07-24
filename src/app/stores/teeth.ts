@@ -785,7 +785,34 @@ export const useTeethStore = create<State>((set, get) => ({
                 prices: state.teethPrices
             }]
         ];
-    }
+    },
+
+    // state and method to calculate the preciousness of the materials used in the configuration
+    // 0 is the starting price, with 14K gold and moissanite
+    totalPreciousness: 0,
+    calcPreciousness: ((gold, diamond) =>
+        set(
+            produce((state) => {
+                state.totalPreciousness = 0;
+
+                if(gold !== '14k') {
+                    const configTeeth = Object.keys(state.teethMaterial).filter(tooth => state.teethMaterial[tooth] !== 'base');
+                    state.totalPreciousness += configTeeth.length * 300;
+                }
+
+                if(diamond !== 'mois') {
+                    const configTeeth = Object.keys(state.teethJewelType).filter(tooth => state.teethJewelType[tooth].includes('Diamond'));
+                    switch(diamond) {
+                        case 'lab':
+                            state.totalPreciousness += configTeeth.length * 500;
+                           break;
+                        case 'natural':
+                            state.totalPreciousness += configTeeth.length * 1000;
+                    }
+                }
+            })
+        )
+    )
 }))
 
 // initial data fetch
