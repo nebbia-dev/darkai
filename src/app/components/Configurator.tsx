@@ -24,6 +24,14 @@ import CiSxStone from "@/app/components/teeth/CiSxStone";
 import State from "@/app/types/State";
 import * as THREE from 'three'
 import {useThree} from "@react-three/fiber";
+import IlsSxStone from "@/app/components/teeth/IlsSxStone";
+import IlsDxStone from "@/app/components/teeth/IlsDxStone";
+import IcsSxStone from "@/app/components/teeth/IcsSxStone";
+import IcsDxStone from "@/app/components/teeth/IcsDxStone";
+import IliSxStone from "@/app/components/teeth/IliSxStone";
+import IliDxStone from "@/app/components/teeth/IliDxStone";
+import IciSxStone from "@/app/components/teeth/IciSxStone";
+import IciDxStone from "@/app/components/teeth/IciDxStone";
 
 export default function Configurator() {
     const envMap = useEnvironment({
@@ -343,18 +351,26 @@ export default function Configurator() {
                     {/*<primitive object={upperFrame}/>*/}
                     {/*DENTI SUPERIORI*/}
                     <IlsSx/>
+                    <IlsSxStone/>
                     <IlsDx/>
+                    <IlsDxStone/>
                     <IcsSx/>
+                    <IcsSxStone/>
                     <IcsDx/>
+                    <IcsDxStone/>
                     <CsDx/>
                     <CsDxStone/>
                     <CsSx/>
                     <CsSxStone/>
                     {/*DENTI INFERIORI*/}
                     <IliSx/>
+                    <IliSxStone/>
                     <IliDx/>
+                    <IliDxStone/>
                     <IciSx/>
+                    <IciSxStone/>
                     <IciDx/>
+                    <IciDxStone/>
                     <CiDx/>
                     <CiDxStone/>
                     <CiSx/>

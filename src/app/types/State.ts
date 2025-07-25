@@ -68,6 +68,14 @@ interface Stone {
 }
 interface Stones {
     [key: string]: Stone
+    icsdx: Stone,
+    icssx: Stone,
+    icidx: Stone,
+    icisx: Stone,
+    ilsdx: Stone,
+    ilssx: Stone,
+    ilidx: Stone,
+    ilisx: Stone,
     csdx: Stone,
     cssx: Stone,
     cidx: Stone,
@@ -168,5 +176,6 @@ export default interface State {
     undo: () => void,
     redo: () => void,
     reset: () => void,
-    calcTotal: (state:State) => void
+    calcTotal: (state:State) => void,
+    setHistory: (state:State) => void
 }

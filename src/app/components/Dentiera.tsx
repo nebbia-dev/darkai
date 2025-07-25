@@ -6,8 +6,11 @@ import {useTeethStore} from "@/app/stores/teeth";
 import State from "@/app/types/State";
 
 export default function Dentiera() {
+    // const fbx2 = useMemo(() => {
+    //     console.log('dentiera')
+    //     return useFBX('/models/MOD_Denti (2).fbx')
+    // }, []);
     const fbx = useMemo(() => {
-        console.log('dentiera')
         return useFBX('/models/Dentiera_Separata.fbx')
     }, []);
     const envMap = useTeethStore((state: State) => state.envMap);
@@ -36,6 +39,7 @@ export default function Dentiera() {
         })
     }, []);
 
+    // console.log(fbx, fbx2);
     useEffect(() => {
         if('ontouchstart' in window || navigator.maxTouchPoints > 0) {
             setTouch(true);
@@ -343,6 +347,7 @@ export default function Dentiera() {
             </mesh>
         )
     })
+
 
     const Base = memo(() : JSX.Element => {
         console.log('base')

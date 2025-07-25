@@ -4,10 +4,10 @@ import StonesMaterial from "@/app/components/materials/StonesMaterial";
 import {JSX, memo} from "react";
 import State from "@/app/types/State";
 import * as THREE from 'three'
-export default function CsDxStone() {
-    const tooth = useTeethStore((state: State) => state.teethGeometry.csdx ? state.teethGeometry.csdx.stones : undefined);
-    const toothStone =  useTeethStore((state: State) => state.teethStones.csdx);
-    const CSDXstone = memo(({visible, type} : {visible: boolean, type: string|undefined}): JSX.Element => {
+export default function IcsDxStone() {
+    const tooth = useTeethStore((state: State) => state.teethGeometry.icsdx ? state.teethGeometry.icsdx.stones : undefined);
+    const toothStone =  useTeethStore((state: State) => state.teethStones.icsdx);
+    const ICSDXstone = memo(({visible, type} : {visible: boolean, type: string|undefined}): JSX.Element => {
         if(!tooth || !toothStone.shape) {
             return (
                 <mesh>
@@ -52,5 +52,5 @@ export default function CsDxStone() {
             </mesh>
         )
     })
-    return <CSDXstone visible={toothStone.shape !== undefined} type={toothStone.shape}/>
+    return <ICSDXstone visible={toothStone.shape !== undefined} type={toothStone.shape}/>
 }

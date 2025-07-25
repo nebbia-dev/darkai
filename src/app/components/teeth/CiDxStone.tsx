@@ -6,9 +6,14 @@ import State from "@/app/types/State";
 import * as THREE from 'three'
 export default function CiDxStone() {
     const tooth = useTeethStore((state: State) => state.teethGeometry.cidx ? state.teethGeometry.cidx.stones : undefined);
-    const toothStone =  useTeethStore((state: State) => state.teethStones.cidx ? state.teethStones.cidx : undefined);
+    const toothStone =  useTeethStore((state: State) => state.teethStones.cidx);
     const CIDXstone = memo(({visible, type} : {visible: boolean, type: string|undefined}): JSX.Element => {
-        if(!tooth || !toothStone?.shape) return <></>
+        if(!tooth || !toothStone.shape) {
+            return (
+                <mesh>
+                </mesh>
+            )
+        }
         let shape;
         switch(type) {
             case 'marquise':
@@ -25,6 +30,9 @@ export default function CiDxStone() {
                 break;
             case 'square':
                 shape = [tooth.square];
+                break;
+            default:
+                shape = [null];
                 break;
         }
 
@@ -44,5 +52,5 @@ export default function CiDxStone() {
             </mesh>
         )
     })
-    return <CIDXstone visible={toothStone !== undefined} type={toothStone?.shape}/>
+    return <CIDXstone visible={toothStone.shape !== undefined} type={toothStone.shape}/>
 }
