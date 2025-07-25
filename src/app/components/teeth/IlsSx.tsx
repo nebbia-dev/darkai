@@ -13,6 +13,7 @@ export default function IlsSx() {
     const toothGeometry = useTeethStore((state: State) => state.teethGeometry.ilssx);
     const toothJewelType = useTeethStore((state: State) => state.teethJewelType.ilssx);
     const toothMaterial = useTeethStore((state: State) => state.teethMaterial.ilssx);
+    const toothPave = useTeethStore((state: State) => state.teethPave.ilssx);
     const toothVisibility = useTeethStore((state: State) => state.teethVisibility.ilssx);
 
     const ILSSX = memo(({visible, type, mat} : {visible: boolean, type: string, mat: string}): JSX.Element => {
@@ -21,23 +22,23 @@ export default function IlsSx() {
         switch(type) {
             case 'full':
                 geometry = [toothGeometry.full];
-                material = [<FullMaterial color={mat}/>]
+                material = [<FullMaterial color={toothMaterial}/>]
                 break;
             case 'fullDiamond':
                 geometry = [toothGeometry.fullDiamond.base, toothGeometry.fullDiamond.full];
-                material = [<BaseFullDiamond color={mat}/>, <FullDiamond color={mat}/>]
+                material = [<BaseFullDiamond color={toothMaterial}/>, <FullDiamond color={toothMaterial} pave={toothPave}/>]
                 break;
             case 'bar':
                 geometry = [toothGeometry.bar.full.left, toothGeometry.bar.full.right];
-                material = [<BarSmall color={mat}/>, <BarSmall color={mat}/>]
+                material = [<BarSmall color={toothMaterial}/>, <BarSmall color={toothMaterial}/>]
                 break;
             case 'barDiamond':
                 geometry = [toothGeometry.bar.diamond.left.base, toothGeometry.bar.diamond.right.base, toothGeometry.bar.diamond.left.full, toothGeometry.bar.diamond.right.full];
-                material = [<BarSmall color={mat}/>, <BarSmall color={mat}/>, <BarDiamond color={mat}/>]
+                material = [<BarSmall color={toothMaterial}/>, <BarSmall color={toothMaterial}/>, <BarDiamond color={toothMaterial}/>]
                 break;
             default:
                 geometry = [toothGeometry.full];
-                material = [<FullMaterial color={mat}/>]
+                material = [<FullMaterial color={toothMaterial}/>]
         }
         if(geometry.length === 2) {
             return (
@@ -78,5 +79,5 @@ export default function IlsSx() {
 
     console.log('render 2')
 
-    return <ILSSX visible={toothVisibility} type={toothJewelType} mat={toothMaterial}/>
+    return <ILSSX visible={toothVisibility} type={toothJewelType}/>
 }

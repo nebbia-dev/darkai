@@ -333,7 +333,7 @@ export const useTeethStore = create<State>((set, get) => ({
                 get().setHistory(state);
             }),
         ),
-    setDiamond: (tooth) =>
+    setDiamond: (tooth, pave: string) =>
         set(
             produce((state) => {
 
@@ -359,26 +359,30 @@ export const useTeethStore = create<State>((set, get) => ({
                         state.teethJewelType[tooth] = 'barDiamond';
                         break;
                     case 'barDiamond':
-                        state.teethJewelType[tooth] = 'bar';
+                        if(state.teethPave[tooth] === pave) state.teethJewelType[tooth] = 'bar';
                         break;
                     case 'fullDiamond':
-                        state.teethJewelType[tooth] = 'full';
+                        if(state.teethPave[tooth] === pave) state.teethJewelType[tooth] = 'full';
                         break;
                     case 'bigBar':
                         state.teethJewelType.cidx = 'bigBarDiamond';
                         state.teethJewelType.cisx = 'bigBarDiamond';
                         break;
                     case 'bigBarDiamond':
-                        state.teethJewelType.cidx = 'bigBar';
-                        state.teethJewelType.cisx = 'bigBar';
+                        if(state.teethPave[tooth] === pave) {
+                            state.teethJewelType.cidx = 'bigBar';
+                            state.teethJewelType.cisx = 'bigBar';
+                        }
                         break;
                     case 'frame':
                         state.teethJewelType[tooth] = 'frameDiamond';
                         break;
                     case 'frameDiamond':
-                        state.teethJewelType[tooth] = 'frame';
+                        if(state.teethPave[tooth] === pave) state.teethJewelType[tooth] = 'frame';
                         break;
                 }
+
+                state.teethPave[tooth] = pave;
 
                 // calc total and set history step
                 get().calcTotal(state);
@@ -476,6 +480,22 @@ export const useTeethStore = create<State>((set, get) => ({
                 get().setHistory(state);
             }),
         ),
+
+    // state to keep track of pave stones
+    teethPave: {
+        icsdx: 'diamond',
+        icssx: 'diamond',
+        icidx: 'diamond',
+        icisx: 'diamond',
+        ilsdx: 'diamond',
+        ilssx: 'diamond',
+        ilidx: 'diamond',
+        ilisx: 'diamond',
+        csdx: 'diamond',
+        cssx: 'diamond',
+        cidx: 'diamond',
+        cisx: 'diamond',
+    },
 
     // state and method to set the active tooth
     currentTooth: undefined,

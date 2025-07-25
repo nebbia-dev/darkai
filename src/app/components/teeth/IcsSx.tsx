@@ -11,6 +11,7 @@ export default function IcsSx() {
     const toothGeometry = useTeethStore((state: State) => state.teethGeometry.icssx);
     const toothJewelType = useTeethStore((state: State) => state.teethJewelType.icssx);
     const toothMaterial = useTeethStore((state: State) => state.teethMaterial.icssx);
+    const toothPave = useTeethStore((state: State) => state.teethPave.icssx);
     const toothVisibility = useTeethStore((state: State) => state.teethVisibility.icssx);
 
     const ICSSX = memo(({visible, type, mat} : {visible: boolean, type: string, mat: string}): JSX.Element => {
@@ -23,7 +24,7 @@ export default function IcsSx() {
                 break;
             case 'fullDiamond':
                 geometry = [toothGeometry.fullDiamond.base, toothGeometry.fullDiamond.full];
-                material = [<BaseFullDiamond color={toothMaterial}/>, <FullDiamond color={toothMaterial}/>]
+                material = [<BaseFullDiamond color={toothMaterial}/>, <FullDiamond color={toothMaterial} pave={toothPave}/>]
                 break;
             default:
                 geometry = [toothGeometry.full];

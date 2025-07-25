@@ -32,19 +32,20 @@ import IliSxStone from "@/app/components/teeth/IliSxStone";
 import IliDxStone from "@/app/components/teeth/IliDxStone";
 import IciSxStone from "@/app/components/teeth/IciSxStone";
 import IciDxStone from "@/app/components/teeth/IciDxStone";
+import FullMaterial from "@/app/components/materials/FullMaterial";
 
 export default function Configurator() {
     const envMap = useEnvironment({
         files: "envMaps/HDR_Light_Studio_Free_HDRI_Design_13.exr"
     })
     const geometry = useTeethStore((state:State) => state.teethGeometry);
-    const upperFrame = useFBX('/models/MOD_Frame_Upper.fbx');
-    // const fbx = useMemo(() => useFBX('/models/MOD_Dentiera_Completa_180_Phong.fbx'), []);
+    // const upperFrames = useFBX('/models/MOD_Frame_Capsula (1).fbx');
+    // console.log(upperFrames)
     // Se voglio piazzare anche l'fbx in LoadedMaterials, verosimilmente devo usare qui uno useEffect
     const teeth = useMemo((): FBX => {
         const fbx = useFBX('/models/MOD_Dentiera_Completa_180_Phong_Scala_1 (1).fbx');
         // const stones = useFBX('/models/MOD_Stone.fbx');
-        const stones = useFBX('/models/MOD_Stone (1).fbx');
+        const stones = useFBX('/models/MOD_Stone (2).fbx');
         if(!geometry.cisx){
             stones.children[0].children[0].children[1].matrix.makeScale(stones.children[0].children[0].children[1].scale.x/10, stones.children[0].children[0].children[1].scale.y/10, stones.children[0].children[0].children[1].scale.z/10);
             (stones.children[0].children[0].children[1] as THREE.Mesh).geometry.applyMatrix4(stones.children[0].children[0].children[1].matrix);
@@ -380,7 +381,45 @@ export default function Configurator() {
             {/*<primitive object={fbx} visible={false} position={[0, -10, 0]}/>*/}
             {savedTeeth && savedEnvMap &&
                 <>
-                    {/*<primitive object={upperFrame}/>*/}
+                    {/*<mesh geometry={upperFrames.children[0].children[0].geometry}>*/}
+                    {/*    <FullMaterial color="gold"/>*/}
+                    {/*</mesh>*/}
+                    {/*<mesh geometry={upperFrames.children[2].children[0].geometry}>*/}
+                    {/*    <FullMaterial color="gold"/>*/}
+                    {/*</mesh>*/}
+                    {/*<mesh geometry={upperFrames.children[2].children[1].geometry}>*/}
+                    {/*    <FullMaterial color="gold"/>*/}
+                    {/*</mesh>*/}
+                    {/*<mesh geometry={upperFrames.children[2].children[2].geometry}>*/}
+                    {/*    <FullMaterial color="gold"/>*/}
+                    {/*</mesh>*/}
+                    {/*<mesh geometry={upperFrames.children[2].children[3].geometry}>*/}
+                    {/*    <FullMaterial color="gold"/>*/}
+                    {/*</mesh>*/}
+                    {/*<mesh geometry={upperFrames.children[2].children[4].geometry}>*/}
+                    {/*    <FullMaterial color="gold"/>*/}
+                    {/*</mesh>*/}
+                    {/*<mesh geometry={upperFrames.children[2].children[5].geometry}>*/}
+                    {/*    <FullMaterial color="gold"/>*/}
+                    {/*</mesh>*/}
+                    {/*<mesh geometry={upperFrames.children[1].children[0].geometry}>*/}
+                    {/*    <FullMaterial color="gold"/>*/}
+                    {/*</mesh>*/}
+                    {/*<mesh geometry={upperFrames.children[1].children[1].geometry}>*/}
+                    {/*    <FullMaterial color="gold"/>*/}
+                    {/*</mesh>*/}
+                    {/*<mesh geometry={upperFrames.children[1].children[2].geometry}>*/}
+                    {/*    <FullMaterial color="gold"/>*/}
+                    {/*</mesh>*/}
+                    {/*<mesh geometry={upperFrames.children[1].children[3].geometry}>*/}
+                    {/*    <FullMaterial color="gold"/>*/}
+                    {/*</mesh>*/}
+                    {/*<mesh geometry={upperFrames.children[1].children[4].geometry}>*/}
+                    {/*    <FullMaterial color="gold"/>*/}
+                    {/*</mesh>*/}
+                    {/*<mesh geometry={upperFrames.children[1].children[5].geometry}>*/}
+                    {/*    <FullMaterial color="gold"/>*/}
+                    {/*</mesh>*/}
                     {/*DENTI SUPERIORI*/}
                     <IlsSx/>
                     <IlsSxStone/>

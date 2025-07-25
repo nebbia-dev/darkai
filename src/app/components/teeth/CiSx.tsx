@@ -13,6 +13,7 @@ export default function CiSx() {
     const toothGeometry = useTeethStore((state: State) => state.teethGeometry.cisx);
     const toothJewelType = useTeethStore((state: State) => state.teethJewelType.cisx);
     const toothMaterial = useTeethStore((state: State) => state.teethMaterial.cisx);
+    const toothPave = useTeethStore((state: State) => state.teethPave.cisx);
     const toothVisibility = useTeethStore((state: State) => state.teethVisibility.cisx);
     const CISX = memo(({visible, type, mat} : {visible: boolean, type: string, mat: string}): JSX.Element => {
         if(!toothGeometry) return <></>
@@ -24,7 +25,7 @@ export default function CiSx() {
                 break;
             case 'fullDiamond':
                 geometry = [toothGeometry.fullDiamond.base, toothGeometry.fullDiamond.full];
-                material = [<BaseFullDiamond color={toothMaterial}/>, <FullDiamond color={toothMaterial}/>]
+                material = [<BaseFullDiamond color={toothMaterial}/>, <FullDiamond color={toothMaterial} pave={toothPave}/>]
                 break;
             case 'frame':
                 geometry = [toothGeometry.frame.full];

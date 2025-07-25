@@ -11,6 +11,7 @@ export default function IliDx() {
     const toothGeometry = useTeethStore((state: State) => state.teethGeometry.ilidx);
     const toothJewelType = useTeethStore((state: State) => state.teethJewelType.ilidx);
     const toothMaterial = useTeethStore((state: State) => state.teethMaterial.ilidx);
+    const toothPave = useTeethStore((state: State) => state.teethPave.ilidx);
     const toothVisibility = useTeethStore((state: State) => state.teethVisibility.ilidx);
 
     const ILIDX = memo(({visible, type, mat} : {visible: boolean, type: string, mat: string}): JSX.Element => {
@@ -23,7 +24,7 @@ export default function IliDx() {
                 break;
             case 'fullDiamond':
                 geometry = [toothGeometry.fullDiamond.base, toothGeometry.fullDiamond.full];
-                material = [<BaseFullDiamond color={toothMaterial}/>, <FullDiamond color={toothMaterial}/>]
+                material = [<BaseFullDiamond color={toothMaterial}/>, <FullDiamond color={toothMaterial} pave={toothPave}/>]
                 break;
             default:
                 geometry = [toothGeometry.full];
