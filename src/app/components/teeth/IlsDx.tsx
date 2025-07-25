@@ -34,7 +34,7 @@ export default function IlsDx() {
                 break;
             case 'barDiamond':
                 geometry = [toothGeometry.bar.diamond.left.base, toothGeometry.bar.diamond.right.base, toothGeometry.bar.diamond.left.full, toothGeometry.bar.diamond.right.full];
-                material = [<BarSmall color={toothMaterial}/>, <BarSmall color={toothMaterial}/>, <BarDiamond color={toothMaterial}/>]
+                material = [<BarSmall color={toothMaterial}/>, <BarSmall color={toothMaterial}/>, <BarDiamond color={toothMaterial} pave={toothPave}/>]
                 break;
             default:
                 geometry = [toothGeometry.full];
