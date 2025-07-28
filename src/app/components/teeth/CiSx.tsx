@@ -35,6 +35,14 @@ export default function CiSx() {
                 geometry = [toothGeometry.frame.diamond.base, toothGeometry.frame.diamond.full];
                 material = [<FrameFull color={toothMaterial}/>, <FrameDiamond color={toothMaterial} pave={toothPave}/>]
                 break;
+            case 'bar':
+                geometry = [toothGeometry.bar.full];
+                material = [<FullMaterial color={toothMaterial}/>]
+                break;
+            case 'barDiamond':
+                geometry = [toothGeometry.bar.diamond.base, toothGeometry.bar.diamond.full];
+                material = [<FullMaterial color={toothMaterial}/>, <FullDiamond color={toothMaterial} pave={toothPave}/>]
+                break;
             case 'bigBar':
                 geometry = [];
                 material = []

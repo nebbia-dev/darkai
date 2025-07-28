@@ -125,14 +125,13 @@ export default function ToothConfig({tooth, ref, position} : {tooth: string, ref
                                             disabled={false} selection="full"
                                             active={visible && (jewelType === 'full' || jewelType === 'fullDiamond')}/>
 
-                            {(tooth === 'ilsdx' || tooth === 'ilssx') &&
-                                <SelectorButton adjust={true} click={() => selectType('bar')}
-                                                disabled={false} selection="bar"
-                                                active={visible && (jewelType === 'bar' || jewelType === 'barDiamond')}/>
-                            }
-                                <SelectorButton adjust={true} click={() => selectType('frame')}
-                                                disabled={false} selection="frame"
-                                                active={visible && (jewelType === 'frame' || jewelType === 'frameDiamond')}/>
+                            <SelectorButton adjust={true} click={() => selectType('bar')}
+                                            disabled={false} selection="bar"
+                                            active={visible && (jewelType === 'bar' || jewelType === 'barDiamond')}/>
+
+                            <SelectorButton adjust={true} click={() => selectType('frame')}
+                                            disabled={false} selection="frame"
+                                            active={visible && (jewelType === 'frame' || jewelType === 'frameDiamond')}/>
 
                             {(tooth === 'cidx' || tooth === 'cisx') &&
                                 <SelectorButton adjust={true} click={() => selectType('bigBar')}

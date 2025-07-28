@@ -14,6 +14,13 @@ export default interface FBX {
             base: THREE.BufferGeometry,
             full: THREE.BufferGeometry
         },
+        bar: {
+            full: THREE.BufferGeometry,
+            diamond: {
+                base: THREE.BufferGeometry,
+                full: THREE.BufferGeometry
+            }
+        },
         frame: {
             full: THREE.BufferGeometry,
             diamond: {
@@ -34,6 +41,13 @@ export default interface FBX {
         fullDiamond: {
             base: THREE.BufferGeometry,
             full: THREE.BufferGeometry
+        },
+        bar: {
+            full: THREE.BufferGeometry,
+            diamond: {
+                base: THREE.BufferGeometry,
+                full: THREE.BufferGeometry
+            }
         },
         frame: {
             full: THREE.BufferGeometry,
@@ -56,6 +70,13 @@ export default interface FBX {
             base: THREE.BufferGeometry,
             full: THREE.BufferGeometry
         },
+        bar: {
+            full: THREE.BufferGeometry,
+            diamond: {
+                base: THREE.BufferGeometry,
+                full: THREE.BufferGeometry
+            }
+        },
         frame: {
             full: THREE.BufferGeometry,
             diamond: {
@@ -76,6 +97,13 @@ export default interface FBX {
         fullDiamond: {
             base: THREE.BufferGeometry,
             full: THREE.BufferGeometry
+        },
+        bar: {
+            full: THREE.BufferGeometry,
+            diamond: {
+                base: THREE.BufferGeometry,
+                full: THREE.BufferGeometry
+            }
         },
         frame: {
             full: THREE.BufferGeometry,
@@ -100,19 +128,10 @@ export default interface FBX {
             full: THREE.BufferGeometry
         },
         bar: {
-            full: {
-                left: THREE.BufferGeometry,
-                right: THREE.BufferGeometry,
-            },
+            full: THREE.BufferGeometry,
             diamond: {
-                right:{
-                    base: THREE.BufferGeometry,
-                    full: THREE.BufferGeometry
-                },
-                left: {
-                    base: THREE.BufferGeometry,
-                    full: THREE.BufferGeometry
-                }
+                base: THREE.BufferGeometry,
+                full: THREE.BufferGeometry
             }
         },
         frame: {
@@ -137,19 +156,10 @@ export default interface FBX {
             full: THREE.BufferGeometry
         },
         bar: {
-            full: {
-                left: THREE.BufferGeometry,
-                    right: THREE.BufferGeometry,
-            },
+            full: THREE.BufferGeometry,
             diamond: {
-                left:{
-                    base: THREE.BufferGeometry,
-                        full: THREE.BufferGeometry
-                },
-                right: {
-                    base: THREE.BufferGeometry,
-                        full: THREE.BufferGeometry
-                }
+                base: THREE.BufferGeometry,
+                full: THREE.BufferGeometry
             }
         },
         frame: {
@@ -173,6 +183,13 @@ export default interface FBX {
             base: THREE.BufferGeometry,
             full: THREE.BufferGeometry
         },
+        bar: {
+            full: THREE.BufferGeometry,
+            diamond: {
+                base: THREE.BufferGeometry,
+                full: THREE.BufferGeometry
+            }
+        },
         frame: {
             full: THREE.BufferGeometry,
             diamond: {
@@ -193,6 +210,13 @@ export default interface FBX {
         fullDiamond: {
             base: THREE.BufferGeometry,
             full: THREE.BufferGeometry
+        },
+        bar: {
+            full: THREE.BufferGeometry,
+            diamond: {
+                base: THREE.BufferGeometry,
+                full: THREE.BufferGeometry
+            }
         },
         frame: {
             full: THREE.BufferGeometry,
@@ -216,6 +240,13 @@ export default interface FBX {
             base: THREE.BufferGeometry,
             full: THREE.BufferGeometry
         },
+        bar: {
+            full: THREE.BufferGeometry,
+            diamond: {
+                base: THREE.BufferGeometry,
+                full: THREE.BufferGeometry
+            }
+        },
         frame: {
             full: THREE.BufferGeometry,
             diamond: {
@@ -236,6 +267,13 @@ export default interface FBX {
         fullDiamond: {
             base: THREE.BufferGeometry,
             full: THREE.BufferGeometry
+        },
+        bar: {
+            full: THREE.BufferGeometry,
+            diamond: {
+                base: THREE.BufferGeometry,
+                full: THREE.BufferGeometry
+            }
         },
         frame: {
             full: THREE.BufferGeometry,
@@ -271,6 +309,13 @@ export default interface FBX {
                 base: THREE.BufferGeometry,
                 full: THREE.BufferGeometry
             }
+        },
+        bigBar: {
+            full: THREE.BufferGeometry,
+            diamond: {
+                base: THREE.BufferGeometry,
+                full: THREE.BufferGeometry
+            }
         }
     } | undefined,
     cisx: {
@@ -294,6 +339,13 @@ export default interface FBX {
             }
         },
         bar: {
+            full: THREE.BufferGeometry,
+            diamond: {
+                base: THREE.BufferGeometry,
+                full: THREE.BufferGeometry
+            }
+        },
+        bigBar: {
             full: THREE.BufferGeometry,
             diamond: {
                 base: THREE.BufferGeometry,

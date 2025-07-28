@@ -99,11 +99,15 @@ export const useTeethStore = create<State>((set, get) => ({
                     state.teethMaterial.cisx = color;
                     state.teethMaterial.cidx = color;
 
+                } else if((tooth === 'icsdx' || tooth === 'icssx') && (state.teethJewelType[tooth] === 'bar' || state.teethJewelType[tooth] === 'barDiamond')) {
+                    state.teethMaterial.icsdx = color;
+                    state.teethMaterial.cidx = color;
+
                 } else {
                     state.teethMaterial[tooth] = color;
 
                     // if the user clicks on the material and the tooth isn't visible, the tooth becomes visible
-                    // with a default full jewel type on it; if this happens on a lower tooth when  the lower canines
+                    // with a default full jewel type on it; if this happens on a lower tooth when the lower canines
                     // already have a bigBar on them, the bigBar is deactivated and the lower canines reset
                     if(!state.teethVisibility[tooth]) {
                         state.teethVisibility[tooth] = true;

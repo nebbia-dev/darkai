@@ -25,6 +25,10 @@ export default function IlsSx() {
                 geometry = [toothGeometry.full];
                 material = [<FullMaterial color={toothMaterial}/>]
                 break;
+            case 'fullDiamond':
+                geometry = [toothGeometry.fullDiamond.base, toothGeometry.fullDiamond.full];
+                material = [<BaseFullDiamond color={toothMaterial}/>, <FullDiamond color={toothMaterial} pave={toothPave}/>]
+                break;
             case 'frame':
                 geometry = [toothGeometry.frame.full];
                 material = [<FullMaterial color={toothMaterial}/>]
@@ -33,17 +37,13 @@ export default function IlsSx() {
                 geometry = [toothGeometry.frame.diamond.base, toothGeometry.frame.diamond.full];
                 material = [<FullMaterial color={toothMaterial}/>, <FullDiamond color={toothMaterial} pave={toothPave}/>]
                 break;
-            case 'fullDiamond':
-                geometry = [toothGeometry.fullDiamond.base, toothGeometry.fullDiamond.full];
-                material = [<BaseFullDiamond color={toothMaterial}/>, <FullDiamond color={toothMaterial} pave={toothPave}/>]
-                break;
             case 'bar':
-                geometry = [toothGeometry.bar.full.left, toothGeometry.bar.full.right];
-                material = [<BarSmall color={toothMaterial}/>, <BarSmall color={toothMaterial}/>]
+                geometry = [toothGeometry.bar.full];
+                material = [<FullMaterial color={toothMaterial}/>]
                 break;
             case 'barDiamond':
-                geometry = [toothGeometry.bar.diamond.left.base, toothGeometry.bar.diamond.right.base, toothGeometry.bar.diamond.left.full, toothGeometry.bar.diamond.right.full];
-                material = [<BarSmall color={toothMaterial}/>, <BarSmall color={toothMaterial}/>, <BarDiamond color={toothMaterial} pave={toothPave}/>]
+                geometry = [toothGeometry.bar.diamond.base, toothGeometry.bar.diamond.full];
+                material = [<FullMaterial color={toothMaterial}/>, <FullDiamond color={toothMaterial} pave={toothPave}/>]
                 break;
             default:
                 geometry = [toothGeometry.full];

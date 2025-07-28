@@ -24,6 +24,10 @@ export default function IciDx() {
                 geometry = [toothGeometry.full];
                 material = [<FullMaterial color={toothMaterial}/>]
                 break;
+            case 'fullDiamond':
+                geometry = [toothGeometry.fullDiamond.base, toothGeometry.fullDiamond.full];
+                material = [<BaseFullDiamond color={toothMaterial}/>, <FullDiamond color={toothMaterial} pave={toothPave}/>]
+                break;
             case 'frame':
                 geometry = [toothGeometry.frame.full];
                 material = [<FullMaterial color={toothMaterial}/>]
@@ -32,9 +36,13 @@ export default function IciDx() {
                 geometry = [toothGeometry.frame.diamond.base, toothGeometry.frame.diamond.full];
                 material = [<FullMaterial color={toothMaterial}/>, <FullDiamond color={toothMaterial} pave={toothPave}/>]
                 break;
-            case 'fullDiamond':
-                geometry = [toothGeometry.fullDiamond.base, toothGeometry.fullDiamond.full];
-                material = [<BaseFullDiamond color={toothMaterial}/>, <FullDiamond color={toothMaterial} pave={toothPave}/>]
+            case 'bar':
+                geometry = [toothGeometry.bar.full];
+                material = [<FullMaterial color={toothMaterial}/>]
+                break;
+            case 'barDiamond':
+                geometry = [toothGeometry.bar.diamond.base, toothGeometry.bar.diamond.full];
+                material = [<FullMaterial color={toothMaterial}/>, <FullDiamond color={toothMaterial} pave={toothPave}/>]
                 break;
             default:
                 geometry = [toothGeometry.full];

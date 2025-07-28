@@ -23,6 +23,10 @@ export default function IcsSx() {
                 geometry = [toothGeometry.full];
                 material = [<FullMaterial color={toothMaterial}/>]
                 break;
+            case 'fullDiamond':
+                geometry = [toothGeometry.fullDiamond.base, toothGeometry.fullDiamond.full];
+                material = [<BaseFullDiamond color={toothMaterial}/>, <FullDiamond color={toothMaterial} pave={toothPave}/>]
+                break;
             case 'frame':
                 geometry = [toothGeometry.frame.full];
                 material = [<FullMaterial color={toothMaterial}/>]
@@ -31,9 +35,13 @@ export default function IcsSx() {
                 geometry = [toothGeometry.frame.diamond.base, toothGeometry.frame.diamond.full];
                 material = [<FullMaterial color={toothMaterial}/>, <FullDiamond color={toothMaterial} pave={toothPave}/>]
                 break;
-            case 'fullDiamond':
-                geometry = [toothGeometry.fullDiamond.base, toothGeometry.fullDiamond.full];
-                material = [<BaseFullDiamond color={toothMaterial}/>, <FullDiamond color={toothMaterial} pave={toothPave}/>]
+            case 'bar':
+                geometry = [];
+                material = []
+                break;
+            case 'barDiamond':
+                geometry = [];
+                material = []
                 break;
             default:
                 geometry = [toothGeometry.full];

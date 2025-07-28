@@ -37,12 +37,20 @@ export default function CiDx() {
                 geometry = [toothGeometry.frame.diamond.base, toothGeometry.frame.diamond.full];
                 material = [<FrameFull color={toothMaterial}/>, <FrameDiamond color={toothMaterial} pave={toothPave}/>]
                 break;
-            case 'bigBar':
+            case 'bar':
                 geometry = [toothGeometry.bar.full];
+                material = [<FullMaterial color={toothMaterial}/>]
+                break;
+            case 'barDiamond':
+                geometry = [toothGeometry.bar.diamond.base, toothGeometry.bar.diamond.full];
+                material = [<FullMaterial color={toothMaterial}/>, <FullDiamond color={toothMaterial} pave={toothPave}/>]
+                break;
+            case 'bigBar':
+                geometry = [toothGeometry.bigBar.full];
                 material = [<BarFull color={toothMaterial}/>]
                 break;
             case 'bigBarDiamond':
-                geometry = [toothGeometry.bar.diamond.base, toothGeometry.bar.diamond.full];
+                geometry = [toothGeometry.bigBar.diamond.base, toothGeometry.bigBar.diamond.full];
                 material = [<BarFull color={toothMaterial}/>, <BarDiamond color={toothMaterial} pave={toothPave}/>]
                 break;
             default:
