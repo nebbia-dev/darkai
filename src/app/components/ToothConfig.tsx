@@ -228,29 +228,33 @@ export default function ToothConfig({tooth, ref, position} : {tooth: string, ref
                                 <StoneSelector tooth={tooth} stone="sapphire"
                                                active={visible && (stones?.color === 'sapphire')}
                                                onclick={() => selectStone('sapphire')}/>
-                                {pricesAdds?.map(stone => (jewelType === 'full' || jewelType === 'fullDiamond') && material !== 'base' && stone.stone === 'sapphire' ?
-                                    <p key={stone + '_' + tooth}>+ {stone[stones?.shape + 'Shape']}€</p> : null)}
+                                {pricesAdds?.map(stone => (jewelType === 'full' || jewelType === 'fullDiamond') && material !== 'base' && stone.stone === 'sapphire' && stones.shape
+                                    ? <p key={stone + '_' + tooth}>+ {stone[stones?.shape + 'Shape']}€</p>
+                                    : null)}
                             </div>
                             <div className="text-center">
                                 <StoneSelector tooth={tooth} stone="ruby"
                                                active={visible && (stones?.color === 'ruby')}
                                                onclick={() => selectStone('ruby')}/>
-                                {pricesAdds?.map(stone => (jewelType === 'full' || jewelType === 'fullDiamond') && material !== 'base' && stone.stone === 'ruby' ?
-                                    <p key={stone + '_' + tooth}>+ {stone[stones?.shape + 'Shape']}€</p> : null)}
+                                {pricesAdds?.map(stone => (jewelType === 'full' || jewelType === 'fullDiamond') && material !== 'base' && stone.stone === 'ruby' && stones.shape
+                                    ? <p key={stone + '_' + tooth}>+ {stone[stones?.shape + 'Shape']}€</p>
+                                    : null)}
                             </div>
                             <div className="text-center">
                                 <StoneSelector tooth={tooth} stone="emerald"
                                                active={visible && (stones?.color === 'emerald')}
                                                onclick={() => selectStone('emerald')}/>
-                                {pricesAdds?.map(stone => (jewelType === 'full' || jewelType === 'fullDiamond') && material !== 'base' && stone.stone === 'emerald' ?
-                                    <p key={stone + '_' + tooth}>+ {stone[stones?.shape + 'Shape']}€</p> : null)}
+                                {pricesAdds?.map(stone => (jewelType === 'full' || jewelType === 'fullDiamond') && material !== 'base' && stone.stone === 'emerald' && stones.shape
+                                    ? <p key={stone + '_' + tooth}>+ {stone[stones?.shape + 'Shape']}€</p>
+                                    : null)}
                             </div>
                             <div className="text-center">
                                 <StoneSelector tooth={tooth} stone="amethyst"
                                                active={visible && (stones?.color === 'amethyst')}
                                                onclick={() => selectStone('amethyst')}/>
-                                {pricesAdds?.map(stone => (jewelType === 'full' || jewelType === 'fullDiamond') && material !== 'base' && stone.stone === 'amethyst' ?
-                                    <p key={stone + '_' + tooth}>+ {stone[stones?.shape + 'Shape']}€</p> : null)}
+                                {pricesAdds?.map(stone => (jewelType === 'full' || jewelType === 'fullDiamond') && material !== 'base' && stone.stone === 'amethyst' && stones.shape
+                                    ? <p key={stone + '_' + tooth}>+ {stone[stones?.shape + 'Shape']}€</p>
+                                    : null)}
                             </div>
                         </div>
                     </div>
