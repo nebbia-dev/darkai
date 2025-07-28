@@ -29,7 +29,7 @@ export default function IcsSx() {
                 break;
             case 'frame':
                 geometry = [toothGeometry.frame.full];
-                material = [<FullMaterial color={toothMaterial}/>]
+                material = [<FrameFull color={toothMaterial}/>]
                 break;
             case 'frameDiamond':
                 geometry = [toothGeometry.frame.diamond.base, toothGeometry.frame.diamond.full];

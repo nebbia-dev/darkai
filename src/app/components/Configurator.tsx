@@ -46,7 +46,9 @@ export default function Configurator() {
         const fbx = useFBX('/models/MOD_Dentiera_Completa_180_Phong_Scala_1 (1).fbx');
         // const stones = useFBX('/models/MOD_Stone.fbx');
         const stones = useFBX('/models/MOD_Stone (2).fbx');
-        const frames = useFBX('/models/MOD_Frame_Capsula (1).fbx');
+        const frames = useFBX('/models/MOD_Frame_Capsula (2).fbx');
+        const bigBar  = useFBX('/models/MOD_Full_Frame_Capsula.fbx');
+        console.log(bigBar)
         if(!geometry.cisx){
             stones.children[0].children[0].children[1].matrix.makeScale(stones.children[0].children[0].children[1].scale.x/10, stones.children[0].children[0].children[1].scale.y/10, stones.children[0].children[0].children[1].scale.z/10);
             (stones.children[0].children[0].children[1] as THREE.Mesh).geometry.applyMatrix4(stones.children[0].children[0].children[1].matrix);
@@ -109,10 +111,10 @@ export default function Configurator() {
                     }
                 },
                 frame: {
-                    full: (frames.children[1].children[0] as THREE.Mesh).geometry,
+                    full: (frames.children[1] as THREE.Mesh).geometry,
                     diamond: {
-                        base: (frames.children[1].children[0] as THREE.Mesh).geometry,
-                        full: (frames.children[1].children[0] as THREE.Mesh).geometry
+                        base: (frames.children[1] as THREE.Mesh).geometry,
+                        full: (frames.children[1] as THREE.Mesh).geometry
                     }
                 }
             },
@@ -137,10 +139,10 @@ export default function Configurator() {
                     }
                 },
                 frame: {
-                    full: (frames.children[1].children[1] as THREE.Mesh).geometry,
+                    full: (frames.children[0] as THREE.Mesh).geometry,
                     diamond: {
-                        base: (frames.children[1].children[1] as THREE.Mesh).geometry,
-                        full: (frames.children[1].children[1] as THREE.Mesh).geometry
+                        base: (frames.children[1] as THREE.Mesh).geometry,
+                        full: (frames.children[1] as THREE.Mesh).geometry
                     }
                 }
             },
@@ -165,10 +167,10 @@ export default function Configurator() {
                     }
                 },
                 frame: {
-                    full: (frames.children[2].children[0] as THREE.Mesh).geometry,
+                    full: (frames.children[6] as THREE.Mesh).geometry,
                     diamond: {
-                        base: (frames.children[2].children[0] as THREE.Mesh).geometry,
-                        full: (frames.children[2].children[0] as THREE.Mesh).geometry
+                        base: (frames.children[6] as THREE.Mesh).geometry,
+                        full: (frames.children[6] as THREE.Mesh).geometry
                     }
                 }
             },
@@ -193,10 +195,10 @@ export default function Configurator() {
                     }
                 },
                 frame: {
-                    full: (frames.children[2].children[1] as THREE.Mesh).geometry,
+                    full: (frames.children[7] as THREE.Mesh).geometry,
                     diamond: {
-                        base: (frames.children[2].children[1] as THREE.Mesh).geometry,
-                        full: (frames.children[2].children[1] as THREE.Mesh).geometry
+                        base: (frames.children[7] as THREE.Mesh).geometry,
+                        full: (frames.children[7] as THREE.Mesh).geometry
                     }
                 }
             },
@@ -222,10 +224,10 @@ export default function Configurator() {
                     }
                 },
                 frame: {
-                    full: (frames.children[1].children[2] as THREE.Mesh).geometry,
+                    full: (frames.children[2] as THREE.Mesh).geometry,
                     diamond: {
-                        base: (frames.children[1].children[2] as THREE.Mesh).geometry,
-                        full: (frames.children[1].children[2] as THREE.Mesh).geometry
+                        base: (frames.children[2] as THREE.Mesh).geometry,
+                        full: (frames.children[2] as THREE.Mesh).geometry
                     }
                 }
             },
@@ -250,10 +252,10 @@ export default function Configurator() {
                     }
                 },
                 frame: {
-                    full: (frames.children[1].children[3] as THREE.Mesh).geometry,
+                    full: (frames.children[3] as THREE.Mesh).geometry,
                     diamond: {
-                        base: (frames.children[1].children[3] as THREE.Mesh).geometry,
-                        full: (frames.children[1].children[3] as THREE.Mesh).geometry
+                        base: (frames.children[3] as THREE.Mesh).geometry,
+                        full: (frames.children[3] as THREE.Mesh).geometry
                     }
                 }
             },
@@ -278,10 +280,10 @@ export default function Configurator() {
                     }
                 },
                 frame: {
-                    full: (frames.children[2].children[2] as THREE.Mesh).geometry,
+                    full: (frames.children[8] as THREE.Mesh).geometry,
                     diamond: {
-                        base: (frames.children[2].children[2] as THREE.Mesh).geometry,
-                        full: (frames.children[2].children[2] as THREE.Mesh).geometry
+                        base: (frames.children[8] as THREE.Mesh).geometry,
+                        full: (frames.children[8] as THREE.Mesh).geometry
                     }
                 }
             },
@@ -306,10 +308,10 @@ export default function Configurator() {
                     }
                 },
                 frame: {
-                    full: (frames.children[2].children[3] as THREE.Mesh).geometry,
+                    full: (frames.children[9] as THREE.Mesh).geometry,
                     diamond: {
-                        base: (frames.children[2].children[3] as THREE.Mesh).geometry,
-                        full: (frames.children[2].children[3] as THREE.Mesh).geometry
+                        base: (frames.children[9] as THREE.Mesh).geometry,
+                        full: (frames.children[9] as THREE.Mesh).geometry
                     }
                 }
             },
@@ -335,7 +337,7 @@ export default function Configurator() {
                     }
                 },
                 frame: {
-                    full: (frames.children[1].children[4] as THREE.Mesh).geometry,
+                    full: (frames.children[4] as THREE.Mesh).geometry,
                     diamond: {
                         base: (fbx.children[2].children[0].children[1] as THREE.Mesh).geometry,
                         full: (fbx.children[2].children[0].children[0].children[0] as THREE.Mesh).geometry
@@ -363,7 +365,7 @@ export default function Configurator() {
                     }
                 },
                 frame: {
-                    full: (frames.children[1].children[5] as THREE.Mesh).geometry,
+                    full: (frames.children[5] as THREE.Mesh).geometry,
                     diamond: {
                         base: (fbx.children[2].children[0].children[3] as THREE.Mesh).geometry,
                         full: (fbx.children[2].children[0].children[0].children[2] as THREE.Mesh).geometry
@@ -384,7 +386,7 @@ export default function Configurator() {
                     full: (fbx.children[1].children[1].children[4] as THREE.Mesh).geometry
                 },
                 frame: {
-                    full: (frames.children[2].children[4] as THREE.Mesh).geometry,
+                    full: (frames.children[10] as THREE.Mesh).geometry,
                     diamond: {
                         base: (fbx.children[2].children[0].children[2] as THREE.Mesh).geometry,
                         full: (fbx.children[2].children[0].children[0].children[1] as THREE.Mesh).geometry
@@ -398,7 +400,7 @@ export default function Configurator() {
                     }
                 },
                 bigBar: {
-                    full: (frames.children[0].children[0] as THREE.Mesh).geometry,
+                    full: (bigBar.children[0] as THREE.Mesh).geometry,
                     diamond: {
                         base: (fbx.children[3].children[0].children[0] as THREE.Mesh).geometry,
                         full: (fbx.children[3].children[0].children[1] as THREE.Mesh).geometry
@@ -419,7 +421,7 @@ export default function Configurator() {
                     full: (fbx.children[1].children[1].children[10] as THREE.Mesh).geometry
                 },
                 frame: {
-                    full: (frames.children[2].children[5] as THREE.Mesh).geometry,
+                    full: (frames.children[11] as THREE.Mesh).geometry,
                     diamond: {
                         base: (fbx.children[2].children[0].children[4] as THREE.Mesh).geometry,
                         full: (fbx.children[2].children[0].children[0].children[3] as THREE.Mesh).geometry
@@ -433,7 +435,7 @@ export default function Configurator() {
                     }
                 },
                 bigBar: {
-                    full: (frames.children[0].children[0] as THREE.Mesh).geometry,
+                    full: (bigBar.children[0] as THREE.Mesh).geometry,
                     diamond: {
                         base: (fbx.children[3].children[0].children[0] as THREE.Mesh).geometry,
                         full: (fbx.children[3].children[0].children[1] as THREE.Mesh).geometry
@@ -485,7 +487,7 @@ export default function Configurator() {
 
     return (
         <>
-            <OrbitControls maxDistance={35} minDistance={22} minPolarAngle={Math.PI / 3}
+            <OrbitControls maxDistance={35} minDistance={10} minPolarAngle={Math.PI / 3}
                            maxPolarAngle={Math.PI - Math.PI / 3} ref={orbitRef}/>
             {savedEnvMap && <LoadedMaterials/>}
             {/*<primitive object={fbx} visible={false} position={[0, -10, 0]}/>*/}

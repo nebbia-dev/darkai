@@ -8,6 +8,7 @@ import FrameFull from "@/app/components/materials/FrameFull";
 import FrameDiamond from "@/app/components/materials/FrameDiamond";
 import State from "@/app/types/State";
 import * as THREE from "three";
+import BarSmall from "@/app/components/materials/BarSmall";
 
 export default function CsSx() {
     const toothGeometry = useTeethStore((state: State) => state.teethGeometry.cssx);
@@ -29,7 +30,7 @@ export default function CsSx() {
                 break;
             case 'frame':
                 geometry = [toothGeometry.frame.full];
-                material = [<FullMaterial color={toothMaterial}/>]
+                material = [<FrameFull color={toothMaterial}/>]
                 break;
             case 'frameDiamond':
                 geometry = [toothGeometry.frame.diamond.base, toothGeometry.frame.diamond.full];
@@ -37,7 +38,7 @@ export default function CsSx() {
                 break;
             case 'bar':
                 geometry = [toothGeometry.bar.full];
-                material = [<FullMaterial color={toothMaterial}/>]
+                material = [<BarSmall color={toothMaterial}/>]
                 break;
             case 'barDiamond':
                 geometry = [toothGeometry.bar.diamond.base, toothGeometry.bar.diamond.full];

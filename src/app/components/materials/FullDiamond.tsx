@@ -8,18 +8,20 @@ export default function FullDiamond({color, pave} : {color: string, pave: string
 
         // DiamondGold
         const propsYDiamondFull = useTexture({
-            map: 'textures/diamondFull/Difuse_Diamanti.webp',
-            normalMap: 'textures/diamondFull/Normal_Diamanti.webp',
+            // map: 'textures/diamondFull/Difuse_Diamanti.webp',
+            map: 'textures/proveDiamanti/Prova_03.png',
+            // normalMap: 'textures/diamondFull/Normal_Diamanti.webp',
+            normalMap: 'textures/proveDiamanti/Normal (1).png',
             metalnessMap: 'textures/diamondFull/Metalness_Diamanti.webp',
             roughnessMap: 'textures/diamondFull/Metalness_Diamanti.webp',
         });
         propsYDiamondFull.map.colorSpace = THREE.SRGBColorSpace;
         propsYDiamondFull.map.wrapS = propsYDiamondFull.map.wrapT = THREE.RepeatWrapping;
-        propsYDiamondFull.map.repeat.set(4,4);
+        propsYDiamondFull.map.repeat.set(6,6);
         propsYDiamondFull.normalMap.wrapS = propsYDiamondFull.normalMap.wrapT = THREE.RepeatWrapping;
-        propsYDiamondFull.normalMap.repeat.set(4,4);
+        propsYDiamondFull.normalMap.repeat.set(6,6);
         propsYDiamondFull.metalnessMap.wrapS = propsYDiamondFull.metalnessMap.wrapT = THREE.RepeatWrapping;
-        propsYDiamondFull.metalnessMap.repeat.set(4,4);
+        propsYDiamondFull.metalnessMap.repeat.set(6,6);
 
         // DiamondRose
         const propsRDiamondFull = useTexture({
@@ -27,7 +29,7 @@ export default function FullDiamond({color, pave} : {color: string, pave: string
         });
         propsRDiamondFull.map.colorSpace = THREE.SRGBColorSpace;
         propsRDiamondFull.map.wrapS = propsRDiamondFull.map.wrapT = THREE.RepeatWrapping;
-        propsRDiamondFull.map.repeat.set(4,4);
+        propsRDiamondFull.map.repeat.set(6,6);
 
         // DiamondWhite
         const propsWDiamondFull = useTexture({
@@ -35,7 +37,7 @@ export default function FullDiamond({color, pave} : {color: string, pave: string
         });
         propsWDiamondFull.map.colorSpace = THREE.SRGBColorSpace;
         propsWDiamondFull.map.wrapS = propsWDiamondFull.map.wrapT = THREE.RepeatWrapping;
-        propsWDiamondFull.map.repeat.set(4,4);
+        propsWDiamondFull.map.repeat.set(6,6);
 
         // EmeraldGold
         const propsGEmeraldFull = useTexture({
@@ -43,7 +45,7 @@ export default function FullDiamond({color, pave} : {color: string, pave: string
         });
         propsGEmeraldFull.map.colorSpace = THREE.SRGBColorSpace;
         propsGEmeraldFull.map.wrapS = propsGEmeraldFull.map.wrapT = THREE.RepeatWrapping;
-        propsGEmeraldFull.map.repeat.set(4,4);
+        propsGEmeraldFull.map.repeat.set(6,6);
 
         // EmeraldRose
         const propsREmeraldFull = useTexture({
@@ -51,7 +53,7 @@ export default function FullDiamond({color, pave} : {color: string, pave: string
         });
         propsREmeraldFull.map.colorSpace = THREE.SRGBColorSpace;
         propsREmeraldFull.map.wrapS = propsREmeraldFull.map.wrapT = THREE.RepeatWrapping;
-        propsREmeraldFull.map.repeat.set(4,4);
+        propsREmeraldFull.map.repeat.set(6,6);
 
         // EmeraldWhite
         const propsWEmeraldFull = useTexture({
@@ -59,7 +61,7 @@ export default function FullDiamond({color, pave} : {color: string, pave: string
         });
         propsWEmeraldFull.map.colorSpace = THREE.SRGBColorSpace;
         propsWEmeraldFull.map.wrapS = propsWEmeraldFull.map.wrapT = THREE.RepeatWrapping;
-        propsWEmeraldFull.map.repeat.set(4,4);
+        propsWEmeraldFull.map.repeat.set(6,6);
 
         // SapphireGold
         const propsGSapphireFull = useTexture({
@@ -67,7 +69,7 @@ export default function FullDiamond({color, pave} : {color: string, pave: string
         });
         propsGSapphireFull.map.colorSpace = THREE.SRGBColorSpace;
         propsGSapphireFull.map.wrapS = propsGSapphireFull.map.wrapT = THREE.RepeatWrapping;
-        propsGSapphireFull.map.repeat.set(4,4);
+        propsGSapphireFull.map.repeat.set(6,6);
 
         // SapphireRose
         const propsRSapphireFull = useTexture({
@@ -75,7 +77,7 @@ export default function FullDiamond({color, pave} : {color: string, pave: string
         });
         propsRSapphireFull.map.colorSpace = THREE.SRGBColorSpace;
         propsRSapphireFull.map.wrapS = propsRSapphireFull.map.wrapT = THREE.RepeatWrapping;
-        propsRSapphireFull.map.repeat.set(4,4);
+        propsRSapphireFull.map.repeat.set(6,6);
 
         // SapphireWhite
         const propsWSapphireFull = useTexture({
@@ -83,7 +85,7 @@ export default function FullDiamond({color, pave} : {color: string, pave: string
         });
         propsWSapphireFull.map.colorSpace = THREE.SRGBColorSpace;
         propsWSapphireFull.map.wrapS = propsWSapphireFull.map.wrapT = THREE.RepeatWrapping;
-        propsWSapphireFull.map.repeat.set(4,4);
+        propsWSapphireFull.map.repeat.set(6,6);
 
         // RubyGold
         const propsGRubyFull = useTexture({
@@ -91,7 +93,7 @@ export default function FullDiamond({color, pave} : {color: string, pave: string
         });
         propsGRubyFull.map.colorSpace = THREE.SRGBColorSpace;
         propsGRubyFull.map.wrapS = propsGRubyFull.map.wrapT = THREE.RepeatWrapping;
-        propsGRubyFull.map.repeat.set(4,4);
+        propsGRubyFull.map.repeat.set(6,6);
 
         // RubyRose
         const propsRRubyFull = useTexture({
@@ -99,7 +101,7 @@ export default function FullDiamond({color, pave} : {color: string, pave: string
         });
         propsRRubyFull.map.colorSpace = THREE.SRGBColorSpace;
         propsRRubyFull.map.wrapS = propsRRubyFull.map.wrapT = THREE.RepeatWrapping;
-        propsRRubyFull.map.repeat.set(4,4);
+        propsRRubyFull.map.repeat.set(6,6);
 
         // RubyWhite
         const propsWRubyFull = useTexture({
@@ -107,7 +109,7 @@ export default function FullDiamond({color, pave} : {color: string, pave: string
         });
         propsWRubyFull.map.colorSpace = THREE.SRGBColorSpace;
         propsWRubyFull.map.wrapS = propsWRubyFull.map.wrapT = THREE.RepeatWrapping;
-        propsWRubyFull.map.repeat.set(4,4);
+        propsWRubyFull.map.repeat.set(6,6);
 
         const pairs = new Map();
         pairs.set('golddiamond', propsYDiamondFull.map);
@@ -131,7 +133,7 @@ export default function FullDiamond({color, pave} : {color: string, pave: string
             normalMap={color !== 'base' ? propsYDiamondFull.normalMap : undefined}
             metalnessMap = {color !== 'base' ? propsYDiamondFull.metalnessMap : undefined}
             roughnessMap = {color !== 'base' ? propsYDiamondFull.roughnessMap : undefined}
-            metalness = {color !== 'base' ? 1 : 0}
+            metalness = {color !== 'base' ? 0.5 : 0}
             roughness = {color !== 'base' ? 0 : 1}
             envMap = {envMap}
             color={color !== 'base' ? undefined : 'grey'}

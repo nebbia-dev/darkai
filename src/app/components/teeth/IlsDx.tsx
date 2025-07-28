@@ -31,7 +31,7 @@ export default function IlsDx() {
                 break;
             case 'frame':
                 geometry = [toothGeometry.frame.full];
-                material = [<FullMaterial color={toothMaterial}/>]
+                material = [<FrameFull color={toothMaterial}/>]
                 break;
             case 'frameDiamond':
                 geometry = [toothGeometry.frame.diamond.base, toothGeometry.frame.diamond.full];
@@ -39,7 +39,7 @@ export default function IlsDx() {
                 break;
             case 'bar':
                 geometry = [toothGeometry.bar.full];
-                material = [<FullMaterial color={toothMaterial}/>]
+                material = [<BarSmall color={toothMaterial}/>]
                 break;
             case 'barDiamond':
                 geometry = [toothGeometry.bar.diamond.base, toothGeometry.bar.diamond.full];

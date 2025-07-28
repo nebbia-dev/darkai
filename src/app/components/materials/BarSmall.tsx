@@ -6,19 +6,19 @@ import {useTeethStore} from "@/app/stores/teeth";
 export default function BarSmall({color} : {color: string}) {
     const envMap = useTeethStore((state) => state.envMap);
         const propsYBar03 = useTexture({
-            map: 'textures/bar/03/DefaultMaterial_Base_color.webp',
-            normalMap: 'textures/bar/03/DefaultMaterial_Normal.webp',
-            metalnessMap: 'textures/bar/03/DefaultMaterial_Metallic.webp',
-            roughnessMap: 'textures/bar/03/DefaultMaterial_Roughness.webp',
-            aoMap: 'textures/bar/03/DefaultMaterial_Mixed_AO.webp',
+            map: 'textures/Giallo.webp',
+            normalMap: 'textures/bar/all/DefaultMaterial_Normal.webp',
+            metalnessMap: 'textures/bar/all/DefaultMaterial_Metallic.webp',
+            roughnessMap: 'textures/bar/all/DefaultMaterial_Roughness.webp',
+            // aoMap: 'textures/bar/03/DefaultMaterial_Mixed_AO.webp',
         });
         propsYBar03.map.colorSpace = THREE.SRGBColorSpace;
         const propsRBar03 = useTexture({
-            map: 'textures/bar/03/DefaultMaterial_Base_colorRose.webp',
+            map: 'textures/Rosa.webp',
         });
         propsRBar03.map.colorSpace = THREE.SRGBColorSpace;
         const propsWBar03 = useTexture({
-            map: 'textures/bar/03/DefaultMaterial_Base_colorWhite.webp',
+            map: 'textures/Bianco.webp',
         });
         propsWBar03.map.colorSpace = THREE.SRGBColorSpace;
         console.log(color);
@@ -33,7 +33,7 @@ export default function BarSmall({color} : {color: string}) {
             normalMap={color !== 'base' ? propsYBar03.normalMap : undefined}
             metalnessMap = {color !== 'base' ? propsYBar03.metalnessMap : undefined}
             roughnessMap = {color !== 'base' ? propsYBar03.roughnessMap : undefined}
-            aoMap = {color !== 'base' ? propsYBar03.aoMap : undefined}
+            // aoMap = {color !== 'base' ? propsYBar03.aoMap : undefined}
             metalness = {color !== 'base' ? 1 : 0}
             roughness = {color !== 'base' ? 0.5 : 1}
             envMap = {envMap}
