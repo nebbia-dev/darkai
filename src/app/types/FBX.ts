@@ -13,7 +13,14 @@ export default interface FBX {
         fullDiamond: {
             base: THREE.BufferGeometry,
             full: THREE.BufferGeometry
-        }
+        },
+        frame: {
+            full: THREE.BufferGeometry,
+            diamond: {
+                base: THREE.BufferGeometry,
+                full: THREE.BufferGeometry
+            }
+        },
     } | undefined,
     icssx: {
         full: THREE.BufferGeometry,
@@ -27,7 +34,14 @@ export default interface FBX {
         fullDiamond: {
             base: THREE.BufferGeometry,
             full: THREE.BufferGeometry
-        }
+        },
+        frame: {
+            full: THREE.BufferGeometry,
+            diamond: {
+                base: THREE.BufferGeometry,
+                full: THREE.BufferGeometry
+            }
+        },
     } | undefined,
     icidx: {
         full: THREE.BufferGeometry,
@@ -41,7 +55,14 @@ export default interface FBX {
         fullDiamond: {
             base: THREE.BufferGeometry,
             full: THREE.BufferGeometry
-        }
+        },
+        frame: {
+            full: THREE.BufferGeometry,
+            diamond: {
+                base: THREE.BufferGeometry,
+                full: THREE.BufferGeometry
+            }
+        },
     } | undefined,
     icisx: {
         full: THREE.BufferGeometry,
@@ -55,7 +76,14 @@ export default interface FBX {
         fullDiamond: {
             base: THREE.BufferGeometry,
             full: THREE.BufferGeometry
-        }
+        },
+        frame: {
+            full: THREE.BufferGeometry,
+            diamond: {
+                base: THREE.BufferGeometry,
+                full: THREE.BufferGeometry
+            }
+        },
     } | undefined,
     // INCISIVI LATERALI
     ilsdx: {
@@ -86,7 +114,14 @@ export default interface FBX {
                     full: THREE.BufferGeometry
                 }
             }
-        }
+        },
+        frame: {
+            full: THREE.BufferGeometry,
+            diamond: {
+                base: THREE.BufferGeometry,
+                full: THREE.BufferGeometry
+            }
+        },
     } | undefined,
     ilssx: {
         full: THREE.BufferGeometry,
@@ -116,7 +151,14 @@ export default interface FBX {
                         full: THREE.BufferGeometry
                 }
             }
-        }
+        },
+        frame: {
+            full: THREE.BufferGeometry,
+            diamond: {
+                base: THREE.BufferGeometry,
+                full: THREE.BufferGeometry
+            }
+        },
     } | undefined,
     ilidx: {
         full: THREE.BufferGeometry,
@@ -130,7 +172,14 @@ export default interface FBX {
         fullDiamond: {
             base: THREE.BufferGeometry,
             full: THREE.BufferGeometry
-        }
+        },
+        frame: {
+            full: THREE.BufferGeometry,
+            diamond: {
+                base: THREE.BufferGeometry,
+                full: THREE.BufferGeometry
+            }
+        },
     } | undefined,
     ilisx: {
         full: THREE.BufferGeometry,
@@ -144,6 +193,13 @@ export default interface FBX {
         fullDiamond: {
             base: THREE.BufferGeometry,
             full: THREE.BufferGeometry
+        },
+        frame: {
+            full: THREE.BufferGeometry,
+            diamond: {
+                base: THREE.BufferGeometry,
+                full: THREE.BufferGeometry
+            }
         }
     } | undefined,
     // CANINI

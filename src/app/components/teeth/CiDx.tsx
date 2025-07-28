@@ -31,7 +31,7 @@ export default function CiDx() {
                 break;
             case 'frame':
                 geometry = [toothGeometry.frame.full];
-                material = [<FrameFull color={toothMaterial}/>]
+                material = [<FullMaterial color={toothMaterial}/>]
                 break;
             case 'frameDiamond':
                 geometry = [toothGeometry.frame.diamond.base, toothGeometry.frame.diamond.full];

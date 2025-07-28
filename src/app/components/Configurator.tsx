@@ -39,13 +39,14 @@ export default function Configurator() {
         files: "envMaps/HDR_Light_Studio_Free_HDRI_Design_13.exr"
     })
     const geometry = useTeethStore((state:State) => state.teethGeometry);
-    // const upperFrames = useFBX('/models/MOD_Frame_Capsula (1).fbx');
-    // console.log(upperFrames)
+    const bars = useFBX('/models/MOD_Bars_Capsula (1).fbx');
+    console.log(bars)
     // Se voglio piazzare anche l'fbx in LoadedMaterials, verosimilmente devo usare qui uno useEffect
     const teeth = useMemo((): FBX => {
         const fbx = useFBX('/models/MOD_Dentiera_Completa_180_Phong_Scala_1 (1).fbx');
         // const stones = useFBX('/models/MOD_Stone.fbx');
         const stones = useFBX('/models/MOD_Stone (2).fbx');
+        const frames = useFBX('/models/MOD_Frame_Capsula (1).fbx');
         if(!geometry.cisx){
             stones.children[0].children[0].children[1].matrix.makeScale(stones.children[0].children[0].children[1].scale.x/10, stones.children[0].children[0].children[1].scale.y/10, stones.children[0].children[0].children[1].scale.z/10);
             (stones.children[0].children[0].children[1] as THREE.Mesh).geometry.applyMatrix4(stones.children[0].children[0].children[1].matrix);
@@ -99,6 +100,13 @@ export default function Configurator() {
                 fullDiamond: {
                     base: (fbx.children[1].children[0].children[0] as THREE.Mesh).geometry,
                     full: (fbx.children[1].children[1].children[2] as THREE.Mesh).geometry
+                },
+                frame: {
+                    full: (frames.children[1].children[0] as THREE.Mesh).geometry,
+                    diamond: {
+                        base: (frames.children[1].children[0] as THREE.Mesh).geometry,
+                        full: (frames.children[1].children[0] as THREE.Mesh).geometry
+                    }
                 }
             },
             icssx: {
@@ -113,6 +121,13 @@ export default function Configurator() {
                 fullDiamond: {
                     base: (fbx.children[1].children[0].children[6] as THREE.Mesh).geometry,
                     full: (fbx.children[1].children[1].children[8] as THREE.Mesh).geometry
+                },
+                frame: {
+                    full: (frames.children[1].children[1] as THREE.Mesh).geometry,
+                    diamond: {
+                        base: (frames.children[1].children[1] as THREE.Mesh).geometry,
+                        full: (frames.children[1].children[1] as THREE.Mesh).geometry
+                    }
                 }
             },
             icidx: {
@@ -127,6 +142,13 @@ export default function Configurator() {
                 fullDiamond: {
                     base: (fbx.children[1].children[0].children[2] as THREE.Mesh).geometry,
                     full: (fbx.children[1].children[1].children[5] as THREE.Mesh).geometry
+                },
+                frame: {
+                    full: (frames.children[2].children[0] as THREE.Mesh).geometry,
+                    diamond: {
+                        base: (frames.children[2].children[0] as THREE.Mesh).geometry,
+                        full: (frames.children[2].children[0] as THREE.Mesh).geometry
+                    }
                 }
             },
             icisx: {
@@ -141,6 +163,13 @@ export default function Configurator() {
                 fullDiamond: {
                     base: (fbx.children[1].children[0].children[8] as THREE.Mesh).geometry,
                     full: (fbx.children[1].children[1].children[11] as THREE.Mesh).geometry
+                },
+                frame: {
+                    full: (frames.children[2].children[1] as THREE.Mesh).geometry,
+                    diamond: {
+                        base: (frames.children[2].children[1] as THREE.Mesh).geometry,
+                        full: (frames.children[2].children[1] as THREE.Mesh).geometry
+                    }
                 }
             },
             // INCISIVI LATERALI
@@ -172,6 +201,13 @@ export default function Configurator() {
                             full: (fbx.children[3].children[1].children[1].children[1] as THREE.Mesh).geometry
                         }
                     }
+                },
+                frame: {
+                    full: (frames.children[1].children[2] as THREE.Mesh).geometry,
+                    diamond: {
+                        base: (frames.children[1].children[2] as THREE.Mesh).geometry,
+                        full: (frames.children[1].children[2] as THREE.Mesh).geometry
+                    }
                 }
             },
             ilssx: {
@@ -202,6 +238,13 @@ export default function Configurator() {
                             full: (fbx.children[3].children[1].children[3].children[1] as THREE.Mesh).geometry
                         }
                     }
+                },
+                frame: {
+                    full: (frames.children[1].children[3] as THREE.Mesh).geometry,
+                    diamond: {
+                        base: (frames.children[1].children[3] as THREE.Mesh).geometry,
+                        full: (frames.children[1].children[3] as THREE.Mesh).geometry
+                    }
                 }
             },
             ilidx: {
@@ -216,6 +259,13 @@ export default function Configurator() {
                 fullDiamond: {
                     base: (fbx.children[1].children[0].children[5] as THREE.Mesh).geometry,
                     full: (fbx.children[1].children[1].children[1] as THREE.Mesh).geometry
+                },
+                frame: {
+                    full: (frames.children[2].children[2] as THREE.Mesh).geometry,
+                    diamond: {
+                        base: (frames.children[2].children[2] as THREE.Mesh).geometry,
+                        full: (frames.children[2].children[2] as THREE.Mesh).geometry
+                    }
                 }
             },
             ilisx: {
@@ -230,6 +280,13 @@ export default function Configurator() {
                 fullDiamond: {
                     base: (fbx.children[1].children[0].children[11] as THREE.Mesh).geometry,
                     full: (fbx.children[1].children[1].children[7] as THREE.Mesh).geometry
+                },
+                frame: {
+                    full: (frames.children[2].children[3] as THREE.Mesh).geometry,
+                    diamond: {
+                        base: (frames.children[2].children[3] as THREE.Mesh).geometry,
+                        full: (frames.children[2].children[3] as THREE.Mesh).geometry
+                    }
                 }
             },
             // CANINI
@@ -247,7 +304,7 @@ export default function Configurator() {
                     full: (fbx.children[1].children[1].children[3] as THREE.Mesh).geometry
                 },
                 frame: {
-                    full: (fbx.children[2].children[1] as THREE.Mesh).geometry,
+                    full: (frames.children[1].children[4] as THREE.Mesh).geometry,
                     diamond: {
                         base: (fbx.children[2].children[0].children[1] as THREE.Mesh).geometry,
                         full: (fbx.children[2].children[0].children[0].children[0] as THREE.Mesh).geometry
@@ -268,7 +325,7 @@ export default function Configurator() {
                     full: (fbx.children[1].children[1].children[9] as THREE.Mesh).geometry
                 },
                 frame: {
-                    full: (fbx.children[2].children[3] as THREE.Mesh).geometry,
+                    full: (frames.children[1].children[5] as THREE.Mesh).geometry,
                     diamond: {
                         base: (fbx.children[2].children[0].children[3] as THREE.Mesh).geometry,
                         full: (fbx.children[2].children[0].children[0].children[2] as THREE.Mesh).geometry
@@ -289,14 +346,14 @@ export default function Configurator() {
                     full: (fbx.children[1].children[1].children[4] as THREE.Mesh).geometry
                 },
                 frame: {
-                    full: (fbx.children[2].children[2] as THREE.Mesh).geometry,
+                    full: (frames.children[2].children[4] as THREE.Mesh).geometry,
                     diamond: {
                         base: (fbx.children[2].children[0].children[2] as THREE.Mesh).geometry,
                         full: (fbx.children[2].children[0].children[0].children[1] as THREE.Mesh).geometry
                     }
                 },
                 bar: {
-                    full: (fbx.children[3].children[3] as THREE.Mesh).geometry,
+                    full: (frames.children[0].children[0] as THREE.Mesh).geometry,
                     diamond: {
                         base: (fbx.children[3].children[0].children[0] as THREE.Mesh).geometry,
                         full: (fbx.children[3].children[0].children[1] as THREE.Mesh).geometry
@@ -317,14 +374,14 @@ export default function Configurator() {
                     full: (fbx.children[1].children[1].children[10] as THREE.Mesh).geometry
                 },
                 frame: {
-                    full: (fbx.children[2].children[4] as THREE.Mesh).geometry,
+                    full: (frames.children[2].children[5] as THREE.Mesh).geometry,
                     diamond: {
                         base: (fbx.children[2].children[0].children[4] as THREE.Mesh).geometry,
                         full: (fbx.children[2].children[0].children[0].children[3] as THREE.Mesh).geometry
                     }
                 },
                 bar: {
-                    full: (fbx.children[3].children[3] as THREE.Mesh).geometry,
+                    full: (frames.children[0].children[0] as THREE.Mesh).geometry,
                     diamond: {
                         base: (fbx.children[3].children[0].children[0] as THREE.Mesh).geometry,
                         full: (fbx.children[3].children[0].children[1] as THREE.Mesh).geometry
@@ -381,45 +438,42 @@ export default function Configurator() {
             {/*<primitive object={fbx} visible={false} position={[0, -10, 0]}/>*/}
             {savedTeeth && savedEnvMap &&
                 <>
-                    {/*<mesh geometry={upperFrames.children[0].children[0].geometry}>*/}
+                    <mesh geometry={(bars.children[3] as THREE.Mesh).geometry} name="ICIDX">
+                        <FullMaterial color="gold"/>
+                    </mesh>
+                    {/*<mesh geometry={(bars.children[3] as THREE.Mesh).geometry} name="ICISX">*/}
                     {/*    <FullMaterial color="gold"/>*/}
                     {/*</mesh>*/}
-                    {/*<mesh geometry={upperFrames.children[2].children[0].geometry}>*/}
+                    <mesh geometry={(bars.children[4] as THREE.Mesh).geometry} name="ILIDX">
+                        <FullMaterial color="gold"/>
+                    </mesh>
+                    <mesh geometry={(bars.children[5] as THREE.Mesh).geometry} name="ILISX">
+                        <FullMaterial color="gold"/>
+                    </mesh>
+                    <mesh geometry={(bars.children[8] as THREE.Mesh).geometry} name="CIDX">
+                        <FullMaterial color="gold"/>
+                    </mesh>
+                    <mesh geometry={(bars.children[9] as THREE.Mesh).geometry} name="CISX">
+                        <FullMaterial color="gold"/>
+                    </mesh>
+                    <mesh geometry={(bars.children[0] as THREE.Mesh).geometry} name="ICSDX">
+                        <FullMaterial color="gold"/>
+                    </mesh>
+                    {/*<mesh geometry={(bars.children[0] as THREE.Mesh).geometry} name="ICSSX">*/}
                     {/*    <FullMaterial color="gold"/>*/}
                     {/*</mesh>*/}
-                    {/*<mesh geometry={upperFrames.children[2].children[1].geometry}>*/}
-                    {/*    <FullMaterial color="gold"/>*/}
-                    {/*</mesh>*/}
-                    {/*<mesh geometry={upperFrames.children[2].children[2].geometry}>*/}
-                    {/*    <FullMaterial color="gold"/>*/}
-                    {/*</mesh>*/}
-                    {/*<mesh geometry={upperFrames.children[2].children[3].geometry}>*/}
-                    {/*    <FullMaterial color="gold"/>*/}
-                    {/*</mesh>*/}
-                    {/*<mesh geometry={upperFrames.children[2].children[4].geometry}>*/}
-                    {/*    <FullMaterial color="gold"/>*/}
-                    {/*</mesh>*/}
-                    {/*<mesh geometry={upperFrames.children[2].children[5].geometry}>*/}
-                    {/*    <FullMaterial color="gold"/>*/}
-                    {/*</mesh>*/}
-                    {/*<mesh geometry={upperFrames.children[1].children[0].geometry}>*/}
-                    {/*    <FullMaterial color="gold"/>*/}
-                    {/*</mesh>*/}
-                    {/*<mesh geometry={upperFrames.children[1].children[1].geometry}>*/}
-                    {/*    <FullMaterial color="gold"/>*/}
-                    {/*</mesh>*/}
-                    {/*<mesh geometry={upperFrames.children[1].children[2].geometry}>*/}
-                    {/*    <FullMaterial color="gold"/>*/}
-                    {/*</mesh>*/}
-                    {/*<mesh geometry={upperFrames.children[1].children[3].geometry}>*/}
-                    {/*    <FullMaterial color="gold"/>*/}
-                    {/*</mesh>*/}
-                    {/*<mesh geometry={upperFrames.children[1].children[4].geometry}>*/}
-                    {/*    <FullMaterial color="gold"/>*/}
-                    {/*</mesh>*/}
-                    {/*<mesh geometry={upperFrames.children[1].children[5].geometry}>*/}
-                    {/*    <FullMaterial color="gold"/>*/}
-                    {/*</mesh>*/}
+                    <mesh geometry={(bars.children[1] as THREE.Mesh).geometry} name="ILSDX">
+                        <FullMaterial color="gold"/>
+                    </mesh>
+                    <mesh geometry={(bars.children[2] as THREE.Mesh).geometry} name="ILSSX">
+                        <FullMaterial color="gold"/>
+                    </mesh>
+                    <mesh geometry={(bars.children[6] as THREE.Mesh).geometry} name="CSDX">
+                        <FullMaterial color="gold"/>
+                    </mesh>
+                    <mesh geometry={(bars.children[7] as THREE.Mesh).geometry} name="CSSX">
+                        <FullMaterial color="gold"/>
+                    </mesh>
                     {/*DENTI SUPERIORI*/}
                     <IlsSx/>
                     <IlsSxStone/>

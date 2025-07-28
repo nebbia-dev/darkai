@@ -6,6 +6,8 @@ import BaseFullDiamond from "@/app/components/materials/BaseFullDiamond";
 import FullDiamond from "@/app/components/materials/FullDiamond";
 import State from "@/app/types/State";
 import * as THREE from "three";
+import FrameFull from "@/app/components/materials/FrameFull";
+import FrameDiamond from "@/app/components/materials/FrameDiamond";
 
 export default function IciDx() {
     const toothGeometry = useTeethStore((state: State) => state.teethGeometry.icidx);
@@ -21,6 +23,14 @@ export default function IciDx() {
             case 'full':
                 geometry = [toothGeometry.full];
                 material = [<FullMaterial color={toothMaterial}/>]
+                break;
+            case 'frame':
+                geometry = [toothGeometry.frame.full];
+                material = [<FullMaterial color={toothMaterial}/>]
+                break;
+            case 'frameDiamond':
+                geometry = [toothGeometry.frame.diamond.base, toothGeometry.frame.diamond.full];
+                material = [<FullMaterial color={toothMaterial}/>, <FullDiamond color={toothMaterial} pave={toothPave}/>]
                 break;
             case 'fullDiamond':
                 geometry = [toothGeometry.fullDiamond.base, toothGeometry.fullDiamond.full];

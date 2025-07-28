@@ -6,22 +6,30 @@ import {useTeethStore} from "@/app/stores/teeth";
 import State from "@/app/types/State";
 
 export default function Dentiera() {
-    const fbx2 = useMemo(() => {
+    const fbx = useMemo(() => {
         console.log('dentiera')
-        return useFBX('/models/MOD_Denti_Freeze_PSR.fbx')
+        return useFBX('/models/MOD_Gengive.fbx')
     }, []);
-    // const fbx = useMemo(() => {
-    //     return useFBX('/models/Dentiera_Separata.fbx')
-    // }, []);
+    const fbx2 = useMemo(() => {
+        return useFBX('/models/MOD_Denti_Separati.fbx')
+    }, []);
+    console.log(fbx2)
     const envMap = useTeethStore((state: State) => state.envMap);
     const setActive = useTeethStore((state: State) => state.setActiveTooth);
     const activeTooth = useTeethStore((state: State) => state.currentTooth);
     const props = useTexture({
-        map: 'textures/dentieraBase/DefaultMaterial_Base_color.webp',
-        normalMap: 'textures/dentieraBase/DefaultMaterial_Normal.webp',
-        metalnessMap: 'textures/dentieraBase/DefaultMaterial_Metallic.webp',
-        roughnessMap: 'textures/dentieraBase/DefaultMaterial_Roughness.webp',
-        aoMap: 'textures/dentieraBase/DefaultMaterial_Mixed_AO.webp',
+        map: 'textures/dentieraBase/DefaultMaterial_Base_color_1001.webp',
+        normalMap: 'textures/dentieraBase/DefaultMaterial_Normal_1001.webp',
+        // metalnessMap: 'textures/dentieraBase/DefaultMaterial_Metallic.webp',
+        roughnessMap: 'textures/dentieraBase/DefaultMaterial_Roughness_1001.webp',
+        // aoMap: 'textures/dentieraBase/DefaultMaterial_Mixed_AO.webp',
+    });
+    const propsTeeth = useTexture({
+        map: 'textures/dentieraBase/DefaultMaterial_Base_color_1002.webp',
+        // normalMap: 'textures/dentieraBase/DefaultMaterial_Normal_1001.webp',
+        // metalnessMap: 'textures/dentieraBase/DefaultMaterial_Metallic.webp',
+        roughnessMap: 'textures/dentieraBase/DefaultMaterial_Roughness_1002.webp',
+        // aoMap: 'textures/dentieraBase/DefaultMaterial_Mixed_AO.webp',
     });
     const [hovered, setHover] = useState<string|null>(null);
     const [touch, setTouch] = useState<boolean>(false);
@@ -30,10 +38,20 @@ export default function Dentiera() {
         return new THREE.MeshStandardMaterial({
             map: props.map,
             normalMap: props.normalMap,
-            metalnessMap: props.metalnessMap,
+            // metalnessMap: props.metalnessMap,
             roughnessMap: props.roughnessMap,
-            aoMap: props.aoMap,
+            // aoMap: props.aoMap,
             metalness: 0.5,
+            roughness: 0.7,
+            envMap: envMap
+        })
+    }, []);
+    const dentiMaterial = useMemo(() => {
+        console.log('material')
+        return new THREE.MeshStandardMaterial({
+            map: propsTeeth.map,
+            roughnessMap: propsTeeth.roughnessMap,
+            metalness: 0.2,
             roughness: 0.7,
             envMap: envMap
         })
@@ -93,9 +111,9 @@ export default function Dentiera() {
             <mesh onClick={log} onPointerOver={() => setHover('icsdx')} onPointerOut={() => setHover(null)}
                   // geometry={(fbx.children[0].children[11] as THREE.Mesh).geometry}
                   // name={fbx.children[0].children[11].name}
-                  geometry={(fbx2.children[1].children[5] as THREE.Mesh).geometry}
-                  name={fbx2.children[1].children[5].name}
-                  material={dentieraMaterial}
+                  geometry={(fbx2.children[0].children[5] as THREE.Mesh).geometry}
+                  name={fbx2.children[0].children[5].name}
+                  material={dentiMaterial}
             >
                   {outline && <Outlines thickness={10} color="hotpink"/>}
                   {hovered && <Outlines thickness={10} color="yellow"/>}
@@ -107,9 +125,9 @@ export default function Dentiera() {
             <mesh onClick={log} onPointerOver={() => setHover('icssx')} onPointerOut={() => setHover(null)}
                   // geometry={(fbx.children[0].children[8] as THREE.Mesh).geometry}
                   // name={fbx.children[0].children[8].name}
-                  geometry={(fbx2.children[1].children[2] as THREE.Mesh).geometry}
-                  name={fbx2.children[1].children[2].name}
-                  material={dentieraMaterial}
+                  geometry={(fbx2.children[0].children[2] as THREE.Mesh).geometry}
+                  name={fbx2.children[0].children[2].name}
+                  material={dentiMaterial}
             >
                   {outline && <Outlines thickness={10} color="hotpink"/>}
                   {hovered && <Outlines thickness={10} color="yellow"/>}
@@ -121,9 +139,9 @@ export default function Dentiera() {
             <mesh onClick={log} onPointerOver={() => setHover('icisx')} onPointerOut={() => setHover(null)}
                   // name={fbx.children[0].children[0].name}
                   // geometry={(fbx.children[0].children[0] as THREE.Mesh).geometry}
-                  geometry={(fbx2.children[2].children[0] as THREE.Mesh).geometry}
-                  name={fbx2.children[2].children[0].name}
-                  material={dentieraMaterial}
+                  geometry={(fbx2.children[1].children[0] as THREE.Mesh).geometry}
+                  name={fbx2.children[1].children[0].name}
+                  material={dentiMaterial}
             >
                   {outline && <Outlines thickness={10} color="hotpink"/>}
                   {hovered && <Outlines thickness={10} color="yellow"/>}
@@ -135,9 +153,9 @@ export default function Dentiera() {
             <mesh onClick={log} onPointerOver={() => setHover('icidx')} onPointerOut={() => setHover(null)}
                   // geometry={(fbx.children[0].children[1] as THREE.Mesh).geometry}
                   // name={fbx.children[0].children[1].name}
-                  geometry={(fbx2.children[2].children[1] as THREE.Mesh).geometry}
-                  name={fbx2.children[2].children[1].name}
-                  material={dentieraMaterial}
+                  geometry={(fbx2.children[1].children[1] as THREE.Mesh).geometry}
+                  name={fbx2.children[1].children[1].name}
+                  material={dentiMaterial}
             >
                   {outline && <Outlines thickness={10} color="hotpink"/>}
                   {hovered && <Outlines thickness={10} color="yellow"/>}
@@ -150,9 +168,9 @@ export default function Dentiera() {
             <mesh onClick={log} onPointerOver={() => setHover('csdx')} onPointerOut={() => setHover(null)}
                   // geometry={(fbx.children[0].children[9] as THREE.Mesh).geometry}
                   // name={fbx.children[0].children[9].name}
-                  geometry={(fbx2.children[1].children[3] as THREE.Mesh).geometry}
-                  name={fbx2.children[1].children[3].name}
-                  material={dentieraMaterial}
+                  geometry={(fbx2.children[0].children[3] as THREE.Mesh).geometry}
+                  name={fbx2.children[0].children[3].name}
+                  material={dentiMaterial}
             >
                   {outline && <Outlines thickness={10} color="hotpink"/>}
                   {hovered && <Outlines thickness={10} color="yellow"/>}
@@ -164,9 +182,9 @@ export default function Dentiera() {
             <mesh onClick={log} onPointerOver={() => setHover('cssx')} onPointerOut={() => setHover(null)}
                   // geometry={(fbx.children[0].children[6] as THREE.Mesh).geometry}
                   // name={fbx.children[0].children[6].name}
-                  geometry={(fbx2.children[1].children[0] as THREE.Mesh).geometry}
-                  name={fbx2.children[1].children[0].name}
-                  material={dentieraMaterial}
+                  geometry={(fbx2.children[0].children[0] as THREE.Mesh).geometry}
+                  name={fbx2.children[0].children[0].name}
+                  material={dentiMaterial}
             >
                   {outline && <Outlines thickness={10} color="hotpink"/>}
                   {hovered && <Outlines thickness={10} color="yellow"/>}
@@ -178,9 +196,9 @@ export default function Dentiera() {
             <mesh onClick={log} onPointerOver={() => setHover('cisx')} onPointerOut={() => setHover(null)}
                   // geometry={(fbx.children[0].children[4] as THREE.Mesh).geometry}
                   // name={fbx.children[0].children[4].name}
-                  geometry={(fbx2.children[2].children[4] as THREE.Mesh).geometry}
-                  name={fbx2.children[2].children[4].name}
-                  material={dentieraMaterial}
+                  geometry={(fbx2.children[1].children[4] as THREE.Mesh).geometry}
+                  name={fbx2.children[1].children[4].name}
+                  material={dentiMaterial}
             >
                   {outline && <Outlines thickness={10} color="hotpink"/>}
                   {hovered && <Outlines thickness={10} color="yellow"/>}
@@ -192,9 +210,9 @@ export default function Dentiera() {
             <mesh onClick={log} onPointerOver={() => setHover('cidx')} onPointerOut={() => setHover(null)}
                   // geometry={(fbx.children[0].children[5] as THREE.Mesh).geometry}
                   // name={fbx.children[0].children[5].name}
-                  geometry={(fbx2.children[2].children[5] as THREE.Mesh).geometry}
-                  name={fbx2.children[2].children[5].name}
-                  material={dentieraMaterial}
+                  geometry={(fbx2.children[1].children[5] as THREE.Mesh).geometry}
+                  name={fbx2.children[1].children[5].name}
+                  material={dentiMaterial}
             >
                   {outline && <Outlines thickness={10} color="hotpink"/>}
                   {hovered && <Outlines thickness={10} color="yellow"/>}
@@ -207,9 +225,9 @@ export default function Dentiera() {
             <mesh onClick={log} onPointerOver={() => setHover('ilsdx')} onPointerOut={() => setHover(null)}
                   // geometry={(fbx.children[0].children[10] as THREE.Mesh).geometry}
                   // name={fbx.children[0].children[10].name}
-                  geometry={(fbx2.children[1].children[4] as THREE.Mesh).geometry}
-                  name={fbx2.children[1].children[4].name}
-                  material={dentieraMaterial}
+                  geometry={(fbx2.children[0].children[4] as THREE.Mesh).geometry}
+                  name={fbx2.children[0].children[4].name}
+                  material={dentiMaterial}
             >
                   {outline && <Outlines thickness={10} color="hotpink"/>}
                   {hovered && <Outlines thickness={10} color="yellow"/>}
@@ -221,9 +239,9 @@ export default function Dentiera() {
             <mesh onClick={log} onPointerOver={() => setHover('ilssx')} onPointerOut={() => setHover(null)}
                   // geometry={(fbx.children[0].children[7] as THREE.Mesh).geometry}
                   // name={fbx.children[0].children[7].name}
-                  geometry={(fbx2.children[1].children[1] as THREE.Mesh).geometry}
-                  name={fbx2.children[1].children[1].name}
-                  material={dentieraMaterial}
+                  geometry={(fbx2.children[0].children[1] as THREE.Mesh).geometry}
+                  name={fbx2.children[0].children[1].name}
+                  material={dentiMaterial}
             >
                   {outline && <Outlines thickness={10} color="hotpink"/>}
                   {hovered && <Outlines thickness={10} color="yellow"/>}
@@ -235,9 +253,9 @@ export default function Dentiera() {
             <mesh onClick={log} onPointerOver={() => setHover('ilisx')} onPointerOut={() => setHover(null)}
                   // geometry={(fbx.children[0].children[2] as THREE.Mesh).geometry}
                   // name={fbx.children[0].children[2].name}
-                  geometry={(fbx2.children[2].children[2] as THREE.Mesh).geometry}
-                  name={fbx2.children[2].children[2].name}
-                  material={dentieraMaterial}
+                  geometry={(fbx2.children[1].children[2] as THREE.Mesh).geometry}
+                  name={fbx2.children[1].children[2].name}
+                  material={dentiMaterial}
             >
                   {outline && <Outlines thickness={10} color="hotpink"/>}
                   {hovered && <Outlines thickness={10} color="yellow"/>}
@@ -249,9 +267,9 @@ export default function Dentiera() {
             <mesh onClick={log} onPointerOver={() => setHover('ilidx')} onPointerOut={() => setHover(null)}
                   // geometry={(fbx.children[0].children[3] as THREE.Mesh).geometry}
                   // name={fbx.children[0].children[3].name}
-                  geometry={(fbx2.children[2].children[3] as THREE.Mesh).geometry}
-                  name={fbx2.children[2].children[3].name}
-                  material={dentieraMaterial}
+                  geometry={(fbx2.children[1].children[3] as THREE.Mesh).geometry}
+                  name={fbx2.children[1].children[3].name}
+                  material={dentiMaterial}
             >
                   {outline && <Outlines thickness={10} color="hotpink"/>}
                   {hovered && <Outlines thickness={10} color="yellow"/>}
@@ -265,9 +283,9 @@ export default function Dentiera() {
             <mesh onClick={log}
                   // geometry={(fbx.children[0].children[11] as THREE.Mesh).geometry}
                   // name={fbx.children[0].children[11].name}
-                  geometry={(fbx2.children[1].children[5] as THREE.Mesh).geometry}
-                  name={fbx2.children[1].children[5].name}
-                  material={dentieraMaterial}
+                  geometry={(fbx2.children[0].children[5] as THREE.Mesh).geometry}
+                  name={fbx2.children[0].children[5].name}
+                  material={dentiMaterial}
             >
                 {outline && <Outlines thickness={10} color="hotpink"/>}
             </mesh>
@@ -278,9 +296,9 @@ export default function Dentiera() {
             <mesh onClick={log}
                   // geometry={(fbx.children[0].children[8] as THREE.Mesh).geometry}
                   // name={fbx.children[0].children[8].name}
-                  geometry={(fbx2.children[1].children[2] as THREE.Mesh).geometry}
-                  name={fbx2.children[1].children[2].name}
-                  material={dentieraMaterial}
+                  geometry={(fbx2.children[0].children[2] as THREE.Mesh).geometry}
+                  name={fbx2.children[0].children[2].name}
+                  material={dentiMaterial}
             >
                 {outline && <Outlines thickness={10} color="hotpink"/>}
             </mesh>
@@ -291,9 +309,9 @@ export default function Dentiera() {
             <mesh onClick={log}
                   // geometry={(fbx.children[0].children[0] as THREE.Mesh).geometry}
                   // name={fbx.children[0].children[0].name}
-                  geometry={(fbx2.children[2].children[0] as THREE.Mesh).geometry}
-                  name={fbx2.children[2].children[0].name}
-                  material={dentieraMaterial}
+                  geometry={(fbx2.children[1].children[0] as THREE.Mesh).geometry}
+                  name={fbx2.children[1].children[0].name}
+                  material={dentiMaterial}
             >
                 {outline && <Outlines thickness={10} color="hotpink"/>}
             </mesh>
@@ -304,9 +322,9 @@ export default function Dentiera() {
             <mesh onClick={log}
                   // geometry={(fbx.children[0].children[1] as THREE.Mesh).geometry}
                   // name={fbx.children[0].children[1].name}
-                  geometry={(fbx2.children[2].children[1] as THREE.Mesh).geometry}
-                  name={fbx2.children[2].children[1].name}
-                  material={dentieraMaterial}
+                  geometry={(fbx2.children[1].children[1] as THREE.Mesh).geometry}
+                  name={fbx2.children[1].children[1].name}
+                  material={dentiMaterial}
             >
                 {outline && <Outlines thickness={10} color="hotpink"/>}
             </mesh>
@@ -318,9 +336,9 @@ export default function Dentiera() {
             <mesh onClick={log}
                   // geometry={(fbx.children[0].children[9] as THREE.Mesh).geometry}
                   // name={fbx.children[0].children[9].name}
-                  geometry={(fbx2.children[1].children[3] as THREE.Mesh).geometry}
-                  name={fbx2.children[1].children[3].name}
-                  material={dentieraMaterial}
+                  geometry={(fbx2.children[0].children[3] as THREE.Mesh).geometry}
+                  name={fbx2.children[0].children[3].name}
+                  material={dentiMaterial}
             >
                 {outline && <Outlines thickness={10} color="hotpink"/>}
             </mesh>
@@ -331,9 +349,9 @@ export default function Dentiera() {
             <mesh onClick={log}
                   // geometry={(fbx.children[0].children[6] as THREE.Mesh).geometry}
                   // name={fbx.children[0].children[6].name}
-                  geometry={(fbx2.children[1].children[0] as THREE.Mesh).geometry}
-                  name={fbx2.children[1].children[0].name}
-                  material={dentieraMaterial}
+                  geometry={(fbx2.children[0].children[0] as THREE.Mesh).geometry}
+                  name={fbx2.children[0].children[0].name}
+                  material={dentiMaterial}
             >
                 {outline && <Outlines thickness={10} color="hotpink"/>}
             </mesh>
@@ -344,9 +362,9 @@ export default function Dentiera() {
             <mesh onClick={log}
                   // geometry={(fbx.children[0].children[4] as THREE.Mesh).geometry}
                   // name={fbx.children[0].children[4].name}
-                  geometry={(fbx2.children[2].children[4] as THREE.Mesh).geometry}
-                  name={fbx2.children[2].children[4].name}
-                  material={dentieraMaterial}
+                  geometry={(fbx2.children[1].children[4] as THREE.Mesh).geometry}
+                  name={fbx2.children[1].children[4].name}
+                  material={dentiMaterial}
             >
                 {outline && <Outlines thickness={10} color="hotpink"/>}
             </mesh>
@@ -357,9 +375,9 @@ export default function Dentiera() {
             <mesh onClick={log}
                   // geometry={(fbx.children[0].children[5] as THREE.Mesh).geometry}
                   // name={fbx.children[0].children[5].name}
-                  geometry={(fbx2.children[2].children[5] as THREE.Mesh).geometry}
-                  name={fbx2.children[2].children[5].name}
-                  material={dentieraMaterial}
+                  geometry={(fbx2.children[1].children[5] as THREE.Mesh).geometry}
+                  name={fbx2.children[1].children[5].name}
+                  material={dentiMaterial}
             >
                 {outline && <Outlines thickness={10} color="hotpink"/>}
             </mesh>
@@ -371,9 +389,9 @@ export default function Dentiera() {
             <mesh onClick={log}
                   // geometry={(fbx.children[0].children[10] as THREE.Mesh).geometry}
                   // name={fbx.children[0].children[10].name}
-                  geometry={(fbx2.children[1].children[4] as THREE.Mesh).geometry}
-                  name={fbx2.children[1].children[4].name}
-                  material={dentieraMaterial}
+                  geometry={(fbx2.children[0].children[4] as THREE.Mesh).geometry}
+                  name={fbx2.children[0].children[4].name}
+                  material={dentiMaterial}
             >
                 {outline && <Outlines thickness={10} color="hotpink"/>}
             </mesh>
@@ -384,9 +402,9 @@ export default function Dentiera() {
             <mesh onClick={log}
                   // geometry={(fbx.children[0].children[7] as THREE.Mesh).geometry}
                   // name={fbx.children[0].children[7].name}
-                  geometry={(fbx2.children[1].children[1] as THREE.Mesh).geometry}
-                  name={fbx2.children[1].children[1].name}
-                  material={dentieraMaterial}
+                  geometry={(fbx2.children[0].children[1] as THREE.Mesh).geometry}
+                  name={fbx2.children[0].children[1].name}
+                  material={dentiMaterial}
             >
                 {outline && <Outlines thickness={10} color="hotpink"/>}
             </mesh>
@@ -397,9 +415,9 @@ export default function Dentiera() {
             <mesh onClick={log}
                   // geometry={(fbx.children[0].children[2] as THREE.Mesh).geometry}
                   // name={fbx.children[0].children[2].name}
-                  geometry={(fbx2.children[2].children[2] as THREE.Mesh).geometry}
-                  name={fbx2.children[2].children[2].name}
-                  material={dentieraMaterial}
+                  geometry={(fbx2.children[1].children[2] as THREE.Mesh).geometry}
+                  name={fbx2.children[1].children[2].name}
+                  material={dentiMaterial}
             >
                 {outline && <Outlines thickness={10} color="hotpink"/>}
             </mesh>
@@ -410,9 +428,9 @@ export default function Dentiera() {
             <mesh onClick={log}
                   // geometry={(fbx.children[0].children[3] as THREE.Mesh).geometry}
                   // name={fbx.children[0].children[3].name}
-                  geometry={(fbx2.children[2].children[3] as THREE.Mesh).geometry}
-                  name={fbx2.children[2].children[3].name}
-                  material={dentieraMaterial}
+                  geometry={(fbx2.children[1].children[3] as THREE.Mesh).geometry}
+                  name={fbx2.children[1].children[3].name}
+                  material={dentiMaterial}
             >
                 {outline && <Outlines thickness={10} color="hotpink"/>}
             </mesh>
@@ -424,9 +442,9 @@ export default function Dentiera() {
         console.log('base')
         return (
             <>
-                <mesh geometry={(fbx2.children[0] as THREE.Mesh).geometry} material={dentieraMaterial}>
+                <mesh geometry={(fbx.children[0] as THREE.Mesh).geometry} material={dentieraMaterial}>
                 </mesh>
-                <mesh geometry={(fbx2.children[3] as THREE.Mesh).geometry} material={dentieraMaterial}>
+                <mesh geometry={(fbx2.children[2] as THREE.Mesh).geometry} material={dentiMaterial}>
                 </mesh>
             </>
         )
@@ -438,7 +456,7 @@ export default function Dentiera() {
 
             {!touch
                 ? <>
-                    <Icisx outline={activeTooth === 'icisx'} hovered={hovered === 'icisx'}/>
+                <Icisx outline={activeTooth === 'icisx'} hovered={hovered === 'icisx'}/>
                     <Icidx outline={activeTooth === 'icidx'} hovered={hovered === 'icidx'}/>
                     <Icssx outline={activeTooth === 'icssx'} hovered={hovered === 'icssx'}/>
                     <Icsdx outline={activeTooth === 'icsdx'} hovered={hovered === 'icsdx'}/>
