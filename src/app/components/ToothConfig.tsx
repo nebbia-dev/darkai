@@ -110,7 +110,7 @@ export default function ToothConfig({tooth, ref, position} : {tooth: string, ref
                                                     {opt}
                                                 </button>
                                             }
-                                        </li>Copy
+                                        </li>
                                     )
                                 })
                                 }
