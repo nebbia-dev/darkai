@@ -904,11 +904,11 @@ export const useTeethStore = create<State>((set, get) => ({
     teethTypeOptions: {
         full: ['icsdx', 'icssx', 'icidx', 'icisx', 'ilsdx', 'ilssx', 'ilidx', 'ilisx', 'csdx', 'cssx', 'cidx', 'cisx'],
         fullDiamond: ['icsdx', 'icssx', 'icidx', 'icisx', 'ilsdx', 'ilssx', 'ilidx', 'ilisx', 'csdx', 'cssx', 'cidx', 'cisx'],
-        bar: ['ilsdx', 'ilssx'],
-        barDiamond: ['ilsdx', 'ilssx'],
-        frame: ['csdx', 'cssx', 'cidx', 'cisx'],
-        frameDiamond: ['csdx', 'cssx', 'cidx', 'cisx'],
-        stones: ['csdx', 'cssx', 'cidx', 'cisx']
+        bar: ['icsdx', 'icssx', 'icidx', 'icisx', 'ilsdx', 'ilssx', 'ilidx', 'ilisx', 'csdx', 'cssx', 'cidx', 'cisx'],
+        barDiamond: ['icsdx', 'icssx', 'icidx', 'icisx', 'ilsdx', 'ilssx', 'ilidx', 'ilisx', 'csdx', 'cssx', 'cidx', 'cisx'],
+        frame: ['icsdx', 'icssx', 'icidx', 'icisx', 'ilsdx', 'ilssx', 'ilidx', 'ilisx', 'csdx', 'cssx', 'cidx', 'cisx'],
+        frameDiamond: ['icsdx', 'icssx', 'icidx', 'icisx', 'ilsdx', 'ilssx', 'ilidx', 'ilisx', 'csdx', 'cssx', 'cidx', 'cisx'],
+        stones: ['icsdx', 'icssx', 'icidx', 'icisx', 'ilsdx', 'ilssx', 'ilidx', 'ilisx', 'csdx', 'cssx', 'cidx', 'cisx']
     },
     setCopy: (copied, original) =>
         set(
@@ -919,9 +919,44 @@ export const useTeethStore = create<State>((set, get) => ({
                 }
                 state.currentHistory++;
 
+                if((copied === 'icsdx' || copied === 'icssx' || copied === 'icidx' || copied === 'icisx')
+                && (state.teethJewelType[original] === 'bar' || state.teethJewelType[original] === 'barDiamond')) {
+                    switch(copied) {
+                        case 'icssx':
+                            state.teethJewelType.icsdx = state.teethJewelType[original];
+                            state.teethMaterial.icsdx = state.teethMaterial[original];
+                            state.teethVisibility.icsdx = state.teethVisibility[original];
+                            state.teethPave.icsdx = state.teethPave[original];
+                            state.teethStones.icsdx = state.teethStones[original];
+                            break;
+                        case 'icsdx':
+                            state.teethJewelType.icssx = state.teethJewelType[original];
+                            state.teethMaterial.icssx = state.teethMaterial[original];
+                            state.teethVisibility.icssx = state.teethVisibility[original];
+                            state.teethPave.icssx = state.teethPave[original];
+                            state.teethStones.icssx = state.teethStones[original];
+                            break;
+                        case 'icisx':
+                            state.teethJewelType.icidx = state.teethJewelType[original];
+                            state.teethMaterial.icidx = state.teethMaterial[original];
+                            state.teethVisibility.icidx = state.teethVisibility[original];
+                            state.teethPave.icidx = state.teethPave[original];
+                            state.teethStones.icidx = state.teethStones[original];
+                            break;
+                        case 'icidx':
+                            state.teethJewelType.icisx = state.teethJewelType[original];
+                            state.teethMaterial.icisx = state.teethMaterial[original];
+                            state.teethVisibility.icisx = state.teethVisibility[original];
+                            state.teethPave.icisx = state.teethPave[original];
+                            state.teethStones.icisx = state.teethStones[original];
+                            break;
+                    }
+                }
+
                 state.teethJewelType[copied] = state.teethJewelType[original];
                 state.teethMaterial[copied] = state.teethMaterial[original];
                 state.teethVisibility[copied] = state.teethVisibility[original];
+                state.teethPave[copied] = state.teethPave[original];
                 state.teethStones[copied] = state.teethStones[original];
 
                 get().calcTotal(state);

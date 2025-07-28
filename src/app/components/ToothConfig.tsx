@@ -102,7 +102,7 @@ export default function ToothConfig({tooth, ref, position} : {tooth: string, ref
                                     const opt = elabToothName(data, false);
 
                                     return (
-                                        <li className="hover:bg-stone-200 hover:rounded px-4 py-1"
+                                        <li className={`hover:bg-stone-200 hover:rounded px-4 py-1 ${data !== tooth ? '' : 'hidden'}`}
                                             key={data + tooth + i}>
                                             {data !== tooth &&
                                                 <button className="cursor-pointer"
@@ -110,7 +110,7 @@ export default function ToothConfig({tooth, ref, position} : {tooth: string, ref
                                                     {opt}
                                                 </button>
                                             }
-                                        </li>
+                                        </li>Copy
                                     )
                                 })
                                 }
