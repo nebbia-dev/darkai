@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import {produce} from "immer";
-import State from "@/app/types/State";
+import {AddonsPrices, BasePrices, State, Stone} from "@/app/types/State";
 import {createClient} from "@/utils/supabase/client";
 
 export const useTeethStore = create<State>((set, get) => ({
@@ -987,7 +987,7 @@ export const useTeethStore = create<State>((set, get) => ({
         let { data: addons, error: errorAddons } = await supabase
             .from('Prices_addons')
             .select('*');
-        set({prices: base, pricesAdds: addons});
+        set({prices: base as BasePrices[], pricesAdds: addons as AddonsPrices[]});
         console.log(addons)
     },
 
@@ -1006,7 +1006,7 @@ export const useTeethStore = create<State>((set, get) => ({
                     for(const [key, value] of Object.entries(tooth.material)) {
                         state.teethMaterial[key] = value;
                     }
-                    for(const [key, value] of Object.entries(tooth.stones)) {
+                    for(const [key, value] of Object.entries(tooth.stones) as [string, Stone][]) {
                         state.teethStones[key].shape = value.shape;
                         state.teethStones[key].color = value.color;
                     }
@@ -1028,7 +1028,7 @@ export const useTeethStore = create<State>((set, get) => ({
                     for(const [key, value] of Object.entries(tooth.material)) {
                         state.teethMaterial[key] = value;
                     }
-                    for(const [key, value] of Object.entries(tooth.stones)) {
+                    for(const [key, value] of Object.entries(tooth.stones) as [string, Stone][]) {
                         state.teethStones[key].shape = value.shape;
                         state.teethStones[key].color = value.color;
                     }
@@ -1174,22 +1174,22 @@ export const useTeethStore = create<State>((set, get) => ({
                     case 'full':
                     case 'frame':
                     case 'bar':
-                        state.teethPrices[key] = toothPriceList[state.teethJewelType[key] + value[0].toUpperCase() + value.slice(1)];
+                        state.teethPrices[key] = Number(toothPriceList[state.teethJewelType[key] + value[0].toUpperCase() + value.slice(1)]);
                         break;
                     case 'fullDiamond':
                     case 'frameDiamond':
                     case 'barDiamond':
                         const baseType = state.teethJewelType[key].slice();
-                        state.teethPrices[key] = toothPriceList[baseType.split('D').shift() + value[0].toUpperCase() + value.slice(1)] + toothPriceList[state.teethJewelType[key]];
+                        state.teethPrices[key] = Number(toothPriceList[baseType.split('D').shift() + value[0].toUpperCase() + value.slice(1)]) + Number(toothPriceList[state.teethJewelType[key]]);
                         break;
                     case 'bigBar':
-                        state.teethPrices.cidx = toothPriceList[state.teethJewelType[key] + value[0].toUpperCase() + value.slice(1)] / 2;
-                        state.teethPrices.cisx = toothPriceList[state.teethJewelType[key] + value[0].toUpperCase() + value.slice(1)] / 2;
+                        state.teethPrices.cidx = Number(toothPriceList[state.teethJewelType[key] + value[0].toUpperCase() + value.slice(1)]) / 2;
+                        state.teethPrices.cisx = Number(toothPriceList[state.teethJewelType[key] + value[0].toUpperCase() + value.slice(1)]) / 2;
                         break;
                     case 'bigBarDiamond':
                         const barType = state.teethJewelType[key].slice();
-                        state.teethPrices.cidx = toothPriceList[barType.split('D').shift() + value[0].toUpperCase() + value.slice(1)] / 2 + toothPriceList[state.teethJewelType[key]] / 2;
-                        state.teethPrices.cisx = toothPriceList[barType.split('D').shift() + value[0].toUpperCase() + value.slice(1)] / 2 + toothPriceList[state.teethJewelType[key]] / 2;
+                        state.teethPrices.cidx = Number(toothPriceList[barType.split('D').shift() + value[0].toUpperCase() + value.slice(1)]) / 2 + Number(toothPriceList[state.teethJewelType[key]]) / 2;
+                        state.teethPrices.cisx = Number(toothPriceList[barType.split('D').shift() + value[0].toUpperCase() + value.slice(1)]) / 2 + Number(toothPriceList[state.teethJewelType[key]]) / 2;
                         break;
                 }
             } else {
@@ -1199,7 +1199,7 @@ export const useTeethStore = create<State>((set, get) => ({
 
         for (const [key, value] of Object.entries(state.teethStones)) {
             if(value?.shape && state.pricesAdds) {
-                state.teethPrices[key] = state.teethPrices[key] + state.pricesAdds.filter(el => el.stone === value.color)[0][state.teethStones[key].shape + 'Shape'];
+                state.teethPrices[key] = state.teethPrices[key] + Number(state.pricesAdds.filter(el => el.stone === value.color)[0][state.teethStones[key].shape + 'Shape']);
             }
         }
 

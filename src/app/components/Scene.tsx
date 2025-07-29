@@ -3,7 +3,7 @@ import {Canvas} from '@react-three/fiber';
 import Configurator from "@/app/components/Configurator";
 import {useEffect} from "react";
 import {useTeethStore} from "@/app/stores/teeth";
-import State from "@/app/types/State";
+import {State} from "@/app/types/State";
 
 export default function Scene() {
 

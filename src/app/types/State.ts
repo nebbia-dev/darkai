@@ -62,7 +62,7 @@ interface Visibility {
     cidx: boolean,
     cisx: boolean,
 }
-interface Stone {
+export interface Stone {
     shape: string | undefined,
     color: string | undefined
 }
@@ -88,7 +88,8 @@ interface History {
     visible: Visibility,
     prices: Prices
 }
-interface BasePrices {
+export interface BasePrices {
+    [key: string]: any,
     barDiamond: number | null,
     barGold: number | null,
     barRose: number | null,
@@ -110,7 +111,8 @@ interface BasePrices {
     tooth: string
 }
 
-interface AddonsPrices {
+export interface AddonsPrices {
+    [key: string]: any,
     marquiseShape: number | null,
     tearShape: number | null,
     diamondShape: number | null,
@@ -121,7 +123,7 @@ interface AddonsPrices {
     stone: string
 }
 
-export default interface State {
+export interface State {
     envMap: Texture | CubeTexture | undefined,
     teethGeometry: FBX,
     teethMaterial: Materials,
@@ -145,6 +147,7 @@ export default interface State {
         stones: string[]
     },
     teethPave: {
+        [key: string]: 'diamond' | 'emerald' | 'sapphire' | 'ruby',
         icsdx: 'diamond' | 'emerald' | 'sapphire' | 'ruby',
         icssx: 'diamond' | 'emerald' | 'sapphire' | 'ruby',
         icidx: 'diamond' | 'emerald' | 'sapphire' | 'ruby',
@@ -183,7 +186,7 @@ export default interface State {
     setTooth: (tooth:string, type:string, color:string) => void,
     resetTooth: (tooth:string) => void,
     setActiveDefault: (active:string|undefined, color:string|undefined) => void,
-    setCopy: (copied:string, original:string|undefined) =>void,
+    setCopy: (copied:string, original:string) =>void,
     setLoaded: (bool:boolean) => void,
     setUI: (bool:boolean) => void,
     fetchPrices: () => void,

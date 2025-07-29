@@ -6,7 +6,7 @@ import BaseFullDiamond from "@/app/components/materials/BaseFullDiamond";
 import FullDiamond from "@/app/components/materials/FullDiamond";
 import FrameFull from "@/app/components/materials/FrameFull";
 import FrameDiamond from "@/app/components/materials/FrameDiamond";
-import State from "@/app/types/State";
+import {State} from "@/app/types/State";
 import * as THREE from "three";
 import BarSmall from "@/app/components/materials/BarSmall";
 

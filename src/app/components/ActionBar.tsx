@@ -5,8 +5,8 @@ import {Redo} from "@/app/components/icons/Redo";
 import {Copy} from "@/app/components/icons/Copy";
 import elabToothName from "@/app/helpers/elabToothName";
 import {useState} from "react";
-import State from "@/app/types/State";
 import {ResetCamera} from "@/app/components/icons/ResetCamera";
+import {State, Stone} from "@/app/types/State";
 
 export default function ActionBar({ui} : {ui: boolean}) {
     const current = useTeethStore((state:State) => state.currentHistory);
@@ -14,7 +14,7 @@ export default function ActionBar({ui} : {ui: boolean}) {
     const activeTooth: string|undefined = useTeethStore((state:State) => state.currentTooth);
     const jewelType: string|undefined = useTeethStore((state:State) => activeTooth !== undefined ? state.teethJewelType[activeTooth] : undefined);
     const material: string|undefined = useTeethStore((state:State) => activeTooth !== undefined ? state.teethMaterial[activeTooth] : undefined);
-    const stones: string|undefined = useTeethStore((state:State) => activeTooth !== undefined ? state.teethStones[activeTooth] : undefined);
+    const stones: Stone|undefined = useTeethStore((state:State) => activeTooth !== undefined ? state.teethStones[activeTooth] : undefined);
     const availableTypes = useTeethStore((state:State) => state.teethTypeOptions);
     const visible: boolean|undefined = useTeethStore((state:State) => activeTooth !== undefined ? state.teethVisibility[activeTooth] : undefined);
     const copy = useTeethStore((state:State) => state.setCopy);
@@ -70,7 +70,7 @@ export default function ActionBar({ui} : {ui: boolean}) {
                                     <li className="hover:bg-stone-200 hover:rounded px-4 py-1"
                                         key={data + activeTooth + i}>
                                         <button className="cursor-pointer whitespace-nowrap"
-                                                onClick={() => setCopy(data, activeTooth)}>
+                                                onClick={() => setCopy(data, activeTooth as string)}>
                                             {opt}
                                         </button>
                                     </li>

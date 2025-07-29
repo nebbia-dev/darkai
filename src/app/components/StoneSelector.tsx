@@ -1,6 +1,6 @@
 import {useTeethStore} from "@/app/stores/teeth";
 import SelectorButton from "@/app/components/SelectorButton";
-import State from "@/app/types/State";
+import {State} from "@/app/types/State";
 
 export default function StoneSelector({tooth, stone, onclick, active} : {onclick: () => void, tooth: string, active: boolean, stone: string}) {
     const type = useTeethStore((state: State) => state.teethJewelType[tooth]);

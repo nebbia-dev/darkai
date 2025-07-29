@@ -8,7 +8,7 @@ import {Copy} from "@/app/components/icons/Copy";
 import {Close} from "@/app/components/icons/Close";
 import {RefObject, useEffect, useState} from "react";
 import elabToothName from "@/app/helpers/elabToothName";
-import State from "@/app/types/State";
+import {State} from "@/app/types/State";
 import ShapeSelector from "@/app/components/ShapeSelector";
 
 export default function ToothConfig({tooth, ref, position} : {tooth: string, ref:RefObject<any>, position:RefObject<any>}) {

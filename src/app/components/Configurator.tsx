@@ -1,5 +1,6 @@
 'use client'
 import {OrbitControls, useEnvironment, useFBX} from '@react-three/drei';
+import type { OrbitControls as OrbitControlsImpl } from 'three-stdlib';
 import Dentiera from "@/app/components/Dentiera";
 import {useTeethStore} from "@/app/stores/teeth";
 import IlsDx from "@/app/components/teeth/IlsDx";
@@ -21,7 +22,7 @@ import CiDxStone from "@/app/components/teeth/CiDxStone";
 import CiDx from "@/app/components/teeth/CiDx";
 import CiSx from "@/app/components/teeth/CiSx";
 import CiSxStone from "@/app/components/teeth/CiSxStone";
-import State from "@/app/types/State";
+import {State} from "@/app/types/State";
 import * as THREE from 'three'
 import {useThree} from "@react-three/fiber";
 import IlsSxStone from "@/app/components/teeth/IlsSxStone";
@@ -452,11 +453,11 @@ export default function Configurator() {
     const resetScreenShot = useTeethStore((state : State) => state.setIsScreenshotNeeded);
     const resetControls = useTeethStore((state : State) => state.resetControls);
     const doResetControls = useTeethStore((state : State) => state.setResetControls);
-    const orbitRef = useRef();
+    const orbitRef = useRef<OrbitControlsImpl>(null);
     const { gl, scene, camera } = useThree();
 
     useEffect(() => {
-        if(screenshot) {
+        if(screenshot && orbitRef.current) {
             console.log('say cheese')
             orbitRef.current.reset();
             setTimeout(() => {
@@ -471,7 +472,7 @@ export default function Configurator() {
     }, [screenshot]);
 
     useEffect(() => {
-        if(resetControls) {
+        if(resetControls && orbitRef.current) {
             orbitRef.current.reset();
             doResetControls(undefined);
         }

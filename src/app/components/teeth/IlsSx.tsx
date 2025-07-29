@@ -6,7 +6,7 @@ import BaseFullDiamond from "@/app/components/materials/BaseFullDiamond";
 import FullDiamond from "@/app/components/materials/FullDiamond";
 import BarDiamond from "@/app/components/materials/BarDiamond";
 import BarSmall from "@/app/components/materials/BarSmall";
-import State from "@/app/types/State";
+import {State} from "@/app/types/State";
 import * as THREE from "three";
 import FrameFull from "@/app/components/materials/FrameFull";
 
@@ -88,5 +88,5 @@ export default function IlsSx() {
 
     console.log('render 2')
 
-    return <ILSSX visible={toothVisibility} type={toothJewelType}/>
+    return <ILSSX visible={toothVisibility} type={toothJewelType} mat={toothMaterial}/>
 }

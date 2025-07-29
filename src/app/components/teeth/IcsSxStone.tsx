@@ -2,7 +2,7 @@
 import {useTeethStore} from "@/app/stores/teeth";
 import StonesMaterial from "@/app/components/materials/StonesMaterial";
 import {JSX, memo} from "react";
-import State from "@/app/types/State";
+import {State} from "@/app/types/State";
 import * as THREE from 'three'
 export default function IcsSxStone() {
     const tooth = useTeethStore((state: State) => state.teethGeometry.icssx ? state.teethGeometry.icssx.stones : undefined);
@@ -32,24 +32,26 @@ export default function IcsSxStone() {
                 shape = [tooth.square];
                 break;
             default:
-                shape = [null];
+                shape = [undefined];
                 break;
         }
 
         const posVec = new THREE.Vector3;
-        const pos = shape[0].getWorldPosition(posVec);
+        const pos: THREE.Vector3 = shape[0] ? shape[0].getWorldPosition(posVec) : new THREE.Vector3();
         const quatVec = new THREE.Quaternion;
-        const quat = shape[0].getWorldQuaternion(quatVec);
+        const quat = shape[0] ? shape[0].getWorldQuaternion(quatVec) : new THREE.Quaternion();
 
         return(
-            <mesh
-                geometry={shape[0].geometry}
-                visible={visible}
-                position={pos}
-                quaternion={quat}
-            >
-                <StonesMaterial color={toothStone.color}/>
-            </mesh>
+            <>
+                {shape[0] && <mesh
+                    geometry={(shape[0] as THREE.Mesh).geometry}
+                    visible={visible}
+                    position={pos}
+                    quaternion={quat}
+                >
+                    <StonesMaterial color={toothStone.color}/>
+                </mesh>}
+            </>
         )
     })
     return <ICSSXstone visible={toothStone.shape !== undefined} type={toothStone.shape}/>

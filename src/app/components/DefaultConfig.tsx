@@ -2,7 +2,7 @@ import {Accordion, AccordionDetails, AccordionSummary} from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import DefaultConfigButton from "@/app/components/DefaultConfigButton";
 import {useTeethStore} from "@/app/stores/teeth";
-import State from "@/app/types/State";
+import {State} from "@/app/types/State";
 import {useState} from "react";
 
 export default function DefaultConfig({teeth} : {teeth: string}) {

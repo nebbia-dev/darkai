@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import {Outlines, useFBX, useTexture} from "@react-three/drei";
 import React, {JSX, memo, useEffect, useMemo, useState} from "react";
 import {useTeethStore} from "@/app/stores/teeth";
-import State from "@/app/types/State";
+import {State} from "@/app/types/State";
 
 export default function Dentiera() {
     const fbx = useMemo(() => {

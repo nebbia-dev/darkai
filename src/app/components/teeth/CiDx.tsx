@@ -8,7 +8,7 @@ import FrameDiamond from "@/app/components/materials/FrameDiamond";
 import BarFull from "@/app/components/materials/BarFull";
 import BarDiamond from "@/app/components/materials/BarDiamond";
 import FrameFull from "@/app/components/materials/FrameFull";
-import State from "@/app/types/State";
+import {State} from "@/app/types/State";
 import * as THREE from 'three'
 import BarSmall from "@/app/components/materials/BarSmall";
 
