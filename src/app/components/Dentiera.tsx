@@ -31,6 +31,8 @@ export default function Dentiera() {
         roughnessMap: 'textures/dentieraBase/DefaultMaterial_Roughness_1002.webp',
         // aoMap: 'textures/dentieraBase/DefaultMaterial_Mixed_AO.webp',
     });
+    props.map.colorSpace = THREE.SRGBColorSpace;
+    propsTeeth.map.colorSpace = THREE.SRGBColorSpace;
     const [hovered, setHover] = useState<string|null>(null);
     const [touch, setTouch] = useState<boolean>(false);
     const dentieraMaterial = useMemo(() => {
