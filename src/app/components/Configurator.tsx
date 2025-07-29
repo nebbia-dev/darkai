@@ -1,5 +1,5 @@
 'use client'
-import {OrbitControls, useEnvironment, useFBX} from '@react-three/drei';
+import {Instance, Instances, OrbitControls, useEnvironment, useFBX} from '@react-three/drei';
 import type { OrbitControls as OrbitControlsImpl } from 'three-stdlib';
 import Dentiera from "@/app/components/Dentiera";
 import {useTeethStore} from "@/app/stores/teeth";
@@ -24,7 +24,7 @@ import CiSx from "@/app/components/teeth/CiSx";
 import CiSxStone from "@/app/components/teeth/CiSxStone";
 import {State} from "@/app/types/State";
 import * as THREE from 'three'
-import {useThree} from "@react-three/fiber";
+import {useFrame, useThree} from "@react-three/fiber";
 import IlsSxStone from "@/app/components/teeth/IlsSxStone";
 import IlsDxStone from "@/app/components/teeth/IlsDxStone";
 import IcsSxStone from "@/app/components/teeth/IcsSxStone";
@@ -34,12 +34,15 @@ import IliDxStone from "@/app/components/teeth/IliDxStone";
 import IciSxStone from "@/app/components/teeth/IciSxStone";
 import IciDxStone from "@/app/components/teeth/IciDxStone";
 import FullMaterial from "@/app/components/materials/FullMaterial";
+import StonesMaterial from "@/app/components/materials/StonesMaterial";
+import {MathUtils} from "three";
 
 export default function Configurator() {
     const envMap = useEnvironment({
         files: "envMaps/HDR_Light_Studio_Free_HDRI_Design_13.exr"
     })
-    const geometry = useTeethStore((state:State) => state.teethGeometry);
+
+    // const geometry = useTeethStore((state:State) => state.teethGeometry);
     // Se voglio piazzare anche l'fbx in LoadedMaterials, verosimilmente devo usare qui uno useEffect
     const teeth = useMemo((): FBX => {
         const fbx = useFBX('/models/MOD_Dentiera_Completa_180_Phong_Scala_1 (1).fbx');
@@ -485,10 +488,61 @@ export default function Configurator() {
 
     console.log('envMap');
 
+
+    // Instances prova
+    // const particles = Array.from({length: 250}, () => ({
+    //     factor: MathUtils.randInt(20, 100),
+    //     speed: MathUtils.randFloat(0.01, 0.75),
+    //     xFactor: MathUtils.randFloatSpread(40),
+    //     yFactor: MathUtils.randFloatSpread(10),
+    //     zFactor: MathUtils.randFloatSpread(10)
+    // }))
+    // function Bubbles() {
+    //     const diamond = useFBX('/models/MOD_Diamante.fbx');
+    //     return (
+    //         <Instances limit={particles.length} position={[0,0.25,0]} scale={[0.001, 0.001, 0.001]}>
+    //             <bufferGeometry>
+    //                 <bufferAttribute
+    //                     attach='attributes-position'
+    //                     array={diamond.children[0].geometry.attributes.position.array}
+    //                     count={diamond.children[0].geometry.attributes.position.array.length / 3}
+    //                     itemSize={3}
+    //                 ></bufferAttribute>
+    //                 <bufferAttribute
+    //                     attach='attributes-normal'
+    //                     array={diamond.children[0].geometry.attributes.normal.array}
+    //                     count={diamond.children[0].geometry.attributes.normal.array.length / 3}
+    //                     itemSize={3}
+    //                 ></bufferAttribute>
+    //                 <bufferAttribute
+    //                     attach='attributes-uv'
+    //                     array={diamond.children[0].geometry.attributes.uv.array}
+    //                     count={diamond.children[0].geometry.attributes.uv.array.length / 3}
+    //                     itemSize={3}
+    //                 ></bufferAttribute>
+    //             </bufferGeometry>
+    //             <StonesMaterial color="sapphire"/>
+    //             {particles.map((data, i) => (
+    //                 <Instance key={i} position={[
+    //                     Math.random() * 10000,
+    //                     Math.random() * 10000,
+    //                     Math.random() * 10000]} />
+    //             ))}
+    //         </Instances>
+    //     )
+    // }
+
     return (
         <>
-            <OrbitControls maxDistance={35} minDistance={22} minPolarAngle={Math.PI / 3}
-                           maxPolarAngle={Math.PI - Math.PI / 3} ref={orbitRef}/>
+            <OrbitControls
+                maxDistance={35}
+                minDistance={22}
+                minPolarAngle={Math.PI / 3}
+                maxPolarAngle={Math.PI - Math.PI / 3}
+                ref={orbitRef}/>
+
+
+            {savedEnvMap && <Bubbles/>}
             {savedEnvMap && <LoadedMaterials/>}
             {savedTeeth && savedEnvMap &&
                 <>
