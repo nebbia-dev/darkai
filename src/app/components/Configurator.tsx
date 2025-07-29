@@ -24,7 +24,7 @@ import CiSx from "@/app/components/teeth/CiSx";
 import CiSxStone from "@/app/components/teeth/CiSxStone";
 import {State} from "@/app/types/State";
 import * as THREE from 'three'
-import {useFrame, useThree} from "@react-three/fiber";
+import {useThree} from "@react-three/fiber";
 import IlsSxStone from "@/app/components/teeth/IlsSxStone";
 import IlsDxStone from "@/app/components/teeth/IlsDxStone";
 import IcsSxStone from "@/app/components/teeth/IcsSxStone";
@@ -33,7 +33,6 @@ import IliSxStone from "@/app/components/teeth/IliSxStone";
 import IliDxStone from "@/app/components/teeth/IliDxStone";
 import IciSxStone from "@/app/components/teeth/IciSxStone";
 import IciDxStone from "@/app/components/teeth/IciDxStone";
-import FullMaterial from "@/app/components/materials/FullMaterial";
 import StonesMaterial from "@/app/components/materials/StonesMaterial";
 import {MathUtils} from "three";
 
@@ -47,7 +46,7 @@ export default function Configurator() {
     const teeth = useMemo((): FBX => {
         const fbx = useFBX('/models/MOD_Dentiera_Completa_180_Phong_Scala_1 (1).fbx');
         const fulls = useFBX('/models/MOD_Full_Capsula (2).fbx');
-        const stones = useFBX('/models/MOD_Stone (2).fbx');
+        const stones = useFBX('/models/MOD_Stone (3).fbx');
         const frames = useFBX('/models/MOD_Frame_Capsula (2).fbx');
         const bigBar  = useFBX('/models/MOD_Full_Frame_Capsula.fbx');
         const bars = useFBX('/models/MOD_Bars_Capsula (2).fbx');
@@ -542,7 +541,7 @@ export default function Configurator() {
                 ref={orbitRef}/>
 
 
-            {savedEnvMap && <Bubbles/>}
+            {/*{savedEnvMap && <Bubbles/>}*/}
             {savedEnvMap && <LoadedMaterials/>}
             {savedTeeth && savedEnvMap &&
                 <>
