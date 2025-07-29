@@ -48,8 +48,7 @@ export default function Configurator() {
         const frames = useFBX('/models/MOD_Frame_Capsula (2).fbx');
         const bigBar  = useFBX('/models/MOD_Full_Frame_Capsula.fbx');
         const bars = useFBX('/models/MOD_Bars_Capsula (2).fbx');
-        console.log('FULLS: ', fulls)
-        if(!geometry.cisx){
+
             stones.children[0].children[0].children[1].matrix.makeScale(stones.children[0].children[0].children[1].scale.x/10, stones.children[0].children[0].children[1].scale.y/10, stones.children[0].children[0].children[1].scale.z/10);
             (stones.children[0].children[0].children[1] as THREE.Mesh).geometry.applyMatrix4(stones.children[0].children[0].children[1].matrix);
 
@@ -85,8 +84,6 @@ export default function Configurator() {
 
             stones.children[3].children[2].children[1].matrix.makeScale(stones.children[3].children[2].children[1].scale.x/10, stones.children[3].children[2].children[1].scale.y/10, stones.children[3].children[2].children[1].scale.z/10);
             (stones.children[3].children[2].children[1] as THREE.Mesh).geometry.applyMatrix4(stones.children[3].children[2].children[1].matrix);
-
-        }
 
         return {
             // INCISIVI CENTRALI
