@@ -4,13 +4,15 @@ import FullMaterial from "@/app/components/materials/FullMaterial";
 import {useTeethStore} from "@/app/stores/teeth";
 import BaseFullDiamond from "@/app/components/materials/BaseFullDiamond";
 import FullDiamond from "@/app/components/materials/FullDiamond";
-import State from "@/app/types/State";
+import {State} from "@/app/types/State";
 import * as THREE from "three";
+import FrameFull from "@/app/components/materials/FrameFull";
 
 export default function IcsSx() {
     const toothGeometry = useTeethStore((state: State) => state.teethGeometry.icssx);
     const toothJewelType = useTeethStore((state: State) => state.teethJewelType.icssx);
     const toothMaterial = useTeethStore((state: State) => state.teethMaterial.icssx);
+    const toothPave = useTeethStore((state: State) => state.teethPave.icssx);
     const toothVisibility = useTeethStore((state: State) => state.teethVisibility.icssx);
 
     const ICSSX = memo(({visible, type, mat} : {visible: boolean, type: string, mat: string}): JSX.Element => {
@@ -23,7 +25,23 @@ export default function IcsSx() {
                 break;
             case 'fullDiamond':
                 geometry = [toothGeometry.fullDiamond.base, toothGeometry.fullDiamond.full];
-                material = [<BaseFullDiamond color={toothMaterial}/>, <FullDiamond color={toothMaterial}/>]
+                material = [<BaseFullDiamond color={toothMaterial}/>, <FullDiamond color={toothMaterial} pave={toothPave}/>]
+                break;
+            case 'frame':
+                geometry = [toothGeometry.frame.full];
+                material = [<FrameFull color={toothMaterial}/>]
+                break;
+            case 'frameDiamond':
+                geometry = [toothGeometry.frame.diamond.base, toothGeometry.frame.diamond.full];
+                material = [<FullMaterial color={toothMaterial}/>, <FullDiamond color={toothMaterial} pave={toothPave}/>]
+                break;
+            case 'bar':
+                geometry = [];
+                material = []
+                break;
+            case 'barDiamond':
+                geometry = [];
+                material = []
                 break;
             default:
                 geometry = [toothGeometry.full];

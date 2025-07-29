@@ -5,22 +5,27 @@ import {Redo} from "@/app/components/icons/Redo";
 import {Copy} from "@/app/components/icons/Copy";
 import elabToothName from "@/app/helpers/elabToothName";
 import {useState} from "react";
-import State from "@/app/types/State";
+import {ResetCamera} from "@/app/components/icons/ResetCamera";
+import {State, Stone} from "@/app/types/State";
 
 export default function ActionBar({ui} : {ui: boolean}) {
     const current = useTeethStore((state:State) => state.currentHistory);
     const history = useTeethStore((state:State) => state.history);
-    const activeTooth: string|null = useTeethStore((state:State) => state.currentTooth);
-    const jewelType: string|null = useTeethStore((state:State) => activeTooth !== null ? state.teethJewelType[activeTooth] : null);
-    const material: string|null = useTeethStore((state:State) => activeTooth !== null ? state.teethMaterial[activeTooth] : null);
-    const stones: string|null = useTeethStore((state:State) => activeTooth !== null ? state.teethStones[activeTooth] : null);
+    const activeTooth: string|undefined = useTeethStore((state:State) => state.currentTooth);
+    const jewelType: string|undefined = useTeethStore((state:State) => activeTooth !== undefined ? state.teethJewelType[activeTooth] : undefined);
+    const material: string|undefined = useTeethStore((state:State) => activeTooth !== undefined ? state.teethMaterial[activeTooth] : undefined);
+    const stones: Stone|undefined = useTeethStore((state:State) => activeTooth !== undefined ? state.teethStones[activeTooth] : undefined);
     const availableTypes = useTeethStore((state:State) => state.teethTypeOptions);
-    const visible: boolean|null = useTeethStore((state:State) => activeTooth !== null ? state.teethVisibility[activeTooth] : null);
+    const visible: boolean|undefined = useTeethStore((state:State) => activeTooth !== undefined ? state.teethVisibility[activeTooth] : undefined);
     const copy = useTeethStore((state:State) => state.setCopy);
     const reset = useTeethStore((state:State) => state.reset);
     const undo = useTeethStore((state:State) => state.undo);
     const redo = useTeethStore((state:State) => state.redo);
     const [showCopy, setShowCopy] = useState<boolean>(false);
+    const doResetControls = useTeethStore((state:State) => state.setResetControls);
+    function resetControls() {
+        doResetControls(true);
+    }
 
     function doUndo() {
         if(current > 1) {
@@ -42,14 +47,15 @@ export default function ActionBar({ui} : {ui: boolean}) {
     return(
         <div className="relative z-30">
             <div
-                className={`absolute flex items-center justify-center gap-4 ${ui ? 'bottom-5' : 'bottom-30'} left-[50%] translate-x-[-50%] w-2/4`}>
+                className={`absolute flex items-center justify-center gap-4 ${ui ? 'bottom-5' : 'bottom-20'} left-[50%] translate-x-[-50%] w-2/4`}>
                 <button onClick={doUndo} className="rounded-full border p-2 cursor-pointer bg-gray-50/50">
                     <Undo className={`${ui ? 'w-6 h-6' : 'w-8 h-8'}`}/>
                 </button>
                 <button onClick={doRedo} className="rounded-full border p-2 cursor-pointer bg-gray-50/50">
                     <Redo className={`${ui ? 'w-6 h-6' : 'w-8 h-8'}`}/>
                 </button>
-                <div className={`${visible && material !== 'base' && ui ? 'flex' : 'hidden'} relative items-center justify-center col-start-1 col-end-1 row-start-1 row-end-1`}>
+                <div
+                    className={`${visible && material !== 'base' && ui ? 'flex' : 'hidden'} relative items-center justify-center col-start-1 col-end-1 row-start-1 row-end-1`}>
                     <button className="bg-gray-50/50 rounded-full border p-2 cursor-pointer w-fit"
                             onClick={() => setShowCopy((prev) => !prev)}>
                         <Copy className={`${ui ? 'w-6 h-6' : 'w-8 h-8'}`}/>
@@ -60,9 +66,11 @@ export default function ActionBar({ui} : {ui: boolean}) {
                         <ul className="py-2 flex overflow-x-scroll">
                             {jewelType && availableTypes[jewelType] && availableTypes[(stones ? 'stones' : jewelType)].map((data, i) => {
                                 const opt = elabToothName(data, false);
-                                if(activeTooth && data !== activeTooth) return (
-                                    <li className="hover:bg-stone-200 hover:rounded px-4 py-1" key={data + activeTooth + i}>
-                                        <button className="cursor-pointer whitespace-nowrap" onClick={() => setCopy(data, activeTooth)}>
+                                if (activeTooth && data !== activeTooth) return (
+                                    <li className="hover:bg-stone-200 hover:rounded px-4 py-1"
+                                        key={data + activeTooth + i}>
+                                        <button className="cursor-pointer whitespace-nowrap"
+                                                onClick={() => setCopy(data, activeTooth as string)}>
                                             {opt}
                                         </button>
                                     </li>
@@ -72,6 +80,9 @@ export default function ActionBar({ui} : {ui: boolean}) {
                         </ul>
                     </div>
                 </div>
+                <button onClick={resetControls} className="rounded-full border p-2 cursor-pointer bg-gray-50/50">
+                    <ResetCamera className={`${ui ? 'w-6 h-6' : 'w-8 h-8'}`}/>
+                </button>
                 <button onClick={reset} className="bg-gray-50/50 rounded-full border p-2 cursor-pointer">
                     <Reset className={`${ui ? 'w-6 h-6' : 'w-8 h-8'}`}/>
                 </button>

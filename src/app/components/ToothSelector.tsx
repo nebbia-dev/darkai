@@ -7,7 +7,7 @@ import StoneSelectorPill from "@/app/components/StoneSelectorPill";
 import {Shape} from "@/app/components/icons/Shape";
 import {Metal} from "@/app/components/icons/Metal";
 import {Gem} from "@/app/components/icons/Gem";
-import State from "@/app/types/State";
+import {State} from "@/app/types/State";
 interface TabPanelProps {
     children?: ReactNode;
     index: number;
@@ -16,7 +16,7 @@ interface TabPanelProps {
 export default function ToothSelector({tooth} : {tooth: string}) {
     const [value, setValue] = useState<number>(0);
     const activeTooth = useTeethStore((state: State) => state.currentTooth);
-
+    const pave = useTeethStore((state: State) => state.teethPave[tooth]);
     const jewelType = useTeethStore((state: State) => state.teethJewelType[tooth]);
     const material = useTeethStore((state: State) => state.teethMaterial[tooth]);
     const stones = useTeethStore((state: State) => state.teethStones[tooth]);
@@ -29,21 +29,21 @@ export default function ToothSelector({tooth} : {tooth: string}) {
 
 
     function selectType(type: string) {
-        setActiveDefault(null, null);
+        setActiveDefault(undefined, undefined);
         changeJewelType(tooth, type);
     }
 
     function selectMaterial(material: string) {
-        setActiveDefault(null, null);
+        setActiveDefault(undefined, undefined);
         changeMaterial(tooth, material);
     }
 
     function selectDiamond() {
-        toggleDiamond(tooth);
+        toggleDiamond(tooth, pave);
     }
 
     function selectStone(stone: string) {
-        changeStone(tooth, stone);
+        changeStone(tooth, stone, 'prev');
     }
     const changeTab = (event: SyntheticEvent, newValue: number) => {
         setValue(newValue);
@@ -226,15 +226,15 @@ export default function ToothSelector({tooth} : {tooth: string}) {
                         {(tooth === 'csdx' || tooth === 'cssx' || tooth === 'cidx' || tooth === 'cisx') &&
                             <>
                                 <StoneSelectorPill tooth={tooth} stone="sapphire"
-                                                   active={visible && (stones === 'sapphire')}
+                                                   active={visible && (stones.color === 'sapphire')}
                                                    onclick={() => selectStone('sapphire')}/>
-                                <StoneSelectorPill tooth={tooth} stone="ruby" active={visible && (stones === 'ruby')}
+                                <StoneSelectorPill tooth={tooth} stone="ruby" active={visible && (stones.color === 'ruby')}
                                                    onclick={() => selectStone('ruby')}/>
                                 <StoneSelectorPill tooth={tooth} stone="emerald"
-                                                   active={visible && (stones === 'emerald')}
+                                                   active={visible && (stones.color === 'emerald')}
                                                    onclick={() => selectStone('emerald')}/>
                                 <StoneSelectorPill tooth={tooth} stone="amethyst"
-                                                   active={visible && (stones === 'amethyst')}
+                                                   active={visible && (stones.color === 'amethyst')}
                                                    onclick={() => selectStone('amethyst')}/>
                             </>
                         }

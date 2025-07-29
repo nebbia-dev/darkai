@@ -1,5 +1,5 @@
 import {useTeethStore} from "@/app/stores/teeth";
-import State from "@/app/types/State";
+import {State} from "@/app/types/State";
 
 export default function DefaultConfigSelector({teeth, color} : {teeth: string, color: string}) {
     const setDefaultConfig = useTeethStore((state: State) => state.setDefaultConfig);

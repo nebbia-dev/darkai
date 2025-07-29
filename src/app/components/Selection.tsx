@@ -1,11 +1,13 @@
 import ToothConfig from "@/app/components/ToothConfig";
-import {ReactNode, SyntheticEvent} from "react";
+import {ReactNode, SyntheticEvent, useEffect, useRef, useState} from "react";
 import {Box, Tab, Tabs} from "@mui/material";
 import DefaultConfig from "@/app/components/DefaultConfig";
 import ToothSelector from "@/app/components/ToothSelector";
 import DefaultSelector from "@/app/components/DefaultSelector";
 import {useTeethStore} from "@/app/stores/teeth";
-import State from "@/app/types/State";
+import {State} from "@/app/types/State";
+import elabToothName from "@/app/helpers/elabToothName";
+import Link from 'next/link';
 
 interface TabPanelProps {
     children?: ReactNode;
@@ -14,13 +16,46 @@ interface TabPanelProps {
 }
 
 export default function Selection({ui} : {ui:boolean}) {
+    const total = useTeethStore((state:State) => state.total);
+    const totalPreciousness = useTeethStore((state:State) => state.totalPreciousness);
+    const calcPreciousness = useTeethStore((state:State) => state.calcPreciousness);
+    const visibleTeeth = useTeethStore((state:State) => state.teethVisibility);
+    const jewelType = useTeethStore((state: State) => state.teethJewelType);
+    const material = useTeethStore((state: State) => state.teethMaterial);
+    const stones = useTeethStore((state: State) => state.teethStones);
+    const teethPrices = useTeethStore((state:State) => state.teethPrices);
     const activeTooth = useTeethStore((state: State) => state.currentTooth);
     const activeTab = useTeethStore((state: State) => state.activeTab);
     const setActiveTab = useTeethStore((state: State) => state.setActiveTab);
+    const recap = useTeethStore((state:State) => state.recap);
+    const setRecap = useTeethStore((state:State) => state.setRecap);
+    const takeScreenshot = useTeethStore((state:State) => state.setIsScreenshotNeeded);
+
+    const [gold, setGold] = useState<string>('14k');
+    const [diamond, setDiamond] = useState<string>('mois');
+
+    const accordionContainer = useRef<null|HTMLDivElement>(null);
+    const scrollPosition = useRef(null);
+    function download() {
+        takeScreenshot(true);
+    }
+    function checkDiamonds() {
+        for(const tooth of Object.keys(jewelType)) {
+            if(jewelType[tooth].includes('Diamond')) {
+                console.log('Me diamond!!')
+                return true;
+            }
+        }
+        console.log('Me NOT diamond!!')
+        return false;
+    }
+    function showRecap() {
+        setRecap(true);
+        calcPreciousness(gold, diamond);
+    }
     const changeTab = (event: SyntheticEvent, newValue: number) => {
         setActiveTab(newValue);
     };
-
     function CustomTabPanel(props: TabPanelProps) {
         const {children, value, index, ...other} = props;
 
@@ -39,25 +74,32 @@ export default function Selection({ui} : {ui:boolean}) {
         );
     }
 
+    useEffect(() => {
+        calcPreciousness(gold, diamond);
+    }, [gold, diamond]);
+
     return (
         <>
             {!ui
                 ? <div className="border-l-1 border-gray-400">
-                    <div>
-                        <Tabs
-                            value={activeTab} onChange={changeTab} aria-label="tabs" sx={{
-                            width: 1,
-                            '& .MuiTabs-indicator': {top: 0, backgroundColor: '#030712', height: '0.2rem'},
-                            borderBottom: '1px solid #9ca3af',
-                            '& .Mui-selected': {color: '#030712 !important'}
-                        }}>
-                            <Tab label="DEFAULT" sx={{width: 0.5, maxWidth: 1}}/>
-                            <Tab label="CUSTOM" sx={{width: 0.5, maxWidth: 1}}/>
-                        </Tabs>
-                    </div>
-                    <CustomTabPanel value={activeTab} index={0}>
+                    {!recap
+                        ?
+                        <>
+                            <div>
+                                <Tabs
+                                    value={activeTab} onChange={changeTab} aria-label="tabs" sx={{
+                                    width: 1,
+                                    '& .MuiTabs-indicator': {top: 0, backgroundColor: '#030712', height: '0.2rem'},
+                                    borderBottom: '1px solid #9ca3af',
+                                    '& .Mui-selected': {color: '#030712 !important'}
+                                }}>
+                                    <Tab label="DEFAULT" sx={{width: 0.5, maxWidth: 1}}/>
+                                    <Tab label="CUSTOM" sx={{width: 0.5, maxWidth: 1}}/>
+                                </Tabs>
+                            </div>
+                            <CustomTabPanel value={activeTab} index={0}>
                         <div
-                            className="w-full h-[calc(100vh-54px-48px-0.2rem)] flex flex-col align-center justify-start text-center bg-gray-50 my-auto rounded text-black">
+                            className="w-full h-[calc(100vh-54px-48px-0.2rem-15vh)] flex flex-col align-center justify-start text-center bg-gray-50 my-auto rounded text-black">
                             <div className="overflow-y-auto">
                                 <DefaultConfig teeth="full"/>
                                 <DefaultConfig teeth="bar"/>
@@ -67,27 +109,120 @@ export default function Selection({ui} : {ui:boolean}) {
                             </div>
                         </div>
                     </CustomTabPanel>
-                    <CustomTabPanel value={activeTab} index={1}>
-                        <div
-                            className="w-full h-[calc(100vh-54px-48px-0.2rem)] flex flex-col align-center justify-start text-center bg-gray-50 my-auto rounded text-black">
-                            <div className="overflow-y-auto">
-                                {/*DENTI SUPERIORI*/}
-                                <ToothConfig tooth='icsdx'/>
-                                <ToothConfig tooth='icssx'/>
-                                <ToothConfig tooth='ilsdx'/>
-                                <ToothConfig tooth='ilssx'/>
-                                <ToothConfig tooth='csdx'/>
-                                <ToothConfig tooth='cssx'/>
-                                {/*DENTI INFERIORI*/}
-                                <ToothConfig tooth='icidx'/>
-                                <ToothConfig tooth='icisx'/>
-                                <ToothConfig tooth='ilidx'/>
-                                <ToothConfig tooth='ilisx'/>
-                                <ToothConfig tooth='cidx'/>
-                                <ToothConfig tooth='cisx'/>
+                            <CustomTabPanel value={activeTab} index={1}>
+                                <div
+                                    className="w-full h-[calc(100vh-54px-48px-0.2rem-15vh)] flex flex-col align-center justify-start text-center bg-gray-50 my-auto rounded text-black">
+                                    <div className="overflow-y-auto" ref={accordionContainer}>
+                                        {/*DENTI SUPERIORI*/}
+                                        {(activeTooth === 'icsdx' || visibleTeeth.icsdx) &&
+                                            <ToothConfig tooth='icsdx' ref={accordionContainer} position={scrollPosition}/>}
+                                        {(activeTooth === 'icssx' || visibleTeeth.icssx) &&
+                                            <ToothConfig tooth='icssx' ref={accordionContainer} position={scrollPosition}/>}
+                                        {(activeTooth === 'ilsdx' || visibleTeeth.ilsdx) &&
+                                            <ToothConfig tooth='ilsdx' ref={accordionContainer} position={scrollPosition}/>}
+                                        {(activeTooth === 'ilssx' || visibleTeeth.ilssx) &&
+                                            <ToothConfig tooth='ilssx' ref={accordionContainer} position={scrollPosition}/>}
+                                        {(activeTooth === 'csdx' || visibleTeeth.csdx) &&
+                                            <ToothConfig tooth='csdx' ref={accordionContainer} position={scrollPosition}/>}
+                                        {(activeTooth === 'cssx' || visibleTeeth.cssx) &&
+                                            <ToothConfig tooth='cssx' ref={accordionContainer} position={scrollPosition}/>}
+                                        {/*DENTI INFERIORI*/}
+                                        {(activeTooth === 'icidx' || visibleTeeth.icidx) &&
+                                            <ToothConfig tooth='icidx' ref={accordionContainer} position={scrollPosition}/>}
+                                        {(activeTooth === 'icisx' || visibleTeeth.icisx) &&
+                                            <ToothConfig tooth='icisx' ref={accordionContainer} position={scrollPosition}/>}
+                                        {(activeTooth === 'ilidx' || visibleTeeth.ilidx) &&
+                                            <ToothConfig tooth='ilidx' ref={accordionContainer} position={scrollPosition}/>}
+                                        {(activeTooth === 'ilisx' || visibleTeeth.ilisx) &&
+                                            <ToothConfig tooth='ilisx' ref={accordionContainer} position={scrollPosition}/>}
+                                        {(activeTooth === 'cidx' || visibleTeeth.cidx) &&
+                                            <ToothConfig tooth='cidx' ref={accordionContainer} position={scrollPosition}/>}
+                                        {(activeTooth === 'cisx' || visibleTeeth.cisx) &&
+                                            <ToothConfig tooth='cisx' ref={accordionContainer} position={scrollPosition}/>}
+                                    </div>
+                                </div>
+                            </CustomTabPanel>
+                            <div className="w-full h-[15vh] bg-stone-200">
+                                <div className="h-full flex items-center justify-between w-[90%] mx-auto">
+                                    <p>{total !== 0 && <span>Starting from {total}€</span>}</p>
+                                    <button onClick={() => showRecap()} className="bg-gray-950 py-2 px-4 rounded-full text-gray-50 cursor-pointer">Continue &rarr;</button>
+                                </div>
+                            </div>
+                        </>
+                        : <div className="h-[calc(100vh-54px)] flex flex-col w-[75%] mx-auto">
+                            <div className="h-[calc(100%-15vh-7.5vh)] overflow-y-auto mt-[48px] w-full mx-auto">
+                                {
+                                    Object.keys(visibleTeeth).map((tooth, i) => {
+                                        if (!visibleTeeth[tooth]) return null
+                                        return (
+                                            <div key={i} className="flex flex-col mb-4">
+                                                <span className="w-full py-1 px-3 bg-stone-200 mb-1">{elabToothName(tooth, false)}</span>
+                                                <ul className="ml-4">
+                                                    <li>Jewel type: {jewelType[tooth].includes('Diamond') ? jewelType[tooth].split('D')[0][0].toUpperCase() + jewelType[tooth].split('D')[0].slice(1) + ' with diamonds' : jewelType[tooth][0].toUpperCase() + jewelType[tooth].slice(1)}</li>
+                                                    <li>Material: {material[tooth][0].toUpperCase() + material[tooth].slice(1)}</li>
+                                                    {(stones[tooth].shape && stones[tooth].color) && <li>Gem: {stones[tooth].color?.[0].toUpperCase() + stones[tooth].color?.slice(1)}, {stones[tooth].shape} cut</li>}
+                                                </ul>
+                                                <span className="w-full text-right py-1 px-3 mt-2 border-t-1">{teethPrices[tooth]}€</span>
+                                            </div>
+                                        )
+                                    })
+                                }
+                                <div className="mb-4">
+                                    <span className="w-full py-1 px-3 bg-stone-200 mb-1 block">Gold carats</span>
+                                    <div className="ml-4">
+                                        <label htmlFor="18k" className="flex items-center gap-2">
+                                            <input type="radio" id="18k" name="carats" checked={gold === '18k'}
+                                                   value="18k" onChange={(e) => setGold(e.target.value)}/>
+                                            18K
+                                        </label>
+                                        <label htmlFor="14k" className="flex items-center gap-2">
+                                            <input type="radio" id="14k" name="carats" checked={gold === '14k'}
+                                                   value="14k" onChange={(e) => setGold(e.target.value)}/>
+                                            14K
+                                        </label>
+                                    </div>
+                                </div>
+                                {checkDiamonds() &&
+                                    <div>
+                                        <span className="w-full py-1 px-3 bg-stone-200 mb-1 block">Diamonds type</span>
+                                        <div className="ml-4">
+                                            <label htmlFor="natural" className="flex items-center gap-2">
+                                                <input type="radio" id="natural" name="diamonds" checked={diamond === 'natural'}
+                                                       value="natural" onChange={(e) => setDiamond(e.target.value)}/>
+                                                Natural
+                                            </label>
+                                            <label htmlFor="lab" className="flex items-center gap-2">
+                                                <input type="radio" id="lab" name="diamonds" checked={diamond === 'lab'}
+                                                       value="lab" onChange={(e) => setDiamond(e.target.value)}/>
+                                                Lab
+                                            </label>
+                                            <label htmlFor="mois" className="flex items-center gap-2">
+                                                <input type="radio" id="mois" name="diamonds" checked={diamond === 'mois'}
+                                                       value="mois" onChange={(e) => setDiamond(e.target.value)}/>
+                                                Moissanite
+                                            </label>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                            <div className="flex flex-col items-center">
+                                <div className="flex justify-end w-full px-3 h-[7.5vh] items-center bg-stone-200 text-right mt-4">Total: {total + totalPreciousness}€</div>
+                                <div className="flex items-center justify-between w-full h-[15vh] mx-auto">
+                                    <button onClick={() => setRecap(false)}
+                                            className="bg-gray-50 py-2 px-4 rounded-full text-gray-950 border cursor-pointer">&larr; Back
+                                    </button>
+                                    <div className="flex gap-4">
+                                        <button onClick={download}
+                                                className="bg-gray-50 py-2 px-4 rounded-full text-gray-950 border cursor-pointer">Save
+                                        </button>
+                                        <Link href="/checkout/upload"
+                                                className="bg-gray-950 py-2 px-4 rounded-full text-gray-50 cursor-pointer">Proceed &rarr;
+                                        </Link>
+                                </div>
+                                </div>
                             </div>
                         </div>
-                    </CustomTabPanel>
+                    }
                 </div>
                 : <div className="w-full h-full relative">
                     <>

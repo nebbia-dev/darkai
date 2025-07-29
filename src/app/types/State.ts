@@ -31,6 +31,22 @@ interface JewelTypes {
     cidx: string,
     cisx: string,
 }
+
+interface Prices {
+    [key: string]: number
+    icsdx: number,
+    icssx: number,
+    icidx: number,
+    icisx: number,
+    ilsdx: number,
+    ilssx: number,
+    ilidx: number,
+    ilisx: number,
+    csdx: number,
+    cssx: number,
+    cidx: number,
+    cisx: number,
+}
 interface Visibility {
     [key: string]: boolean
     icsdx: boolean,
@@ -46,31 +62,79 @@ interface Visibility {
     cidx: boolean,
     cisx: boolean,
 }
+export interface Stone {
+    shape: string | undefined,
+    color: string | undefined
+}
 interface Stones {
-    [key: string]: string | null
-    csdx: string | null,
-    cssx: string | null,
-    cidx: string | null,
-    cisx: string | null,
+    [key: string]: Stone
+    icsdx: Stone,
+    icssx: Stone,
+    icidx: Stone,
+    icisx: Stone,
+    ilsdx: Stone,
+    ilssx: Stone,
+    ilidx: Stone,
+    ilisx: Stone,
+    csdx: Stone,
+    cssx: Stone,
+    cidx: Stone,
+    cisx: Stone,
 }
 interface History {
     material: Materials,
     stones: Stones,
     type: JewelTypes,
-    visible: Visibility
+    visible: Visibility,
+    prices: Prices
+}
+export interface BasePrices {
+    [key: string]: any,
+    barDiamond: number | null,
+    barGold: number | null,
+    barRose: number | null,
+    barWhite: number | null,
+    bigBarDiamond: number | null,
+    bigBarGold: number | null,
+    bigBarRose: number | null,
+    bigBarWhite: number | null,
+    created_at: Date,
+    frameDiamond: number | null,
+    frameGold: number | null,
+    frameRose: number | null,
+    frameWhite: number | null,
+    fullDiamond: number | null,
+    fullGold: number | null,
+    fullRose: number | null,
+    fullWhite: number | null,
+    id: number,
+    tooth: string
 }
 
-export default interface State {
-    envMap: Texture | CubeTexture | null,
+export interface AddonsPrices {
+    [key: string]: any,
+    marquiseShape: number | null,
+    tearShape: number | null,
+    diamondShape: number | null,
+    heartShape: number | null,
+    circleShape: number | null,
+    created_at: Date,
+    id: number,
+    stone: string
+}
+
+export interface State {
+    envMap: Texture | CubeTexture | undefined,
     teethGeometry: FBX,
     teethMaterial: Materials,
     teethJewelType: JewelTypes,
     teethStones: Stones,
     teethVisibility: Visibility,
+    teethPrices: Prices,
     history: History[][],
     currentHistory: number,
-    activeDefault: string | null,
-    currentTooth: string| null,
+    activeDefault: string | undefined,
+    currentTooth: string | undefined,
     ui: boolean,
     teethTypeOptions: {
         [key: string]: string[]
@@ -82,23 +146,53 @@ export default interface State {
         frameDiamond: string[],
         stones: string[]
     },
+    teethPave: {
+        [key: string]: 'diamond' | 'emerald' | 'sapphire' | 'ruby',
+        icsdx: 'diamond' | 'emerald' | 'sapphire' | 'ruby',
+        icssx: 'diamond' | 'emerald' | 'sapphire' | 'ruby',
+        icidx: 'diamond' | 'emerald' | 'sapphire' | 'ruby',
+        icisx: 'diamond' | 'emerald' | 'sapphire' | 'ruby',
+        ilsdx: 'diamond' | 'emerald' | 'sapphire' | 'ruby',
+        ilssx: 'diamond' | 'emerald' | 'sapphire' | 'ruby',
+        ilidx: 'diamond' | 'emerald' | 'sapphire' | 'ruby',
+        ilisx: 'diamond' | 'emerald' | 'sapphire' | 'ruby',
+        csdx: 'diamond' | 'emerald' | 'sapphire' | 'ruby',
+        cssx: 'diamond' | 'emerald' | 'sapphire' | 'ruby',
+        cidx: 'diamond' | 'emerald' | 'sapphire' | 'ruby',
+        cisx: 'diamond' | 'emerald' | 'sapphire' | 'ruby',
+    },
     activeTab: number,
     loaded: boolean,
+    prices: BasePrices[] | undefined,
+    pricesAdds: AddonsPrices[] | undefined,
+    total: number,
+    isScreenshotNeeded: boolean | undefined,
+    resetControls: boolean | undefined,
+    recap: boolean,
+    totalPreciousness: number,
+    calcPreciousness: (gold:string, diamond:string) => void,
+    setRecap: (bool:boolean) => void,
+    setIsScreenshotNeeded: (value:boolean|undefined) => void,
+    setResetControls: (value:boolean|undefined) => void,
     setActiveTab: (value:number) => void,
     setEnvMap: (em: Texture | CubeTexture) => void,
     setGeometry: (fbx:FBX) => void,
     setMaterial: (tooth:string, color:string) => void,
     setType: (tooth:string, type:string) => void,
-    setDiamond: (tooth:string) => void,
-    setStone: (tooth:string, stone:string) => void,
+    setDiamond: (tooth:string, pave:string) => void,
+    setStone: (tooth:string, shape:string, color:string) => void,
     setActiveTooth: (tooth:string) => void,
     setDefaultConfig: (config:string, color:string) => void,
     setTooth: (tooth:string, type:string, color:string) => void,
-    setActiveDefault: (active:string|null, color:string|null) => void,
+    resetTooth: (tooth:string) => void,
+    setActiveDefault: (active:string|undefined, color:string|undefined) => void,
     setCopy: (copied:string, original:string) =>void,
     setLoaded: (bool:boolean) => void,
     setUI: (bool:boolean) => void,
+    fetchPrices: () => void,
     undo: () => void,
     redo: () => void,
-    reset: () => void
+    reset: () => void,
+    calcTotal: (state:State) => void,
+    setHistory: (state:State) => void
 }

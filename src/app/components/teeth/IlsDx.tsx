@@ -6,13 +6,15 @@ import BaseFullDiamond from "@/app/components/materials/BaseFullDiamond";
 import FullDiamond from "@/app/components/materials/FullDiamond";
 import BarDiamond from "@/app/components/materials/BarDiamond";
 import BarSmall from "@/app/components/materials/BarSmall";
-import State from "@/app/types/State";
+import {State} from "@/app/types/State";
 import * as THREE from "three";
+import FrameFull from "@/app/components/materials/FrameFull";
 
 export default function IlsDx() {
     const toothGeometry = useTeethStore((state: State) => state.teethGeometry.ilsdx);
     const toothJewelType = useTeethStore((state: State) => state.teethJewelType.ilsdx);
     const toothMaterial = useTeethStore((state: State) => state.teethMaterial.ilsdx);
+    const toothPave = useTeethStore((state: State) => state.teethPave.ilsdx);
     const toothVisibility = useTeethStore((state: State) => state.teethVisibility.ilsdx);
 
     const ILSDX = memo(({visible, type, mat} : {visible: boolean, type: string, mat: string}): JSX.Element => {
@@ -25,15 +27,23 @@ export default function IlsDx() {
                 break;
             case 'fullDiamond':
                 geometry = [toothGeometry.fullDiamond.base, toothGeometry.fullDiamond.full];
-                material = [<BaseFullDiamond color={toothMaterial}/>, <FullDiamond color={toothMaterial}/>]
+                material = [<BaseFullDiamond color={toothMaterial}/>, <FullDiamond color={toothMaterial} pave={toothPave}/>]
+                break;
+            case 'frame':
+                geometry = [toothGeometry.frame.full];
+                material = [<FrameFull color={toothMaterial}/>]
+                break;
+            case 'frameDiamond':
+                geometry = [toothGeometry.frame.diamond.base, toothGeometry.frame.diamond.full];
+                material = [<FullMaterial color={toothMaterial}/>, <FullDiamond color={toothMaterial} pave={toothPave}/>]
                 break;
             case 'bar':
-                geometry = [toothGeometry.bar.full.left, toothGeometry.bar.full.right];
-                material = [<BarSmall color={toothMaterial}/>, <BarSmall color={toothMaterial}/>]
+                geometry = [toothGeometry.bar.full];
+                material = [<BarSmall color={toothMaterial}/>]
                 break;
             case 'barDiamond':
-                geometry = [toothGeometry.bar.diamond.left.base, toothGeometry.bar.diamond.right.base, toothGeometry.bar.diamond.left.full, toothGeometry.bar.diamond.right.full];
-                material = [<BarSmall color={toothMaterial}/>, <BarSmall color={toothMaterial}/>, <BarDiamond color={toothMaterial}/>]
+                geometry = [toothGeometry.bar.diamond.base, toothGeometry.bar.diamond.full];
+                material = [<FullMaterial color={toothMaterial}/>, <FullDiamond color={toothMaterial} pave={toothPave}/>]
                 break;
             default:
                 geometry = [toothGeometry.full];
