@@ -352,6 +352,8 @@ export const useTeethStore = create<State>((set, get) => ({
                     state.teethMaterial.cisx = state.teethMaterial[tooth];
                     state.teethJewelType.cidx = type + 'Diamond';
                     state.teethJewelType.cisx = type + 'Diamond';
+                    state.teethPave.cidx = state.teethPave[tooth];
+                    state.teethPave.cisx = state.teethPave[tooth];
                     state.teethStones.cisx = {shape: undefined, color: undefined};
                     state.teethStones.cidx = {shape: undefined, color: undefined};
                     // calc total
@@ -625,13 +627,14 @@ export const useTeethStore = create<State>((set, get) => ({
                         if(state.teethPave[tooth] === pave) state.teethJewelType[tooth] = 'frame';
                         break;
                 }
-                if(tooth === 'cidx' || tooth === 'cisx') {
+
+                if((tooth === 'cidx' || tooth === 'cisx') && state.teethJewelType[tooth] === 'bigBarDiamond') {
                     state.teethPave.cidx = pave;
                     state.teethPave.cisx = pave;
-                } else if (tooth === 'icsdx' || tooth === 'icssx') {
+                } else if ((tooth === 'icsdx' || tooth === 'icssx') && state.teethJewelType[tooth] === 'barDiamond') {
                     state.teethPave.icsdx = pave;
                     state.teethPave.icssx = pave;
-                } else if (tooth === 'icidx' || tooth === 'icisx') {
+                } else if ((tooth === 'icidx' || tooth === 'icisx') && state.teethJewelType[tooth] === 'barDiamond') {
                     state.teethPave.icidx = pave;
                     state.teethPave.icisx = pave;
                 } else {
