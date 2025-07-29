@@ -48,42 +48,45 @@ export default function Configurator() {
         const frames = useFBX('/models/MOD_Frame_Capsula (2).fbx');
         const bigBar  = useFBX('/models/MOD_Full_Frame_Capsula.fbx');
         const bars = useFBX('/models/MOD_Bars_Capsula (2).fbx');
+        const hearts = useFBX('/models/MOD_Stone_Ametista.fbx');
 
-            stones.children[0].children[0].children[1].matrix.makeScale(stones.children[0].children[0].children[1].scale.x/10, stones.children[0].children[0].children[1].scale.y/10, stones.children[0].children[0].children[1].scale.z/10);
-            (stones.children[0].children[0].children[1] as THREE.Mesh).geometry.applyMatrix4(stones.children[0].children[0].children[1].matrix);
-
-            stones.children[1].children[0].children[1].matrix.makeScale(stones.children[1].children[0].children[1].scale.x/10, stones.children[1].children[0].children[1].scale.y/10, stones.children[1].children[0].children[1].scale.z/10);
-            (stones.children[1].children[0].children[1] as THREE.Mesh).geometry.applyMatrix4(stones.children[1].children[0].children[1].matrix);
-
-            stones.children[2].children[0].children[1].matrix.makeScale(stones.children[2].children[0].children[1].scale.x/10, stones.children[2].children[0].children[1].scale.y/10, stones.children[2].children[0].children[1].scale.z/10);
-            (stones.children[2].children[0].children[1] as THREE.Mesh).geometry.applyMatrix4(stones.children[2].children[0].children[1].matrix);
-
-            stones.children[3].children[0].children[1].matrix.makeScale(stones.children[3].children[0].children[1].scale.x/10, stones.children[3].children[0].children[1].scale.y/10, stones.children[3].children[0].children[1].scale.z/10);
-            (stones.children[3].children[0].children[1] as THREE.Mesh).geometry.applyMatrix4(stones.children[3].children[0].children[1].matrix);
-
-            stones.children[0].children[1].children[1].matrix.makeScale(stones.children[0].children[1].children[1].scale.x/10, stones.children[0].children[1].children[1].scale.y/10, stones.children[0].children[1].children[1].scale.z/10);
-            (stones.children[0].children[1].children[1] as THREE.Mesh).geometry.applyMatrix4(stones.children[0].children[1].children[1].matrix);
-
-            stones.children[1].children[1].children[1].matrix.makeScale(stones.children[1].children[1].children[1].scale.x/10, stones.children[1].children[1].children[1].scale.y/10, stones.children[1].children[1].children[1].scale.z/10);
-            (stones.children[1].children[1].children[1] as THREE.Mesh).geometry.applyMatrix4(stones.children[1].children[1].children[1].matrix);
-
-            stones.children[2].children[1].children[1].matrix.makeScale(stones.children[2].children[1].children[1].scale.x/10, stones.children[2].children[1].children[1].scale.y/10, stones.children[2].children[1].children[1].scale.z/10);
-            (stones.children[2].children[1].children[1] as THREE.Mesh).geometry.applyMatrix4(stones.children[2].children[1].children[1].matrix);
-
-            stones.children[3].children[1].children[1].matrix.makeScale(stones.children[3].children[1].children[1].scale.x/10, stones.children[3].children[1].children[1].scale.y/10, stones.children[3].children[1].children[1].scale.z/10);
-            (stones.children[3].children[1].children[1] as THREE.Mesh).geometry.applyMatrix4(stones.children[3].children[1].children[1].matrix);
-
-            stones.children[0].children[2].children[1].matrix.makeScale(stones.children[0].children[2].children[1].scale.x/10, stones.children[0].children[2].children[1].scale.y/10, stones.children[0].children[2].children[1].scale.z/10);
-            (stones.children[0].children[2].children[1] as THREE.Mesh).geometry.applyMatrix4(stones.children[0].children[2].children[1].matrix);
-
-            stones.children[1].children[2].children[1].matrix.makeScale(stones.children[1].children[2].children[1].scale.x/10, stones.children[1].children[2].children[1].scale.y/10, stones.children[1].children[2].children[1].scale.z/10);
-            (stones.children[1].children[2].children[1] as THREE.Mesh).geometry.applyMatrix4(stones.children[1].children[2].children[1].matrix);
-
-            stones.children[2].children[2].children[1].matrix.makeScale(stones.children[2].children[2].children[1].scale.x/10, stones.children[2].children[2].children[1].scale.y/10, stones.children[2].children[2].children[1].scale.z/10);
-            (stones.children[2].children[2].children[1] as THREE.Mesh).geometry.applyMatrix4(stones.children[2].children[2].children[1].matrix);
-
-            stones.children[3].children[2].children[1].matrix.makeScale(stones.children[3].children[2].children[1].scale.x/10, stones.children[3].children[2].children[1].scale.y/10, stones.children[3].children[2].children[1].scale.z/10);
-            (stones.children[3].children[2].children[1] as THREE.Mesh).geometry.applyMatrix4(stones.children[3].children[2].children[1].matrix);
+        // if(!geometry.cisx) {
+        //     stones.children[0].children[0].children[1].matrix.makeScale(stones.children[0].children[0].children[1].scale.x / 10, stones.children[0].children[0].children[1].scale.y / 10, stones.children[0].children[0].children[1].scale.z / 10);
+        //     (stones.children[0].children[0].children[1] as THREE.Mesh).geometry.applyMatrix4(stones.children[0].children[0].children[1].matrix);
+        //
+        //     stones.children[1].children[0].children[1].matrix.makeScale(stones.children[1].children[0].children[1].scale.x / 10, stones.children[1].children[0].children[1].scale.y / 10, stones.children[1].children[0].children[1].scale.z / 10);
+        //     (stones.children[1].children[0].children[1] as THREE.Mesh).geometry.applyMatrix4(stones.children[1].children[0].children[1].matrix);
+        //
+        //     stones.children[2].children[0].children[1].matrix.makeScale(stones.children[2].children[0].children[1].scale.x / 10, stones.children[2].children[0].children[1].scale.y / 10, stones.children[2].children[0].children[1].scale.z / 10);
+        //     (stones.children[2].children[0].children[1] as THREE.Mesh).geometry.applyMatrix4(stones.children[2].children[0].children[1].matrix);
+        //
+        //     stones.children[3].children[0].children[1].matrix.makeScale(stones.children[3].children[0].children[1].scale.x / 10, stones.children[3].children[0].children[1].scale.y / 10, stones.children[3].children[0].children[1].scale.z / 10);
+        //     (stones.children[3].children[0].children[1] as THREE.Mesh).geometry.applyMatrix4(stones.children[3].children[0].children[1].matrix);
+        //
+        //     stones.children[0].children[1].children[1].matrix.makeScale(stones.children[0].children[1].children[1].scale.x / 10, stones.children[0].children[1].children[1].scale.y / 10, stones.children[0].children[1].children[1].scale.z / 10);
+        //     (stones.children[0].children[1].children[1] as THREE.Mesh).geometry.applyMatrix4(stones.children[0].children[1].children[1].matrix);
+        //
+        //     stones.children[1].children[1].children[1].matrix.makeScale(stones.children[1].children[1].children[1].scale.x / 10, stones.children[1].children[1].children[1].scale.y / 10, stones.children[1].children[1].children[1].scale.z / 10);
+        //     (stones.children[1].children[1].children[1] as THREE.Mesh).geometry.applyMatrix4(stones.children[1].children[1].children[1].matrix);
+        //
+        //     stones.children[2].children[1].children[1].matrix.makeScale(stones.children[2].children[1].children[1].scale.x / 10, stones.children[2].children[1].children[1].scale.y / 10, stones.children[2].children[1].children[1].scale.z / 10);
+        //     (stones.children[2].children[1].children[1] as THREE.Mesh).geometry.applyMatrix4(stones.children[2].children[1].children[1].matrix);
+        //
+        //     stones.children[3].children[1].children[1].matrix.makeScale(stones.children[3].children[1].children[1].scale.x / 10, stones.children[3].children[1].children[1].scale.y / 10, stones.children[3].children[1].children[1].scale.z / 10);
+        //     (stones.children[3].children[1].children[1] as THREE.Mesh).geometry.applyMatrix4(stones.children[3].children[1].children[1].matrix);
+        //
+        //     stones.children[0].children[2].children[1].matrix.makeScale(stones.children[0].children[2].children[1].scale.x / 10, stones.children[0].children[2].children[1].scale.y / 10, stones.children[0].children[2].children[1].scale.z / 10);
+        //     (stones.children[0].children[2].children[1] as THREE.Mesh).geometry.applyMatrix4(stones.children[0].children[2].children[1].matrix);
+        //
+        //     stones.children[1].children[2].children[1].matrix.makeScale(stones.children[1].children[2].children[1].scale.x / 10, stones.children[1].children[2].children[1].scale.y / 10, stones.children[1].children[2].children[1].scale.z / 10);
+        //     (stones.children[1].children[2].children[1] as THREE.Mesh).geometry.applyMatrix4(stones.children[1].children[2].children[1].matrix);
+        //
+        //     stones.children[2].children[2].children[1].matrix.makeScale(stones.children[2].children[2].children[1].scale.x / 10, stones.children[2].children[2].children[1].scale.y / 10, stones.children[2].children[2].children[1].scale.z / 10);
+        //     (stones.children[2].children[2].children[1] as THREE.Mesh).geometry.applyMatrix4(stones.children[2].children[2].children[1].matrix);
+        //
+        //     stones.children[3].children[2].children[1].matrix.makeScale(stones.children[3].children[2].children[1].scale.x / 10, stones.children[3].children[2].children[1].scale.y / 10, stones.children[3].children[2].children[1].scale.z / 10);
+        //     (stones.children[3].children[2].children[1] as THREE.Mesh).geometry.applyMatrix4(stones.children[3].children[2].children[1].matrix);
+        // }
 
         return {
             // INCISIVI CENTRALI
@@ -91,7 +94,7 @@ export default function Configurator() {
                 full: (fulls.children[9] as THREE.Mesh).geometry,
                 stones: {
                     marquise: stones.children[0].children[0].children[0],
-                    heart: stones.children[0].children[0].children[1],
+                    heart: hearts.children[0],
                     circle: stones.children[0].children[0].children[2],
                     tear: stones.children[0].children[0].children[3],
                     square: stones.children[0].children[0].children[4]
@@ -119,7 +122,7 @@ export default function Configurator() {
                 full: (fulls.children[4] as THREE.Mesh).geometry,
                 stones: {
                     marquise: stones.children[1].children[0].children[0],
-                    heart: stones.children[1].children[0].children[1],
+                    heart: hearts.children[3],
                     circle: stones.children[1].children[0].children[2],
                     tear: stones.children[1].children[0].children[3],
                     square: stones.children[1].children[0].children[4]
@@ -147,7 +150,7 @@ export default function Configurator() {
                 full: (fulls.children[0] as THREE.Mesh).geometry,
                 stones: {
                     marquise: stones.children[2].children[0].children[0],
-                    heart: stones.children[2].children[0].children[1],
+                    heart: hearts.children[6],
                     circle: stones.children[2].children[0].children[2],
                     tear: stones.children[2].children[0].children[3],
                     square: stones.children[2].children[0].children[4]
@@ -175,7 +178,7 @@ export default function Configurator() {
                 full: (fulls.children[2] as THREE.Mesh).geometry,
                 stones: {
                     marquise: stones.children[3].children[0].children[0],
-                    heart: stones.children[3].children[0].children[1],
+                    heart: hearts.children[9],
                     circle: stones.children[3].children[0].children[2],
                     tear: stones.children[3].children[0].children[3],
                     square: stones.children[3].children[0].children[4]
@@ -204,7 +207,7 @@ export default function Configurator() {
                 full: (fulls.children[8] as THREE.Mesh).geometry,
                 stones: {
                     marquise: stones.children[0].children[1].children[0],
-                    heart: stones.children[0].children[1].children[1],
+                    heart: hearts.children[1],
                     circle: stones.children[0].children[1].children[2],
                     tear: stones.children[0].children[1].children[3],
                     square: stones.children[0].children[1].children[4]
@@ -232,7 +235,7 @@ export default function Configurator() {
                 full: (fulls.children[11] as THREE.Mesh).geometry,
                 stones: {
                     marquise: stones.children[1].children[1].children[0],
-                    heart: stones.children[1].children[1].children[1],
+                    heart: hearts.children[4],
                     circle: stones.children[1].children[1].children[2],
                     tear: stones.children[1].children[1].children[3],
                     square: stones.children[1].children[1].children[4]
@@ -260,7 +263,7 @@ export default function Configurator() {
                 full: (fulls.children[1] as THREE.Mesh).geometry,
                 stones: {
                     marquise: stones.children[2].children[1].children[0],
-                    heart: stones.children[2].children[1].children[1],
+                    heart: hearts.children[7],
                     circle: stones.children[2].children[1].children[2],
                     tear: stones.children[2].children[1].children[3],
                     square: stones.children[2].children[1].children[4]
@@ -288,7 +291,7 @@ export default function Configurator() {
                 full: (fulls.children[3] as THREE.Mesh).geometry,
                 stones: {
                     marquise: stones.children[3].children[1].children[0],
-                    heart: stones.children[3].children[1].children[1],
+                    heart: hearts.children[10],
                     circle: stones.children[3].children[1].children[2],
                     tear: stones.children[3].children[1].children[3],
                     square: stones.children[3].children[1].children[4]
@@ -317,7 +320,7 @@ export default function Configurator() {
                 full: (fulls.children[7] as THREE.Mesh).geometry,
                 stones: {
                     marquise: stones.children[0].children[2].children[0],
-                    heart: stones.children[0].children[2].children[1],
+                    heart: hearts.children[2],
                     circle: stones.children[0].children[2].children[2],
                     tear: stones.children[0].children[2].children[3],
                     square: stones.children[0].children[2].children[4]
@@ -345,7 +348,7 @@ export default function Configurator() {
                 full: (fulls.children[10] as THREE.Mesh).geometry,
                 stones: {
                     marquise: stones.children[1].children[2].children[0],
-                    heart: stones.children[1].children[2].children[1],
+                    heart: hearts.children[5],
                     circle: stones.children[1].children[2].children[2],
                     tear: stones.children[1].children[2].children[3],
                     square: stones.children[1].children[2].children[4]
@@ -373,7 +376,7 @@ export default function Configurator() {
                 full: (fulls.children[5] as THREE.Mesh).geometry,
                 stones: {
                     marquise: stones.children[2].children[2].children[0],
-                    heart: stones.children[2].children[2].children[1],
+                    heart: hearts.children[8],
                     circle: stones.children[2].children[2].children[2],
                     tear: stones.children[2].children[2].children[3],
                     square: stones.children[2].children[2].children[4]
@@ -408,7 +411,7 @@ export default function Configurator() {
                 full: (fulls.children[6] as THREE.Mesh).geometry,
                 stones: {
                     marquise: stones.children[3].children[2].children[0],
-                    heart: stones.children[3].children[2].children[1],
+                    heart: hearts.children[11],
                     circle: stones.children[3].children[2].children[2],
                     tear: stones.children[3].children[2].children[3],
                     square: stones.children[3].children[2].children[4]
