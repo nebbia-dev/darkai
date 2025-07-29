@@ -125,16 +125,19 @@ export const useTeethStore = create<State>((set, get) => ({
                     // already have a bigBar on them, the bigBar is deactivated and the lower canines reset
                     if(!state.teethVisibility[tooth]) {
                         state.teethVisibility[tooth] = true;
-                        if((state.teethJewelType.cidx === 'bigBar' || state.teethJewelType.cidx === 'bigBarDiamond')
-                            && (tooth === 'icidx' || tooth === 'icisx' || tooth === 'ilidx' || tooth === 'ilisx')
-                        ) {
-                            state.teethJewelType.cidx = 'full';
-                            state.teethJewelType.cisx = 'full';
-                            state.teethVisibility.cidx = false;
-                            state.teethVisibility.cisx = false;
-                            state.teethMaterial.cidx = 'base';
-                            state.teethMaterial.cisx = 'base';
-                        }
+
+                        // ⚠️ TEMP DEACTIVATION ⚠️
+
+                        // if((state.teethJewelType.cidx === 'bigBar' || state.teethJewelType.cidx === 'bigBarDiamond')
+                        //     && (tooth === 'icidx' || tooth === 'icisx' || tooth === 'ilidx' || tooth === 'ilisx')
+                        // ) {
+                        //     state.teethJewelType.cidx = 'full';
+                        //     state.teethJewelType.cisx = 'full';
+                        //     state.teethVisibility.cidx = false;
+                        //     state.teethVisibility.cisx = false;
+                        //     state.teethMaterial.cidx = 'base';
+                        //     state.teethMaterial.cisx = 'base';
+                        // }
                     }
                 }
                 // the tooth for which a material is chosen becomes automatically the active tooth
@@ -369,22 +372,24 @@ export const useTeethStore = create<State>((set, get) => ({
                     state.teethStones.cisx = {shape: undefined, color: undefined};
                     if(state.teethMaterial[tooth] === 'base') state.teethMaterial[tooth]  = 'gold';
 
-                    state.teethJewelType.icidx = 'full';
-                    state.teethJewelType.icisx = 'full';
-                    state.teethJewelType.ilidx = 'full';
-                    state.teethJewelType.ilisx = 'full';
-                    state.teethMaterial.icidx = 'base';
-                    state.teethMaterial.icisx = 'base';
-                    state.teethMaterial.ilidx = 'base';
-                    state.teethMaterial.ilisx = 'base';
-                    state.teethVisibility.icidx = false;
-                    state.teethVisibility.icisx = false;
-                    state.teethVisibility.ilidx = false;
-                    state.teethVisibility.ilisx = false;
-                    state.teethStones.icidx = {shape: undefined, color: undefined};
-                    state.teethStones.icisx = {shape: undefined, color: undefined};
-                    state.teethStones.ilidx = {shape: undefined, color: undefined};
-                    state.teethStones.ilisx = {shape: undefined, color: undefined};
+                    // ⚠️ TEMP DEACTIVATION ⚠️
+
+                    // state.teethJewelType.icidx = 'full';
+                    // state.teethJewelType.icisx = 'full';
+                    // state.teethJewelType.ilidx = 'full';
+                    // state.teethJewelType.ilisx = 'full';
+                    // state.teethMaterial.icidx = 'base';
+                    // state.teethMaterial.icisx = 'base';
+                    // state.teethMaterial.ilidx = 'base';
+                    // state.teethMaterial.ilisx = 'base';
+                    // state.teethVisibility.icidx = false;
+                    // state.teethVisibility.icisx = false;
+                    // state.teethVisibility.ilidx = false;
+                    // state.teethVisibility.ilisx = false;
+                    // state.teethStones.icidx = {shape: undefined, color: undefined};
+                    // state.teethStones.icisx = {shape: undefined, color: undefined};
+                    // state.teethStones.ilidx = {shape: undefined, color: undefined};
+                    // state.teethStones.ilisx = {shape: undefined, color: undefined};
 
                     if (tooth === 'cidx') {
                         state.teethMaterial.cisx = state.teethMaterial.cidx;
@@ -537,16 +542,19 @@ export const useTeethStore = create<State>((set, get) => ({
 
                         // if the jewel type change happens on a lower tooth when the lower canines
                         // already have a bigBar on them, the bigBar is deactivated and the lower canines reset
-                        if((state.teethJewelType.cidx === 'bigBar' || state.teethJewelType.cidx === 'bigBarDiamond')
-                            && (tooth === 'icidx' || tooth === 'icisx' || tooth === 'ilidx' || tooth === 'ilisx')) {
 
-                            state.teethJewelType.cidx = 'full';
-                            state.teethJewelType.cisx = 'full';
-                            state.teethVisibility.cidx = false;
-                            state.teethVisibility.cisx = false;
-                            state.teethMaterial.cidx = 'base';
-                            state.teethMaterial.cisx = 'base';
-                        }
+                        // ⚠️ TEMP DEACTIVATION ⚠️
+
+                        // if((state.teethJewelType.cidx === 'bigBar' || state.teethJewelType.cidx === 'bigBarDiamond')
+                        //     && (tooth === 'icidx' || tooth === 'icisx' || tooth === 'ilidx' || tooth === 'ilisx')) {
+                        //
+                        //     state.teethJewelType.cidx = 'full';
+                        //     state.teethJewelType.cisx = 'full';
+                        //     state.teethVisibility.cidx = false;
+                        //     state.teethVisibility.cisx = false;
+                        //     state.teethMaterial.cidx = 'base';
+                        //     state.teethMaterial.cisx = 'base';
+                        // }
                     }
                 }
 
