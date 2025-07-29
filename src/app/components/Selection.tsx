@@ -160,7 +160,7 @@ export default function Selection({ui} : {ui:boolean}) {
                                                 <ul className="ml-4">
                                                     <li>Jewel type: {jewelType[tooth].includes('Diamond') ? jewelType[tooth].split('D')[0][0].toUpperCase() + jewelType[tooth].split('D')[0].slice(1) + ' with diamonds' : jewelType[tooth][0].toUpperCase() + jewelType[tooth].slice(1)}</li>
                                                     <li>Material: {material[tooth][0].toUpperCase() + material[tooth].slice(1)}</li>
-                                                    {stones[tooth] && <li>Gem: {stones[tooth][0].toUpperCase() + stones[tooth].slice(1)}</li>}
+                                                    {stones[tooth].shape && <li>Gem: {stones[tooth].color?.[0].toUpperCase() + stones[tooth].color?.slice(1)}, {stones[tooth].shape} cut</li>}
                                                 </ul>
                                                 <span className="w-full text-right py-1 px-3 mt-2 border-t-1">{teethPrices[tooth]}€</span>
                                             </div>
