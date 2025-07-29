@@ -8,10 +8,10 @@ export default function FullDiamond({color, pave} : {color: string, pave: string
 
         // DiamondGold
         const propsYDiamondFull = useTexture({
-            // map: 'textures/diamondFull/Difuse_Diamanti.webp',
-            map: 'textures/proveDiamanti/Prova_03.png',
-            // normalMap: 'textures/diamondFull/Normal_Diamanti.webp',
-            normalMap: 'textures/proveDiamanti/Normal (1).png',
+            map: 'textures/diamondFull/Difuse_Diamanti.webp',
+            // map: 'textures/proveDiamanti/Prova_03.png',
+            normalMap: 'textures/diamondFull/Normal_Diamanti.webp',
+            // normalMap: 'textures/proveDiamanti/Normal (1).png',
             metalnessMap: 'textures/diamondFull/Metalness_Diamanti.webp',
             roughnessMap: 'textures/diamondFull/Metalness_Diamanti.webp',
         });

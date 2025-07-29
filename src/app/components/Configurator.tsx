@@ -39,16 +39,15 @@ export default function Configurator() {
         files: "envMaps/HDR_Light_Studio_Free_HDRI_Design_13.exr"
     })
     const geometry = useTeethStore((state:State) => state.teethGeometry);
-    const bars = useFBX('/models/MOD_Bars_Capsula (2).fbx');
-    console.log(bars)
     // Se voglio piazzare anche l'fbx in LoadedMaterials, verosimilmente devo usare qui uno useEffect
     const teeth = useMemo((): FBX => {
         const fbx = useFBX('/models/MOD_Dentiera_Completa_180_Phong_Scala_1 (1).fbx');
-        // const stones = useFBX('/models/MOD_Stone.fbx');
+        const fulls = useFBX('/models/MOD_Full_Capsula (2).fbx');
         const stones = useFBX('/models/MOD_Stone (2).fbx');
         const frames = useFBX('/models/MOD_Frame_Capsula (2).fbx');
         const bigBar  = useFBX('/models/MOD_Full_Frame_Capsula.fbx');
-        console.log(bigBar)
+        const bars = useFBX('/models/MOD_Bars_Capsula (2).fbx');
+        console.log('FULLS: ', fulls)
         if(!geometry.cisx){
             stones.children[0].children[0].children[1].matrix.makeScale(stones.children[0].children[0].children[1].scale.x/10, stones.children[0].children[0].children[1].scale.y/10, stones.children[0].children[0].children[1].scale.z/10);
             (stones.children[0].children[0].children[1] as THREE.Mesh).geometry.applyMatrix4(stones.children[0].children[0].children[1].matrix);
@@ -91,7 +90,7 @@ export default function Configurator() {
         return {
             // INCISIVI CENTRALI
             icsdx: {
-                full: (fbx.children[0].children[5] as THREE.Mesh).geometry,
+                full: (fulls.children[9] as THREE.Mesh).geometry,
                 stones: {
                     marquise: stones.children[0].children[0].children[0],
                     heart: stones.children[0].children[0].children[1],
@@ -119,7 +118,7 @@ export default function Configurator() {
                 }
             },
             icssx: {
-                full: (fbx.children[0].children[11] as THREE.Mesh).geometry,
+                full: (fulls.children[4] as THREE.Mesh).geometry,
                 stones: {
                     marquise: stones.children[1].children[0].children[0],
                     heart: stones.children[1].children[0].children[1],
@@ -147,7 +146,7 @@ export default function Configurator() {
                 }
             },
             icidx: {
-                full: (fbx.children[0].children[4] as THREE.Mesh).geometry,
+                full: (fulls.children[0] as THREE.Mesh).geometry,
                 stones: {
                     marquise: stones.children[2].children[0].children[0],
                     heart: stones.children[2].children[0].children[1],
@@ -175,7 +174,7 @@ export default function Configurator() {
                 }
             },
             icisx: {
-                full: (fbx.children[0].children[10] as THREE.Mesh).geometry,
+                full: (fulls.children[2] as THREE.Mesh).geometry,
                 stones: {
                     marquise: stones.children[3].children[0].children[0],
                     heart: stones.children[3].children[0].children[1],
@@ -204,7 +203,7 @@ export default function Configurator() {
             },
             // INCISIVI LATERALI
             ilsdx: {
-                full: (fbx.children[0].children[0] as THREE.Mesh).geometry,
+                full: (fulls.children[8] as THREE.Mesh).geometry,
                 stones: {
                     marquise: stones.children[0].children[1].children[0],
                     heart: stones.children[0].children[1].children[1],
@@ -232,7 +231,7 @@ export default function Configurator() {
                 }
             },
             ilssx: {
-                full: (fbx.children[0].children[6] as THREE.Mesh).geometry,
+                full: (fulls.children[11] as THREE.Mesh).geometry,
                 stones: {
                     marquise: stones.children[1].children[1].children[0],
                     heart: stones.children[1].children[1].children[1],
@@ -260,7 +259,7 @@ export default function Configurator() {
                 }
             },
             ilidx: {
-                full: (fbx.children[0].children[1] as THREE.Mesh).geometry,
+                full: (fulls.children[1] as THREE.Mesh).geometry,
                 stones: {
                     marquise: stones.children[2].children[1].children[0],
                     heart: stones.children[2].children[1].children[1],
@@ -288,7 +287,7 @@ export default function Configurator() {
                 }
             },
             ilisx: {
-                full: (fbx.children[0].children[7] as THREE.Mesh).geometry,
+                full: (fulls.children[3] as THREE.Mesh).geometry,
                 stones: {
                     marquise: stones.children[3].children[1].children[0],
                     heart: stones.children[3].children[1].children[1],
@@ -317,7 +316,7 @@ export default function Configurator() {
             },
             // CANINI
             csdx: {
-                full: (fbx.children[0].children[2] as THREE.Mesh).geometry,
+                full: (fulls.children[7] as THREE.Mesh).geometry,
                 stones: {
                     marquise: stones.children[0].children[2].children[0],
                     heart: stones.children[0].children[2].children[1],
@@ -345,7 +344,7 @@ export default function Configurator() {
                 }
             },
             cssx: {
-                full: (fbx.children[0].children[8] as THREE.Mesh).geometry,
+                full: (fulls.children[10] as THREE.Mesh).geometry,
                 stones: {
                     marquise: stones.children[1].children[2].children[0],
                     heart: stones.children[1].children[2].children[1],
@@ -373,7 +372,7 @@ export default function Configurator() {
                 }
             },
             cidx: {
-                full: (fbx.children[0].children[3] as THREE.Mesh).geometry,
+                full: (fulls.children[5] as THREE.Mesh).geometry,
                 stones: {
                     marquise: stones.children[2].children[2].children[0],
                     heart: stones.children[2].children[2].children[1],
@@ -408,7 +407,7 @@ export default function Configurator() {
                 }
             },
             cisx: {
-                full: (fbx.children[0].children[9] as THREE.Mesh).geometry,
+                full: (fulls.children[6] as THREE.Mesh).geometry,
                 stones: {
                     marquise: stones.children[3].children[2].children[0],
                     heart: stones.children[3].children[2].children[1],
@@ -490,7 +489,6 @@ export default function Configurator() {
             <OrbitControls maxDistance={35} minDistance={10} minPolarAngle={Math.PI / 3}
                            maxPolarAngle={Math.PI - Math.PI / 3} ref={orbitRef}/>
             {savedEnvMap && <LoadedMaterials/>}
-            {/*<primitive object={fbx} visible={false} position={[0, -10, 0]}/>*/}
             {savedTeeth && savedEnvMap &&
                 <>
                     {/*DENTI SUPERIORI*/}
