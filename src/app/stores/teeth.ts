@@ -769,11 +769,9 @@ export const useTeethStore = create<State>((set, get) => ({
 
         if(config.search(/(Diamond)/) >= 0) {
             const configName = config.replace('Diamond', '');
-            get().setActiveDefault(configName, 'diamond');
-            console.log('quaso')
+            get().setActiveDefault(configName, color + 'Diamond');
         } else {
             get().setActiveDefault(config, color);
-            console.log('halo')
         }
 
         switch (config) {
@@ -796,6 +794,8 @@ export const useTeethStore = create<State>((set, get) => ({
             case 'barDiamond':
                 get().setTooth('ilsdx', config, color);
                 get().setTooth('ilssx', config, color);
+                get().setTooth('csdx', config, color);
+                get().setTooth('cssx', config, color);
                 if (config === 'bar') {
                     get().setTooth('cidx', 'bigBar', color);
                     get().setTooth('cisx', 'bigBar', color);

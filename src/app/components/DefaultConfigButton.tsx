@@ -5,14 +5,20 @@ export default function DefaultConfigButton({teeth, color} : {teeth: string, col
     const setDefaultConfig = useTeethStore((state: State) => state.setDefaultConfig);
     const activeDefault = useTeethStore((state: State) => state.activeDefault);
     function setConfig() {
-        if(color === 'diamond') {
-            return setDefaultConfig(teeth + color[0].toUpperCase() + color.slice(1), 'gold');
+        switch(color) {
+         case 'goldDiamond':
+             return setDefaultConfig(teeth + 'Diamond', 'gold');
+         case 'roseDiamond':
+             return setDefaultConfig(teeth + 'Diamond', 'rose');
+         case 'whiteDiamond':
+             return setDefaultConfig(teeth + 'Diamond', 'white');
+         default:
+             return setDefaultConfig(teeth, color);
         }
-        return setDefaultConfig(teeth, color);
     }
     return(
         <div>
-            <button className={`${activeDefault === teeth + color ? 'bg-stone-400' : 'bg-stone-200'} max-w-[300px] cursor-pointer rounded-2xl p-4`} onClick={setConfig}>
+            <button className={`${activeDefault === teeth + color ? 'bg-stone-400' : 'bg-stone-200'} w-[150px] cursor-pointer rounded-2xl p-4`} onClick={setConfig}>
                 <img src={`/default/${teeth}${color === 'gold' ? 'Y' : color === 'rose' ? 'R' : color === 'white' ? 'W' : 'Diamond'}.webp`} alt={`${teeth} ${color}`}/>
             </button>
         </div>

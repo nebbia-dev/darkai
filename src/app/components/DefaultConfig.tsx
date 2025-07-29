@@ -39,11 +39,14 @@ export default function DefaultConfig({teeth} : {teeth: string}) {
                 {title}
             </AccordionSummary>
             <AccordionDetails sx={{borderTop: '1px solid #9ca3af'}}>
-                <div className="w-full flex gap-8">
+                <div className="w-full flex gap-8 flex-wrap">
                     <DefaultConfigButton teeth={teeth} color="gold"/>
                     <DefaultConfigButton teeth={teeth} color="rose"/>
                     <DefaultConfigButton teeth={teeth} color="white"/>
-                    <DefaultConfigButton teeth={teeth} color="diamond"/>
+                    <DefaultConfigButton teeth={teeth} color="goldDiamond"/>
+                    <DefaultConfigButton teeth={teeth} color="roseDiamond"/>
+                    <DefaultConfigButton teeth={teeth} color="whiteDiamond"/>
+
                 </div>
             </AccordionDetails>
 
