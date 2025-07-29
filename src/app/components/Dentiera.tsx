@@ -8,7 +8,7 @@ import {State} from "@/app/types/State";
 export default function Dentiera() {
     const fbx = useMemo(() => {
         console.log('dentiera')
-        return useFBX('/models/MOD_Gengive.fbx')
+        return useFBX('/models/MOD_Gengive (1).fbx')
     }, []);
     const fbx2 = useMemo(() => {
         return useFBX('/models/MOD_Denti_Separati.fbx')

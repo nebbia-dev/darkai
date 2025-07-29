@@ -1133,9 +1133,24 @@ export const useTeethStore = create<State>((set, get) => ({
                 cidx: false,
                 cisx: false,
             },
+            teethPave: {
+                icsdx: 'diamond',
+                icssx: 'diamond',
+                icidx: 'diamond',
+                icisx: 'diamond',
+                ilsdx: 'diamond',
+                ilssx: 'diamond',
+                ilidx: 'diamond',
+                ilisx: 'diamond',
+                csdx: 'diamond',
+                cssx: 'diamond',
+                cidx: 'diamond',
+                cisx: 'diamond',
+            },
             currentTooth: undefined,
-            activeDefault: undefined
-        })
+            activeDefault: undefined,
+            total: 0
+        });
     },
     setHistory: (state) => {
         state.history = [...state.history,
