@@ -18,7 +18,7 @@ export default function DefaultConfigButton({teeth, color} : {teeth: string, col
     }
     return(
         <div>
-            <button className={`${activeDefault === teeth + color ? 'bg-stone-400' : 'bg-stone-200'} w-[150px] cursor-pointer rounded-2xl p-4`} onClick={setConfig}>
+            <button type="button" className={`${activeDefault === teeth + color ? 'bg-stone-400' : 'bg-stone-200'} w-[150px] cursor-pointer rounded-2xl p-4`} onClick={setConfig}>
                 <img src={`/default/${teeth}${color === 'gold' ? 'Y' : color === 'rose' ? 'R' : color === 'white' ? 'W' : 'Diamond'}.webp`} alt={`${teeth} ${color}`}/>
             </button>
         </div>

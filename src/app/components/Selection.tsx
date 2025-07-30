@@ -1,6 +1,6 @@
 import ToothConfig from "@/app/components/ToothConfig";
-import {ReactNode, SyntheticEvent, useEffect, useRef, useState} from "react";
-import {Box, Tab, Tabs} from "@mui/material";
+import {FormEvent, ReactNode, SyntheticEvent, useEffect, useRef, useState} from "react";
+import {Box, Modal, Tab, Tabs, Typography} from "@mui/material";
 import DefaultConfig from "@/app/components/DefaultConfig";
 import ToothSelector from "@/app/components/ToothSelector";
 import DefaultSelector from "@/app/components/DefaultSelector";
@@ -33,11 +33,24 @@ export default function Selection({ui} : {ui:boolean}) {
 
     const [gold, setGold] = useState<string>('14k');
     const [diamond, setDiamond] = useState<string>('mois');
+    const [open, setOpen] = useState<boolean>(false);
+    const [isSending, setIsSending] = useState<boolean>(false);
+    const [sent, setSent] = useState<boolean>(false);
 
     const accordionContainer = useRef<null|HTMLDivElement>(null);
     const scrollPosition = useRef(null);
-    function download() {
-        takeScreenshot(true);
+    function download(e:FormEvent) {
+        e.preventDefault();
+        setIsSending(true);
+        setTimeout(() => {
+            takeScreenshot(true);
+            // TODO:
+            // - set Nodemailer to SEND the email with the current configuration and the screenshot
+            // - save the configuration in the local storage
+            // - IF the checkbox is checked, SAVE name, email address and config in the Newsletter table
+            setIsSending(false);
+            setSent(true);
+        }, 1000)
     }
     function checkDiamonds() {
         for(const tooth of Object.keys(jewelType)) {
@@ -110,42 +123,58 @@ export default function Selection({ui} : {ui:boolean}) {
                         </div>
                     </CustomTabPanel>
                             <CustomTabPanel value={activeTab} index={1}>
-                                <div
-                                    className="w-full h-[calc(100vh-54px-48px-0.2rem-15vh)] flex flex-col align-center justify-start text-center bg-gray-50 my-auto rounded text-black">
-                                    <div className="overflow-y-auto" ref={accordionContainer}>
-                                        {/*DENTI SUPERIORI*/}
-                                        {(activeTooth === 'icsdx' || visibleTeeth.icsdx) &&
-                                            <ToothConfig tooth='icsdx' ref={accordionContainer} position={scrollPosition}/>}
-                                        {(activeTooth === 'icssx' || visibleTeeth.icssx) &&
-                                            <ToothConfig tooth='icssx' ref={accordionContainer} position={scrollPosition}/>}
-                                        {(activeTooth === 'ilsdx' || visibleTeeth.ilsdx) &&
-                                            <ToothConfig tooth='ilsdx' ref={accordionContainer} position={scrollPosition}/>}
-                                        {(activeTooth === 'ilssx' || visibleTeeth.ilssx) &&
-                                            <ToothConfig tooth='ilssx' ref={accordionContainer} position={scrollPosition}/>}
-                                        {(activeTooth === 'csdx' || visibleTeeth.csdx) &&
-                                            <ToothConfig tooth='csdx' ref={accordionContainer} position={scrollPosition}/>}
-                                        {(activeTooth === 'cssx' || visibleTeeth.cssx) &&
-                                            <ToothConfig tooth='cssx' ref={accordionContainer} position={scrollPosition}/>}
-                                        {/*DENTI INFERIORI*/}
-                                        {(activeTooth === 'icidx' || visibleTeeth.icidx) &&
-                                            <ToothConfig tooth='icidx' ref={accordionContainer} position={scrollPosition}/>}
-                                        {(activeTooth === 'icisx' || visibleTeeth.icisx) &&
-                                            <ToothConfig tooth='icisx' ref={accordionContainer} position={scrollPosition}/>}
-                                        {(activeTooth === 'ilidx' || visibleTeeth.ilidx) &&
-                                            <ToothConfig tooth='ilidx' ref={accordionContainer} position={scrollPosition}/>}
-                                        {(activeTooth === 'ilisx' || visibleTeeth.ilisx) &&
-                                            <ToothConfig tooth='ilisx' ref={accordionContainer} position={scrollPosition}/>}
-                                        {(activeTooth === 'cidx' || visibleTeeth.cidx) &&
-                                            <ToothConfig tooth='cidx' ref={accordionContainer} position={scrollPosition}/>}
-                                        {(activeTooth === 'cisx' || visibleTeeth.cisx) &&
-                                            <ToothConfig tooth='cisx' ref={accordionContainer} position={scrollPosition}/>}
+                                {!activeTooth && Object.values(visibleTeeth).filter((el:boolean):boolean => el).length === 0
+                                    ? <div className="w-full h-[calc(100vh-54px-48px-0.2rem-15vh)] flex flex-col align-center justify-center">
+                                        <p className="text-center">To start, select a tooth</p>
+                                      </div>
+                                    : <div className="w-full h-[calc(100vh-54px-48px-0.2rem-15vh)] flex flex-col align-center justify-start text-center bg-gray-50 my-auto rounded text-black">
+                                        <div className="overflow-y-auto" ref={accordionContainer}>
+                                            {/*DENTI SUPERIORI*/}
+                                            {(activeTooth === 'icsdx' || visibleTeeth.icsdx) &&
+                                                <ToothConfig tooth='icsdx' ref={accordionContainer}
+                                                             position={scrollPosition}/>}
+                                            {(activeTooth === 'icssx' || visibleTeeth.icssx) &&
+                                                <ToothConfig tooth='icssx' ref={accordionContainer}
+                                                             position={scrollPosition}/>}
+                                            {(activeTooth === 'ilsdx' || visibleTeeth.ilsdx) &&
+                                                <ToothConfig tooth='ilsdx' ref={accordionContainer}
+                                                             position={scrollPosition}/>}
+                                            {(activeTooth === 'ilssx' || visibleTeeth.ilssx) &&
+                                                <ToothConfig tooth='ilssx' ref={accordionContainer}
+                                                             position={scrollPosition}/>}
+                                            {(activeTooth === 'csdx' || visibleTeeth.csdx) &&
+                                                <ToothConfig tooth='csdx' ref={accordionContainer}
+                                                             position={scrollPosition}/>}
+                                            {(activeTooth === 'cssx' || visibleTeeth.cssx) &&
+                                                <ToothConfig tooth='cssx' ref={accordionContainer}
+                                                             position={scrollPosition}/>}
+                                            {/*DENTI INFERIORI*/}
+                                            {(activeTooth === 'icidx' || visibleTeeth.icidx) &&
+                                                <ToothConfig tooth='icidx' ref={accordionContainer}
+                                                             position={scrollPosition}/>}
+                                            {(activeTooth === 'icisx' || visibleTeeth.icisx) &&
+                                                <ToothConfig tooth='icisx' ref={accordionContainer}
+                                                             position={scrollPosition}/>}
+                                            {(activeTooth === 'ilidx' || visibleTeeth.ilidx) &&
+                                                <ToothConfig tooth='ilidx' ref={accordionContainer}
+                                                             position={scrollPosition}/>}
+                                            {(activeTooth === 'ilisx' || visibleTeeth.ilisx) &&
+                                                <ToothConfig tooth='ilisx' ref={accordionContainer}
+                                                             position={scrollPosition}/>}
+                                            {(activeTooth === 'cidx' || visibleTeeth.cidx) &&
+                                                <ToothConfig tooth='cidx' ref={accordionContainer}
+                                                             position={scrollPosition}/>}
+                                            {(activeTooth === 'cisx' || visibleTeeth.cisx) &&
+                                                <ToothConfig tooth='cisx' ref={accordionContainer}
+                                                             position={scrollPosition}/>}
+                                        </div>
                                     </div>
-                                </div>
+                                }
                             </CustomTabPanel>
                             <div className="w-full h-[15vh] bg-stone-200">
                                 <div className="h-full flex items-center justify-between w-[90%] mx-auto">
                                     <p>{total !== 0 && <span>Starting from {total}€</span>}</p>
-                                    <button onClick={() => showRecap()} className="bg-gray-950 py-2 px-4 rounded-full text-gray-50 cursor-pointer">Continue &rarr;</button>
+                                    <button type="button" onClick={() => showRecap()} className="bg-gray-950 py-2 px-4 rounded-full text-gray-50 cursor-pointer">Continue &rarr;</button>
                                 </div>
                             </div>
                         </>
@@ -208,15 +237,15 @@ export default function Selection({ui} : {ui:boolean}) {
                             <div className="flex flex-col items-center">
                                 <div className="flex justify-end w-full px-3 h-[7.5vh] items-center bg-stone-200 text-right mt-4">Total: {total + totalPreciousness}€</div>
                                 <div className="flex items-center justify-between w-full h-[15vh] mx-auto">
-                                    <button onClick={() => setRecap(false)}
-                                            className="bg-gray-50 py-2 px-4 rounded-full text-gray-950 border cursor-pointer">&larr; Back
+                                    <button type="button" onClick={() => setRecap(false)}
+                                            className="bg-gray-50 py-2 px-4 rounded text-gray-950 border cursor-pointer">&larr; Back
                                     </button>
                                     <div className="flex gap-4">
-                                        <button onClick={download}
-                                                className="bg-gray-50 py-2 px-4 rounded-full text-gray-950 border cursor-pointer">Save
+                                        <button type="button" onClick={() => setOpen(true)}
+                                                className="bg-gray-50 py-2 px-4 rounded text-gray-950 border cursor-pointer">Save
                                         </button>
                                         <Link href="/checkout/upload"
-                                                className="bg-gray-950 py-2 px-4 rounded-full text-gray-50 cursor-pointer">Proceed &rarr;
+                                                className="bg-gray-950 py-2 px-4 rounded text-gray-50 cursor-pointer">Next &rarr;
                                         </Link>
                                 </div>
                                 </div>
@@ -321,6 +350,56 @@ export default function Selection({ui} : {ui:boolean}) {
                     </>
                 </div>
             }
+            <Modal
+                open={open}
+                onClose={() => setOpen(false)}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+            >
+                <div className="absolute top-[50%] left-[50%] translate-[-50%] bg-gray-50 rounded py-8 px-12">
+                    {isSending
+                        ?
+                        <div className="w-full text-center">
+                            <span className="loader mb-8 inline-block mx-auto"></span>
+                            <h2 className="text-gray-950 mx-auto">Sending...</h2>
+                        </div>
+                        : sent
+                            ? <div>
+                                <p className="text-gray-950">Your configuration has been sent to you!</p>
+                                <div className="w-full text-right mt-6">
+                                    <button className="cursor-pointer py-2 px-4 rounded border text-gray-950"
+                                            type="button" onClick={() => setOpen(false)}>Close
+                                    </button>
+                                </div>
+                            </div>
+
+                            : <div>
+                                <p className="text-gray-950">In order to save your configuration, tell us to whom we may
+                                    send it!</p>
+                                <form className="flex flex-col gap-2 mt-6" onSubmit={(event) => download(event)}>
+                                    <input className="w-full rounded bg-stone-200 py-2 px-4" placeholder="Your name"
+                                           type="text"
+                                           required/>
+                                    <input className="w-full rounded bg-stone-200 py-2 px-4" placeholder="Your email"
+                                           type="email"
+                                           required/>
+                                    <label className="flex items-center gap-2 mt-2">
+                                        <input className="mr-4" type="checkbox"/>
+                                        I'd like to receive more information about Darkai products
+                                    </label>
+                                    <div className="w-full text-right mt-4">
+                                        <button className="cursor-pointer py-2 px-4 rounded border text-gray-950 mr-4"
+                                                type="button" onClick={() => setOpen(false)}>Close
+                                        </button>
+                                        <button className="cursor-pointer py-2 px-4 rounded bg-gray-950 text-gray-50"
+                                                type="submit">Send
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                    }
+                </div>
+            </Modal>
         </>
     )
 }

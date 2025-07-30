@@ -147,18 +147,18 @@ export default function ToothConfig({tooth, ref, position} : {tooth: string, ref
                             <div className="text-center">
                                 <SelectorButton disabled={false} selection="gold" active={visible && (material === 'gold')}
                                             click={() => selectMaterial('gold')} adjust={false}/>
-                                {prices?.map(price => (tooth === price.tooth + 'sx' || tooth === price.tooth + 'dx') && material !== 'base' ? <p key={price.tooth + '_' + jewelType + 'G'} >{price[jewelType.slice().split('D').shift() + 'Gold']}€</p> : null)}
+                                {/*{prices?.map(price => (tooth === price.tooth + 'sx' || tooth === price.tooth + 'dx') && material !== 'base' ? <p key={price.tooth + '_' + jewelType + 'G'} >{price[jewelType.slice().split('D').shift() + 'Gold']}€</p> : null)}*/}
                             </div>
                             <div className="text-center">
                                 <SelectorButton disabled={false} selection="rose" active={visible && (material === 'rose')}
                                             click={() => selectMaterial('rose')} adjust={false}/>
-                                {prices?.map(price => (tooth === price.tooth + 'sx' || tooth === price.tooth + 'dx') && material !== 'base' ? <p key={price.tooth + '_' + jewelType + 'R'}>{price[jewelType.slice().split('D').shift() + 'Rose']}€</p> : null)}
+                                {/*{prices?.map(price => (tooth === price.tooth + 'sx' || tooth === price.tooth + 'dx') && material !== 'base' ? <p key={price.tooth + '_' + jewelType + 'R'}>{price[jewelType.slice().split('D').shift() + 'Rose']}€</p> : null)}*/}
                             </div>
                             <div className="text-center">
                                 <SelectorButton disabled={false} selection="white"
                                             active={visible && (material === 'white')}
                                             click={() => selectMaterial('white')} adjust={false}/>
-                                {prices?.map(price => (tooth === price.tooth + 'sx' || tooth === price.tooth + 'dx') && material !== 'base' ? <p key={price.tooth + '_' + jewelType + 'W'}>{price[jewelType.slice().split('D').shift() + 'White']}€</p> : null)}
+                                {/*{prices?.map(price => (tooth === price.tooth + 'sx' || tooth === price.tooth + 'dx') && material !== 'base' ? <p key={price.tooth + '_' + jewelType + 'W'}>{price[jewelType.slice().split('D').shift() + 'White']}€</p> : null)}*/}
                             </div>
                         </div>
                     </div>
@@ -169,26 +169,26 @@ export default function ToothConfig({tooth, ref, position} : {tooth: string, ref
                             <div className="text-center">
                                 <DiamondToggler tooth={tooth} onclick={() => selectDiamond('diamond')} selection="diamond"
                                                 active={visible && pave === 'diamond' && (jewelType === 'fullDiamond' || jewelType === 'barDiamond' || jewelType === 'frameDiamond' || jewelType === 'bigBarDiamond')}/>
-                                {prices?.map(price => (tooth === price.tooth + 'sx' || tooth === price.tooth + 'dx') && material !== 'base' ?
-                                    <p key={price.tooth + '_' + jewelType + 'D'}>+ {price[jewelType.includes('Diamond') ? jewelType : jewelType + 'Diamond']}€</p> : null)}
+                                {/*{prices?.map(price => (tooth === price.tooth + 'sx' || tooth === price.tooth + 'dx') && material !== 'base' ?*/}
+                                {/*    <p key={price.tooth + '_' + jewelType + 'D'}>+ {price[jewelType.includes('Diamond') ? jewelType : jewelType + 'Diamond']}€</p> : null)}*/}
                             </div>
                             <div className="text-center">
                                 <DiamondToggler tooth={tooth} onclick={() => selectDiamond('emerald')} selection="emerald"
                                                 active={visible && pave === 'emerald' && (jewelType === 'fullDiamond' || jewelType === 'barDiamond' || jewelType === 'frameDiamond' || jewelType === 'bigBarDiamond')}/>
-                                {prices?.map(price => (tooth === price.tooth + 'sx' || tooth === price.tooth + 'dx') && material !== 'base' ?
-                                    <p key={price.tooth + '_' + jewelType + 'D'}>+ {price[jewelType.includes('Diamond') ? jewelType : jewelType + 'Diamond']}€</p> : null)}
+                                {/*{prices?.map(price => (tooth === price.tooth + 'sx' || tooth === price.tooth + 'dx') && material !== 'base' ?*/}
+                                {/*    <p key={price.tooth + '_' + jewelType + 'D'}>+ {price[jewelType.includes('Diamond') ? jewelType : jewelType + 'Diamond']}€</p> : null)}*/}
                             </div>
                             <div className="text-center">
                                 <DiamondToggler tooth={tooth} onclick={() => selectDiamond('sapphire')} selection="sapphire"
                                                 active={visible && pave === 'sapphire' && (jewelType === 'fullDiamond' || jewelType === 'barDiamond' || jewelType === 'frameDiamond' || jewelType === 'bigBarDiamond')}/>
-                                {prices?.map(price => (tooth === price.tooth + 'sx' || tooth === price.tooth + 'dx') && material !== 'base' ?
-                                    <p key={price.tooth + '_' + jewelType + 'D'}>+ {price[jewelType.includes('Diamond') ? jewelType : jewelType + 'Diamond']}€</p> : null)}
+                                {/*{prices?.map(price => (tooth === price.tooth + 'sx' || tooth === price.tooth + 'dx') && material !== 'base' ?*/}
+                                {/*    <p key={price.tooth + '_' + jewelType + 'D'}>+ {price[jewelType.includes('Diamond') ? jewelType : jewelType + 'Diamond']}€</p> : null)}*/}
                             </div>
                             <div className="text-center">
                                 <DiamondToggler tooth={tooth} onclick={() => selectDiamond('ruby')} selection="ruby"
                                                 active={visible && pave === 'ruby' && (jewelType === 'fullDiamond' || jewelType === 'barDiamond' || jewelType === 'frameDiamond' || jewelType === 'bigBarDiamond')}/>
-                                {prices?.map(price => (tooth === price.tooth + 'sx' || tooth === price.tooth + 'dx') && material !== 'base' ?
-                                    <p key={price.tooth + '_' + jewelType + 'D'}>+ {price[jewelType.includes('Diamond') ? jewelType : jewelType + 'Diamond']}€</p> : null)}
+                                {/*{prices?.map(price => (tooth === price.tooth + 'sx' || tooth === price.tooth + 'dx') && material !== 'base' ?*/}
+                                {/*    <p key={price.tooth + '_' + jewelType + 'D'}>+ {price[jewelType.includes('Diamond') ? jewelType : jewelType + 'Diamond']}€</p> : null)}*/}
                             </div>
                         </div>
                     </div>
@@ -228,33 +228,33 @@ export default function ToothConfig({tooth, ref, position} : {tooth: string, ref
                                 <StoneSelector tooth={tooth} stone="sapphire"
                                                active={visible && (stones?.color === 'sapphire')}
                                                onclick={() => selectStone('sapphire')}/>
-                                {pricesAdds?.map(stone => (jewelType === 'full' || jewelType === 'fullDiamond') && material !== 'base' && stone.stone === 'sapphire' && stones.shape
-                                    ? <p key={stone + '_' + tooth}>+ {stone[stones?.shape + 'Shape']}€</p>
-                                    : null)}
+                                {/*{pricesAdds?.map(stone => (jewelType === 'full' || jewelType === 'fullDiamond') && material !== 'base' && stone.stone === 'sapphire' && stones.shape*/}
+                                {/*    ? <p key={stone + '_' + tooth}>+ {stone[stones?.shape + 'Shape']}€</p>*/}
+                                {/*    : null)}*/}
                             </div>
                             <div className="text-center">
                                 <StoneSelector tooth={tooth} stone="ruby"
                                                active={visible && (stones?.color === 'ruby')}
                                                onclick={() => selectStone('ruby')}/>
-                                {pricesAdds?.map(stone => (jewelType === 'full' || jewelType === 'fullDiamond') && material !== 'base' && stone.stone === 'ruby' && stones.shape
-                                    ? <p key={stone + '_' + tooth}>+ {stone[stones?.shape + 'Shape']}€</p>
-                                    : null)}
+                                {/*{pricesAdds?.map(stone => (jewelType === 'full' || jewelType === 'fullDiamond') && material !== 'base' && stone.stone === 'ruby' && stones.shape*/}
+                                {/*    ? <p key={stone + '_' + tooth}>+ {stone[stones?.shape + 'Shape']}€</p>*/}
+                                {/*    : null)}*/}
                             </div>
                             <div className="text-center">
                                 <StoneSelector tooth={tooth} stone="emerald"
                                                active={visible && (stones?.color === 'emerald')}
                                                onclick={() => selectStone('emerald')}/>
-                                {pricesAdds?.map(stone => (jewelType === 'full' || jewelType === 'fullDiamond') && material !== 'base' && stone.stone === 'emerald' && stones.shape
-                                    ? <p key={stone + '_' + tooth}>+ {stone[stones?.shape + 'Shape']}€</p>
-                                    : null)}
+                                {/*{pricesAdds?.map(stone => (jewelType === 'full' || jewelType === 'fullDiamond') && material !== 'base' && stone.stone === 'emerald' && stones.shape*/}
+                                {/*    ? <p key={stone + '_' + tooth}>+ {stone[stones?.shape + 'Shape']}€</p>*/}
+                                {/*    : null)}*/}
                             </div>
                             <div className="text-center">
                                 <StoneSelector tooth={tooth} stone="amethyst"
                                                active={visible && (stones?.color === 'amethyst')}
                                                onclick={() => selectStone('amethyst')}/>
-                                {pricesAdds?.map(stone => (jewelType === 'full' || jewelType === 'fullDiamond') && material !== 'base' && stone.stone === 'amethyst' && stones.shape
-                                    ? <p key={stone + '_' + tooth}>+ {stone[stones?.shape + 'Shape']}€</p>
-                                    : null)}
+                                {/*{pricesAdds?.map(stone => (jewelType === 'full' || jewelType === 'fullDiamond') && material !== 'base' && stone.stone === 'amethyst' && stones.shape*/}
+                                {/*    ? <p key={stone + '_' + tooth}>+ {stone[stones?.shape + 'Shape']}€</p>*/}
+                                {/*    : null)}*/}
                             </div>
                         </div>
                     </div>
@@ -262,6 +262,4 @@ export default function ToothConfig({tooth, ref, position} : {tooth: string, ref
             </AccordionDetails>
         </Accordion>
     )
-}
-{/*E' ESPANSO SE COINCIDE L'ACTIVE TOOTH, NON SE IL DENTE E' VISIBILE*/
 }
