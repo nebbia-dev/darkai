@@ -139,6 +139,16 @@ input[type="file"] {
   clip-path: inset(50%);
   border: 0;
 }
+
+input[type="text"]:focus {
+  outline: 2px solid #171717;
+}
+input[type="email"]:focus {
+  outline: 2px solid #171717;
+}
+input[type="number"]:focus {
+  outline: 2px solid #171717;
+}
 .label:focus-within {
   outline: 2px solid #171717;
 }

@@ -171,12 +171,15 @@ export default function Selection({ui} : {ui:boolean}) {
                                     </div>
                                 }
                             </CustomTabPanel>
-                            <div className="w-full h-[15vh] bg-stone-200">
-                                <div className="h-full flex items-center justify-between w-[90%] mx-auto">
-                                    <p>{total !== 0 && <span>Starting from {total}€</span>}</p>
-                                    <button type="button" onClick={() => showRecap()} className="bg-gray-950 py-2 px-4 rounded-full text-gray-50 cursor-pointer">Continue &rarr;</button>
+                                <div className="w-full h-[15vh] bg-stone-200">
+                            {Object.values(visibleTeeth).filter((el:boolean):boolean => el).length > 0 &&
+                                    <div className="h-full flex items-center justify-between w-[90%] mx-auto">
+                                        <p>{total !== 0 && <span>Starting from {total}€</span>}</p>
+                                        <button type="button" onClick={() => showRecap()}
+                                                className="bg-gray-950 py-2 px-4 rounded text-gray-50 cursor-pointer">Continue &rarr;</button>
+                                    </div>
+                            }
                                 </div>
-                            </div>
                         </>
                         : <div className="h-[calc(100vh-54px)] flex flex-col w-[75%] mx-auto">
                             <div className="h-[calc(100%-15vh-7.5vh)] overflow-y-auto mt-[48px] w-full mx-auto">

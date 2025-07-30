@@ -538,10 +538,10 @@ export default function Configurator() {
     return (
         <>
             <OrbitControls
-                // maxDistance={35}
-                // minDistance={22}
-                // minPolarAngle={Math.PI / 3}
-                // maxPolarAngle={Math.PI - Math.PI / 3}
+                maxDistance={35}
+                minDistance={22}
+                minPolarAngle={Math.PI / 3}
+                maxPolarAngle={Math.PI - Math.PI / 3}
                 ref={orbitRef}/>
 
 
