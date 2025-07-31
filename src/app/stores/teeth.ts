@@ -999,7 +999,6 @@ export const useTeethStore = create<State>((set, get) => ({
             .from('Prices_addons')
             .select('*');
         set({prices: base as BasePrices[], pricesAdds: addons as AddonsPrices[]});
-        console.log(addons)
     },
 
     // states and methods to set the configuration steps history and
