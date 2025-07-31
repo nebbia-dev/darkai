@@ -55,11 +55,9 @@ export default function Selection({ui} : {ui:boolean}) {
     function checkDiamonds() {
         for(const tooth of Object.keys(jewelType)) {
             if(jewelType[tooth].includes('Diamond')) {
-                console.log('Me diamond!!')
                 return true;
             }
         }
-        console.log('Me NOT diamond!!')
         return false;
     }
     function showRecap() {
@@ -88,8 +86,12 @@ export default function Selection({ui} : {ui:boolean}) {
     }
 
     useEffect(() => {
-        calcPreciousness(gold, diamond);
-    }, [gold, diamond]);
+        if(checkDiamonds()) {
+            calcPreciousness(gold, diamond);
+        } else {
+            calcPreciousness(gold, undefined);
+        }
+    }, [recap, gold, diamond]);
 
     return (
         <>

@@ -1169,6 +1169,7 @@ export const useTeethStore = create<State>((set, get) => ({
                 type: state.teethJewelType,
                 material: state.teethMaterial,
                 stones: state.teethStones,
+                pave: state.teethPave,
                 visible: state.teethVisibility,
                 prices: state.teethPrices
             }]
@@ -1237,6 +1238,10 @@ export const useTeethStore = create<State>((set, get) => ({
 
     // state and method to calculate the preciousness of the materials used in the configuration
     // 0 is the starting price, with 14K gold and moissanite
+    teethPreciousness: {
+        carats: undefined,
+        diamonds: undefined
+    },
     totalPreciousness: 0,
     calcPreciousness: ((gold, diamond) =>
         set(
@@ -1248,7 +1253,7 @@ export const useTeethStore = create<State>((set, get) => ({
                     state.totalPreciousness += configTeeth.length * 300;
                 }
 
-                if(diamond !== 'mois') {
+                if(diamond && diamond !== 'mois') {
                     const configTeeth = Object.keys(state.teethJewelType).filter(tooth => state.teethJewelType[tooth].includes('Diamond'));
                     switch(diamond) {
                         case 'lab':
@@ -1257,6 +1262,12 @@ export const useTeethStore = create<State>((set, get) => ({
                         case 'natural':
                             state.totalPreciousness += configTeeth.length * 1000;
                     }
+                }
+
+                state.teethPreciousness.carats = gold;
+                state.teethPreciousness.diamonds = diamond;
+                if(state.history.length > 0) {
+                    state.history[state.history.length - 1][0].preciousness = state.teethPreciousness;
                 }
             })
         )
