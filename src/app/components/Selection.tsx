@@ -8,6 +8,7 @@ import {useTeethStore} from "@/app/stores/teeth";
 import {State} from "@/app/types/State";
 import elabToothName from "@/app/helpers/elabToothName";
 import Link from 'next/link';
+import firstCapital from "@/app/helpers/firstCapital";
 
 interface TabPanelProps {
     children?: ReactNode;
@@ -22,6 +23,7 @@ export default function Selection({ui} : {ui:boolean}) {
     const visibleTeeth = useTeethStore((state:State) => state.teethVisibility);
     const jewelType = useTeethStore((state: State) => state.teethJewelType);
     const material = useTeethStore((state: State) => state.teethMaterial);
+    const pave = useTeethStore((state: State) => state.teethPave);
     const stones = useTeethStore((state: State) => state.teethStones);
     const teethPrices = useTeethStore((state:State) => state.teethPrices);
     const activeTooth = useTeethStore((state: State) => state.currentTooth);
@@ -187,16 +189,33 @@ export default function Selection({ui} : {ui:boolean}) {
                             <div className="h-[calc(100%-15vh-7.5vh)] overflow-y-auto mt-[48px] w-full mx-auto">
                                 {
                                     Object.keys(visibleTeeth).map((tooth, i) => {
-                                        if (!visibleTeeth[tooth]) return null
+                                        if (!visibleTeeth[tooth]) return null;
+                                        if (tooth === 'cisx' && (jewelType[tooth] === 'bigBar' || jewelType[tooth] === 'bigBarDiamond')) return null;
+                                        if (tooth === 'icisx' && (jewelType[tooth] === 'bar' || jewelType[tooth] === 'barDiamond')) return null;
+                                        if (tooth === 'icssx' && (jewelType[tooth] === 'bar' || jewelType[tooth] === 'barDiamond')) return null;
+
                                         return (
                                             <div key={i} className="flex flex-col mb-4">
-                                                <span className="w-full py-1 px-3 bg-stone-200 mb-1">{elabToothName(tooth, false)}</span>
+                                                <span className="w-full py-1 px-3 bg-stone-200 mb-1">{
+                                                    (tooth === 'cidx' && (jewelType[tooth] === 'bigBar' || jewelType[tooth] === 'bigBarDiamond'))
+                                                    ? 'Canini inferiori'
+                                                    : (tooth === 'icidx' && (jewelType[tooth] === 'bar' || jewelType[tooth] === 'barDiamond'))
+                                                        ? 'Incisivi centrali inferiori'
+                                                        : (tooth === 'icsdx' && (jewelType[tooth] === 'bar' || jewelType[tooth] === 'barDiamond'))
+                                                            ? 'Incisivi centrali superiori'
+                                                            : elabToothName(tooth, false)
+                                                }</span>
                                                 <ul className="ml-4">
-                                                    <li>Jewel type: {jewelType[tooth].includes('Diamond') ? jewelType[tooth].split('D')[0][0].toUpperCase() + jewelType[tooth].split('D')[0].slice(1) + ' with diamonds' : jewelType[tooth][0].toUpperCase() + jewelType[tooth].slice(1)}</li>
-                                                    <li>Material: {material[tooth][0].toUpperCase() + material[tooth].slice(1)}</li>
-                                                    {(stones[tooth].shape && stones[tooth].color) && <li>Gem: {stones[tooth].color?.[0].toUpperCase() + stones[tooth].color?.slice(1)}, {stones[tooth].shape} cut</li>}
+                                                    <li>Jewel type: {jewelType[tooth].includes('Diamond') ? firstCapital(jewelType[tooth].split('D')[0]) + ' with ' + pave[tooth] + 's': firstCapital(jewelType[tooth])}</li>
+                                                    <li>Material: {firstCapital(material[tooth])}</li>
+                                                    {(stones[tooth].shape && stones[tooth].color) && <li>Gem: {firstCapital(stones[tooth].color as string)}, {firstCapital(stones[tooth].shape as string)} cut</li>}
                                                 </ul>
-                                                <span className="w-full text-right py-1 px-3 mt-2 border-t-1">{teethPrices[tooth]}€</span>
+                                                <span className="w-full text-right py-1 px-3 mt-2 border-t-1">{
+                                                    (tooth === 'cidx' && (jewelType[tooth] === 'bigBar' || jewelType[tooth] === 'bigBarDiamond'))
+                                                    || ((tooth === 'icidx' || tooth === 'icsdx') && (jewelType[tooth] === 'bar' || jewelType[tooth] === 'barDiamond'))
+                                                        ? teethPrices[tooth]*2
+                                                        : teethPrices[tooth]
+                                                }€</span>
                                             </div>
                                         )
                                     })

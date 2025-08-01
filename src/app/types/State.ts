@@ -32,19 +32,19 @@ interface JewelTypes {
     cisx: string,
 }
 interface Pave {
-    [key: string]: 'diamond' | 'emerald' | 'sapphire' | 'ruby',
-    icsdx: 'diamond' | 'emerald' | 'sapphire' | 'ruby',
-    icssx: 'diamond' | 'emerald' | 'sapphire' | 'ruby',
-    icidx: 'diamond' | 'emerald' | 'sapphire' | 'ruby',
-    icisx: 'diamond' | 'emerald' | 'sapphire' | 'ruby',
-    ilsdx: 'diamond' | 'emerald' | 'sapphire' | 'ruby',
-    ilssx: 'diamond' | 'emerald' | 'sapphire' | 'ruby',
-    ilidx: 'diamond' | 'emerald' | 'sapphire' | 'ruby',
-    ilisx: 'diamond' | 'emerald' | 'sapphire' | 'ruby',
-    csdx: 'diamond' | 'emerald' | 'sapphire' | 'ruby',
-    cssx: 'diamond' | 'emerald' | 'sapphire' | 'ruby',
-    cidx: 'diamond' | 'emerald' | 'sapphire' | 'ruby',
-    cisx: 'diamond' | 'emerald' | 'sapphire' | 'ruby',
+    [key: string]: 'diamond' | 'emerald' | 'sapphire' | 'ruby' | 'base',
+    icsdx: 'diamond' | 'emerald' | 'sapphire' | 'ruby' | 'base',
+    icssx: 'diamond' | 'emerald' | 'sapphire' | 'ruby' | 'base',
+    icidx: 'diamond' | 'emerald' | 'sapphire' | 'ruby' | 'base',
+    icisx: 'diamond' | 'emerald' | 'sapphire' | 'ruby' | 'base',
+    ilsdx: 'diamond' | 'emerald' | 'sapphire' | 'ruby' | 'base',
+    ilssx: 'diamond' | 'emerald' | 'sapphire' | 'ruby' | 'base',
+    ilidx: 'diamond' | 'emerald' | 'sapphire' | 'ruby' | 'base',
+    ilisx: 'diamond' | 'emerald' | 'sapphire' | 'ruby' | 'base',
+    csdx: 'diamond' | 'emerald' | 'sapphire' | 'ruby' | 'base',
+    cssx: 'diamond' | 'emerald' | 'sapphire' | 'ruby' | 'base',
+    cidx: 'diamond' | 'emerald' | 'sapphire' | 'ruby' | 'base',
+    cisx: 'diamond' | 'emerald' | 'sapphire' | 'ruby' | 'base',
 }
 interface Prices {
     [key: string]: number

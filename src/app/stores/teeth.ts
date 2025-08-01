@@ -740,18 +740,18 @@ export const useTeethStore = create<State>((set, get) => ({
 
     // state to keep track of pave stones
     teethPave: {
-        icsdx: 'diamond',
-        icssx: 'diamond',
-        icidx: 'diamond',
-        icisx: 'diamond',
-        ilsdx: 'diamond',
-        ilssx: 'diamond',
-        ilidx: 'diamond',
-        ilisx: 'diamond',
-        csdx: 'diamond',
-        cssx: 'diamond',
-        cidx: 'diamond',
-        cisx: 'diamond',
+        icsdx: 'base',
+        icssx: 'base',
+        icidx: 'base',
+        icisx: 'base',
+        ilsdx: 'base',
+        ilssx: 'base',
+        ilidx: 'base',
+        ilisx: 'base',
+        csdx: 'base',
+        cssx: 'base',
+        cidx: 'base',
+        cisx: 'base',
     },
 
     // state and method to set the active tooth
