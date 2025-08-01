@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -16,10 +17,12 @@ export default function RootLayout({
   return (
     <html lang="en">
         <body className="bg-gray-50">
+        <AppRouterCacheProvider>
             <div className="w-[100vw] bg-gray-50 flex justify-center border-b-1 border-gray-400">
                 <img className="py-4" src="/logo.webp" alt="darkai logo"/>
             </div>
             {children}
+        </AppRouterCacheProvider>
         </body>
     </html>
   );
