@@ -1170,7 +1170,8 @@ export const useTeethStore = create<State>((set, get) => ({
                 stones: state.teethStones,
                 pave: state.teethPave,
                 visible: state.teethVisibility,
-                prices: state.teethPrices
+                prices: state.teethPrices,
+                preciousness: state.teethPreciousness
             }]
         ];
         console.log(state.currentHistory, state.history)
