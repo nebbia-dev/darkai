@@ -1,7 +1,7 @@
 import {useTeethStore} from "@/app/stores/teeth";
 import DiamondToggler from "@/app/components/DiamondToggler";
 import StoneSelector from "@/app/components/StoneSelector";
-import {Accordion, AccordionDetails, AccordionSummary} from "@mui/material";
+import {Accordion, AccordionDetails, AccordionSummary, Tooltip} from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import SelectorButton from "@/app/components/SelectorButton";
 import {Copy} from "@/app/components/icons/Copy";
@@ -76,7 +76,9 @@ export default function ToothConfig({tooth} : {tooth: string}) {
             <div className="flex items-center justify-between border-t border-[#9ca3af]">
                 <div className="w-[10%] flex justify-center">
                     {material !== 'base' &&
+                        <Tooltip title="Delete tooth">
                             <Close className="cursor-pointer" onClick={() => resetTooth(tooth)}/>
+                        </Tooltip>
                     }
                 </div>
                 <AccordionSummary expandIcon={<ExpandMoreIcon/>} sx={{height: '100px', px: 8, width:'90%', '&.MuiAccordionSummary-root':{paddingLeft:'2rem', paddingRight:'2rem'},}}
@@ -87,10 +89,12 @@ export default function ToothConfig({tooth} : {tooth: string}) {
             <AccordionDetails sx={{height: 'calc(100% - 100px - 15vh)', borderTop: '1px solid #9ca3af'}}>
                 <div className="w-full flex flex-col gap-2 relative text-right">
                     <div className={`${visible && material !== 'base' ? 'block' : 'hidden'} absolute top-4 right-4`}>
-                        <button className=" rounded-full border p-2 cursor-pointer w-fit"
-                                onClick={() => setShowCopy((prev) => !prev)}>
-                            <Copy className="w-8 h-8"/>
-                        </button>
+                        <Tooltip title="Copy on another tooth">
+                            <button className=" rounded-full border p-2 cursor-pointer w-fit"
+                                    onClick={() => setShowCopy((prev) => !prev)}>
+                                <Copy className="w-8 h-8"/>
+                            </button>
+                        </Tooltip>
                         <div
                             className={`${showCopy && availableTypes[jewelType] ? 'block' : 'hidden'} border bg-gray-50 rounded mt-2`}>
                             <h3 className="bg-gray-950 p-4 text-gray-50">Copia su...</h3>

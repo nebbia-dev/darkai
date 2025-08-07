@@ -1,6 +1,6 @@
 'use client'
 import Link from 'next/link';
-import {FormEvent, useState} from "react";
+import {useState} from "react";
 import {MuiTelInput} from "mui-tel-input";
 import {Accordion, AccordionDetails, AccordionSummary} from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -10,7 +10,7 @@ import {useRouter} from "next/navigation";
 export default function Upload() {
     const router = useRouter();
     const history = useTeethStore((state:State) => state.history);
-    const preciousness = useTeethStore((state:State) => state.teethPreciousness);
+    // const preciousness = useTeethStore((state:State) => state.teethPreciousness);
     const [value, setValue] = useState();
     const [shippingOption, setShippingOption] = useState<string|undefined>(undefined);
     const [differentShipOpts, setDifferentShipOpts] = useState<boolean>(false);
@@ -51,15 +51,13 @@ export default function Upload() {
                                   backgroundColor: '#f9fafb',
                                   '&:before': {height: '0px'},
                                   '&.Mui-expanded': {margin: 0},
-                                  marginBottom: '1rem'
                               }}>
-                                  <div className="flex items-center justify-center bg-stone-100">
+                                  <div className="flex items-center justify-center">
                                       <AccordionSummary expandIcon={<ExpandMoreIcon/>} sx={{
                                           height: '100px',
                                           px: 8,
                                           width: '90%',
                                           '&.MuiAccordionSummary-root': {paddingLeft: '2rem', paddingRight: '2rem'},
-                                          backgroundColor: '#f5f5f4'
                                       }}>
                                           <h2>Billing information</h2>
                                       </AccordionSummary>
@@ -158,15 +156,13 @@ export default function Upload() {
                                   backgroundColor: '#f9fafb',
                                   '&:before': {height: '0px'},
                                   '&.Mui-expanded': {margin: 0},
-                                  marginBottom: '1rem'
                               }}>
-                                  <div className="flex items-center justify-center bg-stone-100">
+                                  <div className="flex items-center justify-center border-t border-[#9ca3af]">
                                       <AccordionSummary expandIcon={<ExpandMoreIcon/>} sx={{
                                           height: '100px',
                                           px: 8,
                                           width: '90%',
                                           '&.MuiAccordionSummary-root': {paddingLeft: '2rem', paddingRight: '2rem'},
-                                          backgroundColor: '#f5f5f4'
                                       }}>
                                           <h2>Shipping</h2>
                                       </AccordionSummary>
@@ -224,20 +220,18 @@ export default function Upload() {
                                   </AccordionDetails>
                               </Accordion>
 
-                              {differentShipOpts &&
+                              {differentShipOpts && shippingOption === 'ship' &&
                                   <Accordion elevation={0} sx={{
                                       backgroundColor: '#f9fafb',
                                       '&:before': {height: '0px'},
                                       '&.Mui-expanded': {margin: 0},
-                                      marginBottom: '1rem'
                                   }}>
-                                      <div className="flex items-center justify-center bg-stone-100">
+                                      <div className="flex items-center justify-center border-t border-[#9ca3af]">
                                           <AccordionSummary expandIcon={<ExpandMoreIcon/>} sx={{
                                               height: '100px',
                                               px: 8,
                                               width: '90%',
                                               '&.MuiAccordionSummary-root': {paddingLeft: '2rem', paddingRight: '2rem'},
-                                              backgroundColor: '#f5f5f4'
                                           }}>
                                               <h2>Shipping information</h2>
                                           </AccordionSummary>
