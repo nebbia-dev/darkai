@@ -166,12 +166,12 @@ export default function Selection({ui} : {ui:boolean}) {
                                     <div className="h-full flex items-center justify-between w-[90%] mx-auto">
                                         <p>{total !== 0 && <span>Starting from {total}€</span>}</p>
                                         <button type="button" onClick={() => showRecap()}
-                                                className="bg-gray-950 py-2 px-4 rounded text-gray-50 cursor-pointer">Continue &rarr;</button>
+                                                className="bg-gray-950 py-2 px-4 rounded-full text-gray-50 cursor-pointer">Continue &rarr;</button>
                                     </div>
                             }
                                 </div>
                         </>
-                        : <div className="h-[calc(100vh-54px)] flex flex-col w-[75%] mx-auto">
+                        : <div className="h-[calc(100vh-54px)] flex flex-col w-full mx-auto">
                             <div className="h-[calc(100%-15vh-7.5vh)] overflow-y-auto mt-[48px] w-full mx-auto">
                                 {
                                     Object.keys(visibleTeeth).map((tooth, i) => {
@@ -182,7 +182,9 @@ export default function Selection({ui} : {ui:boolean}) {
 
                                         return (
                                             <div key={i} className="flex flex-col mb-4">
-                                                <span className="w-full py-1 px-3 bg-stone-200 mb-1">{
+                                                <div className="w-full py-1 px-3 bg-stone-200 mb-2">
+                                                    <h3 className="w-full flex items-center justify-start">
+                                                        <span className="inline-block w-[75%] mx-auto">{
                                                     (tooth === 'cidx' && (jewelType[tooth] === 'bigBar' || jewelType[tooth] === 'bigBarDiamond'))
                                                     ? 'Canini inferiori'
                                                     : (tooth === 'icidx' && (jewelType[tooth] === 'bar' || jewelType[tooth] === 'barDiamond'))
@@ -190,52 +192,64 @@ export default function Selection({ui} : {ui:boolean}) {
                                                         : (tooth === 'icsdx' && (jewelType[tooth] === 'bar' || jewelType[tooth] === 'barDiamond'))
                                                             ? 'Incisivi centrali superiori'
                                                             : elabToothName(tooth, false)
-                                                }</span>
-                                                <ul className="ml-4">
-                                                    <li>Jewel type: {jewelType[tooth].includes('Diamond') ? firstCapital(jewelType[tooth].split('D')[0]) + ' with ' + pave[tooth] + 's': firstCapital(jewelType[tooth])}</li>
-                                                    <li>Material: {firstCapital(material[tooth])}</li>
-                                                    {(stones[tooth].shape && stones[tooth].color) && <li>Gem: {firstCapital(stones[tooth].color as string)}, {firstCapital(stones[tooth].shape as string)} cut</li>}
+                                                        }</span></h3>
+                                                    </div>
+                                                <ul className="ml-4 w-full flex flex-col items-center justify-start mb-2">
+                                                    <li className="inline-block w-[75%] mx-auto">Jewel type: {jewelType[tooth].includes('Diamond') ? firstCapital(jewelType[tooth].split('D')[0]) + ' with ' + pave[tooth] + 's': firstCapital(jewelType[tooth])}</li>
+                                                    <li className="inline-block w-[75%] mx-auto">Material: {firstCapital(material[tooth])}</li>
+                                                    {(stones[tooth].shape && stones[tooth].color) && <li className="inline-block w-[75%] mx-auto">Gem: {firstCapital(stones[tooth].color as string)}, {firstCapital(stones[tooth].shape as string)} cut</li>}
                                                 </ul>
-                                                <span className="w-full text-right py-1 px-3 mt-2 border-t-1">{
-                                                    (tooth === 'cidx' && (jewelType[tooth] === 'bigBar' || jewelType[tooth] === 'bigBarDiamond'))
-                                                    || ((tooth === 'icidx' || tooth === 'icsdx') && (jewelType[tooth] === 'bar' || jewelType[tooth] === 'barDiamond'))
-                                                        ? teethPrices[tooth]*2
-                                                        : teethPrices[tooth]
-                                                }€</span>
+                                                <div className="border-t-1 w-full flex flex-col items-center">
+                                                    <span className="text-right py-1 px-3 mt-2 font-semibold text-xl inline-block w-[75%] mx-auto">{
+                                                        (tooth === 'cidx' && (jewelType[tooth] === 'bigBar' || jewelType[tooth] === 'bigBarDiamond'))
+                                                        || ((tooth === 'icidx' || tooth === 'icsdx') && (jewelType[tooth] === 'bar' || jewelType[tooth] === 'barDiamond'))
+                                                            ? teethPrices[tooth]*2
+                                                            : teethPrices[tooth]
+                                                    }€</span>
+                                                </div>
                                             </div>
                                         )
                                     })
                                 }
                                 <div className="mb-4">
-                                    <span className="w-full py-1 px-3 bg-stone-200 mb-1 block">Gold carats</span>
-                                    <div className="ml-4">
-                                        <label htmlFor="18k" className="flex items-center gap-2">
-                                            <input type="radio" id="18k" name="carats" checked={gold === '18k'}
-                                                   value="18k" onChange={(e) => setGold(e.target.value)}/>
-                                            18K
-                                        </label>
-                                        <label htmlFor="14k" className="flex items-center gap-2">
-                                            <input type="radio" id="14k" name="carats" checked={gold === '14k'}
-                                                   value="14k" onChange={(e) => setGold(e.target.value)}/>
-                                            14K
-                                        </label>
+                                    <div className="w-full py-1 px-3 bg-stone-200 mb-2">
+                                        <h3 className="w-full flex items-center justify-start">
+                                            <span className="inline-block w-[75%] mx-auto">Gold carats</span>
+                                        </h3>
                                     </div>
+                                        <div className="w-[75%] mx-auto">
+                                            <label htmlFor="18k" className="flex items-center gap-2 ml-4">
+                                                <input type="radio" id="18k" name="carats" checked={gold === '18k'}
+                                                       value="18k" onChange={(e) => setGold(e.target.value)}/>
+                                                18K
+                                            </label>
+                                            <label htmlFor="14k" className="flex items-center gap-2 ml-4">
+                                                <input type="radio" id="14k" name="carats" checked={gold === '14k'}
+                                                       value="14k" onChange={(e) => setGold(e.target.value)}/>
+                                                14K
+                                            </label>
+                                        </div>
                                 </div>
                                 {checkDiamonds() &&
                                     <div>
-                                        <span className="w-full py-1 px-3 bg-stone-200 mb-1 block">Diamonds type</span>
-                                        <div className="ml-4">
-                                            <label htmlFor="natural" className="flex items-center gap-2">
-                                                <input type="radio" id="natural" name="diamonds" checked={diamond === 'natural'}
+                                        <div className="w-full py-1 px-3 bg-stone-200 mb-2">
+                                            <h3 className="w-full flex items-center justify-start">
+                                                <span className="inline-block w-[75%] mx-auto">Diamonds type</span>
+                                            </h3>
+                                        </div>
+                                        <div className="w-[75%] mx-auto">
+                                            <label htmlFor="natural" className="flex items-center gap-2 ml-4">
+                                                <input type="radio" id="natural" name="diamonds"
+                                                       checked={diamond === 'natural'}
                                                        value="natural" onChange={(e) => setDiamond(e.target.value)}/>
                                                 Natural
                                             </label>
-                                            <label htmlFor="lab" className="flex items-center gap-2">
+                                            <label htmlFor="lab" className="flex items-center gap-2 ml-4">
                                                 <input type="radio" id="lab" name="diamonds" checked={diamond === 'lab'}
                                                        value="lab" onChange={(e) => setDiamond(e.target.value)}/>
                                                 Lab
                                             </label>
-                                            <label htmlFor="mois" className="flex items-center gap-2">
+                                            <label htmlFor="mois" className="flex items-center gap-2 ml-4">
                                                 <input type="radio" id="mois" name="diamonds" checked={diamond === 'mois'}
                                                        value="mois" onChange={(e) => setDiamond(e.target.value)}/>
                                                 Moissanite
@@ -245,19 +259,21 @@ export default function Selection({ui} : {ui:boolean}) {
                                 }
                             </div>
                             <div className="flex flex-col items-center">
-                                <div className="flex justify-end w-full px-3 h-[7.5vh] items-center bg-stone-200 text-right mt-4">Total: {total + totalPreciousness}€</div>
-                                <div className="flex items-center justify-between w-full h-[15vh] mx-auto">
-                                    <button type="button" onClick={() => setRecap(false)}
-                                            className="bg-gray-50 py-2 px-4 rounded text-gray-950 border cursor-pointer">&larr; Back
-                                    </button>
-                                    <div className="flex gap-4">
-                                        <button type="button" onClick={() => setOpen(true)}
-                                                className="bg-gray-50 py-2 px-4 rounded text-gray-950 border cursor-pointer">Save
+                                <div className="flex justify-end w-[90%] px-3 h-[7.5vh] items-center text-right my-4 font-bold text-3xl">Total: {total + totalPreciousness}€</div>
+                                <div className="w-full h-[15vh] bg-stone-200">
+                                    <div className="flex items-center justify-between w-[90%] h-full mx-auto">
+                                        <button type="button" onClick={() => setRecap(false)}
+                                                className="bg-gray-50 py-2 px-4 rounded-full text-gray-950 border cursor-pointer">&larr; Back
                                         </button>
-                                        <Link href="/checkout/upload"
-                                                className="bg-gray-950 py-2 px-4 rounded text-gray-50 cursor-pointer">Next &rarr;
-                                        </Link>
-                                </div>
+                                        <div className="flex gap-4">
+                                            <button type="button" onClick={() => setOpen(true)}
+                                                    className="bg-gray-50 py-2 px-4 rounded-full text-gray-950 border cursor-pointer">Save
+                                            </button>
+                                            <Link href="/checkout/upload"
+                                                    className="bg-gray-950 py-2 px-4 rounded-full text-gray-50 cursor-pointer border">Next &rarr;
+                                            </Link>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -377,7 +393,7 @@ export default function Selection({ui} : {ui:boolean}) {
                             ? <div>
                                 <p className="text-gray-950">Your configuration has been sent to you!</p>
                                 <div className="w-full text-right mt-6">
-                                    <button className="cursor-pointer py-2 px-4 rounded border text-gray-950"
+                                    <button className="cursor-pointer py-2 px-4 rounded-full border text-gray-950"
                                             type="button" onClick={() => setOpen(false)}>Close
                                     </button>
                                 </div>
@@ -398,10 +414,10 @@ export default function Selection({ui} : {ui:boolean}) {
                                         I'd like to receive more information about Darkai products
                                     </label>
                                     <div className="w-full text-right mt-4">
-                                        <button className="cursor-pointer py-2 px-4 rounded border text-gray-950 mr-4"
+                                        <button className="cursor-pointer py-2 px-4 rounded-full border text-gray-950 mr-4"
                                                 type="button" onClick={() => setOpen(false)}>Close
                                         </button>
-                                        <button className="cursor-pointer py-2 px-4 rounded bg-gray-950 text-gray-50"
+                                        <button className="cursor-pointer py-2 px-4 rounded-full bg-gray-950 text-gray-50"
                                                 type="submit">Send
                                         </button>
                                     </div>

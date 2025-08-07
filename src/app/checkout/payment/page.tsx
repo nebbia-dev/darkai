@@ -377,10 +377,10 @@ export default function Upload() {
                       </div>
                         </div>
                         <div className="w-[75vw] h-[15vh] flex items-center justify-between mx-auto">
-                          <Link className="cursor-pointer py-2 px-4 rounded border text-gray-950 mr-4"
+                          <Link className="cursor-pointer py-2 px-4 rounded-full border text-gray-950 mr-4"
                           href="/checkout/upload">&larr; Back
                           </Link>
-                          <button className="cursor-pointer py-2 px-4 rounded bg-gray-950 text-gray-50"
+                          <button className="cursor-pointer py-2 px-4 rounded-full bg-gray-950 text-gray-50"
                           type="button" onClick={pay}>Proceed to payment &rarr;</button>
                         </div>
                     </>

@@ -7,10 +7,10 @@ export default function Error() {
                 <h2 className="font-bold text-2xl mb-6">Something went wrong...</h2>
                 <p>The transaction was not completed and your order has not been placed.</p>
                 <div className="flex items-center justify-between mx-auto mt-6">
-                    <Link className="cursor-pointer py-2 px-4 rounded border text-gray-950 mr-4"
+                    <Link className="cursor-pointer py-2 px-4 rounded-full border text-gray-950 mr-4"
                           href="/">&larr; Back to the configurator
                     </Link>
-                    <Link className="cursor-pointer py-2 px-4 rounded border bg-gray-950 text-gray-50 mr-4"
+                    <Link className="cursor-pointer py-2 px-4 rounded-full border bg-gray-950 text-gray-50 mr-4"
                           href="/checkout/payment">Try again &rarr;
                     </Link>
                 </div>

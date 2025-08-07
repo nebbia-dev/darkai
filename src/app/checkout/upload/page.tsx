@@ -15,10 +15,10 @@ export default function Upload() {
             </div>
         </div>
             <div className="max-w-[50vw] w-full flex justify-between h-[15vh] items-center mx-auto">
-                <Link className="cursor-pointer py-2 px-4 rounded border text-gray-950 mr-4"
+                <Link className="cursor-pointer py-2 px-4 rounded-full border text-gray-950 mr-4"
                       href="/">&larr; Back
                 </Link>
-                <Link className="cursor-pointer py-2 px-4 rounded bg-gray-950 text-gray-50"
+                <Link className="cursor-pointer py-2 px-4 rounded-full bg-gray-950 text-gray-50"
                       href="/checkout/payment"
                         >Proceed to checkout &rarr;
                 </Link>

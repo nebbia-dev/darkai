@@ -17,7 +17,7 @@ export default function Success() {
                     className="font-semibold">customercare.orders@darkai.com</span>
                 </p>
                 <div className="flex items-center justify-center mx-auto mt-6">
-                    <Link className="cursor-pointer py-2 px-4 rounded border text-gray-950 mr-4"
+                    <Link className="cursor-pointer py-2 px-4 rounded-full border text-gray-950 mr-4"
                           href="/">&larr; Back to the configurator
                     </Link>
                 </div>
