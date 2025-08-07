@@ -740,18 +740,18 @@ export const useTeethStore = create<State>((set, get) => ({
 
     // state to keep track of pave stones
     teethPave: {
-        icsdx: 'diamond',
-        icssx: 'diamond',
-        icidx: 'diamond',
-        icisx: 'diamond',
-        ilsdx: 'diamond',
-        ilssx: 'diamond',
-        ilidx: 'diamond',
-        ilisx: 'diamond',
-        csdx: 'diamond',
-        cssx: 'diamond',
-        cidx: 'diamond',
-        cisx: 'diamond',
+        icsdx: 'base',
+        icssx: 'base',
+        icidx: 'base',
+        icisx: 'base',
+        ilsdx: 'base',
+        ilssx: 'base',
+        ilidx: 'base',
+        ilisx: 'base',
+        csdx: 'base',
+        cssx: 'base',
+        cidx: 'base',
+        cisx: 'base',
     },
 
     // state and method to set the active tooth
@@ -999,7 +999,6 @@ export const useTeethStore = create<State>((set, get) => ({
             .from('Prices_addons')
             .select('*');
         set({prices: base as BasePrices[], pricesAdds: addons as AddonsPrices[]});
-        console.log(addons)
     },
 
     // states and methods to set the configuration steps history and
@@ -1169,8 +1168,10 @@ export const useTeethStore = create<State>((set, get) => ({
                 type: state.teethJewelType,
                 material: state.teethMaterial,
                 stones: state.teethStones,
+                pave: state.teethPave,
                 visible: state.teethVisibility,
-                prices: state.teethPrices
+                prices: state.teethPrices,
+                preciousness: state.teethPreciousness
             }]
         ];
         console.log(state.currentHistory, state.history)
@@ -1237,6 +1238,10 @@ export const useTeethStore = create<State>((set, get) => ({
 
     // state and method to calculate the preciousness of the materials used in the configuration
     // 0 is the starting price, with 14K gold and moissanite
+    teethPreciousness: {
+        carats: undefined,
+        diamonds: undefined
+    },
     totalPreciousness: 0,
     calcPreciousness: ((gold, diamond) =>
         set(
@@ -1248,7 +1253,7 @@ export const useTeethStore = create<State>((set, get) => ({
                     state.totalPreciousness += configTeeth.length * 300;
                 }
 
-                if(diamond !== 'mois') {
+                if(diamond && diamond !== 'mois') {
                     const configTeeth = Object.keys(state.teethJewelType).filter(tooth => state.teethJewelType[tooth].includes('Diamond'));
                     switch(diamond) {
                         case 'lab':
@@ -1257,6 +1262,12 @@ export const useTeethStore = create<State>((set, get) => ({
                         case 'natural':
                             state.totalPreciousness += configTeeth.length * 1000;
                     }
+                }
+
+                state.teethPreciousness.carats = gold;
+                state.teethPreciousness.diamonds = diamond;
+                if(state.history.length > 0) {
+                    state.history[state.history.length - 1][0].preciousness = state.teethPreciousness;
                 }
             })
         )

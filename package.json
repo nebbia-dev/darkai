@@ -9,11 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/cache": "^11.14.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@fontsource/roboto": "^5.2.6",
     "@mui/icons-material": "^7.1.2",
     "@mui/material": "^7.1.2",
+    "@mui/material-nextjs": "^7.2.0",
     "@netlify/plugin-nextjs": "^5.11.5",
     "@react-three/drei": "^10.1.2",
     "@react-three/fiber": "^9.1.2",
@@ -21,6 +23,7 @@
     "@supabase/supabase-js": "^2.51.0",
     "immer": "^10.1.1",
     "leva": "^0.10.0",
+    "mui-tel-input": "^9.0.1",
     "next": "15.3.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

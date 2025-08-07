@@ -6,7 +6,7 @@ export default function ShapeSelector({tooth, stone, onclick, active} : {onclick
     const type = useTeethStore((state: State) => state.teethJewelType[tooth]);
     const material = useTeethStore((state: State) => state.teethMaterial[tooth]);
     const disabled = type === 'frame' || type === 'frameDiamond' || type === 'bar' || type === 'barDiamond' || type === 'bigBar' || type === 'bigBarDiamond' || material === 'base'
-    console.log('oops')
+
     return (
         <SelectorButton click={onclick} disabled={disabled} selection={stone} active={active} adjust={true}/>
     )

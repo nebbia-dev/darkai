@@ -31,7 +31,21 @@ interface JewelTypes {
     cidx: string,
     cisx: string,
 }
-
+interface Pave {
+    [key: string]: 'diamond' | 'emerald' | 'sapphire' | 'ruby' | 'base',
+    icsdx: 'diamond' | 'emerald' | 'sapphire' | 'ruby' | 'base',
+    icssx: 'diamond' | 'emerald' | 'sapphire' | 'ruby' | 'base',
+    icidx: 'diamond' | 'emerald' | 'sapphire' | 'ruby' | 'base',
+    icisx: 'diamond' | 'emerald' | 'sapphire' | 'ruby' | 'base',
+    ilsdx: 'diamond' | 'emerald' | 'sapphire' | 'ruby' | 'base',
+    ilssx: 'diamond' | 'emerald' | 'sapphire' | 'ruby' | 'base',
+    ilidx: 'diamond' | 'emerald' | 'sapphire' | 'ruby' | 'base',
+    ilisx: 'diamond' | 'emerald' | 'sapphire' | 'ruby' | 'base',
+    csdx: 'diamond' | 'emerald' | 'sapphire' | 'ruby' | 'base',
+    cssx: 'diamond' | 'emerald' | 'sapphire' | 'ruby' | 'base',
+    cidx: 'diamond' | 'emerald' | 'sapphire' | 'ruby' | 'base',
+    cisx: 'diamond' | 'emerald' | 'sapphire' | 'ruby' | 'base',
+}
 interface Prices {
     [key: string]: number
     icsdx: number,
@@ -81,12 +95,20 @@ interface Stones {
     cidx: Stone,
     cisx: Stone,
 }
-interface History {
+
+export interface Preciousness {
+    [key: string]: string | undefined,
+    carats: string | undefined,
+    diamonds: string | undefined
+}
+export interface History {
     material: Materials,
     stones: Stones,
+    pave: Pave,
     type: JewelTypes,
     visible: Visibility,
-    prices: Prices
+    prices: Prices,
+    preciousness: Preciousness | undefined
 }
 export interface BasePrices {
     [key: string]: any,
@@ -146,21 +168,7 @@ export interface State {
         frameDiamond: string[],
         stones: string[]
     },
-    teethPave: {
-        [key: string]: 'diamond' | 'emerald' | 'sapphire' | 'ruby',
-        icsdx: 'diamond' | 'emerald' | 'sapphire' | 'ruby',
-        icssx: 'diamond' | 'emerald' | 'sapphire' | 'ruby',
-        icidx: 'diamond' | 'emerald' | 'sapphire' | 'ruby',
-        icisx: 'diamond' | 'emerald' | 'sapphire' | 'ruby',
-        ilsdx: 'diamond' | 'emerald' | 'sapphire' | 'ruby',
-        ilssx: 'diamond' | 'emerald' | 'sapphire' | 'ruby',
-        ilidx: 'diamond' | 'emerald' | 'sapphire' | 'ruby',
-        ilisx: 'diamond' | 'emerald' | 'sapphire' | 'ruby',
-        csdx: 'diamond' | 'emerald' | 'sapphire' | 'ruby',
-        cssx: 'diamond' | 'emerald' | 'sapphire' | 'ruby',
-        cidx: 'diamond' | 'emerald' | 'sapphire' | 'ruby',
-        cisx: 'diamond' | 'emerald' | 'sapphire' | 'ruby',
-    },
+    teethPave: Pave,
     activeTab: number,
     loaded: boolean,
     prices: BasePrices[] | undefined,
@@ -169,8 +177,9 @@ export interface State {
     isScreenshotNeeded: boolean | undefined,
     resetControls: boolean | undefined,
     recap: boolean,
+    teethPreciousness: Preciousness,
     totalPreciousness: number,
-    calcPreciousness: (gold:string, diamond:string) => void,
+    calcPreciousness: (gold:string, diamond:string|undefined) => void,
     setRecap: (bool:boolean) => void,
     setIsScreenshotNeeded: (value:boolean|undefined) => void,
     setResetControls: (value:boolean|undefined) => void,
@@ -181,7 +190,7 @@ export interface State {
     setType: (tooth:string, type:string) => void,
     setDiamond: (tooth:string, pave:string) => void,
     setStone: (tooth:string, shape:string, color:string) => void,
-    setActiveTooth: (tooth:string) => void,
+    setActiveTooth: (tooth:string|undefined) => void,
     setDefaultConfig: (config:string, color:string) => void,
     setTooth: (tooth:string, type:string, color:string) => void,
     resetTooth: (tooth:string) => void,

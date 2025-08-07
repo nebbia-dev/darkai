@@ -3,10 +3,12 @@ import {Reset} from "@/app/components/icons/Reset";
 import {Undo} from "@/app/components/icons/Undo";
 import {Redo} from "@/app/components/icons/Redo";
 import {Copy} from "@/app/components/icons/Copy";
+import {Info} from "@/app/components/icons/Info";
 import elabToothName from "@/app/helpers/elabToothName";
 import {useState} from "react";
 import {ResetCamera} from "@/app/components/icons/ResetCamera";
 import {State, Stone} from "@/app/types/State";
+import {Tooltip} from "@mui/material";
 
 export default function ActionBar({ui} : {ui: boolean}) {
     const current = useTeethStore((state:State) => state.currentHistory);
@@ -22,6 +24,7 @@ export default function ActionBar({ui} : {ui: boolean}) {
     const undo = useTeethStore((state:State) => state.undo);
     const redo = useTeethStore((state:State) => state.redo);
     const [showCopy, setShowCopy] = useState<boolean>(false);
+    const [showManual, setShowManual] = useState<boolean>(false);
     const doResetControls = useTeethStore((state:State) => state.setResetControls);
     function resetControls() {
         doResetControls(true);
@@ -45,15 +48,33 @@ export default function ActionBar({ui} : {ui: boolean}) {
     }
 
     return(
-        <div className="relative z-30">
+        <div>
+            <div className="absolute flex items-center justify-center gap-4 left-10 top-10 translate-x-[-50%] w-2/4">
+                <button className="cursor-pointer">
+                    <Info className="w-6 h-6" onClick={() => setShowManual((prev) => !prev)}/>
+                </button>
+                {showManual &&
+                    <div className="absolute flex flex-col border border-gray-950/[33%] gap-2 left-[60%] top-[-100%] w-[250px] text-sm bg-gray-50 rounded py-2 px-4">
+                        <p className="font-semibold">How to navigate the model</p>
+                        <ul>
+                            <li><span className="font-semibold">Move</span>: click + drag</li>
+                            <li><span className="font-semibold">Zoom</span>: slide two fingers up/down or rotate the mouse wheel</li>
+                        </ul>
+                    </div>
+                }
+            </div>
             <div
                 className={`absolute flex items-center justify-center gap-4 ${ui ? 'bottom-5' : 'bottom-20'} left-[50%] translate-x-[-50%] w-2/4`}>
-                <button onClick={doUndo} className="rounded-full border p-2 cursor-pointer bg-gray-50/50">
-                    <Undo className={`${ui ? 'w-6 h-6' : 'w-8 h-8'}`}/>
-                </button>
-                <button onClick={doRedo} className="rounded-full border p-2 cursor-pointer bg-gray-50/50">
-                    <Redo className={`${ui ? 'w-6 h-6' : 'w-8 h-8'}`}/>
-                </button>
+                <Tooltip title="Previous">
+                    <button onClick={doUndo} className="rounded-full border p-2 cursor-pointer bg-gray-50/50">
+                        <Undo className={`${ui ? 'w-6 h-6' : 'w-8 h-8'}`}/>
+                    </button>
+                </Tooltip>
+                <Tooltip title="Next">
+                    <button onClick={doRedo} className="rounded-full border p-2 cursor-pointer bg-gray-50/50">
+                        <Redo className={`${ui ? 'w-6 h-6' : 'w-8 h-8'}`}/>
+                    </button>
+                </Tooltip>
                 <div
                     className={`${visible && material !== 'base' && ui ? 'flex' : 'hidden'} relative items-center justify-center col-start-1 col-end-1 row-start-1 row-end-1`}>
                     <button className="bg-gray-50/50 rounded-full border p-2 cursor-pointer w-fit"
@@ -80,12 +101,16 @@ export default function ActionBar({ui} : {ui: boolean}) {
                         </ul>
                     </div>
                 </div>
-                <button onClick={resetControls} className="rounded-full border p-2 cursor-pointer bg-gray-50/50">
-                    <ResetCamera className={`${ui ? 'w-6 h-6' : 'w-8 h-8'}`}/>
-                </button>
-                <button onClick={reset} className="bg-gray-50/50 rounded-full border p-2 cursor-pointer">
-                    <Reset className={`${ui ? 'w-6 h-6' : 'w-8 h-8'}`}/>
-                </button>
+                <Tooltip title="Reset camera">
+                    <button onClick={resetControls} className="rounded-full border p-2 cursor-pointer bg-gray-50/50">
+                        <ResetCamera className={`${ui ? 'w-6 h-6' : 'w-8 h-8'}`}/>
+                    </button>
+                </Tooltip>
+                <Tooltip title="Reset configuration">
+                    <button onClick={reset} className="bg-gray-50/50 rounded-full border p-2 cursor-pointer">
+                        <Reset className={`${ui ? 'w-6 h-6' : 'w-8 h-8'}`}/>
+                    </button>
+                </Tooltip>
             </div>
         </div>
     )
