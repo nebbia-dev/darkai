@@ -96,12 +96,12 @@ interface Stones {
     cisx: Stone,
 }
 
-interface Preciousness {
+export interface Preciousness {
     [key: string]: string | undefined,
     carats: string | undefined,
     diamonds: string | undefined
 }
-interface History {
+export interface History {
     material: Materials,
     stones: Stones,
     pave: Pave,

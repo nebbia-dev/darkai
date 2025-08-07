@@ -32,7 +32,7 @@ export default function ToothConfig({tooth} : {tooth: string}) {
     const [showCopy, setShowCopy] = useState<boolean>(false);
     const title = elabToothName(tooth, false);
 
-    const divRef = useRef(null);
+    const divRef = useRef<HTMLDivElement|null>(null);
 
     useEffect(() => {
         if (activeTooth === tooth && divRef.current !== null){

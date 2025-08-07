@@ -11,10 +11,10 @@ export default function Upload() {
     const router = useRouter();
     const history = useTeethStore((state:State) => state.history);
     // const preciousness = useTeethStore((state:State) => state.teethPreciousness);
-    const [value, setValue] = useState();
+    const [value, setValue] = useState<string>();
     const [shippingOption, setShippingOption] = useState<string|undefined>(undefined);
     const [differentShipOpts, setDifferentShipOpts] = useState<boolean>(false);
-    function handleChange(newValue) {
+    function handleChange(newValue: string) {
         setValue(newValue);
     }
 

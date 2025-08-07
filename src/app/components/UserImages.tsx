@@ -2,7 +2,7 @@
 import Image from "next/image";
 import {useState} from "react";
 
-export default function UserImages({configId}:{configId:string|number}) {
+export default function UserImages({configId}:{configId:string|number|undefined}) {
     const [showConfig, setShowConfig] = useState<boolean>(true);
     return(
         <div className="w-[90%] mx-auto h-full flex gap-3">

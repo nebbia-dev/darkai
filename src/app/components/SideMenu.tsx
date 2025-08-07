@@ -2,7 +2,7 @@
 import {useState} from "react";
 import {Drawer} from "@mui/material";
 import Link from "next/link";
-import {Menu} from '@/app/components/icons/Menu.tsx';
+import {Menu} from '@/app/components/icons/Menu';
 
 export default function SideMenu() {
     const [open, setOpen] = useState(false);
