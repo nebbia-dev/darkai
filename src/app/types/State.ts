@@ -190,7 +190,7 @@ export interface State {
     setType: (tooth:string, type:string) => void,
     setDiamond: (tooth:string, pave:string) => void,
     setStone: (tooth:string, shape:string, color:string) => void,
-    setActiveTooth: (tooth:string) => void,
+    setActiveTooth: (tooth:string|undefined) => void,
     setDefaultConfig: (config:string, color:string) => void,
     setTooth: (tooth:string, type:string, color:string) => void,
     resetTooth: (tooth:string) => void,

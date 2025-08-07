@@ -27,6 +27,7 @@ export default function Selection({ui} : {ui:boolean}) {
     const stones = useTeethStore((state: State) => state.teethStones);
     const teethPrices = useTeethStore((state:State) => state.teethPrices);
     const activeTooth = useTeethStore((state: State) => state.currentTooth);
+    const setActiveTooth =  useTeethStore((state: State) => state.setActiveTooth);
     const activeTab = useTeethStore((state: State) => state.activeTab);
     const setActiveTab = useTeethStore((state: State) => state.setActiveTab);
     const recap = useTeethStore((state:State) => state.recap);
@@ -62,6 +63,7 @@ export default function Selection({ui} : {ui:boolean}) {
     }
     function showRecap() {
         setRecap(true);
+        setActiveTooth(undefined);
         calcPreciousness(gold, diamond);
     }
     const changeTab = (event: SyntheticEvent, newValue: number) => {

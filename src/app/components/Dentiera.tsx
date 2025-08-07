@@ -17,6 +17,7 @@ export default function Dentiera() {
     const envMap = useTeethStore((state: State) => state.envMap);
     const setActive = useTeethStore((state: State) => state.setActiveTooth);
     const activeTooth = useTeethStore((state: State) => state.currentTooth);
+    const setRecap = useTeethStore((state:State) => state.setRecap);
     const props = useTexture({
         map: 'textures/dentieraBase/DefaultMaterial_Base_color_1001.webp',
         normalMap: 'textures/dentieraBase/DefaultMaterial_Normal_1001.webp',
@@ -105,6 +106,7 @@ export default function Dentiera() {
                 setActive('icsdx');
                 break;
         }
+        setRecap(false);
     }
 
     // hover
