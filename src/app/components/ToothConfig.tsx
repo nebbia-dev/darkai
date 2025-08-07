@@ -146,18 +146,18 @@ export default function ToothConfig({tooth, ref, position} : {tooth: string, ref
                         <div className="flex gap-2">
                             <div className="text-center">
                                 <SelectorButton disabled={false} selection="gold" active={visible && (material === 'gold')}
-                                            click={() => selectMaterial('gold')} adjust={false}/>
+                                            click={() => selectMaterial('gold')} adjust={true}/>
                                 {/*{prices?.map(price => (tooth === price.tooth + 'sx' || tooth === price.tooth + 'dx') && material !== 'base' ? <p key={price.tooth + '_' + jewelType + 'G'} >{price[jewelType.slice().split('D').shift() + 'Gold']}€</p> : null)}*/}
                             </div>
                             <div className="text-center">
                                 <SelectorButton disabled={false} selection="rose" active={visible && (material === 'rose')}
-                                            click={() => selectMaterial('rose')} adjust={false}/>
+                                            click={() => selectMaterial('rose')} adjust={true}/>
                                 {/*{prices?.map(price => (tooth === price.tooth + 'sx' || tooth === price.tooth + 'dx') && material !== 'base' ? <p key={price.tooth + '_' + jewelType + 'R'}>{price[jewelType.slice().split('D').shift() + 'Rose']}€</p> : null)}*/}
                             </div>
                             <div className="text-center">
                                 <SelectorButton disabled={false} selection="white"
                                             active={visible && (material === 'white')}
-                                            click={() => selectMaterial('white')} adjust={false}/>
+                                            click={() => selectMaterial('white')} adjust={true}/>
                                 {/*{prices?.map(price => (tooth === price.tooth + 'sx' || tooth === price.tooth + 'dx') && material !== 'base' ? <p key={price.tooth + '_' + jewelType + 'W'}>{price[jewelType.slice().split('D').shift() + 'White']}€</p> : null)}*/}
                             </div>
                         </div>
