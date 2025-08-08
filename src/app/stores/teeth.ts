@@ -754,8 +754,10 @@ export const useTeethStore = create<State>((set, get) => ({
         cisx: 'base',
     },
 
-    // state and method to set the active tooth
+    // state and method to set the active tooth;
+    // lastActivatedTooth and its setter/unsetter activate/deactivate the scrollIntoView of the relative accordion
     currentTooth: undefined,
+    lastActivatedTooth: undefined,
     setActiveTooth: (tooth) =>
         set(
             produce((state) => {
@@ -767,13 +769,15 @@ export const useTeethStore = create<State>((set, get) => ({
                 // active tooth toggler
                 if(state.currentTooth === tooth) {
                     state.currentTooth = undefined;
+                    state.lastActivatedTooth = undefined;
                 } else {
                     state.currentTooth = tooth;
+                    state.lastActivatedTooth = tooth;
                 }
 
             })
         ),
-
+    unsetLastActivatedTooth: () => set({lastActivatedTooth: undefined}),
     // state and methods to set the active default configuration
     setDefaultConfig: (config, color) => {
         get().reset();
