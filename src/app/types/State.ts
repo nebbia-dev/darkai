@@ -157,6 +157,7 @@ export interface State {
     currentHistory: number,
     activeDefault: string | undefined,
     currentTooth: string | undefined,
+    lastActivatedTooth: string | undefined,
     ui: boolean,
     teethTypeOptions: {
         [key: string]: string[]
@@ -191,6 +192,7 @@ export interface State {
     setDiamond: (tooth:string, pave:string) => void,
     setStone: (tooth:string, shape:string, color:string) => void,
     setActiveTooth: (tooth:string|undefined) => void,
+    unsetLastActivatedTooth: () => void,
     setDefaultConfig: (config:string, color:string) => void,
     setTooth: (tooth:string, type:string, color:string) => void,
     resetTooth: (tooth:string) => void,

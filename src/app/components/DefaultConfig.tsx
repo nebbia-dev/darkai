@@ -6,7 +6,6 @@ import {State} from "@/app/types/State";
 import {useState} from "react";
 
 export default function DefaultConfig({teeth} : {teeth: string}) {
-    const firstChild = teeth === 'full' ? '' : '1px solid #9ca3af';
     const activeDefault = useTeethStore((state:State) => state.activeDefault);
     const [expanded, setExpanded] = useState<boolean>(false);
     let title;
@@ -34,11 +33,11 @@ export default function DefaultConfig({teeth} : {teeth: string}) {
     return (
         <Accordion elevation={0} sx={{backgroundColor: '#f9fafb', '&:before':{height:'0px'}}}
                    expanded={activeDefault?.includes(teeth) || expanded}>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />} sx={{height: '100px', borderTop: firstChild, px: 8}}
+            <AccordionSummary expandIcon={<ExpandMoreIcon />} sx={{height: '100px', borderBottom: '1px solid #9ca3af', px: 8}}
                               onClick={() => setExpanded(prev => !prev)}>
                 {title}
             </AccordionSummary>
-            <AccordionDetails sx={{borderTop: '1px solid #9ca3af'}}>
+            <AccordionDetails sx={{borderBottom: '1px solid #9ca3af', padding:'1rem'}}>
                 <div className="w-full flex gap-8 flex-wrap">
                     <DefaultConfigButton teeth={teeth} color="gold"/>
                     <DefaultConfigButton teeth={teeth} color="rose"/>

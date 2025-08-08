@@ -6,12 +6,12 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import SelectorButton from "@/app/components/SelectorButton";
 import {Copy} from "@/app/components/icons/Copy";
 import {Close} from "@/app/components/icons/Close";
-import {useEffect, useRef, useState} from "react";
+import {RefObject, useEffect, useRef, useState} from "react";
 import elabToothName from "@/app/helpers/elabToothName";
 import {State} from "@/app/types/State";
 import ShapeSelector from "@/app/components/ShapeSelector";
 
-export default function ToothConfig({tooth} : {tooth: string}) {
+export default function ToothConfig({tooth, ref, position} : {tooth: string, ref:RefObject<any>, position:RefObject<any>}) {
     // const prices = useTeethStore((state: State) => state.prices);
     // const pricesAdds = useTeethStore((state: State) => state.pricesAdds);
     const jewelType = useTeethStore((state: State) => state.teethJewelType[tooth]);
@@ -19,9 +19,11 @@ export default function ToothConfig({tooth} : {tooth: string}) {
     const stones = useTeethStore((state: State) => state.teethStones[tooth]);
     const pave = useTeethStore((state: State) => state.teethPave[tooth]);
     const visible = useTeethStore((state: State) => state.teethVisibility[tooth]);
-    const activeTooth = useTeethStore((state: State) => state.currentTooth);
     const availableTypes = useTeethStore((state: State) => state.teethTypeOptions);
+    const activeTooth = useTeethStore((state: State) => state.currentTooth);
     const setActiveTooth = useTeethStore((state: State) => state.setActiveTooth);
+    const lastActivatedTooth = useTeethStore((state: State) => state.lastActivatedTooth);
+    const unsetLastActivatedTooth = useTeethStore((state: State) => state.unsetLastActivatedTooth);
     const resetTooth = useTeethStore((state: State) => state.resetTooth);
     const changeJewelType = useTeethStore((state: State) => state.setType);
     const changeMaterial = useTeethStore((state: State) => state.setMaterial);
@@ -35,32 +37,52 @@ export default function ToothConfig({tooth} : {tooth: string}) {
     const divRef = useRef<HTMLDivElement|null>(null);
 
     useEffect(() => {
-        if (activeTooth === tooth && divRef.current !== null){
+        if (lastActivatedTooth === tooth && divRef.current !== null) {
             divRef.current.scrollIntoView({behavior: "smooth"});
-            console.log(divRef.current.scrollTop)
         }
-    }, [activeTooth]);
+    }, []);
+
+    useEffect(() => {
+        if (position.current !== null && ref.current) {
+            console.log(position.current, 'waaa')
+            ref.current.scrollTop = position.current;
+            position.current = null;
+            console.log(position.current, 'waaaaa')
+        }
+    }, [jewelType, material, stones, pave]);
+
+    function preventScrollIntoView() {
+        if(lastActivatedTooth === tooth) {
+            unsetLastActivatedTooth();
+        }
+    }
 
     function selectType(type: string) {
+        preventScrollIntoView();
+        position.current = ref.current.scrollTop;
         setActiveDefault(undefined, undefined);
         setShowCopy(false);
         changeJewelType(tooth, type);
     }
-
     function selectMaterial(material: string) {
+        preventScrollIntoView();
+        position.current = ref.current.scrollTop;
         setActiveDefault(undefined, undefined);
         changeMaterial(tooth, material);
     }
-
     function selectDiamond(pave: string) {
+        preventScrollIntoView();
+        position.current = ref.current.scrollTop;
         toggleDiamond(tooth, pave);
     }
-
     function selectStone(stone: string) {
+        preventScrollIntoView();
+        position.current = ref.current.scrollTop;
         changeStone(tooth, 'prev', stone);
     }
-
     function selectShape(stone: string) {
+        preventScrollIntoView();
+        position.current = ref.current.scrollTop;
         changeStone(tooth, stone, 'prev');
     }
     function setCopy(newTooth: string, oldTooth: string) {
@@ -68,12 +90,10 @@ export default function ToothConfig({tooth} : {tooth: string}) {
         setShowCopy(false);
     }
 
-    console.log('oh no');
-
     return (
         <Accordion ref={divRef} elevation={0} sx={{backgroundColor: '#f9fafb', '&:before': {height: '0px'}, '&.Mui-expanded': {margin: 0}}}
                    expanded={activeTooth === tooth}>
-            <div className="flex items-center justify-between border-t border-[#9ca3af]">
+            <div className="flex items-center justify-between border-b border-[#9ca3af]">
                 <div className="w-[10%] flex justify-center">
                     {material !== 'base' &&
                         <Tooltip title="Delete tooth">
@@ -86,7 +106,7 @@ export default function ToothConfig({tooth} : {tooth: string}) {
                     {title}
                 </AccordionSummary>
             </div>
-            <AccordionDetails sx={{height: 'calc(100% - 100px - 15vh)', borderTop: '1px solid #9ca3af'}}>
+            <AccordionDetails sx={{height: 'calc(100% - 100px - 15vh)', borderBottom: '1px solid #9ca3af'}}>
                 <div className="w-full flex flex-col gap-2 relative text-right">
                     <div className={`${visible && material !== 'base' ? 'block' : 'hidden'} absolute top-4 right-4`}>
                         <Tooltip title="Copy on another tooth">

@@ -1,5 +1,5 @@
 import ToothConfig from "@/app/components/ToothConfig";
-import {FormEvent, ReactNode, SyntheticEvent, useEffect, useState} from "react";
+import {FormEvent, ReactNode, SyntheticEvent, useEffect, useRef, useState} from "react";
 import {Box, Modal, Tab, Tabs} from "@mui/material";
 import DefaultConfig from "@/app/components/DefaultConfig";
 import ToothSelector from "@/app/components/ToothSelector";
@@ -33,6 +33,9 @@ export default function Selection({ui} : {ui:boolean}) {
     const recap = useTeethStore((state:State) => state.recap);
     const setRecap = useTeethStore((state:State) => state.setRecap);
     const takeScreenshot = useTeethStore((state:State) => state.setIsScreenshotNeeded);
+
+    const accordionContainer = useRef<null|HTMLDivElement>(null);
+    const scrollPosition = useRef(null);
 
     const [gold, setGold] = useState<string>('14k');
     const [diamond, setDiamond] = useState<string>('mois');
@@ -107,7 +110,7 @@ export default function Selection({ui} : {ui:boolean}) {
                                     value={activeTab} onChange={changeTab} aria-label="tabs" sx={{
                                     width: 1,
                                     '& .MuiTabs-indicator': {top: 0, backgroundColor: '#030712', height: '0.2rem'},
-                                    borderBottom: `${activeTab === 0 || !activeTooth && Object.values(visibleTeeth).filter((el:boolean):boolean => el).length === 0 ? '1px solid #9ca3af' : ''}`,
+                                    borderBottom: "1px solid #9ca3af",
                                     '& .Mui-selected': {color: '#030712 !important'}
                                 }}>
                                     <Tab label="DEFAULT" sx={{width: 0.5, maxWidth: 1}}/>
@@ -132,33 +135,45 @@ export default function Selection({ui} : {ui:boolean}) {
                                         <p className="text-center">To start, select a tooth</p>
                                       </div>
                                     : <div className="w-full h-[calc(100vh-54px-48px-0.2rem-15vh)] flex flex-col align-center justify-start text-center bg-gray-50 my-auto rounded text-black">
-                                        <div className="overflow-y-auto">
+                                        <div className="overflow-y-auto" ref={accordionContainer}>
                                             {/*DENTI SUPERIORI*/}
                                             {(activeTooth === 'icsdx' || visibleTeeth.icsdx) &&
-                                                <ToothConfig tooth='icsdx' />}
+                                                <ToothConfig tooth='icsdx' ref={accordionContainer}
+                                                             position={scrollPosition}/>}
                                             {(activeTooth === 'icssx' || visibleTeeth.icssx) &&
-                                                <ToothConfig tooth='icssx' />}
+                                                <ToothConfig tooth='icssx' ref={accordionContainer}
+                                                             position={scrollPosition}/>}
                                             {(activeTooth === 'ilsdx' || visibleTeeth.ilsdx) &&
-                                                <ToothConfig tooth='ilsdx' />}
+                                                <ToothConfig tooth='ilsdx' ref={accordionContainer}
+                                                             position={scrollPosition}/>}
                                             {(activeTooth === 'ilssx' || visibleTeeth.ilssx) &&
-                                                <ToothConfig tooth='ilssx' />}
+                                                <ToothConfig tooth='ilssx' ref={accordionContainer}
+                                                             position={scrollPosition}/>}
                                             {(activeTooth === 'csdx' || visibleTeeth.csdx) &&
-                                                <ToothConfig tooth='csdx' />}
+                                                <ToothConfig tooth='csdx' ref={accordionContainer}
+                                                             position={scrollPosition}/>}
                                             {(activeTooth === 'cssx' || visibleTeeth.cssx) &&
-                                                <ToothConfig tooth='cssx' />}
+                                                <ToothConfig tooth='cssx' ref={accordionContainer}
+                                                             position={scrollPosition}/>}
                                             {/*DENTI INFERIORI*/}
                                             {(activeTooth === 'icidx' || visibleTeeth.icidx) &&
-                                                <ToothConfig tooth='icidx' />}
+                                                <ToothConfig tooth='icidx' ref={accordionContainer}
+                                                             position={scrollPosition}/>}
                                             {(activeTooth === 'icisx' || visibleTeeth.icisx) &&
-                                                <ToothConfig tooth='icisx' />}
+                                                <ToothConfig tooth='icisx' ref={accordionContainer}
+                                                             position={scrollPosition}/>}
                                             {(activeTooth === 'ilidx' || visibleTeeth.ilidx) &&
-                                                <ToothConfig tooth='ilidx' />}
+                                                <ToothConfig tooth='ilidx' ref={accordionContainer}
+                                                             position={scrollPosition}/>}
                                             {(activeTooth === 'ilisx' || visibleTeeth.ilisx) &&
-                                                <ToothConfig tooth='ilisx' />}
+                                                <ToothConfig tooth='ilisx' ref={accordionContainer}
+                                                             position={scrollPosition}/>}
                                             {(activeTooth === 'cidx' || visibleTeeth.cidx) &&
-                                                <ToothConfig tooth='cidx' />}
+                                                <ToothConfig tooth='cidx' ref={accordionContainer}
+                                                             position={scrollPosition}/>}
                                             {(activeTooth === 'cisx' || visibleTeeth.cisx) &&
-                                                <ToothConfig tooth='cisx' />}
+                                                <ToothConfig tooth='cisx' ref={accordionContainer}
+                                                             position={scrollPosition}/>}
                                         </div>
                                     </div>
                                 }
@@ -175,6 +190,9 @@ export default function Selection({ui} : {ui:boolean}) {
                         </>
                         : <div className="h-[calc(100vh-54px)] flex flex-col w-full mx-auto">
                             <div className="h-[calc(100%-15vh-7.5vh)] overflow-y-auto mt-[48px] w-full mx-auto">
+                                <h3 className="w-full flex items-center justify-start font-semibold bg-stone-200 py-4 border-t border-gray-400">
+                                    <span className="inline-block w-[75%] mx-auto">Teeth</span>
+                                </h3>
                                 {
                                     Object.keys(visibleTeeth).map((tooth, i) => {
                                         if (!visibleTeeth[tooth]) return null;
@@ -183,29 +201,33 @@ export default function Selection({ui} : {ui:boolean}) {
                                         if (tooth === 'icssx' && (jewelType[tooth] === 'bar' || jewelType[tooth] === 'barDiamond')) return null;
 
                                         return (
-                                            <div key={i} className="flex flex-col mb-4">
-                                                <div className="w-full py-1 px-3 bg-stone-200 mb-2">
-                                                    <h3 className="w-full flex items-center justify-start">
+                                            <div key={i}
+                                                 className="flex flex-col border-b border-gray-400 pt-4">
+                                                <div className="w-full py-1 px-3 mb-2">
+                                                    <h4 className="w-full flex items-center justify-start font-semibold">
                                                         <span className="inline-block w-[75%] mx-auto">{
-                                                    (tooth === 'cidx' && (jewelType[tooth] === 'bigBar' || jewelType[tooth] === 'bigBarDiamond'))
-                                                    ? 'Canini inferiori'
-                                                    : (tooth === 'icidx' && (jewelType[tooth] === 'bar' || jewelType[tooth] === 'barDiamond'))
-                                                        ? 'Incisivi centrali inferiori'
-                                                        : (tooth === 'icsdx' && (jewelType[tooth] === 'bar' || jewelType[tooth] === 'barDiamond'))
-                                                            ? 'Incisivi centrali superiori'
-                                                            : elabToothName(tooth, false)
-                                                        }</span></h3>
-                                                    </div>
-                                                <ul className="ml-4 w-full flex flex-col items-center justify-start mb-2">
-                                                    <li className="inline-block w-[75%] mx-auto">Jewel type: {jewelType[tooth].includes('Diamond') ? firstCapital(jewelType[tooth].split('D')[0]) + ' with ' + pave[tooth] + 's': firstCapital(jewelType[tooth])}</li>
+                                                            (tooth === 'cidx' && (jewelType[tooth] === 'bigBar' || jewelType[tooth] === 'bigBarDiamond'))
+                                                                ? 'Lower canines'
+                                                                : (tooth === 'icidx' && (jewelType[tooth] === 'bar' || jewelType[tooth] === 'barDiamond'))
+                                                                    ? 'Lower central incisors'
+                                                                    : (tooth === 'icsdx' && (jewelType[tooth] === 'bar' || jewelType[tooth] === 'barDiamond'))
+                                                                        ? 'Upper central incisors'
+                                                                        : elabToothName(tooth, false)
+                                                        }</span></h4>
+                                                </div>
+                                                <ul className="ml-4 w-full flex flex-col items-center justify-start mb-1">
+                                                    <li className="inline-block w-[75%] mx-auto">Jewel
+                                                        type: {jewelType[tooth].includes('Diamond') ? firstCapital(jewelType[tooth].split('D')[0]) + ' with ' + pave[tooth] + 's' : firstCapital(jewelType[tooth])}</li>
                                                     <li className="inline-block w-[75%] mx-auto">Material: {firstCapital(material[tooth])}</li>
-                                                    {(stones[tooth].shape && stones[tooth].color) && <li className="inline-block w-[75%] mx-auto">Gem: {firstCapital(stones[tooth].color as string)}, {firstCapital(stones[tooth].shape as string)} cut</li>}
+                                                    {(stones[tooth].shape && stones[tooth].color) &&
+                                                        <li className="inline-block w-[75%] mx-auto">Gem: {firstCapital(stones[tooth].color as string)}, {firstCapital(stones[tooth].shape as string)} cut</li>}
                                                 </ul>
-                                                <div className="border-t-1 w-full flex flex-col items-center">
-                                                    <span className="text-right py-1 px-3 mt-2 font-semibold text-xl inline-block w-[75%] mx-auto">{
+                                                <div className="w-full flex flex-col items-center mb-4">
+                                                    <span
+                                                        className="text-right pt-2 pb-1 px-3 mt-2 font-semibold text-xl inline-block border-t border-dashed w-[75%] mx-auto">{
                                                         (tooth === 'cidx' && (jewelType[tooth] === 'bigBar' || jewelType[tooth] === 'bigBarDiamond'))
                                                         || ((tooth === 'icidx' || tooth === 'icsdx') && (jewelType[tooth] === 'bar' || jewelType[tooth] === 'barDiamond'))
-                                                            ? teethPrices[tooth]*2
+                                                            ? teethPrices[tooth] * 2
                                                             : teethPrices[tooth]
                                                     }€</span>
                                                 </div>
@@ -213,32 +235,28 @@ export default function Selection({ui} : {ui:boolean}) {
                                         )
                                     })
                                 }
-                                <div className="mb-4">
-                                    <div className="w-full py-1 px-3 bg-stone-200 mb-2">
-                                        <h3 className="w-full flex items-center justify-start">
-                                            <span className="inline-block w-[75%] mx-auto">Gold carats</span>
-                                        </h3>
+                                <div className={`pb-4 ${checkDiamonds() ? 'border-b border-gray-400' : ''}`}>
+                                    <h3 className="w-full flex items-center justify-start mb-4 font-semibold bg-stone-200 py-4">
+                                        <span className="inline-block w-[75%] mx-auto">Gold carats</span>
+                                    </h3>
+                                    <div className="w-[75%] mx-auto">
+                                        <label htmlFor="18k" className="flex items-center gap-2 ml-4">
+                                            <input type="radio" id="18k" name="carats" checked={gold === '18k'}
+                                                   value="18k" onChange={(e) => setGold(e.target.value)}/>
+                                            18K
+                                        </label>
+                                        <label htmlFor="14k" className="flex items-center gap-2 ml-4">
+                                            <input type="radio" id="14k" name="carats" checked={gold === '14k'}
+                                                   value="14k" onChange={(e) => setGold(e.target.value)}/>
+                                            14K
+                                        </label>
                                     </div>
-                                        <div className="w-[75%] mx-auto">
-                                            <label htmlFor="18k" className="flex items-center gap-2 ml-4">
-                                                <input type="radio" id="18k" name="carats" checked={gold === '18k'}
-                                                       value="18k" onChange={(e) => setGold(e.target.value)}/>
-                                                18K
-                                            </label>
-                                            <label htmlFor="14k" className="flex items-center gap-2 ml-4">
-                                                <input type="radio" id="14k" name="carats" checked={gold === '14k'}
-                                                       value="14k" onChange={(e) => setGold(e.target.value)}/>
-                                                14K
-                                            </label>
-                                        </div>
                                 </div>
                                 {checkDiamonds() &&
-                                    <div>
-                                        <div className="w-full py-1 px-3 bg-stone-200 mb-2">
-                                            <h3 className="w-full flex items-center justify-start">
-                                                <span className="inline-block w-[75%] mx-auto">Diamonds type</span>
-                                            </h3>
-                                        </div>
+                                    <div className="pb-4">
+                                        <h3 className="w-full flex items-center justify-start mb-4 font-semibold bg-stone-200 py-4">
+                                            <span className="inline-block w-[75%] mx-auto">Diamonds type</span>
+                                        </h3>
                                         <div className="w-[75%] mx-auto">
                                             <label htmlFor="natural" className="flex items-center gap-2 ml-4">
                                                 <input type="radio" id="natural" name="diamonds"
@@ -252,7 +270,8 @@ export default function Selection({ui} : {ui:boolean}) {
                                                 Lab
                                             </label>
                                             <label htmlFor="mois" className="flex items-center gap-2 ml-4">
-                                                <input type="radio" id="mois" name="diamonds" checked={diamond === 'mois'}
+                                                <input type="radio" id="mois" name="diamonds"
+                                                       checked={diamond === 'mois'}
                                                        value="mois" onChange={(e) => setDiamond(e.target.value)}/>
                                                 Moissanite
                                             </label>
@@ -260,8 +279,11 @@ export default function Selection({ui} : {ui:boolean}) {
                                     </div>
                                 }
                             </div>
-                            <div className="flex flex-col items-center">
-                                <div className="flex justify-end w-[90%] px-3 h-[7.5vh] items-center text-right my-4 font-bold text-3xl">Total: {total + totalPreciousness}€</div>
+                            <div className="flex flex-col items-center border-t border-gray-400">
+                                <div
+                                    className="flex justify-end w-full py-4 px-3 h-[7.5vh] items-center text-right my-4 font-bold text-3xl">
+                                    <h2 className="w-[90%] mx-auto">Total: {total + totalPreciousness}€</h2>
+                                </div>
                                 <div className="w-full h-[15vh] bg-stone-200">
                                     <div className="flex items-center justify-between w-[90%] h-full mx-auto">
                                         <button type="button" onClick={() => setRecap(false)}

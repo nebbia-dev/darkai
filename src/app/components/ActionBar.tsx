@@ -4,6 +4,7 @@ import {Undo} from "@/app/components/icons/Undo";
 import {Redo} from "@/app/components/icons/Redo";
 import {Copy} from "@/app/components/icons/Copy";
 import {Info} from "@/app/components/icons/Info";
+import {Close} from "@/app/components/icons/Close";
 import elabToothName from "@/app/helpers/elabToothName";
 import {useState} from "react";
 import {ResetCamera} from "@/app/components/icons/ResetCamera";
@@ -24,7 +25,7 @@ export default function ActionBar({ui} : {ui: boolean}) {
     const undo = useTeethStore((state:State) => state.undo);
     const redo = useTeethStore((state:State) => state.redo);
     const [showCopy, setShowCopy] = useState<boolean>(false);
-    const [showManual, setShowManual] = useState<boolean>(false);
+    const [showManual, setShowManual] = useState<boolean>(true);
     const doResetControls = useTeethStore((state:State) => state.setResetControls);
     function resetControls() {
         doResetControls(true);
@@ -50,13 +51,18 @@ export default function ActionBar({ui} : {ui: boolean}) {
     return(
         <div>
             <div className="absolute flex items-center justify-center gap-4 left-10 top-10 translate-x-[-50%] w-2/4">
-                <button className="cursor-pointer">
-                    <Info className="w-6 h-6" onClick={() => setShowManual((prev) => !prev)}/>
-                </button>
+                <Tooltip title="Navigation info">
+                    <button className="cursor-pointer">
+                        <Info className="w-6 h-6" onClick={() => setShowManual((prev) => !prev)}/>
+                    </button>
+                </Tooltip>
                 {showManual &&
-                    <div className="absolute flex flex-col border border-gray-950/[33%] gap-2 left-[60%] top-[-100%] w-[250px] text-sm bg-gray-50 rounded py-2 px-4">
-                        <p className="font-semibold">How to navigate the model</p>
-                        <ul>
+                    <div className="absolute flex flex-col border border-gray-950/[33%] gap-1 left-[60%] top-[-100%] w-[300px] text-sm bg-gray-50 rounded py-2 px-4">
+                        <div className="flex items-center justify-between">
+                            <p className="font-semibold">How to navigate the model</p>
+                            <Close className="cursor-pointer w-5" onClick={() => setShowManual((prev) => !prev)}/>
+                        </div>
+                        <ul className="mb-1 pr-2">
                             <li><span className="font-semibold">Move</span>: click + drag</li>
                             <li><span className="font-semibold">Zoom</span>: slide two fingers up/down or rotate the mouse wheel</li>
                         </ul>
