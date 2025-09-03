@@ -10,6 +10,7 @@ import UploadFile from "@/app/components/UploadFile";
 import {Write} from "@/app/components/icons/Write";
 import {Tooltip} from "@mui/material";
 import Link from 'next/link';
+import UploadScanBackoffice from "@/app/components/UploadScanBackoffice";
 export default async function Order({params}: { params: Promise<{ orderId: string[] }> }){
     const { orderId } = await params;
     const supabase = await createClient();
@@ -137,7 +138,7 @@ export default async function Order({params}: { params: Promise<{ orderId: strin
                                 width={1000} height={1000} quality={70}
                               />
                             : <div className="pt-4 pl-8 pr-2 h-[30vh] w-full flex items-center justify-center">
-                                <UploadFile theme="light"/>
+                                <UploadScanBackoffice userId={(data as unknown as OrderInfo[])?.[0].user_id.id as number}/>
                             </div>
                         }
                     </div>

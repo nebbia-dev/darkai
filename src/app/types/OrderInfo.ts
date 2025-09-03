@@ -1,10 +1,10 @@
 import {History} from "@/app/types/State";
 
 export default interface OrderInfo {
-        config: {
-            id: number,
-            config: History
-        },
+    config: {
+        id: number,
+        config: History
+    },
     created_at: Date,
     id: number,
     shipping: boolean,
