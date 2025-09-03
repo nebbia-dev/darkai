@@ -4,7 +4,7 @@ export default function Upload() {
     return(
         <>
         <div className="max-w-[50vw] h-[calc(100vh-54px-15vh)] flex flex-col items-center justify-center gap-8 mx-auto">
-            <UploadFile/>
+            <UploadFile theme="dark"/>
             <div className="w-full text-center rounded border border-gray-950/[33%] px-6 py-4">
                 <p>If you don't have a dental scan right now, don't worry: you can still proceed with the checkout.<br/>You
                     can send your dental scan later at the following email address: <br/><span

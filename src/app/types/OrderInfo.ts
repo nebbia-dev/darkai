@@ -18,11 +18,13 @@ export default interface OrderInfo {
         postalCode: string,
         state: string
     },
-    status: 'Prepping' | 'Sent' | 'Completed' | 'Canceled',
+    status: 'In preparation' | 'Shipped' | 'Picked Up' | 'Ready' | 'Canceled' | undefined,
     user_id: {
+        id: number,
         email: string,
         lastname: string,
         name: string,
-        phone: string
+        phone: string,
+        scan: boolean
     },
 }

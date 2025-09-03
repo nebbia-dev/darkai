@@ -5,36 +5,63 @@ export default async function Page() {
     const supabase = await createClient();
     let { data, error } = await supabase
         .from('Orders')
-        .select('*');
+        .select('*, user_id(id, name, lastname)');
     console.log(data)
     return(
-        <div className="w-[75vw] h-[calc(100vh-54px)] flex flex-col items-center justify-center mx-auto">
-            <h2 className="font-bold text-2xl mb-8">Orders list</h2>
-            <div className="h-[calc(80vh-54px)]">
-                <table className="rounded border border-gray-400">
-                <thead>
-                <tr>
-                    <th scope="col" className="font-semibold w-[15vw] py-4">Order Id</th>
-                    <th scope="col" className="font-semibold w-[15vw] py-4">Date</th>
-                    <th scope="col" className="font-semibold w-[15vw] py-4">Status</th>
-                    <th scope="col" className="font-semibold w-[15vw] py-4">Shipping</th>
-                    <th className="font-semibold w-[10vw]"></th>
-                </tr>
-                </thead>
-                <tbody>
-                    {data?.map((order, index) => (
-                        <tr key={order.id} className={`${index % 2 === 0? 'border-t border-b border-t-gray-400 border-b-gray-400' : 'bg-stone-100'}`}>
-                            <th scope="row" className="text-center h-[2rem]">{order.id}</th>
-                            <td className="text-center h-[4rem]">{dateConverter(order.created_at)}</td>
-                            <td className="text-center h-[4rem]">{order.status}</td>
-                            <td className="text-center h-[4rem]">{order.shipping ? 'Standard shipping' : 'Pick up'}</td>
-                            <td className="text-center h-[4rem]">
-                                <Link href={`/admin/orders/${order.id}`}>&rarr;</Link>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+        <div className="relative left-[7.5vw] w-[92.5vw]">
+            <div className="bg-stone-100 flex flex-col justify-center h-[15vh]">
+                <h2 className="font-bold text-2xl w-[75vw] mx-auto">Orders list</h2>
+                <h3 className="w-[75vw] mx-auto mt-2">List of all completed orders</h3>
+            </div>
+            <div className="w-full h-[calc(100vh-54px-15vh-3rem)] mb-[3rem]">
+                <div className="overflow-y-scroll">
+                    <table className="w-full">
+                    <thead className="border-b border-b-gray-400">
+                    <tr>
+                        <th scope="col" className="font-semibold w-[15%] py-4 text-right">
+                            <span className="w-[7.5vw] inline-block text-center">
+                                Order Id
+                            </span>
+                        </th>
+                        <th scope="col" className="font-semibold w-[10%] py-4">Date</th>
+                        <th scope="col" className="font-semibold w-[20%] py-4">Customer</th>
+                        <th scope="col" className="font-semibold w-[12.5%] py-4">Total</th>
+                        <th scope="col" className="font-semibold w-[15%] py-4">Status</th>
+                        <th scope="col" className="font-semibold w-[15%] py-4">Shipping</th>
+                        <th className="font-semibold w-[10%]"></th>
+                    </tr>
+                    </thead>
+                        <tbody>
+                        {data?.map((order, index) => (
+                            <tr key={order.id}
+                                className={`${index % 2 !== 0 ? 'border-t border-b border-t-gray-400 border-b-gray-400' : 'bg-stone-100'}`}>
+                                <td scope="row" className="text-right h-[2rem]">
+                                    <span className="w-[7.5vw] inline-block text-center">
+                                        {order.id}
+                                    </span>
+                                </td>
+                                <td className="text-center h-[4rem]">{dateConverter(order.created_at)}</td>
+                                <td className="text-center h-[4rem]">{order.user_id.name} {order.user_id.lastname}</td>
+                                <td className="text-center h-[4rem]">{new Intl.NumberFormat("it-IT", { style: "currency", currency: "EUR" }).format(order.total)}</td>
+                                <td className={`text-center h-[4rem] 
+                                    ${order.status === 'In preparation'
+                                    ? 'bg-yellow-200'
+                                    : order.status === 'Canceled'
+                                        ? 'bg-red-200'
+                                        : order.status === 'Ready'
+                                            ? 'bg-sky-200'
+                                            // Shipped/Picked up
+                                            : 'bg-green-200'}`
+                                }>{order.status}</td>
+                                <td className="text-center h-[4rem]">{order.shipping ? 'Standard shipping' : 'Pick up'}</td>
+                                <td className="text-left h-[4rem]">
+                                    <Link href={`/admin/orders/${order.id}`}>&rarr;</Link>
+                                </td>
+                            </tr>
+                        ))}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     )

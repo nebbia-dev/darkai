@@ -1,9 +1,9 @@
 'use client'
-export default function UploadFile() {
+export default function UploadFile({theme} : {theme:'dark' | 'light'}) {
     return (
         <div className="w-full">
             <label
-                className="label w-full inline-block bg-gray-950/[80%] text-gray-50 rounded px-8 py-8 cursor-pointer border-[#171717] border-1 text-center">
+                className={`label w-full inline-block ${theme === 'dark' ? 'bg-gray-950/[80%] text-gray-50' : 'bg-gray-50 text-gray-950'} rounded px-8 py-8 cursor-pointer border-[#171717] border-1 text-center`}>
                 <div className="w-full flex justify-center mb-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="48px" height="48px" viewBox="0 0 24 24">
                         <g fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth="1.5">
