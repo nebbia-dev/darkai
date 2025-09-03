@@ -3,7 +3,8 @@ import {History} from "@/app/types/State";
 export default interface OrderInfo {
     config: {
         id: number,
-        config: History
+        config: History,
+        screen: string|undefined|null
     },
     created_at: Date,
     id: number,
@@ -25,6 +26,6 @@ export default interface OrderInfo {
         lastname: string,
         name: string,
         phone: string,
-        scan: boolean
+        scan: string|undefined|null
     },
 }

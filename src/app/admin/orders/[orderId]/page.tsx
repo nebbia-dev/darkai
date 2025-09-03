@@ -17,7 +17,7 @@ export default async function Order({params}: { params: Promise<{ orderId: strin
     const {data, error } = await supabase
         .from('Orders')
         .select('id, shipping, created_at, status, shippingAddress, user_id(' +
-            'id, name, lastname, email, phone, scan), config(id, config) ')
+            'id, name, lastname, email, phone, scan), config(id, config, screen) ')
         .eq('id', orderId);
     console.log(data);
 
@@ -89,7 +89,7 @@ export default async function Order({params}: { params: Promise<{ orderId: strin
                         <div className="w-full">
                             <Image alt="config"
                                    className="object-cover w-full"
-                                   src={`https://dggrbfhwlvvsxbhnobig.supabase.co/storage/v1/object/public/configs/${(data as unknown as OrderInfo[])?.[0].config.id}.png`}
+                                   src={`https://dggrbfhwlvvsxbhnobig.supabase.co/storage/v1/object/public/configs/${(data as unknown as OrderInfo[])?.[0].config.screen}`}
                                    width={1000} height={1000} quality={70}/>
                         </div>
                     </div>
@@ -131,16 +131,7 @@ export default async function Order({params}: { params: Promise<{ orderId: strin
                     </div>
 
                     <div className="flex gap-2 items-center justify-center">
-                        {(data as unknown as OrderInfo[])?.[0].user_id.scan
-                            ? <Image alt="config"
-                                className="object-cover h-[35vh] w-full pt-4 pl-8"
-                                src={`https://dggrbfhwlvvsxbhnobig.supabase.co/storage/v1/object/public/scans/${(data as unknown as OrderInfo[])?.[0].user_id.id}.jpg`}
-                                width={1000} height={1000} quality={70}
-                              />
-                            : <div className="pt-4 pl-8 pr-2 h-[30vh] w-full flex items-center justify-center">
-                                <UploadScanBackoffice userId={(data as unknown as OrderInfo[])?.[0].user_id.id as number}/>
-                            </div>
-                        }
+                        <UploadScanBackoffice userId={(data as unknown as OrderInfo[])?.[0].user_id.id as number} scanId={(data as unknown as OrderInfo[])?.[0].user_id.scan}/>
                     </div>
                 </div>
             </div>
