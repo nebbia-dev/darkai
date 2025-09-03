@@ -10,17 +10,18 @@ export default function UploadScanBackoffice ({userId, scanId}:{userId:OrderInfo
 
     async function uploadFile() {
         if(file){
+            const number = Math.random() * 100 + Math.cos(Math.random() * 100);
             const supabase = await createClient();
             const {data, error} = await supabase
                 .storage
                 .from('scans')
-                .upload(file.name, file, {
+                .upload(number + '_' + file.name, file, {
                     cacheControl: '3600',
                     upsert: false
                 })
             const { moreData, moreError } = await supabase
                 .from('Customers')
-                .update({ scan: file.name })
+                .update({ scan: number + '_' + file.name })
                 .eq('id', userId)
             setSavedFile(true);
         }
