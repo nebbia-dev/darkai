@@ -1,12 +1,25 @@
 'use client'
 import {useState} from "react";
 import OrderInfo from "@/app/types/OrderInfo";
+import {createClient} from "@/utils/supabase/client";
 
-export default function Select({st}:{st:OrderInfo["status"]}) {
-    const [status, setStatus] = useState<string>(st);
+export default function Select({st, orderId}:{st:OrderInfo["status"], orderId:OrderInfo["id"]}) {
+    console.log('id ', orderId);
+    async function updateStatus(newStatus:string) {
+        const supabase = await createClient();
+        const { data, error } = await supabase
+            .from('Orders')
+            .update({ status: newStatus })
+            .eq('id', orderId)
+        // TODO:
+        // - set Nodemailer to SEND the customer email telling her the order status has changed
+        setStatus(newStatus);
+    }
+
+    const [status, setStatus] = useState<string|undefined>(st);
 
     return(
-        <select className="inline" value={status} onChange={(e) => setStatus(e.target.value)}>
+        <select className="inline" value={status as string} onChange={(e) => updateStatus(e.target.value)}>
             <option value="In preparation">In preparation</option>
             <option value="Ready">Ready</option>
             <option value="Shipped">Shipped</option>

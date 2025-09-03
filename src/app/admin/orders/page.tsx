@@ -24,25 +24,25 @@ export default async function Page() {
                             </span>
                         </th>
                         <th scope="col" className="font-semibold w-[10%] py-4">Date</th>
-                        <th scope="col" className="font-semibold w-[20%] py-4">Customer</th>
-                        <th scope="col" className="font-semibold w-[12.5%] py-4">Total</th>
-                        <th scope="col" className="font-semibold w-[15%] py-4">Status</th>
+                        <th scope="col" className="font-semibold w-[15%] py-4">Customer</th>
+                        <th scope="col" className="font-semibold w-[10%] py-4">Total</th>
+                        <th scope="col" className="font-semibold w-[12.5%] py-4">Status</th>
                         <th scope="col" className="font-semibold w-[15%] py-4">Shipping</th>
-                        <th className="font-semibold w-[10%]"></th>
+                        <th className="font-semibold w-[15%]"></th>
                     </tr>
                     </thead>
                         <tbody>
                         {data?.map((order, index) => (
                             <tr key={order.id}
                                 className={`${index % 2 !== 0 ? 'border-t border-b border-t-gray-400 border-b-gray-400' : 'bg-stone-100'}`}>
-                                <td scope="row" className="text-right h-[2rem]">
+                                <td scope="row" className="text-right h-[2rem] px-2">
                                     <span className="w-[7.5vw] inline-block text-center">
                                         {order.id}
                                     </span>
                                 </td>
-                                <td className="text-center h-[4rem]">{dateConverter(order.created_at)}</td>
-                                <td className="text-center h-[4rem]">{order.user_id.name} {order.user_id.lastname}</td>
-                                <td className="text-center h-[4rem]">{new Intl.NumberFormat("it-IT", { style: "currency", currency: "EUR" }).format(order.total)}</td>
+                                <td className="text-center h-[4rem] px-2">{dateConverter(order.created_at)}</td>
+                                <td className="text-center h-[4rem] px-2">{order.user_id.name} {order.user_id.lastname}</td>
+                                <td className="text-center h-[4rem] px-2 ">{new Intl.NumberFormat("it-IT", { style: "currency", currency: "EUR" }).format(order.total)}</td>
                                 <td className={`text-center h-[4rem] 
                                     ${order.status === 'In preparation'
                                     ? 'bg-yellow-200'
@@ -53,8 +53,8 @@ export default async function Page() {
                                             // Shipped/Picked up
                                             : 'bg-green-200'}`
                                 }>{order.status}</td>
-                                <td className="text-center h-[4rem]">{order.shipping ? 'Standard shipping' : 'Pick up'}</td>
-                                <td className="text-left h-[4rem]">
+                                <td className="text-center h-[4rem] px-2">{order.shipping ? 'Standard shipping' : 'Pick up'}</td>
+                                <td className="text-left h-[4rem] pl-4">
                                     <Link href={`/admin/orders/${order.id}`}>&rarr;</Link>
                                 </td>
                             </tr>

@@ -9,6 +9,7 @@ import Image from "next/image";
 import UploadFile from "@/app/components/UploadFile";
 import {Write} from "@/app/components/icons/Write";
 import {Tooltip} from "@mui/material";
+import Link from 'next/link';
 export default async function Order({params}: { params: Promise<{ orderId: string[] }> }){
     const { orderId } = await params;
     const supabase = await createClient();
@@ -18,6 +19,7 @@ export default async function Order({params}: { params: Promise<{ orderId: strin
             'id, name, lastname, email, phone, scan), config(id, config) ')
         .eq('id', orderId);
     console.log(data);
+
     return(
         <div className="relative left-[7.5vw] w-[92.5vw] h-[calc(100vh-54px)]">
             <div className="bg-stone-100 h-[15vh] relative">
@@ -30,7 +32,7 @@ export default async function Order({params}: { params: Promise<{ orderId: strin
 
                     <div className="w-[75vw] mx-auto mt-2">
                         <h3 className="inline">Order status: </h3>
-                        <Select st={(data as unknown as OrderInfo[])?.[0].status}/>
+                        <Select st={(data as unknown as OrderInfo[])?.[0].status} orderId={(data as unknown as OrderInfo[])?.[0].id as number}/>
                     </div>
                 </div>
             </div>
@@ -102,13 +104,13 @@ export default async function Order({params}: { params: Promise<{ orderId: strin
                             <h3 className="font-semibold flex items-center gap-2">
                                 Contacts
                                 <Tooltip title="Contact customer" placement="right">
-                                    <button className="cursor-pointer">
+                                    <Link className="cursor-pointer" href={`mailto:${(data as unknown as OrderInfo[])?.[0].user_id.email}`}>
                                         <Write/>
-                                    </button>
+                                    </Link>
                                 </Tooltip>
                             </h3>
                             <ul>
-                                <li className="pl-2">Email: {(data as unknown as OrderInfo[])?.[0].user_id.email}</li>
+                            <li className="pl-2">Email: {(data as unknown as OrderInfo[])?.[0].user_id.email}</li>
                                 <li className="pl-2">Phone: {(data as unknown as OrderInfo[])?.[0].user_id.phone}</li>
                             </ul>
 
