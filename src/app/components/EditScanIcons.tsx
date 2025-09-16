@@ -52,9 +52,6 @@ export default function EditScanIcons({file, sendData} : {file:File|undefined, s
                                 <input type="file" onChange={handleChange}/>
                             </label>
                         </div>
-                        <button className="w-8 h-8 bg-gray-50 text-black rounded-full flex items-center justify-center cursor-pointer">
-                            <Close/>
-                        </button>
                     </div>
             }
         </>

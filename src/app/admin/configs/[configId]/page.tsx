@@ -52,7 +52,7 @@ export default async function Config({params}: { params: Promise<{ orderId: stri
         <div className="relative left-[7.5vw] w-[92.5vw] h-[calc(100vh-54px)]">
             <div className="bg-stone-100 h-[15vh] relative">
                 <div className="h-full absolute flex items-center justify-center w-[7.5vw]">
-                    <BackButton/>
+                    <BackButton url="/admin/configs"/>
                 </div>
                 <div className="h-full flex flex-col justify-center">
                     <h2 className="font-bold text-2xl w-[75vw] mx-auto">Config
