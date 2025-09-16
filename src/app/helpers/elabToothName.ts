@@ -5,16 +5,16 @@ export default function elabToothName(tooth: string, short: boolean) {
 
         if(!short){
             if (tooth[1] === 's') {
-                title += 'Upper canine -';
+                title += 'Upper canine ';
             } else {
-                title += 'Lower canine -';
+                title += 'Lower canine ';
             }
         }
 
         if(tooth[2] === 'd') {
-            title += ' right side';
+            title += ' dx';
         } else {
-            title += ' left side';
+            title += ' sx';
         }
 
     } else if(tooth.length === 5) {
@@ -29,16 +29,16 @@ export default function elabToothName(tooth: string, short: boolean) {
         }
 
         if(tooth[1] === 'c') {
-            title += 'central incisor -';
+            title += 'central incisor';
         } else {
-            title += 'lateral incisor -';
+            title += 'lateral incisor';
         }
 
 
         if(tooth[3] === 'd') {
-            title += ' right side';
+            title += ' dx';
         } else {
-            title += ' left side';
+            title += ' sx';
         }
     }
 

@@ -1,12 +1,14 @@
 'use client'
 import {createClient} from "@/utils/supabase/client";
 import UploadFile from "@/app/components/UploadFile";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import OrderInfo from "@/app/types/OrderInfo";
 import Image from "next/image";
+import {Close} from "@/app/components/icons/Close";
+import EditScanIcons from "@/app/components/EditScanIcons";
 export default function UploadScanBackoffice ({userId, scanId}:{userId:OrderInfo['user_id']['id'], scanId:OrderInfo['user_id']['scan']}) {
     const [file, setFile] = useState<File|undefined>();
-    const [savedFile, setSavedFile] = useState<boolean>();
+    const [savedFile, setSavedFile] = useState<string|undefined>();
 
     async function uploadFile() {
         if(file){
@@ -22,8 +24,9 @@ export default function UploadScanBackoffice ({userId, scanId}:{userId:OrderInfo
             const { moreData, moreError } = await supabase
                 .from('Customers')
                 .update({ scan: number + '_' + file.name })
-                .eq('id', userId)
-            setSavedFile(true);
+                .eq('id', userId);
+            setSavedFile(number + '_' + file.name);
+            setFile(undefined);
         }
     }
 
@@ -34,17 +37,32 @@ export default function UploadScanBackoffice ({userId, scanId}:{userId:OrderInfo
     return(
         <>
             {scanId
-                ? <Image alt="config"
-                         className="object-cover h-[35vh] w-full pt-4 pl-8"
-                         src={`https://dggrbfhwlvvsxbhnobig.supabase.co/storage/v1/object/public/scans/${scanId}`}
-                         width={1000} height={1000} quality={70}
-                />
-                : savedFile && file
-                    ? <Image alt="config"
-                             className="object-cover h-[35vh] w-full pt-4 pl-8"
-                             src={`https://dggrbfhwlvvsxbhnobig.supabase.co/storage/v1/object/public/scans/${file.name}`}
-                             width={1000} height={1000} quality={70}
-                    />
+                ?   <div className="relative">
+                        <EditScanIcons sendData={getData} file={file}/>
+                    {!file && <Image alt="config"
+                            className="object-cover h-[35vh] w-full pt-4 pl-8"
+                            src={`https://dggrbfhwlvvsxbhnobig.supabase.co/storage/v1/object/public/scans/${savedFile? savedFile : scanId}`}
+                            width={1000} height={1000} quality={70}
+                    />}
+                    {file &&
+                        <button className="cursor-pointer py-2 px-4 rounded-full bg-gray-950 text-gray-50 w-[calc(100%-2.5rem)] mt-2 ml-8 mr-2"
+                                type="button" onClick={uploadFile}>Save</button>
+                    }
+                    </div>
+                : savedFile
+                    ? <div className="relative">
+                        <EditScanIcons sendData={getData} file={file}/>
+                        {!file && <Image alt="config"
+                                         className="object-cover h-[35vh] w-full pt-4 pl-8"
+                                         src={`https://dggrbfhwlvvsxbhnobig.supabase.co/storage/v1/object/public/scans/${savedFile}`}
+                                         width={1000} height={1000} quality={70}
+                        />}
+                        {file &&
+                            <button
+                                className="cursor-pointer py-2 px-4 rounded-full bg-gray-950 text-gray-50 w-[calc(100%-2.5rem)] mt-2 ml-8 mr-2"
+                                type="button" onClick={uploadFile}>Save</button>
+                        }
+                      </div>
                     : <div className="pt-4 pl-8 pr-2 h-[30vh] w-full flex items-center justify-center">
                         <div className="flex flex-col gap-2 h-full">
                             <UploadFile theme="light" sendData={getData}/>
