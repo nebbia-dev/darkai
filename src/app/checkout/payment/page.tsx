@@ -173,7 +173,7 @@ export default function Upload() {
 
                                       <>
                                           <div className="px-2 pt-2 pb-4">
-                                              <p>Do you want to ship your package to an address different from the
+                                              <p className="mb-2">Do you want to ship your package to an address different from the
                                                   billing address?</p>
                                               <div>
                                                   <label className="flex items-center gap-2 cursor-pointer">

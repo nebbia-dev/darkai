@@ -4,7 +4,6 @@ import UploadFile from "@/app/components/UploadFile";
 import {useState} from "react";
 import OrderInfo from "@/app/types/OrderInfo";
 import Image from "next/image";
-import {Close} from "@/app/components/icons/Close";
 import EditScanIcons from "@/app/components/EditScanIcons";
 export default function UploadScanBackoffice ({userId, scanId}:{userId:OrderInfo['user_id']['id'], scanId:OrderInfo['user_id']['scan']}) {
     const [file, setFile] = useState<File|undefined>();
@@ -21,7 +20,7 @@ export default function UploadScanBackoffice ({userId, scanId}:{userId:OrderInfo
                     cacheControl: '3600',
                     upsert: false
                 })
-            const { moreData, moreError } = await supabase
+            const { data: moreData, error: moreError } = await supabase
                 .from('Customers')
                 .update({ scan: number + '_' + file.name })
                 .eq('id', userId);

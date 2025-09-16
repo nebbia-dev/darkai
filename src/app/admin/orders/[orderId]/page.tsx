@@ -19,8 +19,8 @@ export default async function Order({params}: { params: Promise<{ orderId: strin
             'id, name, lastname, email, phone, scan), config(id, config, screen) ')
         .eq('id', orderId);
 
-    const teethConfig = {};
-    const jewelsConfig = {};
+    const teethConfig: {[key: string]:string} = {};
+    const jewelsConfig:{[key: string]:string[]} = {};
 
     Object.entries((data as unknown as OrderInfo[])?.[0].config.config.visible).forEach(tooth => {
         if (!tooth[1]) return null;
@@ -42,7 +42,7 @@ export default async function Order({params}: { params: Promise<{ orderId: strin
                                 + (toothProp.type[tooth[0]].includes('Diamond') ? ' with ' + toothProp.pave[tooth[0]] + 's pave' : '')
                                 + (toothProp.stones[tooth[0]].shape ? '. Gem: ' + toothProp.stones[tooth[0]].color as string + ', ' + toothProp.stones[tooth[0]].shape as string + ' cut' : '');
 
-        teethConfig[propName] = propValue;
+        teethConfig[propName as string] = propValue;
 
     })
 

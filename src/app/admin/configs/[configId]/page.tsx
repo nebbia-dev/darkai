@@ -5,7 +5,7 @@ import BackButton from "@/app/components/BackButton";
 import {Preciousness} from "@/app/types/State";
 
 import Image from "next/image";
-export default async function Config({params}: { params: Promise<{ orderId: string[] }> }){
+export default async function Config({params}: { params: Promise<{ configId: string[] }> }){
     const { configId } = await params;
     const supabase = await createClient();
     const {data, error } = await supabase
@@ -13,8 +13,8 @@ export default async function Config({params}: { params: Promise<{ orderId: stri
         .select('*')
         .eq('id', configId);
 
-    const teethConfig = {};
-    const jewelsConfig = {};
+    const teethConfig: {[key: string]:string} = {};
+    const jewelsConfig:{[key: string]:string[]} = {};
 
     Object.entries(data?.[0].config.visible).forEach(tooth => {
         if (!tooth[1]) return null;
@@ -36,7 +36,7 @@ export default async function Config({params}: { params: Promise<{ orderId: stri
                                 + (toothProp.type[tooth[0]].includes('Diamond') ? ' with ' + toothProp.pave[tooth[0]] + 's pave' : '')
                                 + (toothProp.stones[tooth[0]].shape ? '. Gem: ' + toothProp.stones[tooth[0]].color as string + ', ' + toothProp.stones[tooth[0]].shape as string + ' cut' : '');
 
-        teethConfig[propName] = propValue;
+        teethConfig[propName as string] = propValue;
 
     })
 

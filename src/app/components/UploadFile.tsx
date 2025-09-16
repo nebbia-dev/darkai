@@ -1,7 +1,7 @@
 'use client'
-import {useEffect, useState} from "react";
+import {ChangeEvent, useEffect, useState} from "react";
 
-export default function UploadFile({theme, sendData} : {theme:'dark' | 'light', sendData: (File) => void}) {
+export default function UploadFile({theme, sendData} : {theme:'dark' | 'light', sendData: (arg:File) => void}) {
     const [selectedFile, setSelectedFile] = useState<File|undefined>();
     const [preview, setPreview] = useState<string|undefined>();
 
@@ -19,11 +19,12 @@ export default function UploadFile({theme, sendData} : {theme:'dark' | 'light', 
         return () => URL.revokeObjectURL(objectUrl)
     }, [selectedFile])
 
-    function handleChange(e) {
+    function handleChange(e:ChangeEvent<HTMLInputElement>) {
         if (!e.target.files || e.target.files.length === 0) {
             setSelectedFile(undefined);
-            return
+            return;
         }
+
         setSelectedFile(e.target.files[0]);
         sendData(e.target.files[0]);
     }

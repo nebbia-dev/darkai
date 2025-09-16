@@ -1,9 +1,9 @@
 'use client'
-import {useEffect, useState} from "react";
+import {ChangeEvent, useEffect, useState} from "react";
 import {Edit} from "@/app/components/icons/Edit";
 import {Close} from "@/app/components/icons/Close";
 
-export default function EditScanIcons({file, sendData} : {file:File|undefined, sendData: (File) => void}) {
+export default function EditScanIcons({file, sendData} : {file:File|undefined, sendData: (arg:File) => void}) {
     const [selectedFile, setSelectedFile] = useState<File|undefined>();
     const [preview, setPreview] = useState<string|undefined>();
 
@@ -21,11 +21,12 @@ export default function EditScanIcons({file, sendData} : {file:File|undefined, s
         return () => URL.revokeObjectURL(objectUrl)
     }, [selectedFile])
 
-    function handleChange(e) {
+    function handleChange(e:ChangeEvent<HTMLInputElement>) {
         if (!e.target.files || e.target.files.length === 0) {
             setSelectedFile(undefined);
-            return
+            return;
         }
+
         setSelectedFile(e.target.files[0]);
         sendData(e.target.files[0]);
     }
