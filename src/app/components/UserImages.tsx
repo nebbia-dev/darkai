@@ -2,23 +2,24 @@
 import Image from "next/image";
 import {useState} from "react";
 
-export default function UserImages({configId}:{configId:string|number|undefined}) {
+export default function UserImages({configId, userId}:{configId:string|number|undefined, userId:string|number|undefined}) {
     const [showConfig, setShowConfig] = useState<boolean>(true);
+
     return(
         <div className="w-[90%] mx-auto h-full flex gap-3">
-            <div className="h-full">
+            <div className="h-full flex items-center justify-center">
             {showConfig
                 ? <div>
                     <Image alt="config"
                            className="object-cover h-[calc(80vh-20vh)] w-full"
                            src={`https://dggrbfhwlvvsxbhnobig.supabase.co/storage/v1/object/public/configs/${configId}.png`}
-                           width={1000} height={1000}/>
+                           width={1000} height={1000} quality={70}/>
                 </div>
                 : <div>
                     <Image alt="scan"
                            className="object-cover h-[calc(80vh-20vh)] w-full"
-                           src={`https://dggrbfhwlvvsxbhnobig.supabase.co/storage/v1/object/public/scans/${configId}.jpg`}
-                           width={1000} height={1000}/>
+                           src={`https://dggrbfhwlvvsxbhnobig.supabase.co/storage/v1/object/public/scans/${userId}.jpg`}
+                           width={1000} height={1000} quality={70}/>
                 </div>
             }
             </div>

@@ -489,19 +489,36 @@ export default function Configurator() {
 
 
     // Instances prova
-    // const particles = Array.from({length: 1000}, () => ({
+    // const particles = Array.from({length: 15}, () => ({
     //     factor: MathUtils.randInt(20, 100),
     //     speed: MathUtils.randFloat(0.01, 0.75),
     //     xFactor: MathUtils.randFloatSpread(40),
     //     yFactor: MathUtils.randFloatSpread(10),
     //     zFactor: MathUtils.randFloatSpread(10)
     // }))
+    // const pos = [
+    //     [0,-0.4,0],
+    //     [1,-0.2,0],
+    //     [2,0,0],
+    //     [3,-0.2,0],
+    //     [4,-0.4,0],
+    //     [0,-0.4,1],
+    //     [1,-0.2,1],
+    //     [2,0,1],
+    //     [3,-0.2,1],
+    //     [4,-0.4,1],
+    //     [0,-0.4,2],
+    //     [1,-0.2,2],
+    //     [2,0,2],
+    //     [3,-0.2,2],
+    //     [4,-0.4,2]
+    // ]
     // function Bubbles() {
-    //     const diamond = useFBX('/models/MOD_Diamante.fbx');
+    //     const diamond = useFBX('/models/MOD_Diamante_LOD.fbx');
     //
     //     return (
-    //         <Instances limit={particles.length} position={[0,0.25,0]}
-    //                    scale={[0.001, 0.001, 0.001]}
+    //         <Instances limit={particles.length}
+    //                    scale={[0.0007, 0.0007, 0.0007]} rotation={[Math.PI/2, 0, 0]}
     //         >
     //             {/*<boxGeometry/>*/}
     //             <bufferGeometry>
@@ -527,9 +544,10 @@ export default function Configurator() {
     //            <FullMaterial color="gold"/>
     //             {particles.map((data, i) => (
     //                 <Instance key={i} position={[
-    //                     Math.random() * 10000,
-    //                     Math.random() * 10000,
-    //                     Math.random() * 10000]} />
+    //                     pos[i][0] * 200,
+    //                     pos[i][1] * 200,
+    //                     pos[i][2] * 200
+    //                 ]} />
     //             ))}
     //         </Instances>
     //     )
