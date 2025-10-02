@@ -12,9 +12,9 @@ export default function elabToothName(tooth: string, short: boolean) {
         }
 
         if(tooth[2] === 'd') {
-            title += ' dx';
+            title += ' R';
         } else {
-            title += ' sx';
+            title += ' L';
         }
 
     } else if(tooth.length === 5) {
@@ -36,9 +36,9 @@ export default function elabToothName(tooth: string, short: boolean) {
 
 
         if(tooth[3] === 'd') {
-            title += ' dx';
+            title += ' R';
         } else {
-            title += ' sx';
+            title += ' L';
         }
     }
 

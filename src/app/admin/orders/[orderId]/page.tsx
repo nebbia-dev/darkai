@@ -10,12 +10,13 @@ import {Write} from "@/app/components/icons/Write";
 import {Tooltip} from "@mui/material";
 import Link from 'next/link';
 import UploadScanBackoffice from "@/app/components/UploadScanBackoffice";
+import orderIdConverter from "@/app/helpers/orderIdConverter";
 export default async function Order({params}: { params: Promise<{ orderId: string[] }> }){
     const { orderId } = await params;
     const supabase = await createClient();
     const {data, error } = await supabase
         .from('Orders')
-        .select('id, shipping, created_at, status, shippingAddress, user_id(' +
+        .select('id, order_id, shipping, created_at, status, shippingAddress, total, user_id(' +
             'id, name, lastname, email, phone, scan), config(id, config, screen) ')
         .eq('id', orderId);
 
@@ -61,8 +62,7 @@ export default async function Order({params}: { params: Promise<{ orderId: strin
                     <BackButton url="/admin/orders"/>
                 </div>
                 <div className="h-full flex flex-col justify-center">
-                    <h2 className="font-bold text-2xl w-[75vw] mx-auto">Order
-                        n.{(data as unknown as OrderInfo[])?.[0].id} </h2>
+                    <h1 className="font-bold text-2xl w-[75vw] mx-auto">Order {orderIdConverter((data as unknown as OrderInfo[])?.[0].order_id)} </h1>
 
                     <div className="w-[75vw] mx-auto mt-2">
                         <h3 className="inline">Order status: </h3>
@@ -72,11 +72,11 @@ export default async function Order({params}: { params: Promise<{ orderId: strin
             </div>
             <div className="w-[80%] mx-auto h-[calc(100vh-54px-15vh-4rem)] mb-[3rem] flex justify-center">
                 <div className="w-[33vw] py-8 pr-8">
-                    <h3 className="font-semibold mb-4">Configuration</h3>
+                    <h2 className="font-semibold mb-4">Configuration</h2>
                     <div className="overflow-y-auto h-full">
                         <div>
                             <div className="mb-4">
-                                <h4 className="w-full py-1 px-3 bg-stone-200 mb-1">Features</h4>
+                                <h3 className="w-full py-1 px-3 bg-stone-200 mb-1">Composition</h3>
                                 <ul>
                                     {(data as unknown as OrderInfo[])?.[0].config.config.preciousness
                                         && Object.entries((data as unknown as OrderInfo[])?.[0].config.config.preciousness as Preciousness).map(feat => {
@@ -88,18 +88,19 @@ export default async function Order({params}: { params: Promise<{ orderId: strin
                             </div>
 
                             <div className="mb-4">
-                                <h4 className="w-full py-1 px-3 bg-stone-200 mb-1">Jewels list</h4>
+                                <h3 className="w-full py-1 px-3 bg-stone-200 mb-1">Products</h3>
                                 <ul className="mb-2">
                                     {
                                         Object.entries(jewelsConfig).map(jewel => {
-                                            return(
+                                            return (
                                                 <li className="mb-2 pl-2" key={jewel[0]}>
                                                     <span className="font-semibold">{jewel[0]}</span>
                                                     <ul>
                                                         {jewel[1].map(tooth => {
-                                                            return(
+                                                            return (
                                                                 <li key={tooth} className="flex items-center gap-1">
-                                                                    <span className="inline-block w-1 h-1 bg-black rounded-full"></span>
+                                                                    <span
+                                                                        className="inline-block w-1 h-1 bg-black rounded-full"></span>
                                                                     {tooth}
                                                                 </li>
                                                             )
@@ -110,6 +111,16 @@ export default async function Order({params}: { params: Promise<{ orderId: strin
                                         })
                                     }
                                 </ul>
+                            </div>
+
+                            <div className="mb-4">
+                                <h3 className="w-full py-1 px-3 bg-stone-200 mb-1">Total</h3>
+                                <p className="pl-2 mb-2">
+                                    {new Intl.NumberFormat("it-IT", {
+                                        style: "currency",
+                                        currency: "EUR"
+                                    }).format((data as unknown as OrderInfo[])?.[0].total)}
+                                </p>
                             </div>
                         </div>
                     </div>

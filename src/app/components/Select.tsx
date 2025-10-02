@@ -22,10 +22,10 @@ export default function Select({st, orderId}:{st:OrderInfo["status"], orderId:Or
 
     return(
         <select className="inline" value={status as string} onChange={(e) => updateStatus(e.target.value)}>
-            <option value="In preparation">In preparation</option>
-            <option value="Ready">Ready</option>
+            <option value="In production">In production</option>
+            <option value="New" disabled>New</option>
             <option value="Shipped">Shipped</option>
-            <option value="Picked Up">Picked up</option>
+            <option value="Delivered">Delivered</option>
             <option value="Canceled">Canceled</option>
         </select>
     )

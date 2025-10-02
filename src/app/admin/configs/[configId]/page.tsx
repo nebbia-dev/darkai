@@ -5,6 +5,7 @@ import BackButton from "@/app/components/BackButton";
 import {Preciousness} from "@/app/types/State";
 
 import Image from "next/image";
+import confIdConverter from "@/app/helpers/confIdConverter";
 export default async function Config({params}: { params: Promise<{ configId: string[] }> }){
     const { configId } = await params;
     const supabase = await createClient();
@@ -55,17 +56,16 @@ export default async function Config({params}: { params: Promise<{ configId: str
                     <BackButton url="/admin/configs"/>
                 </div>
                 <div className="h-full flex flex-col justify-center">
-                    <h2 className="font-bold text-2xl w-[75vw] mx-auto">Config
-                        n.{data?.[0].id} </h2>
+                    <h1 className="font-bold text-2xl w-[75vw] mx-auto">Configuration {confIdConverter(data?.[0].config_id)} </h1>
                 </div>
             </div>
             <div className="w-[80%] mx-auto h-[calc(100vh-54px-15vh-4rem)] mb-[3rem] flex justify-center">
                 <div className="w-[33vw] py-8 pr-8">
-                    <h3 className="font-semibold mb-4">Configuration</h3>
+                    <h2 className="font-semibold mb-4">Configuration</h2>
                     <div className="overflow-y-auto h-full">
                         <div>
                             <div className="mb-4">
-                                <h4 className="w-full py-1 px-3 bg-stone-200 mb-1">Features</h4>
+                                <h3 className="w-full py-1 px-3 bg-stone-200 mb-1">Composition</h3>
                                 <ul>
                                     {data?.[0].config.preciousness
                                         && Object.entries(data?.[0].config.preciousness as Preciousness).map(feat => {
@@ -77,7 +77,7 @@ export default async function Config({params}: { params: Promise<{ configId: str
                             </div>
 
                             <div className="mb-4">
-                                <h4 className="w-full py-1 px-3 bg-stone-200 mb-1">Jewels list</h4>
+                                <h3 className="w-full py-1 px-3 bg-stone-200 mb-1">Products</h3>
                                 <ul className="mb-2">
                                     {
                                         Object.entries(jewelsConfig).map(jewel => {
@@ -101,11 +101,18 @@ export default async function Config({params}: { params: Promise<{ configId: str
                                     }
                                 </ul>
                             </div>
+
+                            <div className="mb-4">
+                                <h3 className="w-full py-1 px-3 bg-stone-200 mb-1">Total</h3>
+                                <p className="pl-2 mb-2">
+                                    {new Intl.NumberFormat("it-IT", { style: "currency", currency: "EUR" }).format(data?.[0].total)}
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div className="w-[33vw] h-full overflow-y-auto py-8 border-l border-gray-400">
 
+                <div className="w-[33vw] h-full overflow-y-auto py-8 border-l border-gray-400">
                     <div className="pt-4 flex gap-2 items-center justify-center h-full">
                         <div className="w-full">
                             <Image alt="config"
