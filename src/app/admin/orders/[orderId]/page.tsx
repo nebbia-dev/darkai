@@ -56,7 +56,7 @@ export default async function Order({params}: { params: Promise<{ orderId: strin
     }
 
     return(
-        <div className="relative left-[7.5vw] w-[92.5vw] h-[calc(100vh-54px)]">
+        <div className="relative left-[7.5vw] w-[92.5vw] h-page-nav">
             <div className="bg-stone-100 h-[15vh] relative">
                 <div className="h-full absolute flex items-center justify-center w-[7.5vw]">
                     <BackButton url="/admin/orders"/>
@@ -70,7 +70,7 @@ export default async function Order({params}: { params: Promise<{ orderId: strin
                     </div>
                 </div>
             </div>
-            <div className="w-[80%] mx-auto h-[calc(100vh-54px-15vh-4rem)] mb-[3rem] flex justify-center">
+            <div className="w-[80%] mx-auto h-tab-height mb-[3rem] flex justify-center">
                 <div className="w-[33vw] py-8 pr-8">
                     <h2 className="font-semibold mb-4">Configuration</h2>
                     <div className="overflow-y-auto h-full">

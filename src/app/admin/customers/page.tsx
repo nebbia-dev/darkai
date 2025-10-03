@@ -19,7 +19,7 @@ export default async function Page() {
                 </div>
                 <h3 className="w-[75vw] mx-auto mt-2">List of all customers</h3>
             </div>
-            <div className="w-full h-[calc(100vh-54px-15vh-3rem)] mb-[3rem]">
+            <div className="w-full h-tab-height mb-[3rem]">
                 <div className="overflow-y-scroll">
                     <table className="w-full">
                     <thead className="border-b border-b-gray-400">
