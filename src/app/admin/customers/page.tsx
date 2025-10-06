@@ -6,7 +6,7 @@ export default async function Page() {
     const supabase = await createClient();
     let { data, error } = await supabase
         .from('Orders')
-        .select('id, created_at, total, user_id(name, lastname, city, postalCode, state)');
+        .select('id, created_at, total, user_id(name, lastname, city, postalCode, state, email)');
     console.log(data);
 
 
@@ -25,6 +25,7 @@ export default async function Page() {
                     <thead className="border-b border-b-gray-400">
                     <tr>
                         <th scope="col" className="font-semibold text-left pr-2 pl-[10%] w-[20%] py-4">Name</th>
+                        <th scope="col" className="font-semibold w-[10%] py-4">Email</th>
                         <th scope="col" className="font-semibold w-[10%] py-4">City</th>
                         <th scope="col" className="font-semibold w-[10%] py-4">Postal code</th>
                         <th scope="col" className="font-semibold w-[10%] py-4">State</th>
@@ -40,6 +41,7 @@ export default async function Page() {
                                 <td scope="row" className="text-left h-[2rem] pr-2 pl-[10%]">
                                     {(customer as unknown as CustomerInfo).user_id.name} {(customer as unknown as CustomerInfo).user_id.lastname}
                                 </td>
+                                <td className="text-center h-[4rem] px-2">{(customer as unknown as CustomerInfo).user_id.email}</td>
                                 <td className="text-center h-[4rem] px-2">{(customer as unknown as CustomerInfo).user_id.city}</td>
                                 <td className="text-center h-[4rem] px-2 ">{(customer as unknown as CustomerInfo).user_id.postalCode}</td>
                                 <td className="text-center h-[4rem] px-2 ">{(customer as unknown as CustomerInfo).user_id.state}</td>

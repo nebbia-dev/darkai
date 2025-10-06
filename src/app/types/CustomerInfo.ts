@@ -7,6 +7,7 @@ export default interface CustomerInfo {
         name: string,
         city: string,
         postalCode: string,
-        state: string
+        state: string,
+        email: string
     },
 }

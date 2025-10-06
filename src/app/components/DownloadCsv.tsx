@@ -46,10 +46,11 @@ export default function DownloadCsv({data} : {data: CustomerInfo[]| ConfigInfo[]
                 filename = 'DarkaiLab_Orders_List_' + new Date().toLocaleDateString('it-IT');
 
         } else {
-                arr.push(['Name', 'City', 'Postal code', 'State', 'Order Date', 'Order Amount']);
+                arr.push(['Name', 'Email', 'City', 'Postal code', 'State', 'Order Date', 'Order Amount']);
                 data?.forEach(el => {
                     arr.push([
                         removeCommas((el as unknown as CustomerInfo).user_id.name) + ' ' + removeCommas((el as unknown as CustomerInfo).user_id.lastname),
+                        removeCommas((el as unknown as CustomerInfo).user_id.email),
                         removeCommas((el as unknown as CustomerInfo).user_id.city),
                         removeCommas((el as unknown as CustomerInfo).user_id.postalCode),
                         removeCommas((el as unknown as CustomerInfo).user_id.state),
