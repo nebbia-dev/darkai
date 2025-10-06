@@ -18,7 +18,7 @@ export default function Page() {
     }
 
     return (
-        <div className="w-[20vw] h-[calc(100vh-54px)] flex items-center justify-center mx-auto">
+        <div className="w-[20vw] h-page-nav flex items-center justify-center mx-auto">
             {isSending
                 ? <div className="w-full text-center">
                         <span className="loader mb-8 inline-block mx-auto"></span>

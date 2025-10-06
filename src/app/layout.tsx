@@ -19,7 +19,7 @@ export default function RootLayout({
         <body className="bg-gray-50">
         <AppRouterCacheProvider>
             <div className="w-[100vw] bg-gray-50 flex justify-center border-b-1 border-gray-400">
-                <img className="py-4" src="/logo.webp" alt="darkai logo"/>
+                <img className="py-6 w-[132px]" src="/logo.svg" alt="darkai logo"/>
             </div>
             {children}
         </AppRouterCacheProvider>

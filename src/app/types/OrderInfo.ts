@@ -9,6 +9,7 @@ export default interface OrderInfo {
     created_at: Date,
     id: number,
     shipping: boolean,
+    total: number,
     shippingAddress: {
         address: string,
         city: string,
@@ -19,7 +20,8 @@ export default interface OrderInfo {
         postalCode: string,
         state: string
     },
-    status: 'In preparation' | 'Shipped' | 'Picked Up' | 'Ready' | 'Canceled' | undefined,
+    status: 'In produzione' | 'Spedito' | 'Consegnato' | 'Nuovo' | 'Annullato' | undefined,
+    order_id: number,
     user_id: {
         id: number,
         email: string,
