@@ -1,6 +1,7 @@
+'use client'
 import ToothConfig from "@/app/components/ToothConfig";
 import {FormEvent, ReactNode, SyntheticEvent, useEffect, useRef, useState} from "react";
-import {Box, Modal, Tab, Tabs} from "@mui/material";
+import {Box, Divider, Modal, Tab, Tabs, Tooltip} from "@mui/material";
 import DefaultConfig from "@/app/components/DefaultConfig";
 import ToothSelector from "@/app/components/ToothSelector";
 import DefaultSelector from "@/app/components/DefaultSelector";
@@ -9,6 +10,10 @@ import {State} from "@/app/types/State";
 import elabToothName from "@/app/helpers/elabToothName";
 import Link from 'next/link';
 import firstCapital from "@/app/helpers/firstCapital";
+import {Packaging} from "@/app/components/icons/Packaging";
+import {Info} from "@/app/components/icons/Info";
+import {Close} from "@/app/components/icons/Close";
+import ConfiguratorButton from "@/app/components/ConfiguratorButton";
 
 interface TabPanelProps {
     children?: ReactNode;
@@ -16,7 +21,9 @@ interface TabPanelProps {
     value: number;
 }
 
-export default function Selection({ui} : {ui:boolean}) {
+export default function Selection() {
+    const [activeButton, setActiveButton] = useState<string|undefined>(undefined);
+
     const total = useTeethStore((state:State) => state.total);
     const totalPreciousness = useTeethStore((state:State) => state.totalPreciousness);
     const calcPreciousness = useTeethStore((state:State) => state.calcPreciousness);
@@ -39,6 +46,16 @@ export default function Selection({ui} : {ui:boolean}) {
     const [open, setOpen] = useState<boolean>(false);
     const [isSending, setIsSending] = useState<boolean>(false);
     const [sent, setSent] = useState<boolean>(false);
+
+    const [showManual, setShowManual] = useState<boolean>(true);
+
+    function changeActiveButton(value:string) {
+        if(value === activeButton) {
+            setActiveButton(undefined)
+        } else {
+            setActiveButton(value);
+        }
+    }
 
     function download(e:FormEvent) {
         e.preventDefault();
@@ -77,34 +94,44 @@ export default function Selection({ui} : {ui:boolean}) {
 
     return (
         <>
-            <div className="w-full h-full relative">
-                <>
-                    <>
-                        {!activeTooth
-                            ?  <div className="w-full h-full flex flex-col items-center justify-center my-auto rounded text-black col-start-2 col-end-2 row-start-1 row-end-1">
-                                        <p>Prima scegli un dente</p>
-                               </div>
-
-
-                            : <>
-                                {/*DENTI SUPERIORI*/}
-                                <ToothSelector tooth='icsdx'/>
-                                <ToothSelector tooth='icssx'/>
-                                <ToothSelector tooth='ilsdx'/>
-                                <ToothSelector tooth='ilssx'/>
-                                <ToothSelector tooth='csdx'/>
-                                <ToothSelector tooth='cssx'/>
-                                {/*DENTI INFERIORI*/}
-                                <ToothSelector tooth='icidx'/>
-                                <ToothSelector tooth='icisx'/>
-                                <ToothSelector tooth='ilidx'/>
-                                <ToothSelector tooth='ilisx'/>
-                                <ToothSelector tooth='cidx'/>
-                                <ToothSelector tooth='cisx'/>
-                            </>
+            <div className="flex">
+                <div className="w-full h-[calc(100vh-108px)] flex flex-col gap-[25%] ml-[5vw]">
+                    <div
+                        className="relative flex gap-4 top-10">
+                        <Tooltip title="Navigation info">
+                            <button className="cursor-pointer">
+                                <Info className="w-6 h-6" onClick={() => setShowManual((prev) => !prev)}/>
+                            </button>
+                        </Tooltip>
+                        {showManual &&
+                            <div
+                                className="absolute flex flex-col border border-gray-950/[33%] gap-1 left-[60%] top-[-100%] w-[300px] text-sm bg-gray-50 rounded py-2 px-4">
+                                <div className="flex items-center justify-between">
+                                    <p className="font-semibold">How to navigate the model</p>
+                                    <Close className="cursor-pointer w-5"
+                                           onClick={() => setShowManual((prev) => !prev)}/>
+                                </div>
+                                <ul className="mb-1 pr-2">
+                                    <li><span className="font-semibold">Move</span>: click + drag</li>
+                                    <li><span className="font-semibold">Zoom</span>: slide two fingers up/down or rotate
+                                        the
+                                        mouse wheel
+                                    </li>
+                                </ul>
+                            </div>
                         }
-                    </>
-                </>
+                    </div>
+                    <div className="flex flex-col gap-4">
+                        <ConfiguratorButton inverse={true} value="1" active={activeButton}
+                                            onclick={changeActiveButton}>SD</ConfiguratorButton>
+                        <span aria-hidden={true} className="relative z-20 inline-block h-[2px] w-8 bg-slate-950"></span>
+                        <ToothSelector tooth={activeTooth} active={activeButton} onclick={changeActiveButton}/>
+                        <span aria-hidden={true} className="relative z-20 inline-block h-[2px] w-8 bg-slate-950"></span>
+                        <ConfiguratorButton inverse={true} value="6" active={activeButton} onclick={changeActiveButton}>
+                            <Packaging className="w-5 h-5"/>
+                        </ConfiguratorButton>
+                    </div>
+                </div>
             </div>
             <Modal
                 open={open}
@@ -144,11 +171,13 @@ export default function Selection({ui} : {ui:boolean}) {
                                         I'd like to receive more information about Darkai products
                                     </label>
                                     <div className="w-full text-right mt-4">
-                                        <button className="cursor-pointer py-2 px-4 rounded-full border text-gray-950 mr-4"
-                                                type="button" onClick={() => setOpen(false)}>Close
+                                        <button
+                                            className="cursor-pointer py-2 px-4 rounded-full border text-gray-950 mr-4"
+                                            type="button" onClick={() => setOpen(false)}>Close
                                         </button>
-                                        <button className="cursor-pointer py-2 px-4 rounded-full bg-gray-950 text-gray-50"
-                                                type="submit">Send
+                                        <button
+                                            className="cursor-pointer py-2 px-4 rounded-full bg-gray-950 text-gray-50"
+                                            type="submit">Send
                                         </button>
                                     </div>
                                 </form>

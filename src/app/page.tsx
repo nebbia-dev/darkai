@@ -37,8 +37,8 @@ export default function Config() {
     return (
         <div className='flex flex-row w-[100vw] mx-auto bg-gray-200 relative'>
             {/*<button className="absolute top-4 left-4 text-white bg-black rounded-[50%] h-12 w-12 cursor-pointer font-bold z-30" onClick={setUI}>UI</button>*/}
-            <div className="h-[calc(100vh-54px)] w-[20vw] absolute z-5 left-0">
-                {loaded && <Selection ui={ui}/>}
+            <div className="h-[calc(100vh-54px)] w-[20vw] absolute z-15 left-0">
+                {loaded && <Selection />}
             </div>
             <div className="h-[calc(100vh-54px)] w-full mx-auto">
                 <Suspense fallback={<Loading/>}>
@@ -46,7 +46,7 @@ export default function Config() {
                 </Suspense>
                 {loaded && <ActionBar ui={ui}/>}
             </div>
-            <div className=" h-[calc(100vh-54px)] w-[20vw] absolute z-5 right-0">
+            <div className=" h-[calc(100vh-54px)] w-[20vw] absolute z-15 right-0">
                 Halo
             </div>
         </div>
