@@ -1,6 +1,7 @@
 'use client'
 
 import {useTeethStore} from "@/app/stores/teeth";
+import {MeshTransmissionMaterial} from "@react-three/drei";
 
 export default function StonesMaterial({color} : {color: string | undefined}) {
     const envMap = useTeethStore((state) => state.envMap);
@@ -19,3 +20,21 @@ export default function StonesMaterial({color} : {color: string | undefined}) {
             attach='material'
         />)
     }
+
+// export default function StonesMaterial({color} : {color: string | undefined}) {
+//     const envMap = useTeethStore((state) => state.envMap);
+//     return (<MeshTransmissionMaterial
+//         color= '#FFFFFF'
+//         ior ={5.00}
+//         reflectivity={10}
+//         chromaticAberration={1}
+//         thickness={100}
+//         distortion = {1}
+//         // backside={true}
+//         // backsideThickness={5}
+//         clearcoat={1}
+//         envMap = {envMap}
+//         onUpdate={(self) => (self.needsUpdate = true)}
+//         attach='material'
+//     />)
+// }

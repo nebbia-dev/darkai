@@ -1279,4 +1279,4 @@ export const useTeethStore = create<State>((set, get) => ({
 }))
 
 // initial data fetch
-useTeethStore.getState().fetchPrices();
+// useTeethStore.getState().fetchPrices();

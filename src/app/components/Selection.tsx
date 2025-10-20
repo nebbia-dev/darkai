@@ -34,9 +34,6 @@ export default function Selection({ui} : {ui:boolean}) {
     const setRecap = useTeethStore((state:State) => state.setRecap);
     const takeScreenshot = useTeethStore((state:State) => state.setIsScreenshotNeeded);
 
-    const accordionContainer = useRef<null|HTMLDivElement>(null);
-    const scrollPosition = useRef(null);
-
     const [gold, setGold] = useState<string>('14k');
     const [diamond, setDiamond] = useState<string>('mois');
     const [open, setOpen] = useState<boolean>(false);
@@ -69,26 +66,6 @@ export default function Selection({ui} : {ui:boolean}) {
         setActiveTooth(undefined);
         calcPreciousness(gold, diamond);
     }
-    const changeTab = (event: SyntheticEvent, newValue: number) => {
-        setActiveTab(newValue);
-    };
-    function CustomTabPanel(props: TabPanelProps) {
-        const {children, value, index, ...other} = props;
-
-        return (
-            <div
-                role="tabpanel"
-                className={`w-full ${ui ? 'bg-stone-200 h-full' : ''}`}
-                hidden={value !== index}
-                id={`simple-tabpanel-${index}`}
-                aria-labelledby={`simple-tab-${index}`}
-                {...other}
-            >
-                {value === index && ui && <Box sx={{height: 1}}>{children}</Box>}
-                {value === index && !ui && <Box>{children}</Box>}
-            </div>
-        );
-    }
 
     useEffect(() => {
         if(checkDiamonds()) {
@@ -100,306 +77,35 @@ export default function Selection({ui} : {ui:boolean}) {
 
     return (
         <>
-            {!ui
-                ? <div className="border-l-1 border-gray-400">
-                    {!recap
-                        ?
-                        <>
-                            <div>
-                                <Tabs
-                                    value={activeTab} onChange={changeTab} aria-label="tabs" sx={{
-                                    width: 1,
-                                    '& .MuiTabs-indicator': {top: 0, backgroundColor: '#030712', height: '0.2rem'},
-                                    borderBottom: "1px solid #9ca3af",
-                                    '& .Mui-selected': {color: '#030712 !important'}
-                                }}>
-                                    <Tab label="DEFAULT" sx={{width: 0.5, maxWidth: 1}}/>
-                                    <Tab label="CUSTOM" sx={{width: 0.5, maxWidth: 1}}/>
-                                </Tabs>
-                            </div>
-                            <CustomTabPanel value={activeTab} index={0}>
-                        <div
-                            className="w-full h-[calc(100vh-54px-48px-0.2rem-15vh)] flex flex-col align-center justify-start text-center bg-gray-50 my-auto rounded text-black">
-                            <div className="overflow-y-auto">
-                                <DefaultConfig teeth="full"/>
-                                <DefaultConfig teeth="bar"/>
-                                <DefaultConfig teeth="frame"/>
-                                <DefaultConfig teeth="canines"/>
-                                <DefaultConfig teeth="stones"/>
-                            </div>
-                        </div>
-                    </CustomTabPanel>
-                            <CustomTabPanel value={activeTab} index={1}>
-                                {!activeTooth && Object.values(visibleTeeth).filter((el:boolean):boolean => el).length === 0
-                                    ? <div className="w-full h-[calc(100vh-54px-48px-0.2rem-15vh)] flex flex-col align-center justify-center">
-                                        <p className="text-center">To start, select a tooth</p>
-                                      </div>
-                                    : <div className="w-full h-[calc(100vh-54px-48px-0.2rem-15vh)] flex flex-col align-center justify-start text-center bg-gray-50 my-auto rounded text-black">
-                                        <div className="overflow-y-auto" ref={accordionContainer}>
-                                            {/*DENTI SUPERIORI*/}
-                                            {(activeTooth === 'icsdx' || visibleTeeth.icsdx) &&
-                                                <ToothConfig tooth='icsdx' ref={accordionContainer}
-                                                             position={scrollPosition}/>}
-                                            {(activeTooth === 'icssx' || visibleTeeth.icssx) &&
-                                                <ToothConfig tooth='icssx' ref={accordionContainer}
-                                                             position={scrollPosition}/>}
-                                            {(activeTooth === 'ilsdx' || visibleTeeth.ilsdx) &&
-                                                <ToothConfig tooth='ilsdx' ref={accordionContainer}
-                                                             position={scrollPosition}/>}
-                                            {(activeTooth === 'ilssx' || visibleTeeth.ilssx) &&
-                                                <ToothConfig tooth='ilssx' ref={accordionContainer}
-                                                             position={scrollPosition}/>}
-                                            {(activeTooth === 'csdx' || visibleTeeth.csdx) &&
-                                                <ToothConfig tooth='csdx' ref={accordionContainer}
-                                                             position={scrollPosition}/>}
-                                            {(activeTooth === 'cssx' || visibleTeeth.cssx) &&
-                                                <ToothConfig tooth='cssx' ref={accordionContainer}
-                                                             position={scrollPosition}/>}
-                                            {/*DENTI INFERIORI*/}
-                                            {(activeTooth === 'icidx' || visibleTeeth.icidx) &&
-                                                <ToothConfig tooth='icidx' ref={accordionContainer}
-                                                             position={scrollPosition}/>}
-                                            {(activeTooth === 'icisx' || visibleTeeth.icisx) &&
-                                                <ToothConfig tooth='icisx' ref={accordionContainer}
-                                                             position={scrollPosition}/>}
-                                            {(activeTooth === 'ilidx' || visibleTeeth.ilidx) &&
-                                                <ToothConfig tooth='ilidx' ref={accordionContainer}
-                                                             position={scrollPosition}/>}
-                                            {(activeTooth === 'ilisx' || visibleTeeth.ilisx) &&
-                                                <ToothConfig tooth='ilisx' ref={accordionContainer}
-                                                             position={scrollPosition}/>}
-                                            {(activeTooth === 'cidx' || visibleTeeth.cidx) &&
-                                                <ToothConfig tooth='cidx' ref={accordionContainer}
-                                                             position={scrollPosition}/>}
-                                            {(activeTooth === 'cisx' || visibleTeeth.cisx) &&
-                                                <ToothConfig tooth='cisx' ref={accordionContainer}
-                                                             position={scrollPosition}/>}
-                                        </div>
-                                    </div>
-                                }
-                            </CustomTabPanel>
-                                <div className="w-full h-[15vh] bg-stone-200">
-                            {Object.values(visibleTeeth).filter((el:boolean):boolean => el).length > 0 &&
-                                    <div className="h-full flex items-center justify-between w-[90%] mx-auto">
-                                        <p>{total !== 0 && <span>Starting from {total}€</span>}</p>
-                                        <button type="button" onClick={() => showRecap()}
-                                                className="bg-gray-950 py-2 px-4 rounded-full text-gray-50 cursor-pointer">Continue &rarr;</button>
-                                    </div>
-                            }
-                                </div>
-                        </>
-                        : <div className="h-[calc(100vh-54px)] flex flex-col w-full mx-auto">
-                            <div className="h-[calc(100%-15vh-7.5vh)] overflow-y-auto mt-[48px] w-full mx-auto">
-                                <h3 className="w-full flex items-center justify-start font-semibold bg-stone-200 py-4 border-t border-gray-400">
-                                    <span className="inline-block w-[75%] mx-auto">Teeth</span>
-                                </h3>
-                                {
-                                    Object.keys(visibleTeeth).map((tooth, i) => {
-                                        if (!visibleTeeth[tooth]) return null;
-                                        if (tooth === 'cisx' && (jewelType[tooth] === 'bigBar' || jewelType[tooth] === 'bigBarDiamond')) return null;
-                                        if (tooth === 'icisx' && (jewelType[tooth] === 'bar' || jewelType[tooth] === 'barDiamond')) return null;
-                                        if (tooth === 'icssx' && (jewelType[tooth] === 'bar' || jewelType[tooth] === 'barDiamond')) return null;
-
-                                        return (
-                                            <div key={i}
-                                                 className="flex flex-col border-b border-gray-400 pt-4">
-                                                <div className="w-full py-1 px-3 mb-2">
-                                                    <h4 className="w-full flex items-center justify-start font-semibold">
-                                                        <span className="inline-block w-[75%] mx-auto">{
-                                                            (tooth === 'cidx' && (jewelType[tooth] === 'bigBar' || jewelType[tooth] === 'bigBarDiamond'))
-                                                                ? 'Lower canines'
-                                                                : (tooth === 'icidx' && (jewelType[tooth] === 'bar' || jewelType[tooth] === 'barDiamond'))
-                                                                    ? 'Lower central incisors'
-                                                                    : (tooth === 'icsdx' && (jewelType[tooth] === 'bar' || jewelType[tooth] === 'barDiamond'))
-                                                                        ? 'Upper central incisors'
-                                                                        : elabToothName(tooth, false)
-                                                        }</span></h4>
-                                                </div>
-                                                <ul className="ml-4 w-full flex flex-col items-center justify-start mb-1">
-                                                    <li className="inline-block w-[75%] mx-auto">Jewel
-                                                        type: {jewelType[tooth].includes('Diamond') ? firstCapital(jewelType[tooth].split('D')[0]) + ' with ' + pave[tooth] + 's' : firstCapital(jewelType[tooth])}</li>
-                                                    <li className="inline-block w-[75%] mx-auto">Material: {firstCapital(material[tooth])}</li>
-                                                    {(stones[tooth].shape && stones[tooth].color) &&
-                                                        <li className="inline-block w-[75%] mx-auto">Gem: {firstCapital(stones[tooth].color as string)}, {firstCapital(stones[tooth].shape as string)} cut</li>}
-                                                </ul>
-                                                <div className="w-full flex flex-col items-center mb-4">
-                                                    <span
-                                                        className="text-right pt-2 pb-1 px-3 mt-2 font-semibold text-xl inline-block border-t border-dashed w-[75%] mx-auto">{
-                                                        (tooth === 'cidx' && (jewelType[tooth] === 'bigBar' || jewelType[tooth] === 'bigBarDiamond'))
-                                                        || ((tooth === 'icidx' || tooth === 'icsdx') && (jewelType[tooth] === 'bar' || jewelType[tooth] === 'barDiamond'))
-                                                            ? teethPrices[tooth] * 2
-                                                            : teethPrices[tooth]
-                                                    }€</span>
-                                                </div>
-                                            </div>
-                                        )
-                                    })
-                                }
-                                <div className={`pb-4 ${checkDiamonds() ? 'border-b border-gray-400' : ''}`}>
-                                    <h3 className="w-full flex items-center justify-start mb-4 font-semibold bg-stone-200 py-4">
-                                        <span className="inline-block w-[75%] mx-auto">Gold carats</span>
-                                    </h3>
-                                    <div className="w-[75%] mx-auto">
-                                        <label htmlFor="18k" className="flex items-center gap-2 ml-4">
-                                            <input type="radio" id="18k" name="carats" checked={gold === '18k'}
-                                                   value="18k" onChange={(e) => setGold(e.target.value)}/>
-                                            18K
-                                        </label>
-                                        <label htmlFor="14k" className="flex items-center gap-2 ml-4">
-                                            <input type="radio" id="14k" name="carats" checked={gold === '14k'}
-                                                   value="14k" onChange={(e) => setGold(e.target.value)}/>
-                                            14K
-                                        </label>
-                                    </div>
-                                </div>
-                                {checkDiamonds() &&
-                                    <div className="pb-4">
-                                        <h3 className="w-full flex items-center justify-start mb-4 font-semibold bg-stone-200 py-4">
-                                            <span className="inline-block w-[75%] mx-auto">Diamonds type</span>
-                                        </h3>
-                                        <div className="w-[75%] mx-auto">
-                                            <label htmlFor="natural" className="flex items-center gap-2 ml-4">
-                                                <input type="radio" id="natural" name="diamonds"
-                                                       checked={diamond === 'natural'}
-                                                       value="natural" onChange={(e) => setDiamond(e.target.value)}/>
-                                                Natural
-                                            </label>
-                                            <label htmlFor="lab" className="flex items-center gap-2 ml-4">
-                                                <input type="radio" id="lab" name="diamonds" checked={diamond === 'lab'}
-                                                       value="lab" onChange={(e) => setDiamond(e.target.value)}/>
-                                                Lab
-                                            </label>
-                                            <label htmlFor="mois" className="flex items-center gap-2 ml-4">
-                                                <input type="radio" id="mois" name="diamonds"
-                                                       checked={diamond === 'mois'}
-                                                       value="mois" onChange={(e) => setDiamond(e.target.value)}/>
-                                                Moissanite
-                                            </label>
-                                        </div>
-                                    </div>
-                                }
-                            </div>
-                            <div className="flex flex-col items-center border-t border-gray-400">
-                                <div
-                                    className="flex justify-end w-full py-4 px-3 h-[7.5vh] items-center text-right my-4 font-bold text-3xl">
-                                    <h2 className="w-[90%] mx-auto">Total: {total + totalPreciousness}€</h2>
-                                </div>
-                                <div className="w-full h-[15vh] bg-stone-200">
-                                    <div className="flex items-center justify-between w-[90%] h-full mx-auto">
-                                        <button type="button" onClick={() => setRecap(false)}
-                                                className="bg-gray-50 py-2 px-4 rounded-full text-gray-950 border cursor-pointer">&larr; Back
-                                        </button>
-                                        <div className="flex gap-4">
-                                            <button type="button" onClick={() => setOpen(true)}
-                                                    className="bg-gray-50 py-2 px-4 rounded-full text-gray-950 border cursor-pointer">Save
-                                            </button>
-                                            <Link href="/checkout/upload"
-                                                    className="bg-gray-950 py-2 px-4 rounded-full text-gray-50 cursor-pointer border">Next &rarr;
-                                            </Link>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    }
-                </div>
-                : <div className="w-full h-full relative">
+            <div className="w-full h-full relative">
+                <>
                     <>
-                        <Tabs
-                            value={activeTab} onChange={changeTab} aria-label="tabs" sx={{
-                            width: 1,
-                            '& .MuiTabs-indicator': {backgroundColor: '#030712', height: '0.2rem'},
-                            '& .Mui-selected': {color: '#030712 !important'},
-                            position: 'absolute',
-                            backgroundColor: '#f9fafb80',
-                            top: '-60vh'
-                        }}>
-                            <Tab label="DEFAULT" sx={{
-                                width: 0.5,
-                                maxWidth: 1,
-                                fontSize: '0.875rem',
-                                "@media (min-width: 400px)": {
-                                    fontSize: '1rem',
-                                },
-                                "@media (min-width: 600px)": {
-                                    fontSize: '1.125rem',
-                                },
-                                "@media (min-width: 800px)": {
-                                    fontSize: '1.25rem',
-                                },
-                                "@media (min-width: 900px)": {
-                                    fontSize: '1.5rem',
-                                }
-                            }}/>
-                            <Tab label="CUSTOM" sx={{
-                                width:  0.5,
-                                maxWidth: 1,
-                                fontSize: '0.875rem',
-                                "@media (min-width: 400px)": {
-                                    fontSize: '1rem',
-                                },
-                                "@media (min-width: 600px)": {
-                                    fontSize: '1.125rem',
-                                },
-                                "@media (min-width: 800px)": {
-                                    fontSize: '1.25rem',
-                                },
-                                "@media (min-width: 900px)": {
-                                    fontSize: '1.5rem',
-                                }
-                            }}/>
-                        </Tabs>
+                        {!activeTooth
+                            ?  <div className="w-full h-full flex flex-col items-center justify-center my-auto rounded text-black col-start-2 col-end-2 row-start-1 row-end-1">
+                                        <p>Prima scegli un dente</p>
+                               </div>
 
-                        <CustomTabPanel value={activeTab} index={0}>
-                            <DefaultSelector/>
-                        </CustomTabPanel>
-                            <>
-                            {!activeTooth
-                                ? <CustomTabPanel value={activeTab} index={1}>
-                                    <div className="w-full">
-                                        <Tabs
-                                            value={0} aria-label="tabs" sx={{
-                                            width: 1,
-                                            '& .MuiTabs-indicator': {
-                                                top: 0,
-                                                backgroundColor: '#030712',
-                                                height: '0.2rem'
-                                            },
-                                            borderBottom: '1px solid #9ca3af',
-                                            backgroundColor: '#f9fafb',
-                                            '& .Mui-selected': {color: '#030712 !important'}
-                                        }}>
-                                            <Tab sx={{width: 1, maxWidth: 1}}/>
-                                        </Tabs>
-                                    </div>
-                                    <Box sx={{height: 'calc(100% - 48px - 0.2rem)', display:'grid', gridTemplateRows:'80% 10% 10%', gridTemplateColumns:'25% 50% 25%'}}>
-                                        <div className="w-full h-full bg-stone-200 flex flex-col items-center justify-center my-auto rounded text-black col-start-2 col-end-2 row-start-1 row-end-1">
-                                            <p>Prima scegli un dente</p>
-                                        </div>
-                                    </Box>
-                                </CustomTabPanel>
 
-                                : <CustomTabPanel value={activeTab} index={1}>
-                                        {/*DENTI SUPERIORI*/}
-                                        <ToothSelector tooth='icsdx'/>
-                                        <ToothSelector tooth='icssx'/>
-                                        <ToothSelector tooth='ilsdx'/>
-                                        <ToothSelector tooth='ilssx'/>
-                                        <ToothSelector tooth='csdx'/>
-                                        <ToothSelector tooth='cssx'/>
-                                        {/*DENTI INFERIORI*/}
-                                        <ToothSelector tooth='icidx'/>
-                                        <ToothSelector tooth='icisx'/>
-                                        <ToothSelector tooth='ilidx'/>
-                                        <ToothSelector tooth='ilisx'/>
-                                        <ToothSelector tooth='cidx'/>
-                                        <ToothSelector tooth='cisx'/>
-                                    </CustomTabPanel>
-                            }
-                        </>
+                            : <>
+                                {/*DENTI SUPERIORI*/}
+                                <ToothSelector tooth='icsdx'/>
+                                <ToothSelector tooth='icssx'/>
+                                <ToothSelector tooth='ilsdx'/>
+                                <ToothSelector tooth='ilssx'/>
+                                <ToothSelector tooth='csdx'/>
+                                <ToothSelector tooth='cssx'/>
+                                {/*DENTI INFERIORI*/}
+                                <ToothSelector tooth='icidx'/>
+                                <ToothSelector tooth='icisx'/>
+                                <ToothSelector tooth='ilidx'/>
+                                <ToothSelector tooth='ilisx'/>
+                                <ToothSelector tooth='cidx'/>
+                                <ToothSelector tooth='cisx'/>
+                            </>
+                        }
                     </>
-                </div>
-            }
+                </>
+            </div>
             <Modal
                 open={open}
                 onClose={() => setOpen(false)}

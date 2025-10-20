@@ -50,7 +50,7 @@ export default function ActionBar({ui} : {ui: boolean}) {
 
     return(
         <div>
-            <div className="absolute flex items-center justify-center gap-4 left-10 top-10 translate-x-[-50%] w-2/4">
+            <div className="absolute z-10 flex items-center justify-center gap-4 left-10 top-10 translate-x-[-50%] w-2/4">
                 <Tooltip title="Navigation info">
                     <button className="cursor-pointer">
                         <Info className="w-6 h-6" onClick={() => setShowManual((prev) => !prev)}/>
