@@ -17,7 +17,8 @@ import FinishingSubOptions from "@/app/components/FinishingSubOptions";
 import PackagingSubOptions from "@/app/components/PackagingSubOptions";
 import SignatureSubOptions from "@/app/components/SignatureSubOptions";
 
-export default function ToothSelector({tooth, onclick, active} : {tooth: string | undefined, active:string|undefined, onclick: (value:string) => void,}) {
+export default function ToothSelector({tooth, onclick, active} : {tooth: string | undefined, active:string|undefined, onclick: (value:string) => void}) {
+    const [activeSubButton, setActiveSubButton] = useState<string|undefined>(undefined);
     const [value, setValue] = useState<number>(0);
     const pave = useTeethStore((state: State) => tooth ? state.teethPave[tooth] : undefined);
     const jewelType = useTeethStore((state: State) => tooth ? state.teethJewelType[tooth] : undefined);
@@ -62,17 +63,17 @@ export default function ToothSelector({tooth, onclick, active} : {tooth: string 
     function renderOptions(active:string|undefined, tooth:string|undefined) {
         switch(active) {
             case "1":
-                return <SignatureOptions/>
+                return <SignatureOptions onclick={changeActiveSubButton}/>
             case "2":
-                return <DesignOptions tooth={tooth}/>
+                return <DesignOptions tooth={tooth} onclick={changeActiveSubButton} />
             case "3":
-                return <GoldOptions tooth={tooth}/>
+                return <GoldOptions tooth={tooth} onclick={changeActiveSubButton}/>
             case "4":
-                return <FinishingOptions tooth={tooth}/>
+                return <FinishingOptions tooth={tooth} onclick={changeActiveSubButton}/>
             case "5":
-                return <StoneOptions tooth={tooth}/>
+                return <StoneOptions tooth={tooth} onclick={changeActiveSubButton}/>
             case "6":
-                return <PackagingOptions/>
+                return <PackagingOptions onclick={changeActiveSubButton}/>
             default:
                 return (<div className="w-[95%] h-[120px] mx-auto rounded-3xl  mb-4 p-2 text-center">Choose a tooth first</div>)
         }
@@ -81,22 +82,26 @@ export default function ToothSelector({tooth, onclick, active} : {tooth: string 
     function renderSubOptions(active:string|undefined, tooth:string|undefined) {
         switch(active) {
             case "1":
-                return <SignatureSubOptions/>
+                return <SignatureSubOptions value={activeSubButton}/>
             case "2":
-                return <DesignSubOptions tooth={tooth}/>
+                return <DesignSubOptions tooth={tooth} value={activeSubButton}/>
             case "4":
-                return <FinishingSubOptions tooth={tooth}/>
+                return <FinishingSubOptions tooth={tooth} value={activeSubButton}/>
             case "6":
-                return <PackagingSubOptions/>
+                return <PackagingSubOptions value={activeSubButton}/>
         }
     }
 
-    const changeTab = (event: SyntheticEvent, newValue: number) => {
-        setValue(newValue);
-    };
-
     function sync() {
         selectorRef.current.scrollTop = elementRef.current?.scrollTop;
+    }
+
+    function changeActiveSubButton(value:string) {
+        if(value === activeSubButton) {
+            setActiveSubButton(undefined)
+        } else {
+            setActiveSubButton(value);
+        }
     }
 
     // ho sia il bottone selezionato sia l'activeTooth
