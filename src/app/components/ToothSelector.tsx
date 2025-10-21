@@ -1,8 +1,5 @@
 import React, {SyntheticEvent, useState} from "react";
 import {useTeethStore} from "@/app/stores/teeth";
-import SelectorButtonPill from "@/app/components/SelectorButtonPill";
-import DiamondTogglerPill from "@/app/components/DiamondTogglerPill";
-import StoneSelectorPill from "@/app/components/StoneSelectorPill";
 import {Shape} from "@/app/components/icons/Shape";
 import {Metal} from "@/app/components/icons/Metal";
 import {Gem} from "@/app/components/icons/Gem";
@@ -47,10 +44,35 @@ export default function ToothSelector({tooth, onclick, active} : {tooth: string 
             changeStone(tooth, stone, 'prev');
         }
     }
+
+    function renderOptions(active:string|undefined, tooth:string|undefined) {
+        switch(active) {
+            case "2":
+                return (
+                    <>
+                        <div className="w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-2 text-center">Full
+                        </div>
+                        <div className="w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-2 text-center">Frame
+                        </div>
+                        <div className="w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-2 text-center">Spacer
+                        </div>
+                        <div className="w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-2 text-center">Bar
+                        </div>
+                        <div className="w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-2 text-center">Bezel
+                        </div>
+                        <div className="w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-2 text-center">Enamel
+                        </div>
+                    </>)
+            default:
+                return (<div className="w-[95%] h-[120px] mx-auto rounded-3xl  mb-4 p-2 text-center">Choose a tooth first</div>)
+        }
+    }
+
     const changeTab = (event: SyntheticEvent, newValue: number) => {
         setValue(newValue);
     };
 
+    // ho sia il bottone selezionato sia l'activeTooth
 
     return(
 
@@ -61,11 +83,16 @@ export default function ToothSelector({tooth, onclick, active} : {tooth: string 
             <ConfiguratorButton inverse={false} value="5" active={active} onclick={onclick}>Co</ConfiguratorButton>
 
             <div
-                className={`${!active ? 'hidden' : 'block'} text-center h-[80vh] w-[300px] bg-gray-50 rounded-3xl absolute top-[-30vh] left-[48px] p-8 overflow-y-scroll border-1`}>
-                <div className="w-[95%] h-[216px] mx-auto rounded-3xl bg-stone-200 mb-4"></div>
-                <div className="w-[95%] h-[216px] mx-auto rounded-3xl bg-stone-200 mb-4"></div>
-                <div className="w-[95%] h-[216px] mx-auto rounded-3xl bg-stone-200 mb-4"></div>
-                <div className="w-[95%] h-[216px] mx-auto rounded-3xl bg-stone-200 mb-4"></div>
+                className={`${!active ? 'hidden' : 'block'} pups text-center h-[600px] w-[200px] bg-gray-50 rounded-3xl absolute 
+                            ${active === '1'
+                                ? 'top-[-30vh]'
+                                : active === '2'
+                                    ? 'top-[-25vh]'
+                                    : 'top-[-20vh]'
+                            } left-[48px] p-8 pr-4 border-1`}>
+                <div className="overflow-y-scroll h-full pl-[2px] pr-4">
+                    {renderOptions(active, tooth)}
+                </div>
             </div>
 
         </div>
