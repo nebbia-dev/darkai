@@ -1,6 +1,5 @@
-import React from "react";
+export default function DesignOptions({tooth}: { tooth: string | undefined }) {
 
-export default function DesignOptions({tooth}:{tooth:string|undefined}) {
     return (
         <>
             <div className="w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-2 text-center">Full
@@ -13,7 +12,7 @@ export default function DesignOptions({tooth}:{tooth:string|undefined}) {
             </div>
             <div className="w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-2 text-center">Bezel
             </div>
-            <div className="w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-2 text-center">Enamel
+            <div className="w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 p-2 text-center">Enamel
             </div>
         </>
     )

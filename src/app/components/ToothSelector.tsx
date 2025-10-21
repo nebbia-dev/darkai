@@ -1,10 +1,21 @@
-import React, {SyntheticEvent, useState} from "react";
+import React, {SyntheticEvent, useRef, useState} from "react";
 import {useTeethStore} from "@/app/stores/teeth";
 import {Shape} from "@/app/components/icons/Shape";
 import {Metal} from "@/app/components/icons/Metal";
 import {Gem} from "@/app/components/icons/Gem";
 import {State} from "@/app/types/State";
 import ConfiguratorButton from "@/app/components/ConfiguratorButton";
+import DesignOptions from "@/app/components/DesignOptions";
+import GoldOptions from "@/app/components/GoldOptions";
+import FinishingOptions from "@/app/components/FinishingOptions";
+import StoneOptions from "@/app/components/StoneOptions";
+import SignatureOptions from "@/app/components/SignatureOptions";
+import {Packaging} from "@/app/components/icons/Packaging";
+import PackagingOptions from "@/app/components/PackagingOptions";
+import DesignSubOptions from "@/app/components/DesignSubOptions";
+import FinishingSubOptions from "@/app/components/FinishingSubOptions";
+import PackagingSubOptions from "@/app/components/PackagingSubOptions";
+import SignatureSubOptions from "@/app/components/SignatureSubOptions";
 
 export default function ToothSelector({tooth, onclick, active} : {tooth: string | undefined, active:string|undefined, onclick: (value:string) => void,}) {
     const [value, setValue] = useState<number>(0);
@@ -18,6 +29,9 @@ export default function ToothSelector({tooth, onclick, active} : {tooth: string 
     const toggleDiamond = useTeethStore((state: State) => state.setDiamond);
     const changeStone = useTeethStore((state: State) => state.setStone);
     const setActiveDefault = useTeethStore((state: State) => state.setActiveDefault);
+
+    const elementRef = useRef<HTMLDivElement|null>(null);
+    const selectorRef = useRef<HTMLDivElement|null>(null);
 
     function selectType(type: string) {
         if(tooth) {
@@ -47,30 +61,43 @@ export default function ToothSelector({tooth, onclick, active} : {tooth: string 
 
     function renderOptions(active:string|undefined, tooth:string|undefined) {
         switch(active) {
+            case "1":
+                return <SignatureOptions/>
             case "2":
-                return (
-                    <>
-                        <div className="w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-2 text-center">Full
-                        </div>
-                        <div className="w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-2 text-center">Frame
-                        </div>
-                        <div className="w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-2 text-center">Spacer
-                        </div>
-                        <div className="w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-2 text-center">Bar
-                        </div>
-                        <div className="w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-2 text-center">Bezel
-                        </div>
-                        <div className="w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-2 text-center">Enamel
-                        </div>
-                    </>)
+                return <DesignOptions tooth={tooth}/>
+            case "3":
+                return <GoldOptions tooth={tooth}/>
+            case "4":
+                return <FinishingOptions tooth={tooth}/>
+            case "5":
+                return <StoneOptions tooth={tooth}/>
+            case "6":
+                return <PackagingOptions/>
             default:
                 return (<div className="w-[95%] h-[120px] mx-auto rounded-3xl  mb-4 p-2 text-center">Choose a tooth first</div>)
+        }
+    }
+
+    function renderSubOptions(active:string|undefined, tooth:string|undefined) {
+        switch(active) {
+            case "1":
+                return <SignatureSubOptions/>
+            case "2":
+                return <DesignSubOptions tooth={tooth}/>
+            case "4":
+                return <FinishingSubOptions tooth={tooth}/>
+            case "6":
+                return <PackagingSubOptions/>
         }
     }
 
     const changeTab = (event: SyntheticEvent, newValue: number) => {
         setValue(newValue);
     };
+
+    function sync() {
+        selectorRef.current.scrollTop = elementRef.current?.scrollTop;
+    }
 
     // ho sia il bottone selezionato sia l'activeTooth
 
@@ -83,15 +110,33 @@ export default function ToothSelector({tooth, onclick, active} : {tooth: string 
             <ConfiguratorButton inverse={false} value="5" active={active} onclick={onclick}>Co</ConfiguratorButton>
 
             <div
-                className={`${!active ? 'hidden' : 'block'} pups text-center h-[600px] w-[200px] bg-gray-50 rounded-3xl absolute 
+                className={`${!active ? 'hidden' : 'block'} pups text-center ${active === '6' ? 'h-[324px]' : 'h-[596px]'} w-[200px] bg-gray-50 rounded-3xl absolute 
                             ${active === '1'
-                                ? 'top-[-30vh]'
-                                : active === '2'
-                                    ? 'top-[-25vh]'
-                                    : 'top-[-20vh]'
-                            } left-[48px] p-8 pr-4 border-1`}>
-                <div className="overflow-y-scroll h-full pl-[2px] pr-4">
+                    ? 'top-[-30vh]'
+                    : active === '2'
+                        ? 'top-[-25vh]'
+                        : active === '6'
+                            ? 'top-[13.5vh]'
+                            : 'top-[-20vh]'
+                } left-[48px] p-8 pr-4 border-1`}>
+                <div onScroll={sync} ref={elementRef} className="overflow-y-scroll h-full pl-[2px] pr-4">
                     {renderOptions(active, tooth)}
+                </div>
+            </div>
+
+
+            <div
+                className={`${!active ? 'hidden' : 'block'} pups text-center h-[596px] w-[64px] absolute left-[240px] 
+                            ${active === '1'
+                    ? 'top-[-30vh]'
+                    : active === '2'
+                        ? 'top-[-25vh]'
+                        : active === '6'
+                            ? 'top-[-10vh]'
+                            : 'top-[-20vh]'
+                } py-8`}>
+                <div ref={selectorRef} className="whitespace-nowrap overflow-hidden h-full w-full">
+                    {renderSubOptions(active, tooth)}
                 </div>
             </div>
 
