@@ -1,4 +1,4 @@
-import React, {SyntheticEvent, useRef, useState} from "react";
+import React, {useRef, useState} from "react";
 import {useTeethStore} from "@/app/stores/teeth";
 import {Shape} from "@/app/components/icons/Shape";
 import {Metal} from "@/app/components/icons/Metal";
@@ -10,7 +10,6 @@ import GoldOptions from "@/app/components/GoldOptions";
 import FinishingOptions from "@/app/components/FinishingOptions";
 import StoneOptions from "@/app/components/StoneOptions";
 import SignatureOptions from "@/app/components/SignatureOptions";
-import {Packaging} from "@/app/components/icons/Packaging";
 import PackagingOptions from "@/app/components/PackagingOptions";
 import DesignSubOptions from "@/app/components/DesignSubOptions";
 import FinishingSubOptions from "@/app/components/FinishingSubOptions";
@@ -109,10 +108,10 @@ export default function ToothSelector({tooth, onclick, active} : {tooth: string 
     return(
 
         <div className="relative flex flex-col gap-4">
-            <ConfiguratorButton inverse={false} value="2" active={active} onclick={onclick}>De</ConfiguratorButton>
-            <ConfiguratorButton inverse={false} value="3" active={active} onclick={onclick}>Go</ConfiguratorButton>
-            <ConfiguratorButton inverse={false} value="4" active={active} onclick={onclick}>Fi</ConfiguratorButton>
-            <ConfiguratorButton inverse={false} value="5" active={active} onclick={onclick}>Co</ConfiguratorButton>
+            <ConfiguratorButton inverse={false} value="2" active={active} onclick={onclick} label="Grillz Type">De</ConfiguratorButton>
+            <ConfiguratorButton inverse={false} value="3" active={active} onclick={onclick} label="Gold Color">Go</ConfiguratorButton>
+            <ConfiguratorButton inverse={false} value="4" active={active} onclick={onclick} label="Finishing">Fi</ConfiguratorButton>
+            <ConfiguratorButton inverse={false} value="5" active={active} onclick={onclick} label="Stone Color">Co</ConfiguratorButton>
 
             <div
                 className={`${!active ? 'hidden' : 'block'} pups text-center ${active === '6' ? 'h-[324px]' : 'h-[596px]'} w-[200px] bg-gray-50 rounded-3xl absolute 

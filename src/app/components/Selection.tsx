@@ -1,10 +1,7 @@
 'use client'
-import ToothConfig from "@/app/components/ToothConfig";
-import {FormEvent, ReactNode, SyntheticEvent, useEffect, useRef, useState} from "react";
-import {Box, Divider, Modal, Tab, Tabs, Tooltip} from "@mui/material";
-import DefaultConfig from "@/app/components/DefaultConfig";
+import {FormEvent, ReactNode, useEffect, useState} from "react";
+import {Modal, Tooltip} from "@mui/material";
 import ToothSelector from "@/app/components/ToothSelector";
-import DefaultSelector from "@/app/components/DefaultSelector";
 import {useTeethStore} from "@/app/stores/teeth";
 import {State} from "@/app/types/State";
 import elabToothName from "@/app/helpers/elabToothName";
@@ -21,9 +18,7 @@ interface TabPanelProps {
     value: number;
 }
 
-export default function Selection() {
-    const [activeButton, setActiveButton] = useState<string|undefined>(undefined);
-
+export default function Selection({activeButton, changeActiveButton} : {activeButton: string|undefined, changeActiveButton:(value:string) => void }) {
     const total = useTeethStore((state:State) => state.total);
     const totalPreciousness = useTeethStore((state:State) => state.totalPreciousness);
     const calcPreciousness = useTeethStore((state:State) => state.calcPreciousness);
@@ -48,14 +43,6 @@ export default function Selection() {
     const [sent, setSent] = useState<boolean>(false);
 
     const [showManual, setShowManual] = useState<boolean>(true);
-
-    function changeActiveButton(value:string) {
-        if(value === activeButton) {
-            setActiveButton(undefined)
-        } else {
-            setActiveButton(value);
-        }
-    }
 
     function download(e:FormEvent) {
         e.preventDefault();
@@ -105,7 +92,7 @@ export default function Selection() {
                         </Tooltip>
                         {showManual &&
                             <div
-                                className="absolute flex flex-col border border-gray-950/[33%] gap-1 left-[60%] top-[-100%] w-[300px] text-sm bg-gray-50 rounded py-2 px-4">
+                                className={`${activeButton ? 'left-[60%]' : 'left-[15%]' } absolute flex flex-col border border-gray-950/[33%] gap-1 top-[-100%] w-[300px] text-sm bg-gray-50 rounded py-2 px-4`}>
                                 <div className="flex items-center justify-between">
                                     <p className="font-semibold">How to navigate the model</p>
                                     <Close className="cursor-pointer w-5"
@@ -122,12 +109,13 @@ export default function Selection() {
                         }
                     </div>
                     <div className="flex flex-col gap-4">
-                        <ConfiguratorButton inverse={true} value="1" active={activeButton}
-                                            onclick={changeActiveButton}>SD</ConfiguratorButton>
+                        <ConfiguratorButton inverse={true} value="1" active={activeButton} onclick={changeActiveButton} label="Signature Designs">
+                            SD
+                        </ConfiguratorButton>
                         <span aria-hidden={true} className="relative z-20 inline-block h-[2px] w-8 bg-slate-950"></span>
                         <ToothSelector tooth={activeTooth} active={activeButton} onclick={changeActiveButton}/>
                         <span aria-hidden={true} className="relative z-20 inline-block h-[2px] w-8 bg-slate-950"></span>
-                        <ConfiguratorButton inverse={true} value="6" active={activeButton} onclick={changeActiveButton}>
+                        <ConfiguratorButton inverse={true} value="6" active={activeButton} onclick={changeActiveButton} label="Packaging">
                             <Packaging className="w-5 h-5"/>
                         </ConfiguratorButton>
                     </div>
