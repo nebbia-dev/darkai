@@ -9,7 +9,7 @@ import Recap from "@/app/components/Recap";
 
 export default function Config() {
     const [activeButton, setActiveButton] = useState<string|undefined>(undefined);
-
+    const [nextStep, setNextStep] = useState<boolean>(false)
     const ui = useTeethStore((state) => state.ui);
     // const setUI = useTeethStore((state) => state.setUI);
     const loaded = useTeethStore((state) => state.loaded);
@@ -25,6 +25,10 @@ export default function Config() {
         } else {
             setActiveButton(value);
         }
+    }
+
+    function setContinue() {
+        setNextStep(prev => !prev);
     }
 
     // useEffect(() => {
@@ -48,17 +52,17 @@ export default function Config() {
     return (
         <div className='flex flex-row w-[100vw] mx-auto bg-gray-200 relative'>
             {/*<button className="absolute top-4 left-4 text-white bg-black rounded-[50%] h-12 w-12 cursor-pointer font-bold z-30" onClick={setUI}>UI</button>*/}
-            <div className={`h-page-nav ${activeButton ? 'w-[10vw]' : 'w-[25vw]'} absolute z-15 left-0`}>
+            <div className={`h-page-nav ${activeButton ? 'w-[10vw]' : 'w-[25vw]'} ${nextStep ? 'hidden' : 'block'} absolute z-15 left-0`}>
                 {loaded && <Selection activeButton={activeButton} changeActiveButton={changeActiveButton}/>}
             </div>
-            <div className="h-page-nav w-full mx-auto">
+            <div className={`h-page-nav ${nextStep ? 'w-[60%]' : 'w-full mx-auto'}`}>
                 <Suspense fallback={<Loading/>}>
                     <Scene/>
                 </Suspense>
-                {loaded && <ActionBar ui={ui}/>}
+                {loaded && !nextStep && <ActionBar ui={ui}/>}
             </div>
-            <div className=" h-page-nav w-[30vw] absolute z-15 right-0">
-                {loaded && <Recap/>}
+            <div className={`h-page-nav ${nextStep ? 'w-[40vw]' : 'w-[30vw]'} absolute z-15 right-0`}>
+                {loaded && <Recap next={nextStep} onclick={setContinue} />}
             </div>
         </div>
     );

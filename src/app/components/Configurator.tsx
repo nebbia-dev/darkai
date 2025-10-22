@@ -485,9 +485,6 @@ export default function Configurator() {
         setEnvMap(envMap);
     }, []);
 
-    console.log('envMap');
-
-
     // Instances prova
     // const particles = Array.from({length: 15}, () => ({
     //     factor: MathUtils.randInt(20, 100),
