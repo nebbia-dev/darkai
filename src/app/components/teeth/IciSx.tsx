@@ -14,7 +14,7 @@ export default function IciSx() {
     const toothGeometry = useTeethStore((state: State) => state.teethGeometry.icisx);
     const toothJewelType = useTeethStore((state: State) => state.teethJewelType.icisx);
     const toothMaterial = useTeethStore((state: State) => state.teethMaterial.icisx);
-    const toothPave = useTeethStore((state: State) => state.teethPave.icisx);
+    const toothPave = useTeethStore((state: State) => state.teethPaves.icisx);
     const toothEnamel = useTeethStore((state: State) => state.teethEnamel.icisx);
     const toothVisibility = useTeethStore((state: State) => state.teethVisibility.icisx);
 
@@ -28,7 +28,7 @@ export default function IciSx() {
                 break;
             case 'fullDiamond':
                 geometry = [toothGeometry.fullDiamond.base, toothGeometry.fullDiamond.full];
-                material = [<BaseFullDiamond color={toothMaterial}/>, <FullDiamond color={toothMaterial} pave={toothPave}/>]
+                material = [<BaseFullDiamond color={toothMaterial}/>, <FullDiamond color={toothMaterial} pave={toothPave.shape} stone={toothPave.color}/>]
                 break;
             case 'frame':
                 geometry = [toothGeometry.frame.full];
@@ -40,7 +40,7 @@ export default function IciSx() {
                 break;
             case 'frameDiamond':
                 geometry = [toothGeometry.frame.diamond.base, toothGeometry.frame.diamond.full];
-                material = [<FullMaterial color={toothMaterial}/>, <FullDiamond color={toothMaterial} pave={toothPave}/>]
+                material = [<FullMaterial color={toothMaterial}/>, <FullDiamond color={toothMaterial} pave={toothPave.shape} stone={toothPave.color}/>]
                 break;
             case 'bar':
                 geometry = [toothGeometry.bar.full];
@@ -48,7 +48,7 @@ export default function IciSx() {
                 break;
             case 'barDiamond':
                 geometry = [toothGeometry.bar.diamond.base, toothGeometry.bar.diamond.full];
-                material = [<FullMaterial color={toothMaterial}/>, <FullDiamond color={toothMaterial} pave={toothPave}/>]
+                material = [<FullMaterial color={toothMaterial}/>, <FullDiamond color={toothMaterial} pave={toothPave.shape} stone={toothPave.color}/>]
                 break;
             default:
                 geometry = [toothGeometry.full];

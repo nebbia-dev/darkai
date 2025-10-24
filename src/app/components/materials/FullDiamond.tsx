@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import {MeshRefractionMaterial, MeshTransmissionMaterial, useTexture} from "@react-three/drei";
 import {useTeethStore} from "@/app/stores/teeth";
 
-export default function FullDiamond({color, pave} : {color: string, pave: string}) {
+export default function FullDiamond({color, pave} : {color: string, pave: string|undefined, stone:string|undefined}) {
     const envMap = useTeethStore((state) => state.envMap);
 
         // DiamondGold

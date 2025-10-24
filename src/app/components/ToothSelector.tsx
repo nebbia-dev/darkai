@@ -17,62 +17,35 @@ import PackagingSubOptions from "@/app/components/PackagingSubOptions";
 import SignatureSubOptions from "@/app/components/SignatureSubOptions";
 
 export default function ToothSelector({tooth, onclick, active} : {tooth: string | undefined, active:string|undefined, onclick: (value:string) => void}) {
-    const [activeSubButton, setActiveSubButton] = useState<string|undefined>(undefined);
     const [value, setValue] = useState<number>(0);
-    const pave = useTeethStore((state: State) => tooth ? state.teethPave[tooth] : undefined);
+    const pave = useTeethStore((state: State) => tooth ? state.teethPaves[tooth] : undefined);
     const jewelType = useTeethStore((state: State) => tooth ? state.teethJewelType[tooth] : undefined);
     const material = useTeethStore((state: State) => tooth ? state.teethMaterial[tooth] : undefined);
     const stones = useTeethStore((state: State) => tooth ? state.teethStones[tooth] : undefined);
     const visible = useTeethStore((state: State) => tooth ? state.teethVisibility[tooth] : undefined);
     const changeJewelType = useTeethStore((state: State) => state.setType);
     const changeMaterial = useTeethStore((state: State) => state.setMaterial);
-    const toggleDiamond = useTeethStore((state: State) => state.setDiamond);
+    const toggleDiamond = useTeethStore((state: State) => state.setPave);
     const changeStone = useTeethStore((state: State) => state.setStone);
     const setActiveDefault = useTeethStore((state: State) => state.setActiveDefault);
 
     const elementRef = useRef<HTMLDivElement|null>(null);
     const selectorRef = useRef<HTMLDivElement|null>(null);
 
-    function selectType(type: string) {
-        if(tooth) {
-            setActiveDefault(undefined, undefined);
-            changeJewelType(tooth, type);
-        }
-    }
-
-    function selectMaterial(material: string) {
-        if(tooth) {
-            setActiveDefault(undefined, undefined);
-            changeMaterial(tooth, material);
-        }
-    }
-
-    function selectDiamond() {
-        if(tooth && pave) {
-            toggleDiamond(tooth, pave);
-        }
-    }
-
-    function selectStone(stone: string) {
-        if(tooth) {
-            changeStone(tooth, stone, 'prev');
-        }
-    }
-
     function renderOptions(active:string|undefined, tooth:string|undefined) {
         switch(active) {
             case "1":
-                return <SignatureOptions onclick={changeActiveSubButton}/>
+                return <SignatureOptions/>
             case "2":
-                return <DesignOptions tooth={tooth} onclick={changeActiveSubButton} />
+                return <DesignOptions tooth={tooth} />
             case "3":
-                return <GoldOptions tooth={tooth} onclick={changeActiveSubButton}/>
+                return <GoldOptions tooth={tooth}/>
             case "4":
-                return <FinishingOptions tooth={tooth} onclick={changeActiveSubButton}/>
+                return <FinishingOptions tooth={tooth}/>
             case "5":
-                return <StoneOptions tooth={tooth} onclick={changeActiveSubButton}/>
+                return <StoneOptions tooth={tooth}/>
             case "6":
-                return <PackagingOptions onclick={changeActiveSubButton}/>
+                return <PackagingOptions/>
             default:
                 return (<div className="w-[95%] h-[120px] mx-auto rounded-3xl  mb-4 p-2 text-center">Choose a tooth first</div>)
         }
@@ -81,26 +54,18 @@ export default function ToothSelector({tooth, onclick, active} : {tooth: string 
     function renderSubOptions(active:string|undefined, tooth:string|undefined) {
         switch(active) {
             case "1":
-                return <SignatureSubOptions value={activeSubButton}/>
+                return <SignatureSubOptions/>
             case "2":
-                return <DesignSubOptions tooth={tooth} value={activeSubButton}/>
+                return <DesignSubOptions tooth={tooth}/>
             case "4":
-                return <FinishingSubOptions tooth={tooth} value={activeSubButton}/>
+                return <FinishingSubOptions tooth={tooth}/>
             case "6":
-                return <PackagingSubOptions value={activeSubButton}/>
+                return <PackagingSubOptions/>
         }
     }
 
     function sync() {
         selectorRef.current.scrollTop = elementRef.current?.scrollTop;
-    }
-
-    function changeActiveSubButton(value:string) {
-        if(value === activeSubButton) {
-            setActiveSubButton(undefined)
-        } else {
-            setActiveSubButton(value);
-        }
     }
 
     // ho sia il bottone selezionato sia l'activeTooth

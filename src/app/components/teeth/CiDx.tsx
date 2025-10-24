@@ -17,7 +17,7 @@ export default function CiDx() {
     const toothGeometry = useTeethStore((state: State) => state.teethGeometry.cidx);
     const toothJewelType = useTeethStore((state: State) => state.teethJewelType.cidx);
     const toothMaterial = useTeethStore((state: State) => state.teethMaterial.cidx);
-    const toothPave = useTeethStore((state: State) => state.teethPave.cidx);
+    const toothPave = useTeethStore((state: State) => state.teethPaves.cidx);
     const toothVisibility = useTeethStore((state: State) => state.teethVisibility.cidx);
     const toothEnamel = useTeethStore((state: State) => state.teethEnamel.cidx);
     const CIDX = memo(({visible, type, mat} : {visible: boolean, type: string, mat: string}): JSX.Element => {
@@ -30,7 +30,7 @@ export default function CiDx() {
                 break;
             case 'fullDiamond':
                 geometry = [toothGeometry.fullDiamond.base, toothGeometry.fullDiamond.full];
-                material = [<BaseFullDiamond color={toothMaterial}/>, <FullDiamond color={toothMaterial} pave={toothPave}/>]
+                material = [<BaseFullDiamond color={toothMaterial}/>, <FullDiamond color={toothMaterial} pave={toothPave.shape} stone={toothPave.color}/>]
                 break;
             case 'enamel':
                 geometry = [toothGeometry.fullDiamond.base, toothGeometry.fullDiamond.full];
@@ -42,7 +42,7 @@ export default function CiDx() {
                 break;
             case 'frameDiamond':
                 geometry = [toothGeometry.frame.diamond.base, toothGeometry.frame.diamond.full];
-                material = [<FrameFull color={toothMaterial}/>, <FrameDiamond color={toothMaterial} pave={toothPave}/>]
+                material = [<FrameFull color={toothMaterial}/>, <FrameDiamond color={toothMaterial} pave={toothPave.shape} stone={toothPave.color}/>]
                 break;
             case 'bar':
                 geometry = [toothGeometry.bar.full];
@@ -50,7 +50,7 @@ export default function CiDx() {
                 break;
             case 'barDiamond':
                 geometry = [toothGeometry.bar.diamond.base, toothGeometry.bar.diamond.full];
-                material = [<FullMaterial color={toothMaterial}/>, <FullDiamond color={toothMaterial} pave={toothPave}/>]
+                material = [<FullMaterial color={toothMaterial}/>, <FullDiamond color={toothMaterial} pave={toothPave.shape} stone={toothPave.color}/>]
                 break;
             case 'bigBar':
                 geometry = [toothGeometry.bigBar.full];
@@ -58,7 +58,7 @@ export default function CiDx() {
                 break;
             case 'bigBarDiamond':
                 geometry = [toothGeometry.bigBar.diamond.base, toothGeometry.bigBar.diamond.full];
-                material = [<BarFull color={toothMaterial}/>, <BarDiamond color={toothMaterial} pave={toothPave}/>]
+                material = [<BarFull color={toothMaterial}/>, <BarDiamond color={toothMaterial} pave={toothPave.shape} stone={toothPave.color}/>]
                 break;
             default:
                 geometry = [toothGeometry.full];

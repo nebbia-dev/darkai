@@ -1,6 +1,10 @@
 import React from "react";
+import {useTeethStore} from "@/app/stores/teeth";
+import {State} from "@/app/types/State";
 
-export default function PackagingSubOptions({value} : {value:string|undefined}) {
+export default function PackagingSubOptions() {
+
+    const value = useTeethStore((state: State) => state.activeSubButton);
 
     return (
         <>

@@ -2,6 +2,7 @@ import {CubeTexture, Texture} from "three";
 import FBX from "@/app/types/FBX";
 
 interface Materials {
+    // mettere i colori
     [key: string]: string
     icsdx: string,
     icssx: string,
@@ -18,6 +19,7 @@ interface Materials {
 }
 
 interface Enamel {
+    // mettere i colori
     [key: string]: string |undefined
     icsdx: string | undefined,
     icssx: string | undefined,
@@ -33,6 +35,7 @@ interface Enamel {
     cisx: string | undefined,
 }
 interface JewelTypes {
+    // mettere i tipi di design
     [key: string]: string
     icsdx: string,
     icssx: string,
@@ -47,20 +50,25 @@ interface JewelTypes {
     cidx: string,
     cisx: string,
 }
+interface Paves {
+    [key: string]: Pave,
+    icsdx: Pave,
+    icssx: Pave,
+    icidx: Pave,
+    icisx: Pave,
+    ilsdx: Pave,
+    ilssx: Pave,
+    ilidx: Pave,
+    ilisx: Pave,
+    csdx: Pave,
+    cssx: Pave,
+    cidx: Pave,
+    cisx: Pave,
+}
+
 interface Pave {
-    [key: string]: 'diamond' | 'emerald' | 'sapphire' | 'ruby' | 'base',
-    icsdx: 'diamond' | 'emerald' | 'sapphire' | 'ruby' | 'base',
-    icssx: 'diamond' | 'emerald' | 'sapphire' | 'ruby' | 'base',
-    icidx: 'diamond' | 'emerald' | 'sapphire' | 'ruby' | 'base',
-    icisx: 'diamond' | 'emerald' | 'sapphire' | 'ruby' | 'base',
-    ilsdx: 'diamond' | 'emerald' | 'sapphire' | 'ruby' | 'base',
-    ilssx: 'diamond' | 'emerald' | 'sapphire' | 'ruby' | 'base',
-    ilidx: 'diamond' | 'emerald' | 'sapphire' | 'ruby' | 'base',
-    ilisx: 'diamond' | 'emerald' | 'sapphire' | 'ruby' | 'base',
-    csdx: 'diamond' | 'emerald' | 'sapphire' | 'ruby' | 'base',
-    cssx: 'diamond' | 'emerald' | 'sapphire' | 'ruby' | 'base',
-    cidx: 'diamond' | 'emerald' | 'sapphire' | 'ruby' | 'base',
-    cisx: 'diamond' | 'emerald' | 'sapphire' | 'ruby' | 'base',
+    shape: 'round' |  'princess' | 'baguette' | 'hex' | 'mosaic' | undefined,
+    color: string | undefined
 }
 interface Prices {
     [key: string]: number
@@ -93,7 +101,8 @@ interface Visibility {
     cisx: boolean,
 }
 export interface Stone {
-    shape: string | undefined,
+    // aggiungere i colori
+    shape: 'circle' |  'square' | 'baguette' | 'tear' | 'heart' | 'marquise' | undefined,
     color: string | undefined
 }
 interface Stones {
@@ -120,7 +129,7 @@ export interface Preciousness {
 export interface History {
     material: Materials,
     stones: Stones,
-    pave: Pave,
+    pave: Paves,
     type: JewelTypes,
     visible: Visibility,
     prices: Prices,
@@ -185,8 +194,9 @@ export interface State {
         stones: string[]
     },
     teethEnamel: Enamel,
-    teethPave: Pave,
+    teethPaves: Paves,
     activeButton: string|undefined,
+    activeSubButton: string|undefined,
     activeTab: number,
     loaded: boolean,
     prices: BasePrices[] | undefined,
@@ -200,6 +210,7 @@ export interface State {
     calcPreciousness: (gold:string, diamond:string|undefined) => void,
     setRecap: (bool:boolean) => void,
     setActiveButton: (button:string|undefined) => void,
+    setActiveSubButton: (button:string|undefined) => void,
     setIsScreenshotNeeded: (value:boolean|undefined) => void,
     setResetControls: (value:boolean|undefined) => void,
     setActiveTab: (value:number) => void,
@@ -207,7 +218,7 @@ export interface State {
     setGeometry: (fbx:FBX) => void,
     setMaterial: (tooth:string, color:string) => void,
     setType: (tooth:string, type:string) => void,
-    setDiamond: (tooth:string, pave:string) => void,
+    setPave: (tooth:string, pave:string) => void,
     setStone: (tooth:string, shape:string, color:string) => void,
     setEnamel: (tooth:string, color:string) => void,
     setActiveTooth: (tooth:string|undefined) => void,

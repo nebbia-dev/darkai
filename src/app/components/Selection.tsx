@@ -25,7 +25,7 @@ export default function Selection({activeButton, changeActiveButton} : {activeBu
     const visibleTeeth = useTeethStore((state:State) => state.teethVisibility);
     const jewelType = useTeethStore((state: State) => state.teethJewelType);
     const material = useTeethStore((state: State) => state.teethMaterial);
-    const pave = useTeethStore((state: State) => state.teethPave);
+    const pave = useTeethStore((state: State) => state.teethPaves);
     const stones = useTeethStore((state: State) => state.teethStones);
     const teethPrices = useTeethStore((state:State) => state.teethPrices);
     const activeTooth = useTeethStore((state: State) => state.currentTooth);

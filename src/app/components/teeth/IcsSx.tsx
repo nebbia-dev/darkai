@@ -8,12 +8,13 @@ import {State} from "@/app/types/State";
 import * as THREE from "three";
 import FrameFull from "@/app/components/materials/FrameFull";
 import FullEnamel from "@/app/components/materials/FullEnamel";
+import BarSmall from "@/app/components/materials/BarSmall";
 
 export default function IcsSx() {
     const toothGeometry = useTeethStore((state: State) => state.teethGeometry.icssx);
     const toothJewelType = useTeethStore((state: State) => state.teethJewelType.icssx);
     const toothMaterial = useTeethStore((state: State) => state.teethMaterial.icssx);
-    const toothPave = useTeethStore((state: State) => state.teethPave.icssx);
+    const toothPave = useTeethStore((state: State) => state.teethPaves.icssx);
     const toothEnamel = useTeethStore((state: State) => state.teethEnamel.icssx);
     const toothVisibility = useTeethStore((state: State) => state.teethVisibility.icssx);
 
@@ -27,7 +28,7 @@ export default function IcsSx() {
                 break;
             case 'fullDiamond':
                 geometry = [toothGeometry.fullDiamond.base, toothGeometry.fullDiamond.full];
-                material = [<BaseFullDiamond color={toothMaterial}/>, <FullDiamond color={toothMaterial} pave={toothPave}/>]
+                material = [<BaseFullDiamond color={toothMaterial}/>, <FullDiamond color={toothMaterial} pave={toothPave.shape} stone={toothPave.color}/>]
                 break;
             case 'frame':
                 geometry = [toothGeometry.frame.full];
@@ -39,15 +40,15 @@ export default function IcsSx() {
                 break;
             case 'frameDiamond':
                 geometry = [toothGeometry.frame.diamond.base, toothGeometry.frame.diamond.full];
-                material = [<FullMaterial color={toothMaterial}/>, <FullDiamond color={toothMaterial} pave={toothPave}/>]
+                material = [<FullMaterial color={toothMaterial}/>, <FullDiamond color={toothMaterial} pave={toothPave.shape} stone={toothPave.color}/>]
                 break;
             case 'bar':
-                geometry = [];
-                material = []
+                geometry = [toothGeometry.bar.full];
+                material = [<BarSmall color={toothMaterial}/>]
                 break;
             case 'barDiamond':
-                geometry = [];
-                material = []
+                geometry = [toothGeometry.bar.diamond.base, toothGeometry.bar.diamond.full];
+                material = [<FullMaterial color={toothMaterial}/>, <FullDiamond color={toothMaterial} pave={toothPave.shape} stone={toothPave.color}/>]
                 break;
             default:
                 geometry = [toothGeometry.full];

@@ -1,14 +1,13 @@
 import {useTeethStore} from "@/app/stores/teeth";
 import {State} from "@/app/types/State";
 
-export default function GoldOptions({tooth, onclick}:{tooth:string|undefined, onclick:(value:string) => void}) {
+export default function GoldOptions({tooth}:{tooth:string|undefined}) {
     const setMaterial =  useTeethStore((state: State) => state.setMaterial);
-    const unsetTooth = useTeethStore((state: State) => state.unsetLastActivatedTooth);
+    const setActiveSubButton = useTeethStore((state: State) => state.setActiveSubButton);
     function setGold(e:any) {
         if(tooth) {
             setMaterial(tooth, e);
-            unsetTooth();
-            onclick(e);
+            setActiveSubButton(e);
         }
     }
 

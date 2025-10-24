@@ -1,7 +1,9 @@
 import React from "react";
+import {useTeethStore} from "@/app/stores/teeth";
+import {State} from "@/app/types/State";
 
-export default function FinishingSubOptions({tooth, value}: { tooth: string | undefined, value:string|undefined }) {
-
+export default function FinishingSubOptions({tooth}: { tooth: string | undefined }) {
+    const value = useTeethStore((state: State) => state.activeSubButton);
     return (
         <>
             <div className={`${value === 'nopave' ? 'block' : 'invisible'} h-[120px] mb-4 pl-6 text-center`}>
