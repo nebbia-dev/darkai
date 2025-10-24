@@ -108,10 +108,10 @@ export default function ToothSelector({tooth, onclick, active} : {tooth: string 
     return(
 
         <div className="relative flex flex-col gap-4">
-            <ConfiguratorButton inverse={false} value="2" active={active} onclick={onclick} label="Grillz Type">De</ConfiguratorButton>
-            <ConfiguratorButton inverse={false} value="3" active={active} onclick={onclick} label="Gold Color">Go</ConfiguratorButton>
-            <ConfiguratorButton inverse={false} value="4" active={active} onclick={onclick} label="Finishing">Fi</ConfiguratorButton>
-            <ConfiguratorButton inverse={false} value="5" active={active} onclick={onclick} label="Stone Color">Co</ConfiguratorButton>
+            <ConfiguratorButton inverse={false} value="2" active={active} onclick={onclick} tooth={tooth} label="Grillz Type">De</ConfiguratorButton>
+            <ConfiguratorButton inverse={false} value="3" active={active} onclick={onclick} tooth={tooth} label="Gold Color">Go</ConfiguratorButton>
+            <ConfiguratorButton inverse={false} value="4" active={active} onclick={onclick} tooth={tooth} label="Finishing">Fi</ConfiguratorButton>
+            <ConfiguratorButton inverse={false} value="5" active={active} onclick={onclick} tooth={tooth} label="Stone Color">Co</ConfiguratorButton>
 
             <div
                 className={`${!active ? 'hidden' : 'block'} pups text-center ${active === '6' ? 'h-[324px]' : 'h-[596px]'} w-[200px] bg-gray-50 rounded-3xl absolute 

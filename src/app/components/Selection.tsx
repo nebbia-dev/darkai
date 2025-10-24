@@ -92,13 +92,13 @@ export default function Selection({activeButton, changeActiveButton} : {activeBu
                         }
                     </div>
                     <div className="flex flex-col gap-4">
-                        <ConfiguratorButton inverse={true} value="1" active={activeButton} onclick={changeActiveButton} label="Signature Designs">
+                        <ConfiguratorButton tooth="alwaysActive" inverse={true} value="1" active={activeButton} onclick={changeActiveButton} label="Signature Designs">
                             SD
                         </ConfiguratorButton>
                         <span aria-hidden={true} className="relative z-20 inline-block h-[2px] w-8 bg-slate-950"></span>
                         <ToothSelector tooth={activeTooth} active={activeButton} onclick={changeActiveButton}/>
                         <span aria-hidden={true} className="relative z-20 inline-block h-[2px] w-8 bg-slate-950"></span>
-                        <ConfiguratorButton inverse={true} value="6" active={activeButton} onclick={changeActiveButton} label="Packaging">
+                        <ConfiguratorButton tooth="alwaysActive" inverse={true} value="6" active={activeButton} onclick={changeActiveButton} label="Packaging">
                             <Packaging className="w-5 h-5"/>
                         </ConfiguratorButton>
                     </div>

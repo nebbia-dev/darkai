@@ -158,7 +158,6 @@ export interface State {
     activeDefault: string | undefined,
     currentTooth: string | undefined,
     lastActivatedTooth: string | undefined,
-    ui: boolean,
     teethTypeOptions: {
         [key: string]: string[]
         full: string[],
@@ -197,9 +196,7 @@ export interface State {
     setTooth: (tooth:string, type:string, color:string) => void,
     resetTooth: (tooth:string) => void,
     setActiveDefault: (active:string|undefined, color:string|undefined) => void,
-    setCopy: (copied:string, original:string) =>void,
     setLoaded: (bool:boolean) => void,
-    setUI: (bool:boolean) => void,
     fetchPrices: () => void,
     undo: () => void,
     redo: () => void,

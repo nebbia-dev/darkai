@@ -7,13 +7,13 @@ import {State} from "@/app/types/State";
 
 export default function Dentiera() {
     const fbx = useMemo(() => {
-        console.log('dentiera')
         return useFBX('/models/MOD_Gengive (1).fbx')
     }, []);
+
     const fbx2 = useMemo(() => {
         return useFBX('/models/MOD_Denti_Separati.fbx')
     }, []);
-    console.log(fbx2)
+
     const envMap = useTeethStore((state: State) => state.envMap);
     const setActive = useTeethStore((state: State) => state.setActiveTooth);
     const activeTooth = useTeethStore((state: State) => state.currentTooth);
@@ -37,7 +37,7 @@ export default function Dentiera() {
     const [hovered, setHover] = useState<string|null>(null);
     const [touch, setTouch] = useState<boolean>(false);
     const dentieraMaterial = useMemo(() => {
-        console.log('material')
+
         return new THREE.MeshStandardMaterial({
             map: props.map,
             normalMap: props.normalMap,
@@ -50,7 +50,7 @@ export default function Dentiera() {
         })
     }, []);
     const dentiMaterial = useMemo(() => {
-        console.log('material')
+
         return new THREE.MeshStandardMaterial({
             map: propsTeeth.map,
             roughnessMap: propsTeeth.roughnessMap,
@@ -63,7 +63,6 @@ export default function Dentiera() {
     useEffect(() => {
         if('ontouchstart' in window || navigator.maxTouchPoints > 0) {
             setTouch(true);
-            console.log('touch!')
         }
     }, []);
 

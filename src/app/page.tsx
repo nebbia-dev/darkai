@@ -8,24 +8,16 @@ import {useTeethStore} from "@/app/stores/teeth";
 import Recap from "@/app/components/Recap";
 
 export default function Config() {
-    const [activeButton, setActiveButton] = useState<string|undefined>(undefined);
+
     const [nextStep, setNextStep] = useState<boolean>(false)
-    const ui = useTeethStore((state) => state.ui);
-    // const setUI = useTeethStore((state) => state.setUI);
     const loaded = useTeethStore((state) => state.loaded);
+    const activeButton = useTeethStore((state) => state.activeButton);
+    const changeActiveButton = useTeethStore((state) => state.setActiveButton);
     const [isMounted, setIsMounted] = useState(false);
 
     useEffect(() => {
         setTimeout(() => setIsMounted(true), 100);
     });
-
-    function changeActiveButton(value:string) {
-        if(value === activeButton) {
-            setActiveButton(undefined)
-        } else {
-            setActiveButton(value);
-        }
-    }
 
     function setContinue() {
         setNextStep(prev => !prev);
@@ -59,7 +51,7 @@ export default function Config() {
                 <Suspense fallback={<Loading/>}>
                     <Scene/>
                 </Suspense>
-                {loaded && !nextStep && <ActionBar ui={ui}/>}
+                {loaded && !nextStep && <ActionBar/>}
             </div>
             <div className={`h-page-nav ${nextStep ? 'w-[40vw]' : 'w-[30vw]'} absolute z-15 right-0`}>
                 {loaded && <Recap next={nextStep} onclick={setContinue} />}
