@@ -16,6 +16,22 @@ interface Materials {
     cidx: string,
     cisx: string,
 }
+
+interface Enamel {
+    [key: string]: string
+    icsdx: string,
+    icssx: string,
+    icidx: string,
+    icisx: string,
+    ilsdx: string,
+    ilssx: string,
+    ilidx: string,
+    ilisx: string,
+    csdx: string,
+    cssx: string,
+    cidx: string,
+    cisx: string,
+}
 interface JewelTypes {
     [key: string]: string
     icsdx: string,
@@ -168,6 +184,7 @@ export interface State {
         frameDiamond: string[],
         stones: string[]
     },
+    teethEnamel: Enamel,
     teethPave: Pave,
     activeTab: number,
     loaded: boolean,
@@ -190,6 +207,7 @@ export interface State {
     setType: (tooth:string, type:string) => void,
     setDiamond: (tooth:string, pave:string) => void,
     setStone: (tooth:string, shape:string, color:string) => void,
+    setEnamel: (tooth:string, color:string) => void,
     setActiveTooth: (tooth:string|undefined) => void,
     unsetLastActivatedTooth: () => void,
     setDefaultConfig: (config:string, color:string) => void,

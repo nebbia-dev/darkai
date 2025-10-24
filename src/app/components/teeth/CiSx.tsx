@@ -9,6 +9,7 @@ import FrameFull from "@/app/components/materials/FrameFull";
 import {State} from "@/app/types/State";
 import * as THREE from "three";
 import BarSmall from "@/app/components/materials/BarSmall";
+import FullEnamel from "@/app/components/materials/FullEnamel";
 
 export default function CiSx() {
     const toothGeometry = useTeethStore((state: State) => state.teethGeometry.cisx);
@@ -27,6 +28,10 @@ export default function CiSx() {
             case 'fullDiamond':
                 geometry = [toothGeometry.fullDiamond.base, toothGeometry.fullDiamond.full];
                 material = [<BaseFullDiamond color={toothMaterial}/>, <FullDiamond color={toothMaterial} pave={toothPave}/>]
+                break;
+            case 'enamel':
+                geometry = [toothGeometry.fullDiamond.base, toothGeometry.fullDiamond.full];
+                material = [<BaseFullDiamond color={toothMaterial}/>, <FullEnamel color={toothEnamel}/>]
                 break;
             case 'frame':
                 geometry = [toothGeometry.frame.full];

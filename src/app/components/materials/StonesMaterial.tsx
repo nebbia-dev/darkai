@@ -5,6 +5,7 @@ import {MeshTransmissionMaterial} from "@react-three/drei";
 
 export default function StonesMaterial({color} : {color: string | undefined}) {
     const envMap = useTeethStore((state) => state.envMap);
+        // SWITCH per i 5k colori che hanno deciso di inserirci
         return (<meshBasicMaterial
             color={color === 'sapphire'
                 ? 0x5773ff

@@ -8,6 +8,7 @@ import FrameDiamond from "@/app/components/materials/FrameDiamond";
 import FrameFull from "@/app/components/materials/FrameFull";
 import StonesMaterial from "@/app/components/materials/StonesMaterial";
 import BarFull from "@/app/components/materials/BarFull";
+import FullEnamel from "@/app/components/materials/FullEnamel";
 
 export default function LoadedMaterials() {
     return(
@@ -47,6 +48,10 @@ export default function LoadedMaterials() {
             <mesh position={[0, -10, 0]} visible={false}>
                 <planeGeometry args={[1, 1]}/>
                 <BarDiamond color='gold' pave='diamond'/>
+            </mesh>
+            <mesh position={[0, -10, 0]} visible={false}>
+                <planeGeometry args={[1, 1]}/>
+                <FullEnamel color='blue' />
             </mesh>
         </>
     )

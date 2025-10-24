@@ -7,12 +7,14 @@ import FullDiamond from "@/app/components/materials/FullDiamond";
 import {State} from "@/app/types/State";
 import * as THREE from "three";
 import FrameFull from "@/app/components/materials/FrameFull";
+import FullEnamel from "@/app/components/materials/FullEnamel";
 
 export default function IcsSx() {
     const toothGeometry = useTeethStore((state: State) => state.teethGeometry.icssx);
     const toothJewelType = useTeethStore((state: State) => state.teethJewelType.icssx);
     const toothMaterial = useTeethStore((state: State) => state.teethMaterial.icssx);
     const toothPave = useTeethStore((state: State) => state.teethPave.icssx);
+    const toothEnamel = useTeethStore((state: State) => state.teethEnamel.icssx);
     const toothVisibility = useTeethStore((state: State) => state.teethVisibility.icssx);
 
     const ICSSX = memo(({visible, type, mat} : {visible: boolean, type: string, mat: string}): JSX.Element => {
@@ -30,6 +32,10 @@ export default function IcsSx() {
             case 'frame':
                 geometry = [toothGeometry.frame.full];
                 material = [<FrameFull color={toothMaterial}/>]
+                break;
+            case 'enamel':
+                geometry = [toothGeometry.fullDiamond.base, toothGeometry.fullDiamond.full];
+                material = [<BaseFullDiamond color={toothMaterial}/>, <FullEnamel color={toothEnamel}/>]
                 break;
             case 'frameDiamond':
                 geometry = [toothGeometry.frame.diamond.base, toothGeometry.frame.diamond.full];

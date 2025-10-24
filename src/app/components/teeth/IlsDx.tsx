@@ -9,12 +9,14 @@ import BarSmall from "@/app/components/materials/BarSmall";
 import {State} from "@/app/types/State";
 import * as THREE from "three";
 import FrameFull from "@/app/components/materials/FrameFull";
+import FullEnamel from "@/app/components/materials/FullEnamel";
 
 export default function IlsDx() {
     const toothGeometry = useTeethStore((state: State) => state.teethGeometry.ilsdx);
     const toothJewelType = useTeethStore((state: State) => state.teethJewelType.ilsdx);
     const toothMaterial = useTeethStore((state: State) => state.teethMaterial.ilsdx);
     const toothPave = useTeethStore((state: State) => state.teethPave.ilsdx);
+    const toothEnamel = useTeethStore((state: State) => state.teethEnamel.ilsdx);
     const toothVisibility = useTeethStore((state: State) => state.teethVisibility.ilsdx);
 
     const ILSDX = memo(({visible, type, mat} : {visible: boolean, type: string, mat: string}): JSX.Element => {
@@ -32,6 +34,10 @@ export default function IlsDx() {
             case 'frame':
                 geometry = [toothGeometry.frame.full];
                 material = [<FrameFull color={toothMaterial}/>]
+                break;
+            case 'enamel':
+                geometry = [toothGeometry.fullDiamond.base, toothGeometry.fullDiamond.full];
+                material = [<BaseFullDiamond color={toothMaterial}/>, <FullEnamel color={toothEnamel}/>]
                 break;
             case 'frameDiamond':
                 geometry = [toothGeometry.frame.diamond.base, toothGeometry.frame.diamond.full];

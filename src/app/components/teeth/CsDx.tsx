@@ -9,6 +9,7 @@ import FrameDiamond from "@/app/components/materials/FrameDiamond";
 import {State} from "@/app/types/State";
 import * as THREE from "three";
 import BarSmall from "@/app/components/materials/BarSmall";
+import FullEnamel from "@/app/components/materials/FullEnamel";
 
 export default function CsDx() {
     const toothGeometry = useTeethStore((state: State) => state.teethGeometry.csdx);
@@ -31,6 +32,10 @@ export default function CsDx() {
             case 'frame':
                 geometry = [toothGeometry.frame.full];
                 material = [<FrameFull color={toothMaterial}/>]
+                break;
+            case 'enamel':
+                geometry = [toothGeometry.fullDiamond.base, toothGeometry.fullDiamond.full];
+                material = [<BaseFullDiamond color={toothMaterial}/>, <FullEnamel color={toothEnamel}/>]
                 break;
             case 'frameDiamond':
                 geometry = [toothGeometry.frame.diamond.base, toothGeometry.frame.diamond.full];

@@ -21,7 +21,7 @@ export default function BaseFullDiamond({color} : {color: string}) {
             map: 'textures/diamondFull/frameDiamond/DefaultMaterial_Base_colorWhite.webp',
         });
         propsWBaseFullDiamond.map.colorSpace = THREE.SRGBColorSpace;
-        console.log(color);
+
         return (<meshStandardMaterial
             map={color === 'gold'
                 ? propsYBaseFullDiamond.map

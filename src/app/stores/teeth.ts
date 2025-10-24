@@ -372,6 +372,8 @@ export const useTeethStore = create<State>((set, get) => ({
                     state.teethVisibility.cisx = true;
                     state.teethStones.cidx = {shape: undefined, color: undefined};
                     state.teethStones.cisx = {shape: undefined, color: undefined};
+                    state.teethEnamel.cidx = undefined;
+                    state.teethEnamel.cisx = undefined;
                     if(state.teethMaterial[tooth] === 'base') state.teethMaterial[tooth]  = 'gold';
 
                     // ⚠️ TEMP DEACTIVATION ⚠️
@@ -413,6 +415,8 @@ export const useTeethStore = create<State>((set, get) => ({
                                 state.teethVisibility.icssx = true;
                                 state.teethStones.icsdx = {shape: undefined, color: undefined};
                                 state.teethStones.icssx = {shape: undefined, color: undefined};
+                                state.teethEnamel.icsdx = undefined;
+                                state.teethEnamel.icssx = undefined;
                                 break;
                             case 'icidx':
                             case 'icisx':
@@ -422,6 +426,8 @@ export const useTeethStore = create<State>((set, get) => ({
                                 state.teethVisibility.icisx = true;
                                 state.teethStones.icidx = {shape: undefined, color: undefined};
                                 state.teethStones.icisx = {shape: undefined, color: undefined};
+                                state.teethEnamel.icidx = undefined;
+                                state.teethEnamel.icisx = undefined;
                                 break;
                         }
                         if(state.teethMaterial[tooth] === 'base') state.teethMaterial[tooth]  = 'gold';
@@ -455,6 +461,10 @@ export const useTeethStore = create<State>((set, get) => ({
                                     state.teethStones.cidx = {shape: 'circle', color: 'sapphire'};
                                 }
 
+                                if(type === 'enamel') {
+                                    state.teethEnamel.cidx = 'blue';
+                                }
+
                                 // ...second, it deactivates the other bigBar canine
                                 state.teethJewelType.cisx = 'full';
                                 state.teethVisibility.cisx = false;
@@ -470,6 +480,10 @@ export const useTeethStore = create<State>((set, get) => ({
 
                                 if(type === 'bezel') {
                                     state.teethStones.cisx = {shape: 'circle', color: 'sapphire'};
+                                }
+
+                                if(type === 'enamel') {
+                                    state.teethEnamel.cisx = 'blue';
                                 }
 
                                 state.teethJewelType.cidx = 'full';
@@ -497,6 +511,10 @@ export const useTeethStore = create<State>((set, get) => ({
                                 state.teethStones.icsdx = {shape: 'circle', color: 'sapphire'};
                             }
 
+                            if(type === 'enamel') {
+                                state.teethEnamel.icsdx = 'blue';
+                            }
+
                             // ...second, it deactivates the other bar incisor
                             state.teethJewelType.icssx = 'full';
                             state.teethVisibility.icssx = false;
@@ -515,6 +533,10 @@ export const useTeethStore = create<State>((set, get) => ({
                                 state.teethStones.icssx = {shape: 'circle', color: 'sapphire'};
                             }
 
+                            if(type === 'enamel') {
+                                state.teethEnamel.icssx = 'blue';
+                            }
+
                             state.teethJewelType.icsdx = 'full';
                             state.teethVisibility.icsdx = false;
                             state.teethMaterial.icsdx = 'base';
@@ -531,6 +553,10 @@ export const useTeethStore = create<State>((set, get) => ({
                                 state.teethStones.icidx = {shape: 'circle', color: 'sapphire'};
                             }
 
+                            if(type === 'enamel') {
+                                state.teethEnamel.icidx = 'blue';
+                            }
+
                             state.teethJewelType.icisx = 'full';
                             state.teethVisibility.icisx = false;
                             state.teethMaterial.icisx = 'base';
@@ -545,6 +571,10 @@ export const useTeethStore = create<State>((set, get) => ({
 
                             if(type === 'bezel') {
                                 state.teethStones.icisx = {shape: 'circle', color: 'sapphire'};
+                            }
+
+                            if(type === 'enamel') {
+                                state.teethEnamel.icisx = 'blue';
                             }
 
                             state.teethJewelType.icidx = 'full';
@@ -566,6 +596,12 @@ export const useTeethStore = create<State>((set, get) => ({
                             state.teethStones[tooth] = {shape: 'circle', color: 'sapphire'};
                         } else {
                             state.teethStones[tooth] = {shape: undefined, color: undefined};
+                        }
+
+                        if(type === 'enamel') {
+                            state.teethEnamel[tooth] = 'blue';
+                        } else {
+                            state.teethEnamel[tooth] = undefined;
                         }
 
                         console.log(state.teethStones[tooth]);
@@ -768,6 +804,45 @@ export const useTeethStore = create<State>((set, get) => ({
                     return;
                 }
 
+                // calc total and set history step
+                get().calcTotal(state);
+                get().setHistory(state);
+            }),
+        ),
+
+    // state to keep track of enamel colors
+    teethEnamel: {
+        icsdx: undefined,
+        icssx: undefined,
+        icidx: undefined,
+        icisx: undefined,
+        ilsdx: undefined,
+        ilssx: undefined,
+        ilidx: undefined,
+        ilisx: undefined,
+        csdx: undefined,
+        cssx: undefined,
+        cidx: undefined,
+        cisx: undefined,
+    },
+    setEnamel: (tooth:string, color:string) =>
+        set(
+            produce((state) => {
+                // if the tooth is not visible or no material has been chosen, no diamond is set
+                // (reinforce the disabled stone selector button)
+                if(!state.teethVisibility[tooth] || state.teethMaterial[tooth] === 'base') {
+                    return;
+                }
+
+                // update current history step
+                if(state.currentHistory < state.history.length) {
+                    console.log(state.currentHistory, state.history.length)
+                    state.history = state.history.splice(0, state.currentHistory);
+                }
+                state.currentHistory++;
+
+                // color toggler
+                state.teethEnamel[tooth] = color;
 
                 // calc total and set history step
                 get().calcTotal(state);
