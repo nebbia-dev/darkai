@@ -18,19 +18,19 @@ interface Materials {
 }
 
 interface Enamel {
-    [key: string]: string
-    icsdx: string,
-    icssx: string,
-    icidx: string,
-    icisx: string,
-    ilsdx: string,
-    ilssx: string,
-    ilidx: string,
-    ilisx: string,
-    csdx: string,
-    cssx: string,
-    cidx: string,
-    cisx: string,
+    [key: string]: string |undefined
+    icsdx: string | undefined,
+    icssx: string | undefined,
+    icidx: string | undefined,
+    icisx: string | undefined,
+    ilsdx: string | undefined,
+    ilssx: string | undefined,
+    ilidx: string | undefined,
+    ilisx: string | undefined,
+    csdx: string | undefined,
+    cssx: string | undefined,
+    cidx: string | undefined,
+    cisx: string | undefined,
 }
 interface JewelTypes {
     [key: string]: string
@@ -186,6 +186,7 @@ export interface State {
     },
     teethEnamel: Enamel,
     teethPave: Pave,
+    activeButton: string|undefined,
     activeTab: number,
     loaded: boolean,
     prices: BasePrices[] | undefined,
@@ -198,6 +199,7 @@ export interface State {
     totalPreciousness: number,
     calcPreciousness: (gold:string, diamond:string|undefined) => void,
     setRecap: (bool:boolean) => void,
+    setActiveButton: (button:string|undefined) => void,
     setIsScreenshotNeeded: (value:boolean|undefined) => void,
     setResetControls: (value:boolean|undefined) => void,
     setActiveTab: (value:number) => void,

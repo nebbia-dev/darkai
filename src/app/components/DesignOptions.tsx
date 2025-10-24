@@ -1,11 +1,15 @@
 import {useTeethStore} from "@/app/stores/teeth";
 import {State} from "@/app/types/State";
 
-export default function DesignOptions({tooth, onclick}: { tooth: string, onclick:(value:string) => void }) {
+export default function DesignOptions({tooth, onclick}: { tooth: string|undefined, onclick:(value:string) => void }) {
     const setType =  useTeethStore((state: State) => state.setType);
+    const unsetTooth = useTeethStore((state: State) => state.unsetLastActivatedTooth);
     function setDesign(e:any) {
-        setType(tooth, e);
-        onclick(e);
+        if(tooth) {
+            setType(tooth, e);
+            unsetTooth();
+            onclick(e);
+        }
     }
 
     return (

@@ -17,6 +17,7 @@ export default function CiSx() {
     const toothMaterial = useTeethStore((state: State) => state.teethMaterial.cisx);
     const toothPave = useTeethStore((state: State) => state.teethPave.cisx);
     const toothVisibility = useTeethStore((state: State) => state.teethVisibility.cisx);
+    const toothEnamel = useTeethStore((state: State) => state.teethEnamel.cisx);
     const CISX = memo(({visible, type, mat} : {visible: boolean, type: string, mat: string}): JSX.Element => {
         if(!toothGeometry) return <></>
         let geometry:THREE.BufferGeometry[], material:JSX.Element[];

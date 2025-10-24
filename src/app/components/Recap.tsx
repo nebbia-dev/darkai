@@ -112,36 +112,36 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
                         </div>
                         {/* MyConfig Bottom w/ Carats+Diamonds */}
                         <div className="border-1 rounded-b-3xl w-full bg-gray-50 px-6 pt-4 pb-6">
-                            <div className="flex gap-4 mb-2">
+                            <div className="flex gap-4 mb-2 items-center">
                                 <span className="inline-block w-[72px]">Carats:</span>
                                 <ul className="flex gap-4">
-                                    <li className={`${activeCarat === '10K' ? 'bg-stone-500 text-gray-50' : 'bg-gray-50 text-slate-950'} px-2 py-1 rounded-3xl`}>
-                                        <button type="button" className="cursor-pointer" value="10K"
+                                    <li>
+                                        <button type="button" className={`${activeCarat === '10K' ? 'bg-stone-500 text-gray-50' : 'bg-gray-50 text-slate-950'} px-2 py-1 rounded-3xl cursor-pointer`} value="10K"
                                                 onClick={(e) => setActiveCarat(e.currentTarget.value)}>10K
                                         </button>
                                     </li>
-                                    <li className={`${activeCarat === '14K' ? 'bg-stone-500 text-gray-50' : 'bg-gray-50 text-slate-950'} px-2 py-1 rounded-3xl`}>
-                                        <button type="button" className="cursor-pointer" value="14K"
+                                    <li>
+                                        <button type="button" className={`${activeCarat === '14K' ? 'bg-stone-500 text-gray-50' : 'bg-gray-50 text-slate-950'} px-2 py-1 rounded-3xl cursor-pointer`} value="14K"
                                                 onClick={(e) => setActiveCarat(e.currentTarget.value)}>14K
                                         </button>
                                     </li>
-                                    <li className={`${activeCarat === '18K' ? 'bg-stone-500 text-gray-50' : 'bg-gray-50 text-slate-950'} px-2 py-1 rounded-3xl`}>
-                                        <button type="button" className="cursor-pointer" value="18K"
+                                    <li>
+                                        <button type="button" className={`${activeCarat === '18K' ? 'bg-stone-500 text-gray-50' : 'bg-gray-50 text-slate-950'} px-2 py-1 rounded-3xl cursor-pointer`} value="18K"
                                                 onClick={(e) => setActiveCarat(e.currentTarget.value)}>18K
                                         </button>
                                     </li>
                                 </ul>
                             </div>
-                            <div className="flex gap-4">
+                            <div className="flex gap-4 items-center">
                                 <span className="inline-block w-[72px]">Diamonds:</span>
                                 <ul className="flex gap-4">
-                                    <li className={`${activeDiamond === 'lab' ? 'bg-stone-500 text-gray-50' : 'bg-gray-50 text-slate-950'} px-2 py-1 rounded-3xl`}>
-                                        <button type="button" className="cursor-pointer" value="lab"
+                                    <li>
+                                        <button type="button" className={`${activeDiamond === 'lab' ? 'bg-stone-500 text-gray-50' : 'bg-gray-50 text-slate-950'} px-2 py-1 rounded-3xl cursor-pointer`} value="lab"
                                                 onClick={(e) => setActiveDiamond(e.currentTarget.value)}>Lab
                                         </button>
                                     </li>
-                                    <li className={`${activeDiamond === 'nat' ? 'bg-stone-500 text-gray-50' : 'bg-gray-50 text-slate-950'} px-2 py-1 rounded-3xl`}>
-                                        <button type="button" className="cursor-pointer" value="nat"
+                                    <li>
+                                        <button type="button" className={`${activeDiamond === 'nat' ? 'bg-stone-500 text-gray-50' : 'bg-gray-50 text-slate-950'} px-2 py-1 rounded-3xl cursor-pointer`} value="nat"
                                                 onClick={(e) => setActiveDiamond(e.currentTarget.value)}>Natural
                                         </button>
                                     </li>

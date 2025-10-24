@@ -866,8 +866,7 @@ export const useTeethStore = create<State>((set, get) => ({
         cisx: 'base',
     },
 
-    // state and method to set the active tooth;
-    // lastActivatedTooth and its setter/unsetter activate/deactivate the scrollIntoView of the relative accordion
+    // state and method to set the active side button;
     activeButton: undefined,
     setActiveButton: (button:string|undefined) =>
         set(
@@ -881,6 +880,8 @@ export const useTeethStore = create<State>((set, get) => ({
 
             })
         ),
+    // state and method to set the active tooth;
+    // lastActivatedTooth and its setter/unsetter, to check whether a new tooth has been selected
     currentTooth: undefined,
     lastActivatedTooth: undefined,
     setActiveTooth: (tooth) =>

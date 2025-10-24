@@ -83,9 +83,7 @@ export default function Selection({activeButton, changeActiveButton} : {activeBu
                                 </div>
                                 <ul className="mb-1 pr-2">
                                     <li><span className="font-semibold">Move</span>: click + drag</li>
-                                    <li><span className="font-semibold">Zoom</span>: slide two fingers up/down or rotate
-                                        the
-                                        mouse wheel
+                                    <li><span className="font-semibold">Zoom</span>: slide two fingers up/down or rotate the mouse wheel
                                     </li>
                                 </ul>
                             </div>

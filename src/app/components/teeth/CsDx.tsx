@@ -17,6 +17,7 @@ export default function CsDx() {
     const toothMaterial = useTeethStore((state: State) => state.teethMaterial.csdx);
     const toothPave = useTeethStore((state: State) => state.teethPave.csdx);
     const toothVisibility = useTeethStore((state: State) => state.teethVisibility.csdx);
+    const toothEnamel = useTeethStore((state: State) => state.teethEnamel.csdx);
     const CSDX = memo(({visible, type, mat} : {visible: boolean, type: string, mat: string}): JSX.Element => {
         if(!toothGeometry) return <></>
         let geometry:THREE.BufferGeometry[], material:JSX.Element[];
