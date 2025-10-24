@@ -2,12 +2,10 @@ import {useTeethStore} from "@/app/stores/teeth";
 import {State} from "@/app/types/State";
 
 export default function DesignOptions({tooth, onclick}: { tooth: string, onclick:(value:string) => void }) {
-    const jewels = useTeethStore((state: State) => state.teethJewelType);
     const setType =  useTeethStore((state: State) => state.setType);
     function setDesign(e:any) {
         setType(tooth, e);
         onclick(e);
-        console.log(jewels);
     }
 
     return (

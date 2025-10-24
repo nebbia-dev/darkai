@@ -753,22 +753,21 @@ export const useTeethStore = create<State>((set, get) => ({
                 state.currentHistory++;
 
                 // stone toggler
-                if(state.teethStones[tooth]?.shape === shape) {
-                    state.teethStones[tooth].shape = undefined;
-                    state.teethStones[tooth].color = undefined;
-                } else {
-                    if(shape === 'prev') {
-                        if(state.teethStones[tooth].shape === undefined) {
-                            state.teethStones[tooth].shape = 'marquise';
-                        }
-                        state.teethStones[tooth].color = color;
-                    } else {
-                        state.teethStones[tooth].shape = shape;
-                        if(state.teethStones[tooth].color === undefined) {
-                            state.teethStones[tooth].color = 'sapphire';
-                        }
+
+                if(shape === 'prev') {
+                    if(state.teethStones[tooth].shape === undefined) {
+                        state.teethStones[tooth].shape = 'marquise';
                     }
+                    state.teethStones[tooth].color = color;
+                } else if(color === 'prev') {
+                    if(state.teethStones[tooth].color === undefined) {
+                        state.teethStones[tooth].color = 'sapphire';
+                    }
+                    state.teethStones[tooth].shape = shape;
+                } else {
+                    return;
                 }
+
 
                 // calc total and set history step
                 get().calcTotal(state);

@@ -29,6 +29,7 @@ export default function CsDxStone() {
                 shape = [tooth.tear];
                 break;
             case 'square':
+            case 'baguette':
                 shape = [tooth.square];
                 break;
             default:

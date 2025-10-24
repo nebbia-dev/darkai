@@ -29,6 +29,7 @@ export default function IliSxStone() {
                 shape = [tooth.tear];
                 break;
             case 'square':
+            case 'baguette':
                 shape = [tooth.square];
                 break;
             default:
