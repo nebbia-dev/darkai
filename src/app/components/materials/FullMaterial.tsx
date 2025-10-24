@@ -21,7 +21,12 @@ export default function FullMaterial({color} : {color: string}) {
             map: 'textures/Bianco.webp',
         });
         propsWGoldFull.map.colorSpace = THREE.SRGBColorSpace;
-        console.log(color);
+
+        const propsBGoldFull = useTexture({
+            map: 'textures/Nero.webp',
+        });
+        propsBGoldFull.map.colorSpace = THREE.SRGBColorSpace;
+
         return (<meshStandardMaterial
             map={color === 'gold'
                 ? propsYGoldFull.map
@@ -29,7 +34,9 @@ export default function FullMaterial({color} : {color: string}) {
                     ? propsRGoldFull.map
                     : color === 'white'
                         ? propsWGoldFull.map
-                        : undefined}
+                        : color === 'black'
+                            ? propsBGoldFull.map
+                            : undefined}
             normalMap={color !== 'base' ? propsYGoldFull.normalMap : undefined}
             metalnessMap = {color !== 'base' ? propsYGoldFull.metalnessMap : undefined}
             roughnessMap = {color !== 'base' ? propsYGoldFull.roughnessMap : undefined}

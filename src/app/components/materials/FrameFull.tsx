@@ -21,7 +21,12 @@ export default function FrameFull({color} : {color: string}) {
             map: 'textures/Bianco.webp',
         });
         propsWFrame01.map.colorSpace = THREE.SRGBColorSpace;
-        console.log(color);
+
+        const propsBFrame01 = useTexture({
+            map: 'textures/Nero.webp',
+        });
+        propsBFrame01.map.colorSpace = THREE.SRGBColorSpace;
+
         return (<meshStandardMaterial
             map={color === 'gold'
                 ? propsYFrame01.map
@@ -29,7 +34,9 @@ export default function FrameFull({color} : {color: string}) {
                     ? propsRFrame01.map
                     : color === 'white'
                         ? propsWFrame01.map
-                        : undefined}
+                        : color === 'black'
+                            ? propsBFrame01.map
+                            : undefined}
             normalMap={color !== 'base' ? propsYFrame01.normalMap : undefined}
             metalnessMap = {color !== 'base' ? propsYFrame01.metalnessMap : undefined}
             roughnessMap = {color !== 'base' ? propsYFrame01.roughnessMap : undefined}

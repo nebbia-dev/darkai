@@ -22,6 +22,11 @@ export default function BaseFullDiamond({color} : {color: string}) {
         });
         propsWBaseFullDiamond.map.colorSpace = THREE.SRGBColorSpace;
 
+        const propsBBaseFullDiamond = useTexture({
+            map: 'textures/diamondFull/frameDiamond/DefaultMaterial_Base_colorBlack.webp',
+        });
+        propsBBaseFullDiamond.map.colorSpace = THREE.SRGBColorSpace;
+
         return (<meshStandardMaterial
             map={color === 'gold'
                 ? propsYBaseFullDiamond.map
@@ -29,7 +34,9 @@ export default function BaseFullDiamond({color} : {color: string}) {
                     ? propsRBaseFullDiamond.map
                     : color === 'white'
                         ? propsWBaseFullDiamond.map
-                        : undefined}
+                        : color === 'black'
+                            ? propsBBaseFullDiamond.map
+                            : undefined}
             normalMap={color !== 'base' ? propsYBaseFullDiamond.normalMap : undefined}
             metalnessMap = {color !== 'base' ? propsYBaseFullDiamond.metalnessMap : undefined}
             roughnessMap = {color !== 'base' ? propsYBaseFullDiamond.roughnessMap : undefined}

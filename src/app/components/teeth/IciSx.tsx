@@ -36,7 +36,7 @@ export default function IciSx() {
                 break;
             case 'enamel':
                 geometry = [toothGeometry.fullDiamond.base, toothGeometry.fullDiamond.full];
-                material = [<BaseFullDiamond color={toothMaterial}/>, <FullEnamel color={toothEnamel}/>]
+                material = [<BaseFullDiamond color={toothMaterial}/>, <FullEnamel color={toothEnamel ?? 'ivory'}/>]
                 break;
             case 'frameDiamond':
                 geometry = [toothGeometry.frame.diamond.base, toothGeometry.frame.diamond.full];

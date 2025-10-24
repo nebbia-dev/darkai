@@ -141,7 +141,8 @@ export const useTeethStore = create<State>((set, get) => ({
                     }
                 }
                 // the tooth for which a material is chosen becomes automatically the active tooth
-                state.currentTooth = tooth;
+                // NOT NEEDED ANYMORE?
+                // state.currentTooth = tooth;
 
                 // calc total and set history step
                 get().calcTotal(state);
@@ -590,7 +591,7 @@ export const useTeethStore = create<State>((set, get) => ({
                         // STANDARD config setup
                         state.teethVisibility[tooth] = true;
                         state.teethJewelType[tooth] = type;
-                        state.teethMaterial[tooth] = 'gold';
+                        state.teethMaterial[tooth] = state.teethMaterial[tooth] === 'base' ? 'gold' : state.teethMaterial[tooth];
 
                         if(type === 'bezel') {
                             state.teethStones[tooth] = {shape: 'circle', color: 'sapphire'};

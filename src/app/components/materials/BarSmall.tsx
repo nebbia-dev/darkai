@@ -21,7 +21,12 @@ export default function BarSmall({color} : {color: string}) {
             map: 'textures/Bianco.webp',
         });
         propsWBar03.map.colorSpace = THREE.SRGBColorSpace;
-        console.log(color);
+
+        const propsBBar03 = useTexture({
+            map: 'textures/Nero.webp',
+        });
+        propsBBar03.map.colorSpace = THREE.SRGBColorSpace;
+
         return (<meshStandardMaterial
             map={color === 'gold'
                 ? propsYBar03.map
@@ -29,7 +34,9 @@ export default function BarSmall({color} : {color: string}) {
                     ? propsRBar03.map
                     : color === 'white'
                         ? propsWBar03.map
-                        : undefined}
+                        : color === 'black'
+                            ? propsBBar03.map
+                            : undefined}
             normalMap={color !== 'base' ? propsYBar03.normalMap : undefined}
             metalnessMap = {color !== 'base' ? propsYBar03.metalnessMap : undefined}
             roughnessMap = {color !== 'base' ? propsYBar03.roughnessMap : undefined}
