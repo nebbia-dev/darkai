@@ -19,25 +19,9 @@ interface TabPanelProps {
 }
 
 export default function Selection({activeButton, changeActiveButton} : {activeButton: string|undefined, changeActiveButton:(value:string) => void }) {
-    const total = useTeethStore((state:State) => state.total);
-    const totalPreciousness = useTeethStore((state:State) => state.totalPreciousness);
-    const calcPreciousness = useTeethStore((state:State) => state.calcPreciousness);
-    const visibleTeeth = useTeethStore((state:State) => state.teethVisibility);
     const jewelType = useTeethStore((state: State) => state.teethJewelType);
-    const material = useTeethStore((state: State) => state.teethMaterial);
-    const pave = useTeethStore((state: State) => state.teethPaves);
-    const stones = useTeethStore((state: State) => state.teethStones);
-    const teethPrices = useTeethStore((state:State) => state.teethPrices);
     const activeTooth = useTeethStore((state: State) => state.currentTooth);
-    const setActiveTooth =  useTeethStore((state: State) => state.setActiveTooth);
-    const activeTab = useTeethStore((state: State) => state.activeTab);
-    const setActiveTab = useTeethStore((state: State) => state.setActiveTab);
     const recap = useTeethStore((state:State) => state.recap);
-    const setRecap = useTeethStore((state:State) => state.setRecap);
-
-    const [gold, setGold] = useState<string>('14k');
-    const [diamond, setDiamond] = useState<string>('mois');
-
 
     const [showManual, setShowManual] = useState<boolean>(false);
     function checkDiamonds() {
@@ -48,19 +32,6 @@ export default function Selection({activeButton, changeActiveButton} : {activeBu
         }
         return false;
     }
-    function showRecap() {
-        setRecap(true);
-        setActiveTooth(undefined);
-        calcPreciousness(gold, diamond);
-    }
-
-    useEffect(() => {
-        if(checkDiamonds()) {
-            calcPreciousness(gold, diamond);
-        } else {
-            calcPreciousness(gold, undefined);
-        }
-    }, [recap, gold, diamond]);
 
     return (
         <>

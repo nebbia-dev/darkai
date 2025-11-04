@@ -206,8 +206,6 @@ export interface State {
     resetControls: boolean | undefined,
     recap: boolean,
     teethPreciousness: Preciousness,
-    totalPreciousness: number,
-    calcPreciousness: (gold:string, diamond:string|undefined) => void,
     setRecap: (bool:boolean) => void,
     setActiveButton: (button:string|undefined) => void,
     setActiveSubButton: (button:string|undefined) => void,

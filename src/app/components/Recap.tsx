@@ -5,10 +5,13 @@ import {Modal} from "@mui/material";
 import {useTeethStore} from "@/app/stores/teeth";
 import {State} from "@/app/types/State";
 import Link from 'next/link';
+import elabToothName from "@/app/helpers/elabToothName";
+import firstCapital from "@/app/helpers/firstCapital";
 
 export default function Recap({next, onclick} : {next:boolean, onclick:() => void }){
     const [activeCarat, setActiveCarat] = useState<string|undefined>(undefined);
     const [activeDiamond, setActiveDiamond] = useState<string|undefined>(undefined);
+    const history = useTeethStore((state:State) => state.history);
     const [showRecap, setShowRecap] = useState<boolean>(false);
     const [open, setOpen] = useState<boolean>(false);
     const [isSending, setIsSending] = useState<boolean>(false);
@@ -53,60 +56,21 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
                                 className="absolute h-[15%] bottom-0 w-full bg-linear-to-t from-gray-50 to-indigo-0"></div>
                             <div className="pl-6 pr-3 py-4 h-full">
                                 <ul className="pr-3 h-full overflow-y-scroll">
-                                    <li>
-                                        <h4 className="font-semibold">
-                                            Upper central incisor R
-                                        </h4>
-                                        <p>Full, white</p>
-                                        <span aria-hidden={true}
-                                              className="inline-block h-[1px] w-full bg-slate-950"></span>
-                                        <p className="font-bold w-full text-right">500€</p>
-                                    </li>
-                                    <li>
-                                        <h4 className="font-semibold">
-                                            Upper central incisor L
-                                        </h4>
-                                        <p>Full, white</p>
-                                        <span aria-hidden={true}
-                                              className="inline-block h-[1px] w-full bg-slate-950"></span>
-                                        <p className="font-bold w-full text-right">500€</p>
-                                    </li>
-                                    <li>
-                                        <h4 className="font-semibold">
-                                            Lower central incisor R
-                                        </h4>
-                                        <p>Full, white</p>
-                                        <span aria-hidden={true}
-                                              className="inline-block h-[1px] w-full bg-slate-950"></span>
-                                        <p className="font-bold w-full text-right">500€</p>
-                                    </li>
-                                    <li>
-                                        <h4 className="font-semibold">
-                                            Lower central incisor L
-                                        </h4>
-                                        <p>Full, white</p>
-                                        <span aria-hidden={true}
-                                              className="inline-block h-[1px] w-full bg-slate-950"></span>
-                                        <p className="font-bold w-full text-right">500€</p>
-                                    </li>
-                                    <li>
-                                        <h4 className="font-semibold">
-                                            Upper canine R
-                                        </h4>
-                                        <p>Full, gold</p>
-                                        <span aria-hidden={true}
-                                              className="inline-block h-[1px] w-full bg-slate-950"></span>
-                                        <p className="font-bold w-full text-right">500€</p>
-                                    </li>
-                                    <li>
-                                        <h4 className="font-semibold">
-                                            Upper canine L
-                                        </h4>
-                                        <p>Full, gold</p>
-                                        <span aria-hidden={true}
-                                              className="inline-block h-[1px] w-full bg-slate-950"></span>
-                                        <p className="font-bold w-full text-right">500€</p>
-                                    </li>
+                                    {history.length > 0 && Object.entries(history[history.length - 1][0].type).map(tooth => {
+                                        return (history[history.length - 1][0].visible[tooth[0]] && <li key={tooth[0]}>
+                                            <h4 className="font-semibold">
+                                                {elabToothName(tooth[0], false)}
+                                            </h4>
+                                            <p>{firstCapital(tooth[1])}, {history[history.length - 1][0].material[tooth[0]]}</p>
+                                            { history[history.length - 1][0].stones[tooth[0]].shape !== undefined &&
+                                                <p>{firstCapital(history[history.length - 1][0].stones[tooth[0]].color as string)} w/ {history[history.length - 1][0].stones[tooth[0]].shape} shape</p>
+                                            }
+                                            <span aria-hidden={true}
+                                                  className="inline-block h-[1px] w-full bg-slate-950"></span>
+                                            <p className="font-bold w-full text-right">500€</p>
+                                        </li>)
+                                    })}
+                                    {/*<li><button onClick={() => console.log(history[history.length - 1][0].type.icsdx)}>Halo</button></li>*/}
                                 </ul>
                             </div>
                         </div>
