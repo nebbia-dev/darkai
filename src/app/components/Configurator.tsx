@@ -24,7 +24,7 @@ import CiSx from "@/app/components/teeth/CiSx";
 import CiSxStone from "@/app/components/teeth/CiSxStone";
 import {State} from "@/app/types/State";
 import * as THREE from 'three'
-import {useThree} from "@react-three/fiber";
+import {useFrame, useThree} from "@react-three/fiber";
 import IlsSxStone from "@/app/components/teeth/IlsSxStone";
 import IlsDxStone from "@/app/components/teeth/IlsDxStone";
 import IcsSxStone from "@/app/components/teeth/IcsSxStone";

@@ -1,7 +1,7 @@
 'use client'
 import * as THREE from 'three';
 import {Outlines, useFBX, useTexture} from "@react-three/drei";
-import React, {JSX, memo, useCallback, useEffect, useMemo, useState} from "react";
+import React, {JSX, memo, useMemo, useState} from "react";
 import {useTeethStore} from "@/app/stores/teeth";
 import {State} from "@/app/types/State";
 
@@ -59,13 +59,10 @@ export default function Dentiera() {
         })
     }, []);
 
-    useEffect(() => {
-        if(hovered) {
-            setTimeout(() => {
-                setHover(null);
-            }, 3000)
-        }
-    }, [hovered])
+    function hover(e:any, tooth:string|null) {
+        e.stopPropagation();
+        setHover(tooth);
+    }
 
     function log(e: any) {
         switch(e.object.name) {
@@ -112,7 +109,7 @@ export default function Dentiera() {
     // hover
     const Icsdx = memo(({outline, hovered} : {outline: boolean, hovered: boolean}) : JSX.Element => {
         return (
-            <mesh onClick={log} onPointerOver={() => setHover('icsdx')}
+            <mesh onClick={log} onPointerLeave={(e) => hover(e,null)} onPointerEnter={(e) => hover(e,'icsdx')}
                   // geometry={(fbx.children[0].children[11] as THREE.Mesh).geometry}
                   // name={fbx.children[0].children[11].name}
                   geometry={(fbx2.children[0].children[5] as THREE.Mesh).geometry}
@@ -126,7 +123,7 @@ export default function Dentiera() {
     })
     const Icssx = memo(({outline, hovered} : {outline: boolean, hovered: boolean}) : JSX.Element => {
         return (
-            <mesh onClick={log} onPointerOver={() => setHover('icssx')}
+            <mesh onClick={log} onPointerLeave={(e) => hover(e,null)} onPointerEnter={(e) => hover(e,'icssx')}
                   // geometry={(fbx.children[0].children[8] as THREE.Mesh).geometry}
                   // name={fbx.children[0].children[8].name}
                   geometry={(fbx2.children[0].children[2] as THREE.Mesh).geometry}
@@ -140,7 +137,7 @@ export default function Dentiera() {
     })
     const Icisx = memo(({outline, hovered} : {outline: boolean, hovered: boolean}) : JSX.Element => {
         return (
-            <mesh onClick={log} onPointerOver={() => setHover('icisx')}
+            <mesh onClick={log} onPointerLeave={(e) => hover(e,null)} onPointerEnter={(e) => hover(e,'icisx')}
                   // name={fbx.children[0].children[0].name}
                   // geometry={(fbx.children[0].children[0] as THREE.Mesh).geometry}
                   geometry={(fbx2.children[1].children[0] as THREE.Mesh).geometry}
@@ -154,7 +151,7 @@ export default function Dentiera() {
     })
     const Icidx = memo(({outline, hovered} : {outline: boolean, hovered: boolean}) : JSX.Element => {
         return (
-            <mesh onClick={log} onPointerOver={() => setHover('icidx')}
+            <mesh onClick={log} onPointerLeave={(e) => hover(e,null)} onPointerEnter={(e) => hover(e,'icidx')}
                   // geometry={(fbx.children[0].children[1] as THREE.Mesh).geometry}
                   // name={fbx.children[0].children[1].name}
                   geometry={(fbx2.children[1].children[1] as THREE.Mesh).geometry}
@@ -169,7 +166,7 @@ export default function Dentiera() {
 
     const Csdx = memo(({outline, hovered} : {outline: boolean, hovered: boolean}) : JSX.Element => {
         return (
-            <mesh onClick={log} onPointerOver={() => setHover('csdx')}
+            <mesh onClick={log} onPointerLeave={(e) => hover(e,null)} onPointerEnter={(e) => hover(e,'csdx')}
                   // geometry={(fbx.children[0].children[9] as THREE.Mesh).geometry}
                   // name={fbx.children[0].children[9].name}
                   geometry={(fbx2.children[0].children[3] as THREE.Mesh).geometry}
@@ -183,7 +180,7 @@ export default function Dentiera() {
     })
     const Cssx = memo(({outline, hovered} : {outline: boolean, hovered: boolean}) : JSX.Element => {
         return (
-            <mesh onClick={log} onPointerOver={() => setHover('cssx')}
+            <mesh onClick={log} onPointerLeave={(e) => hover(e,null)} onPointerEnter={(e) => hover(e,'cssx')}
                   // geometry={(fbx.children[0].children[6] as THREE.Mesh).geometry}
                   // name={fbx.children[0].children[6].name}
                   geometry={(fbx2.children[0].children[0] as THREE.Mesh).geometry}
@@ -197,7 +194,7 @@ export default function Dentiera() {
     })
     const Cisx = memo(({outline, hovered} : {outline: boolean, hovered: boolean}) : JSX.Element => {
         return (
-            <mesh onClick={log} onPointerOver={() => setHover('cisx')}
+            <mesh onClick={log} onPointerLeave={(e) => hover(e,null)} onPointerEnter={(e) => hover(e,'cisx')}
                   // geometry={(fbx.children[0].children[4] as THREE.Mesh).geometry}
                   // name={fbx.children[0].children[4].name}
                   geometry={(fbx2.children[1].children[4] as THREE.Mesh).geometry}
@@ -211,7 +208,7 @@ export default function Dentiera() {
     })
     const Cidx = memo(({outline, hovered} : {outline: boolean, hovered: boolean}) : JSX.Element => {
         return (
-            <mesh onClick={log} onPointerOver={() => setHover('cidx')}
+            <mesh onClick={log} onPointerLeave={(e) => hover(e,null)} onPointerEnter={(e) => hover(e,'cidx')}
                   // geometry={(fbx.children[0].children[5] as THREE.Mesh).geometry}
                   // name={fbx.children[0].children[5].name}
                   geometry={(fbx2.children[1].children[5] as THREE.Mesh).geometry}
@@ -226,7 +223,7 @@ export default function Dentiera() {
 
     const Ilsdx = memo(({outline, hovered} : {outline: boolean, hovered: boolean}) : JSX.Element => {
         return (
-            <mesh onClick={log} onPointerOver={() => setHover('ilsdx')}
+            <mesh onClick={log} onPointerLeave={(e) => hover(e,null)} onPointerEnter={(e) => hover(e,'ilsdx')}
                   // geometry={(fbx.children[0].children[10] as THREE.Mesh).geometry}
                   // name={fbx.children[0].children[10].name}
                   geometry={(fbx2.children[0].children[4] as THREE.Mesh).geometry}
@@ -240,7 +237,7 @@ export default function Dentiera() {
     })
     const Ilssx = memo(({outline, hovered} : {outline: boolean, hovered: boolean}) : JSX.Element => {
         return (
-            <mesh onClick={log} onPointerOver={() => setHover('ilssx')}
+            <mesh onClick={log} onPointerLeave={(e) => hover(e,null)} onPointerEnter={(e) => hover(e,'ilssx')}
                   // geometry={(fbx.children[0].children[7] as THREE.Mesh).geometry}
                   // name={fbx.children[0].children[7].name}
                   geometry={(fbx2.children[0].children[1] as THREE.Mesh).geometry}
@@ -254,7 +251,7 @@ export default function Dentiera() {
     })
     const Ilisx = memo(({outline, hovered} : {outline: boolean, hovered: boolean}) : JSX.Element => {
         return (
-            <mesh onClick={log} onPointerOver={() => setHover('ilisx')}
+            <mesh onClick={log} onPointerLeave={(e) => hover(e,null)} onPointerEnter={(e) => hover(e,'ilisx')}
                   // geometry={(fbx.children[0].children[2] as THREE.Mesh).geometry}
                   // name={fbx.children[0].children[2].name}
                   geometry={(fbx2.children[1].children[2] as THREE.Mesh).geometry}
@@ -268,7 +265,7 @@ export default function Dentiera() {
     })
     const Ilidx = memo(({outline, hovered} : {outline: boolean, hovered: boolean}) : JSX.Element => {
         return (
-            <mesh onClick={log} onPointerOver={() => setHover('ilidx')}
+            <mesh onClick={log} onPointerLeave={(e) => hover(e,null)} onPointerEnter={(e) => hover(e,'ilidx')}
                   // geometry={(fbx.children[0].children[3] as THREE.Mesh).geometry}
                   // name={fbx.children[0].children[3].name}
                   geometry={(fbx2.children[1].children[3] as THREE.Mesh).geometry}
@@ -282,173 +279,172 @@ export default function Dentiera() {
     })
 
     // no hover
-    const NoHoverIcsdx = memo(({outline} : {outline: boolean}) : JSX.Element => {
-        return (
-            <mesh onClick={log}
-                  // geometry={(fbx.children[0].children[11] as THREE.Mesh).geometry}
-                  // name={fbx.children[0].children[11].name}
-                  geometry={(fbx2.children[0].children[5] as THREE.Mesh).geometry}
-                  name={fbx2.children[0].children[5].name}
-                  material={dentiMaterial}
-            >
-                {outline && <Outlines thickness={10} color="hotpink"/>}
-            </mesh>
-        )
-    })
-    const NoHoverIcssx = memo(({outline} : {outline: boolean}) : JSX.Element => {
-        return (
-            <mesh onClick={log}
-                  // geometry={(fbx.children[0].children[8] as THREE.Mesh).geometry}
-                  // name={fbx.children[0].children[8].name}
-                  geometry={(fbx2.children[0].children[2] as THREE.Mesh).geometry}
-                  name={fbx2.children[0].children[2].name}
-                  material={dentiMaterial}
-            >
-                {outline && <Outlines thickness={10} color="hotpink"/>}
-            </mesh>
-        )
-    })
-    const NoHoverIcisx = memo(({outline} : {outline: boolean}) : JSX.Element => {
-        return (
-            <mesh onClick={log}
-                  // geometry={(fbx.children[0].children[0] as THREE.Mesh).geometry}
-                  // name={fbx.children[0].children[0].name}
-                  geometry={(fbx2.children[1].children[0] as THREE.Mesh).geometry}
-                  name={fbx2.children[1].children[0].name}
-                  material={dentiMaterial}
-            >
-                {outline && <Outlines thickness={10} color="hotpink"/>}
-            </mesh>
-        )
-    })
-    const NoHoverIcidx = memo(({outline} : {outline: boolean}) : JSX.Element => {
-        return (
-            <mesh onClick={log}
-                  // geometry={(fbx.children[0].children[1] as THREE.Mesh).geometry}
-                  // name={fbx.children[0].children[1].name}
-                  geometry={(fbx2.children[1].children[1] as THREE.Mesh).geometry}
-                  name={fbx2.children[1].children[1].name}
-                  material={dentiMaterial}
-            >
-                {outline && <Outlines thickness={10} color="hotpink"/>}
-            </mesh>
-        )
-    })
-
-    const NoHoverCsdx = memo(({outline} : {outline: boolean}) : JSX.Element => {
-        return (
-            <mesh onClick={log}
-                  // geometry={(fbx.children[0].children[9] as THREE.Mesh).geometry}
-                  // name={fbx.children[0].children[9].name}
-                  geometry={(fbx2.children[0].children[3] as THREE.Mesh).geometry}
-                  name={fbx2.children[0].children[3].name}
-                  material={dentiMaterial}
-            >
-                {outline && <Outlines thickness={10} color="hotpink"/>}
-            </mesh>
-        )
-    })
-    const NoHoverCssx = memo(({outline} : {outline: boolean}) : JSX.Element => {
-        return (
-            <mesh onClick={log}
-                  // geometry={(fbx.children[0].children[6] as THREE.Mesh).geometry}
-                  // name={fbx.children[0].children[6].name}
-                  geometry={(fbx2.children[0].children[0] as THREE.Mesh).geometry}
-                  name={fbx2.children[0].children[0].name}
-                  material={dentiMaterial}
-            >
-                {outline && <Outlines thickness={10} color="hotpink"/>}
-            </mesh>
-        )
-    })
-    const NoHoverCisx = memo(({outline} : {outline: boolean}) : JSX.Element => {
-        return (
-            <mesh onClick={log}
-                  // geometry={(fbx.children[0].children[4] as THREE.Mesh).geometry}
-                  // name={fbx.children[0].children[4].name}
-                  geometry={(fbx2.children[1].children[4] as THREE.Mesh).geometry}
-                  name={fbx2.children[1].children[4].name}
-                  material={dentiMaterial}
-            >
-                {outline && <Outlines thickness={10} color="hotpink"/>}
-            </mesh>
-        )
-    })
-    const NoHoverCidx = memo(({outline} : {outline: boolean}) : JSX.Element => {
-        return (
-            <mesh onClick={log}
-                  // geometry={(fbx.children[0].children[5] as THREE.Mesh).geometry}
-                  // name={fbx.children[0].children[5].name}
-                  geometry={(fbx2.children[1].children[5] as THREE.Mesh).geometry}
-                  name={fbx2.children[1].children[5].name}
-                  material={dentiMaterial}
-            >
-                {outline && <Outlines thickness={10} color="hotpink"/>}
-            </mesh>
-        )
-    })
-
-    const NoHoverIlsdx = memo(({outline} : {outline: boolean}) : JSX.Element => {
-        return (
-            <mesh onClick={log}
-                  // geometry={(fbx.children[0].children[10] as THREE.Mesh).geometry}
-                  // name={fbx.children[0].children[10].name}
-                  geometry={(fbx2.children[0].children[4] as THREE.Mesh).geometry}
-                  name={fbx2.children[0].children[4].name}
-                  material={dentiMaterial}
-            >
-                {outline && <Outlines thickness={10} color="hotpink"/>}
-            </mesh>
-        )
-    })
-    const NoHoverIlssx = memo(({outline} : {outline: boolean}) : JSX.Element => {
-        return (
-            <mesh onClick={log}
-                  // geometry={(fbx.children[0].children[7] as THREE.Mesh).geometry}
-                  // name={fbx.children[0].children[7].name}
-                  geometry={(fbx2.children[0].children[1] as THREE.Mesh).geometry}
-                  name={fbx2.children[0].children[1].name}
-                  material={dentiMaterial}
-            >
-                {outline && <Outlines thickness={10} color="hotpink"/>}
-            </mesh>
-        )
-    })
-    const NoHoverIlisx = memo(({outline} : {outline: boolean}) : JSX.Element => {
-        return (
-            <mesh onClick={log}
-                  // geometry={(fbx.children[0].children[2] as THREE.Mesh).geometry}
-                  // name={fbx.children[0].children[2].name}
-                  geometry={(fbx2.children[1].children[2] as THREE.Mesh).geometry}
-                  name={fbx2.children[1].children[2].name}
-                  material={dentiMaterial}
-            >
-                {outline && <Outlines thickness={10} color="hotpink"/>}
-            </mesh>
-        )
-    })
-    const NoHoverIlidx = memo(({outline} : {outline: boolean}) : JSX.Element => {
-        return (
-            <mesh onClick={log}
-                  // geometry={(fbx.children[0].children[3] as THREE.Mesh).geometry}
-                  // name={fbx.children[0].children[3].name}
-                  geometry={(fbx2.children[1].children[3] as THREE.Mesh).geometry}
-                  name={fbx2.children[1].children[3].name}
-                  material={dentiMaterial}
-            >
-                {outline && <Outlines thickness={10} color="hotpink"/>}
-            </mesh>
-        )
-    })
-
+    // const NoHoverIcsdx = memo(({outline} : {outline: boolean}) : JSX.Element => {
+    //     return (
+    //         <mesh onClick={log}
+    //               // geometry={(fbx.children[0].children[11] as THREE.Mesh).geometry}
+    //               // name={fbx.children[0].children[11].name}
+    //               geometry={(fbx2.children[0].children[5] as THREE.Mesh).geometry}
+    //               name={fbx2.children[0].children[5].name}
+    //               material={dentiMaterial}
+    //         >
+    //             {outline && <Outlines thickness={10} color="hotpink"/>}
+    //         </mesh>
+    //     )
+    // })
+    // const NoHoverIcssx = memo(({outline} : {outline: boolean}) : JSX.Element => {
+    //     return (
+    //         <mesh onClick={log}
+    //               // geometry={(fbx.children[0].children[8] as THREE.Mesh).geometry}
+    //               // name={fbx.children[0].children[8].name}
+    //               geometry={(fbx2.children[0].children[2] as THREE.Mesh).geometry}
+    //               name={fbx2.children[0].children[2].name}
+    //               material={dentiMaterial}
+    //         >
+    //             {outline && <Outlines thickness={10} color="hotpink"/>}
+    //         </mesh>
+    //     )
+    // })
+    // const NoHoverIcisx = memo(({outline} : {outline: boolean}) : JSX.Element => {
+    //     return (
+    //         <mesh onClick={log}
+    //               // geometry={(fbx.children[0].children[0] as THREE.Mesh).geometry}
+    //               // name={fbx.children[0].children[0].name}
+    //               geometry={(fbx2.children[1].children[0] as THREE.Mesh).geometry}
+    //               name={fbx2.children[1].children[0].name}
+    //               material={dentiMaterial}
+    //         >
+    //             {outline && <Outlines thickness={10} color="hotpink"/>}
+    //         </mesh>
+    //     )
+    // })
+    // const NoHoverIcidx = memo(({outline} : {outline: boolean}) : JSX.Element => {
+    //     return (
+    //         <mesh onClick={log}
+    //               // geometry={(fbx.children[0].children[1] as THREE.Mesh).geometry}
+    //               // name={fbx.children[0].children[1].name}
+    //               geometry={(fbx2.children[1].children[1] as THREE.Mesh).geometry}
+    //               name={fbx2.children[1].children[1].name}
+    //               material={dentiMaterial}
+    //         >
+    //             {outline && <Outlines thickness={10} color="hotpink"/>}
+    //         </mesh>
+    //     )
+    // })
+    //
+    // const NoHoverCsdx = memo(({outline} : {outline: boolean}) : JSX.Element => {
+    //     return (
+    //         <mesh onClick={log}
+    //               // geometry={(fbx.children[0].children[9] as THREE.Mesh).geometry}
+    //               // name={fbx.children[0].children[9].name}
+    //               geometry={(fbx2.children[0].children[3] as THREE.Mesh).geometry}
+    //               name={fbx2.children[0].children[3].name}
+    //               material={dentiMaterial}
+    //         >
+    //             {outline && <Outlines thickness={10} color="hotpink"/>}
+    //         </mesh>
+    //     )
+    // })
+    // const NoHoverCssx = memo(({outline} : {outline: boolean}) : JSX.Element => {
+    //     return (
+    //         <mesh onClick={log}
+    //               // geometry={(fbx.children[0].children[6] as THREE.Mesh).geometry}
+    //               // name={fbx.children[0].children[6].name}
+    //               geometry={(fbx2.children[0].children[0] as THREE.Mesh).geometry}
+    //               name={fbx2.children[0].children[0].name}
+    //               material={dentiMaterial}
+    //         >
+    //             {outline && <Outlines thickness={10} color="hotpink"/>}
+    //         </mesh>
+    //     )
+    // })
+    // const NoHoverCisx = memo(({outline} : {outline: boolean}) : JSX.Element => {
+    //     return (
+    //         <mesh onClick={log}
+    //               // geometry={(fbx.children[0].children[4] as THREE.Mesh).geometry}
+    //               // name={fbx.children[0].children[4].name}
+    //               geometry={(fbx2.children[1].children[4] as THREE.Mesh).geometry}
+    //               name={fbx2.children[1].children[4].name}
+    //               material={dentiMaterial}
+    //         >
+    //             {outline && <Outlines thickness={10} color="hotpink"/>}
+    //         </mesh>
+    //     )
+    // })
+    // const NoHoverCidx = memo(({outline} : {outline: boolean}) : JSX.Element => {
+    //     return (
+    //         <mesh onClick={log}
+    //               // geometry={(fbx.children[0].children[5] as THREE.Mesh).geometry}
+    //               // name={fbx.children[0].children[5].name}
+    //               geometry={(fbx2.children[1].children[5] as THREE.Mesh).geometry}
+    //               name={fbx2.children[1].children[5].name}
+    //               material={dentiMaterial}
+    //         >
+    //             {outline && <Outlines thickness={10} color="hotpink"/>}
+    //         </mesh>
+    //     )
+    // })
+    //
+    // const NoHoverIlsdx = memo(({outline} : {outline: boolean}) : JSX.Element => {
+    //     return (
+    //         <mesh onClick={log}
+    //               // geometry={(fbx.children[0].children[10] as THREE.Mesh).geometry}
+    //               // name={fbx.children[0].children[10].name}
+    //               geometry={(fbx2.children[0].children[4] as THREE.Mesh).geometry}
+    //               name={fbx2.children[0].children[4].name}
+    //               material={dentiMaterial}
+    //         >
+    //             {outline && <Outlines thickness={10} color="hotpink"/>}
+    //         </mesh>
+    //     )
+    // })
+    // const NoHoverIlssx = memo(({outline} : {outline: boolean}) : JSX.Element => {
+    //     return (
+    //         <mesh onClick={log}
+    //               // geometry={(fbx.children[0].children[7] as THREE.Mesh).geometry}
+    //               // name={fbx.children[0].children[7].name}
+    //               geometry={(fbx2.children[0].children[1] as THREE.Mesh).geometry}
+    //               name={fbx2.children[0].children[1].name}
+    //               material={dentiMaterial}
+    //         >
+    //             {outline && <Outlines thickness={10} color="hotpink"/>}
+    //         </mesh>
+    //     )
+    // })
+    // const NoHoverIlisx = memo(({outline} : {outline: boolean}) : JSX.Element => {
+    //     return (
+    //         <mesh onClick={log}
+    //               // geometry={(fbx.children[0].children[2] as THREE.Mesh).geometry}
+    //               // name={fbx.children[0].children[2].name}
+    //               geometry={(fbx2.children[1].children[2] as THREE.Mesh).geometry}
+    //               name={fbx2.children[1].children[2].name}
+    //               material={dentiMaterial}
+    //         >
+    //             {outline && <Outlines thickness={10} color="hotpink"/>}
+    //         </mesh>
+    //     )
+    // })
+    // const NoHoverIlidx = memo(({outline} : {outline: boolean}) : JSX.Element => {
+    //     return (
+    //         <mesh onClick={log}
+    //               // geometry={(fbx.children[0].children[3] as THREE.Mesh).geometry}
+    //               // name={fbx.children[0].children[3].name}
+    //               geometry={(fbx2.children[1].children[3] as THREE.Mesh).geometry}
+    //               name={fbx2.children[1].children[3].name}
+    //               material={dentiMaterial}
+    //         >
+    //             {outline && <Outlines thickness={10} color="hotpink"/>}
+    //         </mesh>
+    //     )
+    // })
 
     const Base = memo(() : JSX.Element => {
         console.log('base')
         return (
             <>
-                <mesh geometry={(fbx.children[0] as THREE.Mesh).geometry} material={dentieraMaterial}>
+                <mesh onPointerLeave={(e) => hover(e,null)} onPointerEnter={(e) => hover(e,null)} geometry={(fbx.children[0] as THREE.Mesh).geometry} material={dentieraMaterial}>
                 </mesh>
-                <mesh geometry={(fbx2.children[2] as THREE.Mesh).geometry} material={dentiMaterial}>
+                <mesh onPointerLeave={(e) => hover(e,null)} onPointerEnter={(e) => hover(e,null)} geometry={(fbx2.children[2] as THREE.Mesh).geometry} material={dentiMaterial}>
                 </mesh>
             </>
         )
