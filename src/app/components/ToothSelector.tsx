@@ -43,7 +43,7 @@ export default function ToothSelector({tooth, onclick, active} : {tooth: string 
             case "4":
                 return <FinishingOptions tooth={tooth}/>
             case "5":
-                return <StoneOptions tooth={tooth}/>
+                return <StoneOptions tooth={tooth} bezel={jewelType === 'bezel'}/>
             case "6":
                 return <PackagingOptions/>
             default:
@@ -56,7 +56,7 @@ export default function ToothSelector({tooth, onclick, active} : {tooth: string 
             case "1":
                 return <SignatureSubOptions/>
             case "2":
-                return <DesignSubOptions tooth={tooth}/>
+                return <DesignSubOptions tooth={tooth} type={jewelType}/>
             case "4":
                 return <FinishingSubOptions tooth={tooth}/>
             case "6":

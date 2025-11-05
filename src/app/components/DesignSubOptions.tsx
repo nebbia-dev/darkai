@@ -2,7 +2,7 @@ import React from "react";
 import {useTeethStore} from "@/app/stores/teeth";
 import {State} from "@/app/types/State";
 
-export default function DesignSubOptions({tooth}: { tooth: string|undefined }) {
+export default function DesignSubOptions({tooth, type}: { tooth: string|undefined, type:string|undefined }) {
     const setStone =  useTeethStore((state: State) => state.setStone);
     const setEnamel =  useTeethStore((state: State) => state.setEnamel);
     const value = useTeethStore((state: State) => state.activeSubButton);
@@ -30,7 +30,7 @@ export default function DesignSubOptions({tooth}: { tooth: string|undefined }) {
                 (tooth === 'cidx' || tooth === 'cisx') &&
                 <div aria-hidden={true} className="h-[120px] mb-4 pl-6"></div>
             }
-            <div className={`${value === 'bezel' ? 'block' : 'invisible'} h-[120px] mb-4 pl-6 text-center`}>
+            <div className={`${value === 'bezel' || type === 'bezel' ? 'block' : 'invisible'} h-[120px] mb-4 pl-6 text-center`}>
                 <div className="w-[36px] flex flex-col gap-2 items-center bg-gray-50 rounded-full py-2 border-1">
                     <button type="button" onClick={(e) => setStoneShape(e.currentTarget.value)} value="circle" className="w-[24px] h-[24px] bg-stone-200 rounded-full cursor-pointer">Round
                     </button>
@@ -47,7 +47,7 @@ export default function DesignSubOptions({tooth}: { tooth: string|undefined }) {
                 </div>
             </div>
             <div
-                className={`${value === 'enamel' ? 'block' : 'invisible'} h-[120px] mb-4 pl-6 text-center relative bottom-60`}>
+                className={`${value === 'enamel' || type === 'enamel' ? 'block' : 'invisible'} h-[120px] mb-4 pl-6 text-center relative bottom-60`}>
                 <div className="w-[36px] flex flex-col gap-2 items-center bg-gray-50 rounded-full py-2 border-1">
                     <button type="button" value="blue" onClick={(e) => setEnamelColor(e.currentTarget.value)} className="w-[24px] h-[24px] bg-stone-200 rounded-full cursor-pointer">Blue</button>
                     <button type="button" value="turquoise" onClick={(e) => setEnamelColor(e.currentTarget.value)} className="w-[24px] h-[24px] bg-stone-200 rounded-full cursor-pointer">Turquoise</button>

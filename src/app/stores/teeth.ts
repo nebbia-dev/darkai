@@ -459,7 +459,7 @@ export const useTeethStore = create<State>((set, get) => ({
                                 }
 
                                 if(type === 'bezel') {
-                                    state.teethStones.cidx = {shape: 'circle', color: 'sapphire'};
+                                    state.teethStones.cidx = {shape: 'circle', color: 'bSapph'};
                                 }
 
                                 if(type === 'enamel') {
@@ -480,7 +480,7 @@ export const useTeethStore = create<State>((set, get) => ({
                                 }
 
                                 if(type === 'bezel') {
-                                    state.teethStones.cisx = {shape: 'circle', color: 'sapphire'};
+                                    state.teethStones.cisx = {shape: 'circle', color: 'bSapph'};
                                 }
 
                                 if(type === 'enamel') {
@@ -509,7 +509,7 @@ export const useTeethStore = create<State>((set, get) => ({
                             }
 
                             if(type === 'bezel') {
-                                state.teethStones.icsdx = {shape: 'circle', color: 'sapphire'};
+                                state.teethStones.icsdx = {shape: 'circle', color: 'bSapph'};
                             }
 
                             if(type === 'enamel') {
@@ -531,7 +531,7 @@ export const useTeethStore = create<State>((set, get) => ({
                             }
 
                             if(type === 'bezel') {
-                                state.teethStones.icssx = {shape: 'circle', color: 'sapphire'};
+                                state.teethStones.icssx = {shape: 'circle', color: 'bSapph'};
                             }
 
                             if(type === 'enamel') {
@@ -551,7 +551,7 @@ export const useTeethStore = create<State>((set, get) => ({
                             }
 
                             if(type === 'bezel') {
-                                state.teethStones.icidx = {shape: 'circle', color: 'sapphire'};
+                                state.teethStones.icidx = {shape: 'circle', color: 'bSapph'};
                             }
 
                             if(type === 'enamel') {
@@ -571,7 +571,7 @@ export const useTeethStore = create<State>((set, get) => ({
                             }
 
                             if(type === 'bezel') {
-                                state.teethStones.icisx = {shape: 'circle', color: 'sapphire'};
+                                state.teethStones.icisx = {shape: 'circle', color: 'bSapph'};
                             }
 
                             if(type === 'enamel') {
@@ -594,7 +594,7 @@ export const useTeethStore = create<State>((set, get) => ({
                         state.teethMaterial[tooth] = state.teethMaterial[tooth] === 'base' ? 'gold' : state.teethMaterial[tooth];
 
                         if(type === 'bezel') {
-                            state.teethStones[tooth] = {shape: 'circle', color: 'sapphire'};
+                            state.teethStones[tooth] = {shape: 'circle', color: 'bSapph'};
                         } else {
                             state.teethStones[tooth] = {shape: undefined, color: undefined};
                         }
@@ -835,7 +835,7 @@ export const useTeethStore = create<State>((set, get) => ({
                     state.teethStones[tooth].color = color;
                 } else if(color === 'prev') {
                     if(state.teethStones[tooth].color === undefined) {
-                        state.teethStones[tooth].color = 'sapphire';
+                        state.teethStones[tooth].color = 'bSapph';
                     }
                     state.teethStones[tooth].shape = shape;
                 } else {
@@ -1038,10 +1038,10 @@ export const useTeethStore = create<State>((set, get) => ({
                 state.teethStones.icisx = {shape: undefined, color: undefined};
                 state.teethStones.ilidx = {shape: undefined, color: undefined};
                 state.teethStones.ilisx = {shape: undefined, color: undefined};
-                state.teethStones.csdx = {shape: 'marquise', color: 'sapphire'};
-                state.teethStones.cidx = {shape: 'marquise', color: 'sapphire'};
-                state.teethStones.cssx = {shape: 'marquise', color: 'sapphire'};
-                state.teethStones.cisx = {shape: 'marquise', color: 'sapphire'};
+                state.teethStones.csdx = {shape: 'marquise', color: 'bSapph'};
+                state.teethStones.cidx = {shape: 'marquise', color: 'bSapph'};
+                state.teethStones.cssx = {shape: 'marquise', color: 'bSapph'};
+                state.teethStones.cisx = {shape: 'marquise', color: 'bSapph'};
             }
 
             get().calcTotal(state);

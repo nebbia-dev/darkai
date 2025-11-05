@@ -64,6 +64,13 @@ export default function Dentiera() {
         setHover(tooth);
     }
 
+    function hoverBase(e:any) {
+        e.stopPropagation();
+        if(hovered) {
+            setHover(null);
+        }
+    }
+
     function log(e: any) {
         switch(e.object.name) {
             case "Incisivo_C_SX_1":
@@ -442,9 +449,9 @@ export default function Dentiera() {
         console.log('base')
         return (
             <>
-                <mesh onPointerLeave={(e) => hover(e,null)} onPointerEnter={(e) => hover(e,null)} geometry={(fbx.children[0] as THREE.Mesh).geometry} material={dentieraMaterial}>
+                <mesh onPointerLeave={(e) => hoverBase(e)} onPointerEnter={(e) => hoverBase(e)} geometry={(fbx.children[0] as THREE.Mesh).geometry} material={dentieraMaterial}>
                 </mesh>
-                <mesh onPointerLeave={(e) => hover(e,null)} onPointerEnter={(e) => hover(e,null)} geometry={(fbx2.children[2] as THREE.Mesh).geometry} material={dentiMaterial}>
+                <mesh onPointerLeave={(e) => hoverBase(e)} onPointerEnter={(e) => hoverBase(e)} geometry={(fbx2.children[2] as THREE.Mesh).geometry} material={dentiMaterial}>
                 </mesh>
             </>
         )

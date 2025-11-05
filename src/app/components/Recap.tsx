@@ -7,6 +7,7 @@ import {State} from "@/app/types/State";
 import Link from 'next/link';
 import elabToothName from "@/app/helpers/elabToothName";
 import firstCapital from "@/app/helpers/firstCapital";
+import elabStoneName from "@/app/helpers/elabStoneName";
 
 export default function Recap({next, onclick} : {next:boolean, onclick:() => void }){
     const [activeCarat, setActiveCarat] = useState<string|undefined>(undefined);
@@ -56,6 +57,11 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
                                 className="absolute h-[15%] bottom-0 w-full bg-linear-to-t from-gray-50 to-indigo-0"></div>
                             <div className="pl-6 pr-3 py-4 h-full">
                                 <ul className="pr-3 h-full overflow-y-scroll">
+                                    {history.length === 0 &&
+                                        <div className="w-full h-full flex items-center justify-center">
+                                            <p>Choose your configs wisely!</p>
+                                        </div>
+                                    }
                                     {history.length > 0 && Object.entries(history[history.length - 1][0].type).map(tooth => {
                                         return (history[history.length - 1][0].visible[tooth[0]] && <li key={tooth[0]}>
                                             <h4 className="font-semibold">
@@ -63,7 +69,7 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
                                             </h4>
                                             <p>{firstCapital(tooth[1])}, {history[history.length - 1][0].material[tooth[0]]}</p>
                                             { history[history.length - 1][0].stones[tooth[0]].shape !== undefined &&
-                                                <p>{firstCapital(history[history.length - 1][0].stones[tooth[0]].color as string)} w/ {history[history.length - 1][0].stones[tooth[0]].shape} shape</p>
+                                                <p>{firstCapital(elabStoneName(history[history.length - 1][0].stones[tooth[0]].color as string))} w/ {history[history.length - 1][0].stones[tooth[0]].shape} shape</p>
                                             }
                                             <span aria-hidden={true}
                                                   className="inline-block h-[1px] w-full bg-slate-950"></span>
