@@ -640,7 +640,7 @@ export const useTeethStore = create<State>((set, get) => ({
                 get().setHistory(state);
             }),
         ),
-    setPave: (tooth, pave: string) =>
+    setPave: (tooth, pave: string, color:string|undefined) =>
         set(
             produce((state) => {
 
@@ -657,35 +657,10 @@ export const useTeethStore = create<State>((set, get) => ({
                 }
                 state.currentHistory++;
 
-                // diamond is then applied to the corresponding jewel type if a diamondless version is selected
-                // and reset to the diamondless version if the same pave is selected
-                switch (state.teethJewelType[tooth]) {
-                    case 'full':
-                        state.teethJewelType[tooth] = 'fullDiamond';
-                        state.teethPaves[tooth] = {shape: 'round', color:'wDiamond'};
-                        break;
-                    case 'bar':
-                        state.teethJewelType[tooth] = 'barDiamond';
-                        state.teethPaves[tooth] = {shape: 'round', color:'wDiamond'};
-                        if (tooth === 'icsdx') {
-                            state.teethJewelType.icssx = 'barDiamond';
-                            state.teethPaves.icssx = {shape: 'round', color:'wDiamond'};
-                        }
-                        if (tooth === 'icssx') {
-                            state.teethJewelType.icsdx = 'barDiamond';
-                            state.teethPaves.icsdx = {shape: 'round', color:'wDiamond'};
-                        }
-                        if (tooth === 'icidx') {
-                            state.teethJewelType.icisx = 'barDiamond';
-                            state.teethPaves.icisx = {shape: 'round', color:'wDiamond'};
-                        }
-                        if (tooth === 'icisx') {
-                            state.teethJewelType.icidx = 'barDiamond';
-                            state.teethPaves.icidx = {shape: 'round', color:'wDiamond'};
-                        }
-                        break;
-                    case 'barDiamond':
-                        if(state.teethPaves[tooth].shape === pave) {
+                // if pave === 'nopave', reset the design to the diamondless version
+                if(pave === 'nopave') {
+                    switch (state.teethJewelType[tooth]) {
+                        case 'barDiamond':
                             state.teethJewelType[tooth] = 'bar';
                             state.teethPaves[tooth] = {shape: undefined, color: undefined};
                             if (tooth === 'icsdx') {
@@ -704,53 +679,80 @@ export const useTeethStore = create<State>((set, get) => ({
                                 state.teethJewelType.icidx = 'bar';
                                 state.teethJewelType.icidx = {shape: undefined, color: undefined};
                             }
-                        }
-                        break;
-                    case 'fullDiamond':
-                        if(state.teethPaves[tooth].shape === pave) {
+                            break;
+                        case 'fullDiamond':
                             state.teethJewelType[tooth] = 'full';
                             state.teethPaves[tooth] = {shape: undefined, color: undefined};
-                        }
-                        break;
-                    case 'bigBar':
-                        state.teethJewelType.cidx = 'bigBarDiamond';
-                        state.teethPaves.cidx = {shape: 'round', color:'wDiamond'};
-                        state.teethJewelType.cisx = 'bigBarDiamond';
-                        state.teethPaves.cisx = {shape: 'round', color:'wDiamond'};
-                        break;
-                    case 'bigBarDiamond':
-                        if(state.teethPaves.cidx.shape === pave || state.teethPaves.cisx.shape === pave) {
+                            break;
+                        case 'frameDiamond':
+                            state.teethJewelType[tooth] = 'frame';
+                            state.teethPaves[tooth] = {shape: undefined, color: undefined};
+                            break;
+                        case 'bigBarDiamond':
                             state.teethJewelType.cidx = 'bigBar';
                             state.teethPaves.cidx = {shape: undefined, color: undefined};
                             state.teethJewelType.cisx = 'bigBar';
                             state.teethPaves.cisx = {shape: undefined, color: undefined};
-                        }
-                        break;
-                    case 'frame':
-                        state.teethJewelType[tooth] = 'frameDiamond';
-                        state.teethPaves[tooth] = {shape: 'round', color:'wDiamond'};
-                        break;
-                    case 'frameDiamond':
-                        if(state.teethPaves[tooth].shape === pave) {
-                            state.teethJewelType[tooth] = 'frame';
-                            state.teethPaves[tooth] = {shape: undefined, color: undefined};
-                        }
-                        break;
-                }
+                            break;
+                    }
+                // if color === 'prev', it means you're changing the shape
+                } else if(color === 'prev') {
+                    // diamond is then applied to the corresponding jewel type if a diamondless version is selected
+                    // and reset to the diamondless version if the same pave is selected
+                    switch (state.teethJewelType[tooth]) {
+                        case 'full':
+                            state.teethJewelType[tooth] = 'fullDiamond';
+                            state.teethPaves[tooth] = {shape: 'round', color:'ruby'};
+                            break;
+                        case 'bar':
+                            state.teethJewelType[tooth] = 'barDiamond';
+                            state.teethPaves[tooth] = {shape: 'round', color:'ruby'};
+                            if (tooth === 'icsdx') {
+                                state.teethJewelType.icssx = 'barDiamond';
+                                state.teethPaves.icssx = {shape: 'round', color:'ruby'};
+                            }
+                            if (tooth === 'icssx') {
+                                state.teethJewelType.icsdx = 'barDiamond';
+                                state.teethPaves.icsdx = {shape: 'round', color:'ruby'};
+                            }
+                            if (tooth === 'icidx') {
+                                state.teethJewelType.icisx = 'barDiamond';
+                                state.teethPaves.icisx = {shape: 'round', color:'ruby'};
+                            }
+                            if (tooth === 'icisx') {
+                                state.teethJewelType.icidx = 'barDiamond';
+                                state.teethPaves.icidx = {shape: 'round', color:'ruby'};
+                            }
+                            break;
+                        case 'bigBar':
+                            state.teethJewelType.cidx = 'bigBarDiamond';
+                            state.teethPaves.cidx = {shape: 'round', color:'ruby'};
+                            state.teethJewelType.cisx = 'bigBarDiamond';
+                            state.teethPaves.cisx = {shape: 'round', color:'ruby'};
+                            break;
+                        case 'frame':
+                            state.teethJewelType[tooth] = 'frameDiamond';
+                            state.teethPaves[tooth] = {shape: 'round', color:'ruby'};
+                            break;
+                    }
 
-                // if diamond design is already in place and a different pave is selected,
-                // the new pave shape is then applied
-                if((tooth === 'cidx' || tooth === 'cisx') && state.teethJewelType[tooth] === 'bigBarDiamond') {
-                    state.teethPaves.cidx.shape = pave;
-                    state.teethPaves.cisx.shape = pave;
-                } else if ((tooth === 'icsdx' || tooth === 'icssx') && state.teethJewelType[tooth] === 'barDiamond') {
-                    state.teethPaves.icsdx.shape = pave;
-                    state.teethPaves.icssx.shape = pave;
-                } else if ((tooth === 'icidx' || tooth === 'icisx') && state.teethJewelType[tooth] === 'barDiamond') {
-                    state.teethPaves.icidx.shape = pave;
-                    state.teethPaves.icisx.shape = pave;
-                } else {
-                    state.teethPaves[tooth].shape = pave;
+                    // if diamond design is already in place and a different pave is selected,
+                    // the new pave shape is then applied
+                    if((tooth === 'cidx' || tooth === 'cisx') && state.teethJewelType[tooth] === 'bigBarDiamond') {
+                        state.teethPaves.cidx.shape = pave;
+                        state.teethPaves.cisx.shape = pave;
+                    } else if ((tooth === 'icsdx' || tooth === 'icssx') && state.teethJewelType[tooth] === 'barDiamond') {
+                        state.teethPaves.icsdx.shape = pave;
+                        state.teethPaves.icssx.shape = pave;
+                    } else if ((tooth === 'icidx' || tooth === 'icisx') && state.teethJewelType[tooth] === 'barDiamond') {
+                        state.teethPaves.icidx.shape = pave;
+                        state.teethPaves.icisx.shape = pave;
+                    } else {
+                        state.teethPaves[tooth].shape = pave;
+                    }
+                // instead, if shape === 'prev', it means you're changing the gem color
+                } else if(pave === 'prev') {
+                    state.teethPaves[tooth].color = color;
                 }
 
                 // calc total and set history step

@@ -23,15 +23,15 @@ export default function LoadedMaterials() {
             </mesh>
             <mesh position={[0, -10, 0]} visible={false}>
                 <planeGeometry args={[1, 1]}/>
-                <FullDiamond color='gold' pave='diamond'/>
+                <FullDiamond color='gold' pave='round' stone="whD"/>
             </mesh>
             <mesh position={[0, -10, 0]} visible={false}>
                 <planeGeometry args={[1, 1]}/>
-                <BarDiamond color='gold' pave='diamond'/>
+                <BarDiamond color='gold' pave='round' stone="whD"/>
             </mesh>
             <mesh position={[0, -10, 0]} visible={false}>
                 <planeGeometry args={[1, 1]}/>
-                <FrameDiamond color='gold' pave='diamond'/>
+                <FrameDiamond color='gold' pave='round' stone="whD"/>
             </mesh>
             <mesh position={[0, -10, 0]} visible={false}>
                 <planeGeometry args={[1, 1]}/>
@@ -47,7 +47,7 @@ export default function LoadedMaterials() {
             </mesh>
             <mesh position={[0, -10, 0]} visible={false}>
                 <planeGeometry args={[1, 1]}/>
-                <BarDiamond color='gold' pave='diamond'/>
+                <BarDiamond color='gold' pave='round' stone="whD"/>
             </mesh>
             <mesh position={[0, -10, 0]} visible={false}>
                 <planeGeometry args={[1, 1]}/>

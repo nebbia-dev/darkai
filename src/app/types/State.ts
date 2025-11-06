@@ -216,7 +216,7 @@ export interface State {
     setGeometry: (fbx:FBX) => void,
     setMaterial: (tooth:string, color:string) => void,
     setType: (tooth:string, type:string) => void,
-    setPave: (tooth:string, pave:string) => void,
+    setPave: (tooth:string, pave:string, color:string|undefined) => void,
     setStone: (tooth:string, shape:string, color:string) => void,
     setEnamel: (tooth:string, color:string) => void,
     setActiveTooth: (tooth:string|undefined) => void,
