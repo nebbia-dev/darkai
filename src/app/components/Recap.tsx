@@ -71,6 +71,9 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
                                             { history[history.length - 1][0].stones[tooth[0]].shape !== undefined &&
                                                 <p>{firstCapital(elabStoneName(history[history.length - 1][0].stones[tooth[0]].color as string))} w/ {history[history.length - 1][0].stones[tooth[0]].shape} shape</p>
                                             }
+                                            { history[history.length - 1][0].pave[tooth[0]].shape !== undefined &&
+                                                <p>{firstCapital(history[history.length - 1][0].pave[tooth[0]].shape as string)} pave w/ {firstCapital(elabStoneName(history[history.length - 1][0].pave[tooth[0]].color as string))}</p>
+                                            }
                                             <span aria-hidden={true}
                                                   className="inline-block h-[1px] w-full bg-slate-950"></span>
                                             <p className="font-bold w-full text-right">500€</p>

@@ -12,6 +12,7 @@ import {State} from "@/app/types/State";
 import * as THREE from 'three'
 import BarSmall from "@/app/components/materials/BarSmall";
 import FullEnamel from "@/app/components/materials/FullEnamel";
+import DecalPave from "@/app/components/materials/DecalPave";
 
 export default function CiDx() {
     const toothGeometry = useTeethStore((state: State) => state.teethGeometry.cidx);
@@ -22,47 +23,57 @@ export default function CiDx() {
     const toothEnamel = useTeethStore((state: State) => state.teethEnamel.cidx);
     const CIDX = memo(({visible, type, mat} : {visible: boolean, type: string, mat: string}): JSX.Element => {
         if(!toothGeometry) return <></>
-        let geometry:THREE.BufferGeometry[], material:JSX.Element[];
+        let geometry:THREE.BufferGeometry[], material:JSX.Element[], position:THREE.Vector3;
         switch(type) {
             case 'full':
                 geometry = [toothGeometry.full];
                 material = [<FullMaterial color={toothMaterial}/>]
+                position = new THREE.Vector3();
                 break;
             case 'fullDiamond':
                 geometry = [toothGeometry.fullDiamond.base, toothGeometry.fullDiamond.full];
-                material = [<BaseFullDiamond color={toothMaterial}/>, <FullDiamond color={toothMaterial} pave={toothPave.shape} stone={toothPave.color}/>]
+                material = [<BaseFullDiamond color={toothMaterial}/>, <FullDiamond color={toothMaterial}/>]
+                position = toothGeometry.fullDiamond.position;
                 break;
             case 'enamel':
                 geometry = [toothGeometry.fullDiamond.base, toothGeometry.fullDiamond.full];
                 material = [<BaseFullDiamond color={toothMaterial}/>, <FullEnamel color={toothEnamel ?? 'ivory'}/>]
+                position = new THREE.Vector3();
                 break;
             case 'frame':
                 geometry = [toothGeometry.frame.full];
                 material = [<FrameFull color={toothMaterial}/>]
+                position = new THREE.Vector3();
                 break;
             case 'frameDiamond':
                 geometry = [toothGeometry.frame.diamond.base, toothGeometry.frame.diamond.full];
-                material = [<FrameFull color={toothMaterial}/>, <FrameDiamond color={toothMaterial} pave={toothPave.shape} stone={toothPave.color}/>]
+                material = [<FrameFull color={toothMaterial}/>, <FrameDiamond color={toothMaterial}/>]
+                position = toothGeometry.frame.diamond.position;
                 break;
             case 'bar':
                 geometry = [toothGeometry.bar.full];
                 material = [<BarSmall color={toothMaterial}/>]
+                position = new THREE.Vector3();
                 break;
             case 'barDiamond':
                 geometry = [toothGeometry.bar.diamond.base, toothGeometry.bar.diamond.full];
-                material = [<FullMaterial color={toothMaterial}/>, <FullDiamond color={toothMaterial} pave={toothPave.shape} stone={toothPave.color}/>]
+                material = [<FullMaterial color={toothMaterial}/>, <FullDiamond color={toothMaterial}/>]
+                position = toothGeometry.bar.diamond.position;
                 break;
             case 'bigBar':
                 geometry = [toothGeometry.bigBar.full];
                 material = [<BarFull color={toothMaterial}/>]
+                position = new THREE.Vector3();
                 break;
             case 'bigBarDiamond':
                 geometry = [toothGeometry.bigBar.diamond.base, toothGeometry.bigBar.diamond.full];
-                material = [<BarFull color={toothMaterial}/>, <BarDiamond color={toothMaterial} pave={toothPave.shape} stone={toothPave.color}/>]
+                material = [<BarFull color={toothMaterial}/>, <BarDiamond color={toothMaterial}/>]
+                position = new THREE.Vector3(toothGeometry.bigBar.diamond.position.x, toothGeometry.bigBar.diamond.position.y, 0);
                 break;
             default:
                 geometry = [toothGeometry.full];
-                material = [<FullMaterial color={toothMaterial}/>]
+                material = [<FullMaterial color={toothMaterial}/>];
+                position = new THREE.Vector3();
         }
 
         if(geometry.length === 2) {
@@ -73,6 +84,7 @@ export default function CiDx() {
                     </mesh>
                     <mesh geometry={geometry[1]} visible={visible}>
                         {material[1]}
+                        {type !== 'enamel' && <DecalPave scale={type === 'bigBarDiamond' ? 3 : 1} position={position} pave={toothPave.shape} stone={toothPave.color}/>}
                     </mesh>
                 </>
             )

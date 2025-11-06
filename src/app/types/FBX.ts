@@ -12,20 +12,23 @@ export default interface FBX {
         },
         fullDiamond: {
             base: THREE.BufferGeometry,
-            full: THREE.BufferGeometry
+            full: THREE.BufferGeometry,
+            position: THREE.Vector3
         },
         bar: {
             full: THREE.BufferGeometry,
             diamond: {
                 base: THREE.BufferGeometry,
-                full: THREE.BufferGeometry
+                full: THREE.BufferGeometry,
+                position: THREE.Vector3
             }
         },
         frame: {
             full: THREE.BufferGeometry,
             diamond: {
                 base: THREE.BufferGeometry,
-                full: THREE.BufferGeometry
+                full: THREE.BufferGeometry,
+                position: THREE.Vector3
             }
         },
     } | undefined,
@@ -40,20 +43,23 @@ export default interface FBX {
         },
         fullDiamond: {
             base: THREE.BufferGeometry,
-            full: THREE.BufferGeometry
+            full: THREE.BufferGeometry,
+            position: THREE.Vector3
         },
         bar: {
             full: THREE.BufferGeometry,
             diamond: {
                 base: THREE.BufferGeometry,
-                full: THREE.BufferGeometry
+                full: THREE.BufferGeometry,
+                position: THREE.Vector3
             }
         },
         frame: {
             full: THREE.BufferGeometry,
             diamond: {
                 base: THREE.BufferGeometry,
-                full: THREE.BufferGeometry
+                full: THREE.BufferGeometry,
+                position: THREE.Vector3
             }
         },
     } | undefined,
@@ -68,20 +74,23 @@ export default interface FBX {
         },
         fullDiamond: {
             base: THREE.BufferGeometry,
-            full: THREE.BufferGeometry
+            full: THREE.BufferGeometry,
+            position: THREE.Vector3
         },
         bar: {
             full: THREE.BufferGeometry,
             diamond: {
                 base: THREE.BufferGeometry,
-                full: THREE.BufferGeometry
+                full: THREE.BufferGeometry,
+                position: THREE.Vector3
             }
         },
         frame: {
             full: THREE.BufferGeometry,
             diamond: {
                 base: THREE.BufferGeometry,
-                full: THREE.BufferGeometry
+                full: THREE.BufferGeometry,
+                position: THREE.Vector3
             }
         },
     } | undefined,
@@ -96,20 +105,23 @@ export default interface FBX {
         },
         fullDiamond: {
             base: THREE.BufferGeometry,
-            full: THREE.BufferGeometry
+            full: THREE.BufferGeometry,
+            position: THREE.Vector3
         },
         bar: {
             full: THREE.BufferGeometry,
             diamond: {
                 base: THREE.BufferGeometry,
-                full: THREE.BufferGeometry
+                full: THREE.BufferGeometry,
+                position: THREE.Vector3
             }
         },
         frame: {
             full: THREE.BufferGeometry,
             diamond: {
                 base: THREE.BufferGeometry,
-                full: THREE.BufferGeometry
+                full: THREE.BufferGeometry,
+                position: THREE.Vector3
             }
         },
     } | undefined,
@@ -125,20 +137,23 @@ export default interface FBX {
         },
         fullDiamond: {
             base: THREE.BufferGeometry,
-            full: THREE.BufferGeometry
+            full: THREE.BufferGeometry,
+            position: THREE.Vector3
         },
         bar: {
             full: THREE.BufferGeometry,
             diamond: {
                 base: THREE.BufferGeometry,
-                full: THREE.BufferGeometry
+                full: THREE.BufferGeometry,
+                position: THREE.Vector3
             }
         },
         frame: {
             full: THREE.BufferGeometry,
             diamond: {
                 base: THREE.BufferGeometry,
-                full: THREE.BufferGeometry
+                full: THREE.BufferGeometry,
+                position: THREE.Vector3
             }
         },
     } | undefined,
@@ -153,20 +168,23 @@ export default interface FBX {
         },
         fullDiamond: {
             base: THREE.BufferGeometry,
-            full: THREE.BufferGeometry
+            full: THREE.BufferGeometry,
+            position: THREE.Vector3
         },
         bar: {
             full: THREE.BufferGeometry,
             diamond: {
                 base: THREE.BufferGeometry,
-                full: THREE.BufferGeometry
+                full: THREE.BufferGeometry,
+                position: THREE.Vector3
             }
         },
         frame: {
             full: THREE.BufferGeometry,
             diamond: {
                 base: THREE.BufferGeometry,
-                full: THREE.BufferGeometry
+                full: THREE.BufferGeometry,
+                position: THREE.Vector3
             }
         },
     } | undefined,
@@ -181,20 +199,23 @@ export default interface FBX {
         },
         fullDiamond: {
             base: THREE.BufferGeometry,
-            full: THREE.BufferGeometry
+            full: THREE.BufferGeometry,
+            position: THREE.Vector3
         },
         bar: {
             full: THREE.BufferGeometry,
             diamond: {
                 base: THREE.BufferGeometry,
-                full: THREE.BufferGeometry
+                full: THREE.BufferGeometry,
+                position: THREE.Vector3
             }
         },
         frame: {
             full: THREE.BufferGeometry,
             diamond: {
                 base: THREE.BufferGeometry,
-                full: THREE.BufferGeometry
+                full: THREE.BufferGeometry,
+                position: THREE.Vector3
             }
         },
     } | undefined,
@@ -209,20 +230,23 @@ export default interface FBX {
         },
         fullDiamond: {
             base: THREE.BufferGeometry,
-            full: THREE.BufferGeometry
+            full: THREE.BufferGeometry,
+            position: THREE.Vector3
         },
         bar: {
             full: THREE.BufferGeometry,
             diamond: {
                 base: THREE.BufferGeometry,
-                full: THREE.BufferGeometry
+                full: THREE.BufferGeometry,
+                position: THREE.Vector3
             }
         },
         frame: {
             full: THREE.BufferGeometry,
             diamond: {
                 base: THREE.BufferGeometry,
-                full: THREE.BufferGeometry
+                full: THREE.BufferGeometry,
+                position: THREE.Vector3
             }
         }
     } | undefined,
@@ -238,20 +262,23 @@ export default interface FBX {
         },
         fullDiamond: {
             base: THREE.BufferGeometry,
-            full: THREE.BufferGeometry
+            full: THREE.BufferGeometry,
+            position: THREE.Vector3
         },
         bar: {
             full: THREE.BufferGeometry,
             diamond: {
                 base: THREE.BufferGeometry,
-                full: THREE.BufferGeometry
+                full: THREE.BufferGeometry,
+                position: THREE.Vector3
             }
         },
         frame: {
             full: THREE.BufferGeometry,
             diamond: {
                 base: THREE.BufferGeometry,
-                full: THREE.BufferGeometry
+                full: THREE.BufferGeometry,
+                position: THREE.Vector3
             }
         },
     } | undefined,
@@ -266,20 +293,23 @@ export default interface FBX {
         },
         fullDiamond: {
             base: THREE.BufferGeometry,
-            full: THREE.BufferGeometry
+            full: THREE.BufferGeometry,
+            position: THREE.Vector3
         },
         bar: {
             full: THREE.BufferGeometry,
             diamond: {
                 base: THREE.BufferGeometry,
-                full: THREE.BufferGeometry
+                full: THREE.BufferGeometry,
+                position: THREE.Vector3
             }
         },
         frame: {
             full: THREE.BufferGeometry,
             diamond: {
                 base: THREE.BufferGeometry,
-                full: THREE.BufferGeometry
+                full: THREE.BufferGeometry,
+                position: THREE.Vector3
             }
         },
     } | undefined,
@@ -294,27 +324,31 @@ export default interface FBX {
         },
         fullDiamond: {
             base: THREE.BufferGeometry,
-            full: THREE.BufferGeometry
+            full: THREE.BufferGeometry,
+            position: THREE.Vector3
         },
         frame: {
             full: THREE.BufferGeometry,
             diamond: {
                 base: THREE.BufferGeometry,
-                full: THREE.BufferGeometry
+                full: THREE.BufferGeometry,
+                position: THREE.Vector3
             }
         },
         bar: {
             full: THREE.BufferGeometry,
             diamond: {
                 base: THREE.BufferGeometry,
-                full: THREE.BufferGeometry
+                full: THREE.BufferGeometry,
+                position: THREE.Vector3
             }
         },
         bigBar: {
             full: THREE.BufferGeometry,
             diamond: {
                 base: THREE.BufferGeometry,
-                full: THREE.BufferGeometry
+                full: THREE.BufferGeometry,
+                position: THREE.Vector3
             }
         }
     } | undefined,
@@ -329,27 +363,31 @@ export default interface FBX {
         },
         fullDiamond: {
             base: THREE.BufferGeometry,
-            full: THREE.BufferGeometry
+            full: THREE.BufferGeometry,
+            position: THREE.Vector3
         },
         frame: {
             full: THREE.BufferGeometry,
             diamond: {
                 base: THREE.BufferGeometry,
-                full: THREE.BufferGeometry
+                full: THREE.BufferGeometry,
+                position: THREE.Vector3
             }
         },
         bar: {
             full: THREE.BufferGeometry,
             diamond: {
                 base: THREE.BufferGeometry,
-                full: THREE.BufferGeometry
+                full: THREE.BufferGeometry,
+                position: THREE.Vector3
             }
         },
         bigBar: {
             full: THREE.BufferGeometry,
             diamond: {
                 base: THREE.BufferGeometry,
-                full: THREE.BufferGeometry
+                full: THREE.BufferGeometry,
+                position: THREE.Vector3
             }
         }
     }  | undefined,

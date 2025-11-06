@@ -9,6 +9,7 @@ import * as THREE from "three";
 import FrameFull from "@/app/components/materials/FrameFull";
 import FullEnamel from "@/app/components/materials/FullEnamel";
 import BarSmall from "@/app/components/materials/BarSmall";
+import DecalPave from "@/app/components/materials/DecalPave";
 
 export default function IcsSx() {
     const toothGeometry = useTeethStore((state: State) => state.teethGeometry.icssx);
@@ -20,39 +21,47 @@ export default function IcsSx() {
 
     const ICSSX = memo(({visible, type, mat} : {visible: boolean, type: string, mat: string}): JSX.Element => {
         if(!toothGeometry) return <></>
-        let geometry:THREE.BufferGeometry[], material:JSX.Element[];
+        let geometry:THREE.BufferGeometry[], material:JSX.Element[], position:THREE.Vector3;
         switch(type) {
             case 'full':
                 geometry = [toothGeometry.full];
-                material = [<FullMaterial color={toothMaterial}/>]
+                material = [<FullMaterial color={toothMaterial}/>];
+                position = new THREE.Vector3();
                 break;
             case 'fullDiamond':
                 geometry = [toothGeometry.fullDiamond.base, toothGeometry.fullDiamond.full];
-                material = [<BaseFullDiamond color={toothMaterial}/>, <FullDiamond color={toothMaterial} pave={toothPave.shape} stone={toothPave.color}/>]
+                material = [<BaseFullDiamond color={toothMaterial}/>, <FullDiamond color={toothMaterial}/>];
+                position = toothGeometry.fullDiamond.position;
                 break;
             case 'frame':
                 geometry = [toothGeometry.frame.full];
-                material = [<FrameFull color={toothMaterial}/>]
+                material = [<FrameFull color={toothMaterial}/>];
+                position = new THREE.Vector3();
                 break;
             case 'enamel':
                 geometry = [toothGeometry.fullDiamond.base, toothGeometry.fullDiamond.full];
-                material = [<BaseFullDiamond color={toothMaterial}/>, <FullEnamel color={toothEnamel ?? 'ivory'}/>]
+                material = [<BaseFullDiamond color={toothMaterial}/>, <FullEnamel color={toothEnamel ?? 'ivory'}/>];
+                position = new THREE.Vector3();
                 break;
             case 'frameDiamond':
                 geometry = [toothGeometry.frame.diamond.base, toothGeometry.frame.diamond.full];
-                material = [<FullMaterial color={toothMaterial}/>, <FullDiamond color={toothMaterial} pave={toothPave.shape} stone={toothPave.color}/>]
+                material = [<FullMaterial color={toothMaterial}/>, <FullDiamond color={toothMaterial}/>];
+                position = toothGeometry.frame.diamond.position;
                 break;
             case 'bar':
                 geometry = [toothGeometry.bar.full];
-                material = [<BarSmall color={toothMaterial}/>]
+                material = [<BarSmall color={toothMaterial}/>];
+                position = new THREE.Vector3();
                 break;
             case 'barDiamond':
                 geometry = [toothGeometry.bar.diamond.base, toothGeometry.bar.diamond.full];
-                material = [<FullMaterial color={toothMaterial}/>, <FullDiamond color={toothMaterial} pave={toothPave.shape} stone={toothPave.color}/>]
+                material = [<FullMaterial color={toothMaterial}/>, <FullDiamond color={toothMaterial}/>];
+                position = toothGeometry.bar.diamond.position;
                 break;
             default:
                 geometry = [toothGeometry.full];
-                material = [<FullMaterial color={toothMaterial}/>]
+                material = [<FullMaterial color={toothMaterial}/>];
+                position = new THREE.Vector3();
         }
         if(geometry.length === 2) {
             return (
@@ -62,6 +71,7 @@ export default function IcsSx() {
                     </mesh>
                     <mesh geometry={geometry[1]} visible={visible}>
                         {material[1]}
+                        {type !== 'enamel' && <DecalPave position={position} pave={toothPave.shape} stone={toothPave.color}/>}
                     </mesh>
                 </>
             )

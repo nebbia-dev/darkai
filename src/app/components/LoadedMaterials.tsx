@@ -9,6 +9,7 @@ import FrameFull from "@/app/components/materials/FrameFull";
 import StonesMaterial from "@/app/components/materials/StonesMaterial";
 import BarFull from "@/app/components/materials/BarFull";
 import FullEnamel from "@/app/components/materials/FullEnamel";
+import DecalPave from "@/app/components/materials/DecalPave";
 
 export default function LoadedMaterials() {
     return(
@@ -23,15 +24,15 @@ export default function LoadedMaterials() {
             </mesh>
             <mesh position={[0, -10, 0]} visible={false}>
                 <planeGeometry args={[1, 1]}/>
-                <FullDiamond color='gold' pave='round' stone="whD"/>
+                <FullDiamond color='gold'/>
             </mesh>
             <mesh position={[0, -10, 0]} visible={false}>
                 <planeGeometry args={[1, 1]}/>
-                <BarDiamond color='gold' pave='round' stone="whD"/>
+                <BarDiamond color='gold'/>
             </mesh>
             <mesh position={[0, -10, 0]} visible={false}>
                 <planeGeometry args={[1, 1]}/>
-                <FrameDiamond color='gold' pave='round' stone="whD"/>
+                <FrameDiamond color='gold'/>
             </mesh>
             <mesh position={[0, -10, 0]} visible={false}>
                 <planeGeometry args={[1, 1]}/>
@@ -47,11 +48,15 @@ export default function LoadedMaterials() {
             </mesh>
             <mesh position={[0, -10, 0]} visible={false}>
                 <planeGeometry args={[1, 1]}/>
-                <BarDiamond color='gold' pave='round' stone="whD"/>
+                <BarDiamond color='gold'/>
             </mesh>
             <mesh position={[0, -10, 0]} visible={false}>
                 <planeGeometry args={[1, 1]}/>
-                <FullEnamel color='blue' />
+                <FullEnamel color='blue'/>
+            </mesh>
+            <mesh position={[0, -10, 0]} visible={false}>
+                <planeGeometry args={[1, 1]}/>
+                <DecalPave position={[0,0,0]} pave="round" stone="ruby"/>
             </mesh>
         </>
     )
