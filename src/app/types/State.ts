@@ -135,28 +135,28 @@ export interface History {
     prices: Prices,
     preciousness: Preciousness | undefined
 }
-export interface BasePrices {
-    [key: string]: any,
-    barDiamond: number | null,
-    barGold: number | null,
-    barRose: number | null,
-    barWhite: number | null,
-    bigBarDiamond: number | null,
-    bigBarGold: number | null,
-    bigBarRose: number | null,
-    bigBarWhite: number | null,
-    created_at: Date,
-    frameDiamond: number | null,
-    frameGold: number | null,
-    frameRose: number | null,
-    frameWhite: number | null,
-    fullDiamond: number | null,
-    fullGold: number | null,
-    fullRose: number | null,
-    fullWhite: number | null,
-    id: number,
-    tooth: string
-}
+// export interface BasePrices {
+//     [key: string]: any,
+//     barDiamond: number | null,
+//     barGold: number | null,
+//     barRose: number | null,
+//     barWhite: number | null,
+//     bigBarDiamond: number | null,
+//     bigBarGold: number | null,
+//     bigBarRose: number | null,
+//     bigBarWhite: number | null,
+//     created_at: Date,
+//     frameDiamond: number | null,
+//     frameGold: number | null,
+//     frameRose: number | null,
+//     frameWhite: number | null,
+//     fullDiamond: number | null,
+//     fullGold: number | null,
+//     fullRose: number | null,
+//     fullWhite: number | null,
+//     id: number,
+//     tooth: string
+// }
 
 export interface AddonsPrices {
     [key: string]: any,
@@ -199,7 +199,7 @@ export interface State {
     activeButton: string|undefined,
     activeSubButton: string|undefined,
     loaded: boolean,
-    prices: BasePrices[] | undefined,
+    prices: any[] | undefined | null,
     pricesAdds: AddonsPrices[] | undefined,
     total: number,
     isScreenshotNeeded: boolean | undefined,

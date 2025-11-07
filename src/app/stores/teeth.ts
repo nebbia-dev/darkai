@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import {produce} from "immer";
-import {AddonsPrices, BasePrices, State, Stone} from "@/app/types/State";
+import {State, Stone} from "@/app/types/State";
 import {createClient} from "@/utils/supabase/client";
 
 export const useTeethStore = create<State>((set, get) => ({
@@ -1136,14 +1136,121 @@ export const useTeethStore = create<State>((set, get) => ({
     prices: undefined,
     pricesAdds: undefined,
     fetchPrices: async() => {
-        const supabase = await createClient();
+        const supabase = createClient();
         let { data: base, error: errorBase } = await supabase
-            .from('Prices_base')
+            .from('No_Stone')
             .select('*');
-        let { data: addons, error: errorAddons } = await supabase
-            .from('Prices_addons')
+        let { data: bezels, error: errorBezel } = await supabase
+            .from('Bezel')
             .select('*');
-        set({prices: base as BasePrices[], pricesAdds: addons as AddonsPrices[]});
+        let { data: paves, error: errorPave } = await supabase
+            .from('Pave')
+            .select('*');
+        let { data: finish, error: errorFinish } = await supabase
+            .from('Finish')
+            .select('*');
+
+        const [whDLab_b, whDNat_b, brDLab_b, brDNat_b, blDLab_b, blDNat_b, ruby_b, emerald_b, ameth_b, aqua_b, bSapph_b, ySapph_b, pSapph_b] = [[],[],[],[],[],[],[],[],[],[],[],[],[]]
+        const [whDLab_p, whDNat_p, brDLab_p, brDNat_p, blDLab_p, blDNat_p, ruby_p, emerald_p, ameth_p, aqua_p, bSapph_p, ySapph_p, pSapph_p, camo, glitch] = [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+
+        for(let bezel of bezels!) {
+            switch(bezel.stone) {
+                case 'white_diamond_lab':
+                    whDLab_b.push(bezel);
+                    break;
+                case 'white_diamond_nat':
+                    whDNat_b.push(bezel);
+                    break;
+                case 'brown_diamond_lab':
+                    brDLab_b.push(bezel);
+                    break;
+                case 'brown_diamond_nat':
+                    brDNat_b.push(bezel);
+                    break;
+                case 'black_diamond_lab':
+                    blDLab_b.push(bezel);
+                    break;
+                case 'black_diamond_nat':
+                    blDNat_b.push(bezel);
+                    break;
+                case 'emerald_lab':
+                    emerald_b.push(bezel);
+                    break;
+                case 'ruby_lab':
+                    ruby_b.push(bezel);
+                    break;
+                case 'blue_sapphire_lab':
+                    bSapph_b.push(bezel);
+                    break;
+                case 'yellow_sapphire_lab':
+                    ySapph_b.push(bezel);
+                    break;
+                case 'pink_sapphire_lab':
+                    pSapph_b.push(bezel);
+                    break;
+                case 'aquamarine_lab':
+                    aqua_b.push(bezel);
+                    break;
+                case 'amethyst_lab':
+                    ameth_b.push(bezel);
+                    break;
+            }
+        }
+        for(let pave of paves!) {
+            switch(pave.stone) {
+                case 'white_diamond_lab':
+                    whDLab_p.push(pave);
+                    break;
+                case 'white_diamond_nat':
+                    whDNat_p.push(pave);
+                    break;
+                case 'brown_diamond_lab':
+                    brDLab_p.push(pave);
+                    break;
+                case 'brown_diamond_nat':
+                    brDNat_p.push(pave);
+                    break;
+                case 'black_diamond_lab':
+                    blDLab_p.push(pave);
+                    break;
+                case 'black_diamond_nat':
+                    blDNat_p.push(pave);
+                    break;
+                case 'emerald_lab':
+                    emerald_p.push(pave);
+                    break;
+                case 'ruby_lab':
+                    ruby_p.push(pave);
+                    break;
+                case 'blue_sapphire_lab':
+                    bSapph_p.push(pave);
+                    break;
+                case 'yellow_sapphire_lab':
+                    ySapph_p.push(pave);
+                    break;
+                case 'pink_sapphire_lab':
+                    pSapph_p.push(pave);
+                    break;
+                case 'aquamarine_lab':
+                    aqua_p.push(pave);
+                    break;
+                case 'amethyst_lab':
+                    ameth_p.push(pave);
+                    break;
+                case 'camo':
+                    camo.push(pave);
+                    break;
+                case 'glitch_lab':
+                    glitch.push(pave);
+                    break;
+            }
+        }
+
+        set({prices: {'base': base, 'bezel': {
+                    whDLab_b, whDNat_b, brDLab_b, brDNat_b, blDLab_b, blDNat_b, ruby_b, emerald_b, ameth_b, aqua_b, bSapph_b, ySapph_b, pSapph_b
+                }, 'pave': {
+                    whDLab_p, whDNat_p, brDLab_p, brDNat_p, blDLab_p, blDNat_p, ruby_p, emerald_p, ameth_p, aqua_p, bSapph_p, ySapph_p, pSapph_p, camo, glitch
+                }, 'finish':finish}});
     },
 
     // states and methods to set the configuration steps history and
@@ -1396,4 +1503,4 @@ export const useTeethStore = create<State>((set, get) => ({
 }))
 
 // initial data fetch
-// useTeethStore.getState().fetchPrices();
+useTeethStore.getState().fetchPrices();

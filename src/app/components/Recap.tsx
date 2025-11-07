@@ -24,7 +24,9 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
     const setActive = useTeethStore((state: State) => state.setActiveTooth);
     const setHover = useTeethStore((state: State) => state.setHover);
     const setPreciousness = useTeethStore((state:State) => state.setTeethPreciousness);
+    const prices = useTeethStore((state:State) => state.prices);
 
+    console.log(prices)
     function checkDiamonds():boolean {
         for(let stone of Object.values(teethStones)) {
             if(stone.color === 'whD' || stone.color === 'brD' || stone.color === 'blD') {
