@@ -12,12 +12,6 @@ import {Info} from "@/app/components/icons/Info";
 import {Close} from "@/app/components/icons/Close";
 import ConfiguratorButton from "@/app/components/ConfiguratorButton";
 
-interface TabPanelProps {
-    children?: ReactNode;
-    index: number;
-    value: number;
-}
-
 export default function Selection({activeButton, changeActiveButton} : {activeButton: string|undefined, changeActiveButton:(value:string) => void }) {
     const jewelType = useTeethStore((state: State) => state.teethJewelType);
     const activeTooth = useTeethStore((state: State) => state.currentTooth);

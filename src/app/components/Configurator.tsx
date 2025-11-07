@@ -153,9 +153,9 @@ export default function Configurator() {
                 frame: {
                     full: (frames.children[0] as THREE.Mesh).geometry,
                     diamond: {
-                        base: (frames.children[1] as THREE.Mesh).geometry,
-                        full: (frames.children[1] as THREE.Mesh).geometry,
-                        position: getOrigin(frames.children[1])
+                        base: (frames.children[0] as THREE.Mesh).geometry,
+                        full: (frames.children[0] as THREE.Mesh).geometry,
+                        position: getOrigin(frames.children[0])
                     }
                 }
             },

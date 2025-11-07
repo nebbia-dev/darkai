@@ -123,7 +123,7 @@ interface Stones {
 
 export interface Preciousness {
     [key: string]: string | undefined,
-    carats: string | undefined,
+    carats: string,
     diamonds: string | undefined
 }
 export interface History {
@@ -220,6 +220,7 @@ export interface State {
     setStone: (tooth:string, shape:string, color:string) => void,
     setEnamel: (tooth:string, color:string) => void,
     setActiveTooth: (tooth:string|undefined) => void,
+    setTeethPreciousness: (carats:string, diamonds:string|undefined) => void,
     unsetLastActivatedTooth: () => void,
     setDefaultConfig: (config:string, color:string) => void,
     setTooth: (tooth:string, type:string, color:string) => void,

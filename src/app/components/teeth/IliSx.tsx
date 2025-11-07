@@ -24,11 +24,13 @@ export default function IliSx() {
         let geometry:THREE.BufferGeometry[], material:JSX.Element[], position:THREE.Vector3;
         switch(type) {
             case 'full':
+            case 'bezel':
                 geometry = [toothGeometry.full];
                 material = [<FullMaterial color={toothMaterial}/>]
                 position = new THREE.Vector3();
                 break;
             case 'fullDiamond':
+            case 'bezelDiamond':
                 geometry = [toothGeometry.fullDiamond.base, toothGeometry.fullDiamond.full];
                 material = [<BaseFullDiamond color={toothMaterial}/>, <FullDiamond color={toothMaterial}/>]
                 position = toothGeometry.fullDiamond.position;
