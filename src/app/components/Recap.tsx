@@ -1,13 +1,14 @@
 'use client'
 import {FormEvent, useState} from "react";
 import Upload from "./Upload";
-import {Modal} from "@mui/material";
+import {Modal, Tooltip} from "@mui/material";
 import {useTeethStore} from "@/app/stores/teeth";
 import {State} from "@/app/types/State";
 import Link from 'next/link';
 import elabToothName from "@/app/helpers/elabToothName";
 import firstCapital from "@/app/helpers/firstCapital";
 import elabStoneName from "@/app/helpers/elabStoneName";
+import {Close} from "@/app/components/icons/Close";
 
 export default function Recap({next, onclick} : {next:boolean, onclick:() => void }){
     const [activeCarat, setActiveCarat] = useState<string|undefined>(undefined);
@@ -18,10 +19,16 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
     const [isSending, setIsSending] = useState<boolean>(false);
     const [sent, setSent] = useState<boolean>(false);
     const takeScreenshot = useTeethStore((state:State) => state.setIsScreenshotNeeded);
+    const resetTooth = useTeethStore((state: State) => state.resetTooth);
+    const setHover = useTeethStore((state: State) => state.setHover);
     function toggleRecap() {
         setShowRecap(prev => !prev)
     }
 
+    function setCurrentHover(tooth:string|undefined, e:any) {
+        e.stopPropagation();
+        setHover(tooth);
+    }
     function download(e:FormEvent) {
         e.preventDefault();
         setIsSending(true);
@@ -63,21 +70,30 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
                                         </div>
                                     }
                                     {history.length > 0 && Object.entries(history[history.length - 1][0].type).map(tooth => {
-                                        return (history[history.length - 1][0].visible[tooth[0]] && <li key={tooth[0]}>
-                                            <h4 className="font-semibold">
-                                                {elabToothName(tooth[0], false)}
-                                            </h4>
-                                            <p>{firstCapital(tooth[1])}, {history[history.length - 1][0].material[tooth[0]]}</p>
-                                            { history[history.length - 1][0].stones[tooth[0]].shape !== undefined &&
-                                                <p>{firstCapital(elabStoneName(history[history.length - 1][0].stones[tooth[0]].color as string))} w/ {history[history.length - 1][0].stones[tooth[0]].shape} shape</p>
-                                            }
-                                            { history[history.length - 1][0].pave[tooth[0]].shape !== undefined &&
-                                                <p>{firstCapital(history[history.length - 1][0].pave[tooth[0]].shape as string)} pave w/ {firstCapital(elabStoneName(history[history.length - 1][0].pave[tooth[0]].color as string))}</p>
-                                            }
-                                            <span aria-hidden={true}
-                                                  className="inline-block h-[1px] w-full bg-slate-950"></span>
-                                            <p className="font-bold w-full text-right">500€</p>
-                                        </li>)
+                                        return (
+                                            history[history.length - 1][0].visible[tooth[0]] &&
+                                            <li key={tooth[0]} onMouseEnter={(e) => setCurrentHover(tooth[0], e)} onMouseLeave={(e) => setCurrentHover(undefined, e)} className="cursor-pointer">
+                                                <div className="flex justify-between items-center">
+                                                    <h4 className="font-semibold">
+                                                        {elabToothName(tooth[0], false)}
+                                                    </h4>
+                                                    <Tooltip title="Delete tooth">
+                                                        <Close className="cursor-pointer"
+                                                               onClick={() => resetTooth(tooth[0])}/>
+                                                    </Tooltip>
+                                                </div>
+                                                <p>{firstCapital(tooth[1])}, {history[history.length - 1][0].material[tooth[0]]}</p>
+                                                { history[history.length - 1][0].stones[tooth[0]].shape !== undefined &&
+                                                    <p>{firstCapital(elabStoneName(history[history.length - 1][0].stones[tooth[0]].color as string))} w/ {history[history.length - 1][0].stones[tooth[0]].shape} shape</p>
+                                                }
+                                                { history[history.length - 1][0].pave[tooth[0]].shape !== undefined &&
+                                                    <p>{firstCapital(history[history.length - 1][0].pave[tooth[0]].shape as string)} pave w/ {firstCapital(elabStoneName(history[history.length - 1][0].pave[tooth[0]].color as string))}</p>
+                                                }
+                                                <span aria-hidden={true}
+                                                      className="inline-block h-[1px] w-full bg-slate-950"></span>
+                                                <p className="font-bold w-full text-right">500€</p>
+                                            </li>
+                                        )
                                     })}
                                     {/*<li><button onClick={() => console.log(history[history.length - 1][0].type.icsdx)}>Halo</button></li>*/}
                                 </ul>
@@ -87,39 +103,28 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
                         <div className="border-1 rounded-b-3xl w-full bg-gray-50 px-6 pt-4 pb-6">
                             <div className="flex gap-4 mb-2 items-center">
                                 <span className="inline-block w-[72px]">Carats:</span>
-                                <ul className="flex gap-4">
-                                    <li>
-                                        <button type="button" className={`${activeCarat === '10K' ? 'bg-stone-500 text-gray-50' : 'bg-gray-50 text-slate-950'} px-2 py-1 rounded-3xl cursor-pointer`} value="10K"
-                                                onClick={(e) => setActiveCarat(e.currentTarget.value)}>10K
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button type="button" className={`${activeCarat === '14K' ? 'bg-stone-500 text-gray-50' : 'bg-gray-50 text-slate-950'} px-2 py-1 rounded-3xl cursor-pointer`} value="14K"
-                                                onClick={(e) => setActiveCarat(e.currentTarget.value)}>14K
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button type="button" className={`${activeCarat === '18K' ? 'bg-stone-500 text-gray-50' : 'bg-gray-50 text-slate-950'} px-2 py-1 rounded-3xl cursor-pointer`} value="18K"
-                                                onClick={(e) => setActiveCarat(e.currentTarget.value)}>18K
-                                        </button>
-                                    </li>
-                                </ul>
+                                <div className="flex gap-4">
+                                    <button type="button" className={`${activeCarat === '10K' ? 'bg-stone-500 text-gray-50' : 'bg-gray-50 text-slate-950'} px-2 py-1 rounded-3xl cursor-pointer`} value="10K"
+                                            onClick={(e) => setActiveCarat(e.currentTarget.value)}>10K
+                                    </button>
+                                    <button type="button" className={`${activeCarat === '14K' ? 'bg-stone-500 text-gray-50' : 'bg-gray-50 text-slate-950'} px-2 py-1 rounded-3xl cursor-pointer`} value="14K"
+                                            onClick={(e) => setActiveCarat(e.currentTarget.value)}>14K
+                                    </button>
+                                    <button type="button" className={`${activeCarat === '18K' ? 'bg-stone-500 text-gray-50' : 'bg-gray-50 text-slate-950'} px-2 py-1 rounded-3xl cursor-pointer`} value="18K"
+                                            onClick={(e) => setActiveCarat(e.currentTarget.value)}>18K
+                                    </button>
+                                </div>
                             </div>
                             <div className="flex gap-4 items-center">
                                 <span className="inline-block w-[72px]">Diamonds:</span>
-                                <ul className="flex gap-4">
-                                    <li>
-                                        <button type="button" className={`${activeDiamond === 'lab' ? 'bg-stone-500 text-gray-50' : 'bg-gray-50 text-slate-950'} px-2 py-1 rounded-3xl cursor-pointer`} value="lab"
-                                                onClick={(e) => setActiveDiamond(e.currentTarget.value)}>Lab
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button type="button" className={`${activeDiamond === 'nat' ? 'bg-stone-500 text-gray-50' : 'bg-gray-50 text-slate-950'} px-2 py-1 rounded-3xl cursor-pointer`} value="nat"
-                                                onClick={(e) => setActiveDiamond(e.currentTarget.value)}>Natural
-                                        </button>
-                                    </li>
-
-                                </ul>
+                                <div className="flex gap-4">
+                                    <button type="button" className={`${activeDiamond === 'lab' ? 'bg-stone-500 text-gray-50' : 'bg-gray-50 text-slate-950'} px-2 py-1 rounded-3xl cursor-pointer`} value="lab"
+                                            onClick={(e) => setActiveDiamond(e.currentTarget.value)}>Lab
+                                    </button>
+                                    <button type="button" className={`${activeDiamond === 'nat' ? 'bg-stone-500 text-gray-50' : 'bg-gray-50 text-slate-950'} px-2 py-1 rounded-3xl cursor-pointer`} value="nat"
+                                            onClick={(e) => setActiveDiamond(e.currentTarget.value)}>Natural
+                                    </button>
+                                </div>
                             </div>
                         </div>
                         {/* Price */}

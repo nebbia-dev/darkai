@@ -172,6 +172,7 @@ export interface AddonsPrices {
 
 export interface State {
     envMap: Texture | CubeTexture | undefined,
+    hovered: string|undefined,
     teethGeometry: FBX,
     teethMaterial: Materials,
     teethJewelType: JewelTypes,
@@ -197,7 +198,6 @@ export interface State {
     teethPaves: Paves,
     activeButton: string|undefined,
     activeSubButton: string|undefined,
-    activeTab: number,
     loaded: boolean,
     prices: BasePrices[] | undefined,
     pricesAdds: AddonsPrices[] | undefined,
@@ -211,8 +211,8 @@ export interface State {
     setActiveSubButton: (button:string|undefined) => void,
     setIsScreenshotNeeded: (value:boolean|undefined) => void,
     setResetControls: (value:boolean|undefined) => void,
-    setActiveTab: (value:number) => void,
     setEnvMap: (em: Texture | CubeTexture) => void,
+    setHover: (tooth: string|undefined) => void,
     setGeometry: (fbx:FBX) => void,
     setMaterial: (tooth:string, color:string) => void,
     setType: (tooth:string, type:string) => void,

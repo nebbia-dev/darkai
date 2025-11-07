@@ -34,7 +34,8 @@ export default function Dentiera() {
     });
     // props.map.colorSpace = THREE.SRGBColorSpace;
     propsTeeth.map.colorSpace = THREE.SRGBColorSpace;
-    const [hovered, setHover] = useState<string|null>(null);
+    const hovered = useTeethStore((state: State) => state.hovered);
+    const setHover = useTeethStore((state: State) => state.setHover);
     const dentieraMaterial = useMemo(() => {
 
         return new THREE.MeshStandardMaterial({
@@ -59,7 +60,7 @@ export default function Dentiera() {
         })
     }, []);
 
-    function hover(e:any, tooth:string|null) {
+    function hover(e:any, tooth:string|undefined) {
         e.stopPropagation();
         setHover(tooth);
     }
@@ -67,7 +68,7 @@ export default function Dentiera() {
     function hoverBase(e:any) {
         e.stopPropagation();
         if(hovered) {
-            setHover(null);
+            setHover(undefined);
         }
     }
 
@@ -116,7 +117,7 @@ export default function Dentiera() {
     // hover
     const Icsdx = memo(({outline, hovered} : {outline: boolean, hovered: boolean}) : JSX.Element => {
         return (
-            <mesh onClick={log} onPointerLeave={(e) => hover(e,null)} onPointerEnter={(e) => hover(e,'icsdx')}
+            <mesh onClick={log} onPointerLeave={(e) => hover(e,undefined)} onPointerEnter={(e) => hover(e,'icsdx')}
                   // geometry={(fbx.children[0].children[11] as THREE.Mesh).geometry}
                   // name={fbx.children[0].children[11].name}
                   geometry={(fbx2.children[0].children[5] as THREE.Mesh).geometry}
@@ -130,7 +131,7 @@ export default function Dentiera() {
     })
     const Icssx = memo(({outline, hovered} : {outline: boolean, hovered: boolean}) : JSX.Element => {
         return (
-            <mesh onClick={log} onPointerLeave={(e) => hover(e,null)} onPointerEnter={(e) => hover(e,'icssx')}
+            <mesh onClick={log} onPointerLeave={(e) => hover(e,undefined)} onPointerEnter={(e) => hover(e,'icssx')}
                   // geometry={(fbx.children[0].children[8] as THREE.Mesh).geometry}
                   // name={fbx.children[0].children[8].name}
                   geometry={(fbx2.children[0].children[2] as THREE.Mesh).geometry}
@@ -144,7 +145,7 @@ export default function Dentiera() {
     })
     const Icisx = memo(({outline, hovered} : {outline: boolean, hovered: boolean}) : JSX.Element => {
         return (
-            <mesh onClick={log} onPointerLeave={(e) => hover(e,null)} onPointerEnter={(e) => hover(e,'icisx')}
+            <mesh onClick={log} onPointerLeave={(e) => hover(e,undefined)} onPointerEnter={(e) => hover(e,'icisx')}
                   // name={fbx.children[0].children[0].name}
                   // geometry={(fbx.children[0].children[0] as THREE.Mesh).geometry}
                   geometry={(fbx2.children[1].children[0] as THREE.Mesh).geometry}
@@ -158,7 +159,7 @@ export default function Dentiera() {
     })
     const Icidx = memo(({outline, hovered} : {outline: boolean, hovered: boolean}) : JSX.Element => {
         return (
-            <mesh onClick={log} onPointerLeave={(e) => hover(e,null)} onPointerEnter={(e) => hover(e,'icidx')}
+            <mesh onClick={log} onPointerLeave={(e) => hover(e,undefined)} onPointerEnter={(e) => hover(e,'icidx')}
                   // geometry={(fbx.children[0].children[1] as THREE.Mesh).geometry}
                   // name={fbx.children[0].children[1].name}
                   geometry={(fbx2.children[1].children[1] as THREE.Mesh).geometry}
@@ -173,7 +174,7 @@ export default function Dentiera() {
 
     const Csdx = memo(({outline, hovered} : {outline: boolean, hovered: boolean}) : JSX.Element => {
         return (
-            <mesh onClick={log} onPointerLeave={(e) => hover(e,null)} onPointerEnter={(e) => hover(e,'csdx')}
+            <mesh onClick={log} onPointerLeave={(e) => hover(e,undefined)} onPointerEnter={(e) => hover(e,'csdx')}
                   // geometry={(fbx.children[0].children[9] as THREE.Mesh).geometry}
                   // name={fbx.children[0].children[9].name}
                   geometry={(fbx2.children[0].children[3] as THREE.Mesh).geometry}
@@ -187,7 +188,7 @@ export default function Dentiera() {
     })
     const Cssx = memo(({outline, hovered} : {outline: boolean, hovered: boolean}) : JSX.Element => {
         return (
-            <mesh onClick={log} onPointerLeave={(e) => hover(e,null)} onPointerEnter={(e) => hover(e,'cssx')}
+            <mesh onClick={log} onPointerLeave={(e) => hover(e,undefined)} onPointerEnter={(e) => hover(e,'cssx')}
                   // geometry={(fbx.children[0].children[6] as THREE.Mesh).geometry}
                   // name={fbx.children[0].children[6].name}
                   geometry={(fbx2.children[0].children[0] as THREE.Mesh).geometry}
@@ -201,7 +202,7 @@ export default function Dentiera() {
     })
     const Cisx = memo(({outline, hovered} : {outline: boolean, hovered: boolean}) : JSX.Element => {
         return (
-            <mesh onClick={log} onPointerLeave={(e) => hover(e,null)} onPointerEnter={(e) => hover(e,'cisx')}
+            <mesh onClick={log} onPointerLeave={(e) => hover(e,undefined)} onPointerEnter={(e) => hover(e,'cisx')}
                   // geometry={(fbx.children[0].children[4] as THREE.Mesh).geometry}
                   // name={fbx.children[0].children[4].name}
                   geometry={(fbx2.children[1].children[4] as THREE.Mesh).geometry}
@@ -215,7 +216,7 @@ export default function Dentiera() {
     })
     const Cidx = memo(({outline, hovered} : {outline: boolean, hovered: boolean}) : JSX.Element => {
         return (
-            <mesh onClick={log} onPointerLeave={(e) => hover(e,null)} onPointerEnter={(e) => hover(e,'cidx')}
+            <mesh onClick={log} onPointerLeave={(e) => hover(e,undefined)} onPointerEnter={(e) => hover(e,'cidx')}
                   // geometry={(fbx.children[0].children[5] as THREE.Mesh).geometry}
                   // name={fbx.children[0].children[5].name}
                   geometry={(fbx2.children[1].children[5] as THREE.Mesh).geometry}
@@ -230,7 +231,7 @@ export default function Dentiera() {
 
     const Ilsdx = memo(({outline, hovered} : {outline: boolean, hovered: boolean}) : JSX.Element => {
         return (
-            <mesh onClick={log} onPointerLeave={(e) => hover(e,null)} onPointerEnter={(e) => hover(e,'ilsdx')}
+            <mesh onClick={log} onPointerLeave={(e) => hover(e,undefined)} onPointerEnter={(e) => hover(e,'ilsdx')}
                   // geometry={(fbx.children[0].children[10] as THREE.Mesh).geometry}
                   // name={fbx.children[0].children[10].name}
                   geometry={(fbx2.children[0].children[4] as THREE.Mesh).geometry}
@@ -244,7 +245,7 @@ export default function Dentiera() {
     })
     const Ilssx = memo(({outline, hovered} : {outline: boolean, hovered: boolean}) : JSX.Element => {
         return (
-            <mesh onClick={log} onPointerLeave={(e) => hover(e,null)} onPointerEnter={(e) => hover(e,'ilssx')}
+            <mesh onClick={log} onPointerLeave={(e) => hover(e,undefined)} onPointerEnter={(e) => hover(e,'ilssx')}
                   // geometry={(fbx.children[0].children[7] as THREE.Mesh).geometry}
                   // name={fbx.children[0].children[7].name}
                   geometry={(fbx2.children[0].children[1] as THREE.Mesh).geometry}
@@ -258,7 +259,7 @@ export default function Dentiera() {
     })
     const Ilisx = memo(({outline, hovered} : {outline: boolean, hovered: boolean}) : JSX.Element => {
         return (
-            <mesh onClick={log} onPointerLeave={(e) => hover(e,null)} onPointerEnter={(e) => hover(e,'ilisx')}
+            <mesh onClick={log} onPointerLeave={(e) => hover(e,undefined)} onPointerEnter={(e) => hover(e,'ilisx')}
                   // geometry={(fbx.children[0].children[2] as THREE.Mesh).geometry}
                   // name={fbx.children[0].children[2].name}
                   geometry={(fbx2.children[1].children[2] as THREE.Mesh).geometry}
@@ -272,7 +273,7 @@ export default function Dentiera() {
     })
     const Ilidx = memo(({outline, hovered} : {outline: boolean, hovered: boolean}) : JSX.Element => {
         return (
-            <mesh onClick={log} onPointerLeave={(e) => hover(e,null)} onPointerEnter={(e) => hover(e,'ilidx')}
+            <mesh onClick={log} onPointerLeave={(e) => hover(e,undefined)} onPointerEnter={(e) => hover(e,'ilidx')}
                   // geometry={(fbx.children[0].children[3] as THREE.Mesh).geometry}
                   // name={fbx.children[0].children[3].name}
                   geometry={(fbx2.children[1].children[3] as THREE.Mesh).geometry}

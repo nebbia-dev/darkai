@@ -15,22 +15,15 @@ export const useTeethStore = create<State>((set, get) => ({
     resetControls: undefined,
     setResetControls: (value) => set({resetControls: value}),
 
-    // state and method to change between the DEFAULT and the CUSTOM tab
-    activeTab: 0,
-    setActiveTab: (value) =>
-        set(
-            produce((state) => {
-                state.activeTab = value;
-                if(value === 0) {
-                    state.currentTooth = undefined;
-                }
-            })
-        ),
-
     // state and method to set the envMap when everything is loaded the first time
     envMap: undefined,
     setEnvMap: (em) => {
         set({envMap: em})
+    },
+
+    hovered: undefined,
+    setHover: (tooth) => {
+        set({hovered: tooth});
     },
 
     // state and method to set all the jewels geometries when everything is loaded the first time
