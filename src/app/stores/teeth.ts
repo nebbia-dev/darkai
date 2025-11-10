@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import {produce} from "immer";
-import {State, Stone} from "@/app/types/State";
+import {Pave, State, Stone} from "@/app/types/State";
 // import {createClient} from "@/utils/supabase/client";
 import firstCapital from "@/app/helpers/firstCapital";
 import json from "@/utils/prices.json";
@@ -1313,15 +1313,31 @@ export const useTeethStore = create<State>((set, get) => ({
                     for(const [key, value] of Object.entries(tooth.type)) {
                         state.teethJewelType[key] = value;
                     }
+
                     for(const [key, value] of Object.entries(tooth.material)) {
                         state.teethMaterial[key] = value;
                     }
+
                     for(const [key, value] of Object.entries(tooth.stones) as [string, Stone][]) {
                         state.teethStones[key].shape = value.shape;
                         state.teethStones[key].color = value.color;
                     }
+
+                    for(const [key, value] of Object.entries(tooth.pave) as [string, Pave][]) {
+                        state.teethPaves[key].shape = value.shape;
+                        state.teethPaves[key].color = value.color;
+                    }
+
+                    for(const [key, value] of Object.entries(tooth.enamel)) {
+                        state.teethEnamel[key] = value;
+                    }
+
                     for(const [key, value] of Object.entries(tooth.visible)) {
                         state.teethVisibility[key] = value;
+                    }
+
+                    for(const [key, value] of Object.entries(tooth.preciousness)) {
+                        state.teethPreciousness[key] = value;
                     }
                 }
                 get().calcTotal(state);
@@ -1335,15 +1351,31 @@ export const useTeethStore = create<State>((set, get) => ({
                     for(const [key, value] of Object.entries(tooth.type)) {
                         state.teethJewelType[key] = value;
                     }
+
                     for(const [key, value] of Object.entries(tooth.material)) {
                         state.teethMaterial[key] = value;
                     }
+
                     for(const [key, value] of Object.entries(tooth.stones) as [string, Stone][]) {
                         state.teethStones[key].shape = value.shape;
                         state.teethStones[key].color = value.color;
                     }
+
+                    for(const [key, value] of Object.entries(tooth.pave) as [string, Pave][]) {
+                        state.teethPaves[key].shape = value.shape;
+                        state.teethPaves[key].color = value.color;
+                    }
+
+                    for(const [key, value] of Object.entries(tooth.enamel)) {
+                        state.teethEnamel[key] = value;
+                    }
+
                     for(const [key, value] of Object.entries(tooth.visible)) {
                         state.teethVisibility[key] = value;
+                    }
+
+                    for(const [key, value] of Object.entries(tooth.preciousness)) {
+                        state.teethPreciousness[key] = value;
                     }
                 }
                 get().calcTotal(state);
@@ -1457,6 +1489,20 @@ export const useTeethStore = create<State>((set, get) => ({
                 cidx: {shape: undefined, color: undefined},
                 cisx: {shape: undefined, color: undefined},
             },
+            teethEnamel: {
+                icsdx: undefined,
+                icssx: undefined,
+                icidx: undefined,
+                icisx: undefined,
+                ilsdx: undefined,
+                ilssx: undefined,
+                ilidx: undefined,
+                ilisx: undefined,
+                csdx: undefined,
+                cssx: undefined,
+                cidx: undefined,
+                cisx: undefined,
+        },
             currentTooth: undefined,
             activeDefault: undefined,
             total: 0
@@ -1469,6 +1515,7 @@ export const useTeethStore = create<State>((set, get) => ({
                 material: state.teethMaterial,
                 stones: state.teethStones,
                 pave: state.teethPaves,
+                enamel: state.teethEnamel,
                 visible: state.teethVisibility,
                 prices: state.teethPrices,
                 preciousness: state.teethPreciousness
@@ -1507,6 +1554,7 @@ export const useTeethStore = create<State>((set, get) => ({
                     case 'bigBar':
                         priceToFind = state.prices.base.filter(p => p.type === state.teethJewelType[tooth] && p.carats === state.teethPreciousness.carats);
                         if((state.teethJewelType[tooth] === 'bar' && (tooth === 'icsdx' || tooth === 'icssx'))
+                            || (state.teethJewelType[tooth] === 'bar' && (tooth === 'icidx' || tooth === 'icisx'))
                             || (state.teethJewelType[tooth] === 'bigBar' && (tooth === 'cidx' || tooth === 'cisx'))
                         ) {
                             state.teethPrices[tooth] = priceToFind[0].price/2;
@@ -1545,6 +1593,7 @@ export const useTeethStore = create<State>((set, get) => ({
                         console.log(JSON.stringify(state.teethPaves[tooth].color + diamonds + '_p'))
                         priceToFind = paveStone.filter(p => p.type === realType && p.carats === state.teethPreciousness.carats && p.shape === state.teethPaves[tooth].shape);
                         if((state.teethJewelType[tooth] === 'barDiamond' && (tooth === 'icsdx' || tooth === 'icssx'))
+                            || (state.teethJewelType[tooth] === 'barDiamond' && (tooth === 'icidx' || tooth === 'icisx'))
                             || (state.teethJewelType[tooth] === 'bigBarDiamond' && (tooth === 'cidx' || tooth === 'cisx'))
                         ) {
                             state.teethPrices[tooth] = priceToFind[0].price/2;

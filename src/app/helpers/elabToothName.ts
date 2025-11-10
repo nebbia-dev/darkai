@@ -1,31 +1,31 @@
-export default function elabToothName(tooth: string, short: boolean) {
+export default function elabToothName(tooth: string, recap: boolean) {
     let title;
     if(tooth.length === 4) {
         title = '';
 
-        if(!short){
-            if (tooth[1] === 's') {
-                title += 'Upper canine ';
-            } else {
-                title += 'Lower canine ';
-            }
+        if (tooth[1] === 's') {
+            title += 'Upper canine';
+        } else {
+            title += 'Lower canine';
         }
 
-        if(tooth[2] === 'd') {
-            title += ' R';
+        if(!recap){
+            if (tooth[2] === 'd') {
+                title += ' R';
+            } else {
+                title += ' L';
+            }
         } else {
-            title += ' L';
+            title += 's';
         }
 
     } else if(tooth.length === 5) {
         title = '';
 
-        if(!short){
-            if (tooth[2] === 's') {
-                title += 'Upper ';
-            } else {
-                title += 'Lower ';
-            }
+        if (tooth[2] === 's') {
+            title += 'Upper ';
+        } else {
+            title += 'Lower ';
         }
 
         if(tooth[1] === 'c') {
@@ -34,11 +34,14 @@ export default function elabToothName(tooth: string, short: boolean) {
             title += 'lateral incisor';
         }
 
-
-        if(tooth[3] === 'd') {
-            title += ' R';
+        if(!recap){
+            if (tooth[3] === 'd') {
+                title += ' R';
+            } else {
+                title += ' L';
+            }
         } else {
-            title += ' L';
+            title += 's';
         }
     }
 

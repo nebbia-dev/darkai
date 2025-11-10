@@ -1,8 +1,5 @@
-import React, {useRef, useState} from "react";
+import React, {useRef} from "react";
 import {useTeethStore} from "@/app/stores/teeth";
-import {Shape} from "@/app/components/icons/Shape";
-import {Metal} from "@/app/components/icons/Metal";
-import {Gem} from "@/app/components/icons/Gem";
 import {State} from "@/app/types/State";
 import ConfiguratorButton from "@/app/components/ConfiguratorButton";
 import DesignOptions from "@/app/components/DesignOptions";
@@ -19,6 +16,7 @@ import SignatureSubOptions from "@/app/components/SignatureSubOptions";
 export default function ToothSelector({tooth, onclick, active} : {tooth: string | undefined, active:string|undefined, onclick: (value:string) => void}) {
     const pave = useTeethStore((state: State) => tooth ? state.teethPaves[tooth] : undefined);
     const jewelType = useTeethStore((state: State) => tooth ? state.teethJewelType[tooth] : undefined);
+    const visibility = useTeethStore((state: State) => tooth ? state.teethVisibility[tooth] : undefined);
 
     const elementRef = useRef<HTMLDivElement|null>(null);
     const selectorRef = useRef<HTMLDivElement|null>(null);
@@ -32,7 +30,7 @@ export default function ToothSelector({tooth, onclick, active} : {tooth: string 
             case "3":
                 return <GoldOptions tooth={tooth}/>
             case "4":
-                return <FinishingOptions tooth={tooth} enamel={jewelType === 'enamel'}/>
+                return <FinishingOptions tooth={tooth} enamel={jewelType === 'enamel'} visible={visibility}/>
             case "5":
                 return <StoneOptions tooth={tooth} bezel={jewelType === 'bezel'|| jewelType === 'bezelDiamond'} pave={!!pave?.shape}/>
             case "6":

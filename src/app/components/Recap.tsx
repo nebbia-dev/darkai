@@ -9,6 +9,7 @@ import elabToothName from "@/app/helpers/elabToothName";
 import firstCapital from "@/app/helpers/firstCapital";
 import elabStoneName from "@/app/helpers/elabStoneName";
 import {Close} from "@/app/components/icons/Close";
+import elabDesignName from "@/app/helpers/elabDesignName";
 
 export default function Recap({next, onclick} : {next:boolean, onclick:() => void }){
     const teethPreciousness = useTeethStore((state:State) => state.teethPreciousness);
@@ -100,26 +101,46 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
                                     {history.length > 0 && Object.entries(history[history.length - 1][0].type).map(tooth => {
                                         return (
                                             history[history.length - 1][0].visible[tooth[0]] &&
-                                            <li key={tooth[0]} onClick={() => setActive(tooth[0])} onMouseEnter={(e) => setCurrentHover(tooth[0], e)} onMouseLeave={(e) => setCurrentHover(undefined, e)} className="cursor-pointer">
+                                            <li key={tooth[0]} onClick={() => setActive(tooth[0])} onMouseEnter={(e) => setCurrentHover(tooth[0], e)} onMouseLeave={(e) => setCurrentHover(undefined, e)}
+                                                className={`${((tooth[1] === 'bar' || tooth[1] === 'barDiamond') && (tooth[0] === 'icsdx' || tooth[0] === 'icidx')) || ((tooth[1] === 'bigBar' || tooth[1] === 'bigBarDiamond') && tooth[0] === 'cidx') ? 'hidden' : 'block'} cursor-pointer`}
+                                            >
+                                                {/*tooth name*/}
                                                 <div className="flex justify-between items-center">
                                                     <h4 className="font-semibold">
-                                                        {elabToothName(tooth[0], false)}
+                                                        { ((tooth[1] === 'bar' || tooth[1] === 'barDiamond') && (tooth[0] === 'icssx' || tooth[0] === 'icisx')) || ((tooth[1] === 'bigBar' || tooth[1] === 'bigBarDiamond') && tooth[0] === 'cisx')
+                                                            ? elabToothName(tooth[0], true)
+                                                            : elabToothName(tooth[0], false)
+                                                        }
                                                     </h4>
                                                     <Tooltip title="Delete tooth">
                                                         <Close className="cursor-pointer"
                                                                onClick={() => resetTooth(tooth[0])}/>
                                                     </Tooltip>
                                                 </div>
-                                                <p>{firstCapital(tooth[1])}, {history[history.length - 1][0].material[tooth[0]]}</p>
+                                                {/*type + material*/}
+                                                <p>
+                                                    { tooth[1] === 'enamel'
+                                                        ? firstCapital(history[history.length - 1][0].enamel[tooth[0]] as string) + ' ' + elabDesignName(tooth[1])
+                                                        : firstCapital(elabDesignName(tooth[1]))
+                                                    }, {history[history.length - 1][0].material[tooth[0]]}
+                                                </p>
+
+                                                {/*bezel*/}
                                                 { history[history.length - 1][0].stones[tooth[0]].shape !== undefined &&
                                                     <p>{firstCapital(elabStoneName(history[history.length - 1][0].stones[tooth[0]].color as string))} w/ {history[history.length - 1][0].stones[tooth[0]].shape} shape</p>
                                                 }
+
+                                                {/*pave*/}
                                                 { history[history.length - 1][0].pave[tooth[0]].shape !== undefined &&
-                                                    <p>{firstCapital(history[history.length - 1][0].pave[tooth[0]].shape as string)} pave w/ {firstCapital(elabStoneName(history[history.length - 1][0].pave[tooth[0]].color as string))}</p>
+                                                    <p>{firstCapital(history[history.length - 1][0].pave[tooth[0]].shape as string)} pave w/ {elabStoneName(history[history.length - 1][0].pave[tooth[0]].color as string)}</p>
                                                 }
                                                 <span aria-hidden={true}
                                                       className="inline-block h-[1px] w-full bg-slate-950"></span>
-                                                <p className="font-bold w-full text-right">{new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR" }).format(teethPrices[tooth[0]])}</p>
+                                                <p className="font-bold w-full text-right">{
+                                                    ( (tooth[1] === 'bar' || tooth[1] === 'barDiamond') && (tooth[0] === 'icssx' || tooth[0] === 'icisx')) || ((tooth[1] === 'bigBar' || tooth[1] === 'bigBarDiamond') && tooth[0] === 'cisx')
+                                                        ? new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR" }).format(teethPrices[tooth[0]] * 2)
+                                                        : new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR" }).format(teethPrices[tooth[0]])
+                                                }</p>
                                             </li>
                                         )
                                     })}

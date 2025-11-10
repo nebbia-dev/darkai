@@ -66,7 +66,7 @@ interface Paves {
     cisx: Pave,
 }
 
-interface Pave {
+export interface Pave {
     shape: 'round' |  'princess' | 'baguette' | 'hex' | 'mosaic' | undefined,
     color: string | undefined
 }
@@ -131,6 +131,7 @@ export interface History {
     stones: Stones,
     pave: Paves,
     type: JewelTypes,
+    enamel: Enamel,
     visible: Visibility,
     prices: Prices,
     preciousness: Preciousness | undefined
