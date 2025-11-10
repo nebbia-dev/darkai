@@ -1,7 +1,7 @@
 import {useTeethStore} from "@/app/stores/teeth";
 import {State} from "@/app/types/State";
 
-export default function FinishingOptions({tooth}:{tooth:string|undefined}) {
+export default function FinishingOptions({tooth, enamel}:{tooth:string|undefined, enamel:boolean}) {
 
     const setActiveSubButton = useTeethStore((state: State) => state.setActiveSubButton);
     const setPave = useTeethStore((state: State) => state.setPave);
@@ -21,15 +21,15 @@ export default function FinishingOptions({tooth}:{tooth:string|undefined}) {
         <>
             <button onClick={(e) => changePaveShape(e.currentTarget.value)} type="button" value="nopave" className="cursor-pointer w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-2 text-center">No pave
             </button>
-            <button onClick={(e) => changePaveShape(e.currentTarget.value)} type="button" value="mosaic" className="cursor-pointer w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-2 text-center">Mosaic
+            <button disabled={enamel} onClick={(e) => changePaveShape(e.currentTarget.value)} type="button" value="mosaic" className={`cursor-pointer w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 p-2 mb-4 ${enamel ? 'text-slate-400' : 'text-slate-950'}  text-center`}>Mosaic
             </button>
-            <button onClick={(e) => changePaveShape(e.currentTarget.value)} type="button" value="round" className="cursor-pointer w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-2 text-center">Round
+            <button disabled={enamel} onClick={(e) => changePaveShape(e.currentTarget.value)} type="button" value="round" className={`cursor-pointer w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 p-2 mb-4 ${enamel ? 'text-slate-400' : 'text-slate-950'}  text-center`}>Round
             </button>
-            <button onClick={(e) => changePaveShape(e.currentTarget.value)} type="button" value="hexagon" className="cursor-pointer w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-2 text-center">Hexagon
+            <button disabled={enamel} onClick={(e) => changePaveShape(e.currentTarget.value)} type="button" value="hexagon" className={`cursor-pointer w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 p-2 mb-4 ${enamel ? 'text-slate-400' : 'text-slate-950'}  text-center`}>Hexagon
             </button>
-            <button onClick={(e) => changePaveShape(e.currentTarget.value)} type="button" value="princess" className="cursor-pointer w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-2 text-center">Princess
+            <button disabled={enamel} onClick={(e) => changePaveShape(e.currentTarget.value)} type="button" value="princess" className={`cursor-pointer w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 p-2 mb-4 ${enamel ? 'text-slate-400' : 'text-slate-950'}  text-center`}>Princess
             </button>
-            <button onClick={(e) => changePaveShape(e.currentTarget.value)} type="button" value="baguette" className="cursor-pointer w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 p-2 text-center">Baguette
+            <button disabled={enamel} onClick={(e) => changePaveShape(e.currentTarget.value)} type="button" value="baguette" className={`cursor-pointer w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 p-2 ${enamel ? 'text-slate-400' : 'text-slate-950'}  text-center`}>Baguette
             </button>
         </>
     )

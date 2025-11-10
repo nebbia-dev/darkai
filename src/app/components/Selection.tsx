@@ -13,19 +13,9 @@ import {Close} from "@/app/components/icons/Close";
 import ConfiguratorButton from "@/app/components/ConfiguratorButton";
 
 export default function Selection({activeButton, changeActiveButton} : {activeButton: string|undefined, changeActiveButton:(value:string) => void }) {
-    const jewelType = useTeethStore((state: State) => state.teethJewelType);
     const activeTooth = useTeethStore((state: State) => state.currentTooth);
-    const recap = useTeethStore((state:State) => state.recap);
 
     const [showManual, setShowManual] = useState<boolean>(false);
-    function checkDiamonds() {
-        for(const tooth of Object.keys(jewelType)) {
-            if(jewelType[tooth].includes('Diamond')) {
-                return true;
-            }
-        }
-        return false;
-    }
 
     return (
         <>

@@ -26,9 +26,6 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
     const setActive = useTeethStore((state: State) => state.setActiveTooth);
     const setHover = useTeethStore((state: State) => state.setHover);
     const setPreciousness = useTeethStore((state:State) => state.setTeethPreciousness);
-    const prices = useTeethStore((state:State) => state.prices);
-
-    console.log(prices);
     function checkDiamonds():boolean {
         for(let stone of Object.values(teethStones)) {
             if(stone.color === 'whD' || stone.color === 'brD' || stone.color === 'blD') {
@@ -126,7 +123,6 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
                                             </li>
                                         )
                                     })}
-                                    {/*<li><button onClick={() => console.log(history[history.length - 1][0].type.icsdx)}>Halo</button></li>*/}
                                 </ul>
                             </div>
                         </div>
@@ -147,12 +143,12 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
                                 </div>
                             </div>
                             <div className="flex gap-4 items-center">
-                                <span className={`inline-block w-[72px] ${!checkDiamonds() ? 'text-slate-100' : 'text-slate-950'}`}>Diamonds:</span>
+                                <span className={`inline-block w-[72px] ${!checkDiamonds() ? 'text-slate-400' : 'text-slate-950'}`}>Diamonds:</span>
                                 <div className="flex gap-4">
-                                    <button disabled={!checkDiamonds()} type="button" className={`${teethPreciousness.diamonds === 'lab' ? 'bg-stone-500 text-gray-50' : !checkDiamonds() ? 'bg-gray-50 text-slate-200' : 'bg-gray-50 text-slate-950'} px-2 py-1 rounded-3xl ${!checkDiamonds() ? '' : 'cursor-pointer'}`} value="lab"
+                                    <button disabled={!checkDiamonds()} type="button" className={`${teethPreciousness.diamonds === 'lab' ? 'bg-stone-500 text-gray-50' : !checkDiamonds() ? 'bg-gray-50 text-slate-400' : 'bg-gray-50 text-slate-950'} px-2 py-1 rounded-3xl ${!checkDiamonds() ? '' : 'cursor-pointer'}`} value="lab"
                                             onClick={(e) => setDiamonds(e.currentTarget.value)}>Lab
                                     </button>
-                                    <button disabled={!checkDiamonds()} type="button" className={`${teethPreciousness.diamonds === 'nat' ? 'bg-stone-500 text-gray-50' : !checkDiamonds() ? 'bg-gray-50 text-slate-200' : 'bg-gray-50 text-slate-950'} px-2 py-1 rounded-3xl ${!checkDiamonds() ? '' : 'cursor-pointer'}`} value="nat"
+                                    <button disabled={!checkDiamonds()} type="button" className={`${teethPreciousness.diamonds === 'nat' ? 'bg-stone-500 text-gray-50' : !checkDiamonds() ? 'bg-gray-50 text-slate-400' : 'bg-gray-50 text-slate-950'} px-2 py-1 rounded-3xl ${!checkDiamonds() ? '' : 'cursor-pointer'}`} value="nat"
                                             onClick={(e) => setDiamonds(e.currentTarget.value)}>Natural
                                     </button>
                                 </div>

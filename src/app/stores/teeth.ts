@@ -1589,7 +1589,7 @@ export const useTeethStore = create<State>((set, get) => ({
             produce((state) => {
                 state.teethPreciousness.carats = carats;
                 state.teethPreciousness.diamonds = diamonds;
-                console.log(diamonds, state.teethPreciousness.diamonds)
+                get().calcTotal(state);
             })
         ),
 }))

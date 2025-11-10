@@ -17,17 +17,8 @@ import PackagingSubOptions from "@/app/components/PackagingSubOptions";
 import SignatureSubOptions from "@/app/components/SignatureSubOptions";
 
 export default function ToothSelector({tooth, onclick, active} : {tooth: string | undefined, active:string|undefined, onclick: (value:string) => void}) {
-    const [value, setValue] = useState<number>(0);
     const pave = useTeethStore((state: State) => tooth ? state.teethPaves[tooth] : undefined);
     const jewelType = useTeethStore((state: State) => tooth ? state.teethJewelType[tooth] : undefined);
-    const material = useTeethStore((state: State) => tooth ? state.teethMaterial[tooth] : undefined);
-    const stones = useTeethStore((state: State) => tooth ? state.teethStones[tooth] : undefined);
-    const visible = useTeethStore((state: State) => tooth ? state.teethVisibility[tooth] : undefined);
-    const changeJewelType = useTeethStore((state: State) => state.setType);
-    const changeMaterial = useTeethStore((state: State) => state.setMaterial);
-    const toggleDiamond = useTeethStore((state: State) => state.setPave);
-    const changeStone = useTeethStore((state: State) => state.setStone);
-    const setActiveDefault = useTeethStore((state: State) => state.setActiveDefault);
 
     const elementRef = useRef<HTMLDivElement|null>(null);
     const selectorRef = useRef<HTMLDivElement|null>(null);
@@ -41,9 +32,9 @@ export default function ToothSelector({tooth, onclick, active} : {tooth: string 
             case "3":
                 return <GoldOptions tooth={tooth}/>
             case "4":
-                return <FinishingOptions tooth={tooth}/>
+                return <FinishingOptions tooth={tooth} enamel={jewelType === 'enamel'}/>
             case "5":
-                return <StoneOptions tooth={tooth} bezel={jewelType === 'bezel'|| jewelType === 'bezelDiamond'}/>
+                return <StoneOptions tooth={tooth} bezel={jewelType === 'bezel'|| jewelType === 'bezelDiamond'} pave={!!pave?.shape}/>
             case "6":
                 return <PackagingOptions/>
             default:
