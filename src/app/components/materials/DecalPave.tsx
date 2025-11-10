@@ -99,370 +99,368 @@ export default function DecalPave({position, pave, stone, scale} : {position:any
     pairs.set('roundYSapph', roundYSapph.map);
 
     /* PRINCESS PAVE*/
-    // sqWhD
-    const sqWhD = useTexture({
+    // princessWhD
+    const princessWhD = useTexture({
         map: 'textures/paves/sqWhD.png',
     });
-    sqWhD.map.colorSpace = THREE.SRGBColorSpace;
-    sqWhD.map.wrapS = sqWhD.map.wrapT = THREE.RepeatWrapping;
-    sqWhD.map.repeat.set(10,10);
-    pairs.set('sqWhD', sqWhD.map);
+    princessWhD.map.colorSpace = THREE.SRGBColorSpace;
+    princessWhD.map.wrapS = princessWhD.map.wrapT = THREE.RepeatWrapping;
+    princessWhD.map.repeat.set(10,10);
+    pairs.set('princessWhD', princessWhD.map);
 
-    // sqBrD
-    const sqBrD = useTexture({
+    // princessBrD
+    const princessBrD = useTexture({
         map: 'textures/paves/sqBrD.png',
     });
-    sqBrD.map.colorSpace = THREE.SRGBColorSpace;
-    sqBrD.map.wrapS = sqBrD.map.wrapT = THREE.RepeatWrapping;
-    sqBrD.map.repeat.set(10,10);
-    pairs.set('sqBrD', sqBrD.map);
+    princessBrD.map.colorSpace = THREE.SRGBColorSpace;
+    princessBrD.map.wrapS = princessBrD.map.wrapT = THREE.RepeatWrapping;
+    princessBrD.map.repeat.set(10,10);
+    pairs.set('princessBrD', princessBrD.map);
 
-    // sqBlD
-    const sqBlD = useTexture({
+    // princessBlD
+    const princessBlD = useTexture({
         map: 'textures/paves/sqBlD.png',
     });
-    sqBlD.map.colorSpace = THREE.SRGBColorSpace;
-    sqBlD.map.wrapS = sqBlD.map.wrapT = THREE.RepeatWrapping;
-    sqBlD.map.repeat.set(10,10);
-    pairs.set('sqBlD', sqBlD.map);
+    princessBlD.map.colorSpace = THREE.SRGBColorSpace;
+    princessBlD.map.wrapS = princessBlD.map.wrapT = THREE.RepeatWrapping;
+    princessBlD.map.repeat.set(10,10);
+    pairs.set('princessBlD', princessBlD.map);
 
-    // sqRuby
-    const sqRuby = useTexture({
+    // princessRuby
+    const princessRuby = useTexture({
         map: 'textures/paves/sqRuby.png',
     });
-    sqRuby.map.colorSpace = THREE.SRGBColorSpace;
-    sqRuby.map.wrapS = sqRuby.map.wrapT = THREE.RepeatWrapping;
-    sqRuby.map.repeat.set(10,10);
-    pairs.set('sqRuby', sqRuby.map);
+    princessRuby.map.colorSpace = THREE.SRGBColorSpace;
+    princessRuby.map.wrapS = princessRuby.map.wrapT = THREE.RepeatWrapping;
+    princessRuby.map.repeat.set(10,10);
+    pairs.set('princessRuby', princessRuby.map);
 
-    // sqEmerald
-    const sqEmerald = useTexture({
+    // princessEmerald
+    const princessEmerald = useTexture({
         map: 'textures/paves/sqEmerald.png',
     });
-    sqEmerald.map.colorSpace = THREE.SRGBColorSpace;
-    sqEmerald.map.wrapS = sqEmerald.map.wrapT = THREE.RepeatWrapping;
-    sqEmerald.map.repeat.set(10,10);
-    pairs.set('sqEmerald', sqEmerald.map);
+    princessEmerald.map.colorSpace = THREE.SRGBColorSpace;
+    princessEmerald.map.wrapS = princessEmerald.map.wrapT = THREE.RepeatWrapping;
+    princessEmerald.map.repeat.set(10,10);
+    pairs.set('princessEmerald', princessEmerald.map);
 
-    // sqAmeth
-    const sqAmeth = useTexture({
+    // princessAmeth
+    const princessAmeth = useTexture({
         map: 'textures/paves/sqAmeth.png',
     });
-    sqAmeth.map.colorSpace = THREE.SRGBColorSpace;
-    sqAmeth.map.wrapS = sqAmeth.map.wrapT = THREE.RepeatWrapping;
-    sqAmeth.map.repeat.set(10,10);
-    pairs.set('sqAmeth', sqAmeth.map);
+    princessAmeth.map.colorSpace = THREE.SRGBColorSpace;
+    princessAmeth.map.wrapS = princessAmeth.map.wrapT = THREE.RepeatWrapping;
+    princessAmeth.map.repeat.set(10,10);
+    pairs.set('princessAmeth', princessAmeth.map);
 
-    // sqAqua
-    const sqAqua = useTexture({
+    // princessAqua
+    const princessAqua = useTexture({
         map: 'textures/paves/sqAqua.png',
     });
-    sqAqua.map.colorSpace = THREE.SRGBColorSpace;
-    sqAqua.map.wrapS = sqAqua.map.wrapT = THREE.RepeatWrapping;
-    sqAqua.map.repeat.set(10,10);
-    pairs.set('sqAqua', sqAqua.map);
+    princessAqua.map.colorSpace = THREE.SRGBColorSpace;
+    princessAqua.map.wrapS = princessAqua.map.wrapT = THREE.RepeatWrapping;
+    princessAqua.map.repeat.set(10,10);
+    pairs.set('princessAqua', princessAqua.map);
 
-    // sqBSapph
-    const sqBSapph = useTexture({
+    // princessBSapph
+    const princessBSapph = useTexture({
         map: 'textures/paves/sqBSapph.png',
     });
-    sqBSapph.map.colorSpace = THREE.SRGBColorSpace;
-    sqBSapph.map.wrapS = sqBSapph.map.wrapT = THREE.RepeatWrapping;
-    sqBSapph.map.repeat.set(10,10);
-    pairs.set('sqBSapph', sqBSapph.map);
+    princessBSapph.map.colorSpace = THREE.SRGBColorSpace;
+    princessBSapph.map.wrapS = princessBSapph.map.wrapT = THREE.RepeatWrapping;
+    princessBSapph.map.repeat.set(10,10);
+    pairs.set('princessBSapph', princessBSapph.map);
 
-    // sqPSapph
-    const sqPSapph = useTexture({
+    // princessPSapph
+    const princessPSapph = useTexture({
         map: 'textures/paves/sqPSapph.png',
     });
-    sqPSapph.map.colorSpace = THREE.SRGBColorSpace;
-    sqPSapph.map.wrapS = sqPSapph.map.wrapT = THREE.RepeatWrapping;
-    sqPSapph.map.repeat.set(10,10);
-    pairs.set('sqPSapph', sqPSapph.map);
+    princessPSapph.map.colorSpace = THREE.SRGBColorSpace;
+    princessPSapph.map.wrapS = princessPSapph.map.wrapT = THREE.RepeatWrapping;
+    princessPSapph.map.repeat.set(10,10);
+    pairs.set('princessPSapph', princessPSapph.map);
 
-    // sqYSapph
-    const sqYSapph = useTexture({
+    // princessYSapph
+    const princessYSapph = useTexture({
         map: 'textures/paves/sqYSapph.png',
     });
-    sqYSapph.map.colorSpace = THREE.SRGBColorSpace;
-    sqYSapph.map.wrapS = sqYSapph.map.wrapT = THREE.RepeatWrapping;
-    sqYSapph.map.repeat.set(10,10);
-    pairs.set('sqYSapph', sqYSapph.map);
+    princessYSapph.map.colorSpace = THREE.SRGBColorSpace;
+    princessYSapph.map.wrapS = princessYSapph.map.wrapT = THREE.RepeatWrapping;
+    princessYSapph.map.repeat.set(10,10);
+    pairs.set('princessYSapph', princessYSapph.map);
 
     /* BAGUETTE PAVE*/
-    // rectWhD
-    const rectWhD = useTexture({
+    // baguetteWhD
+    const baguetteWhD = useTexture({
         map: 'textures/paves/rectWhD.png',
     });
-    rectWhD.map.colorSpace = THREE.SRGBColorSpace;
-    rectWhD.map.wrapS = rectWhD.map.wrapT = THREE.RepeatWrapping;
-    rectWhD.map.repeat.set(10,10);
-    pairs.set('rectWhD', rectWhD.map);
+    baguetteWhD.map.colorSpace = THREE.SRGBColorSpace;
+    baguetteWhD.map.wrapS = baguetteWhD.map.wrapT = THREE.RepeatWrapping;
+    baguetteWhD.map.repeat.set(10,10);
+    pairs.set('baguetteWhD', baguetteWhD.map);
 
-    // rectBrD
-    const rectBrD = useTexture({
+    // baguetteBrD
+    const baguetteBrD = useTexture({
         map: 'textures/paves/rectBrD.png',
     });
-    rectBrD.map.colorSpace = THREE.SRGBColorSpace;
-    rectBrD.map.wrapS = rectBrD.map.wrapT = THREE.RepeatWrapping;
-    rectBrD.map.repeat.set(10,10);
-    pairs.set('rectBrD', rectBrD.map);
+    baguetteBrD.map.colorSpace = THREE.SRGBColorSpace;
+    baguetteBrD.map.wrapS = baguetteBrD.map.wrapT = THREE.RepeatWrapping;
+    baguetteBrD.map.repeat.set(10,10);
+    pairs.set('baguetteBrD', baguetteBrD.map);
 
-    // rectBlD
-    const rectBlD = useTexture({
+    // baguetteBlD
+    const baguetteBlD = useTexture({
         map: 'textures/paves/rectBlD.png',
     });
-    rectBlD.map.colorSpace = THREE.SRGBColorSpace;
-    rectBlD.map.wrapS = rectBlD.map.wrapT = THREE.RepeatWrapping;
-    rectBlD.map.repeat.set(10,10);
-    pairs.set('rectBlD', rectBlD.map);
+    baguetteBlD.map.colorSpace = THREE.SRGBColorSpace;
+    baguetteBlD.map.wrapS = baguetteBlD.map.wrapT = THREE.RepeatWrapping;
+    baguetteBlD.map.repeat.set(10,10);
+    pairs.set('baguetteBlD', baguetteBlD.map);
 
-    // rectRuby
-    const rectRuby = useTexture({
+    // baguetteRuby
+    const baguetteRuby = useTexture({
         map: 'textures/paves/rectRuby.png',
     });
-    rectRuby.map.colorSpace = THREE.SRGBColorSpace;
-    rectRuby.map.wrapS = rectRuby.map.wrapT = THREE.RepeatWrapping;
-    rectRuby.map.repeat.set(10,10);
-    pairs.set('rectRuby', rectRuby.map);
+    baguetteRuby.map.colorSpace = THREE.SRGBColorSpace;
+    baguetteRuby.map.wrapS = baguetteRuby.map.wrapT = THREE.RepeatWrapping;
+    baguetteRuby.map.repeat.set(10,10);
+    pairs.set('baguetteRuby', baguetteRuby.map);
 
-    // rectEmerald
-    const rectEmerald = useTexture({
+    // baguetteEmerald
+    const baguetteEmerald = useTexture({
         map: 'textures/paves/rectEmerald.png',
     });
-    rectEmerald.map.colorSpace = THREE.SRGBColorSpace;
-    rectEmerald.map.wrapS = rectEmerald.map.wrapT = THREE.RepeatWrapping;
-    rectEmerald.map.repeat.set(10,10);
-    pairs.set('rectEmerald', rectEmerald.map);
+    baguetteEmerald.map.colorSpace = THREE.SRGBColorSpace;
+    baguetteEmerald.map.wrapS = baguetteEmerald.map.wrapT = THREE.RepeatWrapping;
+    baguetteEmerald.map.repeat.set(10,10);
+    pairs.set('baguetteEmerald', baguetteEmerald.map);
 
-    // rectAmeth
-    const rectAmeth = useTexture({
+    // baguetteAmeth
+    const baguetteAmeth = useTexture({
         map: 'textures/paves/rectAmeth.png',
     });
-    rectAmeth.map.colorSpace = THREE.SRGBColorSpace;
-    rectAmeth.map.wrapS = rectAmeth.map.wrapT = THREE.RepeatWrapping;
-    rectAmeth.map.repeat.set(10,10);
-    pairs.set('rectAmeth', rectAmeth.map);
+    baguetteAmeth.map.colorSpace = THREE.SRGBColorSpace;
+    baguetteAmeth.map.wrapS = baguetteAmeth.map.wrapT = THREE.RepeatWrapping;
+    baguetteAmeth.map.repeat.set(10,10);
+    pairs.set('baguetteAmeth', baguetteAmeth.map);
 
-    // rectAqua
-    const rectAqua = useTexture({
+    // baguetteAqua
+    const baguetteAqua = useTexture({
         map: 'textures/paves/rectAqua.png',
     });
-    rectAqua.map.colorSpace = THREE.SRGBColorSpace;
-    rectAqua.map.wrapS = rectAqua.map.wrapT = THREE.RepeatWrapping;
-    rectAqua.map.repeat.set(10,10);
-    pairs.set('rectAqua', rectAqua.map);
+    baguetteAqua.map.colorSpace = THREE.SRGBColorSpace;
+    baguetteAqua.map.wrapS = baguetteAqua.map.wrapT = THREE.RepeatWrapping;
+    baguetteAqua.map.repeat.set(10,10);
+    pairs.set('baguetteAqua', baguetteAqua.map);
 
-    // rectBSapph
-    const rectBSapph = useTexture({
+    // baguetteBSapph
+    const baguetteBSapph = useTexture({
         map: 'textures/paves/rectBSapph.png',
     });
-    rectBSapph.map.colorSpace = THREE.SRGBColorSpace;
-    rectBSapph.map.wrapS = rectBSapph.map.wrapT = THREE.RepeatWrapping;
-    rectBSapph.map.repeat.set(10,10);
-    pairs.set('rectBSapph', rectBSapph.map);
+    baguetteBSapph.map.colorSpace = THREE.SRGBColorSpace;
+    baguetteBSapph.map.wrapS = baguetteBSapph.map.wrapT = THREE.RepeatWrapping;
+    baguetteBSapph.map.repeat.set(10,10);
+    pairs.set('baguetteBSapph', baguetteBSapph.map);
 
-    // rectPSapph
-    const rectPSapph = useTexture({
+    // baguettePSapph
+    const baguettePSapph = useTexture({
         map: 'textures/paves/rectPSapph.png',
     });
-    rectPSapph.map.colorSpace = THREE.SRGBColorSpace;
-    rectPSapph.map.wrapS = rectPSapph.map.wrapT = THREE.RepeatWrapping;
-    rectPSapph.map.repeat.set(10,10);
-    pairs.set('rectPSapph', rectPSapph.map);
+    baguettePSapph.map.colorSpace = THREE.SRGBColorSpace;
+    baguettePSapph.map.wrapS = baguettePSapph.map.wrapT = THREE.RepeatWrapping;
+    baguettePSapph.map.repeat.set(10,10);
+    pairs.set('baguettePSapph', baguettePSapph.map);
 
-    // rectYSapph
-    const rectYSapph = useTexture({
+    // baguetteYSapph
+    const baguetteYSapph = useTexture({
         map: 'textures/paves/rectYSapph.png',
     });
-    rectYSapph.map.colorSpace = THREE.SRGBColorSpace;
-    rectYSapph.map.wrapS = rectYSapph.map.wrapT = THREE.RepeatWrapping;
-    rectYSapph.map.repeat.set(10,10);
-    pairs.set('rectYSapph', rectYSapph.map);
+    baguetteYSapph.map.colorSpace = THREE.SRGBColorSpace;
+    baguetteYSapph.map.wrapS = baguetteYSapph.map.wrapT = THREE.RepeatWrapping;
+    baguetteYSapph.map.repeat.set(10,10);
+    pairs.set('baguetteYSapph', baguetteYSapph.map);
 
     /* MOSAIC PAVE*/
-    // mosWhD
-    const mosWhD = useTexture({
+    // mosaicWhD
+    const mosaicWhD = useTexture({
         map: 'textures/paves/mosWhD.png',
     });
-    mosWhD.map.colorSpace = THREE.SRGBColorSpace;
-    mosWhD.map.wrapS = mosWhD.map.wrapT = THREE.RepeatWrapping;
-    mosWhD.map.repeat.set(10,10);
-    pairs.set('mosWhD', mosWhD.map);
+    mosaicWhD.map.colorSpace = THREE.SRGBColorSpace;
+    mosaicWhD.map.wrapS = mosaicWhD.map.wrapT = THREE.RepeatWrapping;
+    mosaicWhD.map.repeat.set(10,10);
+    pairs.set('mosaicWhD', mosaicWhD.map);
 
-    // mosBrD
-    const mosBrD = useTexture({
+    // mosaicBrD
+    const mosaicBrD = useTexture({
         map: 'textures/paves/mosBrD.png',
     });
-    mosBrD.map.colorSpace = THREE.SRGBColorSpace;
-    mosBrD.map.wrapS = mosBrD.map.wrapT = THREE.RepeatWrapping;
-    mosBrD.map.repeat.set(10,10);
-    pairs.set('mosBrD', mosBrD.map);
+    mosaicBrD.map.colorSpace = THREE.SRGBColorSpace;
+    mosaicBrD.map.wrapS = mosaicBrD.map.wrapT = THREE.RepeatWrapping;
+    mosaicBrD.map.repeat.set(10,10);
+    pairs.set('mosaicBrD', mosaicBrD.map);
 
-    // mosBlD
-    const mosBlD = useTexture({
+    // mosaicBlD
+    const mosaicBlD = useTexture({
         map: 'textures/paves/mosBlD.png',
     });
-    mosBlD.map.colorSpace = THREE.SRGBColorSpace;
-    mosBlD.map.wrapS = mosBlD.map.wrapT = THREE.RepeatWrapping;
-    mosBlD.map.repeat.set(10,10);
-    pairs.set('mosBlD', mosBlD.map);
+    mosaicBlD.map.colorSpace = THREE.SRGBColorSpace;
+    mosaicBlD.map.wrapS = mosaicBlD.map.wrapT = THREE.RepeatWrapping;
+    mosaicBlD.map.repeat.set(10,10);
+    pairs.set('mosaicBlD', mosaicBlD.map);
 
-    // mosRuby
-    const mosRuby = useTexture({
+    // mosaicRuby
+    const mosaicRuby = useTexture({
         map: 'textures/paves/mosRuby.png',
     });
-    mosRuby.map.colorSpace = THREE.SRGBColorSpace;
-    mosRuby.map.wrapS = mosRuby.map.wrapT = THREE.RepeatWrapping;
-    mosRuby.map.repeat.set(10,10);
-    pairs.set('mosRuby', mosRuby.map);
+    mosaicRuby.map.colorSpace = THREE.SRGBColorSpace;
+    mosaicRuby.map.wrapS = mosaicRuby.map.wrapT = THREE.RepeatWrapping;
+    mosaicRuby.map.repeat.set(10,10);
+    pairs.set('mosaicRuby', mosaicRuby.map);
 
-    // mosEmerald
-    const mosEmerald = useTexture({
+    // mosaicEmerald
+    const mosaicEmerald = useTexture({
         map: 'textures/paves/mosEmerald.png',
     });
-    mosEmerald.map.colorSpace = THREE.SRGBColorSpace;
-    mosEmerald.map.wrapS = mosEmerald.map.wrapT = THREE.RepeatWrapping;
-    mosEmerald.map.repeat.set(10,10);
-    pairs.set('mosEmerald', mosEmerald.map);
+    mosaicEmerald.map.colorSpace = THREE.SRGBColorSpace;
+    mosaicEmerald.map.wrapS = mosaicEmerald.map.wrapT = THREE.RepeatWrapping;
+    mosaicEmerald.map.repeat.set(10,10);
+    pairs.set('mosaicEmerald', mosaicEmerald.map);
 
-    // mosAmeth
-    const mosAmeth = useTexture({
+    // mosaicAmeth
+    const mosaicAmeth = useTexture({
         map: 'textures/paves/mosAmeth.png',
     });
-    mosAmeth.map.colorSpace = THREE.SRGBColorSpace;
-    mosAmeth.map.wrapS = mosAmeth.map.wrapT = THREE.RepeatWrapping;
-    mosAmeth.map.repeat.set(10,10);
-    pairs.set('mosAmeth', mosAmeth.map);
+    mosaicAmeth.map.colorSpace = THREE.SRGBColorSpace;
+    mosaicAmeth.map.wrapS = mosaicAmeth.map.wrapT = THREE.RepeatWrapping;
+    mosaicAmeth.map.repeat.set(10,10);
+    pairs.set('mosaicAmeth', mosaicAmeth.map);
 
-    // mosAqua
-    const mosAqua = useTexture({
+    // mosaicAqua
+    const mosaicAqua = useTexture({
         map: 'textures/paves/mosAqua.png',
     });
-    mosAqua.map.colorSpace = THREE.SRGBColorSpace;
-    mosAqua.map.wrapS = mosAqua.map.wrapT = THREE.RepeatWrapping;
-    mosAqua.map.repeat.set(10,10);
-    pairs.set('mosAqua', mosAqua.map);
+    mosaicAqua.map.colorSpace = THREE.SRGBColorSpace;
+    mosaicAqua.map.wrapS = mosaicAqua.map.wrapT = THREE.RepeatWrapping;
+    mosaicAqua.map.repeat.set(10,10);
+    pairs.set('mosaicAqua', mosaicAqua.map);
 
-    // mosBSapph
-    const mosBSapph = useTexture({
+    // mosaicBSapph
+    const mosaicBSapph = useTexture({
         map: 'textures/paves/mosBSapph.png',
     });
-    mosBSapph.map.colorSpace = THREE.SRGBColorSpace;
-    mosBSapph.map.wrapS = mosBSapph.map.wrapT = THREE.RepeatWrapping;
-    mosBSapph.map.repeat.set(10,10);
-    pairs.set('mosBSapph', mosBSapph.map);
+    mosaicBSapph.map.colorSpace = THREE.SRGBColorSpace;
+    mosaicBSapph.map.wrapS = mosaicBSapph.map.wrapT = THREE.RepeatWrapping;
+    mosaicBSapph.map.repeat.set(10,10);
+    pairs.set('mosaicBSapph', mosaicBSapph.map);
 
-    // mosPSapph
-    const mosPSapph = useTexture({
+    // mosaicPSapph
+    const mosaicPSapph = useTexture({
         map: 'textures/paves/mosPSapph.png',
     });
-    mosPSapph.map.colorSpace = THREE.SRGBColorSpace;
-    mosPSapph.map.wrapS = mosPSapph.map.wrapT = THREE.RepeatWrapping;
-    mosPSapph.map.repeat.set(10,10);
-    pairs.set('mosPSapph', mosPSapph.map);
+    mosaicPSapph.map.colorSpace = THREE.SRGBColorSpace;
+    mosaicPSapph.map.wrapS = mosaicPSapph.map.wrapT = THREE.RepeatWrapping;
+    mosaicPSapph.map.repeat.set(10,10);
+    pairs.set('mosaicPSapph', mosaicPSapph.map);
 
-    // mosYSapph
-    const mosYSapph = useTexture({
+    // mosaicYSapph
+    const mosaicYSapph = useTexture({
         map: 'textures/paves/mosYSapph.png',
     });
-    mosYSapph.map.colorSpace = THREE.SRGBColorSpace;
-    mosYSapph.map.wrapS = mosYSapph.map.wrapT = THREE.RepeatWrapping;
-    mosYSapph.map.repeat.set(10,10);
-    pairs.set('mosYSapph', mosYSapph.map);
+    mosaicYSapph.map.colorSpace = THREE.SRGBColorSpace;
+    mosaicYSapph.map.wrapS = mosaicYSapph.map.wrapT = THREE.RepeatWrapping;
+    mosaicYSapph.map.repeat.set(10,10);
+    pairs.set('mosaicYSapph', mosaicYSapph.map);
 
     /* HEXAGON PAVE*/
-    // hexWhD
-    const hexWhD = useTexture({
+    // hexagonWhD
+    const hexagonWhD = useTexture({
         map: 'textures/paves/hexWhD.png',
     });
-    hexWhD.map.colorSpace = THREE.SRGBColorSpace;
-    hexWhD.map.wrapS = hexWhD.map.wrapT = THREE.RepeatWrapping;
-    hexWhD.map.repeat.set(10,10);
-    pairs.set('hexWhD', hexWhD.map);
+    hexagonWhD.map.colorSpace = THREE.SRGBColorSpace;
+    hexagonWhD.map.wrapS = hexagonWhD.map.wrapT = THREE.RepeatWrapping;
+    hexagonWhD.map.repeat.set(10,10);
+    pairs.set('hexagonWhD', hexagonWhD.map);
 
-    // hexBrD
-    const hexBrD = useTexture({
+    // hexagonBrD
+    const hexagonBrD = useTexture({
         map: 'textures/paves/hexBrD.png',
     });
-    hexBrD.map.colorSpace = THREE.SRGBColorSpace;
-    hexBrD.map.wrapS = hexBrD.map.wrapT = THREE.RepeatWrapping;
-    hexBrD.map.repeat.set(10,10);
-    pairs.set('hexBrD', hexBrD.map);
+    hexagonBrD.map.colorSpace = THREE.SRGBColorSpace;
+    hexagonBrD.map.wrapS = hexagonBrD.map.wrapT = THREE.RepeatWrapping;
+    hexagonBrD.map.repeat.set(10,10);
+    pairs.set('hexagonBrD', hexagonBrD.map);
 
-    // hexBlD
-    const hexBlD = useTexture({
+    // hexagonBlD
+    const hexagonBlD = useTexture({
         map: 'textures/paves/hexBlD.png',
     });
-    hexBlD.map.colorSpace = THREE.SRGBColorSpace;
-    hexBlD.map.wrapS = hexBlD.map.wrapT = THREE.RepeatWrapping;
-    hexBlD.map.repeat.set(10,10);
-    pairs.set('hexBlD', hexBlD.map);
+    hexagonBlD.map.colorSpace = THREE.SRGBColorSpace;
+    hexagonBlD.map.wrapS = hexagonBlD.map.wrapT = THREE.RepeatWrapping;
+    hexagonBlD.map.repeat.set(10,10);
+    pairs.set('hexagonBlD', hexagonBlD.map);
 
-    // hexRuby
-    const hexRuby = useTexture({
+    // hexagonRuby
+    const hexagonRuby = useTexture({
         map: 'textures/paves/hexRuby.png',
     });
-    hexRuby.map.colorSpace = THREE.SRGBColorSpace;
-    hexRuby.map.wrapS = hexRuby.map.wrapT = THREE.RepeatWrapping;
-    hexRuby.map.repeat.set(10,10);
-    pairs.set('hexRuby', hexRuby.map);
+    hexagonRuby.map.colorSpace = THREE.SRGBColorSpace;
+    hexagonRuby.map.wrapS = hexagonRuby.map.wrapT = THREE.RepeatWrapping;
+    hexagonRuby.map.repeat.set(10,10);
+    pairs.set('hexagonRuby', hexagonRuby.map);
 
-    // hexEmerald
-    const hexEmerald = useTexture({
+    // hexagonEmerald
+    const hexagonEmerald = useTexture({
         map: 'textures/paves/hexEmerald.png',
     });
-    hexEmerald.map.colorSpace = THREE.SRGBColorSpace;
-    hexEmerald.map.wrapS = hexEmerald.map.wrapT = THREE.RepeatWrapping;
-    hexEmerald.map.repeat.set(10,10);
-    pairs.set('hexEmerald', hexEmerald.map);
+    hexagonEmerald.map.colorSpace = THREE.SRGBColorSpace;
+    hexagonEmerald.map.wrapS = hexagonEmerald.map.wrapT = THREE.RepeatWrapping;
+    hexagonEmerald.map.repeat.set(10,10);
+    pairs.set('hexagonEmerald', hexagonEmerald.map);
 
-    // hexAmeth
-    const hexAmeth = useTexture({
+    // hexagonAmeth
+    const hexagonAmeth = useTexture({
         map: 'textures/paves/hexAmeth.png',
     });
-    hexAmeth.map.colorSpace = THREE.SRGBColorSpace;
-    hexAmeth.map.wrapS = hexAmeth.map.wrapT = THREE.RepeatWrapping;
-    hexAmeth.map.repeat.set(10,10);
-    pairs.set('hexAmeth', hexAmeth.map);
+    hexagonAmeth.map.colorSpace = THREE.SRGBColorSpace;
+    hexagonAmeth.map.wrapS = hexagonAmeth.map.wrapT = THREE.RepeatWrapping;
+    hexagonAmeth.map.repeat.set(10,10);
+    pairs.set('hexagonAmeth', hexagonAmeth.map);
 
-    // hexAqua
-    const hexAqua = useTexture({
+    // hexagonAqua
+    const hexagonAqua = useTexture({
         map: 'textures/paves/hexAqua.png',
     });
-    hexAqua.map.colorSpace = THREE.SRGBColorSpace;
-    hexAqua.map.wrapS = hexAqua.map.wrapT = THREE.RepeatWrapping;
-    hexAqua.map.repeat.set(10,10);
-    pairs.set('hexAqua', hexAqua.map);
+    hexagonAqua.map.colorSpace = THREE.SRGBColorSpace;
+    hexagonAqua.map.wrapS = hexagonAqua.map.wrapT = THREE.RepeatWrapping;
+    hexagonAqua.map.repeat.set(10,10);
+    pairs.set('hexagonAqua', hexagonAqua.map);
 
-    // hexBSapph
-    const hexBSapph = useTexture({
+    // hexagonBSapph
+    const hexagonBSapph = useTexture({
         map: 'textures/paves/hexBSapph.png',
     });
-    hexBSapph.map.colorSpace = THREE.SRGBColorSpace;
-    hexBSapph.map.wrapS = hexBSapph.map.wrapT = THREE.RepeatWrapping;
-    hexBSapph.map.repeat.set(10,10);
-    pairs.set('hexBSapph', hexBSapph.map);
+    hexagonBSapph.map.colorSpace = THREE.SRGBColorSpace;
+    hexagonBSapph.map.wrapS = hexagonBSapph.map.wrapT = THREE.RepeatWrapping;
+    hexagonBSapph.map.repeat.set(10,10);
+    pairs.set('hexagonBSapph', hexagonBSapph.map);
 
-    // hexPSapph
-    const hexPSapph = useTexture({
+    // hexagonPSapph
+    const hexagonPSapph = useTexture({
         map: 'textures/paves/hexPSapph.png',
     });
-    hexPSapph.map.colorSpace = THREE.SRGBColorSpace;
-    hexPSapph.map.wrapS = hexPSapph.map.wrapT = THREE.RepeatWrapping;
-    hexPSapph.map.repeat.set(10,10);
-    pairs.set('hexPSapph', hexPSapph.map);
+    hexagonPSapph.map.colorSpace = THREE.SRGBColorSpace;
+    hexagonPSapph.map.wrapS = hexagonPSapph.map.wrapT = THREE.RepeatWrapping;
+    hexagonPSapph.map.repeat.set(10,10);
+    pairs.set('hexagonPSapph', hexagonPSapph.map);
 
-    // hexYSapph
-    const hexYSapph = useTexture({
+    // hexagonYSapph
+    const hexagonYSapph = useTexture({
         map: 'textures/paves/hexYSapph.png',
     });
-    hexYSapph.map.colorSpace = THREE.SRGBColorSpace;
-    hexYSapph.map.wrapS = hexYSapph.map.wrapT = THREE.RepeatWrapping;
-    hexYSapph.map.repeat.set(10,10);
-    pairs.set('hexYSapph', hexYSapph.map);
-
-    console.log(position)
+    hexagonYSapph.map.colorSpace = THREE.SRGBColorSpace;
+    hexagonYSapph.map.wrapS = hexagonYSapph.map.wrapT = THREE.RepeatWrapping;
+    hexagonYSapph.map.repeat.set(10,10);
+    pairs.set('hexagonYSapph', hexagonYSapph.map);
 
     return(
         <Decal scale={scale ?? 1} polygonOffsetFactor={-0} position={position} map={pairs.get(pave+firstCapital(stone))}/>

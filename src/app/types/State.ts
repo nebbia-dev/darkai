@@ -122,8 +122,8 @@ interface Stones {
 }
 
 export interface Preciousness {
-    [key: string]: string | undefined,
-    carats: string,
+    [key: string]: string | number | undefined,
+    carats: number,
     diamonds: string | undefined
 }
 export interface History {
@@ -134,40 +134,6 @@ export interface History {
     visible: Visibility,
     prices: Prices,
     preciousness: Preciousness | undefined
-}
-// export interface BasePrices {
-//     [key: string]: any,
-//     barDiamond: number | null,
-//     barGold: number | null,
-//     barRose: number | null,
-//     barWhite: number | null,
-//     bigBarDiamond: number | null,
-//     bigBarGold: number | null,
-//     bigBarRose: number | null,
-//     bigBarWhite: number | null,
-//     created_at: Date,
-//     frameDiamond: number | null,
-//     frameGold: number | null,
-//     frameRose: number | null,
-//     frameWhite: number | null,
-//     fullDiamond: number | null,
-//     fullGold: number | null,
-//     fullRose: number | null,
-//     fullWhite: number | null,
-//     id: number,
-//     tooth: string
-// }
-
-export interface AddonsPrices {
-    [key: string]: any,
-    marquiseShape: number | null,
-    tearShape: number | null,
-    diamondShape: number | null,
-    heartShape: number | null,
-    circleShape: number | null,
-    created_at: Date,
-    id: number,
-    stone: string
 }
 
 export interface State {
@@ -200,7 +166,6 @@ export interface State {
     activeSubButton: string|undefined,
     loaded: boolean,
     prices: any[] | undefined | null,
-    pricesAdds: AddonsPrices[] | undefined,
     total: number,
     isScreenshotNeeded: boolean | undefined,
     resetControls: boolean | undefined,
@@ -220,7 +185,7 @@ export interface State {
     setStone: (tooth:string, shape:string, color:string) => void,
     setEnamel: (tooth:string, color:string) => void,
     setActiveTooth: (tooth:string|undefined) => void,
-    setTeethPreciousness: (carats:string, diamonds:string|undefined) => void,
+    setTeethPreciousness: (carats:number, diamonds:string|undefined) => void,
     unsetLastActivatedTooth: () => void,
     setDefaultConfig: (config:string, color:string) => void,
     setTooth: (tooth:string, type:string, color:string) => void,

@@ -14,6 +14,8 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
     const teethPreciousness = useTeethStore((state:State) => state.teethPreciousness);
     const teethStones = useTeethStore((state:State) => state.teethStones);
     const teethPaves = useTeethStore((state:State) => state.teethPaves);
+    const teethPrices = useTeethStore((state:State) => state.teethPrices);
+    const total = useTeethStore((state:State) => state.total);
     const history = useTeethStore((state:State) => state.history);
     const [showRecap, setShowRecap] = useState<boolean>(false);
     const [open, setOpen] = useState<boolean>(false);
@@ -26,7 +28,7 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
     const setPreciousness = useTeethStore((state:State) => state.setTeethPreciousness);
     const prices = useTeethStore((state:State) => state.prices);
 
-    console.log(prices)
+    console.log(prices);
     function checkDiamonds():boolean {
         for(let stone of Object.values(teethStones)) {
             if(stone.color === 'whD' || stone.color === 'brD' || stone.color === 'blD') {
@@ -47,7 +49,7 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
     }
 
     function setCarat(e:any) {
-        setPreciousness(e, teethPreciousness.diamonds);
+        setPreciousness(Number(e), teethPreciousness.diamonds);
     }
 
     function setDiamonds(e:any) {
@@ -120,7 +122,7 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
                                                 }
                                                 <span aria-hidden={true}
                                                       className="inline-block h-[1px] w-full bg-slate-950"></span>
-                                                <p className="font-bold w-full text-right">500€</p>
+                                                <p className="font-bold w-full text-right">{new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR" }).format(teethPrices[tooth[0]])}</p>
                                             </li>
                                         )
                                     })}
@@ -133,13 +135,13 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
                             <div className="flex gap-4 mb-2 items-center">
                                 <span className="inline-block w-[72px]">Carats:</span>
                                 <div className="flex gap-4">
-                                    <button type="button" className={`${teethPreciousness.carats === '10K' ? 'bg-stone-500 text-gray-50' : 'bg-gray-50 text-slate-950'} px-2 py-1 rounded-3xl cursor-pointer`} value="10K"
+                                    <button type="button" className={`${teethPreciousness.carats === 10 ? 'bg-stone-500 text-gray-50' : 'bg-gray-50 text-slate-950'} px-2 py-1 rounded-3xl cursor-pointer`} value="10"
                                             onClick={(e) => setCarat(e.currentTarget.value)}>10K
                                     </button>
-                                    <button type="button" className={`${teethPreciousness.carats === '14K' ? 'bg-stone-500 text-gray-50' : 'bg-gray-50 text-slate-950'} px-2 py-1 rounded-3xl cursor-pointer`} value="14K"
+                                    <button type="button" className={`${teethPreciousness.carats === 14 ? 'bg-stone-500 text-gray-50' : 'bg-gray-50 text-slate-950'} px-2 py-1 rounded-3xl cursor-pointer`} value="14"
                                             onClick={(e) => setCarat(e.currentTarget.value)}>14K
                                     </button>
-                                    <button type="button" className={`${teethPreciousness.carats === '18K' ? 'bg-stone-500 text-gray-50' : 'bg-gray-50 text-slate-950'} px-2 py-1 rounded-3xl cursor-pointer`} value="18K"
+                                    <button type="button" className={`${teethPreciousness.carats === 18 ? 'bg-stone-500 text-gray-50' : 'bg-gray-50 text-slate-950'} px-2 py-1 rounded-3xl cursor-pointer`} value="18"
                                             onClick={(e) => setCarat(e.currentTarget.value)}>18K
                                     </button>
                                 </div>
@@ -161,7 +163,7 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
                             className="border-1 rounded-3xl w-full bg-gray-50 pl-6 pr-2 py-2 flex items-center justify-between mt-4">
                             <div>
                                 <h3 className="font-semibold inline">Price: </h3>
-                                <span>5.000€</span>
+                                <span>{new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR" }).format(total)}</span>
                             </div>
                             <button className="rounded-3xl bg-slate-950 text-gray-50 px-5 py-2 h-full cursor-pointer"
                                     onClick={onclick}>Continue &rarr;</button>
@@ -178,6 +180,7 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
                             </button>
                         </div>
                         {/* MyConfig Middle w/Recap */}
+                        {/* DA SOSTITUIRE CON IL NUOVO */}
                         <div
                             className={`${showRecap ? 'h-[30vh]' : 'h-0'} transition-[height] duration-500 w-full relative`}>
                             <div

@@ -6,20 +6,13 @@ export default function StoneOptions({tooth, bezel}:{tooth:string|undefined, bez
    const setActiveSubButton = useTeethStore((state: State) => state.setActiveSubButton);
    const setStone =  useTeethStore((state: State) => state.setStone);
    const setPave =  useTeethStore((state: State) => state.setPave);
-   const teethPreciousness = useTeethStore((state: State) => state.teethPreciousness);
-   const setDiamonds = useTeethStore((state: State) => state.setTeethPreciousness);
    function setStoneColor(e:any) {
-           if(tooth && bezel) {
-                   setActiveSubButton(e);
-                   setStone(tooth, 'prev', e);
+       if(tooth && bezel) {
+               setActiveSubButton(e);
+               setStone(tooth, 'prev', e);
            } else if(tooth && !bezel) {
                setActiveSubButton(e);
                setPave(tooth, 'prev', e);
-           }
-           if(e === 'whD' || e === 'brD' || e === 'blD') {
-               setDiamonds(teethPreciousness.carats, 'lab');
-           } else {
-               setDiamonds(teethPreciousness.carats, undefined);
            }
    }
 

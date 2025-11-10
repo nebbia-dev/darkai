@@ -21,15 +21,15 @@ export default function FinishingOptions({tooth}:{tooth:string|undefined}) {
         <>
             <button onClick={(e) => changePaveShape(e.currentTarget.value)} type="button" value="nopave" className="cursor-pointer w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-2 text-center">No pave
             </button>
-            <button onClick={(e) => changePaveShape(e.currentTarget.value)} type="button" value="mos" className="cursor-pointer w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-2 text-center">Mosaic
+            <button onClick={(e) => changePaveShape(e.currentTarget.value)} type="button" value="mosaic" className="cursor-pointer w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-2 text-center">Mosaic
             </button>
             <button onClick={(e) => changePaveShape(e.currentTarget.value)} type="button" value="round" className="cursor-pointer w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-2 text-center">Round
             </button>
-            <button onClick={(e) => changePaveShape(e.currentTarget.value)} type="button" value="hex" className="cursor-pointer w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-2 text-center">Hexagon
+            <button onClick={(e) => changePaveShape(e.currentTarget.value)} type="button" value="hexagon" className="cursor-pointer w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-2 text-center">Hexagon
             </button>
-            <button onClick={(e) => changePaveShape(e.currentTarget.value)} type="button" value="sq" className="cursor-pointer w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-2 text-center">Princess
+            <button onClick={(e) => changePaveShape(e.currentTarget.value)} type="button" value="princess" className="cursor-pointer w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-2 text-center">Princess
             </button>
-            <button onClick={(e) => changePaveShape(e.currentTarget.value)} type="button" value="rect" className="cursor-pointer w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 p-2 text-center">Baguette
+            <button onClick={(e) => changePaveShape(e.currentTarget.value)} type="button" value="baguette" className="cursor-pointer w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 p-2 text-center">Baguette
             </button>
         </>
     )
