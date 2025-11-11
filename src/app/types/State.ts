@@ -34,6 +34,22 @@ interface Enamel {
     cidx: string | undefined,
     cisx: string | undefined,
 }
+
+interface Finish {
+    [key: string]: string
+    icsdx: 'polished' | 'sandblasted' | 'diamond cut',
+    icssx: 'polished' | 'sandblasted' | 'diamond cut',
+    icidx: 'polished' | 'sandblasted' | 'diamond cut',
+    icisx: 'polished' | 'sandblasted' | 'diamond cut',
+    ilsdx: 'polished' | 'sandblasted' | 'diamond cut',
+    ilssx: 'polished' | 'sandblasted' | 'diamond cut',
+    ilidx: 'polished' | 'sandblasted' | 'diamond cut',
+    ilisx: 'polished' | 'sandblasted' | 'diamond cut',
+    csdx: 'polished' | 'sandblasted' | 'diamond cut',
+    cssx: 'polished' | 'sandblasted' | 'diamond cut',
+    cidx: 'polished' | 'sandblasted' | 'diamond cut',
+    cisx: 'polished' | 'sandblasted' | 'diamond cut',
+}
 interface JewelTypes {
     // mettere i tipi di design
     [key: string]: string
@@ -131,6 +147,7 @@ export interface History {
     stones: Stones,
     pave: Paves,
     type: JewelTypes,
+    finish: Finish,
     enamel: Enamel,
     visible: Visibility,
     prices: Prices,
@@ -146,6 +163,7 @@ export interface State {
     teethStones: Stones,
     teethVisibility: Visibility,
     teethPrices: Prices,
+    teethFinish: Finish,
     history: History[][],
     currentHistory: number,
     activeDefault: string | undefined,

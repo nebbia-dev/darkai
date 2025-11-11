@@ -9,7 +9,6 @@ import StoneOptions from "@/app/components/StoneOptions";
 import SignatureOptions from "@/app/components/SignatureOptions";
 import PackagingOptions from "@/app/components/PackagingOptions";
 import DesignSubOptions from "@/app/components/DesignSubOptions";
-import FinishingSubOptions from "@/app/components/FinishingSubOptions";
 import PackagingSubOptions from "@/app/components/PackagingSubOptions";
 import SignatureSubOptions from "@/app/components/SignatureSubOptions";
 
@@ -46,8 +45,6 @@ export default function ToothSelector({tooth, onclick, active} : {tooth: string 
                 return <SignatureSubOptions/>
             case "2":
                 return <DesignSubOptions tooth={tooth} type={jewelType}/>
-            case "4":
-                return <FinishingSubOptions tooth={tooth}/>
             case "6":
                 return <PackagingSubOptions/>
         }

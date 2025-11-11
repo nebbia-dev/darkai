@@ -1,11 +1,11 @@
 'use client'
 import {FormEvent, useState} from "react";
 import Upload from "./Upload";
-import {Modal, Tooltip} from "@mui/material";
+import {Modal} from "@mui/material";
 import {useTeethStore} from "@/app/stores/teeth";
 import {State} from "@/app/types/State";
 import Link from 'next/link';
-import RecapList from "@/app/components/teeth/RecapList";
+import RecapList from "@/app/components/RecapList";
 
 export default function Recap({next, onclick} : {next:boolean, onclick:() => void }){
     const teethPreciousness = useTeethStore((state:State) => state.teethPreciousness);
@@ -17,7 +17,6 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
     const [isSending, setIsSending] = useState<boolean>(false);
     const [sent, setSent] = useState<boolean>(false);
     const takeScreenshot = useTeethStore((state:State) => state.setIsScreenshotNeeded);
-    const setHover = useTeethStore((state: State) => state.setHover);
     const setPreciousness = useTeethStore((state:State) => state.setTeethPreciousness);
     function checkDiamonds():boolean {
         for(let stone of Object.values(teethStones)) {

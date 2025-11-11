@@ -6,6 +6,7 @@ import elabDesignName from "@/app/helpers/elabDesignName";
 import elabStoneName from "@/app/helpers/elabStoneName";
 import {useTeethStore} from "@/app/stores/teeth";
 import {State} from "@/app/types/State";
+import elabMaterial from "@/app/helpers/elabMaterial";
 
 export default function RecapList({edit} : {edit:boolean}) {
 
@@ -25,12 +26,14 @@ export default function RecapList({edit} : {edit:boolean}) {
     return (
         <div className="pl-6 pr-3 py-4 h-full">
             <ul className="pr-3 h-full overflow-y-scroll">
-                {history.length === 0 || total === 0 &&
-                    <div className="w-full h-full flex items-center justify-center">
+                {(history.length === 0 || total === 0) &&
+                    <li className="w-full h-full flex items-center justify-center">
                         <p>Choose your configs wisely!</p>
-                    </div>
+                    </li>
                 }
                 {history.length > 0 && Object.entries(history[currentStep][0].type).map(tooth => {
+
+                    {/*https://stackoverflow.com/questions/48223852/how-to-conditionally-add-or-not-onclick-on-a-div-in-react*/}
                     return (
                         history[currentStep][0].visible[tooth[0]] &&
                         <li key={tooth[0]}
@@ -59,7 +62,7 @@ export default function RecapList({edit} : {edit:boolean}) {
                                 {tooth[1] === 'enamel'
                                     ? firstCapital(history[currentStep][0].enamel[tooth[0]] as string) + ' ' + elabDesignName(tooth[1])
                                     : firstCapital(elabDesignName(tooth[1]))
-                                }, {history[currentStep][0].material[tooth[0]]}
+                                } in {elabMaterial(history[currentStep][0].finish[tooth[0]], 'finish')} {elabMaterial(history[currentStep][0].material[tooth[0]], 'gold')} gold
                             </p>
 
                             {/*bezel*/}
