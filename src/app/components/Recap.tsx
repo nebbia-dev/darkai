@@ -5,26 +5,18 @@ import {Modal, Tooltip} from "@mui/material";
 import {useTeethStore} from "@/app/stores/teeth";
 import {State} from "@/app/types/State";
 import Link from 'next/link';
-import elabToothName from "@/app/helpers/elabToothName";
-import firstCapital from "@/app/helpers/firstCapital";
-import elabStoneName from "@/app/helpers/elabStoneName";
-import {Close} from "@/app/components/icons/Close";
-import elabDesignName from "@/app/helpers/elabDesignName";
+import RecapList from "@/app/components/teeth/RecapList";
 
 export default function Recap({next, onclick} : {next:boolean, onclick:() => void }){
     const teethPreciousness = useTeethStore((state:State) => state.teethPreciousness);
     const teethStones = useTeethStore((state:State) => state.teethStones);
     const teethPaves = useTeethStore((state:State) => state.teethPaves);
-    const teethPrices = useTeethStore((state:State) => state.teethPrices);
     const total = useTeethStore((state:State) => state.total);
-    const history = useTeethStore((state:State) => state.history);
     const [showRecap, setShowRecap] = useState<boolean>(false);
     const [open, setOpen] = useState<boolean>(false);
     const [isSending, setIsSending] = useState<boolean>(false);
     const [sent, setSent] = useState<boolean>(false);
     const takeScreenshot = useTeethStore((state:State) => state.setIsScreenshotNeeded);
-    const resetTooth = useTeethStore((state: State) => state.resetTooth);
-    const setActive = useTeethStore((state: State) => state.setActiveTooth);
     const setHover = useTeethStore((state: State) => state.setHover);
     const setPreciousness = useTeethStore((state:State) => state.setTeethPreciousness);
     function checkDiamonds():boolean {
@@ -45,18 +37,11 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
     function toggleRecap() {
         setShowRecap(prev => !prev)
     }
-
     function setCarat(e:any) {
         setPreciousness(Number(e), teethPreciousness.diamonds);
     }
-
     function setDiamonds(e:any) {
         setPreciousness(teethPreciousness.carats, e);
-    }
-
-    function setCurrentHover(tooth:string|undefined, e:any) {
-        e.stopPropagation();
-        setHover(tooth);
     }
     function download(e:FormEvent) {
         e.preventDefault();
@@ -91,61 +76,7 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
                             className={`${showRecap ? 'h-[50vh]' : 'h-0'} transition-[height] duration-500 w-full relative`}>
                             <div
                                 className="absolute h-[15%] bottom-0 w-full bg-linear-to-t from-gray-50 to-indigo-0"></div>
-                            <div className="pl-6 pr-3 py-4 h-full">
-                                <ul className="pr-3 h-full overflow-y-scroll">
-                                    {history.length === 0 &&
-                                        <div className="w-full h-full flex items-center justify-center">
-                                            <p>Choose your configs wisely!</p>
-                                        </div>
-                                    }
-                                    {history.length > 0 && Object.entries(history[history.length - 1][0].type).map(tooth => {
-                                        return (
-                                            history[history.length - 1][0].visible[tooth[0]] &&
-                                            <li key={tooth[0]} onClick={() => setActive(tooth[0])} onMouseEnter={(e) => setCurrentHover(tooth[0], e)} onMouseLeave={(e) => setCurrentHover(undefined, e)}
-                                                className={`${((tooth[1] === 'bar' || tooth[1] === 'barDiamond') && (tooth[0] === 'icsdx' || tooth[0] === 'icidx')) || ((tooth[1] === 'bigBar' || tooth[1] === 'bigBarDiamond') && tooth[0] === 'cidx') ? 'hidden' : 'block'} cursor-pointer`}
-                                            >
-                                                {/*tooth name*/}
-                                                <div className="flex justify-between items-center">
-                                                    <h4 className="font-semibold">
-                                                        { ((tooth[1] === 'bar' || tooth[1] === 'barDiamond') && (tooth[0] === 'icssx' || tooth[0] === 'icisx')) || ((tooth[1] === 'bigBar' || tooth[1] === 'bigBarDiamond') && tooth[0] === 'cisx')
-                                                            ? elabToothName(tooth[0], true)
-                                                            : elabToothName(tooth[0], false)
-                                                        }
-                                                    </h4>
-                                                    <Tooltip title="Delete tooth">
-                                                        <Close className="cursor-pointer"
-                                                               onClick={() => resetTooth(tooth[0])}/>
-                                                    </Tooltip>
-                                                </div>
-                                                {/*type + material*/}
-                                                <p>
-                                                    { tooth[1] === 'enamel'
-                                                        ? firstCapital(history[history.length - 1][0].enamel[tooth[0]] as string) + ' ' + elabDesignName(tooth[1])
-                                                        : firstCapital(elabDesignName(tooth[1]))
-                                                    }, {history[history.length - 1][0].material[tooth[0]]}
-                                                </p>
-
-                                                {/*bezel*/}
-                                                { history[history.length - 1][0].stones[tooth[0]].shape !== undefined &&
-                                                    <p>{firstCapital(elabStoneName(history[history.length - 1][0].stones[tooth[0]].color as string))} w/ {history[history.length - 1][0].stones[tooth[0]].shape} shape</p>
-                                                }
-
-                                                {/*pave*/}
-                                                { history[history.length - 1][0].pave[tooth[0]].shape !== undefined &&
-                                                    <p>{firstCapital(history[history.length - 1][0].pave[tooth[0]].shape as string)} pave w/ {elabStoneName(history[history.length - 1][0].pave[tooth[0]].color as string)}</p>
-                                                }
-                                                <span aria-hidden={true}
-                                                      className="inline-block h-[1px] w-full bg-slate-950"></span>
-                                                <p className="font-bold w-full text-right">{
-                                                    ( (tooth[1] === 'bar' || tooth[1] === 'barDiamond') && (tooth[0] === 'icssx' || tooth[0] === 'icisx')) || ((tooth[1] === 'bigBar' || tooth[1] === 'bigBarDiamond') && tooth[0] === 'cisx')
-                                                        ? new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR" }).format(teethPrices[tooth[0]] * 2)
-                                                        : new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR" }).format(teethPrices[tooth[0]])
-                                                }</p>
-                                            </li>
-                                        )
-                                    })}
-                                </ul>
-                            </div>
+                            <RecapList edit={true}/>
                         </div>
                         {/* MyConfig Bottom w/ Carats+Diamonds */}
                         <div className="border-1 rounded-b-3xl w-full bg-gray-50 px-6 pt-4 pb-6">
@@ -202,64 +133,8 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
                             className={`${showRecap ? 'h-[30vh]' : 'h-0'} transition-[height] duration-500 w-full relative`}>
                             <div
                                 className="absolute h-[15%] bottom-0 w-full bg-linear-to-t from-gray-50 to-indigo-0"></div>
-                            <div className="pl-6 pr-3 py-4 h-full">
-                                <ul className="pr-3 h-full overflow-y-scroll">
-                                    <li>
-                                        <h4 className="font-semibold">
-                                            Upper central incisor R
-                                        </h4>
-                                        <p>Full, white</p>
-                                        <span aria-hidden={true}
-                                              className="inline-block h-[1px] w-full bg-slate-950"></span>
-                                        <p className="font-bold w-full text-right">500€</p>
-                                    </li>
-                                    <li>
-                                        <h4 className="font-semibold">
-                                            Upper central incisor L
-                                        </h4>
-                                        <p>Full, white</p>
-                                        <span aria-hidden={true}
-                                              className="inline-block h-[1px] w-full bg-slate-950"></span>
-                                        <p className="font-bold w-full text-right">500€</p>
-                                    </li>
-                                    <li>
-                                        <h4 className="font-semibold">
-                                            Lower central incisor R
-                                        </h4>
-                                        <p>Full, white</p>
-                                        <span aria-hidden={true}
-                                              className="inline-block h-[1px] w-full bg-slate-950"></span>
-                                        <p className="font-bold w-full text-right">500€</p>
-                                    </li>
-                                    <li>
-                                        <h4 className="font-semibold">
-                                            Lower central incisor L
-                                        </h4>
-                                        <p>Full, white</p>
-                                        <span aria-hidden={true}
-                                              className="inline-block h-[1px] w-full bg-slate-950"></span>
-                                        <p className="font-bold w-full text-right">500€</p>
-                                    </li>
-                                    <li>
-                                        <h4 className="font-semibold">
-                                            Upper canine R
-                                        </h4>
-                                        <p>Full, gold</p>
-                                        <span aria-hidden={true}
-                                              className="inline-block h-[1px] w-full bg-slate-950"></span>
-                                        <p className="font-bold w-full text-right">500€</p>
-                                    </li>
-                                    <li>
-                                        <h4 className="font-semibold">
-                                            Upper canine L
-                                        </h4>
-                                        <p>Full, gold</p>
-                                        <span aria-hidden={true}
-                                              className="inline-block h-[1px] w-full bg-slate-950"></span>
-                                        <p className="font-bold w-full text-right">500€</p>
-                                    </li>
-                                </ul>
-                            </div>
+
+                            <RecapList edit={false}/>
                         </div>
 
                         {/* Upload */}

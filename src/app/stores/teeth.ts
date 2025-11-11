@@ -1382,131 +1382,142 @@ export const useTeethStore = create<State>((set, get) => ({
             })
         ),
     reset: () => {
-        set({
-            teethMaterial: {
-                icsdx: 'base',
-                icssx: 'base',
-                icidx: 'base',
-                icisx: 'base',
-                ilsdx: 'base',
-                ilssx: 'base',
-                ilidx: 'base',
-                ilisx: 'base',
-                csdx: 'base',
-                cssx: 'base',
-                cidx: 'base',
-                cisx: 'base',
-            },
-            teethJewelType: {
-                icsdx: 'full',
-                icssx: 'full',
-                icidx: 'full',
-                icisx: 'full',
-                ilsdx: 'full',
-                ilssx: 'full',
-                ilidx: 'full',
-                ilisx: 'full',
-                csdx: 'full',
-                cssx: 'full',
-                cidx: 'full',
-                cisx: 'full',
-            },
-            teethStones: {
-                icsdx: {
-                    shape: undefined,
-                    color: undefined
-                },
-                icssx: {
-                    shape: undefined,
-                    color: undefined
-                },
-                icidx: {
-                    shape: undefined,
-                    color: undefined
-                },
-                icisx: {
-                    shape: undefined,
-                    color: undefined
-                },
-                ilsdx: {
-                    shape: undefined,
-                    color: undefined
-                },
-                ilssx: {
-                    shape: undefined,
-                    color: undefined
-                },
-                ilidx: {
-                    shape: undefined,
-                    color: undefined
-                },
-                ilisx: {
-                    shape: undefined,
-                    color: undefined
-                },
-                csdx: {
-                    shape: undefined,
-                    color: undefined
-                },
-                cssx: {
-                    shape: undefined,
-                    color: undefined
-                },
-                cidx: {
-                    shape: undefined,
-                    color: undefined
-                },
-                cisx: {
-                    shape: undefined,
-                    color: undefined
-                },
-            },
-            teethVisibility: {
-                icsdx: false,
-                icssx: false,
-                icidx: false,
-                icisx: false,
-                ilsdx: false,
-                ilssx: false,
-                ilidx: false,
-                ilisx: false,
-                csdx: false,
-                cssx: false,
-                cidx: false,
-                cisx: false,
-            },
-            teethPaves: {
-                icsdx: {shape: undefined, color: undefined},
-                icssx: {shape: undefined, color: undefined},
-                icidx: {shape: undefined, color: undefined},
-                icisx: {shape: undefined, color: undefined},
-                ilsdx: {shape: undefined, color: undefined},
-                ilssx: {shape: undefined, color: undefined},
-                ilidx: {shape: undefined, color: undefined},
-                ilisx: {shape: undefined, color: undefined},
-                csdx: {shape: undefined, color: undefined},
-                cssx: {shape: undefined, color: undefined},
-                cidx: {shape: undefined, color: undefined},
-                cisx: {shape: undefined, color: undefined},
-            },
-            teethEnamel: {
-                icsdx: undefined,
-                icssx: undefined,
-                icidx: undefined,
-                icisx: undefined,
-                ilsdx: undefined,
-                ilssx: undefined,
-                ilidx: undefined,
-                ilisx: undefined,
-                csdx: undefined,
-                cssx: undefined,
-                cidx: undefined,
-                cisx: undefined,
-        },
-            currentTooth: undefined,
-            activeDefault: undefined,
-            total: 0
-        });
+        set(
+            produce((state) => {
+                // update current history step
+                if(state.currentHistory < state.history.length) {
+                    console.log(state.currentHistory, state.history.length)
+                    state.history = state.history.splice(0, state.currentHistory);
+                }
+                state.currentHistory++;
+
+                state.teethMaterial = {
+                        icsdx: 'base',
+                            icssx: 'base',
+                            icidx: 'base',
+                            icisx: 'base',
+                            ilsdx: 'base',
+                            ilssx: 'base',
+                            ilidx: 'base',
+                            ilisx: 'base',
+                            csdx: 'base',
+                            cssx: 'base',
+                            cidx: 'base',
+                            cisx: 'base',
+                    };
+                state.teethJewelType = {
+                            icsdx: 'full',
+                                icssx: 'full',
+                                icidx: 'full',
+                                icisx: 'full',
+                                ilsdx: 'full',
+                                ilssx: 'full',
+                                ilidx: 'full',
+                                ilisx: 'full',
+                                csdx: 'full',
+                                cssx: 'full',
+                                cidx: 'full',
+                                cisx: 'full',
+                        };
+                state.teethStones = {
+                            icsdx: {
+                                shape: undefined,
+                                    color: undefined
+                            },
+                            icssx: {
+                                shape: undefined,
+                                    color: undefined
+                            },
+                            icidx: {
+                                shape: undefined,
+                                    color: undefined
+                            },
+                            icisx: {
+                                shape: undefined,
+                                    color: undefined
+                            },
+                            ilsdx: {
+                                shape: undefined,
+                                    color: undefined
+                            },
+                            ilssx: {
+                                shape: undefined,
+                                    color: undefined
+                            },
+                            ilidx: {
+                                shape: undefined,
+                                    color: undefined
+                            },
+                            ilisx: {
+                                shape: undefined,
+                                    color: undefined
+                            },
+                            csdx: {
+                                shape: undefined,
+                                    color: undefined
+                            },
+                            cssx: {
+                                shape: undefined,
+                                    color: undefined
+                            },
+                            cidx: {
+                                shape: undefined,
+                                    color: undefined
+                            },
+                            cisx: {
+                                shape: undefined,
+                                    color: undefined
+                            },
+                        };
+                state.teethVisibility = {
+                            icsdx: false,
+                                icssx: false,
+                                icidx: false,
+                                icisx: false,
+                                ilsdx: false,
+                                ilssx: false,
+                                ilidx: false,
+                                ilisx: false,
+                                csdx: false,
+                                cssx: false,
+                                cidx: false,
+                                cisx: false,
+                        };
+                state.teethPaves = {
+                            icsdx: {shape: undefined, color: undefined},
+                            icssx: {shape: undefined, color: undefined},
+                            icidx: {shape: undefined, color: undefined},
+                            icisx: {shape: undefined, color: undefined},
+                            ilsdx: {shape: undefined, color: undefined},
+                            ilssx: {shape: undefined, color: undefined},
+                            ilidx: {shape: undefined, color: undefined},
+                            ilisx: {shape: undefined, color: undefined},
+                            csdx: {shape: undefined, color: undefined},
+                            cssx: {shape: undefined, color: undefined},
+                            cidx: {shape: undefined, color: undefined},
+                            cisx: {shape: undefined, color: undefined},
+                        };
+                state.teethEnamel = {
+                            icsdx: undefined,
+                                icssx: undefined,
+                                icidx: undefined,
+                                icisx: undefined,
+                                ilsdx: undefined,
+                                ilssx: undefined,
+                                ilidx: undefined,
+                                ilisx: undefined,
+                                csdx: undefined,
+                                cssx: undefined,
+                                cidx: undefined,
+                                cisx: undefined,
+                        };
+                state.currentTooth = undefined;
+                state.activeDefault = undefined;
+                state.teethPreciousness = {carats: 10, diamonds: undefined}
+                state.total = 0
+                get().setHistory(state);
+            })
+        );
     },
     setHistory: (state) => {
         state.history = [...state.history,
@@ -1521,7 +1532,6 @@ export const useTeethStore = create<State>((set, get) => ({
                 preciousness: state.teethPreciousness
             }]
         ];
-        console.log(state.currentHistory, state.history)
     },
 
     // states and method to calculate the total price of the current configuration

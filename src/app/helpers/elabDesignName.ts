@@ -8,6 +8,9 @@ export default function elabDesignName(type: string) {
         case 'frameDiamond':
             toothDesign = 'frame';
             break;
+        case 'bezelDiamond':
+            toothDesign = 'bezel';
+            break;
         case 'bar':
         case 'barDiamond':
             toothDesign = 'spacer';
