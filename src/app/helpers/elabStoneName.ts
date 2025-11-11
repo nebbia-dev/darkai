@@ -32,6 +32,12 @@ export default function elabStoneName(color: string) {
         case 'aqua':
             stoneColor = 'aquamarine';
             break;
+        case 'camo':
+            stoneColor = 'camo pattern';
+            break;
+        case 'glitch':
+            stoneColor = 'glitch pattern';
+            break;
         default:
             stoneColor = 'stone';
     }

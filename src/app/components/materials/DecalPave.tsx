@@ -98,6 +98,24 @@ export default function DecalPave({position, pave, stone, scale} : {position:any
     roundYSapph.map.repeat.set(10,10);
     pairs.set('roundYSapph', roundYSapph.map);
 
+    // roundCamo
+    const roundCamo = useTexture({
+        map: 'textures/paves/roundCamo.png',
+    });
+    roundCamo.map.colorSpace = THREE.SRGBColorSpace;
+    roundCamo.map.wrapS = roundCamo.map.wrapT = THREE.RepeatWrapping;
+    roundCamo.map.repeat.set(10,10);
+    pairs.set('roundCamo', roundCamo.map);
+
+    // roundGlitch
+    const roundGlitch = useTexture({
+        map: 'textures/paves/roundGlitch.png',
+    });
+    roundGlitch.map.colorSpace = THREE.SRGBColorSpace;
+    roundGlitch.map.wrapS = roundGlitch.map.wrapT = THREE.RepeatWrapping;
+    roundGlitch.map.repeat.set(10,10);
+    pairs.set('roundGlitch', roundGlitch.map);
+
     /* PRINCESS PAVE*/
     // princessWhD
     const princessWhD = useTexture({
@@ -188,6 +206,24 @@ export default function DecalPave({position, pave, stone, scale} : {position:any
     princessYSapph.map.wrapS = princessYSapph.map.wrapT = THREE.RepeatWrapping;
     princessYSapph.map.repeat.set(10,10);
     pairs.set('princessYSapph', princessYSapph.map);
+
+    // princessCamo
+    const princessCamo = useTexture({
+        map: 'textures/paves/sqCamo.png',
+    });
+    princessCamo.map.colorSpace = THREE.SRGBColorSpace;
+    princessCamo.map.wrapS = princessCamo.map.wrapT = THREE.RepeatWrapping;
+    princessCamo.map.repeat.set(10,10);
+    pairs.set('princessCamo', princessCamo.map);
+
+    // princessGlitch
+    const princessGlitch = useTexture({
+        map: 'textures/paves/sqGlitch.png',
+    });
+    princessGlitch.map.colorSpace = THREE.SRGBColorSpace;
+    princessGlitch.map.wrapS = princessGlitch.map.wrapT = THREE.RepeatWrapping;
+    princessGlitch.map.repeat.set(10,10);
+    pairs.set('princessGlitch', princessGlitch.map);
 
     /* BAGUETTE PAVE*/
     // baguetteWhD
@@ -280,6 +316,24 @@ export default function DecalPave({position, pave, stone, scale} : {position:any
     baguetteYSapph.map.repeat.set(10,10);
     pairs.set('baguetteYSapph', baguetteYSapph.map);
 
+    // baguetteCamo
+    const baguetteCamo = useTexture({
+        map: 'textures/paves/rectCamo.png',
+    });
+    baguetteCamo.map.colorSpace = THREE.SRGBColorSpace;
+    baguetteCamo.map.wrapS = baguetteCamo.map.wrapT = THREE.RepeatWrapping;
+    baguetteCamo.map.repeat.set(10,10);
+    pairs.set('baguetteCamo', baguetteCamo.map);
+
+    // baguetteGlitch
+    const baguetteGlitch = useTexture({
+        map: 'textures/paves/rectGlitch.png',
+    });
+    baguetteGlitch.map.colorSpace = THREE.SRGBColorSpace;
+    baguetteGlitch.map.wrapS = baguetteGlitch.map.wrapT = THREE.RepeatWrapping;
+    baguetteGlitch.map.repeat.set(10,10);
+    pairs.set('baguetteGlitch', baguetteGlitch.map);
+
     /* MOSAIC PAVE*/
     // mosaicWhD
     const mosaicWhD = useTexture({
@@ -371,6 +425,24 @@ export default function DecalPave({position, pave, stone, scale} : {position:any
     mosaicYSapph.map.repeat.set(10,10);
     pairs.set('mosaicYSapph', mosaicYSapph.map);
 
+    // mosaicCamo
+    const mosaicCamo = useTexture({
+        map: 'textures/paves/mosCamo.png',
+    });
+    mosaicCamo.map.colorSpace = THREE.SRGBColorSpace;
+    mosaicCamo.map.wrapS = mosaicCamo.map.wrapT = THREE.RepeatWrapping;
+    mosaicCamo.map.repeat.set(10,10);
+    pairs.set('mosaicCamo', mosaicCamo.map);
+
+    // mosaicGlitch
+    const mosaicGlitch = useTexture({
+        map: 'textures/paves/mosGlitch.png',
+    });
+    mosaicGlitch.map.colorSpace = THREE.SRGBColorSpace;
+    mosaicGlitch.map.wrapS = mosaicGlitch.map.wrapT = THREE.RepeatWrapping;
+    mosaicGlitch.map.repeat.set(10,10);
+    pairs.set('mosaicGlitch', mosaicGlitch.map);
+
     /* HEXAGON PAVE*/
     // hexagonWhD
     const hexagonWhD = useTexture({
@@ -461,6 +533,24 @@ export default function DecalPave({position, pave, stone, scale} : {position:any
     hexagonYSapph.map.wrapS = hexagonYSapph.map.wrapT = THREE.RepeatWrapping;
     hexagonYSapph.map.repeat.set(10,10);
     pairs.set('hexagonYSapph', hexagonYSapph.map);
+
+    // hexagonCamo
+    const hexagonCamo = useTexture({
+        map: 'textures/paves/hexCamo.png',
+    });
+    hexagonCamo.map.colorSpace = THREE.SRGBColorSpace;
+    hexagonCamo.map.wrapS = hexagonCamo.map.wrapT = THREE.RepeatWrapping;
+    hexagonCamo.map.repeat.set(10,10);
+    pairs.set('hexagonCamo', hexagonCamo.map);
+
+    // hexagonGlitch
+    const hexagonGlitch = useTexture({
+        map: 'textures/paves/hexGlitch.png',
+    });
+    hexagonGlitch.map.colorSpace = THREE.SRGBColorSpace;
+    hexagonGlitch.map.wrapS = hexagonGlitch.map.wrapT = THREE.RepeatWrapping;
+    hexagonGlitch.map.repeat.set(10,10);
+    pairs.set('hexagonGlitch', hexagonGlitch.map);
 
     return(
         <Decal scale={scale ?? 1} polygonOffsetFactor={-0} position={position} map={pairs.get(pave+firstCapital(stone))}/>

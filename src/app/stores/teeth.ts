@@ -913,8 +913,11 @@ export const useTeethStore = create<State>((set, get) => ({
                 } else if(color === 'prev') {
                     // diamond is then applied to the corresponding jewel type if a diamondless version is currently selected
 
-                    state.teethPaves[tooth] = {shape: 'round', color:'ruby'};
                     state.teethFinish[tooth] = 'polished';
+
+                    if(!state.teethPaves[tooth].shape) {
+                        state.teethPaves[tooth] = {shape: 'round', color:'ruby'};
+                    }
 
                     switch (state.teethJewelType[tooth]) {
                         case 'full':
@@ -924,31 +927,41 @@ export const useTeethStore = create<State>((set, get) => ({
                             state.teethJewelType[tooth] = 'barDiamond';
                             if (tooth === 'icsdx') {
                                 state.teethJewelType.icssx = 'barDiamond';
-                                state.teethPaves.icssx = {shape: 'round', color:'ruby'};
                                 state.teethFinish.icssx = 'polished';
+                                if(!state.teethPaves.icssx.shape) {
+                                    state.teethPaves.icssx = {shape: 'round', color:'ruby'};
+                                }
                             }
                             if (tooth === 'icssx') {
                                 state.teethJewelType.icsdx = 'barDiamond';
-                                state.teethPaves.icsdx = {shape: 'round', color:'ruby'};
                                 state.teethFinish.icsdx = 'polished';
+                                if(!state.teethPaves.icsdx.shape) {
+                                    state.teethPaves.icsdx = {shape: 'round', color:'ruby'};
+                                }
                             }
                             if (tooth === 'icidx') {
                                 state.teethJewelType.icisx = 'barDiamond';
-                                state.teethPaves.icisx = {shape: 'round', color:'ruby'};
                                 state.teethFinish.icisx = 'polished';
+                                if(!state.teethPaves.icisx.shape) {
+                                    state.teethPaves.icisx = {shape: 'round', color:'ruby'};
+                                }
                             }
                             if (tooth === 'icisx') {
                                 state.teethJewelType.icidx = 'barDiamond';
-                                state.teethPaves.icidx = {shape: 'round', color:'ruby'};
                                 state.teethFinish.icidx = 'polished';
+                                if(!state.teethPaves.icidx.shape) {
+                                    state.teethPaves.icidx = {shape: 'round', color:'ruby'};
+                                }
                             }
                             break;
                         case 'bigBar':
                             state.teethJewelType.cidx = 'bigBarDiamond';
-                            state.teethPaves.cidx = {shape: 'round', color:'ruby'};
+                            if(!state.teethPaves.cidx.shape || !state.teethPaves.cisx.shape) {
+                                state.teethPaves.cidx = {shape: 'round', color:'ruby'};
+                                state.teethPaves.cisx = {shape: 'round', color:'ruby'};
+                            }
                             state.teethFinish.cidx = 'polished';
                             state.teethJewelType.cisx = 'bigBarDiamond';
-                            state.teethPaves.cisx = {shape: 'round', color:'ruby'};
                             state.teethFinish.cisx = 'polished';
                             break;
                         case 'frame':
@@ -981,7 +994,6 @@ export const useTeethStore = create<State>((set, get) => ({
                     } else if(color !== 'whD' && color !== 'brD' && color !== 'blD' && !checkDiamonds()){
                         state.teethPreciousness.diamonds = undefined;
                     }
-                    console.log(JSON.stringify(state.teethPreciousness.diamonds), JSON.stringify(state.teethPaves[tooth].color))
                 }
 
                 // calc total and set history step
