@@ -1252,8 +1252,28 @@ export const useTeethStore = create<State>((set, get) => ({
                     state.currentTooth = undefined;
                 }
 
+                if(!checkDiamonds()) {
+                    state.teethPreciousness.diamonds = undefined;
+                }
+
                 get().calcTotal(state);
                 get().setHistory(state);
+
+                function checkDiamonds() {
+                    let counter = 0;
+                    for(let pave of Object.values(state.teethPaves)) {
+                        if(pave.color === 'whD' || pave.color === 'brD' || pave.color === 'blD') {
+                            counter++;
+                        }
+                    }
+                    for(let stone of Object.values(state.teethStones)) {
+                        if(stone.color === 'whD' || stone.color === 'brD' || stone.color === 'blD') {
+                            counter++;
+                        }
+                    }
+                    console.log(counter, counter>0)
+                    return counter > 0;
+                }
             })
         ),
 

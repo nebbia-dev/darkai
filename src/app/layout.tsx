@@ -17,9 +17,9 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-        <body className="bg-gray-200">
+        <body>
         <AppRouterCacheProvider>
-            <div className="w-[100vw] flex justify-center">
+            <div className="w-[100vw] flex justify-center bg-gray-200">
                 <img className="py-6 w-[132px]" src="/logo.png" alt="darkai logo"/>
             </div>
             {children}

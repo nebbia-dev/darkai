@@ -12,7 +12,7 @@ export default async function Page() {
     console.log(data)
     return(
         <div className="relative left-[7.5vw] w-[92.5vw]">
-            <div className="bg-stone-100 flex flex-col justify-center h-[15vh]">
+            <div className="bg-gray-100 flex flex-col justify-center h-[15vh]">
                 <div className="w-[75vw] mx-auto flex items-center justify-between">
                     <h2 className="font-bold text-2xl">Orders list</h2>
                     <DownloadCsv data={data as unknown as OrderInfo[]}/>
@@ -40,7 +40,7 @@ export default async function Page() {
                         <tbody>
                         {data?.map((order, index) => (
                             <tr key={order.id}
-                                className={`${index % 2 !== 0 ? 'border-t border-b border-t-gray-400 border-b-gray-400' : 'bg-stone-100'}`}>
+                                className={`${index % 2 !== 0 ? 'border-t border-b border-t-gray-400 border-b-gray-400' : 'bg-gray-100'}`}>
                                 <td scope="row" className="text-right h-[2rem] px-2">
                                     <span className="w-[7.5vw] inline-block text-center">
                                         {orderIdConverter(order.order_id)}

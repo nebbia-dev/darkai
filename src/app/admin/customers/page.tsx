@@ -12,7 +12,7 @@ export default async function Page() {
 
     return(
         <div className="relative left-[7.5vw] w-[92.5vw]">
-            <div className="bg-stone-100 flex flex-col justify-center h-[15vh]">
+            <div className="bg-gray-100 flex flex-col justify-center h-[15vh]">
                 <div className="w-[75vw] mx-auto flex items-center justify-between">
                     <h2 className="font-bold text-2xl">Customers list</h2>
                     <DownloadCsv data={data as unknown as CustomerInfo[]} />
@@ -37,7 +37,7 @@ export default async function Page() {
                         <tbody>
                         {data?.map((customer, index) => (
                             <tr key={(customer as unknown as CustomerInfo).id}
-                                className={`${index % 2 !== 0 ? 'border-t border-b border-t-gray-400 border-b-gray-400' : 'bg-stone-100'}`}>
+                                className={`${index % 2 !== 0 ? 'border-t border-b border-t-gray-400 border-b-gray-400' : 'bg-gray-100'}`}>
                                 <td scope="row" className="text-left h-[2rem] pr-2 pl-[10%]">
                                     {(customer as unknown as CustomerInfo).user_id.name} {(customer as unknown as CustomerInfo).user_id.lastname}
                                 </td>
