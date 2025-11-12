@@ -7,9 +7,9 @@ export default function FullMaterial({color} : {color: string}) {
     const envMap = useTeethStore((state) => state.envMap);
         const propsYGoldFull = useTexture({
             map: 'textures/Giallo.webp',
-            normalMap: 'textures/full/all/DefaultMaterial_Normal.webp',
-            metalnessMap: 'textures/full/all/DefaultMaterial_Metallic.webp',
-            roughnessMap: 'textures/full/all/DefaultMaterial_Roughness.webp',
+            // normalMap: 'textures/full/all/DefaultMaterial_Normal.webp',
+            // metalnessMap: 'textures/full/all/DefaultMaterial_Metallic.webp',
+            // roughnessMap: 'textures/full/all/DefaultMaterial_Roughness.webp',
             // aoMap: 'textures/full/DefaultMaterial_Mixed_AO.webp',
         });
         propsYGoldFull.map.colorSpace = THREE.SRGBColorSpace;
@@ -37,12 +37,12 @@ export default function FullMaterial({color} : {color: string}) {
                         : color === 'black'
                             ? propsBGoldFull.map
                             : undefined}
-            normalMap={color !== 'base' ? propsYGoldFull.normalMap : undefined}
-            metalnessMap = {color !== 'base' ? propsYGoldFull.metalnessMap : undefined}
-            roughnessMap = {color !== 'base' ? propsYGoldFull.roughnessMap : undefined}
+            // normalMap={color !== 'base' ? propsYGoldFull.normalMap : undefined}
+            // metalnessMap = {color !== 'base' ? propsYGoldFull.metalnessMap : undefined}
+            // roughnessMap = {color !== 'base' ? propsYGoldFull.roughnessMap : undefined}
             // aoMap = {color !== 'base' ? propsYGoldFull.aoMap : undefined}
             metalness = {color !== 'base' ? 1 : 0}
-            roughness = {color !== 'base' ? 0.5 : 1}
+            roughness = {color !== 'base' ? 0.1 : 1}
             envMap = {envMap}
             color={color !== 'base' ? undefined : 'grey'}
             onUpdate={(self) => (self.needsUpdate = true)}

@@ -1,5 +1,5 @@
 'use client'
-import {Instance, Instances, OrbitControls, useEnvironment, useFBX, useTexture} from '@react-three/drei';
+import {OrbitControls, useEnvironment, useFBX} from '@react-three/drei';
 import type { OrbitControls as OrbitControlsImpl } from 'three-stdlib';
 import Dentiera from "@/app/components/Dentiera";
 import {useTeethStore} from "@/app/stores/teeth";
@@ -24,7 +24,7 @@ import CiSx from "@/app/components/teeth/CiSx";
 import CiSxStone from "@/app/components/teeth/CiSxStone";
 import {State} from "@/app/types/State";
 import * as THREE from 'three'
-import {useFrame, useThree} from "@react-three/fiber";
+import {useThree} from "@react-three/fiber";
 import IlsSxStone from "@/app/components/teeth/IlsSxStone";
 import IlsDxStone from "@/app/components/teeth/IlsDxStone";
 import IcsSxStone from "@/app/components/teeth/IcsSxStone";
@@ -33,9 +33,6 @@ import IliSxStone from "@/app/components/teeth/IliSxStone";
 import IliDxStone from "@/app/components/teeth/IliDxStone";
 import IciSxStone from "@/app/components/teeth/IciSxStone";
 import IciDxStone from "@/app/components/teeth/IciDxStone";
-import StonesMaterial from "@/app/components/materials/StonesMaterial";
-import {MathUtils} from "three";
-import FullMaterial from "@/app/components/materials/FullMaterial";
 
 export default function Configurator() {
     const envMap = useEnvironment({
@@ -45,13 +42,13 @@ export default function Configurator() {
     // Se voglio piazzare anche l'fbx in LoadedMaterials, verosimilmente devo usare qui uno useEffect
     const teeth = useMemo((): FBX => {
         const fbx = useFBX('/models/MOD_Dentiera_Completa_180_Phong_Scala_1 (1).fbx');
-        const fulls = useFBX('/models/MOD_Full_Capsula (2).fbx');
         const stones = useFBX('/models/MOD_Stone (3).fbx');
         const frames = useFBX('/models/MOD_Frame_Capsula (2).fbx');
         const bigBar  = useFBX('/models/MOD_Full_Frame_Capsula.fbx');
         const bars = useFBX('/models/MOD_Bars_Capsula (2).fbx');
         const hearts = useFBX('/models/MOD_Stone_Ametista.fbx');
-
+        const paves = useFBX('/models/Pave_Separati.fbx');
+        const otherFools = useFBX('/models/MOD_Full_All.fbx');
         function getOrigin(mesh:any) {
             const box = new THREE.Box3().setFromObject(mesh);
             return box.getCenter(new THREE.Vector3());
@@ -98,7 +95,7 @@ export default function Configurator() {
         return {
             // INCISIVI CENTRALI
             icsdx: {
-                full: (fulls.children[9] as THREE.Mesh).geometry,
+                full: (otherFools.children[5] as THREE.Mesh).geometry,
                 stones: {
                     marquise: stones.children[0].children[0].children[0],
                     heart: hearts.children[0],
@@ -107,9 +104,9 @@ export default function Configurator() {
                     square: stones.children[0].children[0].children[4]
                 },
                 fullDiamond: {
-                    base: (fbx.children[1].children[0].children[0] as THREE.Mesh).geometry,
-                    full: (fbx.children[1].children[1].children[2] as THREE.Mesh).geometry,
-                    position: getOrigin(fbx.children[1].children[1].children[2])
+                    base: (paves.children[20] as THREE.Mesh).geometry,
+                    full: (paves.children[21] as THREE.Mesh).geometry,
+                    position: getOrigin(paves.children[21])
                 },
                 bar: {
                     full: (bars.children[0] as THREE.Mesh).geometry,
@@ -129,7 +126,7 @@ export default function Configurator() {
                 }
             },
             icssx: {
-                full: (fulls.children[4] as THREE.Mesh).geometry,
+                full: (otherFools.children[2] as THREE.Mesh).geometry,
                 stones: {
                     marquise: stones.children[1].children[0].children[0],
                     heart: hearts.children[3],
@@ -138,9 +135,9 @@ export default function Configurator() {
                     square: stones.children[1].children[0].children[4]
                 },
                 fullDiamond: {
-                    base: (fbx.children[1].children[0].children[6] as THREE.Mesh).geometry,
-                    full: (fbx.children[1].children[1].children[8] as THREE.Mesh).geometry,
-                    position: getOrigin(fbx.children[1].children[1].children[8])
+                    base: (paves.children[22] as THREE.Mesh).geometry,
+                    full: (paves.children[23] as THREE.Mesh).geometry,
+                    position: getOrigin(paves.children[23])
                 },
                 bar: {
                     full: (bars.children[0] as THREE.Mesh).geometry,
@@ -160,7 +157,7 @@ export default function Configurator() {
                 }
             },
             icidx: {
-                full: (fulls.children[0] as THREE.Mesh).geometry,
+                full: (otherFools.children[7] as THREE.Mesh).geometry,
                 stones: {
                     marquise: stones.children[2].children[0].children[0],
                     heart: hearts.children[6],
@@ -169,9 +166,9 @@ export default function Configurator() {
                     square: stones.children[2].children[0].children[4]
                 },
                 fullDiamond: {
-                    base: (fbx.children[1].children[0].children[2] as THREE.Mesh).geometry,
-                    full: (fbx.children[1].children[1].children[5] as THREE.Mesh).geometry,
-                    position: getOrigin(fbx.children[1].children[1].children[5])
+                    base: (paves.children[36] as THREE.Mesh).geometry,
+                    full: (paves.children[37] as THREE.Mesh).geometry,
+                    position: getOrigin(paves.children[37])
                 },
                 bar: {
                     full: (bars.children[3] as THREE.Mesh).geometry,
@@ -191,7 +188,7 @@ export default function Configurator() {
                 }
             },
             icisx: {
-                full: (fulls.children[2] as THREE.Mesh).geometry,
+                full: (otherFools.children[6] as THREE.Mesh).geometry,
                 stones: {
                     marquise: stones.children[3].children[0].children[0],
                     heart: hearts.children[9],
@@ -200,9 +197,9 @@ export default function Configurator() {
                     square: stones.children[3].children[0].children[4]
                 },
                 fullDiamond: {
-                    base: (fbx.children[1].children[0].children[8] as THREE.Mesh).geometry,
-                    full: (fbx.children[1].children[1].children[11] as THREE.Mesh).geometry,
-                    position: getOrigin(fbx.children[1].children[1].children[11])
+                    base: (paves.children[38] as THREE.Mesh).geometry,
+                    full: (paves.children[39] as THREE.Mesh).geometry,
+                    position: getOrigin(paves.children[39])
                 },
                 bar: {
                     full: (bars.children[3] as THREE.Mesh).geometry,
@@ -223,7 +220,7 @@ export default function Configurator() {
             },
             // INCISIVI LATERALI
             ilsdx: {
-                full: (fulls.children[8] as THREE.Mesh).geometry,
+                full: (otherFools.children[4] as THREE.Mesh).geometry,
                 stones: {
                     marquise: stones.children[0].children[1].children[0],
                     heart: hearts.children[1],
@@ -232,9 +229,9 @@ export default function Configurator() {
                     square: stones.children[0].children[1].children[4]
                 },
                 fullDiamond: {
-                    base: (fbx.children[1].children[0].children[1] as THREE.Mesh).geometry,
-                    full: (fbx.children[1].children[1].children[0] as THREE.Mesh).geometry,
-                    position: getOrigin(fbx.children[1].children[1].children[0])
+                    base: (paves.children[44] as THREE.Mesh).geometry,
+                    full: (paves.children[45] as THREE.Mesh).geometry,
+                    position: getOrigin(paves.children[45])
                 },
                 bar: {
                     full: (bars.children[1] as THREE.Mesh).geometry,
@@ -254,7 +251,7 @@ export default function Configurator() {
                 }
             },
             ilssx: {
-                full: (fulls.children[11] as THREE.Mesh).geometry,
+                full: (otherFools.children[1] as THREE.Mesh).geometry,
                 stones: {
                     marquise: stones.children[1].children[1].children[0],
                     heart: hearts.children[4],
@@ -263,9 +260,9 @@ export default function Configurator() {
                     square: stones.children[1].children[1].children[4]
                 },
                 fullDiamond: {
-                    base: (fbx.children[1].children[0].children[7] as THREE.Mesh).geometry,
-                    full: (fbx.children[1].children[1].children[6] as THREE.Mesh).geometry,
-                    position: getOrigin(fbx.children[1].children[1].children[6])
+                    base: (paves.children[46] as THREE.Mesh).geometry,
+                    full: (paves.children[47] as THREE.Mesh).geometry,
+                    position: getOrigin(paves.children[47])
                 },
                 bar: {
                     full: (bars.children[2] as THREE.Mesh).geometry,
@@ -285,7 +282,7 @@ export default function Configurator() {
                 }
             },
             ilidx: {
-                full: (fulls.children[1] as THREE.Mesh).geometry,
+                full: (otherFools.children[9] as THREE.Mesh).geometry,
                 stones: {
                     marquise: stones.children[2].children[1].children[0],
                     heart: hearts.children[7],
@@ -294,9 +291,9 @@ export default function Configurator() {
                     square: stones.children[2].children[1].children[4]
                 },
                 fullDiamond: {
-                    base: (fbx.children[1].children[0].children[5] as THREE.Mesh).geometry,
-                    full: (fbx.children[1].children[1].children[1] as THREE.Mesh).geometry,
-                    position: getOrigin(fbx.children[1].children[1].children[1])
+                    base: (paves.children[32] as THREE.Mesh).geometry,
+                    full: (paves.children[33] as THREE.Mesh).geometry,
+                    position: getOrigin(paves.children[33])
                 },
                 bar: {
                     full: (bars.children[4] as THREE.Mesh).geometry,
@@ -316,7 +313,7 @@ export default function Configurator() {
                 }
             },
             ilisx: {
-                full: (fulls.children[3] as THREE.Mesh).geometry,
+                full: (otherFools.children[8] as THREE.Mesh).geometry,
                 stones: {
                     marquise: stones.children[3].children[1].children[0],
                     heart: hearts.children[10],
@@ -325,9 +322,9 @@ export default function Configurator() {
                     square: stones.children[3].children[1].children[4]
                 },
                 fullDiamond: {
-                    base: (fbx.children[1].children[0].children[11] as THREE.Mesh).geometry,
-                    full: (fbx.children[1].children[1].children[7] as THREE.Mesh).geometry,
-                    position: getOrigin(fbx.children[1].children[1].children[7])
+                    base: (paves.children[34] as THREE.Mesh).geometry,
+                    full: (paves.children[35] as THREE.Mesh).geometry,
+                    position: getOrigin(paves.children[35])
                 },
                 bar: {
                     full: (bars.children[5] as THREE.Mesh).geometry,
@@ -348,7 +345,7 @@ export default function Configurator() {
             },
             // CANINI
             csdx: {
-                full: (fulls.children[7] as THREE.Mesh).geometry,
+                full: (otherFools.children[3] as THREE.Mesh).geometry,
                 stones: {
                     marquise: stones.children[0].children[2].children[0],
                     heart: hearts.children[2],
@@ -357,9 +354,9 @@ export default function Configurator() {
                     square: stones.children[0].children[2].children[4]
                 },
                 fullDiamond: {
-                    base: (fbx.children[1].children[0].children[4] as THREE.Mesh).geometry,
-                    full: (fbx.children[1].children[1].children[3] as THREE.Mesh).geometry,
-                    position: getOrigin(fbx.children[1].children[1].children[3])
+                    base: (paves.children[41] as THREE.Mesh).geometry,
+                    full: (paves.children[40] as THREE.Mesh).geometry,
+                    position: getOrigin(paves.children[40])
                 },
                 bar: {
                     full: (bars.children[6] as THREE.Mesh).geometry,
@@ -379,7 +376,7 @@ export default function Configurator() {
                 }
             },
             cssx: {
-                full: (fulls.children[10] as THREE.Mesh).geometry,
+                full: (otherFools.children[0] as THREE.Mesh).geometry,
                 stones: {
                     marquise: stones.children[1].children[2].children[0],
                     heart: hearts.children[5],
@@ -388,9 +385,9 @@ export default function Configurator() {
                     square: stones.children[1].children[2].children[4]
                 },
                 fullDiamond: {
-                    base: (fbx.children[1].children[0].children[10] as THREE.Mesh).geometry,
-                    full: (fbx.children[1].children[1].children[9] as THREE.Mesh).geometry,
-                    position: getOrigin(fbx.children[1].children[1].children[9])
+                    base: (paves.children[43] as THREE.Mesh).geometry,
+                    full: (paves.children[42] as THREE.Mesh).geometry,
+                    position: getOrigin(paves.children[42])
                 },
                 bar: {
                     full: (bars.children[7] as THREE.Mesh).geometry,
@@ -410,7 +407,7 @@ export default function Configurator() {
                 }
             },
             cidx: {
-                full: (fulls.children[5] as THREE.Mesh).geometry,
+                full: (otherFools.children[11] as THREE.Mesh).geometry,
                 stones: {
                     marquise: stones.children[2].children[2].children[0],
                     heart: hearts.children[8],
@@ -419,9 +416,9 @@ export default function Configurator() {
                     square: stones.children[2].children[2].children[4]
                 },
                 fullDiamond: {
-                    base: (fbx.children[1].children[0].children[3] as THREE.Mesh).geometry,
-                    full: (fbx.children[1].children[1].children[4] as THREE.Mesh).geometry,
-                    position: getOrigin(fbx.children[1].children[1].children[4])
+                    base: (paves.children[28] as THREE.Mesh).geometry,
+                    full: (paves.children[29] as THREE.Mesh).geometry,
+                    position: getOrigin(paves.children[29])
                 },
                 frame: {
                     full: (frames.children[10] as THREE.Mesh).geometry,
@@ -449,7 +446,7 @@ export default function Configurator() {
                 }
             },
             cisx: {
-                full: (fulls.children[6] as THREE.Mesh).geometry,
+                full: (otherFools.children[10] as THREE.Mesh).geometry,
                 stones: {
                     marquise: stones.children[3].children[2].children[0],
                     heart: hearts.children[11],
@@ -458,9 +455,9 @@ export default function Configurator() {
                     square: stones.children[3].children[2].children[4]
                 },
                 fullDiamond: {
-                    base: (fbx.children[1].children[0].children[9] as THREE.Mesh).geometry,
-                    full: (fbx.children[1].children[1].children[10] as THREE.Mesh).geometry,
-                    position: getOrigin(fbx.children[1].children[1].children[10])
+                    base: (paves.children[30] as THREE.Mesh).geometry,
+                    full: (paves.children[31] as THREE.Mesh).geometry,
+                    position: getOrigin(paves.children[31])
                 },
                 frame: {
                     full: (frames.children[11] as THREE.Mesh).geometry,
@@ -486,7 +483,106 @@ export default function Configurator() {
                         position: getOrigin(fbx.children[3].children[0].children[1])
                     }
                 }
-            }
+            },
+            // PRIMI PREMOLARI
+            pprsdx: {
+                full: (otherFools.children[30] as THREE.Mesh).geometry,
+                fullDiamond: {
+                    base: (paves.children[17] as THREE.Mesh).geometry,
+                    full: (paves.children[16] as THREE.Mesh).geometry,
+                    position: getOrigin(paves.children[16])
+                },
+            },
+            pprssx: {
+                full: (otherFools.children[20] as THREE.Mesh).geometry,
+                fullDiamond: {
+                    base: (paves.children[19] as THREE.Mesh).geometry,
+                    full: (paves.children[18] as THREE.Mesh).geometry,
+                    position: getOrigin(paves.children[18])
+                },
+            },
+            ppridx: {
+                full: (otherFools.children[16] as THREE.Mesh).geometry,
+                fullDiamond: {
+                    base: (paves.children[12] as THREE.Mesh).geometry,
+                    full: (paves.children[13] as THREE.Mesh).geometry,
+                    position: getOrigin(paves.children[13])
+                },
+            },
+            pprisx: {
+                full: (otherFools.children[19] as THREE.Mesh).geometry,
+                fullDiamond: {
+                    base: (paves.children[14] as THREE.Mesh).geometry,
+                    full: (paves.children[15] as THREE.Mesh).geometry,
+                    position: getOrigin(paves.children[15])
+                },
+            },
+            // SECONDI PREMOLARI
+            sprsdx: {
+                full: (otherFools.children[22] as THREE.Mesh).geometry,
+                fullDiamond: {
+                    base: (paves.children[0] as THREE.Mesh).geometry,
+                    full: (paves.children[1] as THREE.Mesh).geometry,
+                    position: getOrigin(paves.children[1])
+                },
+            },
+            sprssx: {
+                full: (otherFools.children[17] as THREE.Mesh).geometry,
+                fullDiamond: {
+                    base: (paves.children[2] as THREE.Mesh).geometry,
+                    full: (paves.children[3] as THREE.Mesh).geometry,
+                    position: getOrigin(paves.children[3])
+                },
+            },
+            spridx: {
+                full: (otherFools.children[14] as THREE.Mesh).geometry,
+                fullDiamond: {
+                    base: (paves.children[8] as THREE.Mesh).geometry,
+                    full: (paves.children[9] as THREE.Mesh).geometry,
+                    position: getOrigin(paves.children[9])
+                },
+            },
+            sprisx: {
+                full: (otherFools.children[31] as THREE.Mesh).geometry,
+                fullDiamond: {
+                    base: (paves.children[10] as THREE.Mesh).geometry,
+                    full: (paves.children[11] as THREE.Mesh).geometry,
+                    position: getOrigin(paves.children[11])
+                },
+            },
+            // MOLARI
+            msdx: {
+                full: (otherFools.children[28] as THREE.Mesh).geometry,
+                fullDiamond: {
+                    base: (paves.children[24] as THREE.Mesh).geometry,
+                    full: (paves.children[25] as THREE.Mesh).geometry,
+                    position: getOrigin(paves.children[25])
+                },
+            },
+            mssx: {
+                full: (otherFools.children[12] as THREE.Mesh).geometry,
+                fullDiamond: {
+                    base: (paves.children[26] as THREE.Mesh).geometry,
+                    full: (paves.children[27] as THREE.Mesh).geometry,
+                    position: getOrigin(paves.children[27])
+                },
+            },
+            midx: {
+                full: (otherFools.children[27] as THREE.Mesh).geometry,
+                fullDiamond: {
+                    base: (paves.children[4] as THREE.Mesh).geometry,
+                    full: (paves.children[5] as THREE.Mesh).geometry,
+                    position: getOrigin(paves.children[5])
+                },
+            },
+            misx: {
+                full: (otherFools.children[29] as THREE.Mesh).geometry,
+                fullDiamond: {
+                    base: (paves.children[6] as THREE.Mesh).geometry,
+                    full: (paves.children[7] as THREE.Mesh).geometry,
+                    position: getOrigin(paves.children[7])
+                },
+            },
         }
 
     }, [])
@@ -529,71 +625,6 @@ export default function Configurator() {
         setEnvMap(envMap);
     }, []);
 
-    // Instances prova
-    // const particles = Array.from({length: 15}, () => ({
-    //     factor: MathUtils.randInt(20, 100),
-    //     speed: MathUtils.randFloat(0.01, 0.75),
-    //     xFactor: MathUtils.randFloatSpread(40),
-    //     yFactor: MathUtils.randFloatSpread(10),
-    //     zFactor: MathUtils.randFloatSpread(10)
-    // }))
-    // const pos = [
-    //     [0,-0.4,0],
-    //     [1,-0.2,0],
-    //     [2,0,0],
-    //     [3,-0.2,0],
-    //     [4,-0.4,0],
-    //     [0,-0.4,1],
-    //     [1,-0.2,1],
-    //     [2,0,1],
-    //     [3,-0.2,1],
-    //     [4,-0.4,1],
-    //     [0,-0.4,2],
-    //     [1,-0.2,2],
-    //     [2,0,2],
-    //     [3,-0.2,2],
-    //     [4,-0.4,2]
-    // ]
-    // function Bubbles() {
-    //     const diamond = useFBX('/models/MOD_Diamante_LOD.fbx');
-    //
-    //     return (
-    //         <Instances limit={particles.length}
-    //                    scale={[0.0007, 0.0007, 0.0007]} rotation={[Math.PI/2, 0, 0]}
-    //         >
-    //             {/*<boxGeometry/>*/}
-    //             <bufferGeometry>
-    //                 <bufferAttribute
-    //                     attach='attributes-position'
-    //                     array={diamond.children[0].geometry.attributes.position.array}
-    //                     count={diamond.children[0].geometry.attributes.position.array.length / 3}
-    //                     itemSize={3}
-    //                 ></bufferAttribute>
-    //                 <bufferAttribute
-    //                     attach='attributes-normal'
-    //                     array={diamond.children[0].geometry.attributes.normal.array}
-    //                     count={diamond.children[0].geometry.attributes.normal.array.length / 3}
-    //                     itemSize={3}
-    //                 ></bufferAttribute>
-    //                 <bufferAttribute
-    //                     attach='attributes-uv'
-    //                     array={diamond.children[0].geometry.attributes.uv.array}
-    //                     count={diamond.children[0].geometry.attributes.uv.array.length / 2}
-    //                     itemSize={2}
-    //                 ></bufferAttribute>
-    //             </bufferGeometry>
-    //            <FullMaterial color="gold"/>
-    //             {particles.map((data, i) => (
-    //                 <Instance key={i} position={[
-    //                     pos[i][0] * 200,
-    //                     pos[i][1] * 200,
-    //                     pos[i][2] * 200
-    //                 ]} />
-    //             ))}
-    //         </Instances>
-    //     )
-    // }
-
     return (
         <>
             <OrbitControls
@@ -603,8 +634,6 @@ export default function Configurator() {
                 maxPolarAngle={Math.PI - Math.PI / 3}
                 ref={orbitRef}/>
 
-
-            {/*{savedEnvMap && <Bubbles/>}*/}
             {savedEnvMap && <LoadedMaterials/>}
             {savedTeeth && savedEnvMap &&
                 <>

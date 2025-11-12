@@ -391,4 +391,103 @@ export default interface FBX {
             }
         }
     }  | undefined,
+    // PRIMI PREMOLARI
+    pprsdx: {
+        full: THREE.BufferGeometry,
+        fullDiamond: {
+            base: THREE.BufferGeometry,
+            full: THREE.BufferGeometry,
+            position: THREE.Vector3
+        }
+    } | undefined,
+    pprssx: {
+        full: THREE.BufferGeometry,
+        fullDiamond: {
+            base: THREE.BufferGeometry,
+            full: THREE.BufferGeometry,
+            position: THREE.Vector3
+        }
+    } | undefined,
+    ppridx: {
+        full: THREE.BufferGeometry,
+        fullDiamond: {
+            base: THREE.BufferGeometry,
+            full: THREE.BufferGeometry,
+            position: THREE.Vector3
+        }
+    } | undefined,
+    pprisx: {
+        full: THREE.BufferGeometry,
+        fullDiamond: {
+            base: THREE.BufferGeometry,
+            full: THREE.BufferGeometry,
+            position: THREE.Vector3
+        }
+    } | undefined,
+    // SECONDI PREMOLARI
+    sprsdx: {
+        full: THREE.BufferGeometry,
+        fullDiamond: {
+            base: THREE.BufferGeometry,
+            full: THREE.BufferGeometry,
+            position: THREE.Vector3
+        }
+    } | undefined,
+    sprssx: {
+        full: THREE.BufferGeometry,
+        fullDiamond: {
+            base: THREE.BufferGeometry,
+            full: THREE.BufferGeometry,
+            position: THREE.Vector3
+        }
+    } | undefined,
+    spridx: {
+        full: THREE.BufferGeometry,
+        fullDiamond: {
+            base: THREE.BufferGeometry,
+            full: THREE.BufferGeometry,
+            position: THREE.Vector3
+        }
+    } | undefined,
+    sprisx: {
+        full: THREE.BufferGeometry,
+        fullDiamond: {
+            base: THREE.BufferGeometry,
+            full: THREE.BufferGeometry,
+            position: THREE.Vector3
+        }
+    } | undefined,
+    // MOLARI
+    msdx: {
+        full: THREE.BufferGeometry,
+        fullDiamond: {
+            base: THREE.BufferGeometry,
+            full: THREE.BufferGeometry,
+            position: THREE.Vector3
+        }
+    } | undefined,
+    mssx: {
+        full: THREE.BufferGeometry,
+        fullDiamond: {
+            base: THREE.BufferGeometry,
+            full: THREE.BufferGeometry,
+            position: THREE.Vector3
+        }
+    } | undefined,
+    midx: {
+        full: THREE.BufferGeometry,
+        fullDiamond: {
+            base: THREE.BufferGeometry,
+            full: THREE.BufferGeometry,
+            position: THREE.Vector3
+        }
+    } | undefined,
+    misx: {
+        full: THREE.BufferGeometry,
+        fullDiamond: {
+            base: THREE.BufferGeometry,
+            full: THREE.BufferGeometry,
+            position: THREE.Vector3
+        }
+    }| undefined,
 }
