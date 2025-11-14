@@ -33,11 +33,15 @@ import IliSxStone from "@/app/components/teeth/IliSxStone";
 import IliDxStone from "@/app/components/teeth/IliDxStone";
 import IciSxStone from "@/app/components/teeth/IciSxStone";
 import IciDxStone from "@/app/components/teeth/IciDxStone";
+import FullMaterial from "@/app/components/materials/FullMaterial";
 
 export default function Configurator() {
     const envMap = useEnvironment({
         files: "envMaps/HDR_Light_Studio_Free_HDRI_Design_13.exr"
     })
+
+    const signatures = useFBX('/models/Gioielli_Separati_SI.fbx');
+    console.log(signatures)
 
     // Se voglio piazzare anche l'fbx in LoadedMaterials, verosimilmente devo usare qui uno useEffect
     const teeth = useMemo((): FBX => {
@@ -633,6 +637,96 @@ export default function Configurator() {
                 minPolarAngle={Math.PI / 3}
                 maxPolarAngle={Math.PI - Math.PI / 3}
                 ref={orbitRef}/>
+
+            {/*/!*Hammered Frames*!/*/}
+            {/*/!*icidx*!/*/}
+            {/*<mesh geometry={signatures.children[0].children[0].children[0].geometry}>*/}
+            {/*    <FullMaterial color="gold"/>*/}
+            {/*</mesh>*/}
+            {/*/!*ilssx*!/*/}
+            {/*<mesh geometry={signatures.children[0].children[0].children[1].geometry}>*/}
+            {/*    <FullMaterial color="gold"/>*/}
+            {/*</mesh>*/}
+            {/*/!*ilsdx*!/*/}
+            {/*<mesh geometry={signatures.children[0].children[1].children[0].geometry}>*/}
+            {/*    <FullMaterial color="gold"/>*/}
+            {/*</mesh>*/}
+            {/*/!*ilisx*!/*/}
+            {/*<mesh geometry={signatures.children[0].children[1].children[1].geometry}>*/}
+            {/*    <FullMaterial color="gold"/>*/}
+            {/*</mesh>*/}
+
+            {/*/!*Cross Spacer*!/*/}
+            {/*/!*icsdx + icssx*!/*/}
+            {/*<mesh geometry={signatures.children[1].geometry} position={signatures.children[1].position}>*/}
+            {/*    <FullMaterial color="gold"/>*/}
+            {/*</mesh>*/}
+
+            {/*/!*Tribals*!/*/}
+            {/*/!*arcata superiore*!/*/}
+            {/*<mesh geometry={signatures.children[2].geometry} position={signatures.children[2].position}>*/}
+            {/*    <FullMaterial color="gold"/>*/}
+            {/*</mesh>*/}
+
+            {/*/!*BubbleGum*!/*/}
+            {/*/!*arcata superiore*!/*/}
+            {/*<mesh geometry={signatures.children[3].geometry} position={signatures.children[3].position}>*/}
+            {/*    <FullMaterial color="gold"/>*/}
+            {/*</mesh>*/}
+
+            {/*/!*Sprinkles*!/*/}
+            {/*/!*csdx*!/*/}
+            {/*<mesh geometry={signatures.children[4].children[0].geometry}>*/}
+            {/*    <FullMaterial color="gold"/>*/}
+            {/*</mesh>*/}
+            {/*/!*cssx*!/*/}
+            {/*<mesh geometry={signatures.children[4].children[1].geometry}>*/}
+            {/*    <FullMaterial color="gold"/>*/}
+            {/*</mesh>*/}
+            {/*/!*ilsdx*!/*/}
+            {/*<mesh geometry={signatures.children[4].children[2].geometry}>*/}
+            {/*    <FullMaterial color="gold"/>*/}
+            {/*</mesh>*/}
+            {/*/!*ilssx*!/*/}
+            {/*<mesh geometry={signatures.children[4].children[3].geometry}>*/}
+            {/*    <FullMaterial color="gold"/>*/}
+            {/*</mesh>*/}
+
+            {/*/!*Braces*!/*/}
+            {/*/!*struttura*!/*/}
+            {/*<mesh geometry={signatures.children[5].children[0].geometry} position={signatures.children[5].position}>*/}
+            {/*    <FullMaterial color="gold"/>*/}
+            {/*</mesh>*/}
+            {/*/!*pave canini*!/*/}
+            {/*<mesh geometry={signatures.children[5].children[1].geometry} position={signatures.children[5].position}>*/}
+            {/*    <FullMaterial color="gold"/>*/}
+            {/*</mesh>*/}
+            {/*/!*pietre*!/*/}
+            {/*<mesh geometry={signatures.children[5].children[2].geometry} position={signatures.children[5].position}>*/}
+            {/*    <FullMaterial color="gold"/>*/}
+            {/*</mesh>*/}
+            {/*/!*contorno pietre*!/*/}
+            {/*<mesh geometry={signatures.children[5].children[3].geometry} position={signatures.children[5].position}>*/}
+            {/*    <FullMaterial color="gold"/>*/}
+            {/*</mesh>*/}
+
+            {/*/!*Vamp*!/*/}
+            {/*/!*pave csdx*!/*/}
+            {/*<mesh geometry={signatures.children[6].children[0].geometry}>*/}
+            {/*    <FullMaterial color="gold"/>*/}
+            {/*</mesh>*/}
+            {/*/!*base csdx*!/*/}
+            {/*<mesh geometry={signatures.children[6].children[1].geometry}>*/}
+            {/*    <FullMaterial color="gold"/>*/}
+            {/*</mesh>*/}
+            {/*/!*pave cssx*!/*/}
+            {/*<mesh geometry={signatures.children[6].children[2].geometry}>*/}
+            {/*    <FullMaterial color="gold"/>*/}
+            {/*</mesh>*/}
+            {/*/!*base cssx*!/*/}
+            {/*<mesh geometry={signatures.children[6].children[3].geometry}>*/}
+            {/*    <FullMaterial color="gold"/>*/}
+            {/*</mesh>*/}
 
             {savedEnvMap && <LoadedMaterials/>}
             {savedTeeth && savedEnvMap &&
