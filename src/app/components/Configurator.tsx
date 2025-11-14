@@ -34,6 +34,18 @@ import IliDxStone from "@/app/components/teeth/IliDxStone";
 import IciSxStone from "@/app/components/teeth/IciSxStone";
 import IciDxStone from "@/app/components/teeth/IciDxStone";
 import FullMaterial from "@/app/components/materials/FullMaterial";
+import PprsDx from "@/app/components/teeth/PprsDx";
+import PprsSx from "@/app/components/teeth/PprsSx";
+import PpriDx from "@/app/components/teeth/PpriDx";
+import PpriSx from "@/app/components/teeth/PpriSx";
+import SprsDx from "@/app/components/teeth/SprsDx";
+import SprsSx from "@/app/components/teeth/SprsSx";
+import SpriDx from "@/app/components/teeth/SpriDx";
+import SpriSx from "@/app/components/teeth/SpriSx";
+import MsDx from "@/app/components/teeth/MsDx";
+import MiSx from "@/app/components/teeth/MiSx";
+import MsSx from "@/app/components/teeth/MsSx";
+import MiDx from "@/app/components/teeth/MiDx";
 
 export default function Configurator() {
     const envMap = useEnvironment({
@@ -41,7 +53,6 @@ export default function Configurator() {
     })
 
     const signatures = useFBX('/models/Gioielli_Separati_SI.fbx');
-    console.log(signatures)
 
     // Se voglio piazzare anche l'fbx in LoadedMaterials, verosimilmente devo usare qui uno useEffect
     const teeth = useMemo((): FBX => {
@@ -531,7 +542,7 @@ export default function Configurator() {
                 },
             },
             sprssx: {
-                full: (otherFools.children[17] as THREE.Mesh).geometry,
+                full: (otherFools.children[12] as THREE.Mesh).geometry,
                 fullDiamond: {
                     base: (paves.children[2] as THREE.Mesh).geometry,
                     full: (paves.children[3] as THREE.Mesh).geometry,
@@ -564,7 +575,7 @@ export default function Configurator() {
                 },
             },
             mssx: {
-                full: (otherFools.children[12] as THREE.Mesh).geometry,
+                full: (otherFools.children[17] as THREE.Mesh).geometry,
                 fullDiamond: {
                     base: (paves.children[26] as THREE.Mesh).geometry,
                     full: (paves.children[27] as THREE.Mesh).geometry,
@@ -728,6 +739,10 @@ export default function Configurator() {
             {/*    <FullMaterial color="gold"/>*/}
             {/*</mesh>*/}
 
+            {/*<mesh geometry={otherFools.children[27].geometry}>*/}
+            {/*    <FullMaterial color="gold"/>*/}
+            {/*</mesh>*/}
+
             {savedEnvMap && <LoadedMaterials/>}
             {savedTeeth && savedEnvMap &&
                 <>
@@ -757,6 +772,19 @@ export default function Configurator() {
                     <CiDxStone/>
                     <CiSx/>
                     <CiSxStone/>
+                    {/*MOLARI E PREMOLARI*/}
+                    <PprsDx/>
+                    <PprsSx/>
+                    <PpriDx/>
+                    <PpriSx/>
+                    <SprsDx/>
+                    <SprsSx/>
+                    <SpriDx/>
+                    <SpriSx/>
+                    <MsDx/>
+                    <MsSx/>
+                    <MiDx/>
+                    <MiSx/>
                     {/*BASE*/}
                     <Dentiera/>
                 </>

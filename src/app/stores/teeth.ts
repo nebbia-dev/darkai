@@ -42,6 +42,18 @@ export const useTeethStore = create<State>((set, get) => ({
         cssx: undefined,
         cidx: undefined,
         cisx: undefined,
+        pprsdx: undefined,
+        pprssx: undefined,
+        ppridx: undefined,
+        pprisx: undefined,
+        sprsdx: undefined,
+        sprssx: undefined,
+        spridx: undefined,
+        sprisx: undefined,
+        msdx: undefined,
+        mssx: undefined,
+        midx: undefined,
+        misx: undefined
     },
     setGeometry: (fbx) => {
         set({teethGeometry: fbx});
@@ -61,6 +73,18 @@ export const useTeethStore = create<State>((set, get) => ({
         cssx: false,
         cidx: false,
         cisx: false,
+        pprsdx: false,
+        pprssx: false,
+        ppridx: false,
+        pprisx: false,
+        sprsdx: false,
+        sprssx: false,
+        spridx: false,
+        sprisx: false,
+        msdx: false,
+        mssx: false,
+        midx: false,
+        misx: false
     },
 
     // state and method to set the material (gold, rose or white) of each jewel
@@ -77,6 +101,18 @@ export const useTeethStore = create<State>((set, get) => ({
         cssx: 'base',
         cidx: 'base',
         cisx: 'base',
+        pprsdx: 'base',
+        pprssx: 'base',
+        ppridx: 'base',
+        pprisx: 'base',
+        sprsdx: 'base',
+        sprssx: 'base',
+        spridx: 'base',
+        sprisx: 'base',
+        msdx: 'base',
+        mssx: 'base',
+        midx: 'base',
+        misx: 'base'
     },
     setMaterial: (tooth, color) =>
         set(
@@ -159,6 +195,18 @@ export const useTeethStore = create<State>((set, get) => ({
         cssx: 'full',
         cidx: 'full',
         cisx: 'full',
+        pprsdx: 'full',
+        pprssx: 'full',
+        ppridx: 'full',
+        pprisx: 'full',
+        sprsdx: 'full',
+        sprssx: 'full',
+        spridx: 'full',
+        sprisx: 'full',
+        msdx: 'full',
+        mssx: 'full',
+        midx: 'full',
+        misx: 'full'
     },
     setType: (tooth, type) =>
         set(
@@ -815,6 +863,18 @@ export const useTeethStore = create<State>((set, get) => ({
         cssx: 'polished',
         cidx: 'polished',
         cisx: 'polished',
+        pprsdx: 'polished',
+        pprssx: 'polished',
+        ppridx: 'polished',
+        pprisx: 'polished',
+        sprsdx: 'polished',
+        sprssx: 'polished',
+        spridx: 'polished',
+        sprisx: 'polished',
+        msdx: 'polished',
+        mssx: 'polished',
+        midx: 'polished',
+        misx: 'polished'
     },
 
     // state to keep track of pave stones
@@ -831,6 +891,18 @@ export const useTeethStore = create<State>((set, get) => ({
         cssx: {shape: undefined, color: undefined},
         cidx: {shape: undefined, color: undefined},
         cisx: {shape: undefined, color: undefined},
+        pprsdx: {shape: undefined, color: undefined},
+        pprssx: {shape: undefined, color: undefined},
+        ppridx: {shape: undefined, color: undefined},
+        pprisx: {shape: undefined, color: undefined},
+        sprsdx: {shape: undefined, color: undefined},
+        sprssx: {shape: undefined, color: undefined},
+        spridx: {shape: undefined, color: undefined},
+        sprisx: {shape: undefined, color: undefined},
+        msdx: {shape: undefined, color: undefined},
+        mssx: {shape: undefined, color: undefined},
+        midx: {shape: undefined, color: undefined},
+        misx: {shape: undefined, color: undefined}
     },
     setPave: (tooth, pave: string, color:string|undefined) =>
         set(

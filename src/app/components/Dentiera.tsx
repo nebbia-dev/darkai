@@ -90,6 +90,43 @@ export default function Dentiera() {
             case "Incisivo_C_S_DX":
                 setActive('icsdx');
                 break;
+            //
+            case "Premolare_1_S_DX":
+                setActive('pprsdx');
+                break;
+            case "Premolare_2_S_DX":
+                setActive('sprsdx');
+                break;
+            case "Molare_S_DX":
+                setActive('msdx');
+                break;
+            case "Premolare_1_S_SX":
+                setActive('pprssx');
+                break;
+            case "Premolare_2_S_SX":
+                setActive('sprssx');
+                break;
+            case "Molare_S_SX":
+                setActive('mssx');
+                break;
+            case "Premolare_1_I_DX":
+                setActive('ppridx');
+                break;
+            case "Premolare_2_I_DX":
+                setActive('spridx');
+                break;
+            case "Molare_I_DX":
+                setActive('midx');
+                break;
+            case "Premolare_1_I_SX":
+                setActive('pprisx');
+                break;
+            case "Premolare_2_I_SX":
+                setActive('sprisx');
+                break;
+            case "Molare_I_SX":
+                setActive('misx');
+                break;
         }
         setRecap(false);
     }

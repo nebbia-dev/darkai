@@ -16,8 +16,22 @@ interface Materials {
     cssx: string,
     cidx: string,
     cisx: string,
-}
 
+    pprsdx: string,
+    pprssx: string,
+    ppridx: string,
+    pprisx: string,
+
+    sprsdx: string,
+    sprssx: string,
+    spridx: string,
+    sprisx: string,
+
+    msdx: string,
+    mssx: string,
+    midx: string,
+    misx: string
+}
 interface Enamel {
     // mettere i colori
     [key: string]: string |undefined
@@ -34,7 +48,6 @@ interface Enamel {
     cidx: string | undefined,
     cisx: string | undefined,
 }
-
 interface Finish {
     [key: string]: string
     icsdx: 'polished' | 'sandblasted' | 'diamond cut',
@@ -49,6 +62,20 @@ interface Finish {
     cssx: 'polished' | 'sandblasted' | 'diamond cut',
     cidx: 'polished' | 'sandblasted' | 'diamond cut',
     cisx: 'polished' | 'sandblasted' | 'diamond cut',
+    pprsdx: 'polished' | 'sandblasted' | 'diamond cut',
+    pprssx: 'polished' | 'sandblasted' | 'diamond cut',
+    ppridx: 'polished' | 'sandblasted' | 'diamond cut',
+    pprisx: 'polished' | 'sandblasted' | 'diamond cut',
+
+    sprsdx: 'polished' | 'sandblasted' | 'diamond cut',
+    sprssx: 'polished' | 'sandblasted' | 'diamond cut',
+    spridx: 'polished' | 'sandblasted' | 'diamond cut',
+    sprisx: 'polished' | 'sandblasted' | 'diamond cut',
+
+    msdx: 'polished' | 'sandblasted' | 'diamond cut',
+    mssx: 'polished' | 'sandblasted' | 'diamond cut',
+    midx: 'polished' | 'sandblasted' | 'diamond cut',
+    misx: 'polished' | 'sandblasted' | 'diamond cut'
 }
 interface JewelTypes {
     // mettere i tipi di design
@@ -65,6 +92,22 @@ interface JewelTypes {
     cssx: string,
     cidx: string,
     cisx: string,
+
+    pprsdx: string,
+    pprssx: string,
+    ppridx: string,
+    pprisx: string,
+
+    sprsdx: string,
+    sprssx: string,
+    spridx: string,
+    sprisx: string,
+
+    msdx: string,
+    mssx: string,
+    midx: string,
+    misx: string
+
 }
 interface Paves {
     [key: string]: Pave,
@@ -80,8 +123,21 @@ interface Paves {
     cssx: Pave,
     cidx: Pave,
     cisx: Pave,
-}
+    pprsdx: Pave,
+    pprssx: Pave,
+    ppridx: Pave,
+    pprisx: Pave,
 
+    sprsdx: Pave,
+    sprssx: Pave,
+    spridx: Pave,
+    sprisx: Pave,
+
+    msdx: Pave,
+    mssx: Pave,
+    midx: Pave,
+    misx: Pave
+}
 export interface Pave {
     shape: 'round' |  'princess' | 'baguette' | 'hex' | 'mosaic' | undefined,
     color: string | undefined
@@ -100,6 +156,21 @@ interface Prices {
     cssx: number,
     cidx: number,
     cisx: number,
+
+    pprsdx: number,
+    pprssx: number,
+    ppridx: number,
+    pprisx: number,
+
+    sprsdx: number,
+    sprssx: number,
+    spridx: number,
+    sprisx: number,
+
+    msdx: number,
+    mssx: number,
+    midx: number,
+    misx: number
 }
 interface Visibility {
     [key: string]: boolean
@@ -115,6 +186,21 @@ interface Visibility {
     cssx: boolean,
     cidx: boolean,
     cisx: boolean,
+
+    pprsdx: boolean,
+    pprssx: boolean,
+    ppridx: boolean,
+    pprisx: boolean,
+
+    sprsdx: boolean,
+    sprssx: boolean,
+    spridx: boolean,
+    sprisx: boolean,
+
+    msdx: boolean,
+    mssx: boolean,
+    midx: boolean,
+    misx: boolean
 }
 export interface Stone {
     // aggiungere i colori
@@ -136,7 +222,6 @@ interface Stones {
     cidx: Stone,
     cisx: Stone,
 }
-
 export interface Preciousness {
     [key: string]: string | number | undefined,
     carats: number,
@@ -153,7 +238,6 @@ export interface History {
     prices: Prices,
     preciousness: Preciousness | undefined
 }
-
 export interface State {
     envMap: Texture | CubeTexture | undefined,
     hovered: string|undefined,

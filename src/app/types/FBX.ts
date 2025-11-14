@@ -489,5 +489,5 @@ export default interface FBX {
             full: THREE.BufferGeometry,
             position: THREE.Vector3
         }
-    }| undefined,
+    } | undefined,
 }
