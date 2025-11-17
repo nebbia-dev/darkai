@@ -15,7 +15,7 @@ export default function MsSx() {
     const toothPave = useTeethStore((state: State) => state.teethPaves.mssx);
     const toothVisibility = useTeethStore((state: State) => state.teethVisibility.mssx);
     const MSSX = memo(({visible, type, mat} : {visible: boolean, type: string, mat: string}): JSX.Element => {
-        if(!toothGeometry) return <></>
+        if(!toothGeometry || toothJewelType === 'signature') return <></>
         let geometry:THREE.BufferGeometry[], material:JSX.Element[], position:THREE.Vector3;
         switch(type) {
             case 'full':

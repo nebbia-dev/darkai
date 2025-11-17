@@ -202,6 +202,25 @@ interface Visibility {
     midx: boolean,
     misx: boolean
 }
+interface SignMaterial {
+    [key: string]: string | undefined,
+    vamp: 'white' | 'pave' | 'black' | undefined,
+    hammered: 'white' | 'gold' | 'black' | undefined,
+    cross: 'white' | 'pave' | 'rose' | 'black' | undefined,
+    bubblegum: 'pink' | 'blue' | 'green' | undefined,
+    sprinkles: 'white' | 'gold' | 'rose' | undefined,
+    tribal: 'white' | 'pave' | 'gold' | undefined,
+    braces: 'emerald' | 'ruby' | undefined
+}
+interface SignVisibility {
+    vamp: boolean,
+    hammered: boolean,
+    cross: boolean,
+    bubblegum: boolean,
+    sprinkles: boolean,
+    tribal: boolean,
+    braces: boolean
+}
 export interface Stone {
     // aggiungere i colori
     shape: 'circle' |  'square' | 'baguette' | 'tear' | 'heart' | 'marquise' | undefined,
@@ -248,20 +267,12 @@ export interface State {
     teethVisibility: Visibility,
     teethPrices: Prices,
     teethFinish: Finish,
+    signatureMaterial: SignMaterial,
+    signatureVisibility: SignVisibility,
     history: History[][],
     currentHistory: number,
     currentTooth: string | undefined,
     lastActivatedTooth: string | undefined,
-    teethTypeOptions: {
-        [key: string]: string[]
-        full: string[],
-        fullDiamond: string[],
-        bar: string[],
-        barDiamond: string[],
-        frame: string[],
-        frameDiamond: string[],
-        stones: string[]
-    },
     teethEnamel: Enamel,
     teethPaves: Paves,
     activeButton: string|undefined,
@@ -287,6 +298,7 @@ export interface State {
     setStone: (tooth:string, shape:string, color:string) => void,
     setEnamel: (tooth:string, color:string) => void,
     setActiveTooth: (tooth:string|undefined) => void,
+    setSignature: (signature:string, material:string) => void,
     setTeethPreciousness: (carats:number, diamonds:string|undefined) => void,
     unsetLastActivatedTooth: () => void,
     resetTooth: (tooth:string) => void,

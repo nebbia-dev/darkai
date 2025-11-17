@@ -3,16 +3,23 @@ import {useTeethStore} from "@/app/_stores/teeth";
 import {State} from "@/app/_types/State";
 
 export default function SignatureSubOptions() {
-
     const value = useTeethStore((state: State) => state.activeSubButton);
+    const setSignature = useTeethStore((state: State) => state.setSignature);
+    const signatureMaterial = useTeethStore((state: State) => state.signatureMaterial);
+    function setSignatureDesign(type:string, e:string) {
+        if(signatureMaterial[type] === e) {
+            return;
+        }
+        setSignature(type, e);
+    }
 
     return (
         <>
             <div className={`${value === 'vamp' ? 'block' : 'invisible'} h-[120px] mb-4 pl-6 text-center`}>
                 <div className="w-[36px] flex flex-col gap-2 items-center bg-gray-50 rounded-full py-2 border-1">
-                    <div className="w-[24px] h-[24px] bg-stone-200 rounded-full">White metal</div>
-                    <div className="w-[24px] h-[24px] bg-stone-200 rounded-full">White pave</div>
-                    <div className="w-[24px] h-[24px] bg-stone-200 rounded-full">Back metal</div>
+                    <button type="button" value="white" onClick={(e) => setSignatureDesign('vamp', e.currentTarget.value)} className="w-[24px] h-[24px] bg-stone-200 rounded-full">White metal</button>
+                    <button type="button" value="pave" onClick={(e) => setSignatureDesign('vamp', e.currentTarget.value)} className="w-[24px] h-[24px] bg-stone-200 rounded-full">White pave</button>
+                    <button type="button" value="black" onClick={(e) => setSignatureDesign('vamp', e.currentTarget.value)} className="w-[24px] h-[24px] bg-stone-200 rounded-full">Black metal</button>
                 </div>
             </div>
             <div className={`${value === 'sprinkles' ? 'block' : 'invisible'} h-[120px] mb-4 pl-6 text-center`}>

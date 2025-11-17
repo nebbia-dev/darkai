@@ -19,7 +19,7 @@ export default function IciDx() {
     const toothVisibility = useTeethStore((state: State) => state.teethVisibility.icidx);
 
     const ICIDX = memo(({visible, type, mat} : {visible: boolean, type: string, mat: string}): JSX.Element => {
-        if(!toothGeometry) return <></>
+        if(!toothGeometry || toothJewelType === 'signature') return <></>
         let geometry:THREE.BufferGeometry[], material:JSX.Element[], position:THREE.Vector3;
         switch(type) {
             case 'full':

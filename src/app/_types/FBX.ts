@@ -490,4 +490,71 @@ export default interface FBX {
             position: THREE.Vector3
         }
     } | undefined,
+    // SIGNATURE
+    signature: {
+        hammered: {
+            icidx: THREE.BufferGeometry,
+            ilssx: THREE.BufferGeometry,
+            ilsdx: THREE.BufferGeometry,
+            ilisx: THREE.BufferGeometry,
+        },
+        bubblegum: {
+            sup: THREE.BufferGeometry,
+            position: THREE.Vector3
+        },
+        cross: {
+            ics: THREE.BufferGeometry,
+            position: THREE.Vector3
+        },
+        tribal: {
+            sup: THREE.BufferGeometry,
+            position: THREE.Vector3
+        },
+        sprinkles: {
+            csdx: THREE.BufferGeometry,
+            cssx: THREE.BufferGeometry,
+            ilsdx: THREE.BufferGeometry,
+            ilssx: THREE.BufferGeometry
+        },
+        vamp: {
+            csdx: {
+                base: {
+                    geometry: THREE.BufferGeometry,
+                    position: THREE.Vector3
+                },
+                pave: {
+                    geometry: THREE.BufferGeometry,
+                    position: THREE.Vector3
+                },
+            },
+            cssx: {
+                base: {
+                    geometry: THREE.BufferGeometry,
+                    position: THREE.Vector3
+                },
+                pave: {
+                    geometry: THREE.BufferGeometry,
+                    position: THREE.Vector3
+                },
+            }
+        },
+        braces: {
+            structure: {
+                geometry: THREE.BufferGeometry,
+                position: THREE.Vector3
+            },
+            pave: {
+                geometry: THREE.BufferGeometry,
+                position: THREE.Vector3
+            },
+            stones: {
+                geometry: THREE.BufferGeometry,
+                position: THREE.Vector3
+            },
+            outline: {
+                geometry: THREE.BufferGeometry,
+                position: THREE.Vector3
+            }
+        },
+    }
 }

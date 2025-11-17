@@ -15,7 +15,7 @@ export default function SpriSx() {
     const toothPave = useTeethStore((state: State) => state.teethPaves.sprisx);
     const toothVisibility = useTeethStore((state: State) => state.teethVisibility.sprisx);
     const SPRISX = memo(({visible, type, mat} : {visible: boolean, type: string, mat: string}): JSX.Element => {
-        if(!toothGeometry) return <></>
+        if(!toothGeometry || toothJewelType === 'signature') return <></>
         let geometry:THREE.BufferGeometry[], material:JSX.Element[], position:THREE.Vector3;
         switch(type) {
             case 'full':

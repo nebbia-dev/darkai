@@ -33,7 +33,6 @@ import IliSxStone from "@/app/_components/_teeth/IliSxStone";
 import IliDxStone from "@/app/_components/_teeth/IliDxStone";
 import IciSxStone from "@/app/_components/_teeth/IciSxStone";
 import IciDxStone from "@/app/_components/_teeth/IciDxStone";
-import FullMaterial from "@/app/_components/_materials/FullMaterial";
 import PprsDx from "@/app/_components/_teeth/PprsDx";
 import PprsSx from "@/app/_components/_teeth/PprsSx";
 import PpriDx from "@/app/_components/_teeth/PpriDx";
@@ -46,13 +45,12 @@ import MsDx from "@/app/_components/_teeth/MsDx";
 import MiSx from "@/app/_components/_teeth/MiSx";
 import MsSx from "@/app/_components/_teeth/MsSx";
 import MiDx from "@/app/_components/_teeth/MiDx";
+import Vamp from "@/app/_components/_teeth/_signature/Vamp";
 
 export default function Configurator() {
     const envMap = useEnvironment({
         files: "envMaps/HDR_Light_Studio_Free_HDRI_Design_13.exr"
     })
-
-    const signatures = useFBX('/models/Gioielli_Separati_SI.fbx');
 
     // Se voglio piazzare anche l'fbx in LoadedMaterials, verosimilmente devo usare qui uno useEffect
     const teeth = useMemo((): FBX => {
@@ -64,48 +62,11 @@ export default function Configurator() {
         const hearts = useFBX('/models/MOD_Stone_Ametista.fbx');
         const paves = useFBX('/models/Pave_Separati.fbx');
         const otherFools = useFBX('/models/MOD_Full_All.fbx');
+        const signatures = useFBX('/models/Gioielli_Separati_SI.fbx');
         function getOrigin(mesh:any) {
             const box = new THREE.Box3().setFromObject(mesh);
             return box.getCenter(new THREE.Vector3());
         }
-
-        // if(!geometry.cisx) {
-        //     stones.children[0].children[0].children[1].matrix.makeScale(stones.children[0].children[0].children[1].scale.x / 10, stones.children[0].children[0].children[1].scale.y / 10, stones.children[0].children[0].children[1].scale.z / 10);
-        //     (stones.children[0].children[0].children[1] as THREE.Mesh).geometry.applyMatrix4(stones.children[0].children[0].children[1].matrix);
-        //
-        //     stones.children[1].children[0].children[1].matrix.makeScale(stones.children[1].children[0].children[1].scale.x / 10, stones.children[1].children[0].children[1].scale.y / 10, stones.children[1].children[0].children[1].scale.z / 10);
-        //     (stones.children[1].children[0].children[1] as THREE.Mesh).geometry.applyMatrix4(stones.children[1].children[0].children[1].matrix);
-        //
-        //     stones.children[2].children[0].children[1].matrix.makeScale(stones.children[2].children[0].children[1].scale.x / 10, stones.children[2].children[0].children[1].scale.y / 10, stones.children[2].children[0].children[1].scale.z / 10);
-        //     (stones.children[2].children[0].children[1] as THREE.Mesh).geometry.applyMatrix4(stones.children[2].children[0].children[1].matrix);
-        //
-        //     stones.children[3].children[0].children[1].matrix.makeScale(stones.children[3].children[0].children[1].scale.x / 10, stones.children[3].children[0].children[1].scale.y / 10, stones.children[3].children[0].children[1].scale.z / 10);
-        //     (stones.children[3].children[0].children[1] as THREE.Mesh).geometry.applyMatrix4(stones.children[3].children[0].children[1].matrix);
-        //
-        //     stones.children[0].children[1].children[1].matrix.makeScale(stones.children[0].children[1].children[1].scale.x / 10, stones.children[0].children[1].children[1].scale.y / 10, stones.children[0].children[1].children[1].scale.z / 10);
-        //     (stones.children[0].children[1].children[1] as THREE.Mesh).geometry.applyMatrix4(stones.children[0].children[1].children[1].matrix);
-        //
-        //     stones.children[1].children[1].children[1].matrix.makeScale(stones.children[1].children[1].children[1].scale.x / 10, stones.children[1].children[1].children[1].scale.y / 10, stones.children[1].children[1].children[1].scale.z / 10);
-        //     (stones.children[1].children[1].children[1] as THREE.Mesh).geometry.applyMatrix4(stones.children[1].children[1].children[1].matrix);
-        //
-        //     stones.children[2].children[1].children[1].matrix.makeScale(stones.children[2].children[1].children[1].scale.x / 10, stones.children[2].children[1].children[1].scale.y / 10, stones.children[2].children[1].children[1].scale.z / 10);
-        //     (stones.children[2].children[1].children[1] as THREE.Mesh).geometry.applyMatrix4(stones.children[2].children[1].children[1].matrix);
-        //
-        //     stones.children[3].children[1].children[1].matrix.makeScale(stones.children[3].children[1].children[1].scale.x / 10, stones.children[3].children[1].children[1].scale.y / 10, stones.children[3].children[1].children[1].scale.z / 10);
-        //     (stones.children[3].children[1].children[1] as THREE.Mesh).geometry.applyMatrix4(stones.children[3].children[1].children[1].matrix);
-        //
-        //     stones.children[0].children[2].children[1].matrix.makeScale(stones.children[0].children[2].children[1].scale.x / 10, stones.children[0].children[2].children[1].scale.y / 10, stones.children[0].children[2].children[1].scale.z / 10);
-        //     (stones.children[0].children[2].children[1] as THREE.Mesh).geometry.applyMatrix4(stones.children[0].children[2].children[1].matrix);
-        //
-        //     stones.children[1].children[2].children[1].matrix.makeScale(stones.children[1].children[2].children[1].scale.x / 10, stones.children[1].children[2].children[1].scale.y / 10, stones.children[1].children[2].children[1].scale.z / 10);
-        //     (stones.children[1].children[2].children[1] as THREE.Mesh).geometry.applyMatrix4(stones.children[1].children[2].children[1].matrix);
-        //
-        //     stones.children[2].children[2].children[1].matrix.makeScale(stones.children[2].children[2].children[1].scale.x / 10, stones.children[2].children[2].children[1].scale.y / 10, stones.children[2].children[2].children[1].scale.z / 10);
-        //     (stones.children[2].children[2].children[1] as THREE.Mesh).geometry.applyMatrix4(stones.children[2].children[2].children[1].matrix);
-        //
-        //     stones.children[3].children[2].children[1].matrix.makeScale(stones.children[3].children[2].children[1].scale.x / 10, stones.children[3].children[2].children[1].scale.y / 10, stones.children[3].children[2].children[1].scale.z / 10);
-        //     (stones.children[3].children[2].children[1] as THREE.Mesh).geometry.applyMatrix4(stones.children[3].children[2].children[1].matrix);
-        // }
 
         return {
             // INCISIVI CENTRALI
@@ -598,6 +559,73 @@ export default function Configurator() {
                     position: getOrigin(paves.children[7])
                 },
             },
+            // SIGNATURE
+            signature: {
+                hammered: {
+                    icidx: (signatures.children[0].children[0].children[0] as THREE.Mesh).geometry,
+                    ilssx: (signatures.children[0].children[0].children[1] as THREE.Mesh).geometry,
+                    ilsdx: (signatures.children[0].children[1].children[0] as THREE.Mesh).geometry,
+                    ilisx: (signatures.children[0].children[1].children[1] as THREE.Mesh).geometry,
+                },
+                bubblegum: {
+                    sup: (signatures.children[3] as THREE.Mesh).geometry,
+                    position: signatures.children[3].position
+                },
+                cross: {
+                    ics: (signatures.children[1] as THREE.Mesh).geometry,
+                    position: signatures.children[1].position
+                },
+                tribal: {
+                    sup: (signatures.children[2] as THREE.Mesh).geometry,
+                    position: signatures.children[2].position
+                },
+                sprinkles: {
+                    csdx: (signatures.children[4].children[0] as THREE.Mesh).geometry,
+                    cssx: (signatures.children[4].children[1] as THREE.Mesh).geometry,
+                    ilsdx: (signatures.children[4].children[2] as THREE.Mesh).geometry,
+                    ilssx: (signatures.children[4].children[3] as THREE.Mesh).geometry
+                },
+                vamp: {
+                    csdx: {
+                        base: {
+                            geometry: (signatures.children[6].children[1] as THREE.Mesh).geometry,
+                            position: signatures.children[6].children[1].position
+                    },
+                        pave: {
+                            geometry: (signatures.children[6].children[0] as THREE.Mesh).geometry,
+                            position: getOrigin(signatures.children[6].children[0])
+                }
+                    },
+                    cssx: {
+                        base: {
+                            geometry: (signatures.children[6].children[3] as THREE.Mesh).geometry,
+                            position: signatures.children[6].children[3].position
+                    },
+                        pave: {
+                            geometry: (signatures.children[6].children[2] as THREE.Mesh).geometry,
+                            position: getOrigin(signatures.children[6].children[2])
+        }
+                    }
+                },
+                braces: {
+                    structure: {
+                        geometry: (signatures.children[5].children[0] as THREE.Mesh).geometry,
+                        position: signatures.children[5].children[0].position
+                    },
+                    pave: {
+                        geometry: (signatures.children[5].children[1] as THREE.Mesh).geometry,
+                        position: signatures.children[5].children[1].position
+                    },
+                    stones: {
+                        geometry: (signatures.children[5].children[2] as THREE.Mesh).geometry,
+                        position: signatures.children[5].children[2].position
+                    },
+                    outline: {
+                        geometry: (signatures.children[5].children[3] as THREE.Mesh).geometry,
+                        position: signatures.children[5].children[3].position
+                    }
+                },
+            }
         }
 
     }, [])
@@ -649,103 +677,11 @@ export default function Configurator() {
                 maxPolarAngle={Math.PI - Math.PI / 3}
                 ref={orbitRef}/>
 
-            {/*/!*Hammered Frames*!/*/}
-            {/*/!*icidx*!/*/}
-            {/*<mesh geometry={signatures.children[0].children[0].children[0].geometry}>*/}
-            {/*    <FullMaterial color="gold"/>*/}
-            {/*</mesh>*/}
-            {/*/!*ilssx*!/*/}
-            {/*<mesh geometry={signatures.children[0].children[0].children[1].geometry}>*/}
-            {/*    <FullMaterial color="gold"/>*/}
-            {/*</mesh>*/}
-            {/*/!*ilsdx*!/*/}
-            {/*<mesh geometry={signatures.children[0].children[1].children[0].geometry}>*/}
-            {/*    <FullMaterial color="gold"/>*/}
-            {/*</mesh>*/}
-            {/*/!*ilisx*!/*/}
-            {/*<mesh geometry={signatures.children[0].children[1].children[1].geometry}>*/}
-            {/*    <FullMaterial color="gold"/>*/}
-            {/*</mesh>*/}
-
-            {/*/!*Cross Spacer*!/*/}
-            {/*/!*icsdx + icssx*!/*/}
-            {/*<mesh geometry={signatures.children[1].geometry} position={signatures.children[1].position}>*/}
-            {/*    <FullMaterial color="gold"/>*/}
-            {/*</mesh>*/}
-
-            {/*/!*Tribals*!/*/}
-            {/*/!*arcata superiore*!/*/}
-            {/*<mesh geometry={signatures.children[2].geometry} position={signatures.children[2].position}>*/}
-            {/*    <FullMaterial color="gold"/>*/}
-            {/*</mesh>*/}
-
-            {/*/!*BubbleGum*!/*/}
-            {/*/!*arcata superiore*!/*/}
-            {/*<mesh geometry={signatures.children[3].geometry} position={signatures.children[3].position}>*/}
-            {/*    <FullMaterial color="gold"/>*/}
-            {/*</mesh>*/}
-
-            {/*/!*Sprinkles*!/*/}
-            {/*/!*csdx*!/*/}
-            {/*<mesh geometry={signatures.children[4].children[0].geometry}>*/}
-            {/*    <FullMaterial color="gold"/>*/}
-            {/*</mesh>*/}
-            {/*/!*cssx*!/*/}
-            {/*<mesh geometry={signatures.children[4].children[1].geometry}>*/}
-            {/*    <FullMaterial color="gold"/>*/}
-            {/*</mesh>*/}
-            {/*/!*ilsdx*!/*/}
-            {/*<mesh geometry={signatures.children[4].children[2].geometry}>*/}
-            {/*    <FullMaterial color="gold"/>*/}
-            {/*</mesh>*/}
-            {/*/!*ilssx*!/*/}
-            {/*<mesh geometry={signatures.children[4].children[3].geometry}>*/}
-            {/*    <FullMaterial color="gold"/>*/}
-            {/*</mesh>*/}
-
-            {/*/!*Braces*!/*/}
-            {/*/!*struttura*!/*/}
-            {/*<mesh geometry={signatures.children[5].children[0].geometry} position={signatures.children[5].position}>*/}
-            {/*    <FullMaterial color="gold"/>*/}
-            {/*</mesh>*/}
-            {/*/!*pave canini*!/*/}
-            {/*<mesh geometry={signatures.children[5].children[1].geometry} position={signatures.children[5].position}>*/}
-            {/*    <FullMaterial color="gold"/>*/}
-            {/*</mesh>*/}
-            {/*/!*pietre*!/*/}
-            {/*<mesh geometry={signatures.children[5].children[2].geometry} position={signatures.children[5].position}>*/}
-            {/*    <FullMaterial color="gold"/>*/}
-            {/*</mesh>*/}
-            {/*/!*contorno pietre*!/*/}
-            {/*<mesh geometry={signatures.children[5].children[3].geometry} position={signatures.children[5].position}>*/}
-            {/*    <FullMaterial color="gold"/>*/}
-            {/*</mesh>*/}
-
-            {/*/!*Vamp*!/*/}
-            {/*/!*pave csdx*!/*/}
-            {/*<mesh geometry={signatures.children[6].children[0].geometry}>*/}
-            {/*    <FullMaterial color="gold"/>*/}
-            {/*</mesh>*/}
-            {/*/!*base csdx*!/*/}
-            {/*<mesh geometry={signatures.children[6].children[1].geometry}>*/}
-            {/*    <FullMaterial color="gold"/>*/}
-            {/*</mesh>*/}
-            {/*/!*pave cssx*!/*/}
-            {/*<mesh geometry={signatures.children[6].children[2].geometry}>*/}
-            {/*    <FullMaterial color="gold"/>*/}
-            {/*</mesh>*/}
-            {/*/!*base cssx*!/*/}
-            {/*<mesh geometry={signatures.children[6].children[3].geometry}>*/}
-            {/*    <FullMaterial color="gold"/>*/}
-            {/*</mesh>*/}
-
-            {/*<mesh geometry={otherFools.children[27].geometry}>*/}
-            {/*    <FullMaterial color="gold"/>*/}
-            {/*</mesh>*/}
-
             {savedEnvMap && <LoadedMaterials/>}
             {savedTeeth && savedEnvMap &&
                 <>
+                    {/*SIGNATURE*/}
+                    <Vamp/>
                     {/*DENTI SUPERIORI*/}
                     <IlsSx/>
                     <IlsSxStone/>

@@ -1159,7 +1159,40 @@ export const useTeethStore = create<State>((set, get) => ({
         ),
     unsetLastActivatedTooth: () => set({lastActivatedTooth: undefined}),
     // state and methods to set the active default configuration
+    signatureMaterial: {
+        vamp: undefined,
+        hammered: undefined,
+        cross: undefined,
+        bubblegum: undefined,
+        sprinkles: undefined,
+        tribal: undefined,
+        braces: undefined
+    },
+    signatureVisibility: {
+        vamp: false,
+        hammered: false,
+        cross: false,
+        bubblegum: false,
+        sprinkles: false,
+        tribal: false,
+        braces: false
+    },
+    setSignature: (signature, material) =>
+        set(
+            produce((state) => {
 
+                if(!state.signatureVisibility[signature]) {
+                    state.signatureVisibility[signature] = true;
+                    state.signatureMaterial[signature] = material;
+                } else if(state.signatureVisibility[signature] && state.signatureMaterial[signature] === material){
+                    state.signatureVisibility[signature] = false;
+                    state.signatureMaterial[signature] = undefined;
+                } else {
+                    state.signatureMaterial[signature] = material;
+                }
+                console.log(JSON.stringify(state.signatureVisibility), JSON.stringify(state.signatureMaterial))
+            })
+        ),
 
     // method to remove the configuration from a tooth
     resetTooth: (tooth) =>
@@ -1243,18 +1276,6 @@ export const useTeethStore = create<State>((set, get) => ({
                 }
             })
         ),
-
-    // state with the list of all the available jewel types for each tooth
-    // method to copy the configuration from a tooth to another one
-    teethTypeOptions: {
-        full: ['icsdx', 'icssx', 'icidx', 'icisx', 'ilsdx', 'ilssx', 'ilidx', 'ilisx', 'csdx', 'cssx', 'cidx', 'cisx'],
-        fullDiamond: ['icsdx', 'icssx', 'icidx', 'icisx', 'ilsdx', 'ilssx', 'ilidx', 'ilisx', 'csdx', 'cssx', 'cidx', 'cisx'],
-        bar: ['icsdx', 'icssx', 'icidx', 'icisx', 'ilsdx', 'ilssx', 'ilidx', 'ilisx', 'csdx', 'cssx', 'cidx', 'cisx'],
-        barDiamond: ['icsdx', 'icssx', 'icidx', 'icisx', 'ilsdx', 'ilssx', 'ilidx', 'ilisx', 'csdx', 'cssx', 'cidx', 'cisx'],
-        frame: ['icsdx', 'icssx', 'icidx', 'icisx', 'ilsdx', 'ilssx', 'ilidx', 'ilisx', 'csdx', 'cssx', 'cidx', 'cisx'],
-        frameDiamond: ['icsdx', 'icssx', 'icidx', 'icisx', 'ilsdx', 'ilssx', 'ilidx', 'ilisx', 'csdx', 'cssx', 'cidx', 'cisx'],
-        stones: ['icsdx', 'icssx', 'icidx', 'icisx', 'ilsdx', 'ilssx', 'ilidx', 'ilisx', 'csdx', 'cssx', 'cidx', 'cisx']
-    },
 
     // state and method to manage the initial loading screens
     loaded: false,

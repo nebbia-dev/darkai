@@ -22,7 +22,7 @@ export default function CiSx() {
     const toothVisibility = useTeethStore((state: State) => state.teethVisibility.cisx);
     const toothEnamel = useTeethStore((state: State) => state.teethEnamel.cisx);
     const CISX = memo(({visible, type, mat} : {visible: boolean, type: string, mat: string}): JSX.Element => {
-        if(!toothGeometry) return <></>
+        if(!toothGeometry || toothJewelType === 'signature') return <></>
         let geometry:THREE.BufferGeometry[], material:JSX.Element[], position:THREE.Vector3;
         switch(type) {
             case 'full':
