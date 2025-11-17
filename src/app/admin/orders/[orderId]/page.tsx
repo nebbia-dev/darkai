@@ -1,16 +1,16 @@
 import {createClient} from "@/utils/supabase/server";
-import elabToothName from "@/app/helpers/elabToothName";
-import firstCapital from "@/app/helpers/firstCapital";
-import BackButton from "@/app/components/BackButton";
-import OrderInfo from "@/app/types/OrderInfo";
-import {Preciousness} from "@/app/types/State";
-import Select from "@/app/components/Select";
+import elabToothName from "@/app/_helpers/elabToothName";
+import firstCapital from "@/app/_helpers/firstCapital";
+import BackButton from "@/app/_components/_buttons/BackButton";
+import OrderInfo from "@/app/_types/OrderInfo";
+import {Preciousness} from "@/app/_types/State";
+import Select from "@/app/_components/_elements/Select";
 import Image from "next/image";
-import {Write} from "@/app/components/icons/Write";
+import {Write} from "@/app/_components/_icons/Write";
 import {Tooltip} from "@mui/material";
 import Link from 'next/link';
-import UploadScanBackoffice from "@/app/components/UploadScanBackoffice";
-import orderIdConverter from "@/app/helpers/orderIdConverter";
+import UploadScanBackoffice from "@/app/_components/_upload/UploadScanBackoffice";
+import orderIdConverter from "@/app/_helpers/orderIdConverter";
 export default async function Order({params}: { params: Promise<{ orderId: string[] }> }){
     const { orderId } = await params;
     const supabase = await createClient();

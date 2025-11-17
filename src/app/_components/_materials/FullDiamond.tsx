@@ -1,0 +1,222 @@
+'use client'
+import {useTeethStore} from "@/app/_stores/teeth";
+
+export default function FullDiamond({color} : {color: string}) {
+
+    const envMap = useTeethStore((state) => state.envMap);
+    let gold;
+
+    switch(color) {
+        case 'gold':
+            gold = 0xfaff8b;
+            break;
+        case 'rose':
+            gold = 0xe8aec5;
+            break;
+        case 'black':
+            gold = 0x2c2d18;
+            break;
+        case 'white':
+            gold = 0xedeee2;
+            break;
+        default:
+            gold = 0xfaff8b;
+    }
+
+        // Base
+        // const baseProps = useTexture({
+        //     normalMap: 'textures/diamondFull/Normal_Diamanti.webp',
+        //     metalnessMap: 'textures/diamondFull/Metalness_Diamanti.webp',
+        //     roughnessMap: 'textures/diamondFull/Metalness_Diamanti.webp',
+        // });
+        //
+        // baseProps.normalMap.wrapS = baseProps.normalMap.wrapT = THREE.RepeatWrapping;
+        // baseProps.normalMap.repeat.set(20,20);
+        // baseProps.metalnessMap.wrapS = baseProps.metalnessMap.wrapT = THREE.RepeatWrapping;
+        // baseProps.metalnessMap.repeat.set(20,20);
+
+        // return (<meshStandardMaterial
+        //     map={pairs.get(pave+firstCapital(stone)) ?? undefined}
+        //     normalMap={color !== 'base' ? baseProps.normalMap : undefined}
+        //     metalnessMap = {color !== 'base' ? baseProps.metalnessMap : undefined}
+        //     roughnessMap = {color !== 'base' ? baseProps.roughnessMap : undefined}
+        //     metalness = {color !== 'base' ? 0.5 : 0}
+        //     roughness = {color !== 'base' ? 0 : 1}
+        //     envMap = {envMap}
+        //     color={color !== 'base' ? undefined : 'grey'}
+        //     onUpdate={(self) => (self.needsUpdate = true)}
+        //     attach='material'
+        // />)
+
+    return (<meshBasicMaterial
+        reflectivity={1}
+        refractionRatio={1}
+        envMap = {envMap}
+        color={gold}
+        onUpdate={(self) => (self.needsUpdate = true)}
+        attach='material'
+    />)
+    }
+
+// export default function FullDiamond({color, pave} : {color: string, pave: string}) {
+//     const envMap = useTeethStore((state) => state.envMap);
+//
+//         // DiamondGold
+//         const propsYDiamondFull = useTexture({
+//             map: 'textures/diamondFull/Difuse_Diamanti.webp',
+//             // map: 'textures/proveDiamanti/Prova_03.png',
+//             normalMap: 'textures/diamondFull/Normal_Diamanti.webp',
+//             // normalMap: 'textures/proveDiamanti/Normal (1).png',
+//             metalnessMap: 'textures/diamondFull/Metalness_Diamanti.webp',
+//             roughnessMap: 'textures/diamondFull/Metalness_Diamanti.webp',
+//         });
+//         propsYDiamondFull.map.colorSpace = THREE.SRGBColorSpace;
+//         propsYDiamondFull.map.wrapS = propsYDiamondFull.map.wrapT = THREE.RepeatWrapping;
+//         propsYDiamondFull.map.repeat.set(20,20);
+//         propsYDiamondFull.normalMap.wrapS = propsYDiamondFull.normalMap.wrapT = THREE.RepeatWrapping;
+//         propsYDiamondFull.normalMap.repeat.set(20,20);
+//         propsYDiamondFull.metalnessMap.wrapS = propsYDiamondFull.metalnessMap.wrapT = THREE.RepeatWrapping;
+//         propsYDiamondFull.metalnessMap.repeat.set(20,20);
+//
+//         // DiamondRose
+//         const propsRDiamondFull = useTexture({
+//             map: 'textures/diamondFull/Difuse_Diamanti_Rosa.webp',
+//         });
+//         propsRDiamondFull.map.colorSpace = THREE.SRGBColorSpace;
+//         propsRDiamondFull.map.wrapS = propsRDiamondFull.map.wrapT = THREE.RepeatWrapping;
+//         propsRDiamondFull.map.repeat.set(20,20);
+//
+//         // DiamondWhite
+//         const propsWDiamondFull = useTexture({
+//             map: 'textures/diamondFull/Metalness_Diamanti.webp',
+//         });
+//         propsWDiamondFull.map.colorSpace = THREE.SRGBColorSpace;
+//         propsWDiamondFull.map.wrapS = propsWDiamondFull.map.wrapT = THREE.RepeatWrapping;
+//         propsWDiamondFull.map.repeat.set(20,20);
+//
+//         // EmeraldGold
+//         const propsGEmeraldFull = useTexture({
+//             map: 'textures/diamondFull/Diffuse_Diamanti_Verde.png',
+//         });
+//         propsGEmeraldFull.map.colorSpace = THREE.SRGBColorSpace;
+//         propsGEmeraldFull.map.wrapS = propsGEmeraldFull.map.wrapT = THREE.RepeatWrapping;
+//         propsGEmeraldFull.map.repeat.set(20,20);
+//
+//         // EmeraldRose
+//         const propsREmeraldFull = useTexture({
+//             map: 'textures/diamondFull/Diffuse_Diamanti_Verde.png',
+//         });
+//         propsREmeraldFull.map.colorSpace = THREE.SRGBColorSpace;
+//         propsREmeraldFull.map.wrapS = propsREmeraldFull.map.wrapT = THREE.RepeatWrapping;
+//         propsREmeraldFull.map.repeat.set(20,20);
+//
+//         // EmeraldWhite
+//         const propsWEmeraldFull = useTexture({
+//             map: 'textures/diamondFull/Diffuse_Diamanti_Verde.png',
+//         });
+//         propsWEmeraldFull.map.colorSpace = THREE.SRGBColorSpace;
+//         propsWEmeraldFull.map.wrapS = propsWEmeraldFull.map.wrapT = THREE.RepeatWrapping;
+//         propsWEmeraldFull.map.repeat.set(20,20);
+//
+//         // SapphireGold
+//         const propsGSapphireFull = useTexture({
+//             map: 'textures/diamondFull/Diffuse_Diamanti_Blu.png',
+//         });
+//         propsGSapphireFull.map.colorSpace = THREE.SRGBColorSpace;
+//         propsGSapphireFull.map.wrapS = propsGSapphireFull.map.wrapT = THREE.RepeatWrapping;
+//         propsGSapphireFull.map.repeat.set(20,20);
+//
+//         // SapphireRose
+//         const propsRSapphireFull = useTexture({
+//             map: 'textures/diamondFull/Diffuse_Diamanti_Blu.png',
+//         });
+//         propsRSapphireFull.map.colorSpace = THREE.SRGBColorSpace;
+//         propsRSapphireFull.map.wrapS = propsRSapphireFull.map.wrapT = THREE.RepeatWrapping;
+//         propsRSapphireFull.map.repeat.set(20,20);
+//
+//         // SapphireWhite
+//         const propsWSapphireFull = useTexture({
+//             map: 'textures/diamondFull/Diffuse_Diamanti_Blu.png',
+//         });
+//         propsWSapphireFull.map.colorSpace = THREE.SRGBColorSpace;
+//         propsWSapphireFull.map.wrapS = propsWSapphireFull.map.wrapT = THREE.RepeatWrapping;
+//         propsWSapphireFull.map.repeat.set(20,20);
+//
+//         // RubyGold
+//         const propsGRubyFull = useTexture({
+//             map: 'textures/diamondFull/Diffuse_Diamanti_Rosso.png',
+//         });
+//         propsGRubyFull.map.colorSpace = THREE.SRGBColorSpace;
+//         propsGRubyFull.map.wrapS = propsGRubyFull.map.wrapT = THREE.RepeatWrapping;
+//         propsGRubyFull.map.repeat.set(20,20);
+//
+//         // RubyRose
+//         const propsRRubyFull = useTexture({
+//             map: 'textures/diamondFull/Diffuse_Diamanti_Rosso.png',
+//         });
+//         propsRRubyFull.map.colorSpace = THREE.SRGBColorSpace;
+//         propsRRubyFull.map.wrapS = propsRRubyFull.map.wrapT = THREE.RepeatWrapping;
+//         propsRRubyFull.map.repeat.set(20,20);
+//
+//         // RubyWhite
+//         const propsWRubyFull = useTexture({
+//             map: 'textures/diamondFull/Diffuse_Diamanti_Rosso.png',
+//         });
+//         propsWRubyFull.map.colorSpace = THREE.SRGBColorSpace;
+//         propsWRubyFull.map.wrapS = propsWRubyFull.map.wrapT = THREE.RepeatWrapping;
+//         propsWRubyFull.map.repeat.set(20,20);
+//
+//         const pairs = new Map();
+//         pairs.set('golddiamond', propsYDiamondFull.map);
+//         pairs.set('rosediamond', propsRDiamondFull.map);
+//         pairs.set('whitediamond', propsWDiamondFull.map);
+//
+//         pairs.set('goldemerald', propsGEmeraldFull.map);
+//         pairs.set('roseemerald', propsREmeraldFull.map);
+//         pairs.set('whiteemerald', propsWEmeraldFull.map);
+//
+//         pairs.set('goldsapphire', propsGSapphireFull.map);
+//         pairs.set('rosesapphire', propsRSapphireFull.map);
+//         pairs.set('whitesapphire', propsWSapphireFull.map);
+//
+//         pairs.set('goldruby', propsGRubyFull.map);
+//         pairs.set('roseruby', propsRRubyFull.map);
+//         pairs.set('whiteruby', propsWRubyFull.map);
+//
+//         return (<MeshTransmissionMaterial
+//             // map={pairs.get(color+pave) ?? undefined}
+//             // normalMap={color !== 'base' ? propsYDiamondFull.normalMap : undefined}
+//             metalnessMap = {color !== 'base' ? propsYDiamondFull.metalnessMap : undefined}
+//             roughnessMap = {color !== 'base' ? propsYDiamondFull.roughnessMap : undefined}
+//             metalness = {color !== 'base' ? 0.5 : 0}
+//             roughness = {color !== 'base' ? 0 : 1}
+//             ior ={1.00}
+//             chromaticAberration={0.5}
+//             thickness={10}
+//             envMap = {envMap}
+//             distortion = {1}
+//             clearcoat={0.5}
+//             // wireframe={true}
+//             // backside={true}
+//             // backsideThickness={5}
+//             // color= '#EFBF04'
+//             onUpdate={(self) => (self.needsUpdate = true)}
+//             attach='material'
+//         />)
+//     }
+
+// export default function FullDiamond({color, pave} : {color: string, pave: string}) {
+//     const envMap = useTeethStore((state) => state.envMap);
+//
+//     return (<MeshRefractionMaterial
+//         bounces = { 3 }
+//         aberrationStrength = { 0.05 }
+//         envMap= {envMap}
+//         ior= { 2.75 }
+//         fresnel= { 1 }
+//         color= 'white'
+//         onUpdate={(self) => (self.needsUpdate = true)}
+//         attach='material'
+//     />)
+// }
+

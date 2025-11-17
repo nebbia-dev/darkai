@@ -1,11 +1,11 @@
 'use client'
-import Scene from "@/app/components/Scene";
-import Selection from "@/app/components/Selection";
+import Scene from "@/app/_components/_layout/Scene";
+import Selection from "@/app/_components/_layout/Selection";
 import {Suspense, useEffect, useState} from "react";
-import Loading from "@/app/components/Loading";
-import ActionBar from "@/app/components/ActionBar";
-import {useTeethStore} from "@/app/stores/teeth";
-import Recap from "@/app/components/Recap";
+import Loading from "@/app/_components/_layout/Loading";
+import ActionBar from "@/app/_components/_buttons/ActionBar";
+import {useTeethStore} from "@/app/_stores/teeth";
+import Recap from "@/app/_components/_layout/Recap";
 
 export default function Config() {
 

@@ -1,11 +1,11 @@
 import {createClient} from "@/utils/supabase/server";
-import elabToothName from "@/app/helpers/elabToothName";
-import firstCapital from "@/app/helpers/firstCapital";
-import BackButton from "@/app/components/BackButton";
-import {Preciousness} from "@/app/types/State";
+import elabToothName from "@/app/_helpers/elabToothName";
+import firstCapital from "@/app/_helpers/firstCapital";
+import BackButton from "@/app/_components/_buttons/BackButton";
+import {Preciousness} from "@/app/_types/State";
 
 import Image from "next/image";
-import confIdConverter from "@/app/helpers/confIdConverter";
+import confIdConverter from "@/app/_helpers/confIdConverter";
 export default async function Config({params}: { params: Promise<{ configId: string[] }> }){
     const { configId } = await params;
     const supabase = await createClient();

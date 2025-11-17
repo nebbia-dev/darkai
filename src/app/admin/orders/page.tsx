@@ -1,9 +1,9 @@
 import {createClient} from "@/utils/supabase/server";
-import dateConverter from "@/app/helpers/dateConverter";
+import dateConverter from "@/app/_helpers/dateConverter";
 import Link from 'next/link';
-import orderIdConverter from "@/app/helpers/orderIdConverter";
-import DownloadCsv from "@/app/components/DownloadCsv";
-import OrderInfo from "@/app/types/OrderInfo";
+import orderIdConverter from "@/app/_helpers/orderIdConverter";
+import DownloadCsv from "@/app/_components/_buttons/DownloadCsv";
+import OrderInfo from "@/app/_types/OrderInfo";
 export default async function Page() {
     const supabase = await createClient();
     let { data, error } = await supabase

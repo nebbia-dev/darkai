@@ -4,8 +4,8 @@ import {useState} from "react";
 import {MuiTelInput} from "mui-tel-input";
 import {Accordion, AccordionDetails, AccordionSummary} from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import {useTeethStore} from "@/app/stores/teeth";
-import {State} from "@/app/types/State";
+import {useTeethStore} from "@/app/_stores/teeth";
+import {State} from "@/app/_types/State";
 import {useRouter} from "next/navigation";
 export default function Upload() {
     const router = useRouter();

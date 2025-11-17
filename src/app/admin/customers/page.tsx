@@ -1,7 +1,7 @@
 import {createClient} from "@/utils/supabase/server";
-import dateConverter from "@/app/helpers/dateConverter";
-import CustomerInfo from "@/app/types/CustomerInfo";
-import DownloadCsv from "@/app/components/DownloadCsv";
+import dateConverter from "@/app/_helpers/dateConverter";
+import CustomerInfo from "@/app/_types/CustomerInfo";
+import DownloadCsv from "@/app/_components/_buttons/DownloadCsv";
 export default async function Page() {
     const supabase = await createClient();
     let { data, error } = await supabase
