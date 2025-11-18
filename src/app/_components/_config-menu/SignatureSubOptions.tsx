@@ -17,16 +17,26 @@ export default function SignatureSubOptions() {
         <>
             <div className={`${value === 'vamp' ? 'block' : 'invisible'} h-[120px] mb-4 pl-6 text-center`}>
                 <div className="w-[36px] flex flex-col gap-2 items-center bg-gray-50 rounded-full py-2 border-1">
-                    <button type="button" value="white" onClick={(e) => setSignatureDesign('vamp', e.currentTarget.value)} className="w-[24px] h-[24px] bg-stone-200 rounded-full">White metal</button>
-                    <button type="button" value="pave" onClick={(e) => setSignatureDesign('vamp', e.currentTarget.value)} className="w-[24px] h-[24px] bg-stone-200 rounded-full">White pave</button>
-                    <button type="button" value="black" onClick={(e) => setSignatureDesign('vamp', e.currentTarget.value)} className="w-[24px] h-[24px] bg-stone-200 rounded-full">Black metal</button>
+                    <button type="button" value="white" onClick={(e) => setSignatureDesign('vamp', e.currentTarget.value)} className="w-[24px] h-[24px] bg-stone-200 rounded-full cursor-pointer">White metal</button>
+                    <button type="button" value="pave" onClick={(e) => setSignatureDesign('vamp', e.currentTarget.value)} className="w-[24px] h-[24px] bg-stone-200 rounded-full cursor-pointer">White pave</button>
+                    <button type="button" value="black" onClick={(e) => setSignatureDesign('vamp', e.currentTarget.value)} className="w-[24px] h-[24px] bg-stone-200 rounded-full cursor-pointer">Black metal</button>
                 </div>
             </div>
             <div className={`${value === 'sprinkles' ? 'block' : 'invisible'} h-[120px] mb-4 pl-6 text-center`}>
                 <div className="w-[36px] flex flex-col gap-2 items-center bg-gray-50 rounded-full py-2 border-1">
-                    <div className="w-[24px] h-[24px] bg-stone-200 rounded-full">White</div>
-                    <div className="w-[24px] h-[24px] bg-stone-200 rounded-full">Gold</div>
-                    <div className="w-[24px] h-[24px] bg-stone-200 rounded-full">Rose</div>
+                    <button type="button" value="white"
+                            onClick={(e) => setSignatureDesign('sprinkles', e.currentTarget.value)}
+                            className="w-[24px] h-[24px] bg-stone-200 rounded-full cursor-pointer">White
+                    </button>
+                    <button type="button" value="gold"
+                            onClick={(e) => setSignatureDesign('sprinkles', e.currentTarget.value)}
+                            className="w-[24px] h-[24px] bg-stone-200 rounded-full cursor-pointer">Gold
+                    </button>
+                    <button type="button" value="rose"
+                            onClick={(e) => setSignatureDesign('sprinkles', e.currentTarget.value)}
+                            className="w-[24px] h-[24px] bg-stone-200 rounded-full cursor-pointer">Rose
+                    </button>
+
                 </div>
             </div>
             <div className={`${value === 'bgum' ? 'block' : 'invisible'} h-[120px] mb-4 pl-6 text-center`}>

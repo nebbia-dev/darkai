@@ -3,49 +3,50 @@ import {OrbitControls, useEnvironment, useFBX} from '@react-three/drei';
 import type { OrbitControls as OrbitControlsImpl } from 'three-stdlib';
 import Dentiera from "@/app/_components/_teeth/Dentiera";
 import {useTeethStore} from "@/app/_stores/teeth";
-import IlsDx from "@/app/_components/_teeth/IlsDx";
-import IlsSx from "@/app/_components/_teeth/IlsSx";
+import IlsDx from "@/app/_components/_teeth/_lateral-incisors/IlsDx";
+import IlsSx from "@/app/_components/_teeth/_lateral-incisors/IlsSx";
 import LoadedMaterials from "@/app/_components/_layout/LoadedMaterials";
 import {useEffect, useMemo, useRef} from "react";
 import FBX from "@/app/_types/FBX";
-import IcsSx from "@/app/_components/_teeth/IcsSx";
-import IcsDx from "@/app/_components/_teeth/IcsDx";
-import IliSx from "@/app/_components/_teeth/IliSx";
-import IliDx from "@/app/_components/_teeth/IliDx";
-import IciSx from "@/app/_components/_teeth/IciSx";
-import IciDx from "@/app/_components/_teeth/IciDx";
-import CsDx from "@/app/_components/_teeth/CsDx";
-import CsSx from "@/app/_components/_teeth/CsSx";
-import CsDxStone from "@/app/_components/_teeth/CsDxStone";
-import CsSxStone from "@/app/_components/_teeth/CsSxStone";
-import CiDxStone from "@/app/_components/_teeth/CiDxStone";
-import CiDx from "@/app/_components/_teeth/CiDx";
-import CiSx from "@/app/_components/_teeth/CiSx";
-import CiSxStone from "@/app/_components/_teeth/CiSxStone";
+import IcsSx from "@/app/_components/_teeth/_central-incisors/IcsSx";
+import IcsDx from "@/app/_components/_teeth/_central-incisors/IcsDx";
+import IliSx from "@/app/_components/_teeth/_lateral-incisors/IliSx";
+import IliDx from "@/app/_components/_teeth/_lateral-incisors/IliDx";
+import IciSx from "@/app/_components/_teeth/_central-incisors/IciSx";
+import IciDx from "@/app/_components/_teeth/_central-incisors/IciDx";
+import CsDx from "@/app/_components/_teeth/_canines/CsDx";
+import CsSx from "@/app/_components/_teeth/_canines/CsSx";
+import CsDxStone from "@/app/_components/_teeth/_canines/CsDxStone";
+import CsSxStone from "@/app/_components/_teeth/_canines/CsSxStone";
+import CiDxStone from "@/app/_components/_teeth/_canines/CiDxStone";
+import CiDx from "@/app/_components/_teeth/_canines/CiDx";
+import CiSx from "@/app/_components/_teeth/_canines/CiSx";
+import CiSxStone from "@/app/_components/_teeth/_canines/CiSxStone";
 import {State} from "@/app/_types/State";
 import * as THREE from 'three'
 import {useThree} from "@react-three/fiber";
-import IlsSxStone from "@/app/_components/_teeth/IlsSxStone";
-import IlsDxStone from "@/app/_components/_teeth/IlsDxStone";
-import IcsSxStone from "@/app/_components/_teeth/IcsSxStone";
-import IcsDxStone from "@/app/_components/_teeth/IcsDxStone";
-import IliSxStone from "@/app/_components/_teeth/IliSxStone";
-import IliDxStone from "@/app/_components/_teeth/IliDxStone";
-import IciSxStone from "@/app/_components/_teeth/IciSxStone";
-import IciDxStone from "@/app/_components/_teeth/IciDxStone";
-import PprsDx from "@/app/_components/_teeth/PprsDx";
-import PprsSx from "@/app/_components/_teeth/PprsSx";
-import PpriDx from "@/app/_components/_teeth/PpriDx";
-import PpriSx from "@/app/_components/_teeth/PpriSx";
-import SprsDx from "@/app/_components/_teeth/SprsDx";
-import SprsSx from "@/app/_components/_teeth/SprsSx";
-import SpriDx from "@/app/_components/_teeth/SpriDx";
-import SpriSx from "@/app/_components/_teeth/SpriSx";
-import MsDx from "@/app/_components/_teeth/MsDx";
-import MiSx from "@/app/_components/_teeth/MiSx";
-import MsSx from "@/app/_components/_teeth/MsSx";
-import MiDx from "@/app/_components/_teeth/MiDx";
+import IlsSxStone from "@/app/_components/_teeth/_lateral-incisors/IlsSxStone";
+import IlsDxStone from "@/app/_components/_teeth/_lateral-incisors/IlsDxStone";
+import IcsSxStone from "@/app/_components/_teeth/_central-incisors/IcsSxStone";
+import IcsDxStone from "@/app/_components/_teeth/_central-incisors/IcsDxStone";
+import IliSxStone from "@/app/_components/_teeth/_lateral-incisors/IliSxStone";
+import IliDxStone from "@/app/_components/_teeth/_lateral-incisors/IliDxStone";
+import IciSxStone from "@/app/_components/_teeth/_central-incisors/IciSxStone";
+import IciDxStone from "@/app/_components/_teeth/_central-incisors/IciDxStone";
+import PprsDx from "@/app/_components/_teeth/_first-premolars/PprsDx";
+import PprsSx from "@/app/_components/_teeth/_first-premolars/PprsSx";
+import PpriDx from "@/app/_components/_teeth/_first-premolars/PpriDx";
+import PpriSx from "@/app/_components/_teeth/_first-premolars/PpriSx";
+import SprsDx from "@/app/_components/_teeth/_second-premolars/SprsDx";
+import SprsSx from "@/app/_components/_teeth/_second-premolars/SprsSx";
+import SpriDx from "@/app/_components/_teeth/_second-premolars/SpriDx";
+import SpriSx from "@/app/_components/_teeth/_second-premolars/SpriSx";
+import MsDx from "@/app/_components/_teeth/_molars/MsDx";
+import MiSx from "@/app/_components/_teeth/_molars/MiSx";
+import MsSx from "@/app/_components/_teeth/_molars/MsSx";
+import MiDx from "@/app/_components/_teeth/_molars/MiDx";
 import Vamp from "@/app/_components/_teeth/_signature/Vamp";
+import Sprinkles from "@/app/_components/_teeth/_signature/Sprinkles";
 
 export default function Configurator() {
     const envMap = useEnvironment({
@@ -682,6 +683,7 @@ export default function Configurator() {
                 <>
                     {/*SIGNATURE*/}
                     <Vamp/>
+                    <Sprinkles/>
                     {/*DENTI SUPERIORI*/}
                     <IlsSx/>
                     <IlsSxStone/>

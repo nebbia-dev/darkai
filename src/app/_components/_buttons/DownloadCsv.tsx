@@ -1,11 +1,11 @@
 'use client'
 import CustomerInfo from "@/app/_types/CustomerInfo";
-import dateConverter from "@/app/_helpers/dateConverter";
-import removeCommas from "@/app/_helpers/removeCommas";
+import dateConverter from "@/app/_helpers/_converters/dateConverter";
+import removeCommas from "@/app/_helpers/_string-modders/removeCommas";
 import ConfigInfo from "@/app/_types/ConfigInfo";
 import OrderInfo from "@/app/_types/OrderInfo";
-import orderIdConverter from "@/app/_helpers/orderIdConverter";
-import confIdConverter from "@/app/_helpers/confIdConverter";
+import orderIdConverter from "@/app/_helpers/_converters/orderIdConverter";
+import confIdConverter from "@/app/_helpers/_converters/confIdConverter";
 
 export default function DownloadCsv({data} : {data: CustomerInfo[]| ConfigInfo[] | OrderInfo[] | null }) {
     if(!data) {

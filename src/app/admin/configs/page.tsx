@@ -1,7 +1,7 @@
 import {createClient} from "@/utils/supabase/server";
-import dateConverter from "@/app/_helpers/dateConverter";
+import dateConverter from "@/app/_helpers/_converters/dateConverter";
 import Link from 'next/link';
-import confIdConverter from "@/app/_helpers/confIdConverter";
+import confIdConverter from "@/app/_helpers/_converters/confIdConverter";
 import DownloadCsv from "@/app/_components/_buttons/DownloadCsv";
 import ConfigInfo from "@/app/_types/ConfigInfo";
 export default async function Page() {

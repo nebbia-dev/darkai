@@ -1,6 +1,6 @@
 import {Decal, useTexture} from "@react-three/drei";
 import * as THREE from "three";
-import firstCapital from "@/app/_helpers/firstCapital";
+import firstCapital from "@/app/_helpers/_string-modders/firstCapital";
 
 export default function DecalPave({position, pave, stone, scale} : {position:any, pave: string|undefined, stone:string|undefined, scale?:number}) {
     if(!pave || !stone) return;

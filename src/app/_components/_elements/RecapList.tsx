@@ -1,12 +1,12 @@
-import elabToothName from "@/app/_helpers/elabToothName";
+import elabToothName from "@/app/_helpers/_string-modders/elabToothName";
 import {Tooltip} from "@mui/material";
 import {Close} from "@/app/_components/_icons/Close";
-import firstCapital from "@/app/_helpers/firstCapital";
-import elabDesignName from "@/app/_helpers/elabDesignName";
-import elabStoneName from "@/app/_helpers/elabStoneName";
+import firstCapital from "@/app/_helpers/_string-modders/firstCapital";
+import elabDesignName from "@/app/_helpers/_string-modders/elabDesignName";
+import elabStoneName from "@/app/_helpers/_string-modders/elabStoneName";
 import {useTeethStore} from "@/app/_stores/teeth";
 import {State} from "@/app/_types/State";
-import elabMaterial from "@/app/_helpers/elabMaterial";
+import elabMaterial from "@/app/_helpers/_string-modders/elabMaterial";
 
 export default function RecapList({edit} : {edit:boolean}) {
 

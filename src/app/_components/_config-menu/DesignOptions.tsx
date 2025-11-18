@@ -1,6 +1,6 @@
 import {useTeethStore} from "@/app/_stores/teeth";
 import {State} from "@/app/_types/State";
-import checkMolar from "@/app/_helpers/checkMolar";
+import checkMolar from "@/app/_helpers/_checkers/checkMolar";
 
 export default function DesignOptions({tooth}: { tooth: string|undefined }) {
     const setType =  useTeethStore((state: State) => state.setType);

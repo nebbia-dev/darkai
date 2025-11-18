@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import {produce} from "immer";
 import {Pave, State, Stone} from "@/app/_types/State";
 // import {createClient} from "@/utils/supabase/client";
-import firstCapital from "@/app/_helpers/firstCapital";
+import firstCapital from "@/app/_helpers/_string-modders/firstCapital";
 import json from "@/utils/prices.json";
 
 export const useTeethStore = create<State>((set, get) => ({
@@ -1182,15 +1182,27 @@ export const useTeethStore = create<State>((set, get) => ({
             produce((state) => {
 
                 if(!state.signatureVisibility[signature]) {
-                    state.signatureVisibility[signature] = true;
-                    state.signatureMaterial[signature] = material;
+
+                    for(let key of Object.keys(state.signatureVisibility)) {
+                        if(key === signature) {
+                            state.signatureVisibility[key] = true;
+                            state.signatureMaterial[key] = material;
+                        } else {
+                            state.signatureVisibility[key] = false;
+                            state.signatureMaterial[key] = undefined;
+                        }
+                    }
+
                 } else if(state.signatureVisibility[signature] && state.signatureMaterial[signature] === material){
+
                     state.signatureVisibility[signature] = false;
                     state.signatureMaterial[signature] = undefined;
+
                 } else {
+
                     state.signatureMaterial[signature] = material;
+
                 }
-                console.log(JSON.stringify(state.signatureVisibility), JSON.stringify(state.signatureMaterial))
             })
         ),
 
