@@ -47,6 +47,7 @@ import MsSx from "@/app/_components/_teeth/_molars/MsSx";
 import MiDx from "@/app/_components/_teeth/_molars/MiDx";
 import Vamp from "@/app/_components/_teeth/_signature/Vamp";
 import Sprinkles from "@/app/_components/_teeth/_signature/Sprinkles";
+import BubbleGum from "@/app/_components/_teeth/_signature/BubbleGum";
 
 export default function Configurator() {
     const envMap = useEnvironment({
@@ -684,6 +685,7 @@ export default function Configurator() {
                     {/*SIGNATURE*/}
                     <Vamp/>
                     <Sprinkles/>
+                    <BubbleGum/>
                     {/*DENTI SUPERIORI*/}
                     <IlsSx/>
                     <IlsSxStone/>

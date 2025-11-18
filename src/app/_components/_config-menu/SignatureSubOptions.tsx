@@ -39,16 +39,25 @@ export default function SignatureSubOptions() {
 
                 </div>
             </div>
-            <div className={`${value === 'bgum' ? 'block' : 'invisible'} h-[120px] mb-4 pl-6 text-center`}>
+            <div className={`${value === 'bubblegum' ? 'block' : 'invisible'} h-[120px] mb-4 pl-6 text-center`}>
                 <div className="w-[36px] flex flex-col gap-2 items-center bg-gray-50 rounded-full py-2 border-1">
-                    <div className="w-[24px] h-[24px] bg-stone-200 rounded-full">Pink</div>
-                    <div className="w-[24px] h-[24px] bg-stone-200 rounded-full">Green</div>
-                    <div className="w-[24px] h-[24px] bg-stone-200 rounded-full">Blue</div>
+                    <button type="button" value="pink"
+                            onClick={(e) => setSignatureDesign('bubblegum', e.currentTarget.value)}
+                            className="w-[24px] h-[24px] bg-stone-200 rounded-full cursor-pointer">Pink
+                    </button>
+                    <button type="button" value="blue"
+                            onClick={(e) => setSignatureDesign('bubblegum', e.currentTarget.value)}
+                            className="w-[24px] h-[24px] bg-stone-200 rounded-full cursor-pointer">Blue
+                    </button>
+                    <button type="button" value="green"
+                            onClick={(e) => setSignatureDesign('bubblegum', e.currentTarget.value)}
+                            className="w-[24px] h-[24px] bg-stone-200 rounded-full cursor-pointer">Green
+                    </button>
                 </div>
             </div>
             <div className={`${value === 'braces' ? 'block' : 'invisible'} h-[120px] mb-4 pl-6 text-center`}>
                 <div className="w-[36px] flex flex-col gap-2 items-center bg-gray-50 rounded-full py-2 border-1">
-                    <div className="w-[24px] h-[24px] bg-stone-200 rounded-full">Pave</div>
+                <div className="w-[24px] h-[24px] bg-stone-200 rounded-full">Pave</div>
                     <div className="w-[24px] h-[24px] bg-stone-200 rounded-full">Metal</div>
                 </div>
             </div>
