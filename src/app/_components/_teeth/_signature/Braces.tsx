@@ -14,7 +14,6 @@ export default function Braces() {
         if(!signatureGeometry) return <></>
         const geometry = [signatureGeometry.structure.geometry, signatureGeometry.pave.geometry, signatureGeometry.stones.geometry, signatureGeometry.outline.geometry];
         const position = [signatureGeometry.structure.position, signatureGeometry.pave.position, signatureGeometry.stones.position, signatureGeometry.outline.position]
-        console.log(position[2])
         let material:JSX.Element[];
         switch(mat) {
             case 'pave':

@@ -73,7 +73,7 @@ export default function Configurator() {
             const box = new THREE.Box3().setFromObject(mesh);
             return box.getCenter(new THREE.Vector3());
         }
-        console.log(signatures.children[5].children[1])
+
         return {
             // INCISIVI CENTRALI
             icsdx: {

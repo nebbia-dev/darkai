@@ -103,7 +103,5 @@ export default function IlsSx() {
         )
     })
 
-    console.log('render 2')
-
     return <ILSSX visible={toothVisibility} type={toothJewelType} mat={toothMaterial}/>
 }

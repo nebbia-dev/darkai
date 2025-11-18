@@ -85,7 +85,5 @@ export default function IliSx() {
         )
     })
 
-    console.log('render 2')
-
     return <ILISX visible={toothVisibility} type={toothJewelType} mat={toothMaterial}/>
 }

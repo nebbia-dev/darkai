@@ -85,7 +85,5 @@ export default function IcsSx() {
         )
     })
 
-    console.log('render 2')
-
     return <ICSSX visible={toothVisibility} type={toothJewelType} mat={toothMaterial}/>
 }

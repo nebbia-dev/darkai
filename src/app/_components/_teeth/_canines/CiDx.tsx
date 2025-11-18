@@ -98,7 +98,5 @@ export default function CiDx() {
         )
     })
 
-    console.log('render 2')
-
     return <CIDX visible={toothVisibility} type={toothJewelType} mat={toothMaterial}/>
 }

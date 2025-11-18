@@ -212,6 +212,16 @@ interface SignMaterial {
     tribal: 'white' | 'pave' | 'gold' | undefined,
     braces: 'emerald' | 'ruby' | undefined
 }
+interface SignatureTeeth {
+    [key: string]: string[],
+    vamp: string[],
+    hammered: string[],
+    cross: string[],
+    bubblegum: string[],
+    sprinkles: string[],
+    tribal: string[],
+    braces: string[]
+}
 interface SignVisibility {
     vamp: boolean,
     hammered: boolean,
@@ -269,6 +279,7 @@ export interface State {
     teethFinish: Finish,
     signatureMaterial: SignMaterial,
     signatureVisibility: SignVisibility,
+    teethSignature: SignatureTeeth,
     history: History[][],
     currentHistory: number,
     currentTooth: string | undefined,
@@ -308,5 +319,7 @@ export interface State {
     redo: () => void,
     reset: () => void,
     calcTotal: (state:State) => void,
-    setHistory: (state:State) => void
+    setHistory: (state:State) => void,
+    resetList: (state:State, tooth:string) => void
+    checkDiamonds: (state: State) => boolean;
 }

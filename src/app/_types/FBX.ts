@@ -556,5 +556,5 @@ export default interface FBX {
                 position: THREE.Vector3
             }
         },
-    }
+    } | undefined
 }

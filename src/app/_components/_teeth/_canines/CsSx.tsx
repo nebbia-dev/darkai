@@ -85,7 +85,5 @@ export default function CsSx() {
         )
     })
 
-    console.log('render 2')
-
     return <CSSX visible={toothVisibility} type={toothJewelType} mat={toothMaterial}/>
 }

@@ -86,7 +86,5 @@ export default function CsDx() {
         )
     })
 
-    console.log('render 2')
-
     return <CSDX visible={toothVisibility} type={toothJewelType} mat={toothMaterial}/>
 }

@@ -99,7 +99,5 @@ export default function CiSx() {
         )
     })
 
-    console.log('render 2')
-
     return <CISX visible={toothVisibility} type={toothJewelType} mat={toothMaterial}/>
 }

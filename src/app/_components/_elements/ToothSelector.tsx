@@ -11,6 +11,7 @@ import PackagingOptions from "@/app/_components/_config-menu/PackagingOptions";
 import DesignSubOptions from "@/app/_components/_config-menu/DesignSubOptions";
 import PackagingSubOptions from "@/app/_components/_config-menu/PackagingSubOptions";
 import SignatureSubOptions from "@/app/_components/_config-menu/SignatureSubOptions";
+import checkSignature from "@/app/_helpers/_checkers/checkSignature";
 
 export default function ToothSelector({tooth, onclick, active} : {tooth: string | undefined, active:string|undefined, onclick: (value:string) => void}) {
     const pave = useTeethStore((state: State) => tooth ? state.teethPaves[tooth] : undefined);
@@ -27,11 +28,11 @@ export default function ToothSelector({tooth, onclick, active} : {tooth: string 
             case "2":
                 return <DesignOptions tooth={tooth} />
             case "3":
-                return <GoldOptions tooth={tooth}/>
+                return <GoldOptions tooth={tooth} signature={checkSignature(jewelType)}/>
             case "4":
-                return <FinishingOptions tooth={tooth} enamel={jewelType === 'enamel'} visible={visibility}/>
+                return <FinishingOptions tooth={tooth} enamel={jewelType === 'enamel'} visible={visibility} signature={checkSignature(jewelType)}/>
             case "5":
-                return <StoneOptions tooth={tooth} bezel={jewelType === 'bezel'|| jewelType === 'bezelDiamond'} pave={!!pave?.shape}/>
+                return <StoneOptions tooth={tooth} bezel={jewelType === 'bezel'|| jewelType === 'bezelDiamond'} pave={!!pave?.shape} />
             case "6":
                 return <PackagingOptions/>
             default:

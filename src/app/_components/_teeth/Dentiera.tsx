@@ -53,6 +53,10 @@ export default function Dentiera() {
     }
 
     function log(e: any) {
+        // fondamentale. Altrimenti, con visuale frontale, cliccando sui primi premolari vengono
+        // selezionati i secondi premolari o i molari
+        e.stopPropagation();
+
         switch(e.object.name) {
             case "Incisivo_C_I_SX":
                 setActive('icisx');
@@ -428,7 +432,6 @@ export default function Dentiera() {
     })
 
     const Base = memo(() : JSX.Element => {
-        console.log('base')
         return (
             <>
                 <mesh onPointerLeave={(e) => hoverBase(e)} onPointerEnter={(e) => hoverBase(e)}
