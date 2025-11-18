@@ -545,7 +545,7 @@ export default interface FBX {
             },
             pave: {
                 geometry: THREE.BufferGeometry,
-                position: THREE.Vector3
+                position: THREE.Vector3,
             },
             stones: {
                 geometry: THREE.BufferGeometry,

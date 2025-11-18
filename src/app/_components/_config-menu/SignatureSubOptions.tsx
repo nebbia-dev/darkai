@@ -57,8 +57,14 @@ export default function SignatureSubOptions() {
             </div>
             <div className={`${value === 'braces' ? 'block' : 'invisible'} h-[120px] mb-4 pl-6 text-center`}>
                 <div className="w-[36px] flex flex-col gap-2 items-center bg-gray-50 rounded-full py-2 border-1">
-                <div className="w-[24px] h-[24px] bg-stone-200 rounded-full">Pave</div>
-                    <div className="w-[24px] h-[24px] bg-stone-200 rounded-full">Metal</div>
+                    <button type="button" value="white"
+                            onClick={(e) => setSignatureDesign('braces', e.currentTarget.value)}
+                            className="w-[24px] h-[24px] bg-stone-200 rounded-full cursor-pointer">White
+                    </button>
+                    <button type="button" value="pave"
+                            onClick={(e) => setSignatureDesign('braces', e.currentTarget.value)}
+                            className="w-[24px] h-[24px] bg-stone-200 rounded-full cursor-pointer">Pave
+                    </button>
                 </div>
             </div>
             <div className={`${value === 'tribal' ? 'block' : 'invisible'} h-[120px] mb-4 pl-6 text-center`}>

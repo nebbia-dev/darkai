@@ -48,6 +48,7 @@ import MiDx from "@/app/_components/_teeth/_molars/MiDx";
 import Vamp from "@/app/_components/_teeth/_signature/Vamp";
 import Sprinkles from "@/app/_components/_teeth/_signature/Sprinkles";
 import BubbleGum from "@/app/_components/_teeth/_signature/BubbleGum";
+import Braces from "@/app/_components/_teeth/_signature/Braces";
 
 export default function Configurator() {
     const envMap = useEnvironment({
@@ -69,7 +70,7 @@ export default function Configurator() {
             const box = new THREE.Box3().setFromObject(mesh);
             return box.getCenter(new THREE.Vector3());
         }
-
+        console.log(signatures.children[5].children[1])
         return {
             // INCISIVI CENTRALI
             icsdx: {
@@ -612,19 +613,19 @@ export default function Configurator() {
                 braces: {
                     structure: {
                         geometry: (signatures.children[5].children[0] as THREE.Mesh).geometry,
-                        position: signatures.children[5].children[0].position
+                        position: signatures.children[5].position
                     },
                     pave: {
                         geometry: (signatures.children[5].children[1] as THREE.Mesh).geometry,
-                        position: signatures.children[5].children[1].position
+                        position: signatures.children[5].position,
                     },
                     stones: {
                         geometry: (signatures.children[5].children[2] as THREE.Mesh).geometry,
-                        position: signatures.children[5].children[2].position
+                        position: signatures.children[5].position
                     },
                     outline: {
                         geometry: (signatures.children[5].children[3] as THREE.Mesh).geometry,
-                        position: signatures.children[5].children[3].position
+                        position: signatures.children[5].position
                     }
                 },
             }
@@ -686,6 +687,7 @@ export default function Configurator() {
                     <Vamp/>
                     <Sprinkles/>
                     <BubbleGum/>
+                    <Braces/>
                     {/*DENTI SUPERIORI*/}
                     <IlsSx/>
                     <IlsSxStone/>
