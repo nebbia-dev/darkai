@@ -23,9 +23,9 @@ export default function SignatureOptions() {
             </button>
             <button type="button" value="tribal" className="cursor-pointer w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-2 text-center" onClick={(e) => setSignatureDesign(e.currentTarget.value)}>Tribals
             </button>
-            <button type="button" value="cross" className="cursor-pointer w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-2 text-center" onClick={(e) => setActiveSubButton(e.currentTarget.value)}>Cross Spacer
+            <button type="button" value="cross" className="cursor-pointer w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-2 text-center" onClick={(e) => setSignatureDesign(e.currentTarget.value)}>Cross Spacer
             </button>
-            <button type="button" value="hammered" className="cursor-pointer w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 p-2 text-center" onClick={(e) => setActiveSubButton(e.currentTarget.value)}>Hammered Frames
+            <button type="button" value="hammered" className="cursor-pointer w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 p-2 text-center" onClick={(e) => setSignatureDesign(e.currentTarget.value)}>Hammered Frames
             </button>
         </>
     )
