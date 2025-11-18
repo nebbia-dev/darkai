@@ -49,6 +49,7 @@ import Vamp from "@/app/_components/_teeth/_signature/Vamp";
 import Sprinkles from "@/app/_components/_teeth/_signature/Sprinkles";
 import BubbleGum from "@/app/_components/_teeth/_signature/BubbleGum";
 import Braces from "@/app/_components/_teeth/_signature/Braces";
+import Tribals from "@/app/_components/_teeth/_signature/Tribals";
 
 export default function Configurator() {
     const envMap = useEnvironment({
@@ -580,7 +581,7 @@ export default function Configurator() {
                 },
                 tribal: {
                     sup: (signatures.children[2] as THREE.Mesh).geometry,
-                    position: signatures.children[2].position
+                    position: signatures.children[2].position,
                 },
                 sprinkles: {
                     csdx: (signatures.children[4].children[0] as THREE.Mesh).geometry,
@@ -688,6 +689,7 @@ export default function Configurator() {
                     <Sprinkles/>
                     <BubbleGum/>
                     <Braces/>
+                    <Tribals/>
                     {/*DENTI SUPERIORI*/}
                     <IlsSx/>
                     <IlsSxStone/>
