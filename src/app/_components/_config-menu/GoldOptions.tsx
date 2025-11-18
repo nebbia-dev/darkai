@@ -1,6 +1,5 @@
 import {useTeethStore} from "@/app/_stores/teeth";
 import {State} from "@/app/_types/State";
-import checkSignature from "@/app/_helpers/_checkers/checkSignature";
 
 export default function GoldOptions({tooth, signature}:{tooth:string|undefined, signature:boolean|undefined}) {
     const setMaterial =  useTeethStore((state: State) => state.setMaterial);

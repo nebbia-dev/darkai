@@ -223,6 +223,7 @@ interface SignatureTeeth {
     braces: string[]
 }
 interface SignVisibility {
+    [key: string]: boolean,
     vamp: boolean,
     hammered: boolean,
     cross: boolean,
@@ -265,7 +266,9 @@ export interface History {
     enamel: Enamel,
     visible: Visibility,
     prices: Prices,
-    preciousness: Preciousness | undefined
+    preciousness: Preciousness | undefined,
+    signatureVisible: SignVisibility,
+    signatureMaterial: SignMaterial
 }
 export interface State {
     envMap: Texture | CubeTexture | undefined,

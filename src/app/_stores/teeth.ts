@@ -215,7 +215,6 @@ export const useTeethStore = create<State>((set, get) => ({
 
                 // update current history step
                 if(state.currentHistory < state.history.length) {
-                    console.log(state.currentHistory, state.history.length)
                     state.history = state.history.splice(0, state.currentHistory);
                 }
                 state.currentHistory++;
@@ -257,7 +256,6 @@ export const useTeethStore = create<State>((set, get) => ({
                             // calc total and set history step
                             get().calcTotal(state);
                             get().setHistory(state);
-                            console.log(JSON.stringify(state.teethJewelType))
                             return;
                         }
 
@@ -299,7 +297,6 @@ export const useTeethStore = create<State>((set, get) => ({
                             // calc total and set history step
                             get().calcTotal(state);
                             get().setHistory(state);
-                            console.log(JSON.stringify(state.teethJewelType))
                             return;
                         }
 
@@ -311,7 +308,6 @@ export const useTeethStore = create<State>((set, get) => ({
                         // calc total and set history step
                         get().calcTotal(state);
                         get().setHistory(state);
-                        console.log(JSON.stringify(state.teethJewelType))
                         return;
                 }
 
@@ -410,7 +406,6 @@ export const useTeethStore = create<State>((set, get) => ({
                     // calc total
                     get().calcTotal(state);
                     get().setHistory(state);
-                    console.log(JSON.stringify(state.teethJewelType))
                     return;
                 }
 
@@ -434,7 +429,6 @@ export const useTeethStore = create<State>((set, get) => ({
                     // calc total
                     get().calcTotal(state);
                     get().setHistory(state);
-                    console.log(JSON.stringify(state.teethJewelType))
                     return;
                 }
 
@@ -660,7 +654,6 @@ export const useTeethStore = create<State>((set, get) => ({
                         state.currentTooth = tooth;
                     //  BUT, if the PREVIOUS jewel type of a tooth is NEITHER a bigBar/bigBarDiamond NOR a bar/barDiamond...
                     } else {
-                        console.log('NOT HALO')
                         // STANDARD config setup
                         state.teethVisibility[tooth] = true;
                         state.teethJewelType[tooth] = type;
@@ -710,7 +703,6 @@ export const useTeethStore = create<State>((set, get) => ({
                 // calc total and set history step
                 get().calcTotal(state);
                 get().setHistory(state);
-                console.log(JSON.stringify(state.teethJewelType))
             }),
         ),
 
@@ -776,7 +768,6 @@ export const useTeethStore = create<State>((set, get) => ({
 
                 // update current history step
                 if(state.currentHistory < state.history.length) {
-                    console.log(state.currentHistory, state.history.length)
                     state.history = state.history.splice(0, state.currentHistory);
                 }
                 state.currentHistory++;
@@ -836,7 +827,6 @@ export const useTeethStore = create<State>((set, get) => ({
 
                 // update current history step
                 if(state.currentHistory < state.history.length) {
-                    console.log(state.currentHistory, state.history.length)
                     state.history = state.history.splice(0, state.currentHistory);
                 }
                 state.currentHistory++;
@@ -916,7 +906,6 @@ export const useTeethStore = create<State>((set, get) => ({
 
                 // update current history step
                 if(state.currentHistory < state.history.length) {
-                    console.log(state.currentHistory, state.history.length)
                     state.history = state.history.splice(0, state.currentHistory);
                 }
                 state.currentHistory++;
@@ -1174,6 +1163,12 @@ export const useTeethStore = create<State>((set, get) => ({
         set(
             produce((state) => {
 
+                // update current history step
+                if(state.currentHistory < state.history.length) {
+                    state.history = state.history.splice(0, state.currentHistory);
+                }
+                state.currentHistory++;
+
                 if(!state.signatureVisibility[signature]) {
 
                     // first, you need to check if another signature is selected;
@@ -1210,7 +1205,7 @@ export const useTeethStore = create<State>((set, get) => ({
 
                 }
 
-                console.log(JSON.stringify(state.teethJewelType))
+                get().setHistory(state);
             })
         ),
 
@@ -1274,7 +1269,6 @@ export const useTeethStore = create<State>((set, get) => ({
 
                 // update current history step
                 if (state.currentHistory < state.history.length) {
-                    console.log(state.currentHistory, state.history.length)
                     state.history = state.history.splice(0, state.currentHistory);
                 }
                 state.currentHistory++;
@@ -1507,7 +1501,6 @@ export const useTeethStore = create<State>((set, get) => ({
             produce((state) => {
                 // update current history step
                 if(state.currentHistory < state.history.length) {
-                    console.log(state.currentHistory, state.history.length)
                     state.history = state.history.splice(0, state.currentHistory);
                 }
                 state.currentHistory++;
@@ -1709,6 +1702,24 @@ export const useTeethStore = create<State>((set, get) => ({
                     midx: 'polished',
                     misx: 'polished'
                 };
+                state.signatureVisibility = {
+                    vamp: false,
+                    hammered: false,
+                    cross: false,
+                    bubblegum: false,
+                    sprinkles: false,
+                    tribal: false,
+                    braces: false
+                };
+                state.signatureMaterial = {
+                    vamp: undefined,
+                    hammered: undefined,
+                    cross: undefined,
+                    bubblegum: undefined,
+                    sprinkles: undefined,
+                    tribal: undefined,
+                    braces: undefined
+                };
                 state.total = 0;
                 get().setHistory(state);
             })
@@ -1725,7 +1736,9 @@ export const useTeethStore = create<State>((set, get) => ({
                 finish: state.teethFinish,
                 visible: state.teethVisibility,
                 prices: state.teethPrices,
-                preciousness: state.teethPreciousness
+                preciousness: state.teethPreciousness,
+                signatureVisible: state.signatureVisibility,
+                signatureMaterial: state.signatureMaterial
             }]
         ];
     },
@@ -1792,7 +1805,6 @@ export const useTeethStore = create<State>((set, get) => ({
                         priceToFind = bezelStone.filter(p => p.carats === state.teethPreciousness.carats && !p.pave && p.shape === state.teethStones[tooth].shape);
                         state.teethPrices[tooth] = priceToFind[0].price;
                         state.total += priceToFind[0].price;
-                        console.log('price: ', JSON.stringify(priceToFind));
                         break;
                     case 'fullDiamond':
                     case 'frameDiamond':

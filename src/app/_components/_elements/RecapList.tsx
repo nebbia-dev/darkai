@@ -7,6 +7,7 @@ import elabStoneName from "@/app/_helpers/_string-modders/elabStoneName";
 import {useTeethStore} from "@/app/_stores/teeth";
 import {State} from "@/app/_types/State";
 import elabMaterial from "@/app/_helpers/_string-modders/elabMaterial";
+import elabSignatureName from "@/app/_helpers/_string-modders/elabSignatureName";
 
 export default function RecapList({edit} : {edit:boolean}) {
 
@@ -26,11 +27,63 @@ export default function RecapList({edit} : {edit:boolean}) {
     return (
         <div className="pl-6 pr-3 py-4 h-full">
             <ul className="pr-3 h-full overflow-y-scroll">
-                {(history.length === 0 || total === 0) &&
+                {/*{(history.length === 0 || total === 0) &&*/}
+                {history.length === 0 &&
                     <li className="w-full h-full flex items-center justify-center">
                         <p>Choose your configs wisely!</p>
                     </li>
                 }
+                {history.length > 0 && Object.entries(history[currentStep][0].signatureVisible).map(signature => {
+
+                    {/*https://stackoverflow.com/questions/48223852/how-to-conditionally-add-or-not-onclick-on-a-div-in-react*/}
+                    return (
+                        history[currentStep][0].signatureVisible[signature[0]] &&
+                        <li key={signature[0]}
+                            className="cursor-pointer mb-4"
+                        >
+                            {/*tooth name*/}
+                            <div className="flex justify-between items-center">
+                                <h4 className="font-semibold">
+                                    {elabSignatureName(signature[0])}
+                                </h4>
+                                {/*{edit && <Tooltip title="Delete tooth">*/}
+                                {/*            <Close className="cursor-pointer"*/}
+                                {/*                   onClick={() => resetTooth(tooth[0])}/>*/}
+                                {/*        </Tooltip>*/}
+                                {/*}*/}
+                            </div>
+
+                            {/*material*/}
+                            <p>
+                                {
+                                    history[currentStep][0].signatureMaterial[signature[0]] !== 'pave'
+                                        ? firstCapital(history[currentStep][0].signatureMaterial[signature[0]] as string)
+                                        : 'White'
+                                } gold
+                            </p>
+
+
+                            {
+                                history[currentStep][0].signatureMaterial[signature[0]] === 'pave' &&
+                                <p>
+                                    Round pave w/ white diamonds
+                                </p>
+                            }
+
+
+                            <span aria-hidden={true}
+                                  className="inline-block h-[1px] w-full bg-slate-950"></span>
+                            <p className="font-bold w-full text-right">
+                                {
+                                    new Intl.NumberFormat("de-DE", {
+                                        style: "currency",
+                                        currency: "EUR"
+                                    }).format(500)
+                                }
+                            </p>
+                        </li>
+                    )
+                })}
                 {history.length > 0 && Object.entries(history[currentStep][0].type).map(tooth => {
 
                     {/*https://stackoverflow.com/questions/48223852/how-to-conditionally-add-or-not-onclick-on-a-div-in-react*/}
