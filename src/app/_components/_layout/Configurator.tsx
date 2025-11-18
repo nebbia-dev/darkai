@@ -51,6 +51,7 @@ import BubbleGum from "@/app/_components/_teeth/_signature/BubbleGum";
 import Braces from "@/app/_components/_teeth/_signature/Braces";
 import Tribals from "@/app/_components/_teeth/_signature/Tribals";
 import Hammered from "@/app/_components/_teeth/_signature/Hammered";
+import Cross from "@/app/_components/_teeth/_signature/Cross";
 
 export default function Configurator() {
     const envMap = useEnvironment({
@@ -579,7 +580,6 @@ export default function Configurator() {
                 cross: {
                     ics: (signatures.children[1] as THREE.Mesh).geometry,
                     position: signatures.children[1].position,
-                    positionD: getOrigin(signatures.children[1])
                 },
                 tribal: {
                     sup: (signatures.children[2] as THREE.Mesh).geometry,
@@ -677,10 +677,10 @@ export default function Configurator() {
     return (
         <>
             <OrbitControls
-                maxDistance={35}
+                // maxDistance={35}
                 // minDistance={22}
-                minPolarAngle={Math.PI / 3}
-                maxPolarAngle={Math.PI - Math.PI / 3}
+                // minPolarAngle={Math.PI / 3}
+                // maxPolarAngle={Math.PI - Math.PI / 3}
                 ref={orbitRef}/>
 
             {savedEnvMap && <LoadedMaterials/>}
@@ -692,6 +692,7 @@ export default function Configurator() {
                     <BubbleGum/>
                     <Braces/>
                     <Tribals/>
+                    <Cross/>
                     <Hammered/>
                     {/*DENTI SUPERIORI*/}
                     <IlsSx/>

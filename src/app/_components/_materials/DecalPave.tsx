@@ -551,7 +551,7 @@ export default function DecalPave({position, pave, stone, scale} : {position:any
     hexagonGlitch.map.wrapS = hexagonGlitch.map.wrapT = THREE.RepeatWrapping;
     hexagonGlitch.map.repeat.set(10,10);
     pairs.set('hexagonGlitch', hexagonGlitch.map);
-
+    console.log(position)
     return(
         <Decal debug scale={scale ?? 1} polygonOffsetFactor={-0} position={position} map={pairs.get(pave+firstCapital(stone))}/>
     )

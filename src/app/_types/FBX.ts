@@ -505,7 +505,6 @@ export default interface FBX {
         cross: {
             ics: THREE.BufferGeometry,
             position: THREE.Vector3,
-            positionD: THREE.Vector3
         },
         tribal: {
             sup: THREE.BufferGeometry,
