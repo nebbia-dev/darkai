@@ -60,10 +60,22 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
     return(
 
         <div className="relative flex flex-col gap-4">
-            <ConfiguratorButton inverse={false} value="2" active={active} onclick={onclick} tooth={tooth} label="Grillz Type">De</ConfiguratorButton>
-            <ConfiguratorButton inverse={false} value="3" active={active} onclick={onclick} tooth={tooth} label="Gold Color">Go</ConfiguratorButton>
-            <ConfiguratorButton inverse={false} value="4" active={active} onclick={onclick} tooth={tooth} label="Finishing">Fi</ConfiguratorButton>
-            <ConfiguratorButton inverse={false} value="5" active={active} onclick={onclick} tooth={tooth} label="Stone Color">Co</ConfiguratorButton>
+            <ConfiguratorButton inverse={false} value="2" active={active} onclick={onclick} tooth={tooth}
+                                label="Grillz Type">
+                <img src="/svgs/tooth.svg" alt="design-option-logo"/>
+            </ConfiguratorButton>
+            <ConfiguratorButton inverse={false} value="3" active={active} onclick={onclick} tooth={tooth}
+                                label="Gold Color">
+                <img src="/svgs/Giallo 1.svg" alt="gold-option-logo"/>
+            </ConfiguratorButton>
+            <ConfiguratorButton inverse={false} value="4" active={active} onclick={onclick} tooth={tooth}
+                                label="Finishing">
+                <img src="/svgs/Diamante.svg" alt="diamond-option-logo"/>
+            </ConfiguratorButton>
+            <ConfiguratorButton inverse={false} value="5" active={active} onclick={onclick} tooth={tooth}
+                                label="Stone Color">
+                <img src="/svgs/image 10.svg" alt="color-option-logo"/>
+            </ConfiguratorButton>
 
             <div
                 className={`${!active ? 'hidden' : 'block'} pups text-center ${active === '6' ? 'h-[324px]' : (active === '2' && checkMolar(tooth)) ? 'h-[186px]' : 'h-[596px]'} w-[200px] bg-gray-50 rounded-3xl absolute 

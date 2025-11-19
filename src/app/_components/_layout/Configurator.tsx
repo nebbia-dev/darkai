@@ -24,7 +24,7 @@ import CiSx from "@/app/_components/_teeth/_canines/CiSx";
 import CiSxStone from "@/app/_components/_teeth/_canines/CiSxStone";
 import {State} from "@/app/_types/State";
 import * as THREE from 'three'
-import {useFrame, useThree, Vector3} from "@react-three/fiber";
+import {useFrame, useThree} from "@react-three/fiber";
 import IlsSxStone from "@/app/_components/_teeth/_lateral-incisors/IlsSxStone";
 import IlsDxStone from "@/app/_components/_teeth/_lateral-incisors/IlsDxStone";
 import IcsSxStone from "@/app/_components/_teeth/_central-incisors/IcsSxStone";
@@ -684,7 +684,6 @@ export default function Configurator() {
             && groupRef.current.position.z > -3
         ) {
             groupRef.current.position.z = orbitRef.current.getAzimuthalAngle() * -2;
-            console.log(groupRef.current.position.z)
         }
     });
 
