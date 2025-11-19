@@ -62,7 +62,8 @@ export interface State {
     fetchPrices: () => void,
     undo: () => void,
     redo: () => void,
-    resetHistoryStep: (state:State) => void
+    resetHistoryStep: (state:State) => void,
+    resetSignature: (signature: string) => void,
     reset: () => void,
     calcTotal: (state:State) => void,
     setHistory: (state:State) => void,

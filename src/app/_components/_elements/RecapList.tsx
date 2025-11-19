@@ -18,6 +18,7 @@ export default function RecapList({edit} : {edit:boolean}) {
     const setActive = useTeethStore((state: State) => state.setActiveTooth);
     const setHover = useTeethStore((state: State) => state.setHover);
     const resetTooth = useTeethStore((state: State) => state.resetTooth);
+    const resetSignature = useTeethStore((state: State) => state.resetSignature);
 
     function setCurrentHover(tooth:string|undefined, e:any) {
         e.stopPropagation();
@@ -45,11 +46,11 @@ export default function RecapList({edit} : {edit:boolean}) {
                                 <h4 className="font-semibold">
                                     {elabSignatureName(signature[0])}
                                 </h4>
-                                {/*{edit && <Tooltip title="Delete tooth">*/}
-                                {/*            <Close className="cursor-pointer"*/}
-                                {/*                   onClick={() => resetTooth(tooth[0])}/>*/}
-                                {/*        </Tooltip>*/}
-                                {/*}*/}
+                                {edit && <Tooltip title="Delete signature">
+                                            <Close className="cursor-pointer"
+                                                   onClick={() => resetSignature(signature[0])}/>
+                                        </Tooltip>
+                                }
                             </div>
 
                             {/*material*/}

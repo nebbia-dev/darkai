@@ -1282,12 +1282,32 @@ export const useTeethStore = create<State>((set, get) => ({
                 state.currentHistory++;
 
                 get().resetList(state, tooth);
-
+                state.activeSubButton = undefined;
                 get().calcTotal(state);
                 get().setHistory(state);
             })
         ),
+    resetSignature: (signature) =>
+        set(
+            produce((state) => {
+                state.signatureMaterial[signature] = undefined;
+                state.signatureVisibility[signature] = false;
 
+                for(let [key, value] of Object.entries(state.teethJewelType)) {
+                    if(value === signature) {
+                        state.teethJewelType[key] = 'full';
+                    }
+                }
+
+                if(!get().checkDiamonds(state)) {
+                    state.teethPreciousness.diamonds = undefined;
+                }
+                state.activeSubButton = undefined;
+                get().calcTotal(state);
+                get().setHistory(state);
+            })
+
+        ),
     // state and method to manage the initial loading screens
     loaded: false,
     setLoaded: (bool) => set(() => ({loaded: bool})),
