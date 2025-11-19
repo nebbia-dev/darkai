@@ -11,6 +11,7 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
     const teethPreciousness = useTeethStore((state:State) => state.teethPreciousness);
     const teethStones = useTeethStore((state:State) => state.teethStones);
     const teethPaves = useTeethStore((state:State) => state.teethPaves);
+    const signatureMaterial = useTeethStore((state:State) => state.signatureMaterial);
     const total = useTeethStore((state:State) => state.total);
     const [showRecap, setShowRecap] = useState<boolean>(false);
     const [open, setOpen] = useState<boolean>(false);
@@ -18,6 +19,7 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
     const [sent, setSent] = useState<boolean>(false);
     const takeScreenshot = useTeethStore((state:State) => state.setIsScreenshotNeeded);
     const setPreciousness = useTeethStore((state:State) => state.setTeethPreciousness);
+    console.log(signatureMaterial)
     function checkDiamonds():boolean {
         for(let stone of Object.values(teethStones)) {
             if(stone.color === 'whD' || stone.color === 'brD' || stone.color === 'blD') {
@@ -27,6 +29,12 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
 
         for(let pave of Object.values(teethPaves)) {
             if(pave.color === 'whD' || pave.color === 'brD' || pave.color === 'blD') {
+                return true;
+            }
+        }
+
+        for(let material of Object.values(signatureMaterial)) {
+            if(material === 'pave') {
                 return true;
             }
         }

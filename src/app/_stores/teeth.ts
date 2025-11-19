@@ -1205,6 +1205,12 @@ export const useTeethStore = create<State>((set, get) => ({
 
                 }
 
+                if(material === 'pave') {
+                    state.teethPreciousness.diamonds = 'lab';
+                } else if(material !== 'pave' && !get().checkDiamonds(state)) {
+                    state.teethPreciousness.diamonds = undefined;
+                }
+
                 get().setHistory(state);
             })
         ),
@@ -1871,6 +1877,12 @@ export const useTeethStore = create<State>((set, get) => ({
         }
         for(let stone of Object.values(state.teethStones)) {
             if(stone.color === 'whD' || stone.color === 'brD' || stone.color === 'blD') {
+                counter++;
+            }
+        }
+
+        for(let material of Object.values(state.signatureMaterial)) {
+            if(material === 'pave') {
                 counter++;
             }
         }
