@@ -27,8 +27,7 @@ export default function RecapList({edit} : {edit:boolean}) {
     return (
         <div className="pl-6 pr-3 py-4 h-full">
             <ul className="pr-3 h-full overflow-y-scroll">
-                {/*{(history.length === 0 || total === 0) &&*/}
-                {history.length === 0 &&
+                {(history.length === 0 || total === 0) &&
                     <li className="w-full h-full flex items-center justify-center">
                         <p>Choose your configs wisely!</p>
                     </li>
@@ -78,7 +77,7 @@ export default function RecapList({edit} : {edit:boolean}) {
                                     new Intl.NumberFormat("de-DE", {
                                         style: "currency",
                                         currency: "EUR"
-                                    }).format(500)
+                                    }).format(teethPrices.signature)
                                 }
                             </p>
                         </li>

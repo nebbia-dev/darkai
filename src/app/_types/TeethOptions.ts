@@ -167,7 +167,9 @@ export interface Prices {
     msdx: number,
     mssx: number,
     midx: number,
-    misx: number
+    misx: number,
+
+    signature: number
 }
 export interface Visibility {
     [key: string]: boolean

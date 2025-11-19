@@ -19,7 +19,6 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
     const [sent, setSent] = useState<boolean>(false);
     const takeScreenshot = useTeethStore((state:State) => state.setIsScreenshotNeeded);
     const setPreciousness = useTeethStore((state:State) => state.setTeethPreciousness);
-    console.log(signatureMaterial)
     function checkDiamonds():boolean {
         for(let stone of Object.values(teethStones)) {
             if(stone.color === 'whD' || stone.color === 'brD' || stone.color === 'blD') {

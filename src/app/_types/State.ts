@@ -54,7 +54,7 @@ export interface State {
     setStone: (tooth:string, shape:string, color:string) => void,
     setEnamel: (tooth:string, color:string) => void,
     setActiveTooth: (tooth:string|undefined) => void,
-    setSignature: (signature:string, material:string) => void,
+    setSignature: (signature:string, material:string, mainMenu:boolean) => void,
     setTeethPreciousness: (carats:number, diamonds:string|undefined) => void,
     unsetLastActivatedTooth: () => void,
     resetTooth: (tooth:string) => void,

@@ -10,7 +10,7 @@ export default function SignatureSubOptions() {
         if(signatureMaterial[type] === e) {
             return;
         }
-        setSignature(type, e);
+        setSignature(type, e, false);
     }
 
     return (

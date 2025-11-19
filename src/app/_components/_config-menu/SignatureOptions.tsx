@@ -8,7 +8,7 @@ export default function SignatureOptions() {
     function setSignatureDesign(e:string) {
         setActiveSubButton(e);
         const material = (e === 'bubblegum') ? 'pink' : 'white';
-        setSignature(e, material);
+        setSignature(e, material, true);
     }
 
     return (

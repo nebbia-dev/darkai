@@ -4,6 +4,7 @@ import {Pave, State, Stone} from "@/app/_types/State";
 // import {createClient} from "@/utils/supabase/client";
 import firstCapital from "@/app/_helpers/_string-modders/firstCapital";
 import json from "@/utils/prices.json";
+import {createClient} from "@/utils/supabase/client";
 
 export const useTeethStore = create<State>((set, get) => ({
 
@@ -1159,7 +1160,7 @@ export const useTeethStore = create<State>((set, get) => ({
         tribal: ['icsdx', 'icssx', 'ilsdx', 'ilssx'],
         braces: ['icsdx', 'icssx', 'ilsdx', 'ilssx', 'csdx', 'cssx']
     },
-    setSignature: (signature, material) =>
+    setSignature: (signature, material, mainMenu) =>
         set(
             produce((state) => {
 
@@ -1194,7 +1195,7 @@ export const useTeethStore = create<State>((set, get) => ({
                         }
                     }
 
-                } else if(state.signatureVisibility[signature] && state.signatureMaterial[signature] === material){
+                } else if(state.signatureVisibility[signature] && mainMenu){
 
                     state.signatureVisibility[signature] = false;
                     state.signatureMaterial[signature] = undefined;
@@ -1211,6 +1212,7 @@ export const useTeethStore = create<State>((set, get) => ({
                     state.teethPreciousness.diamonds = undefined;
                 }
 
+                get().calcTotal(state);
                 get().setHistory(state);
             })
         ),
@@ -1295,7 +1297,7 @@ export const useTeethStore = create<State>((set, get) => ({
     setRecap: (bool) => set({recap: bool}),
 
     // states and method to fetch and save the prices from the db
-    prices: {base: json.base, bezel: json.bezel, pave: json.pave, finish: json.finish},
+    prices: {base: json.base, bezel: json.bezel, pave: json.pave, finish: json.finish, signature: json.signature},
     fetchPrices: async() => {
         // const supabase = createClient();
         // let { data: base, error: errorBase } = await supabase
@@ -1310,6 +1312,10 @@ export const useTeethStore = create<State>((set, get) => ({
         // let { data: finish, error: errorFinish } = await supabase
         //     .from('Finish')
         //     .select('*');
+        // let { data: signature, error: errorSignature } = await supabase
+        //     .from('Signature')
+        //     .select('*');
+
         //
         // const [whDLab_b, whDNat_b, brDLab_b, brDNat_b, blDLab_b, blDNat_b, ruby_b, emerald_b, ameth_b, aqua_b, bSapph_b, ySapph_b, pSapph_b] = [[],[],[],[],[],[],[],[],[],[],[],[],[]]
         // const [whDLab_p, whDNat_p, brDLab_p, brDNat_p, blDLab_p, blDNat_p, ruby_p, emerald_p, ameth_p, aqua_p, bSapph_p, ySapph_p, pSapph_p, camo, glitch] = [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
@@ -1703,6 +1709,33 @@ export const useTeethStore = create<State>((set, get) => ({
                     tribal: undefined,
                     braces: undefined
                 };
+                state.teethPrices = {
+                    icsdx: 0,
+                    icssx: 0,
+                    icidx: 0,
+                    icisx: 0,
+                    ilsdx: 0,
+                    ilssx: 0,
+                    ilidx: 0,
+                    ilisx: 0,
+                    csdx: 0,
+                    cssx: 0,
+                    cidx: 0,
+                    cisx: 0,
+                    pprsdx: 0,
+                    pprssx: 0,
+                    ppridx: 0,
+                    pprisx: 0,
+                    sprsdx: 0,
+                    sprssx: 0,
+                    spridx: 0,
+                    sprisx: 0,
+                    msdx: 0,
+                    mssx: 0,
+                    midx: 0,
+                    misx: 0,
+                    signature: 0
+                };
                 state.total = 0;
                 get().setHistory(state);
             })
@@ -1751,7 +1784,8 @@ export const useTeethStore = create<State>((set, get) => ({
         msdx: 0,
         mssx: 0,
         midx: 0,
-        misx: 0
+        misx: 0,
+        signature: 0
     },
     total: 0,
     calcTotal: (state) => {
@@ -1846,6 +1880,36 @@ export const useTeethStore = create<State>((set, get) => ({
                         state.teethPrices[tooth] += priceFinish[0].price;
                         state.total += priceFinish[0].price;
                     }
+                }
+            }
+        }
+        for(let[signature, visibility] of Object.entries(state.signatureVisibility)) {
+            if(visibility) {
+                let signatureToFind;
+                let chosenSignature;
+                switch(signature) {
+                    // "_" to differentiate variants w/ or w/o pave (base, lab, nat)
+                    case 'vamp':
+                    case 'cross':
+                    case 'braces':
+                    case 'tribal':
+                        signatureToFind = state.prices.signature.filter(p => p.type.includes(signature) && p.carats === state.teethPreciousness.carats);
+                        if(state.signatureMaterial[signature] !== 'pave') {
+                            chosenSignature = signatureToFind.filter(p => p.type.includes('_base'));
+                        } else {
+                            chosenSignature = signatureToFind.filter(p => p.type.includes('_' + state.teethPreciousness.diamonds));
+                        }
+                        state.teethPrices.signature = chosenSignature[0].price;
+                        state.total += chosenSignature[0].price;
+                        break;
+                    // no paves
+                    case 'bubblegum':
+                    case 'sprinkles':
+                    case 'hammered':
+                        signatureToFind = state.prices.signature.filter(p => p.type === signature && p.carats === state.teethPreciousness.carats);
+                        state.teethPrices.signature = signatureToFind[0].price;
+                        state.total += signatureToFind[0].price;
+                        break;
                 }
             }
         }

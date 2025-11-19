@@ -12521,5 +12521,322 @@
       "carats": 18,
       "price": 300
     }
+  ],
+  "signature": [
+    {
+      "id": 1,
+      "created_at": "2025-10-17T15:47:01.542965+00:00",
+      "type": "vamp_base",
+      "carats": 10,
+      "price": 800
+    },
+    {
+      "id": 2,
+      "created_at": "2025-10-17T15:47:01.542965+00:00",
+      "type": "vamp_base",
+      "carats": 14,
+      "price": 1600
+    },
+    {
+      "id": 3,
+      "created_at": "2025-10-17T15:47:01.542965+00:00",
+      "type": "vamp_base",
+      "carats": 18,
+      "price": 3200
+    },
+    {
+      "id": 4,
+      "created_at": "2025-10-17T15:47:01.542965+00:00",
+      "type": "vamp_lab",
+      "carats": 10,
+      "price": 1600
+    },
+    {
+      "id": 5,
+      "created_at": "2025-10-17T15:47:01.542965+00:00",
+      "type": "vamp_lab",
+      "carats": 14,
+      "price": 3200
+    },
+    {
+      "id": 6,
+      "created_at": "2025-10-17T15:47:01.542965+00:00",
+      "type": "vamp_lab",
+      "carats": 18,
+      "price": 6400
+    },
+    {
+      "id": 7,
+      "created_at": "2025-10-17T15:47:01.542965+00:00",
+      "type": "vamp_nat",
+      "carats": 10,
+      "price": 3200
+    },
+    {
+      "id": 8,
+      "created_at": "2025-10-17T15:47:01.542965+00:00",
+      "type": "vamp_nat",
+      "carats": 14,
+      "price": 6400
+    },
+    {
+      "id": 9,
+      "created_at": "2025-10-17T15:47:01.542965+00:00",
+      "type": "vamp_nat",
+      "carats": 18,
+      "price": 12800
+    },
+    {
+      "id": 10,
+      "created_at": "2025-10-17T15:47:01.542965+00:00",
+      "type": "braces_base",
+      "carats": 10,
+      "price": 800
+    },
+    {
+      "id": 11,
+      "created_at": "2025-10-17T15:47:01.542965+00:00",
+      "type": "braces_base",
+      "carats": 14,
+      "price": 1600
+    },
+    {
+      "id": 12,
+      "created_at": "2025-10-17T15:47:01.542965+00:00",
+      "type": "braces_base",
+      "carats": 18,
+      "price": 3200
+    },
+    {
+      "id": 13,
+      "created_at": "2025-10-17T15:47:01.542965+00:00",
+      "type": "braces_lab",
+      "carats": 10,
+      "price": 1600
+    },
+    {
+      "id": 14,
+      "created_at": "2025-10-17T15:47:01.542965+00:00",
+      "type": "braces_lab",
+      "carats": 14,
+      "price": 3200
+    },
+    {
+      "id": 15,
+      "created_at": "2025-10-17T15:47:01.542965+00:00",
+      "type": "braces_lab",
+      "carats": 18,
+      "price": 6400
+    },
+    {
+      "id": 16,
+      "created_at": "2025-10-17T15:47:01.542965+00:00",
+      "type": "braces_nat",
+      "carats": 10,
+      "price": 3200
+    },
+    {
+      "id": 17,
+      "created_at": "2025-10-17T15:47:01.542965+00:00",
+      "type": "braces_nat",
+      "carats": 14,
+      "price": 6400
+    },
+    {
+      "id": 18,
+      "created_at": "2025-10-17T15:47:01.542965+00:00",
+      "type": "braces_nat",
+      "carats": 18,
+      "price": 12800
+    },
+    {
+      "id": 19,
+      "created_at": "2025-10-17T15:47:01.542965+00:00",
+      "type": "tribal_base",
+      "carats": 10,
+      "price": 400
+    },
+    {
+      "id": 20,
+      "created_at": "2025-10-17T15:47:01.542965+00:00",
+      "type": "tribal_base",
+      "carats": 14,
+      "price": 800
+    },
+    {
+      "id": 21,
+      "created_at": "2025-10-17T15:47:01.542965+00:00",
+      "type": "tribal_base",
+      "carats": 18,
+      "price": 1600
+    },
+    {
+      "id": 22,
+      "created_at": "2025-10-17T15:47:01.542965+00:00",
+      "type": "tribal_lab",
+      "carats": 10,
+      "price": 800
+    },
+    {
+      "id": 23,
+      "created_at": "2025-10-17T15:47:01.542965+00:00",
+      "type": "tribal_lab",
+      "carats": 14,
+      "price": 1600
+    },
+    {
+      "id": 24,
+      "created_at": "2025-10-17T15:47:01.542965+00:00",
+      "type": "tribal_lab",
+      "carats": 18,
+      "price": 3200
+    },
+    {
+      "id": 25,
+      "created_at": "2025-10-17T15:47:01.542965+00:00",
+      "type": "tribal_nat",
+      "carats": 10,
+      "price": 1600
+    },
+    {
+      "id": 26,
+      "created_at": "2025-10-17T15:47:01.542965+00:00",
+      "type": "tribal_nat",
+      "carats": 14,
+      "price": 3200
+    },
+    {
+      "id": 27,
+      "created_at": "2025-10-17T15:47:01.542965+00:00",
+      "type": "tribal_nat",
+      "carats": 18,
+      "price": 6400
+    },
+    {
+      "id": 28,
+      "created_at": "2025-10-17T15:47:01.542965+00:00",
+      "type": "cross_base",
+      "carats": 10,
+      "price": 400
+    },
+    {
+      "id": 29,
+      "created_at": "2025-10-17T15:47:01.542965+00:00",
+      "type": "cross_base",
+      "carats": 14,
+      "price": 800
+    },
+    {
+      "id": 30,
+      "created_at": "2025-10-17T15:47:01.542965+00:00",
+      "type": "cross_base",
+      "carats": 18,
+      "price": 1600
+    },
+    {
+      "id": 31,
+      "created_at": "2025-10-17T15:47:01.542965+00:00",
+      "type": "cross_lab",
+      "carats": 10,
+      "price": 800
+    },
+    {
+      "id": 32,
+      "created_at": "2025-10-17T15:47:01.542965+00:00",
+      "type": "cross_lab",
+      "carats": 14,
+      "price": 1600
+    },
+    {
+      "id": 33,
+      "created_at": "2025-10-17T15:47:01.542965+00:00",
+      "type": "cross_lab",
+      "carats": 18,
+      "price": 3200
+    },
+    {
+      "id": 34,
+      "created_at": "2025-10-17T15:47:01.542965+00:00",
+      "type": "cross_nat",
+      "carats": 10,
+      "price": 1600
+    },
+    {
+      "id": 35,
+      "created_at": "2025-10-17T15:47:01.542965+00:00",
+      "type": "cross_nat",
+      "carats": 14,
+      "price": 3200
+    },
+    {
+      "id": 36,
+      "created_at": "2025-10-17T15:47:01.542965+00:00",
+      "type": "cross_nat",
+      "carats": 18,
+      "price": 6400
+    },
+    {
+      "id": 37,
+      "created_at": "2025-10-17T15:47:01.542965+00:00",
+      "type": "hammered",
+      "carats": 10,
+      "price": 800
+    },
+    {
+      "id": 38,
+      "created_at": "2025-10-17T15:47:01.542965+00:00",
+      "type": "hammered",
+      "carats": 14,
+      "price": 1600
+    },
+    {
+      "id": 39,
+      "created_at": "2025-10-17T15:47:01.542965+00:00",
+      "type": "hammered",
+      "carats": 18,
+      "price": 3200
+    },
+    {
+      "id": 40,
+      "created_at": "2025-10-17T15:47:01.542965+00:00",
+      "type": "sprinkles",
+      "carats": 10,
+      "price": 800
+    },
+    {
+      "id": 41,
+      "created_at": "2025-10-17T15:47:01.542965+00:00",
+      "type": "sprinkles",
+      "carats": 14,
+      "price": 1600
+    },
+    {
+      "id": 42,
+      "created_at": "2025-10-17T15:47:01.542965+00:00",
+      "type": "sprinkles",
+      "carats": 18,
+      "price": 3200
+    },
+    {
+      "id": 43,
+      "created_at": "2025-10-17T15:47:01.542965+00:00",
+      "type": "bubblegum",
+      "carats": 10,
+      "price": 400
+    },
+    {
+      "id": 44,
+      "created_at": "2025-10-17T15:47:01.542965+00:00",
+      "type": "bubblegum",
+      "carats": 14,
+      "price": 800
+    },
+    {
+      "id": 45,
+      "created_at": "2025-10-17T15:47:01.542965+00:00",
+      "type": "bubblegum",
+      "carats": 18,
+      "price": 1600
+    }
   ]
 }
