@@ -14,7 +14,7 @@ export default function DesignOptions({tooth}: { tooth: string|undefined }) {
 
     return (
         <>
-            <button type="button" value="full" className="w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-2 text-center cursor-pointer" onClick={(e) => setDesign(e.currentTarget.value)}>Full
+            <button type="button" value="full" className={`w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 ${!checkMolar(tooth) ? 'mb-4 p-2' : ''} text-center cursor-pointer`} onClick={(e) => setDesign(e.currentTarget.value)}>Full
             </button>
             { !checkMolar(tooth) &&
                 <>

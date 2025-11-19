@@ -12,6 +12,7 @@ import DesignSubOptions from "@/app/_components/_config-menu/DesignSubOptions";
 import PackagingSubOptions from "@/app/_components/_config-menu/PackagingSubOptions";
 import SignatureSubOptions from "@/app/_components/_config-menu/SignatureSubOptions";
 import checkSignature from "@/app/_helpers/_checkers/checkSignature";
+import checkMolar from "@/app/_helpers/_checkers/checkMolar";
 
 export default function ToothConfigOptions({tooth, onclick, active} : {tooth: string | undefined, active:string|undefined, onclick: (value:string) => void}) {
     const pave = useTeethStore((state: State) => tooth ? state.teethPaves[tooth] : undefined);
@@ -65,14 +66,16 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
             <ConfiguratorButton inverse={false} value="5" active={active} onclick={onclick} tooth={tooth} label="Stone Color">Co</ConfiguratorButton>
 
             <div
-                className={`${!active ? 'hidden' : 'block'} pups text-center ${active === '6' ? 'h-[324px]' : 'h-[596px]'} w-[200px] bg-gray-50 rounded-3xl absolute 
+                className={`${!active ? 'hidden' : 'block'} pups text-center ${active === '6' ? 'h-[324px]' : (active === '2' && checkMolar(tooth)) ? 'h-[186px]' : 'h-[596px]'} w-[200px] bg-gray-50 rounded-3xl absolute 
                             ${active === '1'
                     ? 'top-[-30vh]'
-                    : active === '2'
+                    : (active === '2' && !checkMolar(tooth))
                         ? 'top-[-25vh]'
-                        : active === '6'
-                            ? 'top-[13.5vh]'
-                            : 'top-[-20vh]'
+                        : (active === '2' && checkMolar(tooth))
+                            ? 'top-[-10vh]'
+                            : active === '6'
+                                ? 'top-[13.5vh]'
+                                : 'top-[-20vh]'
                 } left-[48px] p-8 pr-4 border-1`}>
                 <div onScroll={sync} ref={elementRef} className="overflow-y-scroll h-full pl-[2px] pr-4">
                     {renderOptions(active, tooth)}
