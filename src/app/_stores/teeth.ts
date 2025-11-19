@@ -1416,41 +1416,7 @@ export const useTeethStore = create<State>((set, get) => ({
         set(
             produce((state) => {
                 state.currentHistory = state.currentHistory - 1;
-                for(const tooth of state.history[state.currentHistory - 1]) {
-                    for(const [key, value] of Object.entries(tooth.type)) {
-                        state.teethJewelType[key] = value;
-                    }
-
-                    for(const [key, value] of Object.entries(tooth.material)) {
-                        state.teethMaterial[key] = value;
-                    }
-
-                    for(const [key, value] of Object.entries(tooth.finish)) {
-                        state.teethFinish[key] = value;
-                    }
-
-                    for(const [key, value] of Object.entries(tooth.stones) as [string, Stone][]) {
-                        state.teethStones[key].shape = value.shape;
-                        state.teethStones[key].color = value.color;
-                    }
-
-                    for(const [key, value] of Object.entries(tooth.pave) as [string, Pave][]) {
-                        state.teethPaves[key].shape = value.shape;
-                        state.teethPaves[key].color = value.color;
-                    }
-
-                    for(const [key, value] of Object.entries(tooth.enamel)) {
-                        state.teethEnamel[key] = value;
-                    }
-
-                    for(const [key, value] of Object.entries(tooth.visible)) {
-                        state.teethVisibility[key] = value;
-                    }
-
-                    for(const [key, value] of Object.entries(tooth.preciousness)) {
-                        state.teethPreciousness[key] = value;
-                    }
-                }
+                get().resetHistoryStep(state);
                 get().calcTotal(state);
             })
         ),
@@ -1458,44 +1424,55 @@ export const useTeethStore = create<State>((set, get) => ({
         set(
             produce((state) => {
                 state.currentHistory = state.currentHistory + 1;
-                for(const tooth of state.history[state.currentHistory - 1]) {
-                    for(const [key, value] of Object.entries(tooth.type)) {
-                        state.teethJewelType[key] = value;
-                    }
-
-                    for(const [key, value] of Object.entries(tooth.material)) {
-                        state.teethMaterial[key] = value;
-                    }
-
-                    for(const [key, value] of Object.entries(tooth.finish)) {
-                        state.teethFinish[key] = value;
-                    }
-
-                    for(const [key, value] of Object.entries(tooth.stones) as [string, Stone][]) {
-                        state.teethStones[key].shape = value.shape;
-                        state.teethStones[key].color = value.color;
-                    }
-
-                    for(const [key, value] of Object.entries(tooth.pave) as [string, Pave][]) {
-                        state.teethPaves[key].shape = value.shape;
-                        state.teethPaves[key].color = value.color;
-                    }
-
-                    for(const [key, value] of Object.entries(tooth.enamel)) {
-                        state.teethEnamel[key] = value;
-                    }
-
-                    for(const [key, value] of Object.entries(tooth.visible)) {
-                        state.teethVisibility[key] = value;
-                    }
-
-                    for(const [key, value] of Object.entries(tooth.preciousness)) {
-                        state.teethPreciousness[key] = value;
-                    }
-                }
+                get().resetHistoryStep(state);
                 get().calcTotal(state);
             })
         ),
+    resetHistoryStep: (state) => {
+        for(const tooth of state.history[state.currentHistory - 1]) {
+            for(const [key, value] of Object.entries(tooth.type)) {
+                state.teethJewelType[key] = value;
+            }
+
+            for(const [key, value] of Object.entries(tooth.material)) {
+                state.teethMaterial[key] = value;
+            }
+
+            for(const [key, value] of Object.entries(tooth.finish)) {
+                state.teethFinish[key] = value;
+            }
+
+            for(const [key, value] of Object.entries(tooth.stones) as [string, Stone][]) {
+                state.teethStones[key].shape = value.shape;
+                state.teethStones[key].color = value.color;
+            }
+
+            for(const [key, value] of Object.entries(tooth.pave) as [string, Pave][]) {
+                state.teethPaves[key].shape = value.shape;
+                state.teethPaves[key].color = value.color;
+            }
+
+            for(const [key, value] of Object.entries(tooth.enamel)) {
+                state.teethEnamel[key] = value;
+            }
+
+            for(const [key, value] of Object.entries(tooth.visible)) {
+                state.teethVisibility[key] = value;
+            }
+
+            for(const [key, value] of Object.entries(tooth.preciousness)) {
+                state.teethPreciousness[key] = value;
+            }
+
+            for(const [key, value] of Object.entries(tooth.signatureVisible)) {
+                state.signatureVisibility[key] = value;
+            }
+
+            for(const [key, value] of Object.entries(tooth.signatureMaterial)) {
+                state.signatureMaterial[key] = value;
+            }
+        }
+    },
     reset: () => {
         set(
             produce((state) => {
