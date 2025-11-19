@@ -1,7 +1,5 @@
 'use client'
 import React, {useState} from "react";
-import {useTeethStore} from "@/app/_stores/teeth";
-import {State} from "@/app/_types/State";
 
 export default function ConfiguratorButton({tooth, inverse, children, onclick, value, active, label} : {tooth:string|undefined, inverse:boolean, children: React.ReactNode, onclick: (value:string) => void, value: string, active: string|undefined, label:string}) {
     const [hover, setHover] = useState<boolean>(false);

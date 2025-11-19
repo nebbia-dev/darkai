@@ -89,13 +89,13 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
                             <div className="flex gap-4 mb-2 items-center">
                                 <span className="inline-block w-[72px]">Carats:</span>
                                 <div className="flex gap-4">
-                                    <button type="button" className={`${teethPreciousness.carats === 10 ? 'bg-stone-500 text-gray-50' : 'bg-gray-50 text-slate-950'} px-2 py-1 rounded-3xl cursor-pointer`} value="10"
+                                    <button type="button" className={`${teethPreciousness.carats === 10 ? 'font-medium bg-sky-400 text-gray-50' : 'bg-gray-50 text-slate-950'} px-2 py-1 rounded-3xl cursor-pointer`} value="10"
                                             onClick={(e) => setCarat(e.currentTarget.value)}>10K
                                     </button>
-                                    <button type="button" className={`${teethPreciousness.carats === 14 ? 'bg-stone-500 text-gray-50' : 'bg-gray-50 text-slate-950'} px-2 py-1 rounded-3xl cursor-pointer`} value="14"
+                                    <button type="button" className={`${teethPreciousness.carats === 14 ? 'font-medium bg-sky-400 text-gray-50' : 'bg-gray-50 text-slate-950'} px-2 py-1 rounded-3xl cursor-pointer`} value="14"
                                             onClick={(e) => setCarat(e.currentTarget.value)}>14K
                                     </button>
-                                    <button type="button" className={`${teethPreciousness.carats === 18 ? 'bg-stone-500 text-gray-50' : 'bg-gray-50 text-slate-950'} px-2 py-1 rounded-3xl cursor-pointer`} value="18"
+                                    <button type="button" className={`${teethPreciousness.carats === 18 ? 'font-medium bg-sky-400 text-gray-50' : 'bg-gray-50 text-slate-950'} px-2 py-1 rounded-3xl cursor-pointer`} value="18"
                                             onClick={(e) => setCarat(e.currentTarget.value)}>18K
                                     </button>
                                 </div>
@@ -103,10 +103,10 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
                             <div className="flex gap-4 items-center">
                                 <span className={`inline-block w-[72px] ${!checkDiamonds() ? 'text-slate-400' : 'text-slate-950'}`}>Diamonds:</span>
                                 <div className="flex gap-4">
-                                    <button disabled={!checkDiamonds()} type="button" className={`${teethPreciousness.diamonds === 'lab' ? 'bg-stone-500 text-gray-50' : !checkDiamonds() ? 'bg-gray-50 text-slate-400' : 'bg-gray-50 text-slate-950'} px-2 py-1 rounded-3xl ${!checkDiamonds() ? '' : 'cursor-pointer'}`} value="lab"
+                                    <button disabled={!checkDiamonds()} type="button" className={`${teethPreciousness.diamonds === 'lab' ? 'font-medium bg-sky-400 text-gray-50' : !checkDiamonds() ? 'bg-gray-50 text-slate-400' : 'bg-gray-50 text-slate-950'} px-2 py-1 rounded-3xl ${!checkDiamonds() ? '' : 'cursor-pointer'}`} value="lab"
                                             onClick={(e) => setDiamonds(e.currentTarget.value)}>Lab
                                     </button>
-                                    <button disabled={!checkDiamonds()} type="button" className={`${teethPreciousness.diamonds === 'nat' ? 'bg-stone-500 text-gray-50' : !checkDiamonds() ? 'bg-gray-50 text-slate-400' : 'bg-gray-50 text-slate-950'} px-2 py-1 rounded-3xl ${!checkDiamonds() ? '' : 'cursor-pointer'}`} value="nat"
+                                    <button disabled={!checkDiamonds()} type="button" className={`${teethPreciousness.diamonds === 'nat' ? 'font-medium bg-sky-400 text-gray-50' : !checkDiamonds() ? 'bg-gray-50 text-slate-400' : 'bg-gray-50 text-slate-950'} px-2 py-1 rounded-3xl ${!checkDiamonds() ? '' : 'cursor-pointer'}`} value="nat"
                                             onClick={(e) => setDiamonds(e.currentTarget.value)}>Natural
                                     </button>
                                 </div>

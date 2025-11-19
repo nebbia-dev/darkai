@@ -24,7 +24,7 @@ import CiSx from "@/app/_components/_teeth/_canines/CiSx";
 import CiSxStone from "@/app/_components/_teeth/_canines/CiSxStone";
 import {State} from "@/app/_types/State";
 import * as THREE from 'three'
-import {useThree} from "@react-three/fiber";
+import {useFrame, useThree, Vector3} from "@react-three/fiber";
 import IlsSxStone from "@/app/_components/_teeth/_lateral-incisors/IlsSxStone";
 import IlsDxStone from "@/app/_components/_teeth/_lateral-incisors/IlsDxStone";
 import IcsSxStone from "@/app/_components/_teeth/_central-incisors/IcsSxStone";
@@ -645,6 +645,7 @@ export default function Configurator() {
     const resetControls = useTeethStore((state : State) => state.resetControls);
     const doResetControls = useTeethStore((state : State) => state.setResetControls);
     const orbitRef = useRef<OrbitControlsImpl>(null);
+    const groupRef = useRef<>(null)
     const { gl, scene, camera } = useThree();
 
     useEffect(() => {
@@ -674,18 +675,34 @@ export default function Configurator() {
         setEnvMap(envMap);
     }, []);
 
+    useFrame(() => {
+        if(groupRef.current
+            && orbitRef.current
+            && (orbitRef.current.getAzimuthalAngle() > -Math.PI / 2)
+            && (orbitRef.current.getAzimuthalAngle() < Math.PI / 2)
+            && groupRef.current.position.z < 3
+            && groupRef.current.position.z > -3
+        ) {
+            groupRef.current.position.z = orbitRef.current.getAzimuthalAngle() * -2;
+            console.log(groupRef.current.position.z)
+        }
+    });
+
     return (
         <>
             <OrbitControls
-                // maxDistance={35}
-                // minDistance={22}
-                // minPolarAngle={Math.PI / 3}
-                // maxPolarAngle={Math.PI - Math.PI / 3}
-                ref={orbitRef}/>
+                maxDistance={35}
+                minDistance={22}
+                minPolarAngle={Math.PI / 3}
+                maxPolarAngle={Math.PI - Math.PI / 3}
+                minAzimuthAngle={-Math.PI / 2}
+                maxAzimuthAngle={Math.PI / 2}
+                ref={orbitRef}
+            />
 
             {savedEnvMap && <LoadedMaterials/>}
             {savedTeeth && savedEnvMap &&
-                <>
+                <group ref={groupRef}>
                     {/*SIGNATURE*/}
                     <Vamp/>
                     <Sprinkles/>
@@ -735,7 +752,7 @@ export default function Configurator() {
                     <MiSx/>
                     {/*BASE*/}
                     <Dentiera/>
-                </>
+                </group>
             }
         </>
     );

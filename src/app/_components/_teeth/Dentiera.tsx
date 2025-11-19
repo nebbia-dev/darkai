@@ -23,6 +23,10 @@ export default function Dentiera() {
         aoMap: 'textures/dentieraBase/DefaultMaterial_Mixed_AO.webp',
     });
 
+    const shadow = useTexture({
+        map: 'textures/dentiera_ombra.webp',
+    });
+
 
     const hovered = useTeethStore((state: State) => state.hovered);
     const setHover = useTeethStore((state: State) => state.setHover);
@@ -37,6 +41,14 @@ export default function Dentiera() {
             metalness: 0.5,
             roughness: 0.7,
             envMap: envMap
+        })
+    }, []);
+    const shadowMaterial = useMemo(() => {
+
+        return new THREE.MeshBasicMaterial({
+            map: shadow.map,
+            transparent: true,
+            opacity: 0.65
         })
     }, []);
 
@@ -437,7 +449,6 @@ export default function Dentiera() {
                 <mesh onPointerLeave={(e) => hoverBase(e)} onPointerEnter={(e) => hoverBase(e)}
                       geometry={(fbx.children[0] as THREE.Mesh).geometry} material={dentieraMaterial}>
                 </mesh>
-                return (
                 <mesh onPointerLeave={(e) => hover(e, undefined)} onPointerEnter={(e) => hover(e, undefined)}
                       geometry={(fbx.children[1].children[13] as THREE.Mesh).geometry} material={dentieraMaterial}>
                 </mesh>
@@ -461,6 +472,10 @@ export default function Dentiera() {
                 </mesh>
                 <mesh onPointerLeave={(e) => hover(e, undefined)} onPointerEnter={(e) => hover(e, undefined)}
                       geometry={(fbx.children[1].children[26] as THREE.Mesh).geometry} material={dentieraMaterial}>
+                </mesh>
+
+                <mesh material={shadowMaterial} position={[0, -4, -4]} rotation={[-Math.PI/2, 0, 0]}>
+                    <planeGeometry args={[7.5, 7.5]}/>
                 </mesh>
             </>
         )
