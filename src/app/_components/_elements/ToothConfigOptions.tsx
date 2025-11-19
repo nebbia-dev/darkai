@@ -13,11 +13,10 @@ import PackagingSubOptions from "@/app/_components/_config-menu/PackagingSubOpti
 import SignatureSubOptions from "@/app/_components/_config-menu/SignatureSubOptions";
 import checkSignature from "@/app/_helpers/_checkers/checkSignature";
 
-export default function ToothSelector({tooth, onclick, active} : {tooth: string | undefined, active:string|undefined, onclick: (value:string) => void}) {
+export default function ToothConfigOptions({tooth, onclick, active} : {tooth: string | undefined, active:string|undefined, onclick: (value:string) => void}) {
     const pave = useTeethStore((state: State) => tooth ? state.teethPaves[tooth] : undefined);
     const jewelType = useTeethStore((state: State) => tooth ? state.teethJewelType[tooth] : undefined);
     const visibility = useTeethStore((state: State) => tooth ? state.teethVisibility[tooth] : undefined);
-
     const elementRef = useRef<HTMLDivElement|null>(null);
     const selectorRef = useRef<HTMLDivElement|null>(null);
 

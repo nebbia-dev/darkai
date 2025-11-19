@@ -41,7 +41,7 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
         return false;
     }
     function toggleRecap() {
-        setShowRecap(prev => !prev)
+        setShowRecap(prev => !prev);
     }
     function setCarat(e:any) {
         setPreciousness(Number(e), teethPreciousness.diamonds);

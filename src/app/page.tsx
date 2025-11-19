@@ -6,6 +6,7 @@ import Loading from "@/app/_components/_layout/Loading";
 import ActionBar from "@/app/_components/_buttons/ActionBar";
 import {useTeethStore} from "@/app/_stores/teeth";
 import Recap from "@/app/_components/_layout/Recap";
+import {State} from "@/app/_types/State";
 
 export default function Config() {
 
@@ -14,6 +15,7 @@ export default function Config() {
     const activeButton = useTeethStore((state) => state.activeButton);
     const changeActiveButton = useTeethStore((state) => state.setActiveButton);
     const [isMounted, setIsMounted] = useState(false);
+    const setActive = useTeethStore((state: State) => state.setActiveTooth);
 
     useEffect(() => {
         setTimeout(() => setIsMounted(true), 100);
@@ -21,6 +23,7 @@ export default function Config() {
 
     function setContinue() {
         setNextStep(prev => !prev);
+        setActive(undefined);
     }
 
     // useEffect(() => {

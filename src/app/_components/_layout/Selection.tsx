@@ -1,7 +1,7 @@
 'use client'
 import {useState} from "react";
 import {Tooltip} from "@mui/material";
-import ToothSelector from "@/app/_components/_elements/ToothSelector";
+import ToothConfigOptions from "@/app/_components/_elements/ToothConfigOptions";
 import {useTeethStore} from "@/app/_stores/teeth";
 import {State} from "@/app/_types/State";
 import {Packaging} from "@/app/_components/_icons/Packaging";
@@ -46,7 +46,7 @@ export default function Selection({activeButton, changeActiveButton} : {activeBu
                             SD
                         </ConfiguratorButton>
                         <span aria-hidden={true} className="relative z-20 inline-block h-[2px] w-8 bg-slate-950"></span>
-                        <ToothSelector tooth={activeTooth} active={activeButton} onclick={changeActiveButton}/>
+                        <ToothConfigOptions tooth={activeTooth} active={activeButton} onclick={changeActiveButton}/>
                         <span aria-hidden={true} className="relative z-20 inline-block h-[2px] w-8 bg-slate-950"></span>
                         <ConfiguratorButton tooth="alwaysActive" inverse={true} value="6" active={activeButton} onclick={changeActiveButton} label="Packaging">
                             <Packaging className="w-5 h-5"/>
