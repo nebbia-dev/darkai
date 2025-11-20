@@ -45,7 +45,7 @@ export default function Config() {
     if(!isMounted) return <Loading/>
 
     return (
-        <div className='flex flex-row w-[100vw] mx-auto bg-gray-200 relative'>
+        <div className='flex flex-row w-[100vw] mx-auto bg-gray-200 relative font-sans'>
             {/*<button className="absolute top-4 left-4 text-white bg-black rounded-[50%] h-12 w-12 cursor-pointer font-bold z-30" onClick={setUI}>UI</button>*/}
             <div className={`h-page-nav ${activeButton ? 'w-[10vw]' : 'w-[25vw]'} ${nextStep ? 'hidden' : 'block'} absolute z-15 left-0`}>
                 {loaded && <Selection activeButton={activeButton} changeActiveButton={changeActiveButton}/>}

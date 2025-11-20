@@ -1,5 +1,6 @@
 import {useTeethStore} from "@/app/_stores/teeth";
 import {State} from "@/app/_types/State";
+import React from "react";
 
 export default function FinishingOptions({tooth, enamel, visible, signature}:{tooth:string|undefined, enamel:boolean, visible: boolean|undefined, signature: boolean|undefined}) {
 
@@ -25,37 +26,56 @@ export default function FinishingOptions({tooth, enamel, visible, signature}:{to
 
     return (
         <>
-            <button disabled={isDisabled('nopave')} onClick={(e) => changePaveShape(e.currentTarget.value)} type="button"
+            <button disabled={isDisabled('nopave')} onClick={(e) => changePaveShape(e.currentTarget.value)}
+                    type="button"
                     value="nopave-pol"
-                    className={`w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-2 ${isDisabled('nopave') ? 'text-slate-400' : 'text-slate-950 cursor-pointer'} text-center`}>Polished
+                    className={`w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-2 ${isDisabled('nopave') ? 'text-slate-400' : 'text-slate-950 cursor-pointer'} flex flex-col items-center justify-center`}>
+                <img className="pb-2" src="/finish-icons/nopave.svg" alt="polished-metal"/>
+                <span className="text-sm">Polished</span>
             </button>
-            <button disabled={isDisabled('nopave')} onClick={(e) => changePaveShape(e.currentTarget.value)} type="button"
+            <button disabled={isDisabled('nopave')} onClick={(e) => changePaveShape(e.currentTarget.value)}
+                    type="button"
                     value="nopave-sblast"
-                    className={`w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-2 ${isDisabled('nopave') ? 'text-slate-400' : 'text-slate-950 cursor-pointer'} text-center`}>Sandblasted
+                    className={`w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-2 ${isDisabled('nopave') ? 'text-slate-400' : 'text-slate-950 cursor-pointer'} flex flex-col items-center justify-center`}>
+                <img className="pb-2" src="/finish-icons/nopave.svg" alt="sandblasted-metal"/>
+                <span className="text-sm">Sandblasted</span>
             </button>
-            <button disabled={isDisabled('nopave')} onClick={(e) => changePaveShape(e.currentTarget.value)} type="button"
+            <button disabled={isDisabled('nopave')} onClick={(e) => changePaveShape(e.currentTarget.value)}
+                    type="button"
                     value="nopave-dcut"
-                    className={`w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-2 ${isDisabled('nopave') ? 'text-slate-400' : 'text-slate-950 cursor-pointer'} text-center`}>Diamond cut
+                    className={`w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-2 ${isDisabled('nopave') ? 'text-slate-400' : 'text-slate-950 cursor-pointer'} flex flex-col items-center justify-center`}>
+                <img className="pb-2" src="/finish-icons/nopave.svg" alt="diamond-cut-metal"/>
+                <span className="text-sm">Diamond cut</span>
             </button>
             <button disabled={isDisabled('pave')} onClick={(e) => changePaveShape(e.currentTarget.value)} type="button"
                     value="mosaic"
-                    className={`w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 p-2 mb-4 ${isDisabled('pave') ? 'text-slate-400' : 'text-slate-950 cursor-pointer'}  text-center`}>Mosaic
+                    className={`w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 p-2 mb-4 ${isDisabled('pave') ? 'text-slate-400' : 'text-slate-950 cursor-pointer'} flex flex-col items-center justify-center`}>
+                <img className="pb-1" src="/finish-icons/mosaic.svg" alt="mosaic-pave"/>
+                <span className="text-sm">Mosaic</span>
             </button>
             <button disabled={isDisabled('pave')} onClick={(e) => changePaveShape(e.currentTarget.value)} type="button"
                     value="round"
-                    className={`w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 p-2 mb-4 ${isDisabled('pave') ? 'text-slate-400' : 'text-slate-950 cursor-pointer'}  text-center`}>Round
+                    className={`w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 p-2 mb-4 ${isDisabled('pave') ? 'text-slate-400' : 'text-slate-950 cursor-pointer'} flex flex-col items-center justify-center`}>
+                <img src="/finish-icons/round.svg" alt="round-pave"/>
+                <span className="text-sm">Round</span>
             </button>
             <button disabled={isDisabled('pave')} onClick={(e) => changePaveShape(e.currentTarget.value)} type="button"
                     value="hexagon"
-                    className={`w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 p-2 mb-4 ${isDisabled('pave') ? 'text-slate-400' : 'text-slate-950 cursor-pointer'}  text-center`}>Hexagon
+                    className={`w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 p-2 mb-4 ${isDisabled('pave') ? 'text-slate-400' : 'text-slate-950 cursor-pointer'} flex flex-col items-center justify-center`}>
+                <img src="/finish-icons/hex.svg" alt="hexagon-pave"/>
+                <span className="text-sm">Hexagon</span>
             </button>
             <button disabled={isDisabled('pave')} onClick={(e) => changePaveShape(e.currentTarget.value)} type="button"
                     value="princess"
-                    className={`w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 p-2 mb-4 ${isDisabled('pave') ? 'text-slate-400' : 'text-slate-950 cursor-pointer'}  text-center`}>Princess
+                    className={`w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 p-2 mb-4 ${isDisabled('pave') ? 'text-slate-400' : 'text-slate-950 cursor-pointer'} flex flex-col items-center justify-center`}>
+                <img className="pb-2" src="/finish-icons/princess.svg" alt="princess-pave"/>
+                <span className="text-sm">Princess</span>
             </button>
             <button disabled={isDisabled('pave')} onClick={(e) => changePaveShape(e.currentTarget.value)} type="button"
                     value="baguette"
-                    className={`w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 p-2 ${isDisabled('pave') ? 'text-slate-400' : 'text-slate-950 cursor-pointer'}  text-center`}>Baguette
+                    className={`w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 p-2 ${isDisabled('pave') ? 'text-slate-400' : 'text-slate-950 cursor-pointer'} flex flex-col items-center justify-center`}>
+                <img className="pb-1" src="/finish-icons/baguette.svg" alt="baguette-pave"/>
+                <span className="text-sm">Baguette</span>
             </button>
         </>
     )

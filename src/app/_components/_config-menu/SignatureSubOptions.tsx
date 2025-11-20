@@ -17,9 +17,17 @@ export default function SignatureSubOptions() {
         <>
             <div className={`${value === 'vamp' ? 'block' : 'invisible'} h-[120px] mb-4 pl-6 text-center`}>
                 <div className="w-[36px] flex flex-col gap-2 items-center bg-gray-50 rounded-full py-2 border-1">
-                    <button type="button" value="white" onClick={(e) => setSignatureDesign('vamp', e.currentTarget.value)} className="w-[24px] h-[24px] bg-gray-100 border-1 rounded-full cursor-pointer"></button>
-                    <button type="button" value="pave" onClick={(e) => setSignatureDesign('vamp', e.currentTarget.value)} className="w-[24px] h-[24px] bg-stone-200 border-1 rounded-full cursor-pointer">Pave</button>
-                    <button type="button" value="black" onClick={(e) => setSignatureDesign('vamp', e.currentTarget.value)} className="w-[24px] h-[24px] bg-slate-950 border-1 rounded-full cursor-pointer"></button>
+                    <button type="button" value="white"
+                            onClick={(e) => setSignatureDesign('vamp', e.currentTarget.value)}
+                            className="w-[24px] h-[24px] bg-gray-100 border-1 rounded-full cursor-pointer"></button>
+                    <button type="button" value="pave"
+                            onClick={(e) => setSignatureDesign('vamp', e.currentTarget.value)}
+                            className="w-[24px] h-[24px] bg-gray-100 border-1 rounded-full cursor-pointer flex items-center justify-center">
+                        <img src="/signatures-icons/pave.svg" alt="pave-logo"/>
+                    </button>
+                    <button type="button" value="black"
+                            onClick={(e) => setSignatureDesign('vamp', e.currentTarget.value)}
+                            className="w-[24px] h-[24px] bg-slate-950 border-1 rounded-full cursor-pointer"></button>
                 </div>
             </div>
             <div className={`${value === 'sprinkles' ? 'block' : 'invisible'} h-[120px] mb-4 pl-6 text-center`}>
@@ -58,11 +66,13 @@ export default function SignatureSubOptions() {
                 <div className="w-[36px] flex flex-col gap-2 items-center bg-gray-50 rounded-full py-2 border-1">
                     <button type="button" value="white"
                             onClick={(e) => setSignatureDesign('braces', e.currentTarget.value)}
-                            className="w-[24px] h-[24px] bg-stone-200 rounded-full cursor-pointer border-1">White
+                            className="w-[24px] h-[24px] bg-gray-100 rounded-full cursor-pointer border-1 flex items-center justify-center">
+                        <img src="/signatures-icons/ruby_white.svg" alt="pave-logo"/>
                     </button>
                     <button type="button" value="pave"
                             onClick={(e) => setSignatureDesign('braces', e.currentTarget.value)}
-                            className="w-[24px] h-[24px] bg-stone-200 rounded-full cursor-pointer border-1">Pave
+                            className="w-[24px] h-[24px] gray rounded-full cursor-pointer border-1 flex items-center justify-center">
+                        <img src="/signatures-icons/emerald_pave.svg" alt="pave-logo"/>
                     </button>
                 </div>
             </div>
@@ -78,7 +88,8 @@ export default function SignatureSubOptions() {
                     </button>
                     <button type="button" value="pave"
                             onClick={(e) => setSignatureDesign('tribal', e.currentTarget.value)}
-                            className="w-[24px] h-[24px] bg-stone-200 rounded-full cursor-pointer border-1">Pave
+                            className="w-[24px] h-[24px] bg-gray-100 rounded-full cursor-pointer border-1 flex items-center justify-center">
+                        <img src="/signatures-icons/pave.svg" alt="pave-logo"/>
                     </button>
                 </div>
             </div>
@@ -90,7 +101,8 @@ export default function SignatureSubOptions() {
                     </button>
                     <button type="button" value="pave"
                             onClick={(e) => setSignatureDesign('cross', e.currentTarget.value)}
-                            className="w-[24px] h-[24px] bg-stone-200 rounded-full cursor-pointer border-1">Pave
+                            className="w-[24px] h-[24px] bg-gray-100 rounded-full cursor-pointer border-1 flex items-center justify-center">
+                        <img src="/signatures-icons/pave.svg" alt="pave-logo"/>
                     </button>
                     <button type="button" value="gold"
                             onClick={(e) => setSignatureDesign('cross', e.currentTarget.value)}

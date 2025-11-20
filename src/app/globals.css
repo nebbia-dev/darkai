@@ -7,6 +7,7 @@
 
 @theme inline {
   /*--color-background: var(--background);*/
+  --font-sans: var(--font-work);
   --color-foreground: var(--foreground);
   --spacing-nav: 72px;
   --spacing-page-nav: calc(100vh - 72px);

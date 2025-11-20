@@ -57,7 +57,7 @@ export default function RecapList({edit} : {edit:boolean}) {
                             <p>
                                 {
                                     history[currentStep][0].signatureMaterial[signature[0]] !== 'pave'
-                                        ? firstCapital(history[currentStep][0].signatureMaterial[signature[0]] as string)
+                                        ? (history[currentStep][0].signatureMaterial[signature[0]] === 'gold' ? 'Yellow' : firstCapital(history[currentStep][0].signatureMaterial[signature[0]] as string))
                                         : 'White'
                                 } gold
                             </p>

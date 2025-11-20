@@ -1,7 +1,14 @@
 import type { Metadata } from "next";
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
+import { Work_Sans } from "next/font/google";
 import "./globals.css";
 import React from "react";
+
+const worksans = Work_Sans({
+    subsets: ['latin'],
+    display: "swap",
+    variable: '--font-work'
+});
 
 export const metadata: Metadata = {
   title: "Darkai - Grillz Configurator",
@@ -13,10 +20,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
-
   return (
-    <html lang="en">
+    <html lang="en" className={`${worksans.variable}`}>
         <body>
         <AppRouterCacheProvider>
             <div className="w-[100vw] flex justify-center bg-gray-200">
