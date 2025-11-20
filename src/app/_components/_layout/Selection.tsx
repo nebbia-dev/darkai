@@ -7,7 +7,7 @@ import {State} from "@/app/_types/State";
 import {Packaging} from "@/app/_components/_icons/Packaging";
 import {Info} from "@/app/_components/_icons/Info";
 import {Close} from "@/app/_components/_icons/Close";
-import ConfiguratorButton from "@/app/_components/_buttons/ConfiguratorButton";
+import ConfiguratorButton from "@/app/_components/_elements/_buttons/ConfiguratorButton";
 
 export default function Selection({activeButton, changeActiveButton} : {activeButton: string|undefined, changeActiveButton:(value:string) => void }) {
     const activeTooth = useTeethStore((state: State) => state.currentTooth);

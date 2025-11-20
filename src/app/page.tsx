@@ -3,7 +3,7 @@ import Scene from "@/app/_components/_layout/Scene";
 import Selection from "@/app/_components/_layout/Selection";
 import {Suspense, useEffect, useState} from "react";
 import Loading from "@/app/_components/_layout/Loading";
-import ActionBar from "@/app/_components/_buttons/ActionBar";
+import ActionBar from "@/app/_components/_elements/_buttons/ActionBar";
 import {useTeethStore} from "@/app/_stores/teeth";
 import Recap from "@/app/_components/_layout/Recap";
 import {State} from "@/app/_types/State";

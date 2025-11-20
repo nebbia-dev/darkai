@@ -1,6 +1,6 @@
 'use client'
 import {FormEvent, useState} from "react";
-import Upload from "../_upload/Upload";
+import Upload from "@/app/_components/_elements/_upload/Upload";
 import {Modal} from "@mui/material";
 import {useTeethStore} from "@/app/_stores/teeth";
 import {State} from "@/app/_types/State";

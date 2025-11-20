@@ -1,5 +1,5 @@
 'use client'
-import UploadFile from "@/app/_components/_upload/UploadFile";
+import UploadFile from "@/app/_components/_elements/_upload/UploadFile";
 import {useState} from "react";
 export default function Upload() {
     const [file, setFile] = useState<File|undefined>();

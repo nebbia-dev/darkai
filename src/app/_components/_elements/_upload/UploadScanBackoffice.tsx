@@ -1,10 +1,10 @@
 'use client'
 import {createClient} from "@/utils/supabase/client";
-import UploadFile from "@/app/_components/_upload/UploadFile";
+import UploadFile from "@/app/_components/_elements/_upload/UploadFile";
 import {useState} from "react";
 import OrderInfo from "@/app/_types/OrderInfo";
 import Image from "next/image";
-import EditScanIcons from "@/app/_components/_buttons/EditScanIcons";
+import EditScanIcons from "@/app/_components/_elements/_buttons/EditScanIcons";
 export default function UploadScanBackoffice ({userId, scanId}:{userId:OrderInfo['user_id']['id'], scanId:OrderInfo['user_id']['scan']}) {
     const [file, setFile] = useState<File|undefined>();
     const [savedFile, setSavedFile] = useState<string|undefined>();

@@ -1,7 +1,7 @@
 import {createClient} from "@/utils/supabase/server";
 import elabToothName from "@/app/_helpers/_string-modders/elabToothName";
 import firstCapital from "@/app/_helpers/_string-modders/firstCapital";
-import BackButton from "@/app/_components/_buttons/BackButton";
+import BackButton from "@/app/_components/_elements/_buttons/BackButton";
 import OrderInfo from "@/app/_types/OrderInfo";
 import {Preciousness} from "@/app/_types/State";
 import Select from "@/app/_components/_elements/Select";
@@ -9,7 +9,7 @@ import Image from "next/image";
 import {Write} from "@/app/_components/_icons/Write";
 import {Tooltip} from "@mui/material";
 import Link from 'next/link';
-import UploadScanBackoffice from "@/app/_components/_upload/UploadScanBackoffice";
+import UploadScanBackoffice from "@/app/_components/_elements/_upload/UploadScanBackoffice";
 import orderIdConverter from "@/app/_helpers/_converters/orderIdConverter";
 export default async function Order({params}: { params: Promise<{ orderId: string[] }> }){
     const { orderId } = await params;

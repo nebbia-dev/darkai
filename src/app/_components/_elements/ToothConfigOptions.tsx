@@ -1,16 +1,16 @@
 import React, {useRef} from "react";
 import {useTeethStore} from "@/app/_stores/teeth";
 import {State} from "@/app/_types/State";
-import ConfiguratorButton from "@/app/_components/_buttons/ConfiguratorButton";
-import DesignOptions from "@/app/_components/_config-menu/DesignOptions";
-import GoldOptions from "@/app/_components/_config-menu/GoldOptions";
-import FinishingOptions from "@/app/_components/_config-menu/FinishingOptions";
-import StoneOptions from "@/app/_components/_config-menu/StoneOptions";
-import SignatureOptions from "@/app/_components/_config-menu/SignatureOptions";
-import PackagingOptions from "@/app/_components/_config-menu/PackagingOptions";
-import DesignSubOptions from "@/app/_components/_config-menu/DesignSubOptions";
-import PackagingSubOptions from "@/app/_components/_config-menu/PackagingSubOptions";
-import SignatureSubOptions from "@/app/_components/_config-menu/SignatureSubOptions";
+import ConfiguratorButton from "@/app/_components/_elements/_buttons/ConfiguratorButton";
+import DesignOptions from "@/app/_components/_elements/_config-menu/DesignOptions";
+import GoldOptions from "@/app/_components/_elements/_config-menu/GoldOptions";
+import FinishingOptions from "@/app/_components/_elements/_config-menu/FinishingOptions";
+import StoneOptions from "@/app/_components/_elements/_config-menu/StoneOptions";
+import SignatureOptions from "@/app/_components/_elements/_config-menu/SignatureOptions";
+import PackagingOptions from "@/app/_components/_elements/_config-menu/PackagingOptions";
+import DesignSubOptions from "@/app/_components/_elements/_config-menu/DesignSubOptions";
+import PackagingSubOptions from "@/app/_components/_elements/_config-menu/PackagingSubOptions";
+import SignatureSubOptions from "@/app/_components/_elements/_config-menu/SignatureSubOptions";
 import checkSignature from "@/app/_helpers/_checkers/checkSignature";
 import checkMolar from "@/app/_helpers/_checkers/checkMolar";
 
