@@ -27,7 +27,7 @@ export default function Dentiera() {
         map: 'textures/dentiera_ombra.webp',
     });
 
-
+    const nextStep = useTeethStore((state) => state.nextStep);
     const hovered = useTeethStore((state: State) => state.hovered);
     const setHover = useTeethStore((state: State) => state.setHover);
     const dentieraMaterial = useMemo(() => {
@@ -485,35 +485,35 @@ export default function Dentiera() {
         <>
             <Base/>
 
-            <Icisx outline={activeTooth === 'icisx'} hovered={hovered === 'icisx'}/>
-            <Icidx outline={activeTooth === 'icidx'} hovered={hovered === 'icidx'}/>
-            <Icssx outline={activeTooth === 'icssx'} hovered={hovered === 'icssx'}/>
-            <Icsdx outline={activeTooth === 'icsdx'} hovered={hovered === 'icsdx'}/>
+            <Icisx outline={!nextStep && activeTooth === 'icisx'} hovered={!nextStep && hovered === 'icisx'}/>
+            <Icidx outline={!nextStep && activeTooth === 'icidx'} hovered={!nextStep && hovered === 'icidx'}/>
+            <Icssx outline={!nextStep && activeTooth === 'icssx'} hovered={!nextStep && hovered === 'icssx'}/>
+            <Icsdx outline={!nextStep && activeTooth === 'icsdx'} hovered={!nextStep && hovered === 'icsdx'}/>
 
-            <Ilisx outline={activeTooth === 'ilisx'} hovered={hovered === 'ilisx'}/>
-            <Ilidx outline={activeTooth === 'ilidx'} hovered={hovered === 'ilidx'}/>
-            <Ilssx outline={activeTooth === 'ilssx'} hovered={hovered === 'ilssx'}/>
-            <Ilsdx outline={activeTooth === 'ilsdx'} hovered={hovered === 'ilsdx'}/>
+            <Ilisx outline={!nextStep && activeTooth === 'ilisx'} hovered={!nextStep && hovered === 'ilisx'}/>
+            <Ilidx outline={!nextStep && activeTooth === 'ilidx'} hovered={!nextStep && hovered === 'ilidx'}/>
+            <Ilssx outline={!nextStep && activeTooth === 'ilssx'} hovered={!nextStep && hovered === 'ilssx'}/>
+            <Ilsdx outline={!nextStep && activeTooth === 'ilsdx'} hovered={!nextStep && hovered === 'ilsdx'}/>
 
-            <Cisx outline={activeTooth === 'cisx'} hovered={hovered === 'cisx'}/>
-            <Cidx outline={activeTooth === 'cidx'} hovered={hovered === 'cidx'}/>
-            <Cssx outline={activeTooth === 'cssx'} hovered={hovered === 'cssx'}/>
-            <Csdx outline={activeTooth === 'csdx'} hovered={hovered === 'csdx'}/>
+            <Cisx outline={!nextStep && activeTooth === 'cisx'} hovered={!nextStep && hovered === 'cisx'}/>
+            <Cidx outline={!nextStep && activeTooth === 'cidx'} hovered={!nextStep && hovered === 'cidx'}/>
+            <Cssx outline={!nextStep && activeTooth === 'cssx'} hovered={!nextStep && hovered === 'cssx'}/>
+            <Csdx outline={!nextStep && activeTooth === 'csdx'} hovered={!nextStep && hovered === 'csdx'}/>
 
-            <Pprsdx outline={activeTooth === 'pprsdx'} hovered={hovered === 'pprsdx'}/>
-            <Pprssx outline={activeTooth === 'pprssx'} hovered={hovered === 'pprssx'}/>
-            <Ppridx outline={activeTooth === 'ppridx'} hovered={hovered === 'ppridx'}/>
-            <Pprisx outline={activeTooth === 'pprisx'} hovered={hovered === 'pprisx'}/>
+            <Pprsdx outline={!nextStep && activeTooth === 'pprsdx'} hovered={!nextStep && hovered === 'pprsdx'}/>
+            <Pprssx outline={!nextStep && activeTooth === 'pprssx'} hovered={!nextStep && hovered === 'pprssx'}/>
+            <Ppridx outline={!nextStep && activeTooth === 'ppridx'} hovered={!nextStep && hovered === 'ppridx'}/>
+            <Pprisx outline={!nextStep && activeTooth === 'pprisx'} hovered={!nextStep && hovered === 'pprisx'}/>
 
-            <Sprsdx outline={activeTooth === 'sprsdx'} hovered={hovered === 'sprsdx'}/>
-            <Sprssx outline={activeTooth === 'sprssx'} hovered={hovered === 'sprssx'}/>
-            <Spridx outline={activeTooth === 'spridx'} hovered={hovered === 'spridx'}/>
-            <Sprisx outline={activeTooth === 'sprisx'} hovered={hovered === 'sprisx'}/>
+            <Sprsdx outline={!nextStep && activeTooth === 'sprsdx'} hovered={!nextStep && hovered === 'sprsdx'}/>
+            <Sprssx outline={!nextStep && activeTooth === 'sprssx'} hovered={!nextStep && hovered === 'sprssx'}/>
+            <Spridx outline={!nextStep && activeTooth === 'spridx'} hovered={!nextStep && hovered === 'spridx'}/>
+            <Sprisx outline={!nextStep && activeTooth === 'sprisx'} hovered={!nextStep && hovered === 'sprisx'}/>
 
-            <Msdx outline={activeTooth === 'msdx'} hovered={hovered === 'msdx'}/>
-            <Mssx outline={activeTooth === 'mssx'} hovered={hovered === 'mssx'}/>
-            <Midx outline={activeTooth === 'midx'} hovered={hovered === 'midx'}/>
-            <Misx outline={activeTooth === 'misx'} hovered={hovered === 'misx'}/>
+            <Msdx outline={!nextStep && activeTooth === 'msdx'} hovered={!nextStep && hovered === 'msdx'}/>
+            <Mssx outline={!nextStep && activeTooth === 'mssx'} hovered={!nextStep && hovered === 'mssx'}/>
+            <Midx outline={!nextStep && activeTooth === 'midx'} hovered={!nextStep && hovered === 'midx'}/>
+            <Misx outline={!nextStep && activeTooth === 'misx'} hovered={!nextStep && hovered === 'misx'}/>
         </>
     )
 }

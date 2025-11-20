@@ -40,6 +40,8 @@ export interface State {
     resetControls: boolean | undefined,
     recap: boolean,
     teethPreciousness: Preciousness,
+    nextStep: boolean,
+    setNextStep: (bool: boolean) => void,
     setRecap: (bool:boolean) => void,
     setActiveButton: (button:string|undefined) => void,
     setActiveSubButton: (button:string|undefined) => void,

@@ -10,7 +10,8 @@ import {State} from "@/app/_types/State";
 
 export default function Config() {
 
-    const [nextStep, setNextStep] = useState<boolean>(false)
+    const nextStep = useTeethStore((state) => state.nextStep);
+    const setNextStep = useTeethStore((state) => state.setNextStep);
     const loaded = useTeethStore((state) => state.loaded);
     const activeButton = useTeethStore((state) => state.activeButton);
     const changeActiveButton = useTeethStore((state) => state.setActiveButton);
@@ -22,7 +23,7 @@ export default function Config() {
     });
 
     function setContinue() {
-        setNextStep(prev => !prev);
+        setNextStep(!nextStep);
         setActive(undefined);
     }
 

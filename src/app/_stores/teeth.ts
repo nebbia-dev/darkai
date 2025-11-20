@@ -1311,6 +1311,10 @@ export const useTeethStore = create<State>((set, get) => ({
     loaded: false,
     setLoaded: (bool) => set(() => ({loaded: bool})),
 
+    // state and method to check if the user has clicked on the "Continue" button
+    nextStep: false,
+    setNextStep: (bool) => set(() => ({nextStep: bool})),
+
     // state and method to get back and forth the recap view
     recap: false,
     setRecap: (bool) => set({recap: bool}),

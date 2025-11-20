@@ -62,14 +62,10 @@ export default function RecapList({edit} : {edit:boolean}) {
                                 } gold
                             </p>
 
-
                             {
                                 history[currentStep][0].signatureMaterial[signature[0]] === 'pave' &&
-                                <p>
-                                    Round pave w/ white diamonds
-                                </p>
+                                <p>Round pave w/ white diamonds</p>
                             }
-
 
                             <span aria-hidden={true}
                                   className="inline-block h-[1px] w-full bg-slate-950"></span>
