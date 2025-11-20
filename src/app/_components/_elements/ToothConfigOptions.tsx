@@ -62,19 +62,19 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
         <div className="relative flex flex-col gap-4">
             <ConfiguratorButton inverse={false} value="2" active={active} onclick={onclick} tooth={tooth}
                                 label="Grillz Type">
-                <img src="/svgs/tooth.svg" alt="design-option-logo"/>
+                <img src="/config-menu-svgs/tooth.svg" alt="design-option-logo"/>
             </ConfiguratorButton>
             <ConfiguratorButton inverse={false} value="3" active={active} onclick={onclick} tooth={tooth}
                                 label="Gold Color">
-                <img src="/svgs/Giallo 1.svg" alt="gold-option-logo"/>
+                <img src="/config-menu-svgs/Giallo 1.svg" alt="gold-option-logo"/>
             </ConfiguratorButton>
             <ConfiguratorButton inverse={false} value="4" active={active} onclick={onclick} tooth={tooth}
                                 label="Finishing">
-                <img src="/svgs/Diamante.svg" alt="diamond-option-logo"/>
+                <img src="/config-menu-svgs/Diamante.svg" alt="diamond-option-logo"/>
             </ConfiguratorButton>
             <ConfiguratorButton inverse={false} value="5" active={active} onclick={onclick} tooth={tooth}
                                 label="Stone Color">
-                <img src="/svgs/image 10.svg" alt="color-option-logo"/>
+                <img src="/config-menu-svgs/image 10.svg" alt="color-option-logo"/>
             </ConfiguratorButton>
 
             <div
