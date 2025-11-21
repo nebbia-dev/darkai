@@ -5,7 +5,6 @@ export default function ConfiguratorButton({tooth, inverse, children, onclick, v
     const [hover, setHover] = useState<boolean>(false);
     function hovering(bool:boolean) {
         setHover(bool);
-        console.log(hover)
 
     }
     return (

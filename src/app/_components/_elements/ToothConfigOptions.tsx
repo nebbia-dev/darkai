@@ -17,6 +17,8 @@ import checkMolar from "@/app/_helpers/_checkers/checkMolar";
 export default function ToothConfigOptions({tooth, onclick, active} : {tooth: string | undefined, active:string|undefined, onclick: (value:string) => void}) {
     const pave = useTeethStore((state: State) => tooth ? state.teethPaves[tooth] : undefined);
     const jewelType = useTeethStore((state: State) => tooth ? state.teethJewelType[tooth] : undefined);
+    const material = useTeethStore((state: State) => tooth ? state.teethMaterial[tooth] : undefined);
+    const finish = useTeethStore((state: State) => tooth ? state.teethFinish[tooth] : undefined);
     const visibility = useTeethStore((state: State) => tooth ? state.teethVisibility[tooth] : undefined);
     const elementRef = useRef<HTMLDivElement|null>(null);
     const selectorRef = useRef<HTMLDivElement|null>(null);
@@ -55,24 +57,33 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
         selectorRef.current.scrollTop = elementRef.current?.scrollTop;
     }
 
-    // ho sia il bottone selezionato sia l'activeTooth
+    function checkIsSelected(option: 'base' | 'finish' | 'stone') {
+        switch(option) {
+            case 'base':
+               return (material && material !== 'base') as boolean;
+            case 'stone':
+                return (pave?.shape !== undefined || jewelType?.includes('bezel')) as boolean;
+            case 'finish':
+                return (material && material !== 'base' && (pave?.shape !== undefined || finish)) as boolean;
+        }
+    }
 
     return(
 
         <div className="relative flex flex-col gap-4">
-            <ConfiguratorButton inverse={false} value="2" active={active} onclick={onclick} tooth={tooth}
+            <ConfiguratorButton inverse={checkIsSelected('base')} value="2" active={active} onclick={onclick} tooth={tooth}
                                 label="Grillz Type">
                 <img src="/config-menu-svgs/tooth.svg" alt="design-option-logo"/>
             </ConfiguratorButton>
-            <ConfiguratorButton inverse={false} value="3" active={active} onclick={onclick} tooth={tooth}
+            <ConfiguratorButton inverse={checkIsSelected('base')} value="3" active={active} onclick={onclick} tooth={tooth}
                                 label="Gold Color">
                 <img src="/config-menu-svgs/Giallo 1.svg" alt="gold-option-logo"/>
             </ConfiguratorButton>
-            <ConfiguratorButton inverse={false} value="4" active={active} onclick={onclick} tooth={tooth}
+            <ConfiguratorButton inverse={checkIsSelected('finish')} value="4" active={active} onclick={onclick} tooth={tooth}
                                 label="Finishing">
                 <img src="/config-menu-svgs/Diamante.svg" alt="diamond-option-logo"/>
             </ConfiguratorButton>
-            <ConfiguratorButton inverse={false} value="5" active={active} onclick={onclick} tooth={tooth}
+            <ConfiguratorButton inverse={checkIsSelected('stone')} value="5" active={active} onclick={onclick} tooth={tooth}
                                 label="Stone Color">
                 <img src="/config-menu-svgs/image 10.svg" alt="color-option-logo"/>
             </ConfiguratorButton>

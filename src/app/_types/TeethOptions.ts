@@ -47,32 +47,32 @@ export interface Enamel {
 }
 export interface Finish {
     [key: string]: string
-    icsdx: 'polished' | 'sandblasted' | 'diamond cut',
-    icssx: 'polished' | 'sandblasted' | 'diamond cut',
-    icidx: 'polished' | 'sandblasted' | 'diamond cut',
-    icisx: 'polished' | 'sandblasted' | 'diamond cut',
-    ilsdx: 'polished' | 'sandblasted' | 'diamond cut',
-    ilssx: 'polished' | 'sandblasted' | 'diamond cut',
-    ilidx: 'polished' | 'sandblasted' | 'diamond cut',
-    ilisx: 'polished' | 'sandblasted' | 'diamond cut',
-    csdx: 'polished' | 'sandblasted' | 'diamond cut',
-    cssx: 'polished' | 'sandblasted' | 'diamond cut',
-    cidx: 'polished' | 'sandblasted' | 'diamond cut',
-    cisx: 'polished' | 'sandblasted' | 'diamond cut',
-    pprsdx: 'polished' | 'sandblasted' | 'diamond cut',
-    pprssx: 'polished' | 'sandblasted' | 'diamond cut',
-    ppridx: 'polished' | 'sandblasted' | 'diamond cut',
-    pprisx: 'polished' | 'sandblasted' | 'diamond cut',
+    icsdx: 'polished' | 'sandblasted' | 'diamond_cut',
+    icssx: 'polished' | 'sandblasted' | 'diamond_cut',
+    icidx: 'polished' | 'sandblasted' | 'diamond_cut',
+    icisx: 'polished' | 'sandblasted' | 'diamond_cut',
+    ilsdx: 'polished' | 'sandblasted' | 'diamond_cut',
+    ilssx: 'polished' | 'sandblasted' | 'diamond_cut',
+    ilidx: 'polished' | 'sandblasted' | 'diamond_cut',
+    ilisx: 'polished' | 'sandblasted' | 'diamond_cut',
+    csdx: 'polished' | 'sandblasted' | 'diamond_cut',
+    cssx: 'polished' | 'sandblasted' | 'diamond_cut',
+    cidx: 'polished' | 'sandblasted' | 'diamond_cut',
+    cisx: 'polished' | 'sandblasted' | 'diamond_cut',
+    pprsdx: 'polished' | 'sandblasted' | 'diamond_cut',
+    pprssx: 'polished' | 'sandblasted' | 'diamond_cut',
+    ppridx: 'polished' | 'sandblasted' | 'diamond_cut',
+    pprisx: 'polished' | 'sandblasted' | 'diamond_cut',
 
-    sprsdx: 'polished' | 'sandblasted' | 'diamond cut',
-    sprssx: 'polished' | 'sandblasted' | 'diamond cut',
-    spridx: 'polished' | 'sandblasted' | 'diamond cut',
-    sprisx: 'polished' | 'sandblasted' | 'diamond cut',
+    sprsdx: 'polished' | 'sandblasted' | 'diamond_cut',
+    sprssx: 'polished' | 'sandblasted' | 'diamond_cut',
+    spridx: 'polished' | 'sandblasted' | 'diamond_cut',
+    sprisx: 'polished' | 'sandblasted' | 'diamond_cut',
 
-    msdx: 'polished' | 'sandblasted' | 'diamond cut',
-    mssx: 'polished' | 'sandblasted' | 'diamond cut',
-    midx: 'polished' | 'sandblasted' | 'diamond cut',
-    misx: 'polished' | 'sandblasted' | 'diamond cut'
+    msdx: 'polished' | 'sandblasted' | 'diamond_cut',
+    mssx: 'polished' | 'sandblasted' | 'diamond_cut',
+    midx: 'polished' | 'sandblasted' | 'diamond_cut',
+    misx: 'polished' | 'sandblasted' | 'diamond_cut'
 }
 export interface JewelTypes {
     // mettere i tipi di design
@@ -136,7 +136,7 @@ export interface Paves {
     misx: Pave
 }
 export interface Pave {
-    shape: 'round' |  'princess' | 'baguette' | 'hex' | 'mosaic' | undefined,
+    shape: 'round' |  'princess' | 'baguette' | 'hexagon' | 'mosaic' | undefined,
     color: string | undefined
 }
 export interface Prices {
