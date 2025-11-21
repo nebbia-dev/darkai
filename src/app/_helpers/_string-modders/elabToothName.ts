@@ -10,9 +10,9 @@ export default function elabToothName(tooth: string, recap: boolean) {
         }
 
         if (tooth[0] === 'c') {
-            title += 'canine ';
+            title += 'canine';
         } else {
-            title += 'molar ';
+            title += 'molar';
         }
 
         if(!recap){
