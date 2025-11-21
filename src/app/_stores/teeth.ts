@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import {produce} from "immer";
-import {Pave, State, Stone} from "@/app/_types/State";
+import {State} from "@/app/_types/State";
 import firstCapital from "@/app/_helpers/_string-modders/firstCapital";
 import json from "@/utils/prices.json";
 import {createClient} from "@/utils/supabase/client";
