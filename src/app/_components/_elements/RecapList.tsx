@@ -67,9 +67,9 @@ export default function RecapList({edit} : {edit:boolean}) {
                                 <p>Round pave w/ white diamonds</p>
                             }
 
-                            <span aria-hidden={true}
-                                  className="inline-block h-[1px] w-full bg-slate-950"></span>
-                            <p className="font-bold w-full text-right">
+                            {/*<span aria-hidden={true}*/}
+                            {/*      className="inline-block h-[1px] w-full bg-slate-950"></span>*/}
+                            <p className="w-full text-left mt-1.5">
                                 {
                                     new Intl.NumberFormat("de-DE", {
                                         style: "currency",
@@ -124,9 +124,9 @@ export default function RecapList({edit} : {edit:boolean}) {
                                 <p>{firstCapital(history[currentStep][0].pave[tooth[0]].shape as string)} pave
                                     w/ {elabStoneName(history[currentStep][0].pave[tooth[0]].color as string)}</p>
                             }
-                            <span aria-hidden={true}
-                                  className="inline-block h-[1px] w-full bg-slate-950"></span>
-                            <p className="font-bold w-full text-right">{
+                            {/*<span aria-hidden={true}*/}
+                            {/*      className="inline-block h-[1px] w-full bg-slate-950"></span>*/}
+                            <p className="w-full text-left mt-1.5">{
                                 ((tooth[1] === 'bar' || tooth[1] === 'barDiamond') && (tooth[0] === 'icssx' || tooth[0] === 'icisx')) || ((tooth[1] === 'bigBar' || tooth[1] === 'bigBarDiamond') && tooth[0] === 'cisx')
                                     ? new Intl.NumberFormat("de-DE", {
                                         style: "currency",

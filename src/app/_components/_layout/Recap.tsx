@@ -6,6 +6,7 @@ import {useTeethStore} from "@/app/_stores/teeth";
 import {State} from "@/app/_types/State";
 import Link from 'next/link';
 import RecapList from "@/app/_components/_elements/RecapList";
+import {Dropdown} from "@/app/_components/_icons/Dropdown";
 
 export default function Recap({next, onclick} : {next:boolean, onclick:() => void }){
     const teethPreciousness = useTeethStore((state:State) => state.teethPreciousness);
@@ -73,8 +74,9 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
                             className={`${!showRecap ? 'border-b-0' : ''} border-1 rounded-t-3xl w-full bg-gray-50 px-6 py-4 text-center flex items-center justify-center gap-2`}>
                             <h2 className="font-semibold">My Configuration</h2>
                             <button type="button"
-                                    className="h-4 w-4 bg-slate-950 rounded-full cursor-pointer text-gray-50"
-                                    onClick={toggleRecap}>V
+                                    className="h-4 w-4 bg-slate-950 rounded-full cursor-pointer text-gray-50 flex items-center justify-center"
+                                    onClick={toggleRecap}>
+                                <Dropdown/>
                             </button>
                         </div>
                         {/* MyConfig Middle w/Recap */}

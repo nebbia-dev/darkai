@@ -34,24 +34,24 @@ export default function ActionBar() {
             <div
                 className="absolute flex items-center justify-center gap-4 bottom-20 left-[50%] translate-x-[-50%] w-2/4">
                 <Tooltip title="Previous">
-                    <button onClick={doUndo} className="rounded-full border p-2 cursor-pointer bg-gray-50/50">
-                        <Undo className="w-8 h-8"/>
+                    <button onClick={doUndo} className="rounded-full border p-[6px] cursor-pointer">
+                        <Undo className="w-5 h-5"/>
                     </button>
                 </Tooltip>
                 <Tooltip title="Next">
-                    <button onClick={doRedo} className="rounded-full border p-2 cursor-pointer bg-gray-50/50">
-                        <Redo className="w-8 h-8"/>
+                    <button onClick={doRedo} className="rounded-full border p-[6px] cursor-pointer">
+                        <Redo className="w-5 h-5"/>
                     </button>
                 </Tooltip>
 
                 <Tooltip title="Reset camera">
-                    <button onClick={resetControls} className="rounded-full border p-2 cursor-pointer bg-gray-50/50">
-                        <ResetCamera className="w-8 h-8"/>
+                    <button onClick={resetControls} className="rounded-full border p-[6px] cursor-pointer">
+                        <ResetCamera className="w-5 h-5"/>
                     </button>
                 </Tooltip>
                 <Tooltip title="Reset configuration">
-                    <button onClick={reset} className="bg-gray-50/50 rounded-full border p-2 cursor-pointer">
-                        <Reset className="w-8 h-8"/>
+                    <button onClick={reset} className="rounded-full border p-[6px] cursor-pointer">
+                        <Reset className="w-5 h-5"/>
                     </button>
                 </Tooltip>
             </div>
