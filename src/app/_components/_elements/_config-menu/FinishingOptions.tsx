@@ -2,13 +2,13 @@ import {useTeethStore} from "@/app/_stores/teeth";
 import {State} from "@/app/_types/State";
 import React from "react";
 
-export default function FinishingOptions({tooth, enamel, visible, signature}:{tooth:string|undefined, enamel:boolean, visible: boolean|undefined, signature: boolean|undefined}) {
+export default function FinishingOptions({tooth, jewelType, visible, signature}:{tooth:string|undefined, jewelType:string, visible: boolean|undefined, signature: boolean|undefined}) {
 
     const setActiveSubButton = useTeethStore((state: State) => state.setActiveSubButton);
     const setPave = useTeethStore((state: State) => state.setPave);
 
     function isDisabled(finish:'pave'| 'nopave') {
-        return !!((finish === 'pave' && (enamel || !visible || signature))
+        return !!((finish === 'pave' && (jewelType === 'bezelDiamond' || jewelType === 'enamel' || !visible || signature))
             || (finish === 'nopave' && (!visible || signature)));
 
     }

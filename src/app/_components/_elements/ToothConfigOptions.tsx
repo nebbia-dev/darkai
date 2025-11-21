@@ -30,7 +30,7 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
             case "3":
                 return <GoldOptions tooth={tooth} signature={checkSignature(jewelType)}/>
             case "4":
-                return <FinishingOptions tooth={tooth} enamel={jewelType === 'enamel'} visible={visibility} signature={checkSignature(jewelType)}/>
+                return <FinishingOptions tooth={tooth} jewelType={jewelType} visible={visibility} signature={checkSignature(jewelType)}/>
             case "5":
                 return <StoneOptions tooth={tooth} bezel={jewelType === 'bezel'|| jewelType === 'bezelDiamond'} pave={!!pave?.shape} />
             case "6":
@@ -77,20 +77,24 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
                 <img src="/config-menu-svgs/image 10.svg" alt="color-option-logo"/>
             </ConfiguratorButton>
 
-            <div
-                className={`${!active ? 'hidden' : 'block'} pups text-center ${active === '6' ? 'h-[324px]' : (active === '2' && checkMolar(tooth)) ? 'h-[186px]' : 'h-[596px]'} w-[200px] bg-gray-50 rounded-3xl absolute 
-                            ${active === '1'
-                    ? 'top-[-30vh]'
-                    : (active === '2' && !checkMolar(tooth))
-                        ? 'top-[-25vh]'
-                        : (active === '2' && checkMolar(tooth))
-                            ? 'top-[-10vh]'
+            <div className={`absolute ${!active ? 'hidden' : 'block'} ${active === '1'
+                ? 'top-[-30vh]'
+                : (active === '2' && !checkMolar(tooth))
+                    ? 'top-[-25vh]'
+                    : (active === '2' && checkMolar(tooth))
+                        ? 'top-[-10vh]'
+                        : (active === '5' && jewelType?.includes('Diamond'))
+                            ? 'top-[-30vh]'
                             : active === '6'
                                 ? 'top-[13.5vh]'
                                 : 'top-[-20vh]'
-                } left-[48px] p-8 pr-4 border-1`}>
-                <div onScroll={sync} ref={elementRef} className="overflow-y-scroll h-full pl-[2px] pr-4">
-                    {renderOptions(active, tooth)}
+            } left-[48px]`}>
+                <div className={`${(active === '5' && jewelType?.includes('Diamond')) ? 'block' : 'hidden'} rounded-3xl bg-gray-50 border-1 py-4 px-8 text-sm w-[200px] mb-4`}>You're choosing the <strong>{jewelType?.includes('bezel') ? 'bezel' : 'pave'}</strong> stone color</div>
+                <div
+                    className={`pups text-center ${active === '6' ? 'h-[324px]' : (active === '2' && checkMolar(tooth)) ? 'h-[186px]' : 'h-[596px]'} w-[200px] bg-gray-50 rounded-3xl p-8 pr-4 border-1`}>
+                    <div onScroll={sync} ref={elementRef} className="overflow-y-scroll h-full pl-[2px] pr-4">
+                        {renderOptions(active, tooth)}
+                    </div>
                 </div>
             </div>
 

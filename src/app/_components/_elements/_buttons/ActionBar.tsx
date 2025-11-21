@@ -2,9 +2,8 @@ import {useTeethStore} from "@/app/_stores/teeth";
 import {Reset} from "@/app/_components/_icons/Reset";
 import {Undo} from "@/app/_components/_icons/Undo";
 import {Redo} from "@/app/_components/_icons/Redo";
-import {useState} from "react";
 import {ResetCamera} from "@/app/_components/_icons/ResetCamera";
-import {State, Stone} from "@/app/_types/State";
+import {State} from "@/app/_types/State";
 import {Tooltip} from "@mui/material";
 
 export default function ActionBar() {
