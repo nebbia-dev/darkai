@@ -2,7 +2,7 @@ import {useTeethStore} from "@/app/_stores/teeth";
 import {State} from "@/app/_types/State";
 import React from "react";
 
-export default function FinishingOptions({tooth, jewelType, visible, signature}:{tooth:string|undefined, jewelType:string, visible: boolean|undefined, signature: boolean|undefined}) {
+export default function FinishOptions({tooth, jewelType, visible, signature}:{tooth:string|undefined, jewelType:string, visible: boolean|undefined, signature: boolean|undefined}) {
 
     const setActiveSubButton = useTeethStore((state: State) => state.setActiveSubButton);
     const setPave = useTeethStore((state: State) => state.setPave);
@@ -30,21 +30,21 @@ export default function FinishingOptions({tooth, jewelType, visible, signature}:
                     type="button"
                     value="nopave-pol"
                     className={`w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-2 ${isDisabled('nopave') ? 'text-slate-400' : 'text-slate-950 cursor-pointer'} flex flex-col items-center justify-center`}>
-                <img className="pb-2" src="/finish-icons/nopave.svg" alt="polished-metal"/>
+                <img className="pb-3" src="/finish-icons/polished.svg" alt="polished-metal"/>
                 <span className="text-sm">Polished</span>
             </button>
             <button disabled={isDisabled('nopave')} onClick={(e) => changePaveShape(e.currentTarget.value)}
                     type="button"
                     value="nopave-sblast"
                     className={`w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-2 ${isDisabled('nopave') ? 'text-slate-400' : 'text-slate-950 cursor-pointer'} flex flex-col items-center justify-center`}>
-                <img className="pb-2" src="/finish-icons/nopave.svg" alt="sandblasted-metal"/>
+                <img className="pb-3" src="/finish-icons/sandblasted.svg" alt="sandblasted-metal"/>
                 <span className="text-sm">Sandblasted</span>
             </button>
             <button disabled={isDisabled('nopave')} onClick={(e) => changePaveShape(e.currentTarget.value)}
                     type="button"
                     value="nopave-dcut"
                     className={`w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-2 ${isDisabled('nopave') ? 'text-slate-400' : 'text-slate-950 cursor-pointer'} flex flex-col items-center justify-center`}>
-                <img className="pb-2" src="/finish-icons/nopave.svg" alt="diamond-cut-metal"/>
+                <img className="pb-3" src="/finish-icons/diamondcut.svg" alt="diamond-cut-metal"/>
                 <span className="text-sm">Diamond cut</span>
             </button>
             <button disabled={isDisabled('pave')} onClick={(e) => changePaveShape(e.currentTarget.value)} type="button"
@@ -62,13 +62,13 @@ export default function FinishingOptions({tooth, jewelType, visible, signature}:
             <button disabled={isDisabled('pave')} onClick={(e) => changePaveShape(e.currentTarget.value)} type="button"
                     value="hexagon"
                     className={`w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 p-2 mb-4 ${isDisabled('pave') ? 'text-slate-400' : 'text-slate-950 cursor-pointer'} flex flex-col items-center justify-center`}>
-                <img src="/finish-icons/hex.svg" alt="hexagon-pave"/>
+                <img className="pb-1" src="/finish-icons/hex.svg" alt="hexagon-pave"/>
                 <span className="text-sm">Hexagon</span>
             </button>
             <button disabled={isDisabled('pave')} onClick={(e) => changePaveShape(e.currentTarget.value)} type="button"
                     value="princess"
                     className={`w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 p-2 mb-4 ${isDisabled('pave') ? 'text-slate-400' : 'text-slate-950 cursor-pointer'} flex flex-col items-center justify-center`}>
-                <img className="pb-2" src="/finish-icons/princess.svg" alt="princess-pave"/>
+                <img className="pb-1" src="/finish-icons/princess.svg" alt="princess-pave"/>
                 <span className="text-sm">Princess</span>
             </button>
             <button disabled={isDisabled('pave')} onClick={(e) => changePaveShape(e.currentTarget.value)} type="button"

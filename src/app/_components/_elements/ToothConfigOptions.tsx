@@ -4,7 +4,7 @@ import {State} from "@/app/_types/State";
 import ConfiguratorButton from "@/app/_components/_elements/_buttons/ConfiguratorButton";
 import DesignOptions from "@/app/_components/_elements/_config-menu/DesignOptions";
 import GoldOptions from "@/app/_components/_elements/_config-menu/GoldOptions";
-import FinishingOptions from "@/app/_components/_elements/_config-menu/FinishingOptions";
+import FinishOptions from "@/app/_components/_elements/_config-menu/FinishOptions";
 import StoneOptions from "@/app/_components/_elements/_config-menu/StoneOptions";
 import SignatureOptions from "@/app/_components/_elements/_config-menu/SignatureOptions";
 import PackagingOptions from "@/app/_components/_elements/_config-menu/PackagingOptions";
@@ -30,7 +30,7 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
             case "3":
                 return <GoldOptions tooth={tooth} signature={checkSignature(jewelType)}/>
             case "4":
-                return <FinishingOptions tooth={tooth} jewelType={jewelType} visible={visibility} signature={checkSignature(jewelType)}/>
+                return <FinishOptions tooth={tooth} jewelType={jewelType} visible={visibility} signature={checkSignature(jewelType)}/>
             case "5":
                 return <StoneOptions tooth={tooth} bezel={jewelType === 'bezel'|| jewelType === 'bezelDiamond'} pave={!!pave?.shape} />
             case "6":
