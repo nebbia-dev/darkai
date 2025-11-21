@@ -2,9 +2,9 @@ import {useTeethStore} from "@/app/_stores/teeth";
 import {Reset} from "@/app/_components/_icons/Reset";
 import {Undo} from "@/app/_components/_icons/Undo";
 import {Redo} from "@/app/_components/_icons/Redo";
-import {ResetCamera} from "@/app/_components/_icons/ResetCamera";
 import {State} from "@/app/_types/State";
 import {Tooltip} from "@mui/material";
+import {Eye} from "@/app/_components/_icons/Eye";
 
 export default function ActionBar() {
     const current = useTeethStore((state:State) => state.currentHistory);
@@ -46,7 +46,7 @@ export default function ActionBar() {
 
                 <Tooltip title="Reset camera">
                     <button onClick={resetControls} className="rounded-full border p-[6px] cursor-pointer">
-                        <ResetCamera className="w-5 h-5"/>
+                        <Eye className="w-5 h-5"/>
                     </button>
                 </Tooltip>
                 <Tooltip title="Reset configuration">

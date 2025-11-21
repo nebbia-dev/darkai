@@ -683,7 +683,7 @@ export default function Configurator() {
             && groupRef.current.position.z < 3
             && groupRef.current.position.z > -3
         ) {
-            groupRef.current.position.z = orbitRef.current.getAzimuthalAngle() * -2;
+            groupRef.current.position.z = Math.abs(orbitRef.current.getAzimuthalAngle() * 2);
         }
     });
 
