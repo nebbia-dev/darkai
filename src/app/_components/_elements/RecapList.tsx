@@ -1,6 +1,5 @@
 import elabToothName from "@/app/_helpers/_string-modders/elabToothName";
 import {Tooltip} from "@mui/material";
-import {Close} from "@/app/_components/_icons/Close";
 import firstCapital from "@/app/_helpers/_string-modders/firstCapital";
 import elabDesignName from "@/app/_helpers/_string-modders/elabDesignName";
 import elabStoneName from "@/app/_helpers/_string-modders/elabStoneName";
@@ -8,6 +7,7 @@ import {useTeethStore} from "@/app/_stores/teeth";
 import {State} from "@/app/_types/State";
 import elabMaterial from "@/app/_helpers/_string-modders/elabMaterial";
 import elabSignatureName from "@/app/_helpers/_string-modders/elabSignatureName";
+import {Trash} from "@/app/_components/_icons/Trash";
 
 export default function RecapList({edit} : {edit:boolean}) {
 
@@ -42,12 +42,12 @@ export default function RecapList({edit} : {edit:boolean}) {
                             className="cursor-pointer mb-4"
                         >
                             {/*tooth name*/}
-                            <div className="flex justify-between items-center">
+                            <div className="flex justify-between items-center mb-1">
                                 <h4 className="font-semibold">
                                     {elabSignatureName(signature[0])}
                                 </h4>
                                 {edit && <Tooltip title="Delete signature">
-                                            <Close className="cursor-pointer"
+                                            <Trash className="cursor-pointer rounded-full border-1 p-0.5 w-5 h-5"
                                                    onClick={() => resetSignature(signature[0])}/>
                                         </Tooltip>
                                 }
@@ -69,7 +69,7 @@ export default function RecapList({edit} : {edit:boolean}) {
 
                             {/*<span aria-hidden={true}*/}
                             {/*      className="inline-block h-[1px] w-full bg-slate-950"></span>*/}
-                            <p className="w-full text-left mt-1.5">
+                            <p className="w-full font-medium text-left mt-1.5">
                                 {
                                     new Intl.NumberFormat("de-DE", {
                                         style: "currency",
@@ -93,15 +93,15 @@ export default function RecapList({edit} : {edit:boolean}) {
                             className={`${((tooth[1] === 'bar' || tooth[1] === 'barDiamond') && (tooth[0] === 'icsdx' || tooth[0] === 'icidx')) || ((tooth[1] === 'bigBar' || tooth[1] === 'bigBarDiamond') && tooth[0] === 'cidx') ? 'hidden' : 'block'} cursor-pointer mb-4`}
                         >
                             {/*tooth name*/}
-                            <div className="flex justify-between items-center">
+                            <div className="flex justify-between items-center mb-1">
                                 <h4 className="font-semibold">
                                     {((tooth[1] === 'bar' || tooth[1] === 'barDiamond') && (tooth[0] === 'icssx' || tooth[0] === 'icisx')) || ((tooth[1] === 'bigBar' || tooth[1] === 'bigBarDiamond') && tooth[0] === 'cisx')
                                         ? elabToothName(tooth[0], true)
                                         : elabToothName(tooth[0], false)
                                     }
                                 </h4>
-                                {edit && <Tooltip title="Delete tooth">
-                                            <Close className="cursor-pointer"
+                                {edit && <Tooltip title="Delete configuration">
+                                            <Trash className="cursor-pointer rounded-full border-1 p-0.5 w-5 h-5"
                                                    onClick={() => resetTooth(tooth[0])}/>
                                         </Tooltip>
                                 }
@@ -126,7 +126,7 @@ export default function RecapList({edit} : {edit:boolean}) {
                             }
                             {/*<span aria-hidden={true}*/}
                             {/*      className="inline-block h-[1px] w-full bg-slate-950"></span>*/}
-                            <p className="w-full text-left mt-1.5">{
+                            <p className="w-full font-medium text-left mt-1.5">{
                                 ((tooth[1] === 'bar' || tooth[1] === 'barDiamond') && (tooth[0] === 'icssx' || tooth[0] === 'icisx')) || ((tooth[1] === 'bigBar' || tooth[1] === 'bigBarDiamond') && tooth[0] === 'cisx')
                                     ? new Intl.NumberFormat("de-DE", {
                                         style: "currency",

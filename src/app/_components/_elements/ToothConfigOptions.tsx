@@ -71,21 +71,21 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
     return(
 
         <div className="relative flex flex-col gap-4">
-            <ConfiguratorButton inverse={checkIsSelected('base')} value="2" active={active} onclick={onclick} tooth={tooth}
+            <ConfiguratorButton inverse={false} selected={checkIsSelected('base')} value="2" active={active} onclick={onclick} tooth={tooth}
                                 label="Grillz Type">
-                <img src="/config-menu-svgs/tooth.svg" alt="design-option-logo"/>
+                <img src="/config-menu-svgs/design.svg" alt="design-option-logo"/>
             </ConfiguratorButton>
-            <ConfiguratorButton inverse={checkIsSelected('base')} value="3" active={active} onclick={onclick} tooth={tooth}
+            <ConfiguratorButton inverse={false} selected={checkIsSelected('base')} value="3" active={active} onclick={onclick} tooth={tooth}
                                 label="Gold Color">
-                <img src="/config-menu-svgs/Giallo 1.svg" alt="gold-option-logo"/>
+                <img src="/config-menu-svgs/gold.svg" alt="gold-option-logo"/>
             </ConfiguratorButton>
-            <ConfiguratorButton inverse={checkIsSelected('finish')} value="4" active={active} onclick={onclick} tooth={tooth}
+            <ConfiguratorButton inverse={false} selected={checkIsSelected('finish')} value="4" active={active} onclick={onclick} tooth={tooth}
                                 label="Finishing">
-                <img src="/config-menu-svgs/Diamante.svg" alt="diamond-option-logo"/>
+                <img src="/config-menu-svgs/finish.svg" alt="diamond-option-logo"/>
             </ConfiguratorButton>
-            <ConfiguratorButton inverse={checkIsSelected('stone')} value="5" active={active} onclick={onclick} tooth={tooth}
+            <ConfiguratorButton inverse={false} selected={checkIsSelected('stone')} value="5" active={active} onclick={onclick} tooth={tooth}
                                 label="Stone Color">
-                <img src="/config-menu-svgs/image 10.svg" alt="color-option-logo"/>
+                <img src="/config-menu-svgs/color.svg" alt="color-option-logo"/>
             </ConfiguratorButton>
 
             <div className={`absolute ${!active ? 'hidden' : 'block'} ${active === '1'
@@ -94,13 +94,13 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
                     ? 'top-[-25vh]'
                     : (active === '2' && checkMolar(tooth))
                         ? 'top-[-10vh]'
-                        : (active === '5' && jewelType?.includes('Diamond'))
+                        : (active === '5' && (jewelType?.includes('Diamond') || jewelType?.includes('bezel')))
                             ? 'top-[-30vh]'
                             : active === '6'
                                 ? 'top-[13.5vh]'
                                 : 'top-[-20vh]'
             } left-[48px]`}>
-                <div className={`${(active === '5' && jewelType?.includes('Diamond')) ? 'block' : 'hidden'} rounded-3xl bg-gray-50 border-1 py-4 px-8 text-sm w-[200px] mb-4`}>You're choosing the <strong>{jewelType?.includes('bezel') ? 'bezel' : 'pave'}</strong> stone color</div>
+                <div className={`${(active === '5' && (jewelType?.includes('Diamond') || jewelType?.includes('bezel'))) ? 'block' : 'hidden'} rounded-3xl bg-gray-50 border-1 py-4 px-8 text-sm w-[200px] mb-4`}>You're choosing the <strong>{jewelType?.includes('bezel') ? 'bezel' : 'pave'}</strong> stone color</div>
                 <div
                     className={`pups text-center ${active === '6' ? 'h-[324px]' : (active === '2' && checkMolar(tooth)) ? 'h-[186px]' : 'h-[596px]'} w-[200px] bg-gray-50 rounded-3xl p-8 pr-4 border-1`}>
                     <div onScroll={sync} ref={elementRef} className="overflow-y-scroll h-full pl-[2px] pr-4">

@@ -1,10 +1,9 @@
 'use client'
-import {useState} from "react";
+import React, {useState} from "react";
 import {Tooltip} from "@mui/material";
 import ToothConfigOptions from "@/app/_components/_elements/ToothConfigOptions";
 import {useTeethStore} from "@/app/_stores/teeth";
 import {State} from "@/app/_types/State";
-import {Packaging} from "@/app/_components/_icons/Packaging";
 import {Info} from "@/app/_components/_icons/Info";
 import {Close} from "@/app/_components/_icons/Close";
 import ConfiguratorButton from "@/app/_components/_elements/_buttons/ConfiguratorButton";
@@ -50,8 +49,9 @@ export default function Selection({activeButton, changeActiveButton} : {activeBu
                         <span aria-hidden={true} className="relative z-20 inline-block h-[2px] w-8 bg-slate-950"></span>
                         <ToothConfigOptions tooth={activeTooth} active={activeButton} onclick={changeActiveButton}/>
                         <span aria-hidden={true} className="relative z-20 inline-block h-[2px] w-8 bg-slate-950"></span>
-                        <ConfiguratorButton tooth="alwaysActive" inverse={true} value="6" active={activeButton} onclick={changeActiveButton} label="Packaging">
-                            <Packaging className="w-5 h-5"/>
+                        <ConfiguratorButton tooth="alwaysActive" inverse={true} value="6" active={activeButton}
+                                            onclick={changeActiveButton} label="Packaging">
+                            <img className="p-0.5" src="/config-menu-svgs/packaging.svg" alt="packaging-option-logo"/>
                         </ConfiguratorButton>
                     </div>
                 </div>

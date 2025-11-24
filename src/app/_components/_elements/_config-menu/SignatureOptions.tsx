@@ -15,50 +15,50 @@ export default function SignatureOptions() {
     return (
         <>
             <button type="button" value="vamp"
-                    className="cursor-pointer w-[95%] h-[120px] mx-auto mb-4"
+                    className={`${signature.vamp ? 'border-2 border-sky-400' : ''} cursor-pointer w-[95%] h-[120px] mx-auto mb-4 bg-[#282828] rounded-3xl`}
                     onClick={(e) => setSignatureDesign(e.currentTarget.value)}>
-                <img className={`${signature.vamp ? 'border-2 border-sky-400' : ''} h-full object-cover object-center w-full rounded-3xl`}
+                <img className="h-full object-cover object-center w-full"
                      src="/signatures-icons/vamp.svg" alt="vamp-logo"/>
             </button>
             <button type="button" value="sprinkles"
-                    className="cursor-pointer w-[95%] h-[120px] mx-auto mb-4"
+                    className={`${signature.sprinkles ? 'border-2 border-sky-400' : ''} cursor-pointer w-[95%] h-[120px] mx-auto mb-4 bg-[#282828] rounded-3xl`}
                     onClick={(e) => setSignatureDesign(e.currentTarget.value)}>
-                <img className={`${signature.sprinkles ? 'border-2 border-sky-400' : ''} h-full object-cover object-center w-full rounded-3xl`}
+                <img className="h-full object-cover object-center w-full"
                      src="/signatures-icons/sprinkles.svg"
                      alt="sprinkles-logo"/>
             </button>
             <button type="button" value="bubblegum"
-                    className="cursor-pointer w-[95%] h-[120px] mx-auto mb-4"
+                    className={`${signature.bubblegum ? 'border-2 border-sky-400' : ''} p-2 cursor-pointer w-[95%] h-[120px] mx-auto mb-4 bg-[#282828] rounded-3xl`}
                     onClick={(e) => setSignatureDesign(e.currentTarget.value)}>
-                <img className={`${signature.bubblegum ? 'border-2 border-sky-400' : ''} h-full object-cover object-center w-full rounded-3xl`}
+                <img className="h-full object-cover object-center w-full"
                      src="/signatures-icons/bubblegum.svg"
                      alt="bubblegum-logo"/>
             </button>
             <button type="button" value="braces"
-                    className="cursor-pointer w-[95%] h-[120px] mx-auto mb-4"
+                    className={`${signature.braces ? 'border-2 border-sky-400' : ''} pl-2 pr-1 cursor-pointer w-[95%] h-[120px] mx-auto mb-4 bg-[#282828] rounded-3xl`}
                     onClick={(e) => setSignatureDesign(e.currentTarget.value)}>
-                <img className={`${signature.braces ? 'border-2 border-sky-400' : ''} h-full object-cover object-center w-full rounded-3xl`}
+                <img className="h-full object-cover object-center w-full"
                      src="/signatures-icons/braces.svg"
                      alt="braces-logo"/>
             </button>
             <button type="button" value="tribal"
-                    className="cursor-pointer w-[95%] h-[120px] mx-auto mb-4"
+                    className={`${signature.braces ? 'border-2 border-sky-400' : ''} p-1 cursor-pointer w-[95%] h-[120px] mx-auto mb-4 bg-[#282828] rounded-3xl`}
                     onClick={(e) => setSignatureDesign(e.currentTarget.value)}>
-                <img className={`${signature.tribal ? 'border-2 border-sky-400' : ''} h-full object-cover object-center w-full rounded-3xl`}
+                <img className="h-full object-cover object-center w-full"
                      src="/signatures-icons/tribal.svg"
                      alt="tribals-logo"/>
             </button>
             <button type="button" value="cross"
-                    className="cursor-pointer w-[95%] h-[120px] mx-auto mb-4"
+                    className={`${signature.cross ? 'border-2 border-sky-400' : ''} cursor-pointer w-[95%] h-[120px] mx-auto mb-4 bg-[#282828] rounded-3xl`}
                     onClick={(e) => setSignatureDesign(e.currentTarget.value)}>
-                <img className={`${signature.cross ? 'border-2 border-sky-400' : ''} h-full object-cover object-center w-full rounded-3xl`}
+                <img className="h-full object-cover object-center w-full"
                      src="/signatures-icons/cross.svg"
                      alt="cross-logo"/>
             </button>
             <button type="button" value="hammered"
-                    className="cursor-pointer w-[95%] h-[120px] mx-auto"
+                    className={`${signature.hammered ? 'border-2 border-sky-400' : ''} p-1 cursor-pointer w-[95%] h-[120px] mx-auto bg-[#282828] rounded-3xl`}
                     onClick={(e) => setSignatureDesign(e.currentTarget.value)}>
-                <img className={`${signature.hammered ? 'border-2 border-sky-400' : ''} h-full object-cover object-center w-full rounded-3xl`}
+                <img className="h-full object-cover object-center w-full"
                      src="/signatures-icons/hammered.svg"
                      alt="hammered-logo"/>
             </button>

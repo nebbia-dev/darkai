@@ -6,7 +6,7 @@ import {useTeethStore} from "@/app/_stores/teeth";
 import IlsDx from "@/app/_components/_teeth/_lateral-incisors/IlsDx";
 import IlsSx from "@/app/_components/_teeth/_lateral-incisors/IlsSx";
 import LoadedMaterials from "@/app/_components/_layout/LoadedMaterials";
-import {useEffect, useMemo, useRef, useState} from "react";
+import {useEffect, useMemo, useRef} from "react";
 import FBX from "@/app/_types/FBX";
 import IcsSx from "@/app/_components/_teeth/_central-incisors/IcsSx";
 import IcsDx from "@/app/_components/_teeth/_central-incisors/IcsDx";
@@ -691,12 +691,6 @@ export default function Configurator() {
             }
         }
     })
-
-    // useFrame(() => {
-    //     if(groupRef.current && nextStep) {
-    //         groupRef.current.rotateY(0.005);
-    //     }
-    // })
 
     function resetCameraPosition() {
         if(groupRef.current && orbitRef.current){
