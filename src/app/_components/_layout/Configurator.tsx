@@ -69,8 +69,6 @@ export default function Configurator() {
         const paves = useFBX('/models/Pave_Separati.fbx');
         const otherFools = useFBX('/models/MOD_Full_All.fbx');
         const signatures = useFBX('/models/Gioielli_Separati_SI.fbx');
-
-        console.log(bigBar);
         function getOrigin(mesh:any) {
             const box = new THREE.Box3().setFromObject(mesh);
             return box.getCenter(new THREE.Vector3());
