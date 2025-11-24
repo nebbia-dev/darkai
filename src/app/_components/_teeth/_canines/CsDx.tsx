@@ -2,7 +2,6 @@
 import {JSX, memo} from "react";
 import FullMaterial from "@/app/_components/_materials/FullMaterial";
 import {useTeethStore} from "@/app/_stores/teeth";
-import BaseFullDiamond from "@/app/_components/_materials/BaseFullDiamond";
 import FullDiamond from "@/app/_components/_materials/FullDiamond";
 import FrameFull from "@/app/_components/_materials/FrameFull";
 import FrameDiamond from "@/app/_components/_materials/FrameDiamond";
@@ -32,7 +31,7 @@ export default function CsDx() {
             case 'fullDiamond':
             case 'bezelDiamond':
                 geometry = [toothGeometry.fullDiamond.base, toothGeometry.fullDiamond.full];
-                material = [<BaseFullDiamond color={toothMaterial}/>, <FullDiamond color={toothMaterial}/>]
+                material = [<FullDiamond color={toothMaterial}/>, <FullDiamond color={toothMaterial}/>]
                 position = toothGeometry.fullDiamond.position;
                 break;
             case 'frame':
@@ -42,7 +41,7 @@ export default function CsDx() {
                 break;
             case 'enamel':
                 geometry = [toothGeometry.fullDiamond.base, toothGeometry.fullDiamond.full];
-                material = [<BaseFullDiamond color={toothMaterial}/>, <FullEnamel color={toothEnamel ?? 'ivory'}/>]
+                material = [<FullDiamond color={toothMaterial}/>, <FullEnamel color={toothEnamel ?? 'ivory'}/>]
                 position = new THREE.Vector3();
                 break;
             case 'frameDiamond':

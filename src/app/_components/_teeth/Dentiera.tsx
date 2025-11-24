@@ -57,13 +57,6 @@ export default function Dentiera() {
         setHover(tooth);
     }
 
-    function hoverBase(e:any) {
-        e.stopPropagation();
-        if(hovered) {
-            setHover(undefined);
-        }
-    }
-
     function log(e: any) {
         // fondamentale. Altrimenti, con visuale frontale, cliccando sui primi premolari vengono
         // selezionati i secondi premolari o i molari
@@ -446,7 +439,7 @@ export default function Dentiera() {
     const Base = memo(() : JSX.Element => {
         return (
             <>
-                <mesh onPointerLeave={(e) => hoverBase(e)} onPointerEnter={(e) => hoverBase(e)}
+                <mesh
                       geometry={(fbx.children[0] as THREE.Mesh).geometry} material={dentieraMaterial}>
                 </mesh>
                 <mesh onPointerLeave={(e) => hover(e, undefined)} onPointerEnter={(e) => hover(e, undefined)}

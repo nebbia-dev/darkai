@@ -1,7 +1,6 @@
 'use client'
 
 import BarSmall from "@/app/_components/_materials/BarSmall";
-import BaseFullDiamond from "@/app/_components/_materials/BaseFullDiamond";
 import FullDiamond from "@/app/_components/_materials/FullDiamond";
 import BarDiamond from "@/app/_components/_materials/BarDiamond";
 import FrameDiamond from "@/app/_components/_materials/FrameDiamond";
@@ -17,10 +16,6 @@ export default function LoadedMaterials() {
             <mesh position={[0, -10, 0]} visible={false}>
                 <planeGeometry args={[1, 1]}/>
                 <BarSmall color='gold'/>
-            </mesh>
-            <mesh position={[0, -10, 0]} visible={false}>
-                <planeGeometry args={[1, 1]}/>
-                <BaseFullDiamond color='gold'/>
             </mesh>
             <mesh position={[0, -10, 0]} visible={false}>
                 <planeGeometry args={[1, 1]}/>

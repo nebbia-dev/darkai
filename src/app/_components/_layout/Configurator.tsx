@@ -69,6 +69,8 @@ export default function Configurator() {
         const paves = useFBX('/models/Pave_Separati.fbx');
         const otherFools = useFBX('/models/MOD_Full_All.fbx');
         const signatures = useFBX('/models/Gioielli_Separati_SI.fbx');
+
+        console.log(bigBar);
         function getOrigin(mesh:any) {
             const box = new THREE.Box3().setFromObject(mesh);
             return box.getCenter(new THREE.Vector3());
@@ -665,7 +667,8 @@ export default function Configurator() {
 
     useEffect(() => {
         if(resetControls && orbitRef.current) {
-            orbitRef.current.reset();
+            resetCameraPosition();
+            // orbitRef.current.reset();
             doResetControls(undefined);
         }
     }, [resetControls])
@@ -675,23 +678,31 @@ export default function Configurator() {
         setEnvMap(envMap);
     }, []);
 
-    useFrame(() => {
-        if(groupRef.current
-            && orbitRef.current
-            && (orbitRef.current.getAzimuthalAngle() > -Math.PI / 2)
-            && (orbitRef.current.getAzimuthalAngle() < Math.PI / 2)
-            && groupRef.current.position.z < 3
-            && groupRef.current.position.z > -3
-        ) {
-            groupRef.current.position.z = Math.abs(orbitRef.current.getAzimuthalAngle() * 2);
+    // useFrame(() => {
+        // LOL
+        // if(groupRef.current
+        //     && orbitRef.current
+        //     && (orbitRef.current.getAzimuthalAngle() > -Math.PI / 2)
+        //     && (orbitRef.current.getAzimuthalAngle() < Math.PI / 2)
+        //     && groupRef.current.position.z < 3
+        //     && groupRef.current.position.z > -3
+        // ) {
+        //     groupRef.current.position.z = Math.abs(orbitRef.current.getAzimuthalAngle() * 2);
+        // }
+    // });
+
+    function resetCameraPosition() {
+        if(orbitRef.current){
+            orbitRef.current.setAzimuthalAngle(0);
+            orbitRef.current.setPolarAngle(1.422);
         }
-    });
+    }
 
     return (
         <>
             <OrbitControls
                 maxDistance={35}
-                minDistance={22}
+                // minDistance={25}
                 minPolarAngle={Math.PI / 3}
                 maxPolarAngle={Math.PI - Math.PI / 3}
                 minAzimuthAngle={-Math.PI / 2}
@@ -701,7 +712,7 @@ export default function Configurator() {
 
             {savedEnvMap && <LoadedMaterials/>}
             {savedTeeth && savedEnvMap &&
-                <group ref={groupRef}>
+                <group ref={groupRef} position={[0,0,3]}>
                     {/*SIGNATURE*/}
                     <Vamp/>
                     <Sprinkles/>
