@@ -51,7 +51,8 @@ export default function Config() {
             <div className={`h-page-nav ${activeButton ? 'w-[10vw]' : 'w-[25vw]'} ${nextStep ? 'hidden' : 'block'} absolute z-15 left-0`}>
                 {loaded && <Selection activeButton={activeButton} changeActiveButton={changeActiveButton}/>}
             </div>
-            <div className={`h-page-nav ${nextStep ? 'w-[60%]' : 'w-full mx-auto'}`}>
+            <div className={`h-page-nav w-full mx-auto`}>
+            {/*${nextStep ? 'w-[60%]' : 'w-full mx-auto'}`}>*/}
                 <Suspense fallback={<Loading/>}>
                     <Scene/>
                 </Suspense>

@@ -6,7 +6,7 @@ import {useTeethStore} from "@/app/_stores/teeth";
 import IlsDx from "@/app/_components/_teeth/_lateral-incisors/IlsDx";
 import IlsSx from "@/app/_components/_teeth/_lateral-incisors/IlsSx";
 import LoadedMaterials from "@/app/_components/_layout/LoadedMaterials";
-import {useEffect, useMemo, useRef} from "react";
+import {useEffect, useMemo, useRef, useState} from "react";
 import FBX from "@/app/_types/FBX";
 import IcsSx from "@/app/_components/_teeth/_central-incisors/IcsSx";
 import IcsDx from "@/app/_components/_teeth/_central-incisors/IcsDx";
@@ -24,7 +24,7 @@ import CiSx from "@/app/_components/_teeth/_canines/CiSx";
 import CiSxStone from "@/app/_components/_teeth/_canines/CiSxStone";
 import {State} from "@/app/_types/State";
 import * as THREE from 'three'
-import {useFrame, useThree} from "@react-three/fiber";
+import {invalidate, useFrame, useThree} from "@react-three/fiber";
 import IlsSxStone from "@/app/_components/_teeth/_lateral-incisors/IlsSxStone";
 import IlsDxStone from "@/app/_components/_teeth/_lateral-incisors/IlsDxStone";
 import IcsSxStone from "@/app/_components/_teeth/_central-incisors/IcsSxStone";
@@ -641,6 +641,7 @@ export default function Configurator() {
     const savedEnvMap = useTeethStore((state : State) => state.envMap);
     const setEnvMap = useTeethStore((state : State) => state.setEnvMap);
     const screenshot = useTeethStore((state : State) => state.isScreenshotNeeded);
+    const nextStep = useTeethStore((state : State) => state.nextStep);
     const resetScreenShot = useTeethStore((state : State) => state.setIsScreenshotNeeded);
     const resetControls = useTeethStore((state : State) => state.resetControls);
     const doResetControls = useTeethStore((state : State) => state.setResetControls);
@@ -664,34 +665,46 @@ export default function Configurator() {
     }, [screenshot]);
 
     useEffect(() => {
-        if(resetControls && orbitRef.current) {
+        if(orbitRef.current) {
             resetCameraPosition();
-            // orbitRef.current.reset();
             doResetControls(undefined);
         }
-    }, [resetControls])
+    }, [resetControls, nextStep]);
 
     useEffect(() => {
         setTeeth(teeth);
         setEnvMap(envMap);
     }, []);
 
+    useFrame((state, delta) => {
+        if(groupRef.current && nextStep) {
+            invalidate();
+            if(groupRef.current.position.x > -3) {
+                groupRef.current.position.x -= delta * 2;
+                camera.position.x -= delta * 2;
+            }
+        } else if(groupRef.current && !nextStep) {
+            invalidate();
+            if(groupRef.current.position.x < 0) {
+                groupRef.current.position.x += delta * 2;
+                camera.position.x += delta * 2;
+            }
+        }
+    })
+
     // useFrame(() => {
-        // LOL
-        // if(groupRef.current
-        //     && orbitRef.current
-        //     && (orbitRef.current.getAzimuthalAngle() > -Math.PI / 2)
-        //     && (orbitRef.current.getAzimuthalAngle() < Math.PI / 2)
-        //     && groupRef.current.position.z < 3
-        //     && groupRef.current.position.z > -3
-        // ) {
-        //     groupRef.current.position.z = Math.abs(orbitRef.current.getAzimuthalAngle() * 2);
-        // }
-    // });
+    //     if(groupRef.current && nextStep) {
+    //         groupRef.current.rotateY(0.005);
+    //     }
+    // })
 
     function resetCameraPosition() {
-        if(orbitRef.current){
-            orbitRef.current.setAzimuthalAngle(0);
+        if(groupRef.current && orbitRef.current){
+            if(groupRef.current.position.x < 0) {
+                orbitRef.current.setAzimuthalAngle(-0.12);
+            } else {
+                orbitRef.current.setAzimuthalAngle(0);
+            }
             orbitRef.current.setPolarAngle(1.422);
         }
     }
@@ -700,11 +713,11 @@ export default function Configurator() {
         <>
             <OrbitControls
                 maxDistance={35}
-                // minDistance={25}
-                minPolarAngle={Math.PI / 3}
-                maxPolarAngle={Math.PI - Math.PI / 3}
-                minAzimuthAngle={-Math.PI / 2}
-                maxAzimuthAngle={Math.PI / 2}
+                minDistance={25}
+                minPolarAngle={nextStep ? Math.PI / 2.1 : Math.PI / 3 }
+                maxPolarAngle={nextStep ? Math.PI - Math.PI / 2.1 : Math.PI - Math.PI / 3}
+                minAzimuthAngle={nextStep ? -Math.PI / 4 : -Math.PI / 2}
+                maxAzimuthAngle={nextStep ? Math.PI / 7 : Math.PI / 2}
                 ref={orbitRef}
             />
 
