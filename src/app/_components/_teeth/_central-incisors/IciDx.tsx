@@ -18,7 +18,7 @@ export default function IciDx() {
 
     const ICIDX = memo(({visible, type, mat} : {visible: boolean, type: string, mat: string}): JSX.Element => {
         if(!toothGeometry || toothJewelType === 'signature') return <></>
-        let geometry:THREE.BufferGeometry[], material:JSX.Element[], position:THREE.Vector3;
+        let geometry:THREE.BufferGeometry[], material:JSX.Element[], position:THREE.Vector3, barPositions: THREE.Vector3[] | undefined;
         switch(type) {
             case 'full':
             case 'bezel':
@@ -55,7 +55,8 @@ export default function IciDx() {
             case 'barDiamond':
                 geometry = [toothGeometry.bar.diamond.base, toothGeometry.bar.diamond.full];
                 material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>, <FullDiamond color={toothMaterial}/>]
-                position = toothGeometry.bar.diamond.position;
+                position = toothGeometry.bar.diamond.diamondPosition;
+                barPositions = [toothGeometry.bar.diamond.basePosition, toothGeometry.bar.diamond.fullPosition];
                 break;
             default:
                 geometry = [toothGeometry.full];
@@ -65,10 +66,10 @@ export default function IciDx() {
         if(geometry.length === 2) {
             return (
                 <>
-                    <mesh geometry={geometry[0]} visible={visible}>
+                    <mesh geometry={geometry[0]} visible={visible} position={barPositions?.[0]}>
                         {material[0]}
                     </mesh>
-                    <mesh geometry={geometry[1]} visible={visible}>
+                    <mesh geometry={geometry[1]} visible={visible} position={barPositions?.[1]}>
                         {material[1]}
                         {type !== 'enamel' && <DecalPave position={position} pave={toothPave.shape} stone={toothPave.color}/>}
                     </mesh>

@@ -157,7 +157,7 @@ export default function Dentiera() {
     const Icsdx = memo(({outline, hovered} : {outline: boolean, hovered: boolean}) : JSX.Element => {
         return (
             <mesh onClick={log} onPointerOut={(e) => hover(e,undefined)} onPointerOver={(e) => hover(e,'icsdx')}
-                  geometry={(fbx.children[1].children[1] as THREE.Mesh).geometry}
+                  geometry={(fbx.children[1].children[0] as THREE.Mesh).geometry}
                   name="Incisivo_C_S_DX"
                   material={dentieraMaterial}
             >
@@ -169,7 +169,7 @@ export default function Dentiera() {
     const Icssx = memo(({outline, hovered} : {outline: boolean, hovered: boolean}) : JSX.Element => {
         return (
             <mesh onClick={log} onPointerOut={(e) => hover(e,undefined)} onPointerOver={(e) => hover(e,'icssx')}
-                  geometry={(fbx.children[1].children[0] as THREE.Mesh).geometry}
+                  geometry={(fbx.children[1].children[1] as THREE.Mesh).geometry}
                   name="Incisivo_C_S_SX"
                   material={dentieraMaterial}
             >

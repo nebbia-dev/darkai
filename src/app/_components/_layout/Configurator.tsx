@@ -59,10 +59,13 @@ export default function Configurator() {
     const envMap = useEnvironment({
         files: "envMaps/HDR_Light_Studio_Free_HDRI_Design_13.exr"
     })
-    // const paves = useFBX('/models/Frame_Pave.fbx');
     // Se voglio piazzare anche l'fbx in LoadedMaterials, verosimilmente devo usare qui uno useEffect
+    const fra = useFBX('/models/Full_Pave.fbx');
+    console.log(fra);
+
     const teeth = useMemo((): FBX => {
-        const fbx = useFBX('/models/MOD_Dentiera_Completa_180_Phong_Scala_1 (1).fbx');
+        const frameDiamond = useFBX('/models/Frame_Pave.fbx');
+        const barDiamond = useFBX('/models/Bar_Pave.fbx');
         const stones = useFBX('/models/MOD_Stone (3).fbx');
         const frames = useFBX('/models/MOD_Frame_Capsula (2).fbx');
         const bigBar  = useFBX('/models/MOD_Full_Frame_Capsula.fbx');
@@ -95,17 +98,19 @@ export default function Configurator() {
                 bar: {
                     full: (bars.children[0] as THREE.Mesh).geometry,
                     diamond: {
-                        base: (bars.children[0] as THREE.Mesh).geometry,
-                        full: (bars.children[0] as THREE.Mesh).geometry,
-                        position: getOrigin(bars.children[0])
+                        base: (barDiamond.children[0].children[0] as THREE.Mesh).geometry,
+                        basePosition: barDiamond.children[0].children[0].position,
+                        full: (barDiamond.children[0].children[1] as THREE.Mesh).geometry,
+                        fullPosition: barDiamond.children[0].children[1].position,
+                        diamondPosition: getOrigin(barDiamond.children[0].children[1])
                     }
                 },
                 frame: {
                     full: (frames.children[1] as THREE.Mesh).geometry,
                     diamond: {
-                        base: (frames.children[1] as THREE.Mesh).geometry,
-                        full: (frames.children[1] as THREE.Mesh).geometry,
-                        position: getOrigin(frames.children[1])
+                        base: (frameDiamond.children[0].children[0] as THREE.Mesh).geometry,
+                        full: (frameDiamond.children[0].children[2] as THREE.Mesh).geometry,
+                        position: getOrigin(frameDiamond.children[0].children[2])
                     }
                 }
             },
@@ -126,17 +131,19 @@ export default function Configurator() {
                 bar: {
                     full: (bars.children[0] as THREE.Mesh).geometry,
                     diamond: {
-                        base: (bars.children[0] as THREE.Mesh).geometry,
-                        full: (bars.children[0] as THREE.Mesh).geometry,
-                        position: getOrigin(bars.children[0])
+                        base: (barDiamond.children[0].children[0] as THREE.Mesh).geometry,
+                        basePosition: barDiamond.children[0].children[0].position,
+                        full: (barDiamond.children[0].children[1] as THREE.Mesh).geometry,
+                        fullPosition: barDiamond.children[0].children[1].position,
+                        diamondPosition: getOrigin(barDiamond.children[0].children[1])
                     }
                 },
                 frame: {
                     full: (frames.children[0] as THREE.Mesh).geometry,
                     diamond: {
-                        base: (frames.children[0] as THREE.Mesh).geometry,
-                        full: (frames.children[0] as THREE.Mesh).geometry,
-                        position: getOrigin(frames.children[0])
+                        base: (frameDiamond.children[0].children[1] as THREE.Mesh).geometry,
+                        full: (frameDiamond.children[0].children[3] as THREE.Mesh).geometry,
+                        position: getOrigin(frameDiamond.children[0].children[3])
                     }
                 }
             },
@@ -157,17 +164,19 @@ export default function Configurator() {
                 bar: {
                     full: (bars.children[3] as THREE.Mesh).geometry,
                     diamond: {
-                        base: (bars.children[3] as THREE.Mesh).geometry,
-                        full: (bars.children[3] as THREE.Mesh).geometry,
-                        position: getOrigin(bars.children[3])
+                        base: (barDiamond.children[0].children[2] as THREE.Mesh).geometry,
+                        basePosition: barDiamond.children[0].children[2].position,
+                        full: (barDiamond.children[0].children[3] as THREE.Mesh).geometry,
+                        fullPosition: barDiamond.children[0].children[3].position,
+                        diamondPosition: getOrigin(barDiamond.children[0].children[3])
                     }
                 },
                 frame: {
                     full: (frames.children[6] as THREE.Mesh).geometry,
                     diamond: {
-                        base: (frames.children[6] as THREE.Mesh).geometry,
-                        full: (frames.children[6] as THREE.Mesh).geometry,
-                        position: getOrigin(frames.children[6])
+                        base: (frameDiamond.children[1].children[0] as THREE.Mesh).geometry,
+                        full: (frameDiamond.children[1].children[2] as THREE.Mesh).geometry,
+                        position: getOrigin(frameDiamond.children[1].children[2])
                     }
                 }
             },
@@ -188,17 +197,19 @@ export default function Configurator() {
                 bar: {
                     full: (bars.children[3] as THREE.Mesh).geometry,
                     diamond: {
-                        base: (bars.children[3] as THREE.Mesh).geometry,
-                        full: (bars.children[3] as THREE.Mesh).geometry,
-                        position: getOrigin(bars.children[3])
+                        base: (barDiamond.children[0].children[2] as THREE.Mesh).geometry,
+                        basePosition: barDiamond.children[0].children[2].position,
+                        full: (barDiamond.children[0].children[3] as THREE.Mesh).geometry,
+                        fullPosition: barDiamond.children[0].children[3].position,
+                        diamondPosition: getOrigin(barDiamond.children[0].children[3])
                     }
                 },
                 frame: {
                     full: (frames.children[7] as THREE.Mesh).geometry,
                     diamond: {
-                        base: (frames.children[7] as THREE.Mesh).geometry,
-                        full: (frames.children[7] as THREE.Mesh).geometry,
-                        position: getOrigin(frames.children[7])
+                        base: (frameDiamond.children[1].children[1] as THREE.Mesh).geometry,
+                        full: (frameDiamond.children[1].children[3] as THREE.Mesh).geometry,
+                        position: getOrigin(frameDiamond.children[1].children[3])
                     }
                 }
             },
@@ -220,17 +231,17 @@ export default function Configurator() {
                 bar: {
                     full: (bars.children[1] as THREE.Mesh).geometry,
                     diamond: {
-                        base: (bars.children[1] as THREE.Mesh).geometry,
-                        full: (bars.children[1] as THREE.Mesh).geometry,
-                        position: getOrigin(bars.children[1])
+                        base: (barDiamond.children[1].children[0] as THREE.Mesh).geometry,
+                        full: (barDiamond.children[1].children[2] as THREE.Mesh).geometry,
+                        position: getOrigin(barDiamond.children[1].children[2])
                     }
                 },
                 frame: {
                     full: (frames.children[2] as THREE.Mesh).geometry,
                     diamond: {
-                        base: (frames.children[2] as THREE.Mesh).geometry,
-                        full: (frames.children[2] as THREE.Mesh).geometry,
-                        position: getOrigin(frames.children[2])
+                        base: (frameDiamond.children[0].children[4] as THREE.Mesh).geometry,
+                        full: (frameDiamond.children[0].children[6] as THREE.Mesh).geometry,
+                        position: getOrigin(frameDiamond.children[0].children[6])
                     }
                 }
             },
@@ -251,17 +262,17 @@ export default function Configurator() {
                 bar: {
                     full: (bars.children[2] as THREE.Mesh).geometry,
                     diamond: {
-                        base: (bars.children[2] as THREE.Mesh).geometry,
-                        full: (bars.children[2] as THREE.Mesh).geometry,
-                        position: getOrigin(bars.children[2])
+                        base: (barDiamond.children[1].children[1] as THREE.Mesh).geometry,
+                        full: (barDiamond.children[1].children[3] as THREE.Mesh).geometry,
+                        position: getOrigin(barDiamond.children[1].children[3])
                     }
                 },
                 frame: {
                     full: (frames.children[3] as THREE.Mesh).geometry,
                     diamond: {
-                        base: (frames.children[3] as THREE.Mesh).geometry,
-                        full: (frames.children[3] as THREE.Mesh).geometry,
-                        position: getOrigin(frames.children[3])
+                        base: (frameDiamond.children[0].children[5] as THREE.Mesh).geometry,
+                        full: (frameDiamond.children[0].children[7] as THREE.Mesh).geometry,
+                        position: getOrigin(frameDiamond.children[0].children[7])
                     }
                 }
             },
@@ -282,17 +293,17 @@ export default function Configurator() {
                 bar: {
                     full: (bars.children[4] as THREE.Mesh).geometry,
                     diamond: {
-                        base: (bars.children[4] as THREE.Mesh).geometry,
-                        full: (bars.children[4] as THREE.Mesh).geometry,
-                        position: getOrigin(bars.children[4])
+                        base: (barDiamond.children[1].children[4] as THREE.Mesh).geometry,
+                        full: (barDiamond.children[1].children[6] as THREE.Mesh).geometry,
+                        position: getOrigin(barDiamond.children[1].children[6])
                     }
                 },
                 frame: {
                     full: (frames.children[8] as THREE.Mesh).geometry,
                     diamond: {
-                        base: (frames.children[8] as THREE.Mesh).geometry,
-                        full: (frames.children[8] as THREE.Mesh).geometry,
-                        position: getOrigin(frames.children[8])
+                        base: (frameDiamond.children[1].children[4] as THREE.Mesh).geometry,
+                        full: (frameDiamond.children[1].children[6] as THREE.Mesh).geometry,
+                        position: getOrigin(frameDiamond.children[1].children[6])
                     }
                 }
             },
@@ -313,17 +324,17 @@ export default function Configurator() {
                 bar: {
                     full: (bars.children[5] as THREE.Mesh).geometry,
                     diamond: {
-                        base: (bars.children[5] as THREE.Mesh).geometry,
-                        full: (bars.children[5] as THREE.Mesh).geometry,
-                        position: getOrigin(bars.children[5])
+                        base: (barDiamond.children[1].children[5] as THREE.Mesh).geometry,
+                        full: (barDiamond.children[1].children[7] as THREE.Mesh).geometry,
+                        position: getOrigin(barDiamond.children[1].children[7])
                     }
                 },
                 frame: {
                     full: (frames.children[9] as THREE.Mesh).geometry,
                     diamond: {
-                        base: (frames.children[9] as THREE.Mesh).geometry,
-                        full: (frames.children[9] as THREE.Mesh).geometry,
-                        position: getOrigin(frames.children[9])
+                        base: (frameDiamond.children[1].children[5] as THREE.Mesh).geometry,
+                        full: (frameDiamond.children[1].children[7] as THREE.Mesh).geometry,
+                        position: getOrigin(frameDiamond.children[1].children[7])
                     }
                 }
             },
@@ -345,17 +356,17 @@ export default function Configurator() {
                 bar: {
                     full: (bars.children[6] as THREE.Mesh).geometry,
                     diamond: {
-                        base: (bars.children[6] as THREE.Mesh).geometry,
-                        full: (bars.children[6] as THREE.Mesh).geometry,
-                        position: getOrigin(bars.children[6])
+                        base: (barDiamond.children[1].children[8] as THREE.Mesh).geometry,
+                        full: (barDiamond.children[1].children[10] as THREE.Mesh).geometry,
+                        position: getOrigin(barDiamond.children[1].children[10])
                     }
                 },
                 frame: {
                     full: (frames.children[4] as THREE.Mesh).geometry,
                     diamond: {
-                        base: (fbx.children[2].children[0].children[1] as THREE.Mesh).geometry,
-                        full: (fbx.children[2].children[0].children[0].children[0] as THREE.Mesh).geometry,
-                        position: getOrigin(fbx.children[2].children[0].children[0].children[0])
+                        base: (frameDiamond.children[0].children[8] as THREE.Mesh).geometry,
+                        full: (frameDiamond.children[0].children[10] as THREE.Mesh).geometry,
+                        position: getOrigin(frameDiamond.children[0].children[10])
                     }
                 }
             },
@@ -376,17 +387,17 @@ export default function Configurator() {
                 bar: {
                     full: (bars.children[7] as THREE.Mesh).geometry,
                     diamond: {
-                        base: (bars.children[7] as THREE.Mesh).geometry,
-                        full: (bars.children[7] as THREE.Mesh).geometry,
-                        position: getOrigin(bars.children[7])
+                        base: (barDiamond.children[1].children[9] as THREE.Mesh).geometry,
+                        full: (barDiamond.children[1].children[11] as THREE.Mesh).geometry,
+                        position: getOrigin(barDiamond.children[1].children[11])
                     }
                 },
                 frame: {
                     full: (frames.children[5] as THREE.Mesh).geometry,
                     diamond: {
-                        base: (fbx.children[2].children[0].children[3] as THREE.Mesh).geometry,
-                        full: (fbx.children[2].children[0].children[0].children[2] as THREE.Mesh).geometry,
-                        position: getOrigin(fbx.children[2].children[0].children[0].children[2])
+                        base: (frameDiamond.children[0].children[9] as THREE.Mesh).geometry,
+                        full: (frameDiamond.children[0].children[11] as THREE.Mesh).geometry,
+                        position: getOrigin(frameDiamond.children[0].children[11])
                     }
                 }
             },
@@ -407,25 +418,25 @@ export default function Configurator() {
                 frame: {
                     full: (frames.children[10] as THREE.Mesh).geometry,
                     diamond: {
-                        base: (fbx.children[2].children[0].children[2] as THREE.Mesh).geometry,
-                        full: (fbx.children[2].children[0].children[0].children[1] as THREE.Mesh).geometry,
-                        position: getOrigin(fbx.children[2].children[0].children[0].children[1])
+                        base: (frameDiamond.children[1].children[8] as THREE.Mesh).geometry,
+                        full: (frameDiamond.children[1].children[10] as THREE.Mesh).geometry,
+                        position: getOrigin(frameDiamond.children[1].children[10])
                     }
                 },
                 bar: {
                     full: (bars.children[8] as THREE.Mesh).geometry,
                     diamond: {
-                        base: (bars.children[8] as THREE.Mesh).geometry,
-                        full: (bars.children[8] as THREE.Mesh).geometry,
-                        position: getOrigin(bars.children[8])
+                        base: (barDiamond.children[1].children[12] as THREE.Mesh).geometry,
+                        full: (barDiamond.children[1].children[14] as THREE.Mesh).geometry,
+                        position: getOrigin(barDiamond.children[1].children[14])
                     }
                 },
                 bigBar: {
                     full: (bigBar.children[0] as THREE.Mesh).geometry,
                     diamond: {
-                        base: (fbx.children[3].children[0].children[0] as THREE.Mesh).geometry,
-                        full: (fbx.children[3].children[0].children[1] as THREE.Mesh).geometry,
-                        position: getOrigin(fbx.children[3].children[0].children[1])
+                        base: (frameDiamond.children[2].children[0] as THREE.Mesh).geometry,
+                        full: (frameDiamond.children[2].children[1] as THREE.Mesh).geometry,
+                        position: getOrigin(frameDiamond.children[2].children[1])
                     }
                 }
             },
@@ -446,25 +457,25 @@ export default function Configurator() {
                 frame: {
                     full: (frames.children[11] as THREE.Mesh).geometry,
                     diamond: {
-                        base: (fbx.children[2].children[0].children[4] as THREE.Mesh).geometry,
-                        full: (fbx.children[2].children[0].children[0].children[3] as THREE.Mesh).geometry,
-                        position: getOrigin(fbx.children[2].children[0].children[0].children[3])
+                        base: (frameDiamond.children[1].children[9] as THREE.Mesh).geometry,
+                        full: (frameDiamond.children[1].children[11] as THREE.Mesh).geometry,
+                        position: getOrigin(frameDiamond.children[1].children[11])
                     }
                 },
                 bar: {
                     full: (bars.children[9] as THREE.Mesh).geometry,
                     diamond: {
-                        base: (bars.children[9] as THREE.Mesh).geometry,
-                        full: (bars.children[9] as THREE.Mesh).geometry,
-                        position: getOrigin(bars.children[9])
+                        base: (barDiamond.children[1].children[13] as THREE.Mesh).geometry,
+                        full: (barDiamond.children[1].children[15] as THREE.Mesh).geometry,
+                        position: getOrigin(barDiamond.children[1].children[15])
                     }
                 },
                 bigBar: {
                     full: (bigBar.children[0] as THREE.Mesh).geometry,
                     diamond: {
-                        base: (fbx.children[3].children[0].children[0] as THREE.Mesh).geometry,
-                        full: (fbx.children[3].children[0].children[1] as THREE.Mesh).geometry,
-                        position: getOrigin(fbx.children[3].children[0].children[1])
+                        base: (frameDiamond.children[2].children[0] as THREE.Mesh).geometry,
+                        full: (frameDiamond.children[2].children[1] as THREE.Mesh).geometry,
+                        position: getOrigin(frameDiamond.children[2].children[1])
                     }
                 }
             },
@@ -709,7 +720,7 @@ export default function Configurator() {
         <>
             <OrbitControls
                 maxDistance={35}
-                // minDistance={25}
+                minDistance={25}
                 minPolarAngle={nextStep ? Math.PI / 2.1 : Math.PI / 3 }
                 maxPolarAngle={nextStep ? Math.PI - Math.PI / 2.1 : Math.PI - Math.PI / 3}
                 minAzimuthAngle={nextStep ? -Math.PI / 4 : -Math.PI / 2}
@@ -720,7 +731,9 @@ export default function Configurator() {
             {savedEnvMap && <LoadedMaterials/>}
             {savedTeeth && savedEnvMap &&
                 <group ref={groupRef} position={[0, 0, 3]}>
-                    {/*<primitive object={paves}/>*/}
+                    {/*<mesh geometry={fra.children[1].children[12].geometry} >*/}
+                    {/*    <FullMaterial color="gold" finish="polished"/>*/}
+                    {/*</mesh>*/}
                     {/*SIGNATURE*/}
                     <Vamp/>
                     <Sprinkles/>

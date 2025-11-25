@@ -49,7 +49,7 @@ export default function Selection({activeButton, changeActiveButton} : {activeBu
                         <span aria-hidden={true} className="relative z-20 inline-block h-[2px] w-8 bg-slate-950"></span>
                         <ToothConfigOptions tooth={activeTooth} active={activeButton} onclick={changeActiveButton}/>
                         <span aria-hidden={true} className="relative z-20 inline-block h-[2px] w-8 bg-slate-950"></span>
-                        <ConfiguratorButton tooth="alwaysActive" inverse={true} value="6" active={activeButton}
+                        <ConfiguratorButton tooth="alwaysActive" inverse={false} value="6" active={activeButton}
                                             onclick={changeActiveButton} label="Packaging">
                             <img className="p-0.5" src="/config-menu-svgs/packaging.svg" alt="packaging-option-logo"/>
                         </ConfiguratorButton>

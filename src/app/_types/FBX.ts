@@ -19,8 +19,10 @@ export default interface FBX {
             full: THREE.BufferGeometry,
             diamond: {
                 base: THREE.BufferGeometry,
+                basePosition: THREE.Vector3,
                 full: THREE.BufferGeometry,
-                position: THREE.Vector3
+                fullPosition: THREE.Vector3,
+                diamondPosition: THREE.Vector3
             }
         },
         frame: {
@@ -50,8 +52,10 @@ export default interface FBX {
             full: THREE.BufferGeometry,
             diamond: {
                 base: THREE.BufferGeometry,
+                basePosition: THREE.Vector3,
                 full: THREE.BufferGeometry,
-                position: THREE.Vector3
+                fullPosition: THREE.Vector3,
+                diamondPosition: THREE.Vector3
             }
         },
         frame: {
@@ -81,8 +85,10 @@ export default interface FBX {
             full: THREE.BufferGeometry,
             diamond: {
                 base: THREE.BufferGeometry,
+                basePosition: THREE.Vector3,
                 full: THREE.BufferGeometry,
-                position: THREE.Vector3
+                fullPosition: THREE.Vector3,
+                diamondPosition: THREE.Vector3
             }
         },
         frame: {
@@ -112,8 +118,10 @@ export default interface FBX {
             full: THREE.BufferGeometry,
             diamond: {
                 base: THREE.BufferGeometry,
+                basePosition: THREE.Vector3,
                 full: THREE.BufferGeometry,
-                position: THREE.Vector3
+                fullPosition: THREE.Vector3,
+                diamondPosition: THREE.Vector3
             }
         },
         frame: {
