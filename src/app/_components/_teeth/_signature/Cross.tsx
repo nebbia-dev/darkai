@@ -17,16 +17,16 @@ export default function Cross() {
         switch(mat) {
             case 'pave':
             case 'white':
-                material = [<FullMaterial color="white"/>]
+                material = [<FullMaterial finish="polished" color="white"/>]
                 break;
             case 'gold':
-                material = [<FullMaterial color="gold"/>]
+                material = [<FullMaterial finish="polished" color="gold"/>]
                 break;
             case 'rose':
-                material = [<FullMaterial color="rose"/>]
+                material = [<FullMaterial finish="polished" color="rose"/>]
                 break;
             default:
-                material = [<FullMaterial color="white"/>];
+                material = [<FullMaterial finish="polished" color="white"/>];
         }
 
             return (

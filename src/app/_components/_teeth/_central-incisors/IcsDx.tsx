@@ -2,7 +2,6 @@
 import {JSX, memo} from "react";
 import FullMaterial from "@/app/_components/_materials/FullMaterial";
 import {useTeethStore} from "@/app/_stores/teeth";
-import FullDiamond from "@/app/_components/_materials/FullDiamond";
 import {State} from "@/app/_types/State";
 import * as THREE from "three";
 import FullEnamel from "@/app/_components/_materials/FullEnamel";
@@ -31,7 +30,7 @@ export default function IcsDx() {
             case 'fullDiamond':
             case 'bezelDiamond':
                 geometry = [toothGeometry.fullDiamond.base, toothGeometry.fullDiamond.full];
-                material = [<FullDiamond color={toothMaterial}/>, <FullDiamond color={toothMaterial}/>]
+                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>, <FullMaterial color={toothMaterial} finish={toothFinish}/>]
                 position = toothGeometry.fullDiamond.position;
                 break;
             case 'frame':
@@ -41,12 +40,12 @@ export default function IcsDx() {
                 break;
             case 'enamel':
                 geometry = [toothGeometry.fullDiamond.base, toothGeometry.fullDiamond.full];
-                material = [<FullDiamond color={toothMaterial}/>, <FullEnamel color={toothEnamel ?? 'ivory'}/>]
+                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>, <FullEnamel color={toothEnamel ?? 'ivory'}/>]
                 position = new THREE.Vector3();
                 break;
             case 'frameDiamond':
                 geometry = [toothGeometry.frame.diamond.base, toothGeometry.frame.diamond.full];
-                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>, <FullDiamond color={toothMaterial}/>]
+                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>, <FullMaterial color={toothMaterial} finish={toothFinish}/>]
                 position = toothGeometry.frame.diamond.position;
                 break;
             case 'bar':
@@ -56,7 +55,7 @@ export default function IcsDx() {
                 break;
             case 'barDiamond':
                 geometry = [toothGeometry.bar.diamond.base, toothGeometry.bar.diamond.full];
-                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>, <FullDiamond color={toothMaterial}/>]
+                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>, <FullMaterial color={toothMaterial} finish={toothFinish}/>]
                 position = new THREE.Vector3();
                 barPositions = [toothGeometry.bar.diamond.basePosition, toothGeometry.bar.diamond.fullPosition];
                 break;

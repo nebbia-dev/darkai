@@ -17,13 +17,13 @@ export default function Vamp() {
         switch(mat) {
             case 'pave':
             case 'white':
-                material = [<FullMaterial color="white"/>]
+                material = [<FullMaterial finish="polished" color="white"/>]
                 break;
             case 'black':
-                material = [<FullMaterial color="black"/>]
+                material = [<FullMaterial finish="polished" color="black"/>]
                 break;
             default:
-                material = [<FullMaterial color="white"/>];
+                material = [<FullMaterial finish="polished" color="white"/>];
         }
 
             return (

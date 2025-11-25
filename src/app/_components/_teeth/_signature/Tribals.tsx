@@ -17,13 +17,13 @@ export default function Tribals() {
         switch(mat) {
             case 'pave':
             case 'white':
-                material = [<FullMaterial color="white"/>]
+                material = [<FullMaterial finish="polished" color="white"/>]
                 break;
             case 'gold':
-                material = [<FullMaterial color="gold"/>]
+                material = [<FullMaterial finish="polished" color="gold"/>]
                 break;
             default:
-                material = [<FullMaterial color="white"/>];
+                material = [<FullMaterial finish="polished" color="white"/>];
         }
 
             return (
