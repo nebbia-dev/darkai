@@ -57,7 +57,8 @@ export default function Configurator() {
     const envMap = useEnvironment({
         files: "envMaps/HDR_Light_Studio_Free_HDRI_Design_13.exr"
     })
-
+    // const paves = useFBX('/models/Full_Pave.fbx');
+    // console.log(paves)
     // Se voglio piazzare anche l'fbx in LoadedMaterials, verosimilmente devo usare qui uno useEffect
     const teeth = useMemo((): FBX => {
         const fbx = useFBX('/models/MOD_Dentiera_Completa_180_Phong_Scala_1 (1).fbx');
@@ -707,7 +708,7 @@ export default function Configurator() {
         <>
             <OrbitControls
                 maxDistance={35}
-                minDistance={25}
+                // minDistance={25}
                 minPolarAngle={nextStep ? Math.PI / 2.1 : Math.PI / 3 }
                 maxPolarAngle={nextStep ? Math.PI - Math.PI / 2.1 : Math.PI - Math.PI / 3}
                 minAzimuthAngle={nextStep ? -Math.PI / 4 : -Math.PI / 2}
@@ -718,6 +719,7 @@ export default function Configurator() {
             {savedEnvMap && <LoadedMaterials/>}
             {savedTeeth && savedEnvMap &&
                 <group ref={groupRef} position={[0,0,3]}>
+                    {/*<primitive object={paves}/>*/}
                     {/*SIGNATURE*/}
                     <Vamp/>
                     <Sprinkles/>

@@ -3,18 +3,18 @@ import * as THREE from 'three';
 import {useTexture} from "@react-three/drei";
 import {useTeethStore} from "@/app/_stores/teeth";
 
-export default function FullMaterial({color, finish} : {color: string, finish:string}) {
+export default function FullMaterial_ICS({color, finish} : {color: string, finish:string}) {
     const envMap = useTeethStore((state) => state.envMap);
         const diamondCut = useTexture({
-            map: 'textures/finish/Albedo_Diamond_Cut.webp',
-            normalMap: 'textures/finish/Normal_Diamond_Cut.webp',
+            map: 'textures/finish/Albedo_Diamond_Cut_ICS.webp',
+            normalMap: 'textures/finish/Normal_Diamond_Cut_ICS.webp',
         });
 
     diamondCut.map.colorSpace = THREE.SRGBColorSpace;
     diamondCut.map.wrapS = diamondCut.map.wrapT = THREE.RepeatWrapping;
     diamondCut.normalMap.wrapS = diamondCut.normalMap.wrapT = THREE.RepeatWrapping;
-    diamondCut.map.repeat.set(200,200);
-    diamondCut.normalMap.repeat.set(200,200);
+    diamondCut.map.repeat.set(120,120);
+    diamondCut.normalMap.repeat.set(120,120);
 
         return (<meshStandardMaterial
             map={finish === 'diamond_cut' ? diamondCut.map : undefined}

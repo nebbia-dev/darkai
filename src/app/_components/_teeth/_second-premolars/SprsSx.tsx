@@ -13,13 +13,15 @@ export default function SprsSx() {
     const toothMaterial = useTeethStore((state: State) => state.teethMaterial.sprssx);
     const toothPave = useTeethStore((state: State) => state.teethPaves.sprssx);
     const toothVisibility = useTeethStore((state: State) => state.teethVisibility.sprssx);
+    const toothFinish = useTeethStore((state: State) => state.teethFinish.sprssx);
+
     const SPRSSX = memo(({visible, type, mat} : {visible: boolean, type: string, mat: string}): JSX.Element => {
         if(!toothGeometry || toothJewelType === 'signature') return <></>
         let geometry:THREE.BufferGeometry[], material:JSX.Element[], position:THREE.Vector3;
         switch(type) {
             case 'full':
                 geometry = [toothGeometry.full];
-                material = [<FullMaterial color={toothMaterial}/>]
+                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>]
                 position = new THREE.Vector3();
                 break;
             case 'fullDiamond':
@@ -29,7 +31,7 @@ export default function SprsSx() {
                 break;
             default:
                 geometry = [toothGeometry.full];
-                material = [<FullMaterial color={toothMaterial}/>];
+                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>];
                 position = new THREE.Vector3();
         }
 

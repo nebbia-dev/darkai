@@ -13,13 +13,14 @@ export default function PpriSx() {
     const toothMaterial = useTeethStore((state: State) => state.teethMaterial.pprisx);
     const toothPave = useTeethStore((state: State) => state.teethPaves.pprisx);
     const toothVisibility = useTeethStore((state: State) => state.teethVisibility.pprisx);
+    const toothFinish = useTeethStore((state: State) => state.teethFinish.pprisx);
     const PPRISX = memo(({visible, type, mat} : {visible: boolean, type: string, mat: string}): JSX.Element => {
         if(!toothGeometry || toothJewelType === 'signature') return <></>
         let geometry:THREE.BufferGeometry[], material:JSX.Element[], position:THREE.Vector3;
         switch(type) {
             case 'full':
                 geometry = [toothGeometry.full];
-                material = [<FullMaterial color={toothMaterial}/>]
+                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>]
                 position = new THREE.Vector3();
                 break;
             case 'fullDiamond':
@@ -29,7 +30,7 @@ export default function PpriSx() {
                 break;
             default:
                 geometry = [toothGeometry.full];
-                material = [<FullMaterial color={toothMaterial}/>];
+                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>];
                 position = new THREE.Vector3();
         }
 
