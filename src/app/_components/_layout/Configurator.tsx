@@ -52,13 +52,14 @@ import Braces from "@/app/_components/_teeth/_signature/Braces";
 import Tribals from "@/app/_components/_teeth/_signature/Tribals";
 import Hammered from "@/app/_components/_teeth/_signature/Hammered";
 import Cross from "@/app/_components/_teeth/_signature/Cross";
+import FullMaterial from "@/app/_components/_materials/FullMaterial";
+import FullMaterial_ICS from "@/app/_components/_materials/FullMaterial_ICS";
 
 export default function Configurator() {
     const envMap = useEnvironment({
         files: "envMaps/HDR_Light_Studio_Free_HDRI_Design_13.exr"
     })
-    // const paves = useFBX('/models/Full_Pave.fbx');
-    // console.log(paves)
+    // const paves = useFBX('/models/Frame_Pave.fbx');
     // Se voglio piazzare anche l'fbx in LoadedMaterials, verosimilmente devo usare qui uno useEffect
     const teeth = useMemo((): FBX => {
         const fbx = useFBX('/models/MOD_Dentiera_Completa_180_Phong_Scala_1 (1).fbx');
@@ -718,7 +719,7 @@ export default function Configurator() {
 
             {savedEnvMap && <LoadedMaterials/>}
             {savedTeeth && savedEnvMap &&
-                <group ref={groupRef} position={[0,0,3]}>
+                <group ref={groupRef} position={[0, 0, 3]}>
                     {/*<primitive object={paves}/>*/}
                     {/*SIGNATURE*/}
                     <Vamp/>
