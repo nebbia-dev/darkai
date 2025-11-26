@@ -14,7 +14,7 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
     const teethPaves = useTeethStore((state:State) => state.teethPaves);
     const signatureMaterial = useTeethStore((state:State) => state.signatureMaterial);
     const total = useTeethStore((state:State) => state.total);
-    const [showRecap, setShowRecap] = useState<boolean>(false);
+    const [showRecap, setShowRecap] = useState<boolean>(true);
     const [open, setOpen] = useState<boolean>(false);
     const [isSending, setIsSending] = useState<boolean>(false);
     const [sent, setSent] = useState<boolean>(false);

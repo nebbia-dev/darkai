@@ -58,9 +58,10 @@ export default function Configurator() {
     const envMap = useEnvironment({
         files: "envMaps/HDR_Light_Studio_Free_HDRI_Design_13.exr"
     })
-    const signatures = useFBX('/models/Signature.fbx');
-    const bgum = useFBX('/models/Mascherina_Bubble_Gum.fbx');
-    console.log(signatures)
+    const signatures = useFBX('/models/Signatures.fbx');
+    const bugum = useFBX('/models/BGum.fbx');
+    const spr = useFBX('/models/Sprinkles_FREEZE_COORDINATE.fbx');
+    console.log(spr)
     // Se voglio piazzare anche l'fbx in LoadedMaterials, verosimilmente devo usare qui uno useEffect
 
     const teeth = useMemo((): FBX => {
@@ -73,7 +74,7 @@ export default function Configurator() {
         const bars = useFBX('/models/MOD_Bars_Capsula (2).fbx');
         const hearts = useFBX('/models/MOD_Stone_Ametista.fbx');
         const otherFools = useFBX('/models/MOD_Full_All.fbx');
-        const signatures = useFBX('/models/Signature.fbx');
+        const signatures = useFBX('/models/Signatures.fbx');
         const sign = useFBX('/models/Gioielli_Separati_SI.fbx');
         function getOrigin(mesh:any) {
             const box = new THREE.Box3().setFromObject(mesh);
@@ -613,41 +614,41 @@ export default function Configurator() {
                 vamp: {
                     csdx: {
                         base: {
-                            geometry: (signatures.children[5].children[1] as THREE.Mesh).geometry,
-                            position: signatures.children[5].children[1].position
+                            geometry: (signatures.children[6].children[1] as THREE.Mesh).geometry,
+                            position: signatures.children[6].children[1].position
                     },
                         pave: {
-                            geometry: (signatures.children[5].children[0] as THREE.Mesh).geometry,
-                            position: getOrigin(signatures.children[5].children[0])
+                            geometry: (signatures.children[6].children[0] as THREE.Mesh).geometry,
+                            position: getOrigin(signatures.children[6].children[0])
                 }
                     },
                     cssx: {
                         base: {
-                            geometry: (signatures.children[5].children[3] as THREE.Mesh).geometry,
-                            position: signatures.children[5].children[3].position
+                            geometry: (signatures.children[6].children[3] as THREE.Mesh).geometry,
+                            position: signatures.children[6].children[3].position
                     },
                         pave: {
-                            geometry: (signatures.children[5].children[2] as THREE.Mesh).geometry,
-                            position: getOrigin(signatures.children[5].children[2])
+                            geometry: (signatures.children[6].children[2] as THREE.Mesh).geometry,
+                            position: getOrigin(signatures.children[6].children[2])
         }
                     }
                 },
                 braces: {
                     structure: {
-                        geometry: (signatures.children[4].children[0] as THREE.Mesh).geometry,
-                        position: signatures.children[4].position
+                        geometry: (signatures.children[5].children[0] as THREE.Mesh).geometry,
+                        position: signatures.children[5].position
                     },
                     pave: {
-                        geometry: (signatures.children[4].children[1] as THREE.Mesh).geometry,
-                        position: signatures.children[4].position,
+                        geometry: (signatures.children[5].children[1] as THREE.Mesh).geometry,
+                        position: signatures.children[5].position,
                     },
                     stones: {
-                        geometry: (signatures.children[4].children[2] as THREE.Mesh).geometry,
-                        position: signatures.children[4].position
+                        geometry: (signatures.children[5].children[2] as THREE.Mesh).geometry,
+                        position: signatures.children[5].position
                     },
                     outline: {
-                        geometry: (signatures.children[4].children[3] as THREE.Mesh).geometry,
-                        position: signatures.children[4].position
+                        geometry: (signatures.children[5].children[3] as THREE.Mesh).geometry,
+                        position: signatures.children[5].position
                     }
                 },
             }
@@ -726,7 +727,7 @@ export default function Configurator() {
         <>
             <OrbitControls
                 maxDistance={35}
-                minDistance={25}
+                // minDistance={25}
                 minPolarAngle={nextStep ? Math.PI / 2.1 : Math.PI / 3 }
                 maxPolarAngle={nextStep ? Math.PI - Math.PI / 2.1 : Math.PI - Math.PI / 3}
                 minAzimuthAngle={nextStep ? -Math.PI / 4 : -Math.PI / 2}
@@ -737,15 +738,37 @@ export default function Configurator() {
             {savedEnvMap && <LoadedMaterials/>}
             {savedTeeth && savedEnvMap &&
                 <group ref={groupRef} position={[0, 0, 3]}>
-                    {/*<mesh geometry={signatures.children[1].children[0].geometry}*/}
-                    {/*      position={[signatures.children[1].position.x, signatures.children[1].position.y - 0.1, signatures.children[1].position.z - 0.15]}>*/}
+                    {/*bubblegum*/}
+                    {/*<mesh geometry={bugum.children[0].geometry}*/}
+                    {/*      position={[0.0007401407035925178, 1.3319413842877532, 0.25145907593808386 + 0.02]}>*/}
                     {/*    <FullMaterial color="gold" finish="polished"/>*/}
                     {/*</mesh>*/}
-                    {/*<mesh geometry={bgum.children[0].geometry}*/}
-                    {/*      position={[signatures.children[1].position.x, signatures.children[1].position.y - 0.1, signatures.children[1].position.z - 0.15]}>*/}
-                    {/*    <FullMaterial color="gold" finish="polished"/>*/}
+                    {/*<mesh geometry={bugum.children[1].geometry}*/}
+                    {/*      position={[0.0007401407035925178, 1.3319413842877532, 0.25145907593808386 + 0.025]}>*/}
+                    {/*    <FullMaterial color="black" finish="polished"/>*/}
                     {/*</mesh>*/}
 
+                    <mesh geometry={spr.children[0].geometry}>
+                        <FullMaterial color="gold" finish="polished"/>
+                    </mesh>
+
+                    <mesh geometry={spr.children[1].children[0].geometry}
+                    >
+                        <FullMaterial color="black" finish="polished"/>
+                    </mesh>
+                    <mesh geometry={spr.children[2].children[0].geometry}
+                    >
+                        <FullMaterial color="rose" finish="polished"/>
+                    </mesh>
+
+                    <mesh geometry={spr.children[1].children[1].geometry}
+                    >
+                        <FullMaterial color="black" finish="polished"/>
+                    </mesh>
+                    <mesh geometry={spr.children[2].children[1].geometry}
+                    >
+                        <FullMaterial color="rose" finish="polished"/>
+                    </mesh>
                     {/*SIGNATURE*/}
                     <Vamp/>
                     <Sprinkles/>
