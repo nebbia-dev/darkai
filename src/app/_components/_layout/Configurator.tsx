@@ -52,11 +52,15 @@ import Braces from "@/app/_components/_teeth/_signature/Braces";
 import Tribals from "@/app/_components/_teeth/_signature/Tribals";
 import Hammered from "@/app/_components/_teeth/_signature/Hammered";
 import Cross from "@/app/_components/_teeth/_signature/Cross";
+import FullMaterial from "@/app/_components/_materials/FullMaterial";
 
 export default function Configurator() {
     const envMap = useEnvironment({
         files: "envMaps/HDR_Light_Studio_Free_HDRI_Design_13.exr"
     })
+    const signatures = useFBX('/models/Signature.fbx');
+    const bgum = useFBX('/models/Mascherina_Bubble_Gum.fbx');
+    console.log(signatures)
     // Se voglio piazzare anche l'fbx in LoadedMaterials, verosimilmente devo usare qui uno useEffect
 
     const teeth = useMemo((): FBX => {
@@ -69,7 +73,8 @@ export default function Configurator() {
         const bars = useFBX('/models/MOD_Bars_Capsula (2).fbx');
         const hearts = useFBX('/models/MOD_Stone_Ametista.fbx');
         const otherFools = useFBX('/models/MOD_Full_All.fbx');
-        const signatures = useFBX('/models/Gioielli_Separati_SI.fbx');
+        const signatures = useFBX('/models/Signature.fbx');
+        const sign = useFBX('/models/Gioielli_Separati_SI.fbx');
         function getOrigin(mesh:any) {
             const box = new THREE.Box3().setFromObject(mesh);
             return box.getCenter(new THREE.Vector3());
@@ -577,67 +582,72 @@ export default function Configurator() {
             // SIGNATURE
             signature: {
                 hammered: {
-                    icidx: (signatures.children[0].children[0].children[0] as THREE.Mesh).geometry,
-                    ilssx: (signatures.children[0].children[0].children[1] as THREE.Mesh).geometry,
+                    icidx: (signatures.children[0].children[0].children[1] as THREE.Mesh).geometry,
+                    ilssx: (signatures.children[0].children[0].children[0] as THREE.Mesh).geometry,
                     ilsdx: (signatures.children[0].children[1].children[0] as THREE.Mesh).geometry,
                     ilisx: (signatures.children[0].children[1].children[1] as THREE.Mesh).geometry,
                 },
                 bubblegum: {
-                    sup: (signatures.children[3] as THREE.Mesh).geometry,
-                    position: signatures.children[3].position
+                    sup: (sign.children[3] as THREE.Mesh).geometry,
+                    position: sign.children[3].position
                 },
                 cross: {
-                    ics: (signatures.children[1] as THREE.Mesh).geometry,
-                    position: signatures.children[1].position,
+                    full: (signatures.children[3].children[0] as THREE.Mesh).geometry,
+                    base: (signatures.children[3].children[0] as THREE.Mesh).geometry,
+                    pave: (signatures.children[3].children[0] as THREE.Mesh).geometry,
+                    position: signatures.children[3].position,
                 },
                 tribal: {
-                    sup: (signatures.children[2] as THREE.Mesh).geometry,
+                    hangs: (signatures.children[2].children[0] as THREE.Mesh).geometry,
+                    frame: (signatures.children[2].children[1] as THREE.Mesh).geometry,
+                    back: (signatures.children[2].children[2] as THREE.Mesh).geometry,
+                    pave: (signatures.children[2].children[3] as THREE.Mesh).geometry,
                     position: signatures.children[2].position,
                 },
                 sprinkles: {
-                    csdx: (signatures.children[4].children[0] as THREE.Mesh).geometry,
-                    cssx: (signatures.children[4].children[1] as THREE.Mesh).geometry,
-                    ilsdx: (signatures.children[4].children[2] as THREE.Mesh).geometry,
-                    ilssx: (signatures.children[4].children[3] as THREE.Mesh).geometry
+                    csdx: (sign.children[4].children[0] as THREE.Mesh).geometry,
+                    cssx: (sign.children[4].children[1] as THREE.Mesh).geometry,
+                    ilsdx: (sign.children[4].children[2] as THREE.Mesh).geometry,
+                    ilssx: (sign.children[4].children[3] as THREE.Mesh).geometry
                 },
                 vamp: {
                     csdx: {
                         base: {
-                            geometry: (signatures.children[6].children[1] as THREE.Mesh).geometry,
-                            position: signatures.children[6].children[1].position
+                            geometry: (signatures.children[5].children[1] as THREE.Mesh).geometry,
+                            position: signatures.children[5].children[1].position
                     },
                         pave: {
-                            geometry: (signatures.children[6].children[0] as THREE.Mesh).geometry,
-                            position: getOrigin(signatures.children[6].children[0])
+                            geometry: (signatures.children[5].children[0] as THREE.Mesh).geometry,
+                            position: getOrigin(signatures.children[5].children[0])
                 }
                     },
                     cssx: {
                         base: {
-                            geometry: (signatures.children[6].children[3] as THREE.Mesh).geometry,
-                            position: signatures.children[6].children[3].position
+                            geometry: (signatures.children[5].children[3] as THREE.Mesh).geometry,
+                            position: signatures.children[5].children[3].position
                     },
                         pave: {
-                            geometry: (signatures.children[6].children[2] as THREE.Mesh).geometry,
-                            position: getOrigin(signatures.children[6].children[2])
+                            geometry: (signatures.children[5].children[2] as THREE.Mesh).geometry,
+                            position: getOrigin(signatures.children[5].children[2])
         }
                     }
                 },
                 braces: {
                     structure: {
-                        geometry: (signatures.children[5].children[0] as THREE.Mesh).geometry,
-                        position: signatures.children[5].position
+                        geometry: (signatures.children[4].children[0] as THREE.Mesh).geometry,
+                        position: signatures.children[4].position
                     },
                     pave: {
-                        geometry: (signatures.children[5].children[1] as THREE.Mesh).geometry,
-                        position: signatures.children[5].position,
+                        geometry: (signatures.children[4].children[1] as THREE.Mesh).geometry,
+                        position: signatures.children[4].position,
                     },
                     stones: {
-                        geometry: (signatures.children[5].children[2] as THREE.Mesh).geometry,
-                        position: signatures.children[5].position
+                        geometry: (signatures.children[4].children[2] as THREE.Mesh).geometry,
+                        position: signatures.children[4].position
                     },
                     outline: {
-                        geometry: (signatures.children[5].children[3] as THREE.Mesh).geometry,
-                        position: signatures.children[5].position
+                        geometry: (signatures.children[4].children[3] as THREE.Mesh).geometry,
+                        position: signatures.children[4].position
                     }
                 },
             }
@@ -727,6 +737,15 @@ export default function Configurator() {
             {savedEnvMap && <LoadedMaterials/>}
             {savedTeeth && savedEnvMap &&
                 <group ref={groupRef} position={[0, 0, 3]}>
+                    {/*<mesh geometry={signatures.children[1].children[0].geometry}*/}
+                    {/*      position={[signatures.children[1].position.x, signatures.children[1].position.y - 0.1, signatures.children[1].position.z - 0.15]}>*/}
+                    {/*    <FullMaterial color="gold" finish="polished"/>*/}
+                    {/*</mesh>*/}
+                    {/*<mesh geometry={bgum.children[0].geometry}*/}
+                    {/*      position={[signatures.children[1].position.x, signatures.children[1].position.y - 0.1, signatures.children[1].position.z - 0.15]}>*/}
+                    {/*    <FullMaterial color="gold" finish="polished"/>*/}
+                    {/*</mesh>*/}
+
                     {/*SIGNATURE*/}
                     <Vamp/>
                     <Sprinkles/>

@@ -14,16 +14,16 @@ export default function Hammered() {
         let material:JSX.Element[];
         switch(mat) {
             case 'gold':
-                material = [<FullMaterial finish="polished" color="gold"/>]
+                material = [<FullMaterial finish="hammered" color="gold"/>]
                 break;
             case 'white':
-                material = [<FullMaterial finish="polished" color="white"/>]
+                material = [<FullMaterial finish="hammered" color="white"/>]
                 break;
             case 'black':
-                material = [<FullMaterial finish="polished" color="black"/>]
+                material = [<FullMaterial finish="hammered" color="black"/>]
                 break;
             default:
-                material = [<FullMaterial finish="polished" color="white"/>];
+                material = [<FullMaterial finish="hammered" color="white"/>];
         }
 
             return (

@@ -511,11 +511,16 @@ export default interface FBX {
             position: THREE.Vector3
         },
         cross: {
-            ics: THREE.BufferGeometry,
+            full: THREE.BufferGeometry,
+            base: THREE.BufferGeometry,
+            pave: THREE.BufferGeometry,
             position: THREE.Vector3,
         },
         tribal: {
-            sup: THREE.BufferGeometry,
+            hangs: THREE.BufferGeometry,
+            frame: THREE.BufferGeometry,
+            back: THREE.BufferGeometry,
+            pave: THREE.BufferGeometry,
             position: THREE.Vector3
         },
         sprinkles: {

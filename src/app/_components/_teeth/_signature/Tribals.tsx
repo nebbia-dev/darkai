@@ -11,7 +11,7 @@ export default function Tribals() {
     const signatureVisibility = useTeethStore((state: State) => state.signatureVisibility.tribal);
     const TRIBALS = memo(({visible, mat} : {visible: boolean, mat: string|undefined}): JSX.Element => {
         if(!signatureGeometry) return <></>
-        const geometry = [signatureGeometry.sup];
+        const geometry = [signatureGeometry.hangs, signatureGeometry.frame, signatureGeometry.back, signatureGeometry.pave,];
         const position = signatureGeometry.position
         let material:JSX.Element[];
         switch(mat) {
@@ -28,10 +28,19 @@ export default function Tribals() {
 
             return (
                 <>
-                    <mesh geometry={geometry[0]} visible={visible} position={position}>
+                    <mesh geometry={geometry[0]} visible={visible}>
                         {material[0]}
-                        {mat === 'pave' && <DecalPave position={[-1.15, 0.5, 0]} pave='round' stone='whD'/>}
-                        {mat === 'pave' && <DecalPave position={[1, 0.5, 0]} pave='round' stone='whD'/>}
+                    </mesh>
+                    <mesh geometry={geometry[1]} visible={visible} position={position}>
+                        {material[0]}
+                    </mesh>
+                    <mesh geometry={geometry[2]} visible={visible} position={position}>
+                        {material[0]}
+                    </mesh>
+                    <mesh geometry={geometry[3]} visible={visible} position={position}>
+                        {material[0]}
+                        {mat === 'pave' && <DecalPave position={[-1, 0, 0]} pave='round' stone='whD'/>}
+                        {mat === 'pave' && <DecalPave position={[0.5, 0, 0]} pave='round' stone='whD'/>}
                     </mesh>
                 </>
             )
