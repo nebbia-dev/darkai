@@ -57,35 +57,24 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
         selectorRef.current.scrollTop = elementRef.current?.scrollTop;
     }
 
-    function checkIsSelected(option: 'base' | 'finish' | 'stone') {
-        switch(option) {
-            case 'base':
-               return (material && material !== 'base') as boolean;
-            case 'stone':
-                return (pave?.shape !== undefined || jewelType?.includes('bezel')) as boolean;
-            case 'finish':
-                return (material && material !== 'base' && (pave?.shape !== undefined || finish)) as boolean;
-        }
-    }
-
     return(
 
         <div className="relative flex flex-col gap-4">
-            <ConfiguratorButton inverse={false} selected={checkIsSelected('base')} value="2" active={active} onclick={onclick} tooth={tooth}
+            <ConfiguratorButton inverse={false} value="2" active={active} onclick={onclick} tooth={tooth}
                                 label="Grillz Type">
                 <img src="/config-menu-svgs/design.svg" alt="design-option-logo"/>
             </ConfiguratorButton>
-            <ConfiguratorButton inverse={false} selected={checkIsSelected('base')} value="3" active={active} onclick={onclick} tooth={tooth}
+            <ConfiguratorButton inverse={false} value="3" active={active} onclick={onclick} tooth={tooth}
                                 label="Gold Color">
                 <img src="/config-menu-svgs/gold.svg" alt="gold-option-logo"/>
             </ConfiguratorButton>
-            <ConfiguratorButton inverse={false} selected={checkIsSelected('finish')} value="4" active={active} onclick={onclick} tooth={tooth}
-                                label="Finishing">
-                <img src="/config-menu-svgs/finish.svg" alt="diamond-option-logo"/>
+            <ConfiguratorButton inverse={false} value="4" active={active} onclick={onclick} tooth={tooth}
+                                label="Finish">
+                <img src="/config-menu-svgs/color.svg" alt="diamond-option-logo"/>
             </ConfiguratorButton>
-            <ConfiguratorButton inverse={false} selected={checkIsSelected('stone')} value="5" active={active} onclick={onclick} tooth={tooth}
+            <ConfiguratorButton inverse={false} value="5" active={active} onclick={onclick} tooth={tooth}
                                 label="Stone Color">
-                <img src="/config-menu-svgs/color.svg" alt="color-option-logo"/>
+                <img src="/config-menu-svgs/finish.svg" alt="color-option-logo"/>
             </ConfiguratorButton>
 
             <div className={`absolute ${!active ? 'hidden' : 'block'} ${active === '1'

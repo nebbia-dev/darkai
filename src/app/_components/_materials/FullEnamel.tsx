@@ -46,7 +46,7 @@ export default function FullEnamel({color} : {color: string}) {
 
     return (<meshBasicMaterial
             color={hex}
-            reflectivity={0.4}
+            reflectivity={0.2}
             envMap = {envMap}
             onUpdate={(self) => (self.needsUpdate = true)}
             attach='material'
