@@ -507,8 +507,10 @@ export default interface FBX {
             ilisx: THREE.BufferGeometry,
         },
         bubblegum: {
-            sup: THREE.BufferGeometry,
-            position: THREE.Vector3
+            base: THREE.BufferGeometry,
+            positionBase: THREE.Vector3,
+            pave: THREE.BufferGeometry,
+            positionPave: THREE.Vector3,
         },
         cross: {
             full: THREE.BufferGeometry,
@@ -524,10 +526,104 @@ export default interface FBX {
             position: THREE.Vector3
         },
         sprinkles: {
-            csdx: THREE.BufferGeometry,
-            cssx: THREE.BufferGeometry,
-            ilsdx: THREE.BufferGeometry,
-            ilssx: THREE.BufferGeometry
+            base: THREE.BufferGeometry,
+            // stones names are their position on a compass (+ c = centre)
+            csdx: {
+                n: {
+                    frame: THREE.BufferGeometry,
+                    stone: THREE.BufferGeometry
+                },
+                ne: {
+                    frame: THREE.BufferGeometry,
+                    stone: THREE.BufferGeometry
+                },
+                se: {
+                    frame: THREE.BufferGeometry,
+                    stone: THREE.BufferGeometry
+                },
+                s: {
+                    frame: THREE.BufferGeometry,
+                    stone: THREE.BufferGeometry
+                },
+                o: {
+                    frame: THREE.BufferGeometry,
+                    stone: THREE.BufferGeometry
+                }
+            },
+            cssx: {
+                n: {
+                    frame: THREE.BufferGeometry,
+                    stone: THREE.BufferGeometry
+                },
+                no: {
+                    frame: THREE.BufferGeometry,
+                    stone: THREE.BufferGeometry
+                },
+                so: {
+                    frame: THREE.BufferGeometry,
+                    stone: THREE.BufferGeometry
+                },
+                s: {
+                    frame: THREE.BufferGeometry,
+                    stone: THREE.BufferGeometry
+                },
+                e: {
+                    frame: THREE.BufferGeometry,
+                    stone: THREE.BufferGeometry
+                }
+            },
+            ilsdx: {
+                ne: {
+                    frame: THREE.BufferGeometry,
+                    stone: THREE.BufferGeometry
+                },
+                e: {
+                    frame: THREE.BufferGeometry,
+                    stone: THREE.BufferGeometry
+                },
+                se: {
+                    frame: THREE.BufferGeometry,
+                    stone: THREE.BufferGeometry
+                },
+                c: {
+                    frame: THREE.BufferGeometry,
+                    stone: THREE.BufferGeometry
+                },
+                so: {
+                    frame: THREE.BufferGeometry,
+                    stone: THREE.BufferGeometry
+                },
+                no: {
+                    frame: THREE.BufferGeometry,
+                    stone: THREE.BufferGeometry
+                }
+            },
+            ilssx: {
+                ne: {
+                    frame: THREE.BufferGeometry,
+                    stone: THREE.BufferGeometry
+                },
+                c: {
+                    frame: THREE.BufferGeometry,
+                    stone: THREE.BufferGeometry
+                },
+                se: {
+                    frame: THREE.BufferGeometry,
+                    stone: THREE.BufferGeometry
+                },
+                so: {
+                    frame: THREE.BufferGeometry,
+                    stone: THREE.BufferGeometry
+                },
+                o: {
+                    frame: THREE.BufferGeometry,
+                    stone: THREE.BufferGeometry
+                },
+                no: {
+                    frame: THREE.BufferGeometry,
+                    stone: THREE.BufferGeometry
+                }
+            }
         },
         vamp: {
             csdx: {

@@ -6,7 +6,7 @@ import {State} from "@/app/_types/State";
 import DecalPave from "@/app/_components/_materials/DecalPave";
 
 export default function Vamp() {
-    const signatureGeometry = useTeethStore((state: State) => state.teethGeometry.signature.vamp);
+    const signatureGeometry = useTeethStore((state: State) => state.teethGeometry.signature?.vamp);
     const signatureMaterial = useTeethStore((state: State) => state.signatureMaterial.vamp);
     const signatureVisibility = useTeethStore((state: State) => state.signatureVisibility.vamp);
     const VAMP = memo(({visible, mat} : {visible: boolean, mat: string|undefined}): JSX.Element => {

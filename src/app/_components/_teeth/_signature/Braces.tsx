@@ -7,7 +7,7 @@ import DecalPave from "@/app/_components/_materials/DecalPave";
 import StonesMaterial from "@/app/_components/_materials/StonesMaterial";
 
 export default function Braces() {
-    const signatureGeometry = useTeethStore((state: State) => state.teethGeometry.signature.braces);
+    const signatureGeometry = useTeethStore((state: State) => state.teethGeometry.signature?.braces);
     const signatureMaterial = useTeethStore((state: State) => state.signatureMaterial.braces);
     const signatureVisibility = useTeethStore((state: State) => state.signatureVisibility.braces);
     const BRACES = memo(({visible, mat} : {visible: boolean, mat: string|undefined}): JSX.Element => {

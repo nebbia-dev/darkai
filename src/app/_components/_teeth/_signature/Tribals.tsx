@@ -6,7 +6,7 @@ import {State} from "@/app/_types/State";
 import DecalPave from "@/app/_components/_materials/DecalPave";
 
 export default function Tribals() {
-    const signatureGeometry = useTeethStore((state: State) => state.teethGeometry.signature.tribal);
+    const signatureGeometry = useTeethStore((state: State) => state.teethGeometry.signature?.tribal);
     const signatureMaterial = useTeethStore((state: State) => state.signatureMaterial.tribal);
     const signatureVisibility = useTeethStore((state: State) => state.signatureVisibility.tribal);
     const TRIBALS = memo(({visible, mat} : {visible: boolean, mat: string|undefined}): JSX.Element => {

@@ -58,10 +58,6 @@ export default function Configurator() {
     const envMap = useEnvironment({
         files: "envMaps/HDR_Light_Studio_Free_HDRI_Design_13.exr"
     })
-    const signatures = useFBX('/models/Signatures.fbx');
-    const bugum = useFBX('/models/BGum.fbx');
-    const spr = useFBX('/models/Sprinkles_FREEZE_COORDINATE.fbx');
-    console.log(spr)
     // Se voglio piazzare anche l'fbx in LoadedMaterials, verosimilmente devo usare qui uno useEffect
 
     const teeth = useMemo((): FBX => {
@@ -75,7 +71,8 @@ export default function Configurator() {
         const hearts = useFBX('/models/MOD_Stone_Ametista.fbx');
         const otherFools = useFBX('/models/MOD_Full_All.fbx');
         const signatures = useFBX('/models/Signatures.fbx');
-        const sign = useFBX('/models/Gioielli_Separati_SI.fbx');
+        const bubbglegum = useFBX('/models/BGum.fbx');
+        const sprinkles = useFBX('/models/Sprinkles_FREEZE_COORDINATE.fbx');
         function getOrigin(mesh:any) {
             const box = new THREE.Box3().setFromObject(mesh);
             return box.getCenter(new THREE.Vector3());
@@ -589,8 +586,10 @@ export default function Configurator() {
                     ilisx: (signatures.children[0].children[1].children[1] as THREE.Mesh).geometry,
                 },
                 bubblegum: {
-                    sup: (sign.children[3] as THREE.Mesh).geometry,
-                    position: sign.children[3].position
+                    base: (bubbglegum.children[0] as THREE.Mesh).geometry,
+                    positionBase: new THREE.Vector3(bubbglegum.children[0].position.x, bubbglegum.children[0].position.y, bubbglegum.children[0].position.z + 0.02),
+                    pave: (bubbglegum.children[1] as THREE.Mesh).geometry,
+                    positionPave: new THREE.Vector3(bubbglegum.children[0].position.x, bubbglegum.children[0].position.y, bubbglegum.children[0].position.z + 0.02)
                 },
                 cross: {
                     full: (signatures.children[3].children[0] as THREE.Mesh).geometry,
@@ -606,10 +605,103 @@ export default function Configurator() {
                     position: signatures.children[2].position,
                 },
                 sprinkles: {
-                    csdx: (sign.children[4].children[0] as THREE.Mesh).geometry,
-                    cssx: (sign.children[4].children[1] as THREE.Mesh).geometry,
-                    ilsdx: (sign.children[4].children[2] as THREE.Mesh).geometry,
-                    ilssx: (sign.children[4].children[3] as THREE.Mesh).geometry
+                    base: (sprinkles.children[0] as THREE.Mesh).geometry,
+                    csdx: {
+                        n: {
+                            frame: (sprinkles.children[1].children[6] as THREE.Mesh).geometry,
+                            stone: (sprinkles.children[2].children[6] as THREE.Mesh).geometry
+                        },
+                        ne: {
+                            frame: (sprinkles.children[1].children[10] as THREE.Mesh).geometry,
+                            stone: (sprinkles.children[2].children[10] as THREE.Mesh).geometry
+                        },
+                        se: {
+                            frame: (sprinkles.children[1].children[8] as THREE.Mesh).geometry,
+                            stone: (sprinkles.children[2].children[8] as THREE.Mesh).geometry
+                        },
+                        s: {
+                            frame: (sprinkles.children[1].children[4] as THREE.Mesh).geometry,
+                            stone: (sprinkles.children[2].children[4] as THREE.Mesh).geometry
+                        },
+                        o: {
+                            frame: (sprinkles.children[1].children[12] as THREE.Mesh).geometry,
+                            stone: (sprinkles.children[2].children[12] as THREE.Mesh).geometry
+                        }
+                    },
+                    cssx: {
+                        n: {
+                            frame: (sprinkles.children[1].children[7] as THREE.Mesh).geometry,
+                            stone: (sprinkles.children[2].children[7] as THREE.Mesh).geometry
+                        },
+                        no: {
+                            frame: (sprinkles.children[1].children[11] as THREE.Mesh).geometry,
+                            stone: (sprinkles.children[2].children[11] as THREE.Mesh).geometry
+                        },
+                        so: {
+                            frame: (sprinkles.children[1].children[9] as THREE.Mesh).geometry,
+                            stone: (sprinkles.children[2].children[9] as THREE.Mesh).geometry
+                        },
+                        s: {
+                            frame: (sprinkles.children[1].children[5] as THREE.Mesh).geometry,
+                            stone: (sprinkles.children[2].children[5] as THREE.Mesh).geometry
+                        },
+                        e: {
+                            frame: (sprinkles.children[1].children[13] as THREE.Mesh).geometry,
+                            stone: (sprinkles.children[2].children[13] as THREE.Mesh).geometry
+                        }
+                    },
+                    ilsdx: {
+                        ne: {
+                            frame: (sprinkles.children[1].children[16] as THREE.Mesh).geometry,
+                            stone: (sprinkles.children[2].children[16] as THREE.Mesh).geometry
+                        },
+                        e: {
+                            frame: (sprinkles.children[1].children[2] as THREE.Mesh).geometry,
+                            stone: (sprinkles.children[2].children[2] as THREE.Mesh).geometry
+                        },
+                        se: {
+                            frame: (sprinkles.children[1].children[18] as THREE.Mesh).geometry,
+                            stone: (sprinkles.children[2].children[18] as THREE.Mesh).geometry
+                        },
+                        c: {
+                            frame: (sprinkles.children[1].children[0] as THREE.Mesh).geometry,
+                            stone: (sprinkles.children[2].children[0] as THREE.Mesh).geometry
+                        },
+                        so: {
+                            frame: (sprinkles.children[1].children[14] as THREE.Mesh).geometry,
+                            stone: (sprinkles.children[2].children[14] as THREE.Mesh).geometry
+                        },
+                        no: {
+                            frame: (sprinkles.children[1].children[20] as THREE.Mesh).geometry,
+                            stone: (sprinkles.children[2].children[20] as THREE.Mesh).geometry
+                        }
+                    },
+                    ilssx: {
+                        ne: {
+                            frame: (sprinkles.children[1].children[21] as THREE.Mesh).geometry,
+                            stone: (sprinkles.children[2].children[21] as THREE.Mesh).geometry
+                        },
+                        c: {
+                            frame: (sprinkles.children[1].children[1] as THREE.Mesh).geometry,
+                            stone: (sprinkles.children[2].children[1] as THREE.Mesh).geometry
+                        },
+                        se: {
+                            frame: (sprinkles.children[1].children[15] as THREE.Mesh).geometry,
+                            stone: (sprinkles.children[2].children[15] as THREE.Mesh).geometry
+                        },
+                        so: {
+                            frame: (sprinkles.children[1].children[19] as THREE.Mesh).geometry,
+                            stone: (sprinkles.children[2].children[19] as THREE.Mesh).geometry
+                        },
+                        o: {
+                            frame: (sprinkles.children[1].children[3] as THREE.Mesh).geometry,
+                            stone: (sprinkles.children[2].children[3] as THREE.Mesh).geometry
+                        },
+                        no: {
+                            frame: (sprinkles.children[1].children[17] as THREE.Mesh).geometry,
+                            stone: (sprinkles.children[2].children[17] as THREE.Mesh).geometry
+                        }
+                    }
                 },
                 vamp: {
                     csdx: {
@@ -738,37 +830,7 @@ export default function Configurator() {
             {savedEnvMap && <LoadedMaterials/>}
             {savedTeeth && savedEnvMap &&
                 <group ref={groupRef} position={[0, 0, 3]}>
-                    {/*bubblegum*/}
-                    {/*<mesh geometry={bugum.children[0].geometry}*/}
-                    {/*      position={[0.0007401407035925178, 1.3319413842877532, 0.25145907593808386 + 0.02]}>*/}
-                    {/*    <FullMaterial color="gold" finish="polished"/>*/}
-                    {/*</mesh>*/}
-                    {/*<mesh geometry={bugum.children[1].geometry}*/}
-                    {/*      position={[0.0007401407035925178, 1.3319413842877532, 0.25145907593808386 + 0.025]}>*/}
-                    {/*    <FullMaterial color="black" finish="polished"/>*/}
-                    {/*</mesh>*/}
 
-                    <mesh geometry={spr.children[0].geometry}>
-                        <FullMaterial color="gold" finish="polished"/>
-                    </mesh>
-
-                    <mesh geometry={spr.children[1].children[0].geometry}
-                    >
-                        <FullMaterial color="black" finish="polished"/>
-                    </mesh>
-                    <mesh geometry={spr.children[2].children[0].geometry}
-                    >
-                        <FullMaterial color="rose" finish="polished"/>
-                    </mesh>
-
-                    <mesh geometry={spr.children[1].children[1].geometry}
-                    >
-                        <FullMaterial color="black" finish="polished"/>
-                    </mesh>
-                    <mesh geometry={spr.children[2].children[1].geometry}
-                    >
-                        <FullMaterial color="rose" finish="polished"/>
-                    </mesh>
                     {/*SIGNATURE*/}
                     <Vamp/>
                     <Sprinkles/>

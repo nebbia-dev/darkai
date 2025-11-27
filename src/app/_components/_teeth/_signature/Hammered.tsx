@@ -5,7 +5,7 @@ import {useTeethStore} from "@/app/_stores/teeth";
 import {State} from "@/app/_types/State";
 
 export default function Hammered() {
-    const signatureGeometry = useTeethStore((state: State) => state.teethGeometry.signature.hammered);
+    const signatureGeometry = useTeethStore((state: State) => state.teethGeometry.signature?.hammered);
     const signatureMaterial = useTeethStore((state: State) => state.signatureMaterial.hammered);
     const signatureVisibility = useTeethStore((state: State) => state.signatureVisibility.hammered);
     const HAMMER = memo(({visible, mat} : {visible: boolean, mat: string|undefined}): JSX.Element => {

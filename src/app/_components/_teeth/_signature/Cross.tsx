@@ -7,7 +7,7 @@ import DecalPave from "@/app/_components/_materials/DecalPave";
 import * as THREE from "three";
 
 export default function Cross() {
-    const signatureGeometry = useTeethStore((state: State) => state.teethGeometry.signature.cross);
+    const signatureGeometry = useTeethStore((state: State) => state.teethGeometry.signature?.cross);
     const signatureMaterial = useTeethStore((state: State) => state.signatureMaterial.cross);
     const signatureVisibility = useTeethStore((state: State) => state.signatureVisibility.cross);
     const CROSS = memo(({visible, mat} : {visible: boolean, mat: string|undefined}): JSX.Element => {
