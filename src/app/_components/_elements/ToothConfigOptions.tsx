@@ -54,7 +54,9 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
     }
 
     function sync() {
-        selectorRef.current.scrollTop = elementRef.current?.scrollTop;
+        if(selectorRef.current && elementRef.current) {
+            selectorRef.current.scrollTop = elementRef.current.scrollTop;
+        }
     }
 
     return(

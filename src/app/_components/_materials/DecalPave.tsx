@@ -553,6 +553,6 @@ export default function DecalPave({position, pave, stone, scale} : {position:any
     pairs.set('hexagonGlitch', hexagonGlitch.map);
 
     return(
-        <Decal debug scale={scale ?? 1} polygonOffsetFactor={-0} position={position} map={pairs.get(pave+firstCapital(stone))}/>
+        <Decal scale={scale ?? 1} polygonOffsetFactor={-0} position={position} map={pairs.get(pave+firstCapital(stone))}/>
     )
 }

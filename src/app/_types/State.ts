@@ -12,6 +12,46 @@ import {
     Stones, Visibility, History
 } from "@/app/_types/TeethOptions";
 
+interface TempPrices {
+    base: any[],
+    bezel: {
+        [key: string]: any[],
+        whDLab_b: any[],
+        whDNat_b: any[],
+        brDLab_b: any[],
+        brDNat_b: any[],
+        blDLab_b: any[],
+        blDNat_b: any[],
+        ruby_b: any[],
+        emerald_b: any[],
+        ameth_b: any[],
+        aqua_b: any[],
+        bSapph_b: any[],
+        ySapph_b: any[],
+        pSapph_b: any[],
+    },
+    pave: {
+        [key: string]: any[],
+        whDLab_p: any[],
+        whDNat_p: any[],
+        brDLab_p: any[],
+        brDNat_p: any[],
+        blDLab_p: any[],
+        blDNat_p: any[],
+        ruby_p: any[],
+        emerald_p: any[],
+        ameth_p: any[],
+        aqua_p: any[],
+        bSapph_p: any[],
+        ySapph_p: any[],
+        pSapph_p: any[],
+        camo_p: any[],
+        glitch_p: any[],
+    },
+    finish: any[],
+    signature: any[]
+}
+
 export interface State {
     envMap: Texture | CubeTexture | undefined,
     hovered: string|undefined,
@@ -34,7 +74,7 @@ export interface State {
     activeButton: string|undefined,
     activeSubButton: string|undefined,
     loaded: boolean,
-    prices: any[] | undefined | null,
+    prices: TempPrices | undefined | null,
     total: number,
     isScreenshotNeeded: boolean | undefined,
     resetControls: boolean | undefined,

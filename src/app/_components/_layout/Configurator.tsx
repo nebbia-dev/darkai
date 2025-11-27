@@ -52,7 +52,7 @@ import Braces from "@/app/_components/_teeth/_signature/Braces";
 import Tribals from "@/app/_components/_teeth/_signature/Tribals";
 import Hammered from "@/app/_components/_teeth/_signature/Hammered";
 import Cross from "@/app/_components/_teeth/_signature/Cross";
-import FullMaterial from "@/app/_components/_materials/FullMaterial";
+import {Group} from "three";
 
 export default function Configurator() {
     const envMap = useEnvironment({
@@ -758,7 +758,7 @@ export default function Configurator() {
     const resetControls = useTeethStore((state : State) => state.resetControls);
     const doResetControls = useTeethStore((state : State) => state.setResetControls);
     const orbitRef = useRef<OrbitControlsImpl>(null);
-    const groupRef = useRef<>(null)
+    const groupRef = useRef<Group>(null)
     const { gl, scene, camera } = useThree();
 
     useEffect(() => {

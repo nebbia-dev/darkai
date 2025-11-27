@@ -1,4 +1,4 @@
-import {History} from "@/app/_types/State";
+import {History} from "@/app/_types/TeethOptions";
 
 export default interface ConfigInfo {
     config: History

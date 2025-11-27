@@ -3,7 +3,7 @@ import elabToothName from "@/app/_helpers/_string-modders/elabToothName";
 import firstCapital from "@/app/_helpers/_string-modders/firstCapital";
 import BackButton from "@/app/_components/_elements/_buttons/BackButton";
 import OrderInfo from "@/app/_types/OrderInfo";
-import {Preciousness} from "@/app/_types/State";
+import {Preciousness} from "@/app/_types/TeethOptions";
 import Select from "@/app/_components/_elements/Select";
 import Image from "next/image";
 import {Write} from "@/app/_components/_icons/Write";

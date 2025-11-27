@@ -3,7 +3,7 @@ import {produce} from "immer";
 import {State} from "@/app/_types/State";
 import firstCapital from "@/app/_helpers/_string-modders/firstCapital";
 import json from "@/utils/prices.json";
-import {createClient} from "@/utils/supabase/client";
+import {Pave, Stone} from "@/app/_types/TeethOptions";
 
 export const useTeethStore = create<State>((set, get) => ({
 
@@ -1550,7 +1550,7 @@ export const useTeethStore = create<State>((set, get) => ({
                 state.teethVisibility[key] = value;
             }
 
-            for(const [key, value] of Object.entries(tooth.preciousness)) {
+            for(const [key, value] of Object.entries(tooth.preciousness!)) {
                 state.teethPreciousness[key] = value;
             }
 
@@ -1867,132 +1867,134 @@ export const useTeethStore = create<State>((set, get) => ({
     },
     total: 0,
     calcTotal: (state) => {
-        state.total = 0;
-        for(let[tooth, visibility] of Object.entries(state.teethVisibility)) {
-            if(visibility) {
-                let priceToFind;
-                let diamonds;
-                switch(state.teethJewelType[tooth]) {
-                    case 'full':
-                    case 'frame':
-                    case 'enamel':
-                    case 'bar':
-                    case 'bigBar':
-                        priceToFind = state.prices.base.filter(p => p.type === state.teethJewelType[tooth] && p.carats === state.teethPreciousness.carats);
-                        if((state.teethJewelType[tooth] === 'bar' && (tooth === 'icsdx' || tooth === 'icssx'))
+        if(state.prices){
+            state.total = 0;
+            for (let [tooth, visibility] of Object.entries(state.teethVisibility)) {
+                if (visibility) {
+                    let priceToFind;
+                    let diamonds;
+                    switch (state.teethJewelType[tooth]) {
+                        case 'full':
+                        case 'frame':
+                        case 'enamel':
+                        case 'bar':
+                        case 'bigBar':
+                            priceToFind = state.prices.base.filter(p => p.type === state.teethJewelType[tooth] && p.carats === state.teethPreciousness.carats);
+                            if ((state.teethJewelType[tooth] === 'bar' && (tooth === 'icsdx' || tooth === 'icssx'))
+                                || (state.teethJewelType[tooth] === 'bar' && (tooth === 'icidx' || tooth === 'icisx'))
+                                || (state.teethJewelType[tooth] === 'bigBar' && (tooth === 'cidx' || tooth === 'cisx'))
+                            ) {
+                                state.teethPrices[tooth] = priceToFind[0].price / 2;
+                                state.total += priceToFind[0].price / 2;
+                            } else {
+                                state.teethPrices[tooth] = priceToFind[0].price;
+                                state.total += priceToFind[0].price;
+                            }
+                            break;
+                        case 'bezel':
+                            if (state.teethStones[tooth].color === 'whD' || state.teethStones[tooth].color === 'brD' || state.teethStones[tooth].color === 'blD') {
+                                diamonds = firstCapital(state.teethPreciousness.diamonds as string);
+                            } else {
+                                diamonds = '';
+                            }
+                            const bezelStone = state.prices.bezel[state.teethStones[tooth].color + diamonds + '_b'];
+                            priceToFind = bezelStone.filter(p => p.carats === state.teethPreciousness.carats && !p.pave && p.shape === state.teethStones[tooth].shape);
+                            state.teethPrices[tooth] = priceToFind[0].price;
+                            state.total += priceToFind[0].price;
+                            break;
+                        case 'fullDiamond':
+                        case 'frameDiamond':
+                        case 'barDiamond':
+                        case 'bigBarDiamond':
+                            const prevType = state.teethJewelType[tooth].slice();
+                            const realType = prevType.replace('Diamond', '');
+                            if (state.teethPaves[tooth].color === 'whD' || state.teethPaves[tooth].color === 'brD' || state.teethPaves[tooth].color === 'blD') {
+                                diamonds = firstCapital(state.teethPreciousness.diamonds as string);
+                            } else {
+                                diamonds = '';
+                            }
+                            const paveStone = state.prices.pave[state.teethPaves[tooth].color + diamonds + '_p'];
+                            priceToFind = paveStone.filter(p => p.type === realType && p.carats === state.teethPreciousness.carats && p.shape === state.teethPaves[tooth].shape);
+                            if ((state.teethJewelType[tooth] === 'barDiamond' && (tooth === 'icsdx' || tooth === 'icssx'))
+                                || (state.teethJewelType[tooth] === 'barDiamond' && (tooth === 'icidx' || tooth === 'icisx'))
+                                || (state.teethJewelType[tooth] === 'bigBarDiamond' && (tooth === 'cidx' || tooth === 'cisx'))
+                            ) {
+                                state.teethPrices[tooth] = priceToFind[0].price / 2;
+                                state.total += priceToFind[0].price / 2;
+                            } else {
+                                state.teethPrices[tooth] = priceToFind[0].price;
+                                state.total += priceToFind[0].price;
+                            }
+                            break;
+                        case 'bezelDiamond':
+                            let bezelDiamonds;
+                            if (state.teethPaves[tooth].color === 'whD' || state.teethPaves[tooth].color === 'brD' || state.teethPaves[tooth].color === 'blD') {
+                                diamonds = firstCapital(state.teethPreciousness.diamonds as string);
+                            } else {
+                                diamonds = '';
+                            }
+                            if (state.teethStones[tooth].color === 'whD' || state.teethStones[tooth].color === 'brD' || state.teethStones[tooth].color === 'blD') {
+                                bezelDiamonds = firstCapital(state.teethPreciousness.diamonds as string);
+                            } else {
+                                bezelDiamonds = '';
+                            }
+                            const paveStoneP = state.prices.pave[state.teethPaves[tooth].color + diamonds + '_p'];
+                            const bezelStoneP = state.prices.bezel[state.teethStones[tooth].color + bezelDiamonds + '_b'];
+                            priceToFind = paveStoneP.filter(p => p.carats === state.teethPreciousness.carats && p.type === 'full' && p.shape === state.teethPaves[tooth].shape);
+                            let addonBezel = bezelStoneP.filter(p => p.carats === state.teethPreciousness.carats && p.pave && p.shape === state.teethStones[tooth].shape);
+                            state.teethPrices[tooth] = priceToFind[0].price + addonBezel[0].price;
+                            state.total += priceToFind[0].price + addonBezel[0].price;
+                            break;
+                    }
+
+                    if (state.teethFinish[tooth] !== 'polished') {
+                        const priceFinish = state.prices.finish.filter(p => p.carats === state.teethPreciousness.carats && p.type === state.teethFinish[tooth]);
+                        if ((state.teethJewelType[tooth] === 'bar' && (tooth === 'icsdx' || tooth === 'icssx'))
                             || (state.teethJewelType[tooth] === 'bar' && (tooth === 'icidx' || tooth === 'icisx'))
                             || (state.teethJewelType[tooth] === 'bigBar' && (tooth === 'cidx' || tooth === 'cisx'))
                         ) {
-                            state.teethPrices[tooth] = priceToFind[0].price/2;
-                            state.total += priceToFind[0].price/2;
+                            state.teethPrices[tooth] += priceFinish[0].price / 2;
+                            state.total += priceFinish[0].price / 2;
                         } else {
-                            state.teethPrices[tooth] = priceToFind[0].price;
-                            state.total += priceToFind[0].price;
+                            state.teethPrices[tooth] += priceFinish[0].price;
+                            state.total += priceFinish[0].price;
                         }
-                        break;
-                    case 'bezel':
-                        if(state.teethStones[tooth].color === 'whD' || state.teethStones[tooth].color === 'brD' || state.teethStones[tooth].color === 'blD') {
-                            diamonds = firstCapital(state.teethPreciousness.diamonds as string);
-                        } else {
-                            diamonds = '';
-                        }
-                        const bezelStone = state.prices.bezel[state.teethStones[tooth].color + diamonds + '_b'];
-                        priceToFind = bezelStone.filter(p => p.carats === state.teethPreciousness.carats && !p.pave && p.shape === state.teethStones[tooth].shape);
-                        state.teethPrices[tooth] = priceToFind[0].price;
-                        state.total += priceToFind[0].price;
-                        break;
-                    case 'fullDiamond':
-                    case 'frameDiamond':
-                    case 'barDiamond':
-                    case 'bigBarDiamond':
-                        const prevType = state.teethJewelType[tooth].slice();
-                        const realType = prevType.replace('Diamond', '');
-                        if(state.teethPaves[tooth].color === 'whD' || state.teethPaves[tooth].color === 'brD' || state.teethPaves[tooth].color === 'blD') {
-                            diamonds = firstCapital(state.teethPreciousness.diamonds as string);
-                        } else {
-                            diamonds = '';
-                        }
-                        const paveStone = state.prices.pave[state.teethPaves[tooth].color + diamonds + '_p'];
-                        priceToFind = paveStone.filter(p => p.type === realType && p.carats === state.teethPreciousness.carats && p.shape === state.teethPaves[tooth].shape);
-                        if((state.teethJewelType[tooth] === 'barDiamond' && (tooth === 'icsdx' || tooth === 'icssx'))
-                            || (state.teethJewelType[tooth] === 'barDiamond' && (tooth === 'icidx' || tooth === 'icisx'))
-                            || (state.teethJewelType[tooth] === 'bigBarDiamond' && (tooth === 'cidx' || tooth === 'cisx'))
-                        ) {
-                            state.teethPrices[tooth] = priceToFind[0].price/2;
-                            state.total += priceToFind[0].price/2;
-                        } else {
-                            state.teethPrices[tooth] = priceToFind[0].price;
-                            state.total += priceToFind[0].price;
-                        }
-                        break;
-                    case 'bezelDiamond':
-                        let bezelDiamonds;
-                        if(state.teethPaves[tooth].color === 'whD' || state.teethPaves[tooth].color === 'brD' || state.teethPaves[tooth].color === 'blD') {
-                            diamonds = firstCapital(state.teethPreciousness.diamonds as string);
-                        } else {
-                            diamonds = '';
-                        }
-                        if(state.teethStones[tooth].color === 'whD' || state.teethStones[tooth].color === 'brD' || state.teethStones[tooth].color === 'blD') {
-                            bezelDiamonds = firstCapital(state.teethPreciousness.diamonds as string);
-                        } else {
-                            bezelDiamonds = '';
-                        }
-                        const paveStoneP = state.prices.pave[state.teethPaves[tooth].color + diamonds + '_p'];
-                        const bezelStoneP = state.prices.bezel[state.teethStones[tooth].color + bezelDiamonds + '_b'];
-                        priceToFind = paveStoneP.filter(p => p.carats === state.teethPreciousness.carats && p.type === 'full' && p.shape === state.teethPaves[tooth].shape);
-                        let addonBezel = bezelStoneP.filter(p => p.carats === state.teethPreciousness.carats && p.pave && p.shape === state.teethStones[tooth].shape);
-                        state.teethPrices[tooth] = priceToFind[0].price + addonBezel[0].price;
-                        state.total += priceToFind[0].price + addonBezel[0].price;
-                        break;
-                }
-
-                if(state.teethFinish[tooth] !== 'polished') {
-                    const priceFinish = state.prices.finish.filter(p => p.carats === state.teethPreciousness.carats && p.type === state.teethFinish[tooth]);
-                    if((state.teethJewelType[tooth] === 'bar' && (tooth === 'icsdx' || tooth === 'icssx'))
-                        || (state.teethJewelType[tooth] === 'bar' && (tooth === 'icidx' || tooth === 'icisx'))
-                        || (state.teethJewelType[tooth] === 'bigBar' && (tooth === 'cidx' || tooth === 'cisx'))
-                    ) {
-                        state.teethPrices[tooth] += priceFinish[0].price/2;
-                        state.total += priceFinish[0].price/2;
-                    } else {
-                        state.teethPrices[tooth] += priceFinish[0].price;
-                        state.total += priceFinish[0].price;
                     }
                 }
             }
-        }
-        for(let[signature, visibility] of Object.entries(state.signatureVisibility)) {
-            if(visibility) {
-                let signatureToFind;
-                let chosenSignature;
-                switch(signature) {
-                    // "_" to differentiate variants w/ or w/o pave (base, lab, nat)
-                    case 'vamp':
-                    case 'cross':
-                    case 'braces':
-                    case 'tribal':
-                        signatureToFind = state.prices.signature.filter(p => p.type.includes(signature) && p.carats === state.teethPreciousness.carats);
-                        if(state.signatureMaterial[signature] !== 'pave') {
-                            chosenSignature = signatureToFind.filter(p => p.type.includes('_base'));
-                        } else {
-                            chosenSignature = signatureToFind.filter(p => p.type.includes('_' + state.teethPreciousness.diamonds));
-                        }
-                        state.teethPrices.signature = chosenSignature[0].price;
-                        state.total += chosenSignature[0].price;
-                        break;
-                    // no paves
-                    case 'bubblegum':
-                    case 'sprinkles':
-                    case 'hammered':
-                        signatureToFind = state.prices.signature.filter(p => p.type === signature && p.carats === state.teethPreciousness.carats);
-                        state.teethPrices.signature = signatureToFind[0].price;
-                        state.total += signatureToFind[0].price;
-                        break;
+            for (let [signature, visibility] of Object.entries(state.signatureVisibility)) {
+                if (visibility) {
+                    let signatureToFind;
+                    let chosenSignature;
+                    switch (signature) {
+                        // "_" to differentiate variants w/ or w/o pave (base, lab, nat)
+                        case 'vamp':
+                        case 'cross':
+                        case 'braces':
+                        case 'tribal':
+                            signatureToFind = state.prices.signature.filter(p => p.type.includes(signature) && p.carats === state.teethPreciousness.carats);
+                            if (state.signatureMaterial[signature] !== 'pave') {
+                                chosenSignature = signatureToFind.filter(p => p.type.includes('_base'));
+                            } else {
+                                chosenSignature = signatureToFind.filter(p => p.type.includes('_' + state.teethPreciousness.diamonds));
+                            }
+                            state.teethPrices.signature = chosenSignature[0].price;
+                            state.total += chosenSignature[0].price;
+                            break;
+                        // no paves
+                        case 'bubblegum':
+                        case 'sprinkles':
+                        case 'hammered':
+                            signatureToFind = state.prices.signature.filter(p => p.type === signature && p.carats === state.teethPreciousness.carats);
+                            state.teethPrices.signature = signatureToFind[0].price;
+                            state.total += signatureToFind[0].price;
+                            break;
+                    }
                 }
             }
-        }
-        if(state.hovered) {
-            state.hovered = undefined;
+            if (state.hovered) {
+                state.hovered = undefined;
+            }
         }
     },
 
