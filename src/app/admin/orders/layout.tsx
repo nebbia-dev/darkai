@@ -1,4 +1,4 @@
-import SideMenu from "@/app/components/SideMenu";
+import SideMenu from "@/app/_components/_layout/SideMenu";
 
 export default function AdminLayout({
   children,

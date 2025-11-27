@@ -1,51 +1,65 @@
 'use client'
-import Scene from "@/app/components/Scene";
-import Selection from "@/app/components/Selection";
+import Scene from "@/app/_components/_layout/Scene";
+import Selection from "@/app/_components/_layout/Selection";
 import {Suspense, useEffect, useState} from "react";
-import Loading from "@/app/components/Loading";
-import ActionBar from "@/app/components/ActionBar";
-import {useTeethStore} from "@/app/stores/teeth";
+import Loading from "@/app/_components/_layout/Loading";
+import ActionBar from "@/app/_components/_elements/_buttons/ActionBar";
+import {useTeethStore} from "@/app/_stores/teeth";
+import Recap from "@/app/_components/_layout/Recap";
+import {State} from "@/app/_types/State";
 
 export default function Config() {
-    const ui = useTeethStore((state) => state.ui);
-    const setUI = useTeethStore((state) => state.setUI);
+
+    const nextStep = useTeethStore((state) => state.nextStep);
+    const setNextStep = useTeethStore((state) => state.setNextStep);
     const loaded = useTeethStore((state) => state.loaded);
+    const activeButton = useTeethStore((state) => state.activeButton);
+    const changeActiveButton = useTeethStore((state) => state.setActiveButton);
     const [isMounted, setIsMounted] = useState(false);
+    const setActive = useTeethStore((state: State) => state.setActiveTooth);
 
     useEffect(() => {
         setTimeout(() => setIsMounted(true), 100);
     });
 
-    useEffect(() => {
-        function handleResize() {
-            const width = window.innerWidth;
-            const height = window.innerHeight;
+    function setContinue() {
+        setNextStep(!nextStep);
+        setActive(undefined);
+    }
 
-            if(height > width) {
-                setUI(true);
-            } else {
-                setUI(false);
-            }
-        }
-        window.addEventListener("resize", handleResize);
-        handleResize();
-        return () => window.removeEventListener("resize", handleResize);
-    }, []);
+    // useEffect(() => {
+    //     function handleResize() {
+    //         const width = window.innerWidth;
+    //         const height = window.innerHeight;
+    //
+    //         if(height > width) {
+    //             setUI(true);
+    //         } else {
+    //             setUI(false);
+    //         }
+    //     }
+    //     window.addEventListener("resize", handleResize);
+    //     handleResize();
+    //     return () => window.removeEventListener("resize", handleResize);
+    // }, []);
 
     if(!isMounted) return <Loading/>
 
     return (
-        <div className={`flex ${!ui ? 'flex-row' : 'flex-col'} w-[100vw] mx-auto bg-gray-50 relative`}>
+        <div className='flex flex-row w-[100vw] mx-auto bg-gray-200 relative font-sans'>
             {/*<button className="absolute top-4 left-4 text-white bg-black rounded-[50%] h-12 w-12 cursor-pointer font-bold z-30" onClick={setUI}>UI</button>*/}
-
-            <div className={`relative ${!ui ? 'w-[50vw] h-[calc(100vh-54px)]' : 'w-full h-[60vh]'}`}>
+            <div className={`h-page-nav ${activeButton ? 'w-[10vw]' : 'w-[25vw]'} ${nextStep ? 'hidden' : 'block'} absolute z-15 left-0`}>
+                {loaded && <Selection activeButton={activeButton} changeActiveButton={changeActiveButton}/>}
+            </div>
+            <div className={`h-page-nav w-full mx-auto`}>
+            {/*${nextStep ? 'w-[60%]' : 'w-full mx-auto'}`}>*/}
                 <Suspense fallback={<Loading/>}>
                     <Scene/>
                 </Suspense>
-                {loaded && <ActionBar ui={ui}/>}
+                {loaded && !nextStep && <ActionBar/>}
             </div>
-            <div className={`${!ui ? 'w-[50vw] h-[calc(100vh-54px)]' : 'w-full h-[calc(40vh-54px)]'}`}>
-                {loaded && <Selection ui={ui}/>}
+            <div className={`h-page-nav ${nextStep ? 'w-[40vw]' : 'w-[30vw]'} absolute z-15 right-0`}>
+                {loaded && <Recap next={nextStep} onclick={setContinue} />}
             </div>
         </div>
     );

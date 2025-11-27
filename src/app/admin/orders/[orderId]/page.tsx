@@ -1,16 +1,16 @@
 import {createClient} from "@/utils/supabase/server";
-import elabToothName from "@/app/helpers/elabToothName";
-import firstCapital from "@/app/helpers/firstCapital";
-import BackButton from "@/app/components/BackButton";
-import OrderInfo from "@/app/types/OrderInfo";
-import {Preciousness} from "@/app/types/State";
-import Select from "@/app/components/Select";
+import elabToothName from "@/app/_helpers/_string-modders/elabToothName";
+import firstCapital from "@/app/_helpers/_string-modders/firstCapital";
+import BackButton from "@/app/_components/_elements/_buttons/BackButton";
+import OrderInfo from "@/app/_types/OrderInfo";
+import {Preciousness} from "@/app/_types/TeethOptions";
+import Select from "@/app/_components/_elements/Select";
 import Image from "next/image";
-import {Write} from "@/app/components/icons/Write";
+import {Write} from "@/app/_components/_icons/Write";
 import {Tooltip} from "@mui/material";
 import Link from 'next/link';
-import UploadScanBackoffice from "@/app/components/UploadScanBackoffice";
-import orderIdConverter from "@/app/helpers/orderIdConverter";
+import UploadScanBackoffice from "@/app/_components/_elements/_upload/UploadScanBackoffice";
+import orderIdConverter from "@/app/_helpers/_converters/orderIdConverter";
 export default async function Order({params}: { params: Promise<{ orderId: string[] }> }){
     const { orderId } = await params;
     const supabase = await createClient();
@@ -57,7 +57,7 @@ export default async function Order({params}: { params: Promise<{ orderId: strin
 
     return(
         <div className="relative left-[7.5vw] w-[92.5vw] h-page-nav">
-            <div className="bg-stone-100 h-[15vh] relative">
+            <div className="bg-gray-100 h-[15vh] relative">
                 <div className="h-full absolute flex items-center justify-center w-[7.5vw]">
                     <BackButton url="/admin/orders"/>
                 </div>
@@ -76,7 +76,7 @@ export default async function Order({params}: { params: Promise<{ orderId: strin
                     <div className="overflow-y-auto h-full">
                         <div>
                             <div className="mb-4">
-                                <h3 className="w-full py-1 px-3 bg-stone-200 mb-1">Composition</h3>
+                                <h3 className="w-full py-1 px-3 bg-gray-200 mb-3">Composition</h3>
                                 <ul>
                                     {(data as unknown as OrderInfo[])?.[0].config.config.preciousness
                                         && Object.entries((data as unknown as OrderInfo[])?.[0].config.config.preciousness as Preciousness).map(feat => {
@@ -88,7 +88,7 @@ export default async function Order({params}: { params: Promise<{ orderId: strin
                             </div>
 
                             <div className="mb-4">
-                                <h3 className="w-full py-1 px-3 bg-stone-200 mb-1">Products</h3>
+                                <h3 className="w-full py-1 px-3 bg-gray-200 mb-3">Products</h3>
                                 <ul className="mb-2">
                                     {
                                         Object.entries(jewelsConfig).map(jewel => {
@@ -114,7 +114,7 @@ export default async function Order({params}: { params: Promise<{ orderId: strin
                             </div>
 
                             <div className="mb-4">
-                                <h3 className="w-full py-1 px-3 bg-stone-200 mb-1">Total</h3>
+                                <h3 className="w-full py-1 px-3 bg-gray-200 mb-3">Total</h3>
                                 <p className="pl-2 mb-2">
                                     {new Intl.NumberFormat("it-IT", {
                                         style: "currency",
@@ -131,7 +131,7 @@ export default async function Order({params}: { params: Promise<{ orderId: strin
                         <div className="w-full">
                             <Image alt="config"
                                    className="object-cover w-full"
-                                   src={`https://dggrbfhwlvvsxbhnobig.supabase.co/storage/v1/object/public/configs/${(data as unknown as OrderInfo[])?.[0].config.screen}`}
+                                   src={`https://ronyoylrbgiuxaawwtcb.supabase.co/storage/v1/object/public/configs/${(data as unknown as OrderInfo[])?.[0].config.screen}`}
                                    width={1000} height={1000} quality={70}/>
                         </div>
                     </div>

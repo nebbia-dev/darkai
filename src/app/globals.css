@@ -1,12 +1,13 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f9fafb;
+  /*--background: #f9fafb;*/
   --foreground: #171717;
 }
 
 @theme inline {
-  --color-background: var(--background);
+  /*--color-background: var(--background);*/
+  --font-sans: var(--font-work);
   --color-foreground: var(--foreground);
   --spacing-nav: 72px;
   --spacing-page-nav: calc(100vh - 72px);
@@ -20,8 +21,79 @@
 /*  }*/
 /*}*/
 
+.pips {
+  transform: rotate(-90deg) translateY(-4px);
+  position: absolute;
+  border-bottom: solid 2px #f9fafb;
+}
+
+.li, .a {
+  position: relative;
+}
+
+.a {
+  background:#f9fafb;
+  height: 58px;
+  width: 56px;
+  border:1px solid #171717;
+  border-bottom: none;
+  -webkit-font-smoothing:antialiased;
+  -webkit-border-top-left-radius:56px;
+  -webkit-border-top-right-radius:56px;
+  -moz-border-radius:56px 56px 0 0;
+  border-top-left-radius:56px;
+  border-top-right-radius:56px;
+  -webkit-background-clip: padding-box;
+}
+
+.li:before, .li:after {
+  content: '';
+  width: 24px;
+  height: 20px;
+  position: absolute;
+  z-index: 10;
+  bottom: -1px;
+  background: #f9fafb;
+}
+
+.li:before {
+  left: -18px;
+}
+.li:after {
+  right: -18px;
+}
+
+.a:before, .a:after {
+  content: '';
+  width: 21px;
+  height: 21px;
+  position: absolute;
+  z-index: 11;
+  bottom: -1px;
+  background: #e4e5e9;
+  overflow:hidden;
+  border-bottom: 1px solid #171717;
+  -webkit-background-clip: padding-box;
+}
+
+.a:before {
+  left:-21px;
+  border-bottom-right-radius:48px;
+  -webkit-border-bottom-right-radius:48px;
+  -moz-border-radius-bottomright:48px;
+  border-right:1px solid #222;
+}
+
+.a:after {
+  right:-21px;
+  border-bottom-left-radius:48px;
+  -webkit-border-bottom-left-radius:48px;
+  -moz-border-radius-bottomleft:48px;
+  border-left:1px solid #222;
+}
+
 body {
-  background: var(--background);
+  /*background: var(--background);*/
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
   padding: 0;
@@ -154,4 +226,27 @@ input[type="number"]:focus {
 }
 .label:focus-within {
   outline: 2px solid #171717;
+}
+
+/* width */
+::-webkit-scrollbar {
+  height: 1px;
+  width: 1px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: white;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #17171780;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #17171780;
 }
