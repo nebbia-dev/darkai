@@ -61,7 +61,6 @@ export default function Dentiera() {
         }
         setHover(tooth);
         setLastHover(clock.getElapsedTime());
-        console.log('dente: ', tooth);
     }
 
     function hoverBase(e:any) {

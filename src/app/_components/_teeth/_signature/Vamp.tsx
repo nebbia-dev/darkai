@@ -11,8 +11,8 @@ export default function Vamp() {
     const signatureVisibility = useTeethStore((state: State) => state.signatureVisibility.vamp);
     const VAMP = memo(({visible, mat} : {visible: boolean, mat: string|undefined}): JSX.Element => {
         if(!signatureGeometry) return <></>
-        const geometry = [signatureGeometry.csdx.base.geometry, signatureGeometry.csdx.pave.geometry, signatureGeometry.cssx.base.geometry, signatureGeometry.cssx.pave.geometry];
-        const position = [signatureGeometry.csdx.base.position, signatureGeometry.csdx.pave.position, signatureGeometry.cssx.base.position, signatureGeometry.cssx.pave.position]
+        const geometry = [signatureGeometry.csdx.base, signatureGeometry.csdx.pave.geometry, signatureGeometry.cssx.base, signatureGeometry.cssx.pave.geometry];
+        const position = [signatureGeometry.csdx.pave.position, signatureGeometry.cssx.pave.position]
         let material:JSX.Element[];
         switch(mat) {
             case 'pave':
@@ -33,14 +33,14 @@ export default function Vamp() {
                     </mesh>
                     <mesh geometry={geometry[1]} visible={visible}>
                         {material[0]}
-                        {mat === 'pave' && <DecalPave position={position[1]} pave='round' stone='whD'/>}
+                        {mat === 'pave' && <DecalPave position={position[0]} pave='round' stone='whD'/>}
                     </mesh>
                     <mesh geometry={geometry[2]} visible={visible}>
                         {material[0]}
                     </mesh>
                     <mesh geometry={geometry[3]} visible={visible}>
                         {material[0]}
-                        {mat === 'pave' && <DecalPave position={position[3]} pave='round' stone='whD'/>}
+                        {mat === 'pave' && <DecalPave position={position[1]} pave='round' stone='whD'/>}
                     </mesh>
                 </>
             )

@@ -25,18 +25,28 @@ export default function FullMaterial({color, finish} : {color: string, finish:st
         roughnessMap: 'textures/finish/Hammered_DefaultMaterial_Roughness.webp',
     });
 
+    hammeredProps.normalMap.flipY = false;
+    hammeredProps.metalnessMap.flipY = false;
+    hammeredProps.roughnessMap.flipY = false;
+
     const hammeredGold = useTexture({
         map: 'textures/finish/Hammered_DefaultMaterial_Gold.webp',
     });
     hammeredGold.map.colorSpace = THREE.SRGBColorSpace;
+    hammeredGold.map.flipY = false;
+
     const hammeredWhite = useTexture({
         map: 'textures/finish/Hammered_DefaultMaterial_White.webp',
     });
     hammeredWhite.map.colorSpace = THREE.SRGBColorSpace;
+    hammeredWhite.map.flipY = false;
+
     const hammeredBlack = useTexture({
         map: 'textures/finish/Hammered_DefaultMaterial_Black.webp',
     });
     hammeredBlack.map.colorSpace = THREE.SRGBColorSpace;
+    hammeredBlack.map.flipY = false;
+
 
     // sprinkles texture loading
     const sprinklesProps = useTexture({

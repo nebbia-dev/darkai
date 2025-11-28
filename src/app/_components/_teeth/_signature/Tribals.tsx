@@ -11,7 +11,7 @@ export default function Tribals() {
     const signatureVisibility = useTeethStore((state: State) => state.signatureVisibility.tribal);
     const TRIBALS = memo(({visible, mat} : {visible: boolean, mat: string|undefined}): JSX.Element => {
         if(!signatureGeometry) return <></>
-        const geometry = [signatureGeometry.hangs, signatureGeometry.frame, signatureGeometry.back, signatureGeometry.pave,];
+        const geometry = [signatureGeometry.hangs, signatureGeometry.full, signatureGeometry.frame, signatureGeometry.pave,];
         const position = signatureGeometry.position
         let material:JSX.Element[];
         switch(mat) {
@@ -31,17 +31,23 @@ export default function Tribals() {
                     <mesh geometry={geometry[0]} visible={visible}>
                         {material[0]}
                     </mesh>
-                    <mesh geometry={geometry[1]} visible={visible} position={position}>
-                        {material[0]}
-                    </mesh>
-                    <mesh geometry={geometry[2]} visible={visible} position={position}>
-                        {material[0]}
-                    </mesh>
-                    <mesh geometry={geometry[3]} visible={visible} position={position}>
-                        {material[0]}
-                        {mat === 'pave' && <DecalPave position={[-1, 0, 0]} pave='round' stone='whD'/>}
-                        {mat === 'pave' && <DecalPave position={[0.5, 0, 0]} pave='round' stone='whD'/>}
-                    </mesh>
+                    {
+                        mat === 'pave'
+                        ? <>
+                             <mesh geometry={geometry[2]} visible={visible} position={position}>
+                                 {material[0]}
+                             </mesh>
+                             <mesh geometry={geometry[3]} visible={visible} position={position}>
+                                 {material[0]}
+                                 <DecalPave position={[-1, 0, 0]} pave='round' stone='whD'/>
+                                 <DecalPave position={[0.5, 0, 0]} pave='round' stone='whD'/>
+                                </mesh>
+                            </>
+                            : <mesh geometry={geometry[1]} visible={visible} position={position}>
+                                {material[0]}
+                            </mesh>
+
+                    }
                 </>
             )
     })
