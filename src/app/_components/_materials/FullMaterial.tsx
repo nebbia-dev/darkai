@@ -15,8 +15,8 @@ export default function FullMaterial({color, finish} : {color: string, finish:st
     diamondCut.map.colorSpace = THREE.SRGBColorSpace;
     diamondCut.map.wrapS = diamondCut.map.wrapT = THREE.RepeatWrapping;
     diamondCut.normalMap.wrapS = diamondCut.normalMap.wrapT = THREE.RepeatWrapping;
-    diamondCut.map.repeat.set(200,200);
-    diamondCut.normalMap.repeat.set(200,200);
+    diamondCut.map.repeat.set(200, 200);
+    diamondCut.normalMap.repeat.set(200, 200);
 
     // hammered texture loading
     const hammeredProps = useTexture({
@@ -52,19 +52,25 @@ export default function FullMaterial({color, finish} : {color: string, finish:st
     const sprinklesProps = useTexture({
         normalMap: 'textures/finish/Sprinkles_Normal.webp',
     });
+    sprinklesProps.normalMap.flipY = false;
 
     const sprinklesGold = useTexture({
         map: 'textures/finish/Sprinkles_Albedo_Giallo.webp',
     });
     sprinklesGold.map.colorSpace = THREE.SRGBColorSpace;
+    sprinklesGold.map.flipY = false;
+
     const sprinklesWhite = useTexture({
         map: 'textures/finish/Sprinkles_Albedo_Bianco.webp',
     });
     sprinklesWhite.map.colorSpace = THREE.SRGBColorSpace;
+    sprinklesWhite.map.flipY = false;
+
     const sprinklesRose = useTexture({
         map: 'textures/finish/Sprinkles_Albedo_Rosa.webp',
     });
     sprinklesRose.map.colorSpace = THREE.SRGBColorSpace;
+    sprinklesRose.map.flipY = false;
 
         return (<meshStandardMaterial
             map={finish === 'diamond_cut'

@@ -60,8 +60,8 @@ export default function Configurator() {
     const envMap = useEnvironment({
         files: "envMaps/HDR_Light_Studio_Free_HDRI_Design_13.exr"
     })
-    // const dentiera = useGLTF('/models/Dentiera.glb');
-    // console.log(dentiera)
+    // const full = useGLTF('/models/Full.glb');
+    // console.log(full);
 
     // Se voglio piazzare anche l'fbx in LoadedMaterials, verosimilmente devo usare qui uno useEffect
 
@@ -74,17 +74,15 @@ export default function Configurator() {
         const bigBar  = useFBX('/models/MOD_Full_Frame_Capsula.fbx');
         const bars = useFBX('/models/MOD_Bars_Capsula (2).fbx');
         const hearts = useFBX('/models/MOD_Stone_Ametista.fbx');
-        const otherFools = useFBX('/models/MOD_Full_All.fbx');
+        const full = useGLTF('/models/Full.glb');
         const signatures = useGLTF('/models/Signatures.glb');
         const bubblegum = useGLTF('/models/BGum.glb');
         const sprinkles = useGLTF('/models/Sprinkles.glb');
 
         return {
-
-
             // INCISIVI CENTRALI
             icsdx: {
-                full: (otherFools.children[5] as THREE.Mesh).geometry,
+                full: (full.scene.children[0].children[20] as THREE.Mesh).geometry,
                 stones: {
                     marquise: stones.children[0].children[0].children[0],
                     heart: hearts.children[0],
@@ -117,7 +115,7 @@ export default function Configurator() {
                 }
             },
             icssx: {
-                full: (otherFools.children[2] as THREE.Mesh).geometry,
+                full: (full.scene.children[0].children[14] as THREE.Mesh).geometry,
                 stones: {
                     marquise: stones.children[1].children[0].children[0],
                     heart: hearts.children[3],
@@ -150,7 +148,7 @@ export default function Configurator() {
                 }
             },
             icidx: {
-                full: (otherFools.children[7] as THREE.Mesh).geometry,
+                full: (full.scene.children[0].children[22] as THREE.Mesh).geometry,
                 stones: {
                     marquise: stones.children[2].children[0].children[0],
                     heart: hearts.children[6],
@@ -183,7 +181,7 @@ export default function Configurator() {
                 }
             },
             icisx: {
-                full: (otherFools.children[6] as THREE.Mesh).geometry,
+                full: (full.scene.children[0].children[21] as THREE.Mesh).geometry,
                 stones: {
                     marquise: stones.children[3].children[0].children[0],
                     heart: hearts.children[9],
@@ -217,7 +215,7 @@ export default function Configurator() {
             },
             // INCISIVI LATERALI
             ilsdx: {
-                full: (otherFools.children[4] as THREE.Mesh).geometry,
+                full: (full.scene.children[0].children[19] as THREE.Mesh).geometry,
                 stones: {
                     marquise: stones.children[0].children[1].children[0],
                     heart: hearts.children[1],
@@ -248,7 +246,7 @@ export default function Configurator() {
                 }
             },
             ilssx: {
-                full: (otherFools.children[1] as THREE.Mesh).geometry,
+                full: (full.scene.children[0].children[8] as THREE.Mesh).geometry,
                 stones: {
                     marquise: stones.children[1].children[1].children[0],
                     heart: hearts.children[4],
@@ -279,7 +277,7 @@ export default function Configurator() {
                 }
             },
             ilidx: {
-                full: (otherFools.children[9] as THREE.Mesh).geometry,
+                full: (full.scene.children[0].children[1] as THREE.Mesh).geometry,
                 stones: {
                     marquise: stones.children[2].children[1].children[0],
                     heart: hearts.children[7],
@@ -310,7 +308,7 @@ export default function Configurator() {
                 }
             },
             ilisx: {
-                full: (otherFools.children[8] as THREE.Mesh).geometry,
+                full: (full.scene.children[0].children[23] as THREE.Mesh).geometry,
                 stones: {
                     marquise: stones.children[3].children[1].children[0],
                     heart: hearts.children[10],
@@ -342,7 +340,7 @@ export default function Configurator() {
             },
             // CANINI
             csdx: {
-                full: (otherFools.children[3] as THREE.Mesh).geometry,
+                full: (full.scene.children[0].children[18] as THREE.Mesh).geometry,
                 stones: {
                     marquise: stones.children[0].children[2].children[0],
                     heart: hearts.children[2],
@@ -373,7 +371,7 @@ export default function Configurator() {
                 }
             },
             cssx: {
-                full: (otherFools.children[0] as THREE.Mesh).geometry,
+                full: (full.scene.children[0].children[0] as THREE.Mesh).geometry,
                 stones: {
                     marquise: stones.children[1].children[2].children[0],
                     heart: hearts.children[5],
@@ -404,7 +402,7 @@ export default function Configurator() {
                 }
             },
             cidx: {
-                full: (otherFools.children[11] as THREE.Mesh).geometry,
+                full: (full.scene.children[0].children[3] as THREE.Mesh).geometry,
                 stones: {
                     marquise: stones.children[2].children[2].children[0],
                     heart: hearts.children[8],
@@ -443,7 +441,7 @@ export default function Configurator() {
                 }
             },
             cisx: {
-                full: (otherFools.children[10] as THREE.Mesh).geometry,
+                full: (full.scene.children[0].children[2] as THREE.Mesh).geometry,
                 stones: {
                     marquise: stones.children[3].children[2].children[0],
                     heart: hearts.children[11],
@@ -483,7 +481,7 @@ export default function Configurator() {
             },
             // PRIMI PREMOLARI
             pprsdx: {
-                full: (otherFools.children[30] as THREE.Mesh).geometry,
+                full: (full.scene.children[0].children[16] as THREE.Mesh).geometry,
                 fullDiamond: {
                     base: (fullDiamond.scene.children[1].children[10] as THREE.Mesh).geometry,
                     full: (fullDiamond.scene.children[1].children[28] as THREE.Mesh).geometry,
@@ -491,7 +489,7 @@ export default function Configurator() {
                 },
             },
             pprssx: {
-                full: (otherFools.children[20] as THREE.Mesh).geometry,
+                full: (full.scene.children[0].children[10] as THREE.Mesh).geometry,
                 fullDiamond: {
                     base: (fullDiamond.scene.children[1].children[2] as THREE.Mesh).geometry,
                     full: (fullDiamond.scene.children[1].children[39] as THREE.Mesh).geometry,
@@ -499,7 +497,7 @@ export default function Configurator() {
                 },
             },
             ppridx: {
-                full: (otherFools.children[16] as THREE.Mesh).geometry,
+                full: (full.scene.children[0].children[6] as THREE.Mesh).geometry,
                 fullDiamond: {
                     base: (fullDiamond.scene.children[1].children[26] as THREE.Mesh).geometry,
                     full: (fullDiamond.scene.children[1].children[27] as THREE.Mesh).geometry,
@@ -507,7 +505,7 @@ export default function Configurator() {
                 },
             },
             pprisx: {
-                full: (otherFools.children[19] as THREE.Mesh).geometry,
+                full: (full.scene.children[0].children[9] as THREE.Mesh).geometry,
                 fullDiamond: {
                     base: (fullDiamond.scene.children[1].children[37] as THREE.Mesh).geometry,
                     full: (fullDiamond.scene.children[1].children[38] as THREE.Mesh).geometry,
@@ -516,7 +514,7 @@ export default function Configurator() {
             },
             // SECONDI PREMOLARI
             sprsdx: {
-                full: (otherFools.children[22] as THREE.Mesh).geometry,
+                full: (full.scene.children[0].children[11] as THREE.Mesh).geometry,
                 fullDiamond: {
                     base: (fullDiamond.scene.children[1].children[1] as THREE.Mesh).geometry,
                     full: (fullDiamond.scene.children[1].children[18] as THREE.Mesh).geometry,
@@ -524,7 +522,7 @@ export default function Configurator() {
                 },
             },
             sprssx: {
-                full: (otherFools.children[12] as THREE.Mesh).geometry,
+                full: (full.scene.children[0].children[4] as THREE.Mesh).geometry,
                 fullDiamond: {
                     base: (fullDiamond.scene.children[1].children[0] as THREE.Mesh).geometry,
                     full: (fullDiamond.scene.children[1].children[29]as THREE.Mesh).geometry,
@@ -532,7 +530,7 @@ export default function Configurator() {
                 },
             },
             spridx: {
-                full: (otherFools.children[14] as THREE.Mesh).geometry,
+                full: (full.scene.children[0].children[5] as THREE.Mesh).geometry,
                 fullDiamond: {
                     base: (fullDiamond.scene.children[1].children[40] as THREE.Mesh).geometry,
                     full: (fullDiamond.scene.children[1].children[41] as THREE.Mesh).geometry,
@@ -540,7 +538,7 @@ export default function Configurator() {
                 },
             },
             sprisx: {
-                full: (otherFools.children[31] as THREE.Mesh).geometry,
+                full: (full.scene.children[0].children[17] as THREE.Mesh).geometry,
                 fullDiamond: {
                     base: (fullDiamond.scene.children[1].children[42] as THREE.Mesh).geometry,
                     full: (fullDiamond.scene.children[1].children[43] as THREE.Mesh).geometry,
@@ -549,7 +547,7 @@ export default function Configurator() {
             },
             // MOLARI
             msdx: {
-                full: (otherFools.children[28] as THREE.Mesh).geometry,
+                full: (full.scene.children[0].children[13] as THREE.Mesh).geometry,
                 fullDiamond: {
                     base: (fullDiamond.scene.children[1].children[11] as THREE.Mesh).geometry,
                     full: (fullDiamond.scene.children[1].children[12] as THREE.Mesh).geometry,
@@ -557,7 +555,7 @@ export default function Configurator() {
                 },
             },
             mssx: {
-                full: (otherFools.children[17] as THREE.Mesh).geometry,
+                full: (full.scene.children[0].children[7] as THREE.Mesh).geometry,
                 fullDiamond: {
                     base: (fullDiamond.scene.children[1].children[3] as THREE.Mesh).geometry,
                     full: (fullDiamond.scene.children[1].children[4] as THREE.Mesh).geometry,
@@ -565,7 +563,7 @@ export default function Configurator() {
                 },
             },
             midx: {
-                full: (otherFools.children[27] as THREE.Mesh).geometry,
+                full: (full.scene.children[0].children[12] as THREE.Mesh).geometry,
                 fullDiamond: {
                     base: (fullDiamond.scene.children[1].children[24] as THREE.Mesh).geometry,
                     full: (fullDiamond.scene.children[1].children[25] as THREE.Mesh).geometry,
@@ -573,7 +571,7 @@ export default function Configurator() {
                 },
             },
             misx: {
-                full: (otherFools.children[29] as THREE.Mesh).geometry,
+                full: (full.scene.children[0].children[15] as THREE.Mesh).geometry,
                 fullDiamond: {
                     base: (fullDiamond.scene.children[1].children[35] as THREE.Mesh).geometry,
                     full: (fullDiamond.scene.children[1].children[36] as THREE.Mesh).geometry,
@@ -690,9 +688,7 @@ export default function Configurator() {
                     position: new THREE.Vector3(-0.46473254221912974, 1.76660383113165, -0.15407294943985753)
                 },
             }
-
         }
-
     }, [])
 
     const savedTeeth = useTeethStore((state : State) => state.teethGeometry);
@@ -769,9 +765,8 @@ export default function Configurator() {
 
     function getOriginGlb(mesh:any, factor:number) {
         const box = new THREE.Box3().setFromObject(mesh);
-        const vec3 = box.getCenter(new THREE.Vector3())
-        const vec = new THREE.Vector3(vec3.x * 100, (vec3.z * 100), vec3.y * -(100 * factor))
-        return vec;
+        const vec3 = box.getCenter(new THREE.Vector3());
+        return new THREE.Vector3(vec3.x * 100, (vec3.z * 100), vec3.y * -(100 * factor));
     }
 
     return (

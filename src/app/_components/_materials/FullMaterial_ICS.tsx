@@ -13,8 +13,8 @@ export default function FullMaterial_ICS({color, finish} : {color: string, finis
     diamondCut.map.colorSpace = THREE.SRGBColorSpace;
     diamondCut.map.wrapS = diamondCut.map.wrapT = THREE.RepeatWrapping;
     diamondCut.normalMap.wrapS = diamondCut.normalMap.wrapT = THREE.RepeatWrapping;
-    diamondCut.map.repeat.set(120,120);
-    diamondCut.normalMap.repeat.set(120,120);
+    diamondCut.map.repeat.set(150,150);
+    diamondCut.normalMap.repeat.set(150,150);
 
         return (<meshStandardMaterial
             map={finish === 'diamond_cut' ? diamondCut.map : undefined}

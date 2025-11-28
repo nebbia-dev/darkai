@@ -6,6 +6,7 @@ import {State} from "@/app/_types/State";
 import * as THREE from "three";
 import FullEnamel from "@/app/_components/_materials/FullEnamel";
 import DecalPave from "@/app/_components/_materials/DecalPave";
+import FullMaterial_ICS from "@/app/_components/_materials/FullMaterial_ICS";
 
 export default function CiSx() {
     const toothGeometry = useTeethStore((state: State) => state.teethGeometry.cisx);
@@ -23,7 +24,7 @@ export default function CiSx() {
             case 'full':
             case 'bezel':
                 geometry = [toothGeometry.full];
-                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>]
+                material = [<FullMaterial_ICS color={toothMaterial} finish={toothFinish}/>]
                 position = new THREE.Vector3();
                 break;
             case 'fullDiamond':
@@ -69,7 +70,7 @@ export default function CiSx() {
                 break;
             default:
                 geometry = [toothGeometry.full];
-                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>];
+                material = [<FullMaterial_ICS color={toothMaterial} finish={toothFinish}/>];
                 position = new THREE.Vector3();
         }
 

@@ -5,6 +5,7 @@ import {useTeethStore} from "@/app/_stores/teeth";
 import {State} from "@/app/_types/State";
 import * as THREE from 'three'
 import DecalPave from "@/app/_components/_materials/DecalPave";
+import FullMaterial_ICS from "@/app/_components/_materials/FullMaterial_ICS";
 
 export default function MiDx() {
     const toothGeometry = useTeethStore((state: State) => state.teethGeometry.midx);
@@ -19,7 +20,7 @@ export default function MiDx() {
         switch(type) {
             case 'full':
                 geometry = [toothGeometry.full];
-                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>]
+                material = [<FullMaterial_ICS color={toothMaterial} finish={toothFinish}/>]
                 position = new THREE.Vector3();
                 break;
             case 'fullDiamond':
@@ -29,7 +30,7 @@ export default function MiDx() {
                 break;
             default:
                 geometry = [toothGeometry.full];
-                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>];
+                material = [<FullMaterial_ICS color={toothMaterial} finish={toothFinish}/>];
                 position = new THREE.Vector3();
         }
 
