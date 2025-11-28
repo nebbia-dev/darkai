@@ -60,10 +60,9 @@ export default function Configurator() {
     const envMap = useEnvironment({
         files: "envMaps/HDR_Light_Studio_Free_HDRI_Design_13.exr"
     })
-    // const sign = useFBX('/models/Signatures.fbx');
-    // const spr = useGLTF('/models/Sprinkles.glb');
-    // console.log(spr)
-    // const otherFools = useFBX('/models/MOD_Full_All.fbx');
+    // const dentiera = useGLTF('/models/Dentiera.glb');
+    // console.log(dentiera)
+
     // Se voglio piazzare anche l'fbx in LoadedMaterials, verosimilmente devo usare qui uno useEffect
 
     const teeth = useMemo((): FBX => {
