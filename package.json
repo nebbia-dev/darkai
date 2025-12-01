@@ -22,7 +22,7 @@
     "@supabase/ssr": "^0.6.1",
     "@supabase/supabase-js": "^2.51.0",
     "immer": "^10.1.1",
-    "leva": "^0.10.0",
+    "leva": "^0.10.1",
     "mui-tel-input": "^9.0.1",
     "next": "^15.5.2",
     "nodemailer": "^7.0.6",
