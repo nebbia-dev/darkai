@@ -63,8 +63,8 @@ export default function Configurator() {
     })
 
     // const stones = useFBX('/models/MOD_Stones.fbx');
-    const stones = useGLTF('/models/Stones.glb')
-    console.log(stones)
+    // const stones = useGLTF('/models/Stones.glb')
+
     // Se voglio piazzare anche l'fbx in LoadedMaterials, verosimilmente devo usare qui uno useEffect
 
     const teeth = useMemo((): FBX => {

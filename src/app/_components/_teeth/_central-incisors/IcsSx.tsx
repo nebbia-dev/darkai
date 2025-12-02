@@ -7,6 +7,8 @@ import * as THREE from "three";
 import FullEnamel from "@/app/_components/_materials/FullEnamel";
 import DecalPave from "@/app/_components/_materials/DecalPave";
 import FullMaterial_ICS from "@/app/_components/_materials/FullMaterial_ICS";
+import Pave from "@/app/_components/_materials/Pave";
+import resetUvs from "@/app/_helpers/_models-modifiers/resetUvs";
 
 export default function IcsSx() {
     const toothGeometry = useTeethStore((state: State) => state.teethGeometry.icssx);
@@ -30,7 +32,7 @@ export default function IcsSx() {
             case 'fullDiamond':
             case 'bezelDiamond':
                 geometry = [toothGeometry.fullDiamond.base, toothGeometry.fullDiamond.full];
-                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>, <FullMaterial color={toothMaterial} finish={toothFinish}/>];
+                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>,<Pave pave={toothPave.shape} stone={toothPave.color}/>];
                 position = toothGeometry.fullDiamond.position;
                 break;
             case 'frame':
@@ -45,7 +47,7 @@ export default function IcsSx() {
                 break;
             case 'frameDiamond':
                 geometry = [toothGeometry.frame.diamond.base, toothGeometry.frame.diamond.full];
-                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>, <FullMaterial color={toothMaterial} finish={toothFinish}/>];
+                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>,<Pave pave={toothPave.shape} stone={toothPave.color}/>];
                 position = toothGeometry.frame.diamond.position;
                 break;
             case 'bar':
@@ -55,7 +57,7 @@ export default function IcsSx() {
                 break;
             case 'barDiamond':
                 geometry = [toothGeometry.bar.diamond.base, toothGeometry.bar.diamond.full];
-                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>, <FullMaterial color={toothMaterial} finish={toothFinish}/>];
+                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>, <Pave pave={toothPave.shape} stone={toothPave.color}/>];
                 position = new THREE.Vector3();
                 barPositions = [toothGeometry.bar.diamond.basePosition, toothGeometry.bar.diamond.fullPosition];
                 break;
@@ -64,6 +66,9 @@ export default function IcsSx() {
                 material = [<FullMaterial_ICS color={toothMaterial} finish={toothFinish}/>];
                 position = new THREE.Vector3();
         }
+
+        resetUvs(toothGeometry.fullDiamond.full);
+
         if(geometry.length === 2) {
             return (
                 <>
@@ -72,7 +77,7 @@ export default function IcsSx() {
                     </mesh>
                     <mesh geometry={geometry[1]} visible={visible} position={barPositions?.[1]}>
                         {material[1]}
-                        {type !== 'enamel' && <DecalPave position={position} pave={toothPave.shape} stone={toothPave.color}/>}
+                        {/*{type !== 'enamel' && <DecalPave position={position} pave={toothPave.shape} stone={toothPave.color}/>}*/}
                     </mesh>
                 </>
             )

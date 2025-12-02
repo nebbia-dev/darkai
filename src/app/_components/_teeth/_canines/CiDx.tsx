@@ -6,6 +6,8 @@ import {State} from "@/app/_types/State";
 import * as THREE from 'three'
 import FullEnamel from "@/app/_components/_materials/FullEnamel";
 import DecalPave from "@/app/_components/_materials/DecalPave";
+import Pave from "@/app/_components/_materials/Pave";
+import resetUvs from "@/app/_helpers/_models-modifiers/resetUvs";
 
 export default function CiDx() {
     const toothGeometry = useTeethStore((state: State) => state.teethGeometry.cidx);
@@ -29,7 +31,7 @@ export default function CiDx() {
             case 'fullDiamond':
             case 'bezelDiamond':
                 geometry = [toothGeometry.fullDiamond.base, toothGeometry.fullDiamond.full];
-                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>, <FullMaterial color={toothMaterial} finish={toothFinish}/>]
+                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>, <Pave pave={toothPave.shape} stone={toothPave.color}/>]
                 position = toothGeometry.fullDiamond.position;
                 break;
             case 'enamel':
@@ -44,7 +46,7 @@ export default function CiDx() {
                 break;
             case 'frameDiamond':
                 geometry = [toothGeometry.frame.diamond.base, toothGeometry.frame.diamond.full];
-                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>, <FullMaterial color={toothMaterial} finish={toothFinish}/>]
+                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>, <Pave pave={toothPave.shape} stone={toothPave.color}/>]
                 position = toothGeometry.frame.diamond.position;
                 break;
             case 'bar':
@@ -54,7 +56,7 @@ export default function CiDx() {
                 break;
             case 'barDiamond':
                 geometry = [toothGeometry.bar.diamond.base, toothGeometry.bar.diamond.full];
-                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>, <FullMaterial color={toothMaterial} finish={toothFinish}/>]
+                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>, <Pave pave={toothPave.shape} stone={toothPave.color}/>]
                 position = toothGeometry.bar.diamond.position;
                 break;
             case 'bigBar':
@@ -64,7 +66,7 @@ export default function CiDx() {
                 break;
             case 'bigBarDiamond':
                 geometry = [toothGeometry.bigBar.diamond.base, toothGeometry.bigBar.diamond.full];
-                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>, <FullMaterial color={toothMaterial} finish={toothFinish}/>]
+                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>, <Pave pave={toothPave.shape} stone={toothPave.color}/>]
                 position = new THREE.Vector3(toothGeometry.bigBar.diamond.position.x, toothGeometry.bigBar.diamond.position.y, 0);
                 break;
             default:
@@ -72,6 +74,8 @@ export default function CiDx() {
                 material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>];
                 position = new THREE.Vector3();
         }
+
+        // resetUvs(toothGeometry.fullDiamond.full);
 
         if(geometry.length === 2) {
             return (
@@ -81,7 +85,7 @@ export default function CiDx() {
                     </mesh>
                     <mesh geometry={geometry[1]} visible={visible}>
                         {material[1]}
-                        {type !== 'enamel' && <DecalPave scale={type === 'bigBarDiamond' ? 3 : 1} position={position} pave={toothPave.shape} stone={toothPave.color}/>}
+                        {/*{type !== 'enamel' && <DecalPave scale={type === 'bigBarDiamond' ? 3 : 1} position={position} pave={toothPave.shape} stone={toothPave.color}/>}*/}
                     </mesh>
                 </>
             )
