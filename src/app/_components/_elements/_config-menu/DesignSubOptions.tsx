@@ -30,7 +30,7 @@ export default function DesignSubOptions({tooth, type}: { tooth: string|undefine
                 (tooth === 'cidx' || tooth === 'cisx') &&
                 <div aria-hidden={true} className="h-[120px] mb-4 pl-6"></div>
             }
-            <div className={`${value === 'bezel' || type === 'bezel' ? 'block' : 'invisible'} h-[120px] mb-4 pl-6 text-center`}>
+            <div className={`${value?.includes('bezel') || type?.includes('bezel') ? 'block' : 'invisible'} h-[120px] mb-4 pl-6 text-center`}>
                 <div className="w-[36px] flex flex-col gap-2 items-center bg-gray-50 rounded-full py-2 border-1">
                     <button type="button" onClick={(e) => setStoneShape(e.currentTarget.value)} value="circle"
                             className="w-[24px] h-[24px] bg-stone-200 rounded-full cursor-pointer border-1">

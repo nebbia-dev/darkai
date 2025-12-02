@@ -93,7 +93,7 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
             } left-[48px]`}>
                 <div className={`${(active === '5' && (jewelType?.includes('Diamond') || jewelType?.includes('bezel'))) ? 'block' : 'hidden'} rounded-3xl bg-gray-50 border-1 py-4 px-8 text-sm w-[200px] mb-4`}>You're choosing the <strong>{jewelType?.includes('bezel') ? 'bezel' : 'pave'}</strong> stone color</div>
                 <div
-                    className={`pups text-center ${active === '6' ? 'h-[324px]' : (active === '2' && checkMolar(tooth)) ? 'h-[186px]' : 'h-[596px]'} w-[200px] bg-gray-50 rounded-3xl p-8 pr-4 border-1`}>
+                    className={`pups text-center ${(active === '4' && jewelType?.includes('enamel')) ? 'h-[464px]' : (active === '2' && checkMolar(tooth)) ? 'h-[186px]' : 'h-[596px]'} w-[200px] bg-gray-50 rounded-3xl p-8 pr-4 border-1`}>
                     <div onScroll={sync} ref={elementRef} className="overflow-y-scroll h-full pl-[2px] pr-4">
                         {renderOptions(active, tooth)}
                     </div>

@@ -49,10 +49,27 @@ export default function Selection({activeButton, changeActiveButton} : {activeBu
                         <span aria-hidden={true} className="relative z-20 inline-block h-[2px] w-8 bg-slate-950"></span>
                         <ToothConfigOptions tooth={activeTooth} active={activeButton} onclick={changeActiveButton}/>
                         <span aria-hidden={true} className="relative z-20 inline-block h-[2px] w-8 bg-slate-950"></span>
-                        <ConfiguratorButton tooth="alwaysActive" inverse={false} value="6" active={activeButton}
-                                            onclick={changeActiveButton} label="Packaging">
-                            <img className="p-0.5" src="/config-menu-svgs/packaging.svg" alt="packaging-option-logo"/>
-                        </ConfiguratorButton>
+
+                        {/*PACKAGING BUTTON*/}
+                        {/*<ConfiguratorButton tooth="alwaysActive" inverse={false} value="6" active={activeButton}*/}
+                        {/*                    onclick={changeActiveButton} label="Packaging">*/}
+                        {/*    <img className="p-0.5" src="/config-menu-svgs/packaging.svg" alt="packaging-option-logo"/>*/}
+                        {/*</ConfiguratorButton>*/}
+                        {/**/}
+
+                        {/*PACKAGING FAKE BUTTON*/}
+                        <div className="flex gap-4 items-center text-sm cursor-pointer">
+                            <div className="relative">
+                                <div
+                                    className="border-1 bg-gray-50 text-slate-950 p-0.5 rounded-full flex items-center justify-center w-10 h-10 relative z-20">
+                                    <img className="p-0.5" src="/config-menu-svgs/packaging.svg"
+                                         alt="packaging-option-logo"/>
+                                </div>
+                            </div>
+                            <p className="text-slate-950">Packaging</p>
+                        </div>
+                        {/**/}
+
                     </div>
                 </div>
             </div>

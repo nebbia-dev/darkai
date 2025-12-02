@@ -13,7 +13,7 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
     /* ROUND PAVE*/
     // roundWhD
     const roundWhD = useTexture({
-        map: 'textures/paves/roundWhD.png',
+        map: 'textures/paves/ROUND/Round_Pavè.webp',
     });
     roundWhD.map.colorSpace = THREE.SRGBColorSpace;
     roundWhD.map.wrapS = roundWhD.map.wrapT = THREE.RepeatWrapping;
@@ -22,7 +22,7 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
 
     // roundBrD
     const roundBrD = useTexture({
-        map: 'textures/paves/roundBrD.png',
+        map: 'textures/paves/ROUND/Round_Pavè_Marrone.webp',
     });
     roundBrD.map.colorSpace = THREE.SRGBColorSpace;
     roundBrD.map.wrapS = roundBrD.map.wrapT = THREE.RepeatWrapping;
@@ -31,7 +31,7 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
 
     // roundBlD
     const roundBlD = useTexture({
-        map: 'textures/paves/roundBlD.png',
+        map: 'textures/paves/ROUND/Round_Pavè_Nero.webp',
     });
     roundBlD.map.colorSpace = THREE.SRGBColorSpace;
     roundBlD.map.wrapS = roundBlD.map.wrapT = THREE.RepeatWrapping;
@@ -40,7 +40,7 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
 
     // roundRuby
     const roundRuby = useTexture({
-        map: 'textures/paves/roundRuby.png',
+        map: 'textures/paves/ROUND/Round_Pavè_Rosso.webp',
     });
     roundRuby.map.colorSpace = THREE.SRGBColorSpace;
     roundRuby.map.wrapS = roundRuby.map.wrapT = THREE.RepeatWrapping;
@@ -49,7 +49,7 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
 
     // roundEmerald
     const roundEmerald = useTexture({
-        map: 'textures/paves/roundEmerald.png',
+        map: 'textures/paves/ROUND/Round_Pavè_Verde.webp',
     });
     roundEmerald.map.colorSpace = THREE.SRGBColorSpace;
     roundEmerald.map.wrapS = roundEmerald.map.wrapT = THREE.RepeatWrapping;
@@ -58,7 +58,7 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
 
     // roundAmeth
     const roundAmeth = useTexture({
-        map: 'textures/paves/roundAmeth.png',
+        map: 'textures/paves/ROUND/Round_Pavè_Viola_Scuro.webp',
     });
     roundAmeth.map.colorSpace = THREE.SRGBColorSpace;
     roundAmeth.map.wrapS = roundAmeth.map.wrapT = THREE.RepeatWrapping;
@@ -67,7 +67,7 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
 
     // roundAqua
     const roundAqua = useTexture({
-        map: 'textures/paves/roundAqua.png',
+        map: 'textures/paves/ROUND/Round_Pavè_Azzurro.webp',
     });
     roundAqua.map.colorSpace = THREE.SRGBColorSpace;
     roundAqua.map.wrapS = roundAqua.map.wrapT = THREE.RepeatWrapping;
@@ -76,7 +76,7 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
 
     // roundBSapph
     const roundBSapph = useTexture({
-        map: 'textures/paves/roundBSapph.png',
+        map: 'textures/paves/ROUND/Round_Pavè_Blu.webp',
     });
     roundBSapph.map.colorSpace = THREE.SRGBColorSpace;
     roundBSapph.map.wrapS = roundBSapph.map.wrapT = THREE.RepeatWrapping;
@@ -85,7 +85,7 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
 
     // roundPSapph
     const roundPSapph = useTexture({
-        map: 'textures/paves/roundPSapph.png',
+        map: 'textures/paves/ROUND/Round_Pavè_Viola.webp',
     });
     roundPSapph.map.colorSpace = THREE.SRGBColorSpace;
     roundPSapph.map.wrapS = roundPSapph.map.wrapT = THREE.RepeatWrapping;
@@ -94,7 +94,7 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
 
     // roundYSapph
     const roundYSapph = useTexture({
-        map: 'textures/paves/roundYSapph.png',
+        map: 'textures/paves/ROUND/Round_Pavè_Giallo.webp',
     });
     roundYSapph.map.colorSpace = THREE.SRGBColorSpace;
     roundYSapph.map.wrapS = roundYSapph.map.wrapT = THREE.RepeatWrapping;
@@ -122,7 +122,7 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
     /* PRINCESS PAVE*/
     // princessWhD
     const princessWhD = useTexture({
-        map: 'textures/paves/sqWhD.png',
+        map: 'textures/paves/PRINCESS/Princess_Pavè.webp',
     });
     princessWhD.map.colorSpace = THREE.SRGBColorSpace;
     princessWhD.map.wrapS = princessWhD.map.wrapT = THREE.RepeatWrapping;
@@ -131,7 +131,7 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
 
     // princessBrD
     const princessBrD = useTexture({
-        map: 'textures/paves/sqBrD.png',
+        map: 'textures/paves/PRINCESS/Princess_Pavè_Marrone.webp',
     });
     princessBrD.map.colorSpace = THREE.SRGBColorSpace;
     princessBrD.map.wrapS = princessBrD.map.wrapT = THREE.RepeatWrapping;
@@ -140,7 +140,7 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
 
     // princessBlD
     const princessBlD = useTexture({
-        map: 'textures/paves/sqBlD.png',
+        map: 'textures/paves/PRINCESS/Princess_Pavè_Nero.webp',
     });
     princessBlD.map.colorSpace = THREE.SRGBColorSpace;
     princessBlD.map.wrapS = princessBlD.map.wrapT = THREE.RepeatWrapping;
@@ -149,7 +149,7 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
 
     // princessRuby
     const princessRuby = useTexture({
-        map: 'textures/paves/sqRuby.png',
+        map: 'textures/paves/PRINCESS/Princess_Pavè_Rosso.webp',
     });
     princessRuby.map.colorSpace = THREE.SRGBColorSpace;
     princessRuby.map.wrapS = princessRuby.map.wrapT = THREE.RepeatWrapping;
@@ -158,7 +158,7 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
 
     // princessEmerald
     const princessEmerald = useTexture({
-        map: 'textures/paves/sqEmerald.png',
+        map: 'textures/paves/PRINCESS/Princess_Pavè_Verde.webp',
     });
     princessEmerald.map.colorSpace = THREE.SRGBColorSpace;
     princessEmerald.map.wrapS = princessEmerald.map.wrapT = THREE.RepeatWrapping;
@@ -167,7 +167,7 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
 
     // princessAmeth
     const princessAmeth = useTexture({
-        map: 'textures/paves/sqAmeth.png',
+        map: 'textures/paves/PRINCESS/Princess_Pavè_Viola_Scuro.webp',
     });
     princessAmeth.map.colorSpace = THREE.SRGBColorSpace;
     princessAmeth.map.wrapS = princessAmeth.map.wrapT = THREE.RepeatWrapping;
@@ -176,7 +176,7 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
 
     // princessAqua
     const princessAqua = useTexture({
-        map: 'textures/paves/sqAqua.png',
+        map: 'textures/paves/PRINCESS/Princess_Pavè_Azzurro.webp',
     });
     princessAqua.map.colorSpace = THREE.SRGBColorSpace;
     princessAqua.map.wrapS = princessAqua.map.wrapT = THREE.RepeatWrapping;
@@ -185,7 +185,7 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
 
     // princessBSapph
     const princessBSapph = useTexture({
-        map: 'textures/paves/sqBSapph.png',
+        map: 'textures/paves/PRINCESS/Princess_Pavè_Blu.webp',
     });
     princessBSapph.map.colorSpace = THREE.SRGBColorSpace;
     princessBSapph.map.wrapS = princessBSapph.map.wrapT = THREE.RepeatWrapping;
@@ -194,7 +194,7 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
 
     // princessPSapph
     const princessPSapph = useTexture({
-        map: 'textures/paves/sqPSapph.png',
+        map: 'textures/paves/PRINCESS/Princess_Pavè_Viola.webp',
     });
     princessPSapph.map.colorSpace = THREE.SRGBColorSpace;
     princessPSapph.map.wrapS = princessPSapph.map.wrapT = THREE.RepeatWrapping;
@@ -203,7 +203,7 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
 
     // princessYSapph
     const princessYSapph = useTexture({
-        map: 'textures/paves/sqYSapph.png',
+        map: 'textures/paves/PRINCESS/Princess_Pavè_Giallo.webp',
     });
     princessYSapph.map.colorSpace = THREE.SRGBColorSpace;
     princessYSapph.map.wrapS = princessYSapph.map.wrapT = THREE.RepeatWrapping;
@@ -231,7 +231,7 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
     /* BAGUETTE PAVE*/
     // baguetteWhD
     const baguetteWhD = useTexture({
-        map: 'textures/paves/rectWhD.png',
+        map: 'textures/paves/BAGUETTE/Baguette_Pavè.webp',
     });
     baguetteWhD.map.colorSpace = THREE.SRGBColorSpace;
     baguetteWhD.map.wrapS = baguetteWhD.map.wrapT = THREE.RepeatWrapping;
@@ -240,7 +240,7 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
 
     // baguetteBrD
     const baguetteBrD = useTexture({
-        map: 'textures/paves/rectBrD.png',
+        map: 'textures/paves/BAGUETTE/Baguette_Pavè_Marrone.webp',
     });
     baguetteBrD.map.colorSpace = THREE.SRGBColorSpace;
     baguetteBrD.map.wrapS = baguetteBrD.map.wrapT = THREE.RepeatWrapping;
@@ -249,7 +249,7 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
 
     // baguetteBlD
     const baguetteBlD = useTexture({
-        map: 'textures/paves/rectBlD.png',
+        map: 'textures/paves/BAGUETTE/Baguette_Pavè_Nero.webp',
     });
     baguetteBlD.map.colorSpace = THREE.SRGBColorSpace;
     baguetteBlD.map.wrapS = baguetteBlD.map.wrapT = THREE.RepeatWrapping;
@@ -258,7 +258,7 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
 
     // baguetteRuby
     const baguetteRuby = useTexture({
-        map: 'textures/paves/rectRuby.png',
+        map: 'textures/paves/BAGUETTE/Baguette_Pavè_Rosso.webp',
     });
     baguetteRuby.map.colorSpace = THREE.SRGBColorSpace;
     baguetteRuby.map.wrapS = baguetteRuby.map.wrapT = THREE.RepeatWrapping;
@@ -267,7 +267,7 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
 
     // baguetteEmerald
     const baguetteEmerald = useTexture({
-        map: 'textures/paves/rectEmerald.png',
+        map: 'textures/paves/BAGUETTE/Baguette_Pavè_Verde.webp',
     });
     baguetteEmerald.map.colorSpace = THREE.SRGBColorSpace;
     baguetteEmerald.map.wrapS = baguetteEmerald.map.wrapT = THREE.RepeatWrapping;
@@ -276,7 +276,7 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
 
     // baguetteAmeth
     const baguetteAmeth = useTexture({
-        map: 'textures/paves/rectAmeth.png',
+        map: 'textures/paves/BAGUETTE/Baguette_Pavè_Viola_Scuro.webp',
     });
     baguetteAmeth.map.colorSpace = THREE.SRGBColorSpace;
     baguetteAmeth.map.wrapS = baguetteAmeth.map.wrapT = THREE.RepeatWrapping;
@@ -285,7 +285,7 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
 
     // baguetteAqua
     const baguetteAqua = useTexture({
-        map: 'textures/paves/rectAqua.png',
+        map: 'textures/paves/BAGUETTE/Baguette_Pavè_Azzurro.webp',
     });
     baguetteAqua.map.colorSpace = THREE.SRGBColorSpace;
     baguetteAqua.map.wrapS = baguetteAqua.map.wrapT = THREE.RepeatWrapping;
@@ -294,7 +294,7 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
 
     // baguetteBSapph
     const baguetteBSapph = useTexture({
-        map: 'textures/paves/rectBSapph.png',
+        map: 'textures/paves/BAGUETTE/Baguette_Pavè_Blu.webp',
     });
     baguetteBSapph.map.colorSpace = THREE.SRGBColorSpace;
     baguetteBSapph.map.wrapS = baguetteBSapph.map.wrapT = THREE.RepeatWrapping;
@@ -303,7 +303,7 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
 
     // baguettePSapph
     const baguettePSapph = useTexture({
-        map: 'textures/paves/rectPSapph.png',
+        map: 'textures/paves/BAGUETTE/Baguette_Pavè_Viola.webp',
     });
     baguettePSapph.map.colorSpace = THREE.SRGBColorSpace;
     baguettePSapph.map.wrapS = baguettePSapph.map.wrapT = THREE.RepeatWrapping;
@@ -312,7 +312,7 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
 
     // baguetteYSapph
     const baguetteYSapph = useTexture({
-        map: 'textures/paves/rectYSapph.png',
+        map: 'textures/paves/BAGUETTE/Baguette_Pavè_Giallo.webp',
     });
     baguetteYSapph.map.colorSpace = THREE.SRGBColorSpace;
     baguetteYSapph.map.wrapS = baguetteYSapph.map.wrapT = THREE.RepeatWrapping;
@@ -453,6 +453,7 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
     });
     hexagonWhD.map.colorSpace = THREE.SRGBColorSpace;
     hexagonWhD.map.wrapS = hexagonWhD.map.wrapT = THREE.RepeatWrapping;
+    hexagonWhD.map.repeat.set(10, 10);
     pairs.set('hexagonWhD', hexagonWhD.map);
 
     // hexagonBrD
@@ -488,6 +489,7 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
     });
     hexagonEmerald.map.colorSpace = THREE.SRGBColorSpace;
     hexagonEmerald.map.wrapS = hexagonEmerald.map.wrapT = THREE.RepeatWrapping;
+    hexagonEmerald.map.repeat.set(10, 10);
     pairs.set('hexagonEmerald', hexagonEmerald.map);
 
     // hexagonAmeth

@@ -1,5 +1,5 @@
 'use client'
-import {OrbitControls, useEnvironment, useFBX, useGLTF} from '@react-three/drei';
+import {Instance, Instances, OrbitControls, useEnvironment, useFBX, useGLTF} from '@react-three/drei';
 import type { OrbitControls as OrbitControlsImpl } from 'three-stdlib';
 import Dentiera from "@/app/_components/_teeth/Dentiera";
 import {useTeethStore} from "@/app/_stores/teeth";
@@ -52,7 +52,7 @@ import Braces from "@/app/_components/_teeth/_signature/Braces";
 import Tribals from "@/app/_components/_teeth/_signature/Tribals";
 import Hammered from "@/app/_components/_teeth/_signature/Hammered";
 import Cross from "@/app/_components/_teeth/_signature/Cross";
-import {Group} from "three";
+import {Group, MathUtils} from "three";
 import FullMaterial from "@/app/_components/_materials/FullMaterial";
 import DecalPave from "@/app/_components/_materials/DecalPave";
 import {useControls} from "leva";
@@ -780,6 +780,65 @@ export default function Configurator() {
         return quat2;
     }
 
+
+    // Instances prova
+    // const particles = Array.from({length: 15}, () => ({
+    //     factor: MathUtils.randInt(20, 100),
+    //     speed: MathUtils.randFloat(0.01, 0.75),
+    //     xFactor: MathUtils.randFloatSpread(40),
+    //     yFactor: MathUtils.randFloatSpread(10),
+    //     zFactor: MathUtils.randFloatSpread(10)
+    // }))
+
+    // function Bubbles() {
+    //     const diamond = useFBX('/models/MOD_Diamante_LOD.fbx');
+    //     const fullDiamond = useGLTF('/models/Full_Pave.glb');
+    //     const pos = [];
+    //     for(let i = 0; i < 627; i++) {
+    //         pos.push([
+    //             fullDiamond.scene.children[1].children[45].geometry.attributes.position.array[i],
+    //             fullDiamond.scene.children[1].children[45].geometry.attributes.position.array[i+1],
+    //             fullDiamond.scene.children[1].children[45].geometry.attributes.position.array[i+2]
+    //         ])
+    //     }
+    //
+    //     return (
+    //         <Instances limit={particles.length}
+    //                    scale={[0.0005, 0.0005, 0.0005]} rotation={[Math.PI/2, 0, 0]}
+    //         >
+    //             {/*<boxGeometry/>*/}
+    //             <bufferGeometry>
+    //                 <bufferAttribute
+    //                     attach='attributes-position'
+    //                     array={diamond.children[0].geometry.attributes.position.array}
+    //                     count={diamond.children[0].geometry.attributes.position.array.length / 3}
+    //                     itemSize={3}
+    //                 ></bufferAttribute>
+    //                 <bufferAttribute
+    //                     attach='attributes-normal'
+    //                     array={diamond.children[0].geometry.attributes.normal.array}
+    //                     count={diamond.children[0].geometry.attributes.normal.array.length / 3}
+    //                     itemSize={3}
+    //                 ></bufferAttribute>
+    //                 <bufferAttribute
+    //                     attach='attributes-uv'
+    //                     array={diamond.children[0].geometry.attributes.uv.array}
+    //                     count={diamond.children[0].geometry.attributes.uv.array.length / 2}
+    //                     itemSize={2}
+    //                 ></bufferAttribute>
+    //             </bufferGeometry>
+    //            <FullMaterial color="gold" finish="polished"/>
+    //             {particles.map((data, i) => (
+    //                 <Instance key={i} position={[
+    //                     pos[i][0] * 300,
+    //                     pos[i][1] * 300,
+    //                     pos[i][2] * 300
+    //                 ]} />
+    //             ))}
+    //         </Instances>
+    //     )
+    // }
+
     return (
         <>
             <OrbitControls
@@ -795,6 +854,7 @@ export default function Configurator() {
             {savedEnvMap && <LoadedMaterials/>}
             {savedTeeth && savedEnvMap &&
                 <group ref={groupRef} position={[0, 0, 3]}>
+
                     {/*baguette*/}
                     {/*<group>*/}
                     {/*    <mesh geometry={stones.scene.children[0].children[0].children[5].children[1].geometry}*/}
