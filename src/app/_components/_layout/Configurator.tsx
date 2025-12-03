@@ -55,15 +55,11 @@ import Cross from "@/app/_components/_teeth/_signature/Cross";
 import {Group, MathUtils} from "three";
 import FullMaterial from "@/app/_components/_materials/FullMaterial";
 import DecalPave from "@/app/_components/_materials/DecalPave";
-import {useControls} from "leva";
 
 export default function Configurator() {
     const envMap = useEnvironment({
         files: "envMaps/HDR_Light_Studio_Free_HDRI_Design_13.exr"
     })
-
-    // const stones = useFBX('/models/MOD_Stones.fbx');
-    // const stones = useGLTF('/models/Stones.glb')
 
     // Se voglio piazzare anche l'fbx in LoadedMaterials, verosimilmente devo usare qui uno useEffect
 
@@ -71,11 +67,10 @@ export default function Configurator() {
         const fullDiamond = useGLTF('/models/Full_Pave.glb');
         const frameDiamond = useGLTF('/models/Frame_Pave.glb');
         const barDiamond = useFBX('/models/Bar_Pave.fbx');
-        const stones = useFBX('/models/MOD_Stone (3).fbx');
+        const stones = useGLTF('/models/Stones.glb')
         const frames = useFBX('/models/MOD_Frame_Capsula (2).fbx');
         const bigBar  = useFBX('/models/MOD_Full_Frame_Capsula.fbx');
         const bars = useFBX('/models/MOD_Bars_Capsula (2).fbx');
-        const hearts = useFBX('/models/MOD_Stone_Ametista.fbx');
         const full = useGLTF('/models/Full.glb');
         const signatures = useGLTF('/models/Signatures.glb');
         const bubblegum = useGLTF('/models/BGum.glb');
@@ -87,11 +82,90 @@ export default function Configurator() {
             icsdx: {
                 full: (full.scene.children[0].children[20] as THREE.Mesh).geometry,
                 stones: {
-                    marquise: stones.children[0].children[0].children[0],
-                    heart: hearts.children[0],
-                    circle: stones.children[0].children[0].children[2],
-                    tear: stones.children[0].children[0].children[3],
-                    square: stones.children[0].children[0].children[4]
+                    marquise: {
+                        geometries: [
+                            (stones.scene.children[1].children[3].children[2].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[1].children[3].children[2] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[1].children[3].children[2].children[0]),
+                            getOrigin(stones.scene.children[1].children[3].children[2].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[1].children[3].children[2],
+                            stones.scene.children[1].children[3].children[2]
+                        ]
+                    },
+                    heart: {
+                        geometries: [
+                            (stones.scene.children[1].children[2].children[2].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[1].children[2].children[2] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[1].children[2].children[2].children[0]),
+                            getOrigin(stones.scene.children[1].children[2].children[2].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[1].children[2].children[2],
+                            stones.scene.children[1].children[2].children[2]
+                        ]
+                    },
+                    circle: {
+                        geometries: [
+                            (stones.scene.children[1].children[5].children[2].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[1].children[5].children[2] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[1].children[5].children[2].children[0]),
+                            getOrigin(stones.scene.children[1].children[5].children[2].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[1].children[5].children[2],
+                            stones.scene.children[1].children[5].children[2]
+                        ]
+                    },
+                    tear: {
+                        geometries: [
+                            (stones.scene.children[1].children[1].children[2].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[1].children[1].children[2] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[1].children[1].children[2].children[0]),
+                            getOrigin(stones.scene.children[1].children[1].children[2].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[1].children[1].children[2],
+                            stones.scene.children[1].children[1].children[2]
+                        ]
+                    },
+                    square: {
+                        geometries: [
+                            (stones.scene.children[1].children[4].children[2].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[1].children[4].children[2] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[1].children[4].children[2].children[0]),
+                            getOrigin(stones.scene.children[1].children[4].children[2].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[1].children[4].children[2],
+                            stones.scene.children[1].children[4].children[2]
+                        ]
+                    },
+                    baguette: {
+                        geometries: [
+                            (stones.scene.children[1].children[0].children[2].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[1].children[0].children[2] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[1].children[0].children[2].children[0]),
+                            getOrigin(stones.scene.children[1].children[0].children[2].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[1].children[0].children[2],
+                            stones.scene.children[1].children[0].children[2]
+                        ]
+                    }
                 },
                 fullDiamond: {
                     base: (fullDiamond.scene.children[1].children[44] as THREE.Mesh).geometry,
@@ -120,11 +194,90 @@ export default function Configurator() {
             icssx: {
                 full: (full.scene.children[0].children[14] as THREE.Mesh).geometry,
                 stones: {
-                    marquise: stones.children[1].children[0].children[0],
-                    heart: hearts.children[3],
-                    circle: stones.children[1].children[0].children[2],
-                    tear: stones.children[1].children[0].children[3],
-                    square: stones.children[1].children[0].children[4]
+                    marquise: {
+                        geometries: [
+                            (stones.scene.children[1].children[3].children[5].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[1].children[3].children[5] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[1].children[3].children[5].children[0]),
+                            getOrigin(stones.scene.children[1].children[3].children[5].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[1].children[3].children[5],
+                            stones.scene.children[1].children[3].children[5]
+                        ]
+                    },
+                    heart: {
+                        geometries: [
+                            (stones.scene.children[1].children[2].children[5].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[1].children[2].children[5] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[1].children[2].children[5].children[0]),
+                            getOrigin(stones.scene.children[1].children[2].children[5].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[1].children[2].children[5],
+                            stones.scene.children[1].children[2].children[5]
+                        ]
+                    },
+                    circle: {
+                        geometries: [
+                            (stones.scene.children[1].children[5].children[5].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[1].children[5].children[5] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[1].children[5].children[5].children[0]),
+                            getOrigin(stones.scene.children[1].children[5].children[5].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[1].children[5].children[5],
+                            stones.scene.children[1].children[5].children[5]
+                        ]
+                    },
+                    tear: {
+                        geometries: [
+                            (stones.scene.children[1].children[1].children[5].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[1].children[1].children[5] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[1].children[1].children[5].children[0]),
+                            getOrigin(stones.scene.children[1].children[1].children[5].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[1].children[1].children[5],
+                            stones.scene.children[1].children[1].children[5]
+                        ]
+                    },
+                    square: {
+                        geometries: [
+                            (stones.scene.children[1].children[4].children[5].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[1].children[4].children[5] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[1].children[4].children[5].children[0]),
+                            getOrigin(stones.scene.children[1].children[4].children[5].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[1].children[4].children[5],
+                            stones.scene.children[1].children[4].children[5]
+                        ]
+                    },
+                    baguette: {
+                        geometries: [
+                            (stones.scene.children[1].children[0].children[5].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[1].children[0].children[5] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[1].children[0].children[5].children[0]),
+                            getOrigin(stones.scene.children[1].children[0].children[5].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[1].children[0].children[5],
+                            stones.scene.children[1].children[0].children[5]
+                        ]
+                    }
                 },
                 fullDiamond: {
                     base: (fullDiamond.scene.children[1].children[46] as THREE.Mesh).geometry,
@@ -153,11 +306,90 @@ export default function Configurator() {
             icidx: {
                 full: (full.scene.children[0].children[22] as THREE.Mesh).geometry,
                 stones: {
-                    marquise: stones.children[2].children[0].children[0],
-                    heart: hearts.children[6],
-                    circle: stones.children[2].children[0].children[2],
-                    tear: stones.children[2].children[0].children[3],
-                    square: stones.children[2].children[0].children[4]
+                    marquise: {
+                        geometries: [
+                            (stones.scene.children[0].children[3].children[2].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[0].children[3].children[2] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[0].children[3].children[2].children[0]),
+                            getOrigin(stones.scene.children[0].children[3].children[2].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[0].children[3].children[2],
+                            stones.scene.children[0].children[3].children[2]
+                        ]
+                    },
+                    heart: {
+                        geometries: [
+                            (stones.scene.children[0].children[2].children[2].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[0].children[2].children[2] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[0].children[2].children[2].children[0]),
+                            getOrigin(stones.scene.children[0].children[2].children[2].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[0].children[2].children[2],
+                            stones.scene.children[0].children[2].children[2]
+                        ]
+                    },
+                    circle: {
+                        geometries: [
+                            (stones.scene.children[0].children[5].children[2].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[0].children[5].children[2] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[0].children[5].children[2].children[0]),
+                            getOrigin(stones.scene.children[0].children[5].children[2].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[0].children[5].children[2],
+                            stones.scene.children[0].children[5].children[2]
+                        ]
+                    },
+                    tear: {
+                        geometries: [
+                            (stones.scene.children[0].children[1].children[2].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[0].children[1].children[2] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[0].children[1].children[2].children[0]),
+                            getOrigin(stones.scene.children[0].children[1].children[2].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[0].children[1].children[2],
+                            stones.scene.children[0].children[1].children[2]
+                        ]
+                    },
+                    square: {
+                        geometries: [
+                            (stones.scene.children[0].children[4].children[2].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[0].children[4].children[2] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[0].children[4].children[2].children[0]),
+                            getOrigin(stones.scene.children[0].children[4].children[2].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[0].children[4].children[2],
+                            stones.scene.children[0].children[4].children[2]
+                        ]
+                    },
+                    baguette: {
+                        geometries: [
+                            (stones.scene.children[0].children[0].children[2].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[0].children[0].children[2] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[0].children[0].children[2].children[0]),
+                            getOrigin(stones.scene.children[0].children[0].children[2].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[0].children[0].children[2],
+                            stones.scene.children[0].children[0].children[2]
+                        ]
+                    }
                 },
                 fullDiamond: {
                     base: (fullDiamond.scene.children[1].children[17] as THREE.Mesh).geometry,
@@ -186,11 +418,90 @@ export default function Configurator() {
             icisx: {
                 full: (full.scene.children[0].children[21] as THREE.Mesh).geometry,
                 stones: {
-                    marquise: stones.children[3].children[0].children[0],
-                    heart: hearts.children[9],
-                    circle: stones.children[3].children[0].children[2],
-                    tear: stones.children[3].children[0].children[3],
-                    square: stones.children[3].children[0].children[4]
+                    marquise: {
+                        geometries: [
+                            (stones.scene.children[0].children[3].children[5].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[0].children[3].children[5] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[0].children[3].children[5].children[0]),
+                            getOrigin(stones.scene.children[0].children[3].children[5].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[0].children[3].children[5],
+                            stones.scene.children[0].children[3].children[5]
+                        ]
+                    },
+                    heart: {
+                        geometries: [
+                            (stones.scene.children[0].children[2].children[5].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[0].children[2].children[5] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[0].children[2].children[5].children[0]),
+                            getOrigin(stones.scene.children[0].children[2].children[5].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[0].children[2].children[5],
+                            stones.scene.children[0].children[2].children[5]
+                        ]
+                    },
+                    circle: {
+                        geometries: [
+                            (stones.scene.children[0].children[5].children[5].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[0].children[5].children[5] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[0].children[5].children[5].children[0]),
+                            getOrigin(stones.scene.children[0].children[5].children[5].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[0].children[5].children[5],
+                            stones.scene.children[0].children[5].children[5]
+                        ]
+                    },
+                    tear: {
+                        geometries: [
+                            (stones.scene.children[0].children[1].children[5].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[0].children[1].children[5] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[0].children[1].children[5].children[0]),
+                            getOrigin(stones.scene.children[0].children[1].children[5].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[0].children[1].children[5],
+                            stones.scene.children[0].children[1].children[5]
+                        ]
+                    },
+                    square: {
+                        geometries: [
+                            (stones.scene.children[0].children[4].children[5].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[0].children[4].children[5] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[0].children[4].children[5].children[0]),
+                            getOrigin(stones.scene.children[0].children[4].children[5].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[0].children[4].children[5],
+                            stones.scene.children[0].children[4].children[5]
+                        ]
+                    },
+                    baguette: {
+                        geometries: [
+                            (stones.scene.children[0].children[0].children[5].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[0].children[0].children[5] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[0].children[0].children[5].children[0]),
+                            getOrigin(stones.scene.children[0].children[0].children[5].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[0].children[0].children[5],
+                            stones.scene.children[0].children[0].children[5]
+                        ]
+                    }
                 },
                 fullDiamond: {
                     base: (fullDiamond.scene.children[1].children[9] as THREE.Mesh).geometry,
@@ -220,11 +531,90 @@ export default function Configurator() {
             ilsdx: {
                 full: (full.scene.children[0].children[19] as THREE.Mesh).geometry,
                 stones: {
-                    marquise: stones.children[0].children[1].children[0],
-                    heart: hearts.children[1],
-                    circle: stones.children[0].children[1].children[2],
-                    tear: stones.children[0].children[1].children[3],
-                    square: stones.children[0].children[1].children[4]
+                    marquise: {
+                        geometries: [
+                            (stones.scene.children[1].children[3].children[1].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[1].children[3].children[1] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[1].children[3].children[1].children[0]),
+                            getOrigin(stones.scene.children[1].children[3].children[1].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[1].children[3].children[1],
+                            stones.scene.children[1].children[3].children[1]
+                        ]
+                    },
+                    heart: {
+                        geometries: [
+                            (stones.scene.children[1].children[2].children[1].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[1].children[2].children[1] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[1].children[2].children[1].children[0]),
+                            getOrigin(stones.scene.children[1].children[2].children[1].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[1].children[2].children[1],
+                            stones.scene.children[1].children[2].children[1]
+                        ]
+                    },
+                    circle: {
+                        geometries: [
+                            (stones.scene.children[1].children[5].children[1].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[1].children[5].children[1] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[1].children[5].children[1].children[0]),
+                            getOrigin(stones.scene.children[1].children[5].children[1].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[1].children[5].children[1],
+                            stones.scene.children[1].children[5].children[1]
+                        ]
+                    },
+                    tear: {
+                        geometries: [
+                            (stones.scene.children[1].children[1].children[1].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[1].children[1].children[1] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[1].children[1].children[1].children[0]),
+                            getOrigin(stones.scene.children[1].children[1].children[1].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[1].children[1].children[1],
+                            stones.scene.children[1].children[1].children[1]
+                        ]
+                    },
+                    square: {
+                        geometries: [
+                            (stones.scene.children[1].children[4].children[1].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[1].children[4].children[1] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[1].children[4].children[1].children[0]),
+                            getOrigin(stones.scene.children[1].children[4].children[1].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[1].children[4].children[1],
+                            stones.scene.children[1].children[4].children[1]
+                        ]
+                    },
+                    baguette: {
+                        geometries: [
+                            (stones.scene.children[1].children[0].children[1].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[1].children[0].children[1] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[1].children[0].children[1].children[0]),
+                            getOrigin(stones.scene.children[1].children[0].children[1].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[1].children[0].children[1],
+                            stones.scene.children[1].children[0].children[1]
+                        ]
+                    }
                 },
                 fullDiamond: {
                     base: (fullDiamond.scene.children[1].children[22] as THREE.Mesh).geometry,
@@ -251,11 +641,90 @@ export default function Configurator() {
             ilssx: {
                 full: (full.scene.children[0].children[8] as THREE.Mesh).geometry,
                 stones: {
-                    marquise: stones.children[1].children[1].children[0],
-                    heart: hearts.children[4],
-                    circle: stones.children[1].children[1].children[2],
-                    tear: stones.children[1].children[1].children[3],
-                    square: stones.children[1].children[1].children[4]
+                    marquise: {
+                        geometries: [
+                            (stones.scene.children[1].children[3].children[4].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[1].children[3].children[4] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[1].children[3].children[4].children[0]),
+                            getOrigin(stones.scene.children[1].children[3].children[4].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[1].children[3].children[4],
+                            stones.scene.children[1].children[3].children[4]
+                        ]
+                    },
+                    heart: {
+                        geometries: [
+                            (stones.scene.children[1].children[2].children[4].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[1].children[2].children[4] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[1].children[2].children[4].children[0]),
+                            getOrigin(stones.scene.children[1].children[2].children[4].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[1].children[2].children[4],
+                            stones.scene.children[1].children[2].children[4]
+                        ]
+                    },
+                    circle: {
+                        geometries: [
+                            (stones.scene.children[1].children[5].children[4].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[1].children[5].children[4] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[1].children[5].children[4].children[0]),
+                            getOrigin(stones.scene.children[1].children[5].children[4].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[1].children[5].children[4],
+                            stones.scene.children[1].children[5].children[4]
+                        ]
+                    },
+                    tear: {
+                        geometries: [
+                            (stones.scene.children[1].children[1].children[4].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[1].children[1].children[4] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[1].children[1].children[4].children[0]),
+                            getOrigin(stones.scene.children[1].children[1].children[4].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[1].children[1].children[4],
+                            stones.scene.children[1].children[1].children[4]
+                        ]
+                    },
+                    square: {
+                        geometries: [
+                            (stones.scene.children[1].children[4].children[4].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[1].children[4].children[4] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[1].children[4].children[4].children[0]),
+                            getOrigin(stones.scene.children[1].children[4].children[4].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[1].children[4].children[4],
+                            stones.scene.children[1].children[4].children[4]
+                        ]
+                    },
+                    baguette: {
+                        geometries: [
+                            (stones.scene.children[1].children[0].children[4].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[1].children[0].children[4] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[1].children[0].children[4].children[0]),
+                            getOrigin(stones.scene.children[1].children[0].children[4].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[1].children[0].children[4],
+                            stones.scene.children[1].children[0].children[4]
+                        ]
+                    }
                 },
                 fullDiamond: {
                     base: (fullDiamond.scene.children[1].children[33] as THREE.Mesh).geometry,
@@ -282,11 +751,90 @@ export default function Configurator() {
             ilidx: {
                 full: (full.scene.children[0].children[1] as THREE.Mesh).geometry,
                 stones: {
-                    marquise: stones.children[2].children[1].children[0],
-                    heart: hearts.children[7],
-                    circle: stones.children[2].children[1].children[2],
-                    tear: stones.children[2].children[1].children[3],
-                    square: stones.children[2].children[1].children[4]
+                    marquise: {
+                        geometries: [
+                            (stones.scene.children[0].children[3].children[1].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[0].children[3].children[1] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[0].children[3].children[1].children[0]),
+                            getOrigin(stones.scene.children[0].children[3].children[1].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[0].children[3].children[1],
+                            stones.scene.children[0].children[3].children[1]
+                        ]
+                    },
+                    heart: {
+                        geometries: [
+                            (stones.scene.children[0].children[2].children[1].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[0].children[2].children[1] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[0].children[2].children[1].children[0]),
+                            getOrigin(stones.scene.children[0].children[2].children[1].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[0].children[2].children[1],
+                            stones.scene.children[0].children[2].children[1]
+                        ]
+                    },
+                    circle: {
+                        geometries: [
+                            (stones.scene.children[0].children[5].children[1].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[0].children[5].children[1] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[0].children[5].children[1].children[0]),
+                            getOrigin(stones.scene.children[0].children[5].children[1].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[0].children[5].children[1],
+                            stones.scene.children[0].children[5].children[1]
+                        ]
+                    },
+                    tear: {
+                        geometries: [
+                            (stones.scene.children[0].children[1].children[1].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[0].children[1].children[1] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[0].children[1].children[1].children[0]),
+                            getOrigin(stones.scene.children[0].children[1].children[1].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[0].children[1].children[1],
+                            stones.scene.children[0].children[1].children[1]
+                        ]
+                    },
+                    square: {
+                        geometries: [
+                            (stones.scene.children[0].children[4].children[1].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[0].children[4].children[1] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[0].children[4].children[1].children[0]),
+                            getOrigin(stones.scene.children[0].children[4].children[1].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[0].children[4].children[1],
+                            stones.scene.children[0].children[4].children[1]
+                        ]
+                    },
+                    baguette: {
+                        geometries: [
+                            (stones.scene.children[0].children[0].children[1].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[0].children[0].children[1] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[0].children[0].children[1].children[0]),
+                            getOrigin(stones.scene.children[0].children[0].children[1].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[0].children[0].children[1],
+                            stones.scene.children[0].children[0].children[1]
+                        ]
+                    }
                 },
                 fullDiamond: {
                     base: (fullDiamond.scene.children[1].children[15] as THREE.Mesh).geometry,
@@ -313,11 +861,90 @@ export default function Configurator() {
             ilisx: {
                 full: (full.scene.children[0].children[23] as THREE.Mesh).geometry,
                 stones: {
-                    marquise: stones.children[3].children[1].children[0],
-                    heart: hearts.children[10],
-                    circle: stones.children[3].children[1].children[2],
-                    tear: stones.children[3].children[1].children[3],
-                    square: stones.children[3].children[1].children[4]
+                    marquise: {
+                        geometries: [
+                            (stones.scene.children[0].children[3].children[4].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[0].children[3].children[4] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[0].children[3].children[4].children[0]),
+                            getOrigin(stones.scene.children[0].children[3].children[4].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[0].children[3].children[4],
+                            stones.scene.children[0].children[3].children[4]
+                        ]
+                    },
+                    heart: {
+                        geometries: [
+                            (stones.scene.children[0].children[2].children[4].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[0].children[2].children[4] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[0].children[2].children[4].children[0]),
+                            getOrigin(stones.scene.children[0].children[2].children[4].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[0].children[2].children[4],
+                            stones.scene.children[0].children[2].children[4]
+                        ]
+                    },
+                    circle:{
+                        geometries: [
+                            (stones.scene.children[0].children[5].children[4].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[0].children[5].children[4] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[0].children[5].children[4].children[0]),
+                            getOrigin(stones.scene.children[0].children[5].children[4].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[0].children[5].children[4],
+                            stones.scene.children[0].children[5].children[4]
+                        ]
+                    },
+                    tear: {
+                        geometries: [
+                            (stones.scene.children[0].children[1].children[4].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[0].children[1].children[4] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[0].children[1].children[4].children[0]),
+                            getOrigin(stones.scene.children[0].children[1].children[4].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[0].children[1].children[4],
+                            stones.scene.children[0].children[1].children[4]
+                        ]
+                    },
+                    square: {
+                        geometries: [
+                            (stones.scene.children[0].children[4].children[4].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[0].children[4].children[4] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[0].children[4].children[4].children[0]),
+                            getOrigin(stones.scene.children[0].children[4].children[4].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[0].children[4].children[4],
+                            stones.scene.children[0].children[4].children[4]
+                        ]
+                    },
+                    baguette: {
+                        geometries: [
+                            (stones.scene.children[0].children[0].children[4].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[0].children[0].children[4] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[0].children[0].children[4].children[0]),
+                            getOrigin(stones.scene.children[0].children[0].children[4].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[0].children[0].children[4],
+                            stones.scene.children[0].children[0].children[4]
+                        ]
+                    }
                 },
                 fullDiamond: {
                     base: (fullDiamond.scene.children[1].children[7] as THREE.Mesh).geometry,
@@ -345,11 +972,90 @@ export default function Configurator() {
             csdx: {
                 full: (full.scene.children[0].children[18] as THREE.Mesh).geometry,
                 stones: {
-                    marquise: stones.children[0].children[2].children[0],
-                    heart: hearts.children[2],
-                    circle: stones.children[0].children[2].children[2],
-                    tear: stones.children[0].children[2].children[3],
-                    square: stones.children[0].children[2].children[4]
+                    marquise: {
+                        geometries: [
+                            (stones.scene.children[1].children[3].children[0].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[1].children[3].children[0] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[1].children[3].children[0].children[0]),
+                            getOrigin(stones.scene.children[1].children[3].children[0].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[1].children[3].children[0],
+                            stones.scene.children[1].children[3].children[0]
+                        ]
+                    },
+                    heart: {
+                        geometries: [
+                            (stones.scene.children[1].children[2].children[0].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[1].children[2].children[0] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[1].children[2].children[0].children[0]),
+                            getOrigin(stones.scene.children[1].children[2].children[0].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[1].children[2].children[0],
+                            stones.scene.children[1].children[2].children[0]
+                        ]
+                    },
+                    circle: {
+                        geometries: [
+                            (stones.scene.children[1].children[5].children[0].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[1].children[5].children[0] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[1].children[5].children[0].children[0]),
+                            getOrigin(stones.scene.children[1].children[5].children[0].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[1].children[5].children[0],
+                            stones.scene.children[1].children[5].children[0]
+                        ]
+                    },
+                    tear: {
+                        geometries: [
+                            (stones.scene.children[1].children[1].children[0].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[1].children[1].children[0] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[1].children[1].children[0].children[0]),
+                            getOrigin(stones.scene.children[1].children[1].children[0].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[1].children[1].children[0],
+                            stones.scene.children[1].children[1].children[0]
+                        ]
+                    },
+                    square: {
+                        geometries: [
+                            (stones.scene.children[1].children[4].children[0].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[1].children[4].children[0] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[1].children[4].children[0].children[0]),
+                            getOrigin(stones.scene.children[1].children[4].children[0].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[1].children[4].children[0],
+                            stones.scene.children[1].children[4].children[0]
+                        ]
+                    },
+                    baguette: {
+                        geometries: [
+                            (stones.scene.children[1].children[0].children[0].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[1].children[0].children[0] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[1].children[0].children[0].children[0]),
+                            getOrigin(stones.scene.children[1].children[0].children[0].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[1].children[0].children[0],
+                            stones.scene.children[1].children[0].children[0]
+                        ]
+                    }
                 },
                 fullDiamond: {
                     base: (fullDiamond.scene.children[1].children[21] as THREE.Mesh).geometry,
@@ -376,11 +1082,90 @@ export default function Configurator() {
             cssx: {
                 full: (full.scene.children[0].children[0] as THREE.Mesh).geometry,
                 stones: {
-                    marquise: stones.children[1].children[2].children[0],
-                    heart: hearts.children[5],
-                    circle: stones.children[1].children[2].children[2],
-                    tear: stones.children[1].children[2].children[3],
-                    square: stones.children[1].children[2].children[4]
+                    marquise: {
+                        geometries: [
+                            (stones.scene.children[1].children[3].children[3].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[1].children[3].children[3] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[1].children[3].children[3].children[0]),
+                            getOrigin(stones.scene.children[1].children[3].children[3].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[1].children[3].children[3],
+                            stones.scene.children[1].children[3].children[3]
+                        ]
+                    },
+                    heart: {
+                        geometries: [
+                            (stones.scene.children[1].children[2].children[3].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[1].children[2].children[3] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[1].children[2].children[3].children[0]),
+                            getOrigin(stones.scene.children[1].children[2].children[3].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[1].children[2].children[3],
+                            stones.scene.children[1].children[2].children[3]
+                        ]
+                    },
+                    circle: {
+                        geometries: [
+                            (stones.scene.children[1].children[5].children[3].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[1].children[5].children[3] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[1].children[5].children[3].children[0]),
+                            getOrigin(stones.scene.children[1].children[5].children[3].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[1].children[5].children[3],
+                            stones.scene.children[1].children[5].children[3]
+                        ]
+                    },
+                    tear: {
+                        geometries: [
+                            (stones.scene.children[1].children[1].children[3].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[1].children[1].children[3] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[1].children[1].children[3].children[0]),
+                            getOrigin(stones.scene.children[1].children[1].children[3].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[1].children[1].children[3],
+                            stones.scene.children[1].children[1].children[3]
+                        ]
+                    },
+                    square: {
+                        geometries: [
+                            (stones.scene.children[1].children[4].children[3].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[1].children[4].children[3] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[1].children[4].children[3].children[0]),
+                            getOrigin(stones.scene.children[1].children[4].children[3].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[1].children[4].children[3],
+                            stones.scene.children[1].children[4].children[3]
+                        ]
+                    },
+                    baguette: {
+                        geometries: [
+                            (stones.scene.children[1].children[0].children[3].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[1].children[0].children[3] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[1].children[0].children[3].children[0]),
+                            getOrigin(stones.scene.children[1].children[0].children[3].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[1].children[0].children[3],
+                            stones.scene.children[1].children[0].children[3]
+                        ]
+                    }
                 },
                 fullDiamond: {
                     base: (fullDiamond.scene.children[1].children[32] as THREE.Mesh).geometry,
@@ -407,11 +1192,90 @@ export default function Configurator() {
             cidx: {
                 full: (full.scene.children[0].children[3] as THREE.Mesh).geometry,
                 stones: {
-                    marquise: stones.children[2].children[2].children[0],
-                    heart: hearts.children[8],
-                    circle: stones.children[2].children[2].children[2],
-                    tear: stones.children[2].children[2].children[3],
-                    square: stones.children[2].children[2].children[4]
+                    marquise: {
+                        geometries: [
+                            (stones.scene.children[0].children[3].children[0].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[0].children[3].children[0] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[0].children[3].children[0].children[0]),
+                            getOrigin(stones.scene.children[0].children[3].children[0].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[0].children[3].children[0],
+                            stones.scene.children[0].children[3].children[0]
+                        ]
+                    },
+                    heart: {
+                        geometries: [
+                            (stones.scene.children[0].children[2].children[0].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[0].children[2].children[0] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[0].children[2].children[0].children[0]),
+                            getOrigin(stones.scene.children[0].children[2].children[0].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[0].children[2].children[0],
+                            stones.scene.children[0].children[2].children[0]
+                        ]
+                    },
+                    circle: {
+                        geometries: [
+                            (stones.scene.children[0].children[5].children[0].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[0].children[5].children[0] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[0].children[5].children[0].children[0]),
+                            getOrigin(stones.scene.children[0].children[5].children[0].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[0].children[5].children[0],
+                            stones.scene.children[0].children[5].children[0]
+                        ]
+                    },
+                    tear: {
+                        geometries: [
+                            (stones.scene.children[0].children[1].children[0].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[0].children[1].children[0] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[0].children[1].children[0].children[0]),
+                            getOrigin(stones.scene.children[0].children[1].children[0].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[0].children[1].children[0],
+                            stones.scene.children[0].children[1].children[0]
+                        ]
+                    },
+                    square: {
+                        geometries: [
+                            (stones.scene.children[0].children[4].children[0].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[0].children[4].children[0] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[0].children[4].children[0].children[0]),
+                            getOrigin(stones.scene.children[0].children[4].children[0].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[0].children[4].children[0],
+                            stones.scene.children[0].children[4].children[0]
+                        ]
+                    },
+                    baguette: {
+                        geometries: [
+                            (stones.scene.children[0].children[0].children[0].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[0].children[0].children[0] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[0].children[0].children[0].children[0]),
+                            getOrigin(stones.scene.children[0].children[0].children[0].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[0].children[0].children[0],
+                            stones.scene.children[0].children[0].children[0]
+                        ]
+                    }
                 },
                 fullDiamond: {
                     base: (fullDiamond.scene.children[1].children[13] as THREE.Mesh).geometry,
@@ -446,11 +1310,90 @@ export default function Configurator() {
             cisx: {
                 full: (full.scene.children[0].children[2] as THREE.Mesh).geometry,
                 stones: {
-                    marquise: stones.children[3].children[2].children[0],
-                    heart: hearts.children[11],
-                    circle: stones.children[3].children[2].children[2],
-                    tear: stones.children[3].children[2].children[3],
-                    square: stones.children[3].children[2].children[4]
+                    marquise: {
+                        geometries: [
+                            (stones.scene.children[0].children[3].children[3].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[0].children[3].children[3] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[0].children[3].children[3].children[0]),
+                            getOrigin(stones.scene.children[0].children[3].children[3].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[0].children[3].children[3],
+                            stones.scene.children[0].children[3].children[3]
+                        ]
+                    },
+                    heart: {
+                        geometries: [
+                            (stones.scene.children[0].children[2].children[3].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[0].children[2].children[3] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[0].children[2].children[3].children[0]),
+                            getOrigin(stones.scene.children[0].children[2].children[3].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[0].children[2].children[3],
+                            stones.scene.children[0].children[2].children[3]
+                        ]
+                    },
+                    circle: {
+                        geometries: [
+                            (stones.scene.children[0].children[5].children[3].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[0].children[5].children[3] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[0].children[5].children[3].children[0]),
+                            getOrigin(stones.scene.children[0].children[5].children[3].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[0].children[5].children[3],
+                            stones.scene.children[0].children[5].children[3]
+                        ]
+                    },
+                    tear: {
+                        geometries: [
+                            (stones.scene.children[0].children[1].children[3].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[0].children[1].children[3] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[0].children[1].children[3].children[0]),
+                            getOrigin(stones.scene.children[0].children[1].children[3].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[0].children[1].children[3],
+                            stones.scene.children[0].children[1].children[3]
+                        ]
+                    },
+                    square: {
+                        geometries: [
+                            (stones.scene.children[0].children[4].children[3].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[0].children[4].children[3] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[0].children[4].children[3].children[0]),
+                            getOrigin(stones.scene.children[0].children[4].children[3].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[0].children[4].children[3],
+                            stones.scene.children[0].children[4].children[3]
+                        ]
+                    },
+                    baguette: {
+                        geometries: [
+                            (stones.scene.children[0].children[0].children[3].children[0] as THREE.Mesh).geometry,
+                            (stones.scene.children[0].children[0].children[3] as THREE.Mesh).geometry,
+                        ],
+                        positions: [
+                            getOrigin(stones.scene.children[0].children[0].children[3].children[0]),
+                            getOrigin(stones.scene.children[0].children[0].children[3].children[0])
+                        ],
+                        quaternions: [
+                            stones.scene.children[0].children[0].children[3],
+                            stones.scene.children[0].children[0].children[3]
+                        ]
+                    }
                 },
                 fullDiamond: {
                     base: (fullDiamond.scene.children[1].children[5] as THREE.Mesh).geometry,
@@ -692,6 +1635,7 @@ export default function Configurator() {
                 },
             }
 
+
         }
     }, [])
 
@@ -773,12 +1717,7 @@ export default function Configurator() {
         return new THREE.Vector3((vec3.x * 100), (vec3.z * 100), vec3.y * -(100 * factor));
     }
 
-    function getQuaternion(mesh:any) {
-        const quat = mesh.getWorldQuaternion(new THREE.Quaternion());
-        const quat2 = new THREE.Quaternion(quat.x, quat.z, -quat.y, quat.w);
-        mesh.rotation.x = -1.55;
-        return quat2;
-    }
+
 
 
     // Instances prova
@@ -843,7 +1782,7 @@ export default function Configurator() {
         <>
             <OrbitControls
                 // maxDistance={35}
-                // minDistance={25}
+                // minDistance={20}
                 minPolarAngle={nextStep ? Math.PI / 2.1 : Math.PI / 3 }
                 maxPolarAngle={nextStep ? Math.PI - Math.PI / 2.1 : Math.PI - Math.PI / 3}
                 minAzimuthAngle={nextStep ? -Math.PI / 4 : -Math.PI / 2}
@@ -854,1070 +1793,6 @@ export default function Configurator() {
             {savedEnvMap && <LoadedMaterials/>}
             {savedTeeth && savedEnvMap &&
                 <group ref={groupRef} position={[0, 0, 3]}>
-
-                    {/*baguette*/}
-                    {/*<group>*/}
-                    {/*    <mesh geometry={stones.scene.children[0].children[0].children[5].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[0].children[5].children[1], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[0].children[5].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[0].children[0].children[5].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[0].children[5].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[0].children[5].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-
-                    {/*    <mesh geometry={stones.scene.children[0].children[0].children[9].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[0].children[9].children[1], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[0].children[9].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[0].children[0].children[9].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[0].children[9].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[0].children[9].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-                    {/*    <mesh geometry={stones.scene.children[0].children[0].children[10].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[0].children[10].children[1], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[0].children[10].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[0].children[0].children[10].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[0].children[10].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[0].children[10].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-                    {/*    <mesh geometry={stones.scene.children[0].children[0].children[11].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[0].children[11].children[1], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[0].children[11].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[0].children[0].children[11].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[0].children[11].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[0].children[11].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-                    {/*    <mesh geometry={stones.scene.children[0].children[0].children[4].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[0].children[4].children[1], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[0].children[4].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[0].children[0].children[4].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[0].children[4].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[0].children[4].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-                    {/*    <mesh geometry={stones.scene.children[0].children[0].children[4].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[0].children[4].children[1], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[0].children[4].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[0].children[0].children[4].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[0].children[4].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[0].children[4].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-                    {/*    <mesh geometry={stones.scene.children[0].children[0].children[3].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[0].children[3].children[1], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[0].children[3].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[0].children[0].children[3].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[0].children[3].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[0].children[3].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*</group>*/}
-                    {/*<group>*/}
-                    {/*    <mesh geometry={stones.scene.children[1].children[0].children[5].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[0].children[5].children[1], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[0].children[5].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[1].children[0].children[5].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[0].children[5].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[0].children[5].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-
-                    {/*    <mesh geometry={stones.scene.children[1].children[0].children[9].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[0].children[9].children[1], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[0].children[9].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[1].children[0].children[9].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[0].children[9].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[0].children[9].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-                    {/*    <mesh geometry={stones.scene.children[1].children[0].children[10].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[0].children[10].children[1], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[0].children[10].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[1].children[0].children[10].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[0].children[10].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[0].children[10].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-                    {/*    <mesh geometry={stones.scene.children[1].children[0].children[8].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[0].children[8].children[1], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[0].children[8].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[1].children[0].children[8].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[0].children[8].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[0].children[8].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-                    {/*    <mesh geometry={stones.scene.children[1].children[0].children[4].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[0].children[4].children[1], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[0].children[4].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[1].children[0].children[4].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[0].children[4].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[0].children[4].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-                    {/*    <mesh geometry={stones.scene.children[1].children[0].children[4].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[0].children[4].children[1], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[0].children[4].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[1].children[0].children[4].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[0].children[4].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[0].children[4].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-                    {/*    <mesh geometry={stones.scene.children[1].children[0].children[3].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[0].children[3].children[1], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[0].children[3].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[1].children[0].children[3].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[0].children[3].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[0].children[3].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*</group>*/}
-
-                    {/*drop*/}
-                    {/*<group>*/}
-                    {/*    <mesh geometry={stones.scene.children[0].children[1].children[5].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[1].children[5].children[1], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[1].children[5].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[0].children[1].children[5].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[1].children[5].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[1].children[5].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-
-                    {/*    <mesh geometry={stones.scene.children[0].children[1].children[9].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[1].children[9].children[1], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[1].children[9].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[0].children[1].children[9].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[1].children[9].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[1].children[9].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-                    {/*    <mesh geometry={stones.scene.children[0].children[1].children[10].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[1].children[10].children[1], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[1].children[10].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[0].children[1].children[10].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[1].children[10].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[1].children[10].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-                    {/*    <mesh geometry={stones.scene.children[0].children[1].children[11].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[1].children[11].children[1], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[1].children[11].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[0].children[1].children[11].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[1].children[11].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[1].children[11].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-                    {/*    <mesh geometry={stones.scene.children[0].children[1].children[4].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[1].children[4].children[1], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[1].children[4].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[0].children[1].children[4].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[1].children[4].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[1].children[4].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-                    {/*    <mesh geometry={stones.scene.children[0].children[1].children[4].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[1].children[4].children[1], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[1].children[4].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[0].children[1].children[4].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[1].children[4].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[1].children[4].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-                    {/*    <mesh geometry={stones.scene.children[0].children[1].children[3].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[1].children[3].children[1], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[1].children[3].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[0].children[1].children[3].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[1].children[3].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[1].children[3].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*</group>*/}
-                    {/*<group>*/}
-                    {/*    <mesh geometry={stones.scene.children[1].children[1].children[5].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[1].children[5].children[1], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[1].children[5].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[1].children[1].children[5].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[1].children[5].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[1].children[5].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-
-                    {/*    <mesh geometry={stones.scene.children[1].children[1].children[9].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[1].children[9].children[1], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[1].children[9].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[1].children[1].children[9].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[1].children[9].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[1].children[9].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-                    {/*    <mesh geometry={stones.scene.children[1].children[1].children[10].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[1].children[10].children[1], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[1].children[10].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[1].children[1].children[10].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[1].children[10].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[1].children[10].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-                    {/*    <mesh geometry={stones.scene.children[1].children[1].children[8].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[1].children[8].children[1], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[1].children[8].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[1].children[1].children[8].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[1].children[8].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[1].children[8].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-                    {/*    <mesh geometry={stones.scene.children[1].children[1].children[4].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[1].children[4].children[1], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[1].children[4].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[1].children[1].children[4].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[1].children[4].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[1].children[4].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-                    {/*    <mesh geometry={stones.scene.children[1].children[1].children[4].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[1].children[4].children[1], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[1].children[4].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[1].children[1].children[4].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[1].children[4].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[1].children[4].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-                    {/*    <mesh geometry={stones.scene.children[1].children[1].children[3].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[1].children[3].children[1], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[1].children[3].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[1].children[1].children[3].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[1].children[3].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[1].children[3].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*</group>*/}
-
-                    {/*heart*/}
-                    {/*<group>*/}
-                    {/*    <mesh geometry={stones.scene.children[0].children[2].children[5].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[2].children[5].children[1], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[2].children[5].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[0].children[2].children[5].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[2].children[5].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[2].children[5].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-
-                    {/*    <mesh geometry={stones.scene.children[0].children[2].children[9].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[2].children[9].children[1], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[2].children[9].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[0].children[2].children[9].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[2].children[9].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[2].children[9].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-                    {/*    <mesh geometry={stones.scene.children[0].children[2].children[10].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[2].children[10].children[1], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[2].children[10].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[0].children[2].children[10].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[2].children[10].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[2].children[10].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-                    {/*    <mesh geometry={stones.scene.children[0].children[2].children[11].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[2].children[11].children[1], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[2].children[11].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[0].children[2].children[11].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[2].children[11].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[2].children[11].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-                    {/*    <mesh geometry={stones.scene.children[0].children[2].children[4].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[2].children[4].children[1], 0.95)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[2].children[4].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[0].children[2].children[4].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[2].children[4].children[0], 0.95)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[2].children[4].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-                    {/*    <mesh geometry={stones.scene.children[0].children[2].children[4].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[2].children[4].children[1], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[2].children[4].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[0].children[2].children[4].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[2].children[4].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[2].children[4].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-                    {/*    <mesh geometry={stones.scene.children[0].children[2].children[3].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[2].children[3].children[1], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[2].children[3].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[0].children[2].children[3].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[2].children[3].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[2].children[3].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*</group>*/}
-                    {/*<group>*/}
-                    {/*    <mesh geometry={stones.scene.children[1].children[2].children[5].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[2].children[5].children[1], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[2].children[5].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[1].children[2].children[5].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[2].children[5].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[2].children[5].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-
-                    {/*    <mesh geometry={stones.scene.children[1].children[2].children[9].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[2].children[9].children[1], 0.85)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[2].children[9].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[1].children[2].children[9].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[2].children[9].children[0], 0.85)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[2].children[9].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-                    {/*    <mesh geometry={stones.scene.children[1].children[2].children[10].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[2].children[10].children[1], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[2].children[10].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[1].children[2].children[10].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[2].children[10].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[2].children[10].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-                    {/*    <mesh geometry={stones.scene.children[1].children[2].children[8].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[2].children[8].children[1], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[2].children[8].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[1].children[2].children[8].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[2].children[8].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[2].children[8].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-                    {/*    <mesh geometry={stones.scene.children[1].children[2].children[4].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[2].children[4].children[1], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[2].children[4].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[1].children[2].children[4].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[2].children[4].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[2].children[4].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-                    {/*    <mesh geometry={stones.scene.children[1].children[2].children[4].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[2].children[4].children[1], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[2].children[4].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[1].children[2].children[4].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[2].children[4].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[2].children[4].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-                    {/*    <mesh geometry={stones.scene.children[1].children[2].children[3].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[2].children[3].children[1], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[2].children[3].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[1].children[2].children[3].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[2].children[3].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[2].children[3].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*</group>*/}
-
-                    {/*marquise*/}
-                    {/*<group>*/}
-                    {/*    <mesh geometry={stones.scene.children[0].children[3].children[5].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[3].children[5].children[1], 0.90)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[3].children[5].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[0].children[3].children[5].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[3].children[5].children[0], 0.90)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[3].children[5].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-
-                    {/*    <mesh geometry={stones.scene.children[0].children[3].children[1].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[3].children[1].children[1], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[3].children[1].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[0].children[3].children[1].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[3].children[1].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[3].children[1].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-                    {/*    <mesh geometry={stones.scene.children[0].children[3].children[10].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[3].children[10].children[1], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[3].children[10].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[0].children[3].children[10].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[3].children[10].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[3].children[10].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-                    {/*    <mesh geometry={stones.scene.children[0].children[3].children[11].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[3].children[11].children[1], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[3].children[11].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[0].children[3].children[11].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[3].children[11].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[3].children[11].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-                    {/*    <mesh geometry={stones.scene.children[0].children[3].children[4].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[3].children[4].children[1], 0.95)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[3].children[4].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[0].children[3].children[4].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[3].children[4].children[0], 0.95)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[3].children[4].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-                    {/*    <mesh geometry={stones.scene.children[0].children[3].children[6].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[3].children[6].children[1], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[3].children[6].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[0].children[3].children[6].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[3].children[6].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[3].children[6].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*</group>*/}
-                    {/*<group>*/}
-                    {/*    <mesh geometry={stones.scene.children[1].children[3].children[5].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[3].children[5].children[1], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[3].children[5].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[1].children[3].children[5].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[3].children[5].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[3].children[5].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-                    {/*    <mesh geometry={stones.scene.children[1].children[3].children[9].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[3].children[9].children[1], 0.85)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[3].children[9].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[1].children[3].children[9].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[3].children[9].children[0], 0.85)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[3].children[9].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-                    {/*    <mesh geometry={stones.scene.children[1].children[3].children[10].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[3].children[10].children[1], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[3].children[10].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[1].children[3].children[10].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[3].children[10].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[3].children[10].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-                    {/*    <mesh geometry={stones.scene.children[1].children[3].children[11].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[3].children[11].children[1], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[3].children[11].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[1].children[3].children[11].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[3].children[11].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[3].children[11].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-                    {/*    <mesh geometry={stones.scene.children[1].children[3].children[4].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[3].children[4].children[1], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[3].children[4].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[1].children[3].children[4].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[3].children[4].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[3].children[4].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-                    {/*    <mesh geometry={stones.scene.children[1].children[3].children[4].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[3].children[4].children[1], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[3].children[4].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[1].children[3].children[4].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[3].children[4].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[3].children[4].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-                    {/*    <mesh geometry={stones.scene.children[1].children[3].children[3].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[3].children[3].children[1], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[3].children[3].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[1].children[3].children[3].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[3].children[3].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[3].children[3].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*</group>*/}
-
-                    {/*princess*/}
-                    {/*<group>*/}
-                    {/*    <mesh geometry={stones.scene.children[0].children[4].children[5].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[4].children[5].children[1], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[4].children[5].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[0].children[4].children[5].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[4].children[5].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[4].children[5].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-
-                    {/*    <mesh geometry={stones.scene.children[0].children[4].children[9].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[4].children[9].children[1], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[4].children[9].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[0].children[4].children[9].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[4].children[9].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[4].children[9].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-                    {/*    <mesh geometry={stones.scene.children[0].children[4].children[10].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[4].children[10].children[1], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[4].children[10].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[0].children[4].children[10].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[4].children[10].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[4].children[10].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-                    {/*    <mesh geometry={stones.scene.children[0].children[4].children[11].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[4].children[11].children[1], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[4].children[11].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[0].children[4].children[11].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[4].children[11].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[4].children[11].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-                    {/*    <mesh geometry={stones.scene.children[0].children[4].children[4].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[4].children[4].children[1], 0.95)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[4].children[4].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[0].children[4].children[4].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[4].children[4].children[0], 0.95)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[4].children[4].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-
-                    {/*    <mesh geometry={stones.scene.children[0].children[4].children[3].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[4].children[3].children[1], 0.95)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[4].children[3].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[0].children[4].children[3].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[4].children[3].children[0], 0.95)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[4].children[3].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*</group>*/}
-                    {/*<group>*/}
-                    {/*    <mesh geometry={stones.scene.children[1].children[4].children[5].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[4].children[5].children[1], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[4].children[5].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[1].children[4].children[5].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[4].children[5].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[4].children[5].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-
-                    {/*    <mesh geometry={stones.scene.children[1].children[4].children[9].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[4].children[9].children[1], 0.85)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[4].children[9].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[1].children[4].children[9].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[4].children[9].children[0], 0.85)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[4].children[9].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-                    {/*    <mesh geometry={stones.scene.children[1].children[4].children[10].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[4].children[10].children[1], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[4].children[10].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[1].children[4].children[10].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[4].children[10].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[4].children[10].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-                    {/*    <mesh geometry={stones.scene.children[1].children[4].children[8].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[4].children[8].children[1], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[4].children[8].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[1].children[4].children[8].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[4].children[8].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[4].children[8].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-                    {/*    <mesh geometry={stones.scene.children[1].children[4].children[4].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[4].children[4].children[1], 0.99)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[4].children[4].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[1].children[4].children[4].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[4].children[4].children[0], 0.99)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[4].children[4].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-                    {/*    <mesh geometry={stones.scene.children[1].children[4].children[3].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[4].children[3].children[1], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[4].children[3].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[1].children[4].children[3].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[4].children[3].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[4].children[3].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*</group>*/}
-
-                    {/*round*/}
-                    {/*<group>*/}
-                    {/*    <mesh geometry={stones.scene.children[0].children[5].children[0].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[5].children[0].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[5].children[0].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[0].children[5].children[0].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[5].children[0].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[5].children[0].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-
-                    {/*    <mesh geometry={stones.scene.children[0].children[5].children[1].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[5].children[1].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[5].children[1].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[0].children[5].children[1].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[5].children[1].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[5].children[1].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-                    {/*    <mesh geometry={stones.scene.children[0].children[5].children[7].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[5].children[7].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[5].children[7].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[0].children[5].children[7].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[5].children[7].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[5].children[7].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-                    {/*    <mesh geometry={stones.scene.children[0].children[5].children[11].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[5].children[11].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[5].children[11].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[0].children[5].children[11].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[5].children[11].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[5].children[11].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-                    {/*    <mesh geometry={stones.scene.children[0].children[5].children[2].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[5].children[2].children[1], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[5].children[2].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[0].children[5].children[2].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[5].children[2].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[5].children[2].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-
-                    {/*    <mesh geometry={stones.scene.children[0].children[5].children[3].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[5].children[3].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[5].children[3].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[0].children[5].children[3].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[0].children[5].children[3].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[0].children[5].children[3].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*</group>*/}
-                    {/*<group>*/}
-                    {/*    <mesh geometry={stones.scene.children[1].children[5].children[5].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[5].children[5].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[5].children[5].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[1].children[5].children[5].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[5].children[5].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[5].children[5].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-
-                    {/*    <mesh geometry={stones.scene.children[1].children[5].children[9].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[5].children[9].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[5].children[9].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[1].children[5].children[9].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[5].children[9].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[5].children[9].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-                    {/*    <mesh geometry={stones.scene.children[1].children[5].children[10].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[5].children[10].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[5].children[10].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[1].children[5].children[10].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[5].children[10].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[5].children[10].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-                    {/*    <mesh geometry={stones.scene.children[1].children[5].children[7].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[5].children[7].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[5].children[7].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[1].children[5].children[7].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[5].children[7].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[5].children[7].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-                    {/*    <mesh geometry={stones.scene.children[1].children[5].children[11].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[5].children[11].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[5].children[11].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[1].children[5].children[11].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[5].children[11].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[5].children[11].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-
-                    {/*    <mesh geometry={stones.scene.children[1].children[5].children[6].children[1].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[5].children[6].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[5].children[6].children[1])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="black" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*    <mesh geometry={stones.scene.children[1].children[5].children[6].children[0].geometry}*/}
-                    {/*          position={getOriginGlb(stones.scene.children[1].children[5].children[6].children[0], 1)}*/}
-                    {/*          quaternion={getQuaternion(stones.scene.children[1].children[5].children[6].children[0])}*/}
-                    {/*    >*/}
-                    {/*        <FullMaterial color="white" finish="polished"/>*/}
-                    {/*    </mesh>*/}
-                    {/*</group>*/}
 
                     {/*SIGNATURE*/}
                     <Vamp/>

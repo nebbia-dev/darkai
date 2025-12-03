@@ -1,4 +1,4 @@
-import {Decal, useTexture} from "@react-three/drei";
+import {useTexture} from "@react-three/drei";
 import * as THREE from "three";
 import firstCapital from "@/app/_helpers/_string-modders/firstCapital";
 import {useTeethStore} from "@/app/_stores/teeth";
@@ -235,7 +235,7 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
     });
     baguetteWhD.map.colorSpace = THREE.SRGBColorSpace;
     baguetteWhD.map.wrapS = baguetteWhD.map.wrapT = THREE.RepeatWrapping;
-    baguetteWhD.map.repeat.set(10, 10);
+    baguetteWhD.map.repeat.set(3, 3);
     pairs.set('baguetteWhD', baguetteWhD.map);
 
     // baguetteBrD
@@ -340,7 +340,7 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
     /* MOSAIC PAVE*/
     // mosaicWhD
     const mosaicWhD = useTexture({
-        map: 'textures/paves/mosWhD.png',
+        map: 'textures/paves/MOSAIC/Mosaic_Pavè_White_Gold.webp',
     });
     mosaicWhD.map.colorSpace = THREE.SRGBColorSpace;
     mosaicWhD.map.wrapS = mosaicWhD.map.wrapT = THREE.RepeatWrapping;
@@ -349,7 +349,7 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
 
     // mosaicBrD
     const mosaicBrD = useTexture({
-        map: 'textures/paves/mosBrD.png',
+        map: 'textures/paves/MOSAIC/Mosaic_Pavè_White_Gold.webp',
     });
     mosaicBrD.map.colorSpace = THREE.SRGBColorSpace;
     mosaicBrD.map.wrapS = mosaicBrD.map.wrapT = THREE.RepeatWrapping;
@@ -358,7 +358,7 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
 
     // mosaicBlD
     const mosaicBlD = useTexture({
-        map: 'textures/paves/mosBlD.png',
+        map: 'textures/paves/MOSAIC/Mosaic_Pavè_White_Gold.webp',
     });
     mosaicBlD.map.colorSpace = THREE.SRGBColorSpace;
     mosaicBlD.map.wrapS = mosaicBlD.map.wrapT = THREE.RepeatWrapping;
@@ -367,7 +367,7 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
 
     // mosaicRuby
     const mosaicRuby = useTexture({
-        map: 'textures/paves/mosRuby.png',
+        map: 'textures/paves/MOSAIC/Mosaic_Pavè_White_Gold.webp',
     });
     mosaicRuby.map.colorSpace = THREE.SRGBColorSpace;
     mosaicRuby.map.wrapS = mosaicRuby.map.wrapT = THREE.RepeatWrapping;
@@ -376,7 +376,7 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
 
     // mosaicEmerald
     const mosaicEmerald = useTexture({
-        map: 'textures/paves/mosEmerald.png',
+        map: 'textures/paves/MOSAIC/Mosaic_Pavè_White_Gold.webp',
     });
     mosaicEmerald.map.colorSpace = THREE.SRGBColorSpace;
     mosaicEmerald.map.wrapS = mosaicEmerald.map.wrapT = THREE.RepeatWrapping;
@@ -385,7 +385,7 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
 
     // mosaicAmeth
     const mosaicAmeth = useTexture({
-        map: 'textures/paves/mosAmeth.png',
+        map: 'textures/paves/MOSAIC/Mosaic_Pavè_White_Gold.webp',
     });
     mosaicAmeth.map.colorSpace = THREE.SRGBColorSpace;
     mosaicAmeth.map.wrapS = mosaicAmeth.map.wrapT = THREE.RepeatWrapping;
@@ -394,7 +394,7 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
 
     // mosaicAqua
     const mosaicAqua = useTexture({
-        map: 'textures/paves/mosAqua.png',
+        map: 'textures/paves/MOSAIC/Mosaic_Pavè_White_Gold.webp',
     });
     mosaicAqua.map.colorSpace = THREE.SRGBColorSpace;
     mosaicAqua.map.wrapS = mosaicAqua.map.wrapT = THREE.RepeatWrapping;
@@ -403,7 +403,7 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
 
     // mosaicBSapph
     const mosaicBSapph = useTexture({
-        map: 'textures/paves/mosBSapph.png',
+        map: 'textures/paves/MOSAIC/Mosaic_Pavè_White_Gold.webp',
     });
     mosaicBSapph.map.colorSpace = THREE.SRGBColorSpace;
     mosaicBSapph.map.wrapS = mosaicBSapph.map.wrapT = THREE.RepeatWrapping;
@@ -412,7 +412,7 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
 
     // mosaicPSapph
     const mosaicPSapph = useTexture({
-        map: 'textures/paves/mosPSapph.png',
+        map: 'textures/paves/MOSAIC/Mosaic_Pavè_White_Gold.webp',
     });
     mosaicPSapph.map.colorSpace = THREE.SRGBColorSpace;
     mosaicPSapph.map.wrapS = mosaicPSapph.map.wrapT = THREE.RepeatWrapping;
@@ -421,7 +421,7 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
 
     // mosaicYSapph
     const mosaicYSapph = useTexture({
-        map: 'textures/paves/mosYSapph.png',
+        map: 'textures/paves/MOSAIC/Mosaic_Pavè_White_Gold.webp',
     });
     mosaicYSapph.map.colorSpace = THREE.SRGBColorSpace;
     mosaicYSapph.map.wrapS = mosaicYSapph.map.wrapT = THREE.RepeatWrapping;

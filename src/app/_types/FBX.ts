@@ -1,15 +1,22 @@
 import * as THREE from 'three'
+interface Stone {
+    geometries: THREE.BufferGeometry[],
+    positions: THREE.Vector3[],
+    quaternions: THREE.Object3D[]
+}
+interface Stones {
+    marquise: Stone,
+    heart: Stone,
+    circle: Stone,
+    tear: Stone,
+    square: Stone,
+    baguette: Stone
+}
 export default interface FBX {
     // INCISIVI CENTRALI
     icsdx: {
         full: THREE.BufferGeometry,
-        stones: {
-            marquise: THREE.Object3D,
-            heart: THREE.Object3D,
-            circle: THREE.Object3D,
-            tear: THREE.Object3D,
-            square: THREE.Object3D
-        },
+        stones: Stones,
         fullDiamond: {
             base: THREE.BufferGeometry,
             full: THREE.BufferGeometry,
@@ -36,13 +43,7 @@ export default interface FBX {
     } | undefined,
     icssx: {
         full: THREE.BufferGeometry,
-        stones: {
-            marquise: THREE.Object3D,
-            heart: THREE.Object3D,
-            circle: THREE.Object3D,
-            tear: THREE.Object3D,
-            square: THREE.Object3D
-        },
+        stones: Stones,
         fullDiamond: {
             base: THREE.BufferGeometry,
             full: THREE.BufferGeometry,
@@ -69,13 +70,7 @@ export default interface FBX {
     } | undefined,
     icidx: {
         full: THREE.BufferGeometry,
-        stones: {
-            marquise: THREE.Object3D,
-            heart: THREE.Object3D,
-            circle: THREE.Object3D,
-            tear: THREE.Object3D,
-            square: THREE.Object3D
-        },
+        stones: Stones,
         fullDiamond: {
             base: THREE.BufferGeometry,
             full: THREE.BufferGeometry,
@@ -102,13 +97,7 @@ export default interface FBX {
     } | undefined,
     icisx: {
         full: THREE.BufferGeometry,
-        stones: {
-            marquise: THREE.Object3D,
-            heart: THREE.Object3D,
-            circle: THREE.Object3D,
-            tear: THREE.Object3D,
-            square: THREE.Object3D
-        },
+        stones: Stones,
         fullDiamond: {
             base: THREE.BufferGeometry,
             full: THREE.BufferGeometry,
@@ -136,13 +125,7 @@ export default interface FBX {
     // INCISIVI LATERALI
     ilsdx: {
         full: THREE.BufferGeometry,
-        stones: {
-            marquise: THREE.Object3D,
-            heart: THREE.Object3D,
-            circle: THREE.Object3D,
-            tear: THREE.Object3D,
-            square: THREE.Object3D
-        },
+        stones: Stones,
         fullDiamond: {
             base: THREE.BufferGeometry,
             full: THREE.BufferGeometry,
@@ -167,13 +150,7 @@ export default interface FBX {
     } | undefined,
     ilssx: {
         full: THREE.BufferGeometry,
-        stones: {
-            marquise: THREE.Object3D,
-            heart: THREE.Object3D,
-            circle: THREE.Object3D,
-            tear: THREE.Object3D,
-            square: THREE.Object3D
-        },
+        stones: Stones,
         fullDiamond: {
             base: THREE.BufferGeometry,
             full: THREE.BufferGeometry,
@@ -198,13 +175,7 @@ export default interface FBX {
     } | undefined,
     ilidx: {
         full: THREE.BufferGeometry,
-        stones: {
-            marquise: THREE.Object3D,
-            heart: THREE.Object3D,
-            circle: THREE.Object3D,
-            tear: THREE.Object3D,
-            square: THREE.Object3D
-        },
+        stones: Stones,
         fullDiamond: {
             base: THREE.BufferGeometry,
             full: THREE.BufferGeometry,
@@ -229,13 +200,7 @@ export default interface FBX {
     } | undefined,
     ilisx: {
         full: THREE.BufferGeometry,
-        stones: {
-            marquise: THREE.Object3D,
-            heart: THREE.Object3D,
-            circle: THREE.Object3D,
-            tear: THREE.Object3D,
-            square: THREE.Object3D
-        },
+        stones: Stones,
         fullDiamond: {
             base: THREE.BufferGeometry,
             full: THREE.BufferGeometry,
@@ -261,13 +226,7 @@ export default interface FBX {
     // CANINI
     csdx: {
         full: THREE.BufferGeometry,
-        stones: {
-            marquise: THREE.Object3D,
-            heart: THREE.Object3D,
-            circle: THREE.Object3D,
-            tear: THREE.Object3D,
-            square: THREE.Object3D
-        },
+        stones: Stones,
         fullDiamond: {
             base: THREE.BufferGeometry,
             full: THREE.BufferGeometry,
@@ -292,13 +251,7 @@ export default interface FBX {
     } | undefined,
     cssx: {
         full: THREE.BufferGeometry,
-        stones: {
-            marquise: THREE.Object3D,
-            heart: THREE.Object3D,
-            circle: THREE.Object3D,
-            tear: THREE.Object3D,
-            square: THREE.Object3D
-        },
+        stones: Stones,
         fullDiamond: {
             base: THREE.BufferGeometry,
             full: THREE.BufferGeometry,
@@ -323,13 +276,7 @@ export default interface FBX {
     } | undefined,
     cidx: {
         full: THREE.BufferGeometry,
-        stones: {
-            marquise: THREE.Object3D,
-            heart: THREE.Object3D,
-            circle: THREE.Object3D,
-            tear: THREE.Object3D,
-            square: THREE.Object3D
-        },
+        stones: Stones,
         fullDiamond: {
             base: THREE.BufferGeometry,
             full: THREE.BufferGeometry,
@@ -362,13 +309,7 @@ export default interface FBX {
     } | undefined,
     cisx: {
         full: THREE.BufferGeometry,
-        stones: {
-            marquise: THREE.Object3D,
-            heart: THREE.Object3D,
-            circle: THREE.Object3D,
-            tear: THREE.Object3D,
-            square: THREE.Object3D
-        },
+        stones: Stones,
         fullDiamond: {
             base: THREE.BufferGeometry,
             full: THREE.BufferGeometry,
