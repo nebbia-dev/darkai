@@ -7,8 +7,8 @@ export default function resetUvs( geometry: THREE.BufferGeometry )
     for( let i= 0; i < pos.count; i++ )
     {
         // standard
-        let x = pos.getX(i) / 5,
-            y = pos.getY(i) / 5
+        let x = pos.getX(i) / 4,
+            y = pos.getY(i) / 4
 
         uvs.setXY( i, x, y );
     }

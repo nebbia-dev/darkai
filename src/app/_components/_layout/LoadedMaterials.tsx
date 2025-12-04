@@ -6,6 +6,7 @@ import DecalPave from "@/app/_components/_materials/DecalPave";
 import FullMaterial from "@/app/_components/_materials/FullMaterial";
 import FullMaterial_ICS from "@/app/_components/_materials/FullMaterial_ICS";
 import Pave from "@/app/_components/_materials/Pave";
+import RoundPaveBase from "@/app/_components/_materials/RoundPaveBase";
 
 export default function LoadedMaterials() {
     return(
@@ -34,6 +35,10 @@ export default function LoadedMaterials() {
             <mesh position={[0, -10, 0]} visible={false}>
                 <planeGeometry args={[1, 1]}/>
                 <Pave pave="hexagon" stone="ruby"/>
+            </mesh>
+            <mesh position={[0, -10, 0]} visible={false}>
+                <planeGeometry args={[1, 1]}/>
+                <RoundPaveBase color="gold" type="round"/>
             </mesh>
         </>
     )

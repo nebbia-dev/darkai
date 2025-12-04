@@ -1,598 +1,139 @@
-import {Decal, useTexture} from "@react-three/drei";
+import {useEnvironment, useTexture} from "@react-three/drei";
 import * as THREE from "three";
-import firstCapital from "@/app/_helpers/_string-modders/firstCapital";
 import {useTeethStore} from "@/app/_stores/teeth";
 
 export default function Pave({pave, stone} : {pave: string|undefined, stone:string|undefined}) {
     if(!pave || !stone) return;
 
-    const envMap = useTeethStore((state) => state.envMap);
+    // const envMap = useTeethStore((state) => state.envMap);
+
+    const envMap = useEnvironment({
+        files: "envMaps/rosendal_park_sunset_puresky_1k.exr"
+        // files: "envMaps/Diamond_HDRI.hdr"
+    })
 
     const pairs = new Map();
 
     /* ROUND PAVE*/
-    // roundWhD
-    const roundWhD = useTexture({
+    const round = useTexture({
         map: 'textures/proveDiamanti/Round_Pavè_Diamanti.webp',
-        normalMap: 'textures/proveDiamanti/Normal_Diamanti.png'
+        normalMap: 'textures/proveDiamanti/Normal_Diamanti_Round.png'
     });
-    roundWhD.map.colorSpace = THREE.SRGBColorSpace;
-    roundWhD.map.wrapS = roundWhD.map.wrapT = THREE.RepeatWrapping;
-    roundWhD.map.repeat.set(25, 25);
-    roundWhD.normalMap.wrapS = roundWhD.map.wrapT = THREE.RepeatWrapping;
-    roundWhD.normalMap.repeat.set(25, 25);
+    round.map.colorSpace = THREE.SRGBColorSpace;
+    round.map.wrapS = round.map.wrapT = THREE.RepeatWrapping;
+    round.map.repeat.set(15, 15);
+    round.normalMap.wrapS = round.normalMap.wrapT = THREE.RepeatWrapping;
+    round.normalMap.repeat.set(15, 15);
 
-    pairs.set('roundWhD', roundWhD.map);
-
-    // roundBrD
-    const roundBrD = useTexture({
-        map: 'textures/paves/ROUND/Round_Pavè_Marrone.webp',
-    });
-    roundBrD.map.colorSpace = THREE.SRGBColorSpace;
-    roundBrD.map.wrapS = roundBrD.map.wrapT = THREE.RepeatWrapping;
-    roundBrD.map.repeat.set(10, 10);
-    pairs.set('roundBrD', roundBrD.map);
-
-    // roundBlD
-    const roundBlD = useTexture({
-        map: 'textures/paves/ROUND/Round_Pavè_Nero.webp',
-    });
-    roundBlD.map.colorSpace = THREE.SRGBColorSpace;
-    roundBlD.map.wrapS = roundBlD.map.wrapT = THREE.RepeatWrapping;
-    roundBlD.map.repeat.set(10, 10);
-    pairs.set('roundBlD', roundBlD.map);
-
-    // roundRuby
-    const roundRuby = useTexture({
-        map: 'textures/paves/ROUND/Round_Pavè_Rosso.webp',
-    });
-    roundRuby.map.colorSpace = THREE.SRGBColorSpace;
-    roundRuby.map.wrapS = roundRuby.map.wrapT = THREE.RepeatWrapping;
-    roundRuby.map.repeat.set(10, 10);
-    pairs.set('roundRuby', roundRuby.map);
-
-    // roundEmerald
-    const roundEmerald = useTexture({
-        map: 'textures/paves/ROUND/Round_Pavè_Verde.webp',
-    });
-    roundEmerald.map.colorSpace = THREE.SRGBColorSpace;
-    roundEmerald.map.wrapS = roundEmerald.map.wrapT = THREE.RepeatWrapping;
-    roundEmerald.map.repeat.set(10, 10);
-    pairs.set('roundEmerald', roundEmerald.map);
-
-    // roundAmeth
-    const roundAmeth = useTexture({
-        map: 'textures/paves/ROUND/Round_Pavè_Viola_Scuro.webp',
-    });
-    roundAmeth.map.colorSpace = THREE.SRGBColorSpace;
-    roundAmeth.map.wrapS = roundAmeth.map.wrapT = THREE.RepeatWrapping;
-    roundAmeth.map.repeat.set(10, 10);
-    pairs.set('roundAmeth', roundAmeth.map);
-
-    // roundAqua
-    const roundAqua = useTexture({
-        map: 'textures/paves/ROUND/Round_Pavè_Azzurro.webp',
-    });
-    roundAqua.map.colorSpace = THREE.SRGBColorSpace;
-    roundAqua.map.wrapS = roundAqua.map.wrapT = THREE.RepeatWrapping;
-    roundAqua.map.repeat.set(10, 10);
-    pairs.set('roundAqua', roundAqua.map);
-
-    // roundBSapph
-    const roundBSapph = useTexture({
-        map: 'textures/paves/ROUND/Round_Pavè_Blu.webp',
-    });
-    roundBSapph.map.colorSpace = THREE.SRGBColorSpace;
-    roundBSapph.map.wrapS = roundBSapph.map.wrapT = THREE.RepeatWrapping;
-    roundBSapph.map.repeat.set(10, 10);
-    pairs.set('roundBSapph', roundBSapph.map);
-
-    // roundPSapph
-    const roundPSapph = useTexture({
-        map: 'textures/paves/ROUND/Round_Pavè_Viola.webp',
-    });
-    roundPSapph.map.colorSpace = THREE.SRGBColorSpace;
-    roundPSapph.map.wrapS = roundPSapph.map.wrapT = THREE.RepeatWrapping;
-    roundPSapph.map.repeat.set(10, 10);
-    pairs.set('roundPSapph', roundPSapph.map);
-
-    // roundYSapph
-    const roundYSapph = useTexture({
-        map: 'textures/paves/ROUND/Round_Pavè_Giallo.webp',
-    });
-    roundYSapph.map.colorSpace = THREE.SRGBColorSpace;
-    roundYSapph.map.wrapS = roundYSapph.map.wrapT = THREE.RepeatWrapping;
-    roundYSapph.map.repeat.set(10, 10);
-    pairs.set('roundYSapph', roundYSapph.map);
-
-    // roundCamo
-    const roundCamo = useTexture({
-        map: 'textures/paves/roundCamo.png',
-    });
-    roundCamo.map.colorSpace = THREE.SRGBColorSpace;
-    roundCamo.map.wrapS = roundCamo.map.wrapT = THREE.RepeatWrapping;
-    roundCamo.map.repeat.set(10, 10);
-    pairs.set('roundCamo', roundCamo.map);
-
-    // roundGlitch
-    const roundGlitch = useTexture({
-        map: 'textures/paves/roundGlitch.png',
-    });
-    roundGlitch.map.colorSpace = THREE.SRGBColorSpace;
-    roundGlitch.map.wrapS = roundGlitch.map.wrapT = THREE.RepeatWrapping;
-    roundGlitch.map.repeat.set(10, 10);
-    pairs.set('roundGlitch', roundGlitch.map);
-
-    /* PRINCESS PAVE*/
-    // princessWhD
-    const princessWhD = useTexture({
-        map: 'textures/paves/PRINCESS/Princess_Pavè.webp',
-    });
-    princessWhD.map.colorSpace = THREE.SRGBColorSpace;
-    princessWhD.map.wrapS = princessWhD.map.wrapT = THREE.RepeatWrapping;
-    princessWhD.map.repeat.set(10, 10);
-    pairs.set('princessWhD', princessWhD.map);
-
-    // princessBrD
-    const princessBrD = useTexture({
-        map: 'textures/paves/PRINCESS/Princess_Pavè_Marrone.webp',
-    });
-    princessBrD.map.colorSpace = THREE.SRGBColorSpace;
-    princessBrD.map.wrapS = princessBrD.map.wrapT = THREE.RepeatWrapping;
-    princessBrD.map.repeat.set(10, 10);
-    pairs.set('princessBrD', princessBrD.map);
-
-    // princessBlD
-    const princessBlD = useTexture({
-        map: 'textures/paves/PRINCESS/Princess_Pavè_Nero.webp',
-    });
-    princessBlD.map.colorSpace = THREE.SRGBColorSpace;
-    princessBlD.map.wrapS = princessBlD.map.wrapT = THREE.RepeatWrapping;
-    princessBlD.map.repeat.set(10, 10);
-    pairs.set('princessBlD', princessBlD.map);
-
-    // princessRuby
-    const princessRuby = useTexture({
-        map: 'textures/paves/PRINCESS/Princess_Pavè_Rosso.webp',
-    });
-    princessRuby.map.colorSpace = THREE.SRGBColorSpace;
-    princessRuby.map.wrapS = princessRuby.map.wrapT = THREE.RepeatWrapping;
-    princessRuby.map.repeat.set(10, 10);
-    pairs.set('princessRuby', princessRuby.map);
-
-    // princessEmerald
-    const princessEmerald = useTexture({
-        map: 'textures/paves/PRINCESS/Princess_Pavè_Verde.webp',
-    });
-    princessEmerald.map.colorSpace = THREE.SRGBColorSpace;
-    princessEmerald.map.wrapS = princessEmerald.map.wrapT = THREE.RepeatWrapping;
-    princessEmerald.map.repeat.set(10, 10);
-    pairs.set('princessEmerald', princessEmerald.map);
-
-    // princessAmeth
-    const princessAmeth = useTexture({
-        map: 'textures/paves/PRINCESS/Princess_Pavè_Viola_Scuro.webp',
-    });
-    princessAmeth.map.colorSpace = THREE.SRGBColorSpace;
-    princessAmeth.map.wrapS = princessAmeth.map.wrapT = THREE.RepeatWrapping;
-    princessAmeth.map.repeat.set(10, 10);
-    pairs.set('princessAmeth', princessAmeth.map);
-
-    // princessAqua
-    const princessAqua = useTexture({
-        map: 'textures/paves/PRINCESS/Princess_Pavè_Azzurro.webp',
-    });
-    princessAqua.map.colorSpace = THREE.SRGBColorSpace;
-    princessAqua.map.wrapS = princessAqua.map.wrapT = THREE.RepeatWrapping;
-    princessAqua.map.repeat.set(10, 10);
-    pairs.set('princessAqua', princessAqua.map);
-
-    // princessBSapph
-    const princessBSapph = useTexture({
-        map: 'textures/paves/PRINCESS/Princess_Pavè_Blu.webp',
-    });
-    princessBSapph.map.colorSpace = THREE.SRGBColorSpace;
-    princessBSapph.map.wrapS = princessBSapph.map.wrapT = THREE.RepeatWrapping;
-    princessBSapph.map.repeat.set(10, 10);
-    pairs.set('princessBSapph', princessBSapph.map);
-
-    // princessPSapph
-    const princessPSapph = useTexture({
-        map: 'textures/paves/PRINCESS/Princess_Pavè_Viola.webp',
-    });
-    princessPSapph.map.colorSpace = THREE.SRGBColorSpace;
-    princessPSapph.map.wrapS = princessPSapph.map.wrapT = THREE.RepeatWrapping;
-    princessPSapph.map.repeat.set(10, 10);
-    pairs.set('princessPSapph', princessPSapph.map);
-
-    // princessYSapph
-    const princessYSapph = useTexture({
-        map: 'textures/paves/PRINCESS/Princess_Pavè_Giallo.webp',
-    });
-    princessYSapph.map.colorSpace = THREE.SRGBColorSpace;
-    princessYSapph.map.wrapS = princessYSapph.map.wrapT = THREE.RepeatWrapping;
-    princessYSapph.map.repeat.set(10, 10);
-    pairs.set('princessYSapph', princessYSapph.map);
-
-    // princessCamo
-    const princessCamo = useTexture({
-        map: 'textures/paves/sqCamo.png',
-    });
-    princessCamo.map.colorSpace = THREE.SRGBColorSpace;
-    princessCamo.map.wrapS = princessCamo.map.wrapT = THREE.RepeatWrapping;
-    princessCamo.map.repeat.set(10, 10);
-    pairs.set('princessCamo', princessCamo.map);
-
-    // princessGlitch
-    const princessGlitch = useTexture({
-        map: 'textures/paves/sqGlitch.png',
-    });
-    princessGlitch.map.colorSpace = THREE.SRGBColorSpace;
-    princessGlitch.map.wrapS = princessGlitch.map.wrapT = THREE.RepeatWrapping;
-    princessGlitch.map.repeat.set(10, 10);
-    pairs.set('princessGlitch', princessGlitch.map);
-
-    /* BAGUETTE PAVE*/
-    // baguetteWhD
-    const baguetteWhD = useTexture({
-        map: 'textures/paves/BAGUETTE/Baguette_Pavè.webp',
-    });
-    baguetteWhD.map.colorSpace = THREE.SRGBColorSpace;
-    baguetteWhD.map.wrapS = baguetteWhD.map.wrapT = THREE.RepeatWrapping;
-    baguetteWhD.map.repeat.set(3, 3);
-    pairs.set('baguetteWhD', baguetteWhD.map);
-
-    // baguetteBrD
-    const baguetteBrD = useTexture({
-        map: 'textures/paves/BAGUETTE/Baguette_Pavè_Marrone.webp',
-    });
-    baguetteBrD.map.colorSpace = THREE.SRGBColorSpace;
-    baguetteBrD.map.wrapS = baguetteBrD.map.wrapT = THREE.RepeatWrapping;
-    baguetteBrD.map.repeat.set(10, 10);
-    pairs.set('baguetteBrD', baguetteBrD.map);
-
-    // baguetteBlD
-    const baguetteBlD = useTexture({
-        map: 'textures/paves/BAGUETTE/Baguette_Pavè_Nero.webp',
-    });
-    baguetteBlD.map.colorSpace = THREE.SRGBColorSpace;
-    baguetteBlD.map.wrapS = baguetteBlD.map.wrapT = THREE.RepeatWrapping;
-    baguetteBlD.map.repeat.set(10, 10);
-    pairs.set('baguetteBlD', baguetteBlD.map);
-
-    // baguetteRuby
-    const baguetteRuby = useTexture({
-        map: 'textures/paves/BAGUETTE/Baguette_Pavè_Rosso.webp',
-    });
-    baguetteRuby.map.colorSpace = THREE.SRGBColorSpace;
-    baguetteRuby.map.wrapS = baguetteRuby.map.wrapT = THREE.RepeatWrapping;
-    baguetteRuby.map.repeat.set(10, 10);
-    pairs.set('baguetteRuby', baguetteRuby.map);
-
-    // baguetteEmerald
-    const baguetteEmerald = useTexture({
-        map: 'textures/paves/BAGUETTE/Baguette_Pavè_Verde.webp',
-    });
-    baguetteEmerald.map.colorSpace = THREE.SRGBColorSpace;
-    baguetteEmerald.map.wrapS = baguetteEmerald.map.wrapT = THREE.RepeatWrapping;
-    baguetteEmerald.map.repeat.set(10, 10);
-    pairs.set('baguetteEmerald', baguetteEmerald.map);
-
-    // baguetteAmeth
-    const baguetteAmeth = useTexture({
-        map: 'textures/paves/BAGUETTE/Baguette_Pavè_Viola_Scuro.webp',
-    });
-    baguetteAmeth.map.colorSpace = THREE.SRGBColorSpace;
-    baguetteAmeth.map.wrapS = baguetteAmeth.map.wrapT = THREE.RepeatWrapping;
-    baguetteAmeth.map.repeat.set(10, 10);
-    pairs.set('baguetteAmeth', baguetteAmeth.map);
-
-    // baguetteAqua
-    const baguetteAqua = useTexture({
-        map: 'textures/paves/BAGUETTE/Baguette_Pavè_Azzurro.webp',
-    });
-    baguetteAqua.map.colorSpace = THREE.SRGBColorSpace;
-    baguetteAqua.map.wrapS = baguetteAqua.map.wrapT = THREE.RepeatWrapping;
-    baguetteAqua.map.repeat.set(10, 10);
-    pairs.set('baguetteAqua', baguetteAqua.map);
-
-    // baguetteBSapph
-    const baguetteBSapph = useTexture({
-        map: 'textures/paves/BAGUETTE/Baguette_Pavè_Blu.webp',
-    });
-    baguetteBSapph.map.colorSpace = THREE.SRGBColorSpace;
-    baguetteBSapph.map.wrapS = baguetteBSapph.map.wrapT = THREE.RepeatWrapping;
-    baguetteBSapph.map.repeat.set(10, 10);
-    pairs.set('baguetteBSapph', baguetteBSapph.map);
-
-    // baguettePSapph
-    const baguettePSapph = useTexture({
-        map: 'textures/paves/BAGUETTE/Baguette_Pavè_Viola.webp',
-    });
-    baguettePSapph.map.colorSpace = THREE.SRGBColorSpace;
-    baguettePSapph.map.wrapS = baguettePSapph.map.wrapT = THREE.RepeatWrapping;
-    baguettePSapph.map.repeat.set(10, 10);
-    pairs.set('baguettePSapph', baguettePSapph.map);
-
-    // baguetteYSapph
-    const baguetteYSapph = useTexture({
-        map: 'textures/paves/BAGUETTE/Baguette_Pavè_Giallo.webp',
-    });
-    baguetteYSapph.map.colorSpace = THREE.SRGBColorSpace;
-    baguetteYSapph.map.wrapS = baguetteYSapph.map.wrapT = THREE.RepeatWrapping;
-    baguetteYSapph.map.repeat.set(10, 10);
-    pairs.set('baguetteYSapph', baguetteYSapph.map);
-
-    // baguetteCamo
-    const baguetteCamo = useTexture({
-        map: 'textures/paves/rectCamo.png',
-    });
-    baguetteCamo.map.colorSpace = THREE.SRGBColorSpace;
-    baguetteCamo.map.wrapS = baguetteCamo.map.wrapT = THREE.RepeatWrapping;
-    baguetteCamo.map.repeat.set(10, 10);
-    pairs.set('baguetteCamo', baguetteCamo.map);
-
-    // baguetteGlitch
-    const baguetteGlitch = useTexture({
-        map: 'textures/paves/rectGlitch.png',
-    });
-    baguetteGlitch.map.colorSpace = THREE.SRGBColorSpace;
-    baguetteGlitch.map.wrapS = baguetteGlitch.map.wrapT = THREE.RepeatWrapping;
-    baguetteGlitch.map.repeat.set(10, 10);
-    pairs.set('baguetteGlitch', baguetteGlitch.map);
+    pairs.set('round', round.map);
+    pairs.set('roundNormal', round.normalMap);
 
     /* MOSAIC PAVE*/
-    // mosaicWhD
-    const mosaicWhD = useTexture({
-        map: 'textures/paves/MOSAIC/Mosaic_Pavè_White_Gold.webp',
+    const mosaic = useTexture({
+        map: 'textures/proveDiamanti/Mosaic_Pavè_Diamanti.webp',
+        normalMap: 'textures/proveDiamanti/Normal_Diamanti_Mosaic.webp'
     });
-    mosaicWhD.map.colorSpace = THREE.SRGBColorSpace;
-    mosaicWhD.map.wrapS = mosaicWhD.map.wrapT = THREE.RepeatWrapping;
-    mosaicWhD.map.repeat.set(10, 10);
-    pairs.set('mosaicWhD', mosaicWhD.map);
+    mosaic.map.colorSpace = THREE.SRGBColorSpace;
+    mosaic.map.wrapS = mosaic.map.wrapT = THREE.RepeatWrapping;
+    mosaic.map.repeat.set(6, 6);
+    mosaic.normalMap.wrapS = mosaic.normalMap.wrapT = THREE.RepeatWrapping;
+    mosaic.normalMap.repeat.set(6, 6);
 
-    // mosaicBrD
-    const mosaicBrD = useTexture({
-        map: 'textures/paves/MOSAIC/Mosaic_Pavè_White_Gold.webp',
-    });
-    mosaicBrD.map.colorSpace = THREE.SRGBColorSpace;
-    mosaicBrD.map.wrapS = mosaicBrD.map.wrapT = THREE.RepeatWrapping;
-    mosaicBrD.map.repeat.set(10, 10);
-    pairs.set('mosaicBrD', mosaicBrD.map);
+    pairs.set('mosaic', mosaic.map);
+    pairs.set('mosaicNormal', mosaic.normalMap);
 
-    // mosaicBlD
-    const mosaicBlD = useTexture({
-        map: 'textures/paves/MOSAIC/Mosaic_Pavè_White_Gold.webp',
-    });
-    mosaicBlD.map.colorSpace = THREE.SRGBColorSpace;
-    mosaicBlD.map.wrapS = mosaicBlD.map.wrapT = THREE.RepeatWrapping;
-    mosaicBlD.map.repeat.set(10, 10);
-    pairs.set('mosaicBlD', mosaicBlD.map);
 
-    // mosaicRuby
-    const mosaicRuby = useTexture({
-        map: 'textures/paves/MOSAIC/Mosaic_Pavè_White_Gold.webp',
+    /* PRINCESS PAVE*/
+    const princess = useTexture({
+        map: 'textures/proveDiamanti/Princess_Pavè.webp',
+        normalMap: 'textures/proveDiamanti/Normal_Princess.webp'
     });
-    mosaicRuby.map.colorSpace = THREE.SRGBColorSpace;
-    mosaicRuby.map.wrapS = mosaicRuby.map.wrapT = THREE.RepeatWrapping;
-    mosaicRuby.map.repeat.set(10, 10);
-    pairs.set('mosaicRuby', mosaicRuby.map);
+    princess.map.colorSpace = THREE.SRGBColorSpace;
+    princess.map.wrapS = princess.map.wrapT = THREE.RepeatWrapping;
+    princess.map.repeat.set(9, 9);
+    princess.normalMap.wrapS = princess.normalMap.wrapT = THREE.RepeatWrapping;
+    princess.normalMap.repeat.set(9, 9);
 
-    // mosaicEmerald
-    const mosaicEmerald = useTexture({
-        map: 'textures/paves/MOSAIC/Mosaic_Pavè_White_Gold.webp',
-    });
-    mosaicEmerald.map.colorSpace = THREE.SRGBColorSpace;
-    mosaicEmerald.map.wrapS = mosaicEmerald.map.wrapT = THREE.RepeatWrapping;
-    mosaicEmerald.map.repeat.set(10, 10);
-    pairs.set('mosaicEmerald', mosaicEmerald.map);
+    pairs.set('princess', princess.map);
+    pairs.set('princessNormal', princess.normalMap);
 
-    // mosaicAmeth
-    const mosaicAmeth = useTexture({
-        map: 'textures/paves/MOSAIC/Mosaic_Pavè_White_Gold.webp',
+    /* BAGUETTE PAVE*/
+    const baguette = useTexture({
+        map: 'textures/proveDiamanti/Baguette_Pavè.webp',
+        normalMap: 'textures/proveDiamanti/Normal_Baguette.webp'
     });
-    mosaicAmeth.map.colorSpace = THREE.SRGBColorSpace;
-    mosaicAmeth.map.wrapS = mosaicAmeth.map.wrapT = THREE.RepeatWrapping;
-    mosaicAmeth.map.repeat.set(10, 10);
-    pairs.set('mosaicAmeth', mosaicAmeth.map);
+    baguette.map.colorSpace = THREE.SRGBColorSpace;
+    baguette.map.wrapS = baguette.map.wrapT = THREE.RepeatWrapping;
+    baguette.map.repeat.set(4, 4);
+    baguette.normalMap.wrapS = baguette.normalMap.wrapT = THREE.RepeatWrapping;
+    baguette.normalMap.repeat.set(4, 4);
 
-    // mosaicAqua
-    const mosaicAqua = useTexture({
-        map: 'textures/paves/MOSAIC/Mosaic_Pavè_White_Gold.webp',
-    });
-    mosaicAqua.map.colorSpace = THREE.SRGBColorSpace;
-    mosaicAqua.map.wrapS = mosaicAqua.map.wrapT = THREE.RepeatWrapping;
-    mosaicAqua.map.repeat.set(10, 10);
-    pairs.set('mosaicAqua', mosaicAqua.map);
-
-    // mosaicBSapph
-    const mosaicBSapph = useTexture({
-        map: 'textures/paves/MOSAIC/Mosaic_Pavè_White_Gold.webp',
-    });
-    mosaicBSapph.map.colorSpace = THREE.SRGBColorSpace;
-    mosaicBSapph.map.wrapS = mosaicBSapph.map.wrapT = THREE.RepeatWrapping;
-    mosaicBSapph.map.repeat.set(10, 10);
-    pairs.set('mosaicBSapph', mosaicBSapph.map);
-
-    // mosaicPSapph
-    const mosaicPSapph = useTexture({
-        map: 'textures/paves/MOSAIC/Mosaic_Pavè_White_Gold.webp',
-    });
-    mosaicPSapph.map.colorSpace = THREE.SRGBColorSpace;
-    mosaicPSapph.map.wrapS = mosaicPSapph.map.wrapT = THREE.RepeatWrapping;
-    mosaicPSapph.map.repeat.set(10, 10);
-    pairs.set('mosaicPSapph', mosaicPSapph.map);
-
-    // mosaicYSapph
-    const mosaicYSapph = useTexture({
-        map: 'textures/paves/MOSAIC/Mosaic_Pavè_White_Gold.webp',
-    });
-    mosaicYSapph.map.colorSpace = THREE.SRGBColorSpace;
-    mosaicYSapph.map.wrapS = mosaicYSapph.map.wrapT = THREE.RepeatWrapping;
-    mosaicYSapph.map.repeat.set(10, 10);
-    pairs.set('mosaicYSapph', mosaicYSapph.map);
-
-    // mosaicCamo
-    const mosaicCamo = useTexture({
-        map: 'textures/paves/mosCamo.png',
-    });
-    mosaicCamo.map.colorSpace = THREE.SRGBColorSpace;
-    mosaicCamo.map.wrapS = mosaicCamo.map.wrapT = THREE.RepeatWrapping;
-    mosaicCamo.map.repeat.set(10, 10);
-    pairs.set('mosaicCamo', mosaicCamo.map);
-
-    // mosaicGlitch
-    const mosaicGlitch = useTexture({
-        map: 'textures/paves/mosGlitch.png',
-    });
-    mosaicGlitch.map.colorSpace = THREE.SRGBColorSpace;
-    mosaicGlitch.map.wrapS = mosaicGlitch.map.wrapT = THREE.RepeatWrapping;
-    mosaicGlitch.map.repeat.set(10, 10);
-    pairs.set('mosaicGlitch', mosaicGlitch.map);
+    pairs.set('baguette', baguette.map);
+    pairs.set('baguetteNormal', baguette.normalMap);
 
     /* HEXAGON PAVE*/
-    // hexagonWhD
-    const hexagonWhD = useTexture({
-        map: 'textures/paves/HEXAGON/Hexagon_Pavè.webp',
+    const hexagon = useTexture({
+        map: 'textures/proveDiamanti/Hexagon_Pavè.webp',
+        normalMap: 'textures/proveDiamanti/Normal_Hexagon.webp'
     });
-    hexagonWhD.map.colorSpace = THREE.SRGBColorSpace;
-    hexagonWhD.map.wrapS = hexagonWhD.map.wrapT = THREE.RepeatWrapping;
-    hexagonWhD.map.repeat.set(10, 10);
-    pairs.set('hexagonWhD', hexagonWhD.map);
+    hexagon.map.colorSpace = THREE.SRGBColorSpace;
+    hexagon.map.wrapS = hexagon.map.wrapT = THREE.RepeatWrapping;
+    hexagon.map.repeat.set(6, 6);
+    hexagon.normalMap.wrapS = hexagon.normalMap.wrapT = THREE.RepeatWrapping;
+    hexagon.normalMap.repeat.set(6, 6);
 
-    // hexagonBrD
-    const hexagonBrD = useTexture({
-        map: 'textures/paves/HEXAGON/Hexagon_Pavè_Marrone.webp',
-    });
-    hexagonBrD.map.colorSpace = THREE.SRGBColorSpace;
-    hexagonBrD.map.wrapS = hexagonBrD.map.wrapT = THREE.RepeatWrapping;
-    hexagonBrD.map.repeat.set(10, 10);
-    pairs.set('hexagonBrD', hexagonBrD.map);
+    pairs.set('hexagon', hexagon.map);
+    pairs.set('hexagonNormal', hexagon.normalMap);
 
-    // hexagonBlD
-    const hexagonBlD = useTexture({
-        map: 'textures/paves/HEXAGON/Hexagon_Pavè_Nero.webp',
-    });
-    hexagonBlD.map.colorSpace = THREE.SRGBColorSpace;
-    hexagonBlD.map.wrapS = hexagonBlD.map.wrapT = THREE.RepeatWrapping;
-    hexagonBlD.map.repeat.set(10, 10);
-    pairs.set('hexagonBlD', hexagonBlD.map);
+    let hex;
 
-    // hexagonRuby
-    const hexagonRuby = useTexture({
-            map: 'textures/paves/HEXAGON/Hexagon_Pavè_Rosso.webp'},
-    );
-    hexagonRuby.map.colorSpace = THREE.SRGBColorSpace;
-    hexagonRuby.map.wrapS = hexagonRuby.map.wrapT = THREE.RepeatWrapping;
-    hexagonRuby.map.repeat.set(10, 10);
-    pairs.set('hexagonRuby', hexagonRuby.map);
-
-    // hexagonEmerald
-    const hexagonEmerald = useTexture({
-        map: 'textures/paves/HEXAGON/Hexagon_Pavè_Verde.webp',
-    });
-    hexagonEmerald.map.colorSpace = THREE.SRGBColorSpace;
-    hexagonEmerald.map.wrapS = hexagonEmerald.map.wrapT = THREE.RepeatWrapping;
-    hexagonEmerald.map.repeat.set(10, 10);
-    pairs.set('hexagonEmerald', hexagonEmerald.map);
-
-    // hexagonAmeth
-    const hexagonAmeth = useTexture({
-        map: 'textures/paves/HEXAGON/Hexagon_Pavè_Viola_Scuro.webp',
-    });
-    hexagonAmeth.map.colorSpace = THREE.SRGBColorSpace;
-    hexagonAmeth.map.wrapS = hexagonAmeth.map.wrapT = THREE.RepeatWrapping;
-    hexagonAmeth.map.repeat.set(10, 10);
-    pairs.set('hexagonAmeth', hexagonAmeth.map);
-
-    // hexagonAqua
-    const hexagonAqua = useTexture({
-        map: 'textures/paves/HEXAGON/Hexagon_Pavè_Azzurro.webp',
-    });
-    hexagonAqua.map.colorSpace = THREE.SRGBColorSpace;
-    hexagonAqua.map.wrapS = hexagonAqua.map.wrapT = THREE.RepeatWrapping;
-    hexagonAqua.map.repeat.set(10, 10);
-    pairs.set('hexagonAqua', hexagonAqua.map);
-
-    // hexagonBSapph
-    const hexagonBSapph = useTexture({
-        map: 'textures/paves/HEXAGON/Hexagon_Pavè_Blu.webp',
-    });
-    hexagonBSapph.map.colorSpace = THREE.SRGBColorSpace;
-    hexagonBSapph.map.wrapS = hexagonBSapph.map.wrapT = THREE.RepeatWrapping;
-    hexagonBSapph.map.repeat.set(10, 10);
-    pairs.set('hexagonBSapph', hexagonBSapph.map);
-
-    // hexagonPSapph
-    const hexagonPSapph = useTexture({
-        map: 'textures/paves/HEXAGON/Hexagon_Pavè_Viola.webp',
-    });
-    hexagonPSapph.map.colorSpace = THREE.SRGBColorSpace;
-    hexagonPSapph.map.wrapS = hexagonPSapph.map.wrapT = THREE.RepeatWrapping;
-    hexagonPSapph.map.repeat.set(10, 10);
-    pairs.set('hexagonPSapph', hexagonPSapph.map);
-
-    // hexagonYSapph
-    const hexagonYSapph = useTexture({
-        map: 'textures/paves/HEXAGON/Hexagon_Pavè_Giallo.webp',
-    });
-    hexagonYSapph.map.colorSpace = THREE.SRGBColorSpace;
-    hexagonYSapph.map.wrapS = hexagonYSapph.map.wrapT = THREE.RepeatWrapping;
-    hexagonYSapph.map.repeat.set(10, 10);
-    pairs.set('hexagonYSapph', hexagonYSapph.map);
-
-    // hexagonCamo
-    const hexagonCamo = useTexture({
-        map: 'textures/paves/hexCamo.png',
-    });
-    hexagonCamo.map.colorSpace = THREE.SRGBColorSpace;
-    hexagonCamo.map.wrapS = hexagonCamo.map.wrapT = THREE.RepeatWrapping;
-    hexagonCamo.map.repeat.set(10, 10);
-    pairs.set('hexagonCamo', hexagonCamo.map);
-
-    // hexagonGlitch
-    const hexagonGlitch = useTexture({
-        map: 'textures/paves/hexGlitch.png',
-    });
-    hexagonGlitch.map.colorSpace = THREE.SRGBColorSpace;
-    hexagonGlitch.map.wrapS = hexagonGlitch.map.wrapT = THREE.RepeatWrapping;
-    hexagonGlitch.map.repeat.set(10, 10);
-    pairs.set('hexagonGlitch', hexagonGlitch.map);
-
-
-    // roundWhD
-    const roundDecalGold = useTexture({
-        map: 'textures/proveDiamanti/Round_Pavè_Struttura_Oro_Giallo.webp',
-        normalMap: 'textures/proveDiamanti/Normal_Struttura.png'
-    });
-    roundDecalGold.map.colorSpace = THREE.SRGBColorSpace;
-    roundDecalGold.map.wrapS = roundDecalGold.map.wrapT = THREE.RepeatWrapping;
-    roundDecalGold.map.repeat.set(25, 25);
-    roundDecalGold.normalMap.wrapS = roundDecalGold.map.wrapT = THREE.RepeatWrapping;
-    roundDecalGold.normalMap.repeat.set(25, 25);
-
-    if(pave === 'round' && stone === 'whD') {
-        return (
-            <>
-            <meshStandardMaterial
-                transparent={true}
-                map={roundWhD.map}
-                normalMap={roundWhD.normalMap}
-                metalness={0.6}
-                roughness={0.1}
-                envMap={envMap}
-            />
-
-            </>
-        )
+    switch(stone) {
+        case 'bSapph':
+            hex = 0x0073b6;
+            break;
+        case 'aqua':
+            hex = 0x00bdca;
+            break;
+        case 'emerald':
+            hex = 0x0c8241;
+            break;
+        case 'ySapph':
+            hex = 0xffc007;
+            break;
+        case 'ruby':
+            hex = 0xe91825;
+            break;
+        case 'pSapph':
+            hex = 0xff6588;
+            break;
+        case 'ameth':
+            hex = 0xae3b9f;
+            break;
+        case 'whD':
+            hex = 0xffffff;
+            break;
+        case 'brD':
+            hex = 0x4c3e34;
+            break;
+        case 'blD':
+            hex = 0x1d1e1e;
+            break;
+        default:
+            hex = 0xffffff;
+            break;
     }
+
+
 
     return (
         <meshStandardMaterial
-            map={pairs.get(pave + firstCapital(stone))}
+            transparent={true}
+            map={pairs.get(pave)}
+            normalMap={pairs.get(pave + "Normal")}
+            color={hex}
             metalness={1}
             roughness={0.1}
-            envMap = {envMap}
+            envMap={envMap}
         />
     )
 }

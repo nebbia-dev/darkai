@@ -9,6 +9,7 @@ import DecalPave from "@/app/_components/_materials/DecalPave";
 import FullMaterial_ICS from "@/app/_components/_materials/FullMaterial_ICS";
 import Pave from "@/app/_components/_materials/Pave";
 import resetUvs from "@/app/_helpers/_models-modifiers/resetUvs";
+import RoundPaveBase from "@/app/_components/_materials/RoundPaveBase";
 
 export default function IcsSx() {
     const toothGeometry = useTeethStore((state: State) => state.teethGeometry.icssx);
@@ -32,7 +33,7 @@ export default function IcsSx() {
             case 'fullDiamond':
             case 'bezelDiamond':
                 geometry = [toothGeometry.fullDiamond.base, toothGeometry.fullDiamond.full];
-                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>,<Pave pave={toothPave.shape} stone={toothPave.color} position={toothGeometry.fullDiamond.position}/>];
+                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>,<Pave pave={toothPave.shape} stone={toothPave.color}/>, <RoundPaveBase color={toothMaterial} type={toothPave.shape}/>];
                 position = toothGeometry.fullDiamond.position;
                 break;
             case 'frame':
@@ -72,13 +73,18 @@ export default function IcsSx() {
         if(geometry.length === 2) {
             return (
                 <>
-                    <mesh geometry={geometry[0]} visible={visible} position={barPositions?.[0] ?? position}>
+                    <mesh geometry={geometry[0]} visible={visible} position={barPositions?.[0]}>
                         {material[0]}
                     </mesh>
-                    <mesh geometry={geometry[1]} visible={visible} position={barPositions?.[1] ?? position}>
+                    <mesh geometry={geometry[1]} visible={visible} position={barPositions?.[1]}>
                         {material[1]}
-                        {/*{type !== 'enamel' && <DecalPave position={position} pave={toothPave.shape} stone={toothPave.color}/>}*/}
                     </mesh>
+                    {(toothPave.shape === "round" || toothPave.shape === "mosaic") &&
+                        <mesh geometry={geometry[1]} visible={visible} position={barPositions?.[1]}>
+                            {material[0]}
+                            {material[2]}
+                        </mesh>
+                    }
                 </>
             )
         }

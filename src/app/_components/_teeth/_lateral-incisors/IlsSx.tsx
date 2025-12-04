@@ -32,7 +32,7 @@ export default function IlsSx() {
             case 'fullDiamond':
             case 'bezelDiamond':
                 geometry = [toothGeometry.fullDiamond.base, toothGeometry.fullDiamond.full];
-                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>, <Pave pave={toothPave.shape} stone={toothPave.color}/>, <RoundPaveBase color="gold"/>]
+                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>, <Pave pave={toothPave.shape} stone={toothPave.color}/>, <RoundPaveBase color={toothMaterial} type={toothPave.shape}/>]
                 position = toothGeometry.fullDiamond.position;
                 break;
             case 'frame':
@@ -78,10 +78,12 @@ export default function IlsSx() {
                         {material[1]}
                         {/*{type !== 'enamel' && <DecalPave position={position} pave={toothPave.shape} stone={toothPave.color}/>}*/}
                     </mesh>
-                    <mesh geometry={geometry[1]} visible={visible}>
-                        {material[0]}
-                        {material[2]}
-                    </mesh>
+                    {(toothPave.shape === "round" || toothPave.shape === "mosaic") &&
+                        <mesh geometry={geometry[1]} visible={visible}>
+                            {material[0]}
+                            {material[2]}
+                        </mesh>
+                    }
                 </>
             )
         }
