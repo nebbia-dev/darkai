@@ -1,4 +1,4 @@
-import {useTexture} from "@react-three/drei";
+import {Decal, useTexture} from "@react-three/drei";
 import * as THREE from "three";
 import firstCapital from "@/app/_helpers/_string-modders/firstCapital";
 import {useTeethStore} from "@/app/_stores/teeth";
@@ -13,11 +13,15 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
     /* ROUND PAVE*/
     // roundWhD
     const roundWhD = useTexture({
-        map: 'textures/paves/ROUND/Round_Pavè.webp',
+        map: 'textures/proveDiamanti/Round_Pavè_Diamanti.webp',
+        normalMap: 'textures/proveDiamanti/Normal_Diamanti.png'
     });
     roundWhD.map.colorSpace = THREE.SRGBColorSpace;
     roundWhD.map.wrapS = roundWhD.map.wrapT = THREE.RepeatWrapping;
-    roundWhD.map.repeat.set(10, 10);
+    roundWhD.map.repeat.set(25, 25);
+    roundWhD.normalMap.wrapS = roundWhD.map.wrapT = THREE.RepeatWrapping;
+    roundWhD.normalMap.repeat.set(25, 25);
+
     pairs.set('roundWhD', roundWhD.map);
 
     // roundBrD
@@ -555,9 +559,37 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
     hexagonGlitch.map.repeat.set(10, 10);
     pairs.set('hexagonGlitch', hexagonGlitch.map);
 
-    return(
+
+    // roundWhD
+    const roundDecalGold = useTexture({
+        map: 'textures/proveDiamanti/Round_Pavè_Struttura_Oro_Giallo.webp',
+        normalMap: 'textures/proveDiamanti/Normal_Struttura.png'
+    });
+    roundDecalGold.map.colorSpace = THREE.SRGBColorSpace;
+    roundDecalGold.map.wrapS = roundDecalGold.map.wrapT = THREE.RepeatWrapping;
+    roundDecalGold.map.repeat.set(25, 25);
+    roundDecalGold.normalMap.wrapS = roundDecalGold.map.wrapT = THREE.RepeatWrapping;
+    roundDecalGold.normalMap.repeat.set(25, 25);
+
+    if(pave === 'round' && stone === 'whD') {
+        return (
+            <>
+            <meshStandardMaterial
+                transparent={true}
+                map={roundWhD.map}
+                normalMap={roundWhD.normalMap}
+                metalness={0.6}
+                roughness={0.1}
+                envMap={envMap}
+            />
+
+            </>
+        )
+    }
+
+    return (
         <meshStandardMaterial
-            map={pairs.get(pave+firstCapital(stone))}
+            map={pairs.get(pave + firstCapital(stone))}
             metalness={1}
             roughness={0.1}
             envMap = {envMap}

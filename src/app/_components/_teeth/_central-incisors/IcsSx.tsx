@@ -32,7 +32,7 @@ export default function IcsSx() {
             case 'fullDiamond':
             case 'bezelDiamond':
                 geometry = [toothGeometry.fullDiamond.base, toothGeometry.fullDiamond.full];
-                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>,<Pave pave={toothPave.shape} stone={toothPave.color}/>];
+                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>,<Pave pave={toothPave.shape} stone={toothPave.color} position={toothGeometry.fullDiamond.position}/>];
                 position = toothGeometry.fullDiamond.position;
                 break;
             case 'frame':
@@ -72,10 +72,10 @@ export default function IcsSx() {
         if(geometry.length === 2) {
             return (
                 <>
-                    <mesh geometry={geometry[0]} visible={visible} position={barPositions?.[0]}>
+                    <mesh geometry={geometry[0]} visible={visible} position={barPositions?.[0] ?? position}>
                         {material[0]}
                     </mesh>
-                    <mesh geometry={geometry[1]} visible={visible} position={barPositions?.[1]}>
+                    <mesh geometry={geometry[1]} visible={visible} position={barPositions?.[1] ?? position}>
                         {material[1]}
                         {/*{type !== 'enamel' && <DecalPave position={position} pave={toothPave.shape} stone={toothPave.color}/>}*/}
                     </mesh>

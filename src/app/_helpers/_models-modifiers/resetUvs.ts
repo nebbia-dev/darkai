@@ -6,6 +6,7 @@ export default function resetUvs( geometry: THREE.BufferGeometry )
 
     for( let i= 0; i < pos.count; i++ )
     {
+        // standard
         let x = pos.getX(i) / 5,
             y = pos.getY(i) / 5
 

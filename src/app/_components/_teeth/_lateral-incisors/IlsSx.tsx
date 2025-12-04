@@ -8,6 +8,7 @@ import FullEnamel from "@/app/_components/_materials/FullEnamel";
 import DecalPave from "@/app/_components/_materials/DecalPave";
 import Pave from "@/app/_components/_materials/Pave";
 import resetUvs from "@/app/_helpers/_models-modifiers/resetUvs";
+import RoundPaveBase from "@/app/_components/_materials/RoundPaveBase";
 
 export default function IlsSx() {
     const toothGeometry = useTeethStore((state: State) => state.teethGeometry.ilssx);
@@ -31,7 +32,7 @@ export default function IlsSx() {
             case 'fullDiamond':
             case 'bezelDiamond':
                 geometry = [toothGeometry.fullDiamond.base, toothGeometry.fullDiamond.full];
-                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>, <Pave pave={toothPave.shape} stone={toothPave.color}/>]
+                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>, <Pave pave={toothPave.shape} stone={toothPave.color}/>, <RoundPaveBase color="gold"/>]
                 position = toothGeometry.fullDiamond.position;
                 break;
             case 'frame':
@@ -77,10 +78,14 @@ export default function IlsSx() {
                         {material[1]}
                         {/*{type !== 'enamel' && <DecalPave position={position} pave={toothPave.shape} stone={toothPave.color}/>}*/}
                     </mesh>
+                    <mesh geometry={geometry[1]} visible={visible}>
+                        {material[0]}
+                        {material[2]}
+                    </mesh>
                 </>
             )
         }
-        if(geometry.length === 4) {
+        if (geometry.length === 4) {
             return (
                 <>
                     <mesh geometry={geometry[0]} visible={visible}>
