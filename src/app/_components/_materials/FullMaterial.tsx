@@ -119,7 +119,7 @@ export default function FullMaterial({color, finish} : {color: string, finish:st
                     : color === 'white' || finish === 'hammered' || finish === 'sprinkles'
                         ? 'white'
                         : color === 'black' && finish !== 'hammered'
-                            ? '#2B2D30'
+                            ? '#3c3c3c'
                             : 'grey'}
             onUpdate={(self) => (self.needsUpdate = true)}
             attach='material'

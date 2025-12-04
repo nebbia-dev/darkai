@@ -33,7 +33,7 @@ export default function FullMaterial_ICS({color, finish} : {color: string, finis
                     : color === 'white'
                         ? 'white'
                         : color === 'black'
-                            ? '#2B2D30'
+                            ? '#3c3c3c'
                             : 'grey'}
             onUpdate={(self) => (self.needsUpdate = true)}
             attach='material'

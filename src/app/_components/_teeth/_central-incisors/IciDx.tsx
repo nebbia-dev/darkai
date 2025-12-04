@@ -8,6 +8,7 @@ import FullEnamel from "@/app/_components/_materials/FullEnamel";
 import DecalPave from "@/app/_components/_materials/DecalPave";
 import resetUvs from "@/app/_helpers/_models-modifiers/resetUvs";
 import Pave from "@/app/_components/_materials/Pave";
+import RoundPaveBase from "@/app/_components/_materials/RoundPaveBase";
 export default function IciDx() {
     const toothGeometry = useTeethStore((state: State) => state.teethGeometry.icidx);
     const toothJewelType = useTeethStore((state: State) => state.teethJewelType.icidx);
@@ -30,7 +31,7 @@ export default function IciDx() {
             case 'fullDiamond':
             case 'bezelDiamond':
                 geometry = [toothGeometry.fullDiamond.base, toothGeometry.fullDiamond.full];
-                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>, <Pave pave={toothPave.shape} stone={toothPave.color}/>]
+                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>, <Pave pave={toothPave.shape} stone={toothPave.color}/>, <RoundPaveBase color={toothMaterial} type={toothPave.shape}/>]
                 position = toothGeometry.fullDiamond.position;
                 break;
             case 'frame':
@@ -45,7 +46,7 @@ export default function IciDx() {
                 break;
             case 'frameDiamond':
                 geometry = [toothGeometry.frame.diamond.base, toothGeometry.frame.diamond.full];
-                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>, <Pave pave={toothPave.shape} stone={toothPave.color}/>]
+                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>, <Pave pave={toothPave.shape} stone={toothPave.color}/>, <RoundPaveBase color={toothMaterial} type={toothPave.shape}/>]
                 position = toothGeometry.frame.diamond.position;
                 break;
             case 'bar':
@@ -55,7 +56,7 @@ export default function IciDx() {
                 break;
             case 'barDiamond':
                 geometry = [toothGeometry.bar.diamond.base, toothGeometry.bar.diamond.full];
-                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>, <Pave pave={toothPave.shape} stone={toothPave.color}/>]
+                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>, <Pave pave={toothPave.shape} stone={toothPave.color}/>, <RoundPaveBase color={toothMaterial} type={toothPave.shape}/>]
                 position = toothGeometry.bar.diamond.diamondPosition;
                 barPositions = [toothGeometry.bar.diamond.basePosition, toothGeometry.bar.diamond.fullPosition];
                 break;
@@ -75,8 +76,13 @@ export default function IciDx() {
                     </mesh>
                     <mesh geometry={geometry[1]} visible={visible} position={barPositions?.[1]}>
                         {material[1]}
-                        {/*{type !== 'enamel' && <DecalPave position={position} pave={toothPave.shape} stone={toothPave.color}/>}*/}
                     </mesh>
+                    {(toothPave.shape === "round" || toothPave.shape === "mosaic") &&
+                        <mesh geometry={geometry[1]} visible={visible}>
+                            {material[0]}
+                            {material[2]}
+                        </mesh>
+                    }
                 </>
             )
         }

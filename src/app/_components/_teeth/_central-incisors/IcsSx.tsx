@@ -48,7 +48,7 @@ export default function IcsSx() {
                 break;
             case 'frameDiamond':
                 geometry = [toothGeometry.frame.diamond.base, toothGeometry.frame.diamond.full];
-                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>,<Pave pave={toothPave.shape} stone={toothPave.color}/>];
+                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>,<Pave pave={toothPave.shape} stone={toothPave.color}/>, <RoundPaveBase color={toothMaterial} type={toothPave.shape}/>];
                 position = toothGeometry.frame.diamond.position;
                 break;
             case 'bar':
@@ -58,7 +58,7 @@ export default function IcsSx() {
                 break;
             case 'barDiamond':
                 geometry = [toothGeometry.bar.diamond.base, toothGeometry.bar.diamond.full];
-                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>, <Pave pave={toothPave.shape} stone={toothPave.color}/>];
+                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>, <Pave pave={toothPave.shape} stone={toothPave.color}/>, <RoundPaveBase color={toothMaterial} type={toothPave.shape}/>];
                 position = new THREE.Vector3();
                 barPositions = [toothGeometry.bar.diamond.basePosition, toothGeometry.bar.diamond.fullPosition];
                 break;
@@ -68,7 +68,7 @@ export default function IcsSx() {
                 position = new THREE.Vector3();
         }
 
-        resetUvs(toothGeometry.fullDiamond.full);
+        resetUvs(toothGeometry.fullDiamond.full, false);
 
         if(geometry.length === 2) {
             return (

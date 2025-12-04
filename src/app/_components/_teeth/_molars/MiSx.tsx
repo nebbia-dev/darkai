@@ -6,6 +6,9 @@ import {State} from "@/app/_types/State";
 import * as THREE from 'three'
 import DecalPave from "@/app/_components/_materials/DecalPave";
 import FullMaterial_ICS from "@/app/_components/_materials/FullMaterial_ICS";
+import Pave from "@/app/_components/_materials/Pave";
+import RoundPaveBase from "@/app/_components/_materials/RoundPaveBase";
+import resetUvs from "@/app/_helpers/_models-modifiers/resetUvs";
 
 export default function MiSx() {
     const toothGeometry = useTeethStore((state: State) => state.teethGeometry.misx);
@@ -25,7 +28,7 @@ export default function MiSx() {
                 break;
             case 'fullDiamond':
                 geometry = [toothGeometry.fullDiamond.base, toothGeometry.fullDiamond.full];
-                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>, <FullMaterial color={toothMaterial} finish={toothFinish}/>]
+                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>, <Pave pave={toothPave.shape} stone={toothPave.color}/>, <RoundPaveBase color={toothMaterial} type={toothPave.shape}/>]
                 position = toothGeometry.fullDiamond.position;
                 break;
             default:
@@ -33,6 +36,8 @@ export default function MiSx() {
                 material = [<FullMaterial_ICS color={toothMaterial} finish={toothFinish}/>];
                 position = new THREE.Vector3();
         }
+
+        resetUvs(toothGeometry.fullDiamond.full, true);
 
         if(geometry.length === 2) {
             return (
@@ -42,8 +47,13 @@ export default function MiSx() {
                     </mesh>
                     <mesh geometry={geometry[1]} visible={visible}>
                         {material[1]}
-                        {type !== 'enamel' && <DecalPave scale={type === 'bigBarDiamond' ? 3 : 1} position={position} pave={toothPave.shape} stone={toothPave.color}/>}
                     </mesh>
+                    {(toothPave.shape === "round" || toothPave.shape === "mosaic") &&
+                        <mesh geometry={geometry[1]} visible={visible}>
+                            {material[0]}
+                            {material[2]}
+                        </mesh>
+                    }
                 </>
             )
         }

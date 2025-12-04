@@ -8,7 +8,8 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
     // const envMap = useTeethStore((state) => state.envMap);
 
     const envMap = useEnvironment({
-        files: "envMaps/rosendal_park_sunset_puresky_1k.exr"
+        // files: "envMaps/rosendal_park_sunset_puresky_1k.exr"
+        files: "envMaps/Diamond_HDRI_Schiarita.hdr"
         // files: "envMaps/Diamond_HDRI.hdr"
     })
 
@@ -16,7 +17,7 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
 
     /* ROUND PAVE*/
     const round = useTexture({
-        map: 'textures/proveDiamanti/Round_Pavè_Diamanti.webp',
+        map: 'textures/proveDiamanti/Round_Pavè_Diamanti_V03.webp',
         normalMap: 'textures/proveDiamanti/Normal_Diamanti_Round.png'
     });
     round.map.colorSpace = THREE.SRGBColorSpace;
@@ -130,9 +131,10 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
             transparent={true}
             map={pairs.get(pave)}
             normalMap={pairs.get(pave + "Normal")}
+            envMapIntensity={2}
             color={hex}
             metalness={1}
-            roughness={0.1}
+            roughness={0}
             envMap={envMap}
         />
     )
