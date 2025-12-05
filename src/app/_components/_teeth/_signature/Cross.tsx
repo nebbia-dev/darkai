@@ -5,6 +5,9 @@ import {useTeethStore} from "@/app/_stores/teeth";
 import {State} from "@/app/_types/State";
 import DecalPave from "@/app/_components/_materials/DecalPave";
 import * as THREE from "three";
+import Pave from "@/app/_components/_materials/Pave";
+import RoundPaveBase from "@/app/_components/_materials/RoundPaveBase";
+import resetUvs from "@/app/_helpers/_models-modifiers/resetUvs";
 
 export default function Cross() {
     const signatureGeometry = useTeethStore((state: State) => state.teethGeometry.signature?.cross);
@@ -17,7 +20,7 @@ export default function Cross() {
         switch(mat) {
             case 'pave':
                 geometry = [signatureGeometry.base, signatureGeometry.pave];
-                material = [<FullMaterial finish="polished" color="white"/>];
+                material = [<FullMaterial finish="polished" color="white"/>, <Pave pave="round" stone="whD"/>, <RoundPaveBase color="white" type="round"/>];
                 break;
             case 'white':
                 geometry = [signatureGeometry.full];
@@ -36,6 +39,8 @@ export default function Cross() {
                 material = [<FullMaterial finish="polished" color="white"/>];
         }
 
+        resetUvs(signatureGeometry.pave, false, 'cross');
+
         if(geometry.length === 2) {
             return (
                 <>
@@ -43,16 +48,19 @@ export default function Cross() {
                         {material[0]}
                     </mesh>
                     <mesh geometry={geometry[1]} visible={visible} position={position}>
+                        {material[1]}
+                    </mesh>
+                    <mesh geometry={geometry[1]} visible={visible} position={position}>
                         {material[0]}
-                        {mat === 'pave' && <DecalPave position={[0,0,0]} pave='round' stone='whD'/>}
+                        {material[2]}
                     </mesh>
                 </>
             )
         }
 
-            return (
-                <>
-                    <mesh geometry={geometry[0]} visible={visible} position={position}>
+        return (
+            <>
+                <mesh geometry={geometry[0]} visible={visible} position={position}>
                         {material[0]}
                     </mesh>
                 </>
