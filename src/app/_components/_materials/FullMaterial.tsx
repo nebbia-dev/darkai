@@ -15,8 +15,8 @@ export default function FullMaterial({color, finish} : {color: string, finish:st
     diamondCut.map.colorSpace = THREE.SRGBColorSpace;
     diamondCut.map.wrapS = diamondCut.map.wrapT = THREE.RepeatWrapping;
     diamondCut.normalMap.wrapS = diamondCut.normalMap.wrapT = THREE.RepeatWrapping;
-    diamondCut.map.repeat.set(200,200);
-    diamondCut.normalMap.repeat.set(200,200);
+    diamondCut.map.repeat.set(200, 200);
+    diamondCut.normalMap.repeat.set(200, 200);
 
     // hammered texture loading
     const hammeredProps = useTexture({
@@ -25,36 +25,52 @@ export default function FullMaterial({color, finish} : {color: string, finish:st
         roughnessMap: 'textures/finish/Hammered_DefaultMaterial_Roughness.webp',
     });
 
+    hammeredProps.normalMap.flipY = false;
+    hammeredProps.metalnessMap.flipY = false;
+    hammeredProps.roughnessMap.flipY = false;
+
     const hammeredGold = useTexture({
         map: 'textures/finish/Hammered_DefaultMaterial_Gold.webp',
     });
     hammeredGold.map.colorSpace = THREE.SRGBColorSpace;
+    hammeredGold.map.flipY = false;
+
     const hammeredWhite = useTexture({
         map: 'textures/finish/Hammered_DefaultMaterial_White.webp',
     });
     hammeredWhite.map.colorSpace = THREE.SRGBColorSpace;
+    hammeredWhite.map.flipY = false;
+
     const hammeredBlack = useTexture({
         map: 'textures/finish/Hammered_DefaultMaterial_Black.webp',
     });
     hammeredBlack.map.colorSpace = THREE.SRGBColorSpace;
+    hammeredBlack.map.flipY = false;
+
 
     // sprinkles texture loading
     const sprinklesProps = useTexture({
         normalMap: 'textures/finish/Sprinkles_Normal.webp',
     });
+    sprinklesProps.normalMap.flipY = false;
 
     const sprinklesGold = useTexture({
         map: 'textures/finish/Sprinkles_Albedo_Giallo.webp',
     });
     sprinklesGold.map.colorSpace = THREE.SRGBColorSpace;
+    sprinklesGold.map.flipY = false;
+
     const sprinklesWhite = useTexture({
         map: 'textures/finish/Sprinkles_Albedo_Bianco.webp',
     });
     sprinklesWhite.map.colorSpace = THREE.SRGBColorSpace;
+    sprinklesWhite.map.flipY = false;
+
     const sprinklesRose = useTexture({
         map: 'textures/finish/Sprinkles_Albedo_Rosa.webp',
     });
     sprinklesRose.map.colorSpace = THREE.SRGBColorSpace;
+    sprinklesRose.map.flipY = false;
 
         return (<meshStandardMaterial
             map={finish === 'diamond_cut'
@@ -103,7 +119,7 @@ export default function FullMaterial({color, finish} : {color: string, finish:st
                     : color === 'white' || finish === 'hammered' || finish === 'sprinkles'
                         ? 'white'
                         : color === 'black' && finish !== 'hammered'
-                            ? '#2B2D30'
+                            ? '#3c3c3c'
                             : 'grey'}
             onUpdate={(self) => (self.needsUpdate = true)}
             attach='material'

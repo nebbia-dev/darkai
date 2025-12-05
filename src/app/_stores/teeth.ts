@@ -350,7 +350,7 @@ export const useTeethStore = create<State>((set, get) => ({
                                 state.teethVisibility.icsdx = true;
                                 if(type === 'bezel') {
                                     state.teethStones.icsdx = {shape: 'circle', color: 'bSapph'};
-                                    state.teethPaves.icsdx = {shape: 'round', color: 'ruby'};
+                                    state.teethPaves.icsdx = {shape: state.teethPaves[tooth].shape, color: 'ruby'};
                                 }
                                 break;
                             case 'icssx':
@@ -361,7 +361,7 @@ export const useTeethStore = create<State>((set, get) => ({
                                 state.teethVisibility.icssx = true;
                                 if(type === 'bezel') {
                                     state.teethStones.icssx = {shape: 'circle', color: 'bSapph'};
-                                    state.teethPaves.icssx = {shape: 'round', color: 'ruby'};
+                                    state.teethPaves.icssx = {shape: state.teethPaves[tooth].shape, color: 'ruby'};
                                 }
                                 break;
                             case 'icidx':
@@ -372,7 +372,7 @@ export const useTeethStore = create<State>((set, get) => ({
                                 state.teethVisibility.icidx = true;
                                 if(type === 'bezel') {
                                     state.teethStones.icidx = {shape: 'circle', color: 'bSapph'};
-                                    state.teethPaves.icidx = {shape: 'round', color: 'ruby'};
+                                    state.teethPaves.icidx = {shape: state.teethPaves[tooth].shape, color: 'ruby'};
                                 }
                                 break;
                             case 'icisx':
@@ -383,7 +383,7 @@ export const useTeethStore = create<State>((set, get) => ({
                                 state.teethVisibility.icisx = true;
                                 if(type === 'bezel') {
                                     state.teethStones.icisx = {shape: 'circle', color: 'bSapph'};
-                                    state.teethPaves.icisx = {shape: 'round', color: 'ruby'};
+                                    state.teethPaves.icisx = {shape: state.teethPaves[tooth].shape, color: 'ruby'};
                                 }
                                 break;
                         }
@@ -418,6 +418,9 @@ export const useTeethStore = create<State>((set, get) => ({
                             state.teethMaterial[tooth] = 'gold';
                         }
 
+                        // if you switch to a spacer, the pave type can be only round
+                        state.teethPaves[tooth].shape = 'round';
+
                         switch (tooth) {
                             case 'icsdx':
                                 state.teethMaterial.icssx = state.teethMaterial.icsdx;
@@ -439,9 +442,12 @@ export const useTeethStore = create<State>((set, get) => ({
 
                     } else {
                         state.teethJewelType[tooth] = type + 'Diamond';
+                        if(type === 'frame' || type === 'bar') {
+                            state.teethPaves[tooth].shape = 'round';
+                        }
                         if(type === 'bezel') {
                             state.teethStones[tooth] = {shape: 'circle', color: 'bSapph'};
-                            state.teethPaves[tooth] = {shape: 'round', color: 'ruby'};
+                            state.teethPaves[tooth] = {shape: state.teethPaves[tooth].shape, color: 'ruby'};
                         } else {
                             state.teethStones[tooth] = {shape: undefined, color: undefined};
                         }
@@ -466,6 +472,7 @@ export const useTeethStore = create<State>((set, get) => ({
                     state.teethMaterial.cisx = state.teethMaterial[tooth];
                     state.teethJewelType.cidx = type + 'Diamond';
                     state.teethJewelType.cisx = type + 'Diamond';
+                    state.teethPaves[tooth].shape = 'round';
                     state.teethPaves.cidx = state.teethPaves[tooth];
                     state.teethPaves.cisx = state.teethPaves[tooth];
                     state.teethStones.cisx = {shape: undefined, color: undefined};
@@ -1014,13 +1021,46 @@ export const useTeethStore = create<State>((set, get) => ({
 
                     switch(pave) {
                         case 'nopave-pol':
-                            state.teethFinish[tooth] = 'polished';
+                            if(state.teethJewelType[tooth].includes('bigBar')) {
+                                state.teethFinish.cidx = 'polished';
+                                state.teethFinish.cisx = 'polished';
+                            } else if(state.teethJewelType[tooth].includes('bar') && (tooth === 'icsdx' || tooth === 'icssx')){
+                                state.teethFinish.icsdx = 'polished';
+                                state.teethFinish.icssx = 'polished';
+                            } else if(state.teethJewelType[tooth].includes('bar') && (tooth === 'icidx' || tooth === 'icisx')){
+                                state.teethFinish.icidx = 'polished';
+                                state.teethFinish.icisx = 'polished';
+                            } else {
+                                state.teethFinish[tooth] = 'polished';
+                            }
                             break;
                         case 'nopave-sblast':
-                            state.teethFinish[tooth] = 'sandblasted';
+                            if(state.teethJewelType[tooth].includes('bigBar')) {
+                                state.teethFinish.cidx = 'sandblasted';
+                                state.teethFinish.cisx = 'sandblasted';
+                            } else if(state.teethJewelType[tooth].includes('bar') && (tooth === 'icsdx' || tooth === 'icssx')){
+                                state.teethFinish.icsdx = 'sandblasted';
+                                state.teethFinish.icssx = 'sandblasted';
+                            } else if(state.teethJewelType[tooth].includes('bar') && (tooth === 'icidx' || tooth === 'icisx')){
+                                state.teethFinish.icidx = 'sandblasted';
+                                state.teethFinish.icisx = 'sandblasted';
+                            } else {
+                                state.teethFinish[tooth] = 'sandblasted';
+                            }
                             break;
                         case 'nopave-dcut':
-                            state.teethFinish[tooth] = 'diamond_cut';
+                            if(state.teethJewelType[tooth].includes('bigBar')) {
+                                state.teethFinish.cidx = 'diamond_cut';
+                                state.teethFinish.cisx = 'diamond_cut';
+                            } else if(state.teethJewelType[tooth].includes('bar') && (tooth === 'icsdx' || tooth === 'icssx')){
+                                state.teethFinish.icsdx = 'diamond_cut';
+                                state.teethFinish.icssx = 'diamond_cut';
+                            } else if(state.teethJewelType[tooth].includes('bar') && (tooth === 'icidx' || tooth === 'icisx')){
+                                state.teethFinish.icidx = 'diamond_cut';
+                                state.teethFinish.icisx = 'diamond_cut';
+                            } else {
+                                state.teethFinish[tooth] = 'diamond_cut';
+                            }
                             break;
                         default:
                             state.teethFinish[tooth] = 'polished';

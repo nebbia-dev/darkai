@@ -4,56 +4,36 @@ import StonesMaterial from "@/app/_components/_materials/StonesMaterial";
 import {JSX, memo} from "react";
 import {State} from "@/app/_types/State";
 import * as THREE from 'three'
+import FullMaterial from "@/app/_components/_materials/FullMaterial";
+import getQuaternion from "@/app/_helpers/_models-modifiers/getQuaternion";
 export default function IliSxStone() {
     const tooth = useTeethStore((state: State) => state.teethGeometry.ilisx ? state.teethGeometry.ilisx.stones : undefined);
     const toothStone =  useTeethStore((state: State) => state.teethStones.ilisx);
-    const ILISXstone = memo(({visible, type} : {visible: boolean, type: string|undefined}): JSX.Element => {
+    const toothMaterial = useTeethStore((state: State) => state.teethMaterial.ilisx);
+    const toothFinish = useTeethStore((state: State) => state.teethFinish.ilisx);
+    const ILISXstone = memo(({visible, type, mat} : {visible: boolean, type: string|undefined, mat: string}): JSX.Element => {
         if(!tooth || !toothStone.shape) {
             return (
-                <mesh>
-                </mesh>
+                <></>
             )
         }
-        let shape;
-        switch(type) {
-            case 'marquise':
-                shape = [tooth.marquise];
-                break;
-            case 'heart':
-                shape = [tooth.heart];
-                break;
-            case 'circle':
-                shape = [tooth.circle];
-                break;
-            case 'tear':
-                shape = [tooth.tear];
-                break;
-            case 'square':
-            case 'baguette':
-                shape = [tooth.square];
-                break;
-            default:
-                shape = [undefined];
-                break;
-        }
-
-        const posVec = new THREE.Vector3;
-        const pos: THREE.Vector3 = shape[0] ? shape[0].getWorldPosition(posVec) : new THREE.Vector3();
-        const quatVec = new THREE.Quaternion;
-        const quat = shape[0] ? shape[0].getWorldQuaternion(quatVec) : new THREE.Quaternion();
 
         return(
             <>
-                {shape[0] && <mesh
-                    geometry={(shape[0] as THREE.Mesh).geometry}
-                    visible={visible}
-                    position={pos}
-                    quaternion={quat}
+                <mesh geometry={tooth[toothStone.shape].geometries[0]}
+                      position={tooth[toothStone.shape].positions[0]}
+                      quaternion={getQuaternion(tooth[toothStone.shape].quaternions[0], false)}
+                >
+                    <FullMaterial color={toothMaterial} finish={toothFinish}/>
+                </mesh>
+                <mesh geometry={tooth[toothStone.shape].geometries[1]}
+                      position={tooth[toothStone.shape].positions[1]}
+                      quaternion={getQuaternion(tooth[toothStone.shape].quaternions[1], false)}
                 >
                     <StonesMaterial color={toothStone.color}/>
-                </mesh>}
+                </mesh>
             </>
         )
     })
-    return <ILISXstone visible={toothStone.shape !== undefined} type={toothStone.shape}/>
+    return <ILISXstone visible={toothStone.shape !== undefined} type={toothStone.shape} mat={toothMaterial}/>
 }

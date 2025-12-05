@@ -12,17 +12,17 @@ export default function BubbleGum() {
     const BGUM = memo(({visible, mat} : {visible: boolean, mat: string|undefined}): JSX.Element => {
         if(!signatureGeometry) return <></>
         const geometry = [signatureGeometry.base, signatureGeometry.pave];
-        const position = [signatureGeometry.positionBase, signatureGeometry.positionPave];
+        const position = signatureGeometry.position;
         let material:JSX.Element[];
         switch(mat) {
             case 'pink':
                 material = [<FullMaterial color="gold" finish="polished"/>, <FullEnamel color="pink"/>]
                 break;
             case 'blue':
-                material = [<FullMaterial color="gold" finish="polished"/>, <FullEnamel color="blue"/>]
+                material = [<FullMaterial color="white" finish="polished"/>, <FullEnamel color="blue"/>]
                 break;
             case 'green':
-                material = [<FullMaterial color="gold" finish="polished"/>, <FullEnamel color="green"/>]
+                material = [<FullMaterial color="white" finish="polished"/>, <FullEnamel color="green"/>]
                 break;
             default:
                 material = [<FullMaterial color="gold" finish="polished"/>, <FullEnamel color="pink"/>];
@@ -30,10 +30,10 @@ export default function BubbleGum() {
 
             return (
                 <>
-                    <mesh geometry={geometry[0]} visible={visible} position={position[0]}>
+                    <mesh geometry={geometry[0]} visible={visible} position={position}>
                         {material[0]}
                     </mesh>
-                    <mesh geometry={geometry[1]} visible={visible} position={position[1]}>
+                    <mesh geometry={geometry[1]} visible={visible} position={position}>
                         {material[1]}
                     </mesh>
                 </>

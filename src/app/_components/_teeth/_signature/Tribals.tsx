@@ -4,6 +4,9 @@ import FullMaterial from "@/app/_components/_materials/FullMaterial";
 import {useTeethStore} from "@/app/_stores/teeth";
 import {State} from "@/app/_types/State";
 import DecalPave from "@/app/_components/_materials/DecalPave";
+import Pave from "@/app/_components/_materials/Pave";
+import RoundPaveBase from "@/app/_components/_materials/RoundPaveBase";
+import resetUvs from "@/app/_helpers/_models-modifiers/resetUvs";
 
 export default function Tribals() {
     const signatureGeometry = useTeethStore((state: State) => state.teethGeometry.signature?.tribal);
@@ -11,11 +14,13 @@ export default function Tribals() {
     const signatureVisibility = useTeethStore((state: State) => state.signatureVisibility.tribal);
     const TRIBALS = memo(({visible, mat} : {visible: boolean, mat: string|undefined}): JSX.Element => {
         if(!signatureGeometry) return <></>
-        const geometry = [signatureGeometry.hangs, signatureGeometry.frame, signatureGeometry.back, signatureGeometry.pave,];
-        const position = signatureGeometry.position
+        const geometry = [signatureGeometry.hangs, signatureGeometry.full, signatureGeometry.frame, signatureGeometry.pave];
+        const position = [signatureGeometry.positionHangs, signatureGeometry.positionFull]
         let material:JSX.Element[];
         switch(mat) {
             case 'pave':
+                material = [<FullMaterial finish="polished" color="white"/>, <Pave pave="round" stone="whD"/>, <RoundPaveBase color="white" type="round"/>]
+                break;
             case 'white':
                 material = [<FullMaterial finish="polished" color="white"/>]
                 break;
@@ -26,22 +31,32 @@ export default function Tribals() {
                 material = [<FullMaterial finish="polished" color="white"/>];
         }
 
+        resetUvs(signatureGeometry.pave, false, "tribal")
+
             return (
                 <>
-                    <mesh geometry={geometry[0]} visible={visible}>
+                    <mesh geometry={geometry[0]} visible={visible} position={position[0]}>
                         {material[0]}
                     </mesh>
-                    <mesh geometry={geometry[1]} visible={visible} position={position}>
-                        {material[0]}
-                    </mesh>
-                    <mesh geometry={geometry[2]} visible={visible} position={position}>
-                        {material[0]}
-                    </mesh>
-                    <mesh geometry={geometry[3]} visible={visible} position={position}>
-                        {material[0]}
-                        {mat === 'pave' && <DecalPave position={[-1, 0, 0]} pave='round' stone='whD'/>}
-                        {mat === 'pave' && <DecalPave position={[0.5, 0, 0]} pave='round' stone='whD'/>}
-                    </mesh>
+                    {
+                        mat === 'pave'
+                            ?
+                            <>
+                                <mesh geometry={geometry[2]} visible={visible} position={position[1]}>
+                                    {material[0]}
+                                </mesh>
+                                <mesh geometry={geometry[3]} visible={visible} position={position[1]}>
+                                    {material[1]}
+                                </mesh>
+                                <mesh geometry={geometry[3]} visible={visible} position={position[1]}>
+                                    {material[0]}
+                                    {material[2]}
+                                </mesh>
+                            </>
+                            : <mesh geometry={geometry[1]} visible={visible} position={position[1]}>
+                                {material[0]}
+                            </mesh>
+                    }
                 </>
             )
     })

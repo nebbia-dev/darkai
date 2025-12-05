@@ -6,6 +6,13 @@ import {State} from "@/app/_types/State";
 import * as THREE from "three";
 import FullEnamel from "@/app/_components/_materials/FullEnamel";
 import DecalPave from "@/app/_components/_materials/DecalPave";
+import resetUvs from "@/app/_helpers/_models-modifiers/resetUvs";
+import Pave from "@/app/_components/_materials/Pave";
+import RoundPaveBase from "@/app/_components/_materials/RoundPaveBase";
+import PaveFrame from "@/app/_components/_materials/PaveFrame";
+import RoundPaveBaseFrame from "@/app/_components/_materials/RoundPaveBaseFrame";
+import PaveBar from "@/app/_components/_materials/PaveBar";
+import RoundPaveBaseBar from "@/app/_components/_materials/RoundPaveBaseBar";
 
 export default function IliSx() {
     const toothGeometry = useTeethStore((state: State) => state.teethGeometry.ilisx);
@@ -29,7 +36,7 @@ export default function IliSx() {
             case 'fullDiamond':
             case 'bezelDiamond':
                 geometry = [toothGeometry.fullDiamond.base, toothGeometry.fullDiamond.full];
-                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>, <FullMaterial color={toothMaterial} finish={toothFinish}/>]
+                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>, <Pave pave={toothPave.shape} stone={toothPave.color}/>, <RoundPaveBase color={toothMaterial} type={toothPave.shape}/>]
                 position = toothGeometry.fullDiamond.position;
                 break;
             case 'frame':
@@ -44,7 +51,7 @@ export default function IliSx() {
                 break;
             case 'frameDiamond':
                 geometry = [toothGeometry.frame.diamond.base, toothGeometry.frame.diamond.full];
-                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>, <FullMaterial color={toothMaterial} finish={toothFinish}/>]
+                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>, <PaveFrame stone={toothPave.color}/>, <RoundPaveBaseFrame color={toothMaterial}/>]
                 position = toothGeometry.frame.diamond.position;
                 break;
             case 'bar':
@@ -54,7 +61,7 @@ export default function IliSx() {
                 break;
             case 'barDiamond':
                 geometry = [toothGeometry.bar.diamond.base, toothGeometry.bar.diamond.full];
-                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>, <FullMaterial color={toothMaterial} finish={toothFinish}/>]
+                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>, <PaveBar pave={toothPave.shape} stone={toothPave.color}/>, <RoundPaveBaseBar color={toothMaterial} type={toothPave.shape}/>]
                 position = toothGeometry.bar.diamond.position;
                 break;
             default:
@@ -62,6 +69,9 @@ export default function IliSx() {
                 material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>];
                 position = new THREE.Vector3();
         }
+
+        // resetUvs(toothGeometry.fullDiamond.full);
+
         if(geometry.length === 2) {
             return (
                 <>
@@ -70,8 +80,15 @@ export default function IliSx() {
                     </mesh>
                     <mesh geometry={geometry[1]} visible={visible}>
                         {material[1]}
-                        {type !== 'enamel' && <DecalPave position={position} pave={toothPave.shape} stone={toothPave.color}/>}
                     </mesh>
+                    {(((type.includes('bar') || type.includes('frame')) && toothPave.shape === "round")
+                            || ((type.includes('full') || type.includes('bezel')) && (toothPave.shape === "round" || toothPave.shape === "mosaic"))
+                        ) &&
+                        <mesh geometry={geometry[1]} visible={visible}>
+                            {material[0]}
+                            {material[2]}
+                        </mesh>
+                    }
                 </>
             )
         }

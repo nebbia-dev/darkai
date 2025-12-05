@@ -32,163 +32,89 @@ export default function Sprinkles() {
                         {material[1]}
                     </mesh>
 
+                    {
+                        signatureGeometry.frames.map((frame, i) => {
+                            return(
+                                <mesh key={(Math.random() + i)/0.25} geometry={frame} visible={visible}>
+                                    {material[0]}
+                                </mesh>
+                            )
+                        })
+                    }
+
                     {/* CSDX */}
-                    <mesh geometry={signatureGeometry.csdx.n.frame} visible={visible}>
-                        {material[0]}
-                    </mesh>
-                    <mesh geometry={signatureGeometry.csdx.n.stone} visible={visible}>
+                    <mesh geometry={signatureGeometry.csdx.n} visible={visible}>
                         <StonesMaterial color="ySapph"/>
                     </mesh>
-
-                    <mesh geometry={signatureGeometry.csdx.ne.frame} visible={visible}>
-                        {material[0]}
-                    </mesh>
-                    <mesh geometry={signatureGeometry.csdx.ne.stone} visible={visible}>
+                    <mesh geometry={signatureGeometry.csdx.ne} visible={visible}>
                         <StonesMaterial color="emerald"/>
                     </mesh>
-
-                    <mesh geometry={signatureGeometry.csdx.se.frame} visible={visible}>
-                        {material[0]}
-                    </mesh>
-                    <mesh geometry={signatureGeometry.csdx.se.stone} visible={visible}>
+                    <mesh geometry={signatureGeometry.csdx.se} visible={visible}>
                         <StonesMaterial color="whD"/>
                     </mesh>
-
-                    <mesh geometry={signatureGeometry.csdx.s.frame} visible={visible}>
-                        {material[0]}
-                    </mesh>
-                    <mesh geometry={signatureGeometry.csdx.s.stone} visible={visible}>
-                        <StonesMaterial color="bSapph"/>
-                    </mesh>
-
-                    <mesh geometry={signatureGeometry.csdx.o.frame} visible={visible}>
-                        {material[0]}
-                    </mesh>
-                    <mesh geometry={signatureGeometry.csdx.o.stone} visible={visible}>
-                        <StonesMaterial color="ameth"/>
-                    </mesh>
+                    <mesh geometry={signatureGeometry.csdx.s} visible={visible}>
+                                            <StonesMaterial color="bSapph"/>
+                                        </mesh>
+                    <mesh geometry={signatureGeometry.csdx.o} visible={visible}>
+                                            <StonesMaterial color="ameth"/>
+                                        </mesh>
 
                     {/* CSSX */}
-                    <mesh geometry={signatureGeometry.cssx.n.frame} visible={visible}>
-                        {material[0]}
-                    </mesh>
-                    <mesh geometry={signatureGeometry.cssx.n.stone} visible={visible}>
+                    <mesh geometry={signatureGeometry.cssx.n} visible={visible}>
                         <StonesMaterial color="emerald"/>
                     </mesh>
-
-                    <mesh geometry={signatureGeometry.cssx.no.frame} visible={visible}>
-                        {material[0]}
-                    </mesh>
-                    <mesh geometry={signatureGeometry.cssx.no.stone} visible={visible}>
-                        <StonesMaterial color="ameth"/>
-                    </mesh>
-
-                    <mesh geometry={signatureGeometry.cssx.so.frame} visible={visible}>
-                        {material[0]}
-                    </mesh>
-                    <mesh geometry={signatureGeometry.cssx.so.stone} visible={visible}>
-                        <StonesMaterial color="whD"/>
-                    </mesh>
-
-                    <mesh geometry={signatureGeometry.cssx.s.frame} visible={visible}>
-                        {material[0]}
-                    </mesh>
-                    <mesh geometry={signatureGeometry.cssx.s.stone} visible={visible}>
-                        <StonesMaterial color="bSapph"/>
-                    </mesh>
-
-                    <mesh geometry={signatureGeometry.cssx.e.frame} visible={visible}>
-                        {material[0]}
-                    </mesh>
-                    <mesh geometry={signatureGeometry.cssx.e.stone} visible={visible}>
-                        <StonesMaterial color="ruby"/>
-                    </mesh>
+                    <mesh geometry={signatureGeometry.cssx.no} visible={visible}>
+                                            <StonesMaterial color="ameth"/>
+                                        </mesh>
+                    <mesh geometry={signatureGeometry.cssx.so} visible={visible}>
+                                            <StonesMaterial color="whD"/>
+                                        </mesh>
+                    <mesh geometry={signatureGeometry.cssx.s} visible={visible}>
+                                            <StonesMaterial color="bSapph"/>
+                                        </mesh>
+                    <mesh geometry={signatureGeometry.cssx.e} visible={visible}>
+                                            <StonesMaterial color="ruby"/>
+                                        </mesh>
 
                     {/* ILSDX */}
-                    <mesh geometry={signatureGeometry.ilsdx.ne.frame} visible={visible}>
-                        {material[0]}
-                    </mesh>
-                    <mesh geometry={signatureGeometry.ilsdx.ne.stone} visible={visible}>
+                    <mesh geometry={signatureGeometry.ilsdx.ne} visible={visible}>
                         <StonesMaterial color="ameth"/>
                     </mesh>
-
-                    <mesh geometry={signatureGeometry.ilsdx.e.frame} visible={visible}>
-                        {material[0]}
-                    </mesh>
-                    <mesh geometry={signatureGeometry.ilsdx.e.stone} visible={visible}>
-                        <StonesMaterial color="whD"/>
-                    </mesh>
-
-                    <mesh geometry={signatureGeometry.ilsdx.se.frame} visible={visible}>
-                        {material[0]}
-                    </mesh>
-                    <mesh geometry={signatureGeometry.ilsdx.se.stone} visible={visible}>
-                        <StonesMaterial color="ruby"/>
-                    </mesh>
-
-                    <mesh geometry={signatureGeometry.ilsdx.c.frame} visible={visible}>
-                        {material[0]}
-                    </mesh>
-                    <mesh geometry={signatureGeometry.ilsdx.c.stone} visible={visible}>
-                        <StonesMaterial color="ySapph"/>
-                    </mesh>
-
-                    <mesh geometry={signatureGeometry.ilsdx.so.frame} visible={visible}>
-                        {material[0]}
-                    </mesh>
-                    <mesh geometry={signatureGeometry.ilsdx.so.stone} visible={visible}>
-                        <StonesMaterial color="emerald"/>
-                    </mesh>
-
-                    <mesh geometry={signatureGeometry.ilsdx.no.frame} visible={visible}>
-                        {material[0]}
-                    </mesh>
-                    <mesh geometry={signatureGeometry.ilsdx.no.stone} visible={visible}>
-                        <StonesMaterial color="bSapph"/>
-                    </mesh>
+                    <mesh geometry={signatureGeometry.ilsdx.e} visible={visible}>
+                                            <StonesMaterial color="whD"/>
+                                        </mesh>
+                    <mesh geometry={signatureGeometry.ilsdx.se} visible={visible}>
+                                            <StonesMaterial color="ruby"/>
+                                        </mesh>
+                    <mesh geometry={signatureGeometry.ilsdx.c} visible={visible}>
+                                            <StonesMaterial color="ySapph"/>
+                                        </mesh>
+                    <mesh geometry={signatureGeometry.ilsdx.so} visible={visible}>
+                                            <StonesMaterial color="emerald"/>
+                                        </mesh>
+                    <mesh geometry={signatureGeometry.ilsdx.no} visible={visible}>
+                                            <StonesMaterial color="bSapph"/>
+                                        </mesh>
 
                     {/* ILSSX */}
-                    <mesh geometry={signatureGeometry.ilssx.ne.frame} visible={visible}>
-                        {material[0]}
-                    </mesh>
-                    <mesh geometry={signatureGeometry.ilssx.ne.stone} visible={visible}>
+                    <mesh geometry={signatureGeometry.ilssx.ne} visible={visible}>
                         <StonesMaterial color="pSapph"/>
                     </mesh>
-
-                    <mesh geometry={signatureGeometry.ilssx.o.frame} visible={visible}>
-                        {material[0]}
-                    </mesh>
-                    <mesh geometry={signatureGeometry.ilssx.o.stone} visible={visible}>
-                        <StonesMaterial color="aqua"/>
-                    </mesh>
-
-                    <mesh geometry={signatureGeometry.ilssx.se.frame} visible={visible}>
-                        {material[0]}
-                    </mesh>
-                    <mesh geometry={signatureGeometry.ilssx.se.stone} visible={visible}>
-                        <StonesMaterial color="bSapph"/>
-                    </mesh>
-
-                    <mesh geometry={signatureGeometry.ilssx.c.frame} visible={visible}>
-                        {material[0]}
-                    </mesh>
-                    <mesh geometry={signatureGeometry.ilssx.c.stone} visible={visible}>
-                        <StonesMaterial color="whD"/>
-                    </mesh>
-
-                    <mesh geometry={signatureGeometry.ilssx.so.frame} visible={visible}>
-                        {material[0]}
-                    </mesh>
-                    <mesh geometry={signatureGeometry.ilssx.so.stone} visible={visible}>
-                        <StonesMaterial color="ruby"/>
-                    </mesh>
-
-                    <mesh geometry={signatureGeometry.ilssx.no.frame} visible={visible}>
-                        {material[0]}
-                    </mesh>
-                    <mesh geometry={signatureGeometry.ilssx.no.stone} visible={visible}>
-                        <StonesMaterial color="emerald"/>
-                    </mesh>
+                    <mesh geometry={signatureGeometry.ilssx.o} visible={visible}>
+                                            <StonesMaterial color="aqua"/>
+                                        </mesh>
+                    <mesh geometry={signatureGeometry.ilssx.se} visible={visible}>
+                                            <StonesMaterial color="bSapph"/>
+                                        </mesh>
+                    <mesh geometry={signatureGeometry.ilssx.c} visible={visible}>
+                                            <StonesMaterial color="whD"/>
+                                        </mesh>
+                    <mesh geometry={signatureGeometry.ilssx.so} visible={visible}>
+                                            <StonesMaterial color="ruby"/>
+                                        </mesh>
+                    <mesh geometry={signatureGeometry.ilssx.no} visible={visible}>
+                                            <StonesMaterial color="emerald"/>
+                                        </mesh>
                 </>
             )
     })
