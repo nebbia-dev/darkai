@@ -12,7 +12,7 @@ export default function RoundPaveBase({color, type} : {color: string|undefined, 
 
     // ROUND
     const roundNormal = useTexture({
-        normalMap: 'textures/proveDiamanti/Normal_Struttura_Round.png'
+        normalMap: 'textures/paves/Normal_Struttura_Round.png'
     });
 
     roundNormal.normalMap.wrapS = roundNormal.normalMap.wrapT = THREE.RepeatWrapping;
@@ -21,7 +21,7 @@ export default function RoundPaveBase({color, type} : {color: string|undefined, 
 
     //ROUND COLORS
     const roundGold = useTexture({
-        map: 'textures/proveDiamanti/Round_Pavè_Struttura_Oro_Giallo.webp',
+        map: 'textures/paves/Round_Pavè_Struttura_Oro_Giallo.webp',
     });
     roundGold.map.colorSpace = THREE.SRGBColorSpace;
     roundGold.map.wrapS = roundGold.map.wrapT = THREE.RepeatWrapping;
@@ -29,7 +29,7 @@ export default function RoundPaveBase({color, type} : {color: string|undefined, 
     pairs.set('roundGold', roundGold.map);
 
     const roundRose = useTexture({
-        map: 'textures/proveDiamanti/Round_Pavè_Struttura_Oro_Rosa.webp',
+        map: 'textures/paves/Round_Pavè_Struttura_Oro_Rosa.webp',
     });
     roundRose.map.colorSpace = THREE.SRGBColorSpace;
     roundRose.map.wrapS = roundRose.map.wrapT = THREE.RepeatWrapping;
@@ -37,7 +37,7 @@ export default function RoundPaveBase({color, type} : {color: string|undefined, 
     pairs.set('roundRose', roundRose.map);
 
     const roundWhite = useTexture({
-        map: 'textures/proveDiamanti/Round_Pavè_Struttura_Oro_Bianco.webp',
+        map: 'textures/paves/Round_Pavè_Struttura_Oro_Bianco.webp',
     });
     roundWhite.map.colorSpace = THREE.SRGBColorSpace;
     roundWhite.map.wrapS = roundWhite.map.wrapT = THREE.RepeatWrapping;
@@ -45,7 +45,7 @@ export default function RoundPaveBase({color, type} : {color: string|undefined, 
     pairs.set('roundWhite', roundWhite.map);
 
     const roundBlack = useTexture({
-        map: 'textures/proveDiamanti/Round_Pavè_Struttura_Oro_Nero.webp',
+        map: 'textures/paves/Round_Pavè_Struttura_Oro_Nero.webp',
     });
     roundBlack.map.colorSpace = THREE.SRGBColorSpace;
     roundBlack.map.wrapS = roundBlack.map.wrapT = THREE.RepeatWrapping;
@@ -55,7 +55,7 @@ export default function RoundPaveBase({color, type} : {color: string|undefined, 
 
     // MOSAIC
     const mosaicNormal = useTexture({
-        normalMap: 'textures/proveDiamanti/Normal_Struttura_Mosaic.webp'
+        normalMap: 'textures/paves/Normal_Struttura_Mosaic.webp'
     });
 
     mosaicNormal.normalMap.wrapS = mosaicNormal.normalMap.wrapT = THREE.RepeatWrapping;
@@ -64,7 +64,7 @@ export default function RoundPaveBase({color, type} : {color: string|undefined, 
 
     //MOSAIC COLORS
     const mosaicGold = useTexture({
-        map: 'textures/proveDiamanti/Mosaic_Pavè_Struttura_Oro_Giallo.webp',
+        map: 'textures/paves/Mosaic_Pavè_Struttura_Oro_Giallo.webp',
     });
     mosaicGold.map.colorSpace = THREE.SRGBColorSpace;
     mosaicGold.map.wrapS = mosaicGold.map.wrapT = THREE.RepeatWrapping;
@@ -72,7 +72,7 @@ export default function RoundPaveBase({color, type} : {color: string|undefined, 
     pairs.set('mosaicGold', mosaicGold.map);
 
     const mosaicRose = useTexture({
-        map: 'textures/proveDiamanti/Mosaic_Pavè_Struttura_Oro_Rosa.webp',
+        map: 'textures/paves/Mosaic_Pavè_Struttura_Oro_Rosa.webp',
     });
     mosaicRose.map.colorSpace = THREE.SRGBColorSpace;
     mosaicRose.map.wrapS = mosaicRose.map.wrapT = THREE.RepeatWrapping;
@@ -80,7 +80,7 @@ export default function RoundPaveBase({color, type} : {color: string|undefined, 
     pairs.set('mosaicRose', mosaicRose.map);
 
     const mosaicWhite = useTexture({
-        map: 'textures/proveDiamanti/Mosaic_Pavè_Struttura_Oro_Bianco.webp',
+        map: 'textures/paves/Mosaic_Pavè_Struttura_Oro_Bianco.webp',
     });
     mosaicWhite.map.colorSpace = THREE.SRGBColorSpace;
     mosaicWhite.map.wrapS = mosaicWhite.map.wrapT = THREE.RepeatWrapping;
@@ -88,7 +88,7 @@ export default function RoundPaveBase({color, type} : {color: string|undefined, 
     pairs.set('mosaicWhite', mosaicWhite.map);
 
     const mosaicBlack = useTexture({
-        map: 'textures/proveDiamanti/Mosaic_Pavè_Struttura_Oro_Nero.webp',
+        map: 'textures/paves/Mosaic_Pavè_Struttura_Oro_Nero.webp',
     });
     mosaicBlack.map.colorSpace = THREE.SRGBColorSpace;
     mosaicBlack.map.wrapS = mosaicBlack.map.wrapT = THREE.RepeatWrapping;

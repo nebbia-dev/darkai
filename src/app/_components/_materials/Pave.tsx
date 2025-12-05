@@ -17,8 +17,8 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
 
     /* ROUND PAVE*/
     const round = useTexture({
-        map: 'textures/proveDiamanti/Round_Pavè_Diamanti_V03.webp',
-        normalMap: 'textures/proveDiamanti/Normal_Diamanti_Round.png'
+        map: 'textures/paves/Round_Pavè_Diamanti_V03.webp',
+        normalMap: 'textures/paves/Normal_Diamanti_Round.png'
     });
     round.map.colorSpace = THREE.SRGBColorSpace;
     round.map.wrapS = round.map.wrapT = THREE.RepeatWrapping;
@@ -31,8 +31,8 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
 
     /* MOSAIC PAVE*/
     const mosaic = useTexture({
-        map: 'textures/proveDiamanti/Mosaic_Pavè_Diamanti.webp',
-        normalMap: 'textures/proveDiamanti/Normal_Diamanti_Mosaic.webp'
+        map: 'textures/paves/Mosaic_Pavè_Diamanti.webp',
+        normalMap: 'textures/paves/Normal_Diamanti_Mosaic.webp'
     });
     mosaic.map.colorSpace = THREE.SRGBColorSpace;
     mosaic.map.wrapS = mosaic.map.wrapT = THREE.RepeatWrapping;
@@ -46,8 +46,8 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
 
     /* PRINCESS PAVE*/
     const princess = useTexture({
-        map: 'textures/proveDiamanti/Princess_Pavè.webp',
-        normalMap: 'textures/proveDiamanti/Normal_Princess.webp'
+        map: 'textures/paves/Princess_Pavè.webp',
+        normalMap: 'textures/paves/Normal_Princess.webp'
     });
     princess.map.colorSpace = THREE.SRGBColorSpace;
     princess.map.wrapS = princess.map.wrapT = THREE.RepeatWrapping;
@@ -60,8 +60,8 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
 
     /* BAGUETTE PAVE*/
     const baguette = useTexture({
-        map: 'textures/proveDiamanti/Baguette_Pavè.webp',
-        normalMap: 'textures/proveDiamanti/Normal_Baguette.webp'
+        map: 'textures/paves/Baguette_Pavè.webp',
+        normalMap: 'textures/paves/Normal_Baguette.webp'
     });
     baguette.map.colorSpace = THREE.SRGBColorSpace;
     baguette.map.wrapS = baguette.map.wrapT = THREE.RepeatWrapping;
@@ -74,8 +74,8 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
 
     /* HEXAGON PAVE*/
     const hexagon = useTexture({
-        map: 'textures/proveDiamanti/Hexagon_Pavè.webp',
-        normalMap: 'textures/proveDiamanti/Normal_Hexagon.webp'
+        map: 'textures/paves/Hexagon_Pavè.webp',
+        normalMap: 'textures/paves/Normal_Hexagon.webp'
     });
     hexagon.map.colorSpace = THREE.SRGBColorSpace;
     hexagon.map.wrapS = hexagon.map.wrapT = THREE.RepeatWrapping;

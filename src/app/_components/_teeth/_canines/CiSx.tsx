@@ -67,7 +67,7 @@ export default function CiSx() {
                 break;
             case 'bigBar':
                 geometry = [toothGeometry.bigBar.full];
-                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>]
+                material = [<FullMaterial_ICS color={toothMaterial} finish={toothFinish}/>]
                 position = new THREE.Vector3();
                 break;
             case 'bigBarDiamond':

@@ -15,6 +15,7 @@ import PaveBigBar from "@/app/_components/_materials/PaveBigBar";
 import RoundPaveBaseBigBar from "@/app/_components/_materials/RoundPaveBaseBigBar";
 import PaveBar from "@/app/_components/_materials/PaveBar";
 import RoundPaveBaseBar from "@/app/_components/_materials/RoundPaveBaseBar";
+import FullMaterial_ICS from "@/app/_components/_materials/FullMaterial_ICS";
 
 export default function CiDx() {
     const toothGeometry = useTeethStore((state: State) => state.teethGeometry.cidx);
@@ -68,7 +69,7 @@ export default function CiDx() {
                 break;
             case 'bigBar':
                 geometry = [toothGeometry.bigBar.full];
-                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>]
+                material = [<FullMaterial_ICS color={toothMaterial} finish={toothFinish}/>]
                 position = new THREE.Vector3();
                 break;
             case 'bigBarDiamond':

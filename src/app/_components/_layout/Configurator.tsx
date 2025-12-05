@@ -60,7 +60,7 @@ export default function Configurator() {
     const envMap = useEnvironment({
         files: "envMaps/HDR_Light_Studio_Free_HDRI_Design_13.exr"
     })
-    const signatures = useGLTF('/models/Signatures2.glb');
+    const signatures = useGLTF('/models/BigBar.glb');
     console.log(signatures)
 
     // Se voglio piazzare anche l'fbx in LoadedMaterials, verosimilmente devo usare qui uno useEffect
@@ -71,10 +71,10 @@ export default function Configurator() {
         const barDiamond = useFBX('/models/Bar_Pave.fbx');
         const stones = useGLTF('/models/Stones.glb')
         const frames = useFBX('/models/MOD_Frame_Capsula (2).fbx');
-        const bigBar  = useFBX('/models/MOD_Full_Frame_Capsula.fbx');
+        const bigBar  = useGLTF('/models/BigBar.glb');
         const bars = useFBX('/models/MOD_Bars_Capsula (2).fbx');
         const full = useGLTF('/models/Full.glb');
-        const signatures = useGLTF('/models/Signatures2.glb');
+        const signatures = useGLTF('/models/Signatures.glb');
         const bubblegum = useGLTF('/models/BGum.glb');
         const sprinkles = useGLTF('/models/Sprinkles.glb');
 
@@ -1301,7 +1301,7 @@ export default function Configurator() {
                     }
                 },
                 bigBar: {
-                    full: (bigBar.children[0] as THREE.Mesh).geometry,
+                    full: (bigBar.scene.children[0] as THREE.Mesh).geometry,
                     diamond: {
                         base: (frameDiamond.scene.children[2].children[0] as THREE.Mesh).geometry,
                         full: (frameDiamond.scene.children[2].children[1] as THREE.Mesh).geometry,
@@ -1419,7 +1419,7 @@ export default function Configurator() {
                     }
                 },
                 bigBar: {
-                    full: (bigBar.children[0] as THREE.Mesh).geometry,
+                    full: (bigBar.scene.children[0] as THREE.Mesh).geometry,
                     diamond: {
                         base: (frameDiamond.scene.children[2].children[0] as THREE.Mesh).geometry,
                         full: (frameDiamond.scene.children[2].children[1] as THREE.Mesh).geometry,

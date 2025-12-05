@@ -1021,13 +1021,46 @@ export const useTeethStore = create<State>((set, get) => ({
 
                     switch(pave) {
                         case 'nopave-pol':
-                            state.teethFinish[tooth] = 'polished';
+                            if(state.teethJewelType[tooth].includes('bigBar')) {
+                                state.teethFinish.cidx = 'polished';
+                                state.teethFinish.cisx = 'polished';
+                            } else if(state.teethJewelType[tooth].includes('bar') && (tooth === 'icsdx' || tooth === 'icssx')){
+                                state.teethFinish.icsdx = 'polished';
+                                state.teethFinish.icssx = 'polished';
+                            } else if(state.teethJewelType[tooth].includes('bar') && (tooth === 'icidx' || tooth === 'icisx')){
+                                state.teethFinish.icidx = 'polished';
+                                state.teethFinish.icisx = 'polished';
+                            } else {
+                                state.teethFinish[tooth] = 'polished';
+                            }
                             break;
                         case 'nopave-sblast':
-                            state.teethFinish[tooth] = 'sandblasted';
+                            if(state.teethJewelType[tooth].includes('bigBar')) {
+                                state.teethFinish.cidx = 'sandblasted';
+                                state.teethFinish.cisx = 'sandblasted';
+                            } else if(state.teethJewelType[tooth].includes('bar') && (tooth === 'icsdx' || tooth === 'icssx')){
+                                state.teethFinish.icsdx = 'sandblasted';
+                                state.teethFinish.icssx = 'sandblasted';
+                            } else if(state.teethJewelType[tooth].includes('bar') && (tooth === 'icidx' || tooth === 'icisx')){
+                                state.teethFinish.icidx = 'sandblasted';
+                                state.teethFinish.icisx = 'sandblasted';
+                            } else {
+                                state.teethFinish[tooth] = 'sandblasted';
+                            }
                             break;
                         case 'nopave-dcut':
-                            state.teethFinish[tooth] = 'diamond_cut';
+                            if(state.teethJewelType[tooth].includes('bigBar')) {
+                                state.teethFinish.cidx = 'diamond_cut';
+                                state.teethFinish.cisx = 'diamond_cut';
+                            } else if(state.teethJewelType[tooth].includes('bar') && (tooth === 'icsdx' || tooth === 'icssx')){
+                                state.teethFinish.icsdx = 'diamond_cut';
+                                state.teethFinish.icssx = 'diamond_cut';
+                            } else if(state.teethJewelType[tooth].includes('bar') && (tooth === 'icidx' || tooth === 'icisx')){
+                                state.teethFinish.icidx = 'diamond_cut';
+                                state.teethFinish.icisx = 'diamond_cut';
+                            } else {
+                                state.teethFinish[tooth] = 'diamond_cut';
+                            }
                             break;
                         default:
                             state.teethFinish[tooth] = 'polished';
