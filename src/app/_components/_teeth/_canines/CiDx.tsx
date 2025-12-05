@@ -5,9 +5,7 @@ import {useTeethStore} from "@/app/_stores/teeth";
 import {State} from "@/app/_types/State";
 import * as THREE from 'three'
 import FullEnamel from "@/app/_components/_materials/FullEnamel";
-import DecalPave from "@/app/_components/_materials/DecalPave";
 import Pave from "@/app/_components/_materials/Pave";
-import resetUvs from "@/app/_helpers/_models-modifiers/resetUvs";
 import RoundPaveBase from "@/app/_components/_materials/RoundPaveBase";
 import PaveFrame from "@/app/_components/_materials/PaveFrame";
 import RoundPaveBaseFrame from "@/app/_components/_materials/RoundPaveBaseFrame";

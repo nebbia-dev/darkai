@@ -1,6 +1,5 @@
 import {useEnvironment, useTexture} from "@react-three/drei";
 import * as THREE from "three";
-import {useTeethStore} from "@/app/_stores/teeth";
 
 export default function Pave({pave, stone} : {pave: string|undefined, stone:string|undefined}) {
     if(!pave || !stone) return;
