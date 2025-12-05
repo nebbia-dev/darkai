@@ -463,7 +463,8 @@ export default interface FBX {
             frame: THREE.BufferGeometry,
             full: THREE.BufferGeometry,
             pave: THREE.BufferGeometry,
-            position: THREE.Vector3
+            positionHangs: THREE.Vector3,
+            positionFull: THREE.Vector3
         },
         sprinkles: {
             base: THREE.BufferGeometry,

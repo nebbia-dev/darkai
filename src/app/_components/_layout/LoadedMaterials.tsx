@@ -7,6 +7,12 @@ import FullMaterial from "@/app/_components/_materials/FullMaterial";
 import FullMaterial_ICS from "@/app/_components/_materials/FullMaterial_ICS";
 import Pave from "@/app/_components/_materials/Pave";
 import RoundPaveBase from "@/app/_components/_materials/RoundPaveBase";
+import PaveFrame from "@/app/_components/_materials/PaveFrame";
+import RoundPaveBaseFrame from "@/app/_components/_materials/RoundPaveBaseFrame";
+import PaveBigBar from "@/app/_components/_materials/PaveBigBar";
+import RoundPaveBaseBigBar from "@/app/_components/_materials/RoundPaveBaseBigBar";
+import RoundPaveBaseBar from "@/app/_components/_materials/RoundPaveBaseBar";
+import PaveBar from "@/app/_components/_materials/PaveBar";
 
 export default function LoadedMaterials() {
     return(
@@ -30,15 +36,35 @@ export default function LoadedMaterials() {
             </mesh>
             <mesh position={[0, -10, 0]} visible={false}>
                 <planeGeometry args={[1, 1]}/>
-                <DecalPave position={[0, 0, 0]} pave="round" stone="ruby"/>
-            </mesh>
-            <mesh position={[0, -10, 0]} visible={false}>
-                <planeGeometry args={[1, 1]}/>
                 <Pave pave="hexagon" stone="ruby"/>
             </mesh>
             <mesh position={[0, -10, 0]} visible={false}>
                 <planeGeometry args={[1, 1]}/>
                 <RoundPaveBase color="gold" type="round"/>
+            </mesh>
+            <mesh position={[0, -10, 0]} visible={false}>
+                <planeGeometry args={[1, 1]}/>
+                <PaveFrame stone="ruby"/>
+            </mesh>
+            <mesh position={[0, -10, 0]} visible={false}>
+                <planeGeometry args={[1, 1]}/>
+                <RoundPaveBaseFrame color="gold"/>
+            </mesh>
+            <mesh position={[0, -10, 0]} visible={false}>
+                <planeGeometry args={[1, 1]}/>
+                <PaveBigBar pave="round" stone="ruby"/>
+            </mesh>
+            <mesh position={[0, -10, 0]} visible={false}>
+                <planeGeometry args={[1, 1]}/>
+                <RoundPaveBaseBigBar type="round" color="gold"/>
+            </mesh>
+            <mesh position={[0, -10, 0]} visible={false}>
+                <planeGeometry args={[1, 1]}/>
+                <PaveBar pave="round" stone="ruby"/>
+            </mesh>
+            <mesh position={[0, -10, 0]} visible={false}>
+                <planeGeometry args={[1, 1]}/>
+                <RoundPaveBaseBar type="round" color="gold"/>
             </mesh>
         </>
     )

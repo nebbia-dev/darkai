@@ -8,7 +8,7 @@ export default function resetUvs( geometry: THREE.BufferGeometry, molar:boolean,
     {
         let x,y,z;
 
-        if(signature === 'cross'){
+        if(signature === 'cross' || signature === 'tribal'){
             x = pos.getX(i) / 2;
             y = pos.getY(i) / 2;
             z = pos.getZ(i) / 4

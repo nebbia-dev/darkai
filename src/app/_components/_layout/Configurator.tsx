@@ -60,6 +60,8 @@ export default function Configurator() {
     const envMap = useEnvironment({
         files: "envMaps/HDR_Light_Studio_Free_HDRI_Design_13.exr"
     })
+    const signatures = useGLTF('/models/Signatures2.glb');
+    console.log(signatures)
 
     // Se voglio piazzare anche l'fbx in LoadedMaterials, verosimilmente devo usare qui uno useEffect
 
@@ -72,7 +74,7 @@ export default function Configurator() {
         const bigBar  = useFBX('/models/MOD_Full_Frame_Capsula.fbx');
         const bars = useFBX('/models/MOD_Bars_Capsula (2).fbx');
         const full = useGLTF('/models/Full.glb');
-        const signatures = useGLTF('/models/Signatures.glb');
+        const signatures = useGLTF('/models/Signatures2.glb');
         const bubblegum = useGLTF('/models/BGum.glb');
         const sprinkles = useGLTF('/models/Sprinkles.glb');
 
@@ -1548,7 +1550,8 @@ export default function Configurator() {
                     full: (signatures.scene.children[1].children[2] as THREE.Mesh).geometry,
                     frame: (signatures.scene.children[1].children[1] as THREE.Mesh).geometry,
                     pave: (signatures.scene.children[1].children[3] as THREE.Mesh).geometry,
-                    position: getOriginGlb(signatures.scene.children[1], 3),
+                    positionHangs: getOriginGlb(signatures.scene.children[1].children[0], 1),
+                    positionFull: getOriginGlb(signatures.scene.children[1], 1.5),
                 },
                 sprinkles: {
                     base: (sprinkles.scene.children[0].children[2] as THREE.Mesh).geometry,
@@ -1628,9 +1631,9 @@ export default function Configurator() {
                 },
                 braces: {
                     structure: (signatures.scene.children[3].children[0] as THREE.Mesh).geometry,
-                    pave: (signatures.scene.children[3].children[1] as THREE.Mesh).geometry,
-                    stones: (signatures.scene.children[3].children[3] as THREE.Mesh).geometry,
-                    outline: (signatures.scene.children[3].children[2] as THREE.Mesh).geometry,
+                    pave: (signatures.scene.children[3].children[3] as THREE.Mesh).geometry,
+                    stones: (signatures.scene.children[3].children[2] as THREE.Mesh).geometry,
+                    outline: (signatures.scene.children[3].children[1] as THREE.Mesh).geometry,
                     position: new THREE.Vector3(-0.46473254221912974, 1.76660383113165, -0.15407294943985753)
                 },
             }

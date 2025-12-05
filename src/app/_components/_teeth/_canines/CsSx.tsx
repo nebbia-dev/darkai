@@ -9,6 +9,8 @@ import DecalPave from "@/app/_components/_materials/DecalPave";
 import Pave from "@/app/_components/_materials/Pave";
 import resetUvs from "@/app/_helpers/_models-modifiers/resetUvs";
 import RoundPaveBase from "@/app/_components/_materials/RoundPaveBase";
+import PaveFrame from "@/app/_components/_materials/PaveFrame";
+import RoundPaveBaseFrame from "@/app/_components/_materials/RoundPaveBaseFrame";
 
 export default function CsSx() {
     const toothGeometry = useTeethStore((state: State) => state.teethGeometry.cssx);
@@ -47,7 +49,7 @@ export default function CsSx() {
                 break;
             case 'frameDiamond':
                 geometry = [toothGeometry.frame.diamond.base, toothGeometry.frame.diamond.full];
-                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>, <Pave pave={toothPave.shape} stone={toothPave.color}/>, <RoundPaveBase color={toothMaterial} type={toothPave.shape}/>]
+                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>, <PaveFrame stone={toothPave.color}/>, <RoundPaveBaseFrame color={toothMaterial}/>]
                 position = toothGeometry.frame.diamond.position;
                 break;
             case 'bar':
@@ -76,7 +78,6 @@ export default function CsSx() {
                     </mesh>
                     <mesh geometry={geometry[1]} visible={visible}>
                         {material[1]}
-                        {/*{type !== 'enamel' && <DecalPave position={position} pave={toothPave.shape} stone={toothPave.color}/>}*/}
                     </mesh>
                     {(toothPave.shape === "round" || toothPave.shape === "mosaic") &&
                         <mesh geometry={geometry[1]} visible={visible}>
