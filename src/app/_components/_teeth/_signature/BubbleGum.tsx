@@ -19,10 +19,10 @@ export default function BubbleGum() {
                 material = [<FullMaterial color="gold" finish="polished"/>, <FullEnamel color="pink"/>]
                 break;
             case 'blue':
-                material = [<FullMaterial color="gold" finish="polished"/>, <FullEnamel color="blue"/>]
+                material = [<FullMaterial color="white" finish="polished"/>, <FullEnamel color="blue"/>]
                 break;
             case 'green':
-                material = [<FullMaterial color="gold" finish="polished"/>, <FullEnamel color="green"/>]
+                material = [<FullMaterial color="white" finish="polished"/>, <FullEnamel color="green"/>]
                 break;
             default:
                 material = [<FullMaterial color="gold" finish="polished"/>, <FullEnamel color="pink"/>];
