@@ -77,7 +77,7 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
             </ConfiguratorButton>
             <ConfiguratorButton inverse={false} value="4" active={active} onclick={onclick} tooth={tooth}
                                 label="Finish">
-                <img src="/config-menu-svgs/color.svg" alt="diamond-option-logo"/>
+                <img src="/config-menu-svgs/colors.webp" className="mt-0.5 mr-1" alt="colors-option-logo"/>
             </ConfiguratorButton>
             <ConfiguratorButton inverse={false} value="5" active={active} onclick={onclick} tooth={tooth}
                                 label="Stone Color">
