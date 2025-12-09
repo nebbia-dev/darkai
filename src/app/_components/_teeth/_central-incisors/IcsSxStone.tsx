@@ -18,7 +18,11 @@ export default function IcsSxStone() {
                 <></>
             )
         }
-    return(
+
+        getOrigin(tooth[toothStone.shape].positions[0]);
+        getOrigin(tooth[toothStone.shape].positions[1]);
+
+        return(
             <>
                 <mesh geometry={tooth[toothStone.shape].geometries[0]}
                       position={getOrigin(tooth[toothStone.shape].positions[0])}
