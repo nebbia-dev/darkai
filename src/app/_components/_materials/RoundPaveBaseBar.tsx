@@ -20,7 +20,7 @@ export default function RoundPaveBaseBar({color, type} : {color: string|undefine
     const roundNormal = useTexture({
         normalMap: 'textures/bar/singoli/Bar_Struttura_Normal.webp',
     });
-    // roundNormal.normalMap.flipY = false;
+    roundNormal.normalMap.flipY = false;
     pairs.set('roundNormal', roundNormal.normalMap);
 
     //ROUND COLORS
@@ -28,28 +28,28 @@ export default function RoundPaveBaseBar({color, type} : {color: string|undefine
         map: 'textures/bar/singoli/Spacer_Struttura_Oro_Giallo.webp',
     });
     roundGold.map.colorSpace = THREE.SRGBColorSpace;
-    // roundGold.map.flipY = false;
+    roundGold.map.flipY = false;
     pairs.set('roundGold', roundGold.map);
 
     const roundRose = useTexture({
         map: 'textures/bar/singoli/Spacer_Struttura_Oro_Rosa.webp',
     });
     roundRose.map.colorSpace = THREE.SRGBColorSpace;
-    // roundRose.map.flipY = false;
+    roundRose.map.flipY = false;
     pairs.set('roundRose', roundRose.map);
 
     const roundWhite = useTexture({
         map: 'textures/bar/singoli/Spacer_Struttura_Oro_Bianco.webp',
     });
     roundWhite.map.colorSpace = THREE.SRGBColorSpace;
-    // roundWhite.map.flipY = false;
+    roundWhite.map.flipY = false;
     pairs.set('roundWhite', roundWhite.map);
 
     const roundBlack = useTexture({
         map: 'textures/bar/singoli/Spacer_Struttura_Oro_Nero.webp',
     });
     roundBlack.map.colorSpace = THREE.SRGBColorSpace;
-    // roundBlack.map.flipY = false;
+    roundBlack.map.flipY = false;
     pairs.set('roundBlack', roundBlack.map);
 
         return (

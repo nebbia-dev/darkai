@@ -21,14 +21,14 @@ export default function PaveBar({pave, stone} : {pave:string|undefined, stone:st
         map: 'textures/bar/singoli/Bar_Round.webp',
     });
     round.map.colorSpace = THREE.SRGBColorSpace;
-    // round.map.flipY = false;
+    round.map.flipY = false;
     pairs.set('round', round.map);
 
     /* NORMAL ROUND */
     const roundNormal = useTexture({
         normalMap: 'textures/bar/singoli/Bar_Diamanti_Normal.webp',
     });
-   // roundNormal.normalMap.flipY = false;
+   roundNormal.normalMap.flipY = false;
     pairs.set('roundNormal', roundNormal.normalMap);
 
     /* BAGUETTE PAVE */
@@ -36,14 +36,14 @@ export default function PaveBar({pave, stone} : {pave:string|undefined, stone:st
         map: 'textures/bar/singoli/Bar_Pavè_Baguette.webp',
     });
     baguette.map.colorSpace = THREE.SRGBColorSpace;
-    // baguette.map.flipY = false;
+    baguette.map.flipY = false;
     pairs.set('baguette', baguette.map);
 
     /* NORMAL BAGUETTE */
     const baguetteNormal = useTexture({
         normalMap: 'textures/bar/singoli/Bar_Pavè_Baguette_Normal.webp',
     });
-    // baguetteNormal.normalMap.flipY = false;
+    baguetteNormal.normalMap.flipY = false;
     pairs.set('baguetteNormal', baguetteNormal.normalMap);
 
     let hex;

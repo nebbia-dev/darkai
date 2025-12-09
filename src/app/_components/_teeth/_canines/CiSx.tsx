@@ -13,6 +13,8 @@ import RoundPaveBaseFrame from "@/app/_components/_materials/RoundPaveBaseFrame"
 import PaveBigBar from "@/app/_components/_materials/PaveBigBar";
 import RoundPaveBaseBigBar from "@/app/_components/_materials/RoundPaveBaseBigBar";
 import resetUvs from "@/app/_helpers/_models-modifiers/resetUvs";
+import PaveBar from "@/app/_components/_materials/PaveBar";
+import RoundPaveBaseBar from "@/app/_components/_materials/RoundPaveBaseBar";
 
 export default function CiSx() {
     const toothGeometry = useTeethStore((state: State) => state.teethGeometry.cisx);
@@ -61,7 +63,7 @@ export default function CiSx() {
                 break;
             case 'barDiamond':
                 geometry = [toothGeometry.bar.diamond.base, toothGeometry.bar.diamond.full];
-                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>, <Pave pave={toothPave.shape} stone={toothPave.color}/>, <RoundPaveBase color={toothMaterial} type={toothPave.shape}/>]
+                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>, <PaveBar pave={toothPave.shape} stone={toothPave.color}/>, <RoundPaveBaseBar color={toothMaterial} type={toothPave.shape}/>]
                 position = toothGeometry.bar.diamond.position;
                 break;
             case 'bigBar':
