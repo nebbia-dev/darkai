@@ -4,6 +4,12 @@ interface Stone {
     positions: THREE.Vector3[],
     quaternions: THREE.Object3D[]
 }
+
+interface Stone2 {
+    geometries: THREE.BufferGeometry[],
+    positions: THREE.Object3D[],
+    quaternions: THREE.Object3D[]
+}
 interface Stones {
     marquise: Stone,
     heart: Stone,
@@ -11,6 +17,15 @@ interface Stones {
     tear: Stone,
     square: Stone,
     baguette: Stone
+}
+
+interface Stones2 {
+    marquise: Stone2,
+    heart: Stone2,
+    circle: Stone2,
+    tear: Stone2,
+    square: Stone2,
+    baguette: Stone2
 }
 export default interface FBX {
     // INCISIVI CENTRALI
@@ -43,7 +58,7 @@ export default interface FBX {
     } | undefined,
     icssx: {
         full: THREE.BufferGeometry,
-        stones: Stones,
+        stones: Stones2,
         fullDiamond: {
             base: THREE.BufferGeometry,
             full: THREE.BufferGeometry,
