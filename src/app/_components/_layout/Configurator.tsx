@@ -53,6 +53,7 @@ import Tribals from "@/app/_components/_teeth/_signature/Tribals";
 import Hammered from "@/app/_components/_teeth/_signature/Hammered";
 import Cross from "@/app/_components/_teeth/_signature/Cross";
 import {Group} from "three";
+import FullMaterial from "@/app/_components/_materials/FullMaterial";
 
 export default function Configurator() {
     const envMap = useEnvironment({
@@ -1627,6 +1628,8 @@ export default function Configurator() {
                 },
                 braces: {
                     structure: (signatures.scene.children[3].children[0] as THREE.Mesh).geometry,
+                    stoneBases: (signatures.scene.children[3].children[4] as THREE.Mesh).geometry,
+                    stoneBasePosition: getOriginGlb(signatures.scene.children[3].children[4], 1),
                     pave: (signatures.scene.children[3].children[3] as THREE.Mesh).geometry,
                     stones: (signatures.scene.children[3].children[2] as THREE.Mesh).geometry,
                     outline: (signatures.scene.children[3].children[1] as THREE.Mesh).geometry,

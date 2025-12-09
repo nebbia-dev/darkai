@@ -520,6 +520,8 @@ export default interface FBX {
         braces: {
             position: THREE.Vector3
             structure: THREE.BufferGeometry,
+            stoneBases: THREE.BufferGeometry,
+            stoneBasePosition: THREE.Vector3,
             pave: THREE.BufferGeometry,
             stones: THREE.BufferGeometry,
             outline: THREE.BufferGeometry,

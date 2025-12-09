@@ -15,8 +15,8 @@ export default function Braces() {
     const signatureVisibility = useTeethStore((state: State) => state.signatureVisibility.braces);
     const BRACES = memo(({visible, mat} : {visible: boolean, mat: string|undefined}): JSX.Element => {
         if(!signatureGeometry) return <></>
-        const geometry = [signatureGeometry.structure, signatureGeometry.pave, signatureGeometry.stones, signatureGeometry.outline];
-        const position = signatureGeometry.position
+        const geometry = [signatureGeometry.structure, signatureGeometry.pave, signatureGeometry.stones, signatureGeometry.outline, signatureGeometry.stoneBases];
+        const position = [signatureGeometry.position, signatureGeometry.stoneBasePosition]
         let material:JSX.Element[];
         switch(mat) {
             case 'pave':
@@ -33,27 +33,31 @@ export default function Braces() {
 
             return (
                 <>
-                    <mesh geometry={geometry[0]} visible={visible} position={position}>
+                    <mesh geometry={geometry[0]} visible={visible} position={position[0]}>
                         {material[0]}
                     </mesh>
 
-                    <mesh geometry={geometry[1]} visible={visible} position={position}>
+                    <mesh geometry={geometry[4]} visible={visible} position={position[1]}>
+                        {material[0]}
+                    </mesh>
+
+                    <mesh geometry={geometry[1]} visible={visible} position={position[0]}>
                         {mat === 'pave'
                             ? material[2]
                             : material[0]
                         }
                     </mesh>
                     {mat === 'pave' &&
-                        <mesh geometry={geometry[1]} visible={visible} position={position}>
+                        <mesh geometry={geometry[1]} visible={visible} position={position[0]}>
                             {material[0]}
                             {material[3]}
                         </mesh>
                     }
 
-                    <mesh geometry={geometry[2]} visible={visible} position={position}>
+                    <mesh geometry={geometry[2]} visible={visible} position={position[0]}>
                         {material[1]}
                     </mesh>
-                    <mesh geometry={geometry[3]} visible={visible} position={position}>
+                    <mesh geometry={geometry[3]} visible={visible} position={position[0]}>
                         {material[0]}
                     </mesh>
                 </>
