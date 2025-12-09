@@ -73,6 +73,8 @@ export default function IcsDx() {
         }
 
         resetUvs(toothGeometry.fullDiamond.full, false);
+        resetUvs(toothGeometry.bar.full, false, 'barDC');
+        resetUvs(toothGeometry.frame.full, false, 'barDC');
 
         if(geometry.length === 2) {
             return (

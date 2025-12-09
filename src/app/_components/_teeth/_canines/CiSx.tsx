@@ -12,6 +12,7 @@ import PaveFrame from "@/app/_components/_materials/PaveFrame";
 import RoundPaveBaseFrame from "@/app/_components/_materials/RoundPaveBaseFrame";
 import PaveBigBar from "@/app/_components/_materials/PaveBigBar";
 import RoundPaveBaseBigBar from "@/app/_components/_materials/RoundPaveBaseBigBar";
+import resetUvs from "@/app/_helpers/_models-modifiers/resetUvs";
 
 export default function CiSx() {
     const toothGeometry = useTeethStore((state: State) => state.teethGeometry.cisx);
@@ -79,7 +80,8 @@ export default function CiSx() {
                 position = new THREE.Vector3();
         }
 
-        // resetUvs(toothGeometry.fullDiamond.full);
+        resetUvs(toothGeometry.bar.full, false, 'barDC_lat');
+        resetUvs(toothGeometry.frame.full, false, 'barDC_lat');
 
         if(geometry.length === 2) {
             return (

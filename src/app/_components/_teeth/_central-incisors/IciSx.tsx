@@ -71,6 +71,9 @@ export default function IciSx() {
                 position = new THREE.Vector3();
         }
 
+        resetUvs(toothGeometry.bar.full, false, 'barDC_lat');
+        resetUvs(toothGeometry.frame.full, false, 'barDC_lat');
+
         if(geometry.length === 2) {
             return (
                 <>
