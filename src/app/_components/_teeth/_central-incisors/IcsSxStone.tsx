@@ -23,6 +23,13 @@ export default function IcsSxStone() {
                 <mesh geometry={tooth[toothStone.shape].geometries[0]}
                       position={tooth[toothStone.shape].positions[0]}
                       quaternion={getQuaternion(tooth[toothStone.shape].quaternions[0], true)}
+                      visible={false}
+                >
+                </mesh>
+
+                <mesh geometry={tooth[toothStone.shape].geometries[0]}
+                      position={tooth[toothStone.shape].positions[0]}
+                      quaternion={getQuaternion(tooth[toothStone.shape].quaternions[0], true)}
                 >
                     <FullMaterial color={toothMaterial} finish={toothFinish}/>
                 </mesh>
