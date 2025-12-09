@@ -53,7 +53,6 @@ import Tribals from "@/app/_components/_teeth/_signature/Tribals";
 import Hammered from "@/app/_components/_teeth/_signature/Hammered";
 import Cross from "@/app/_components/_teeth/_signature/Cross";
 import {Group} from "three";
-import FullMaterial from "@/app/_components/_materials/FullMaterial";
 
 export default function Configurator() {
     const envMap = useEnvironment({
@@ -73,6 +72,7 @@ export default function Configurator() {
         const bars = useGLTF('/models/Bars.glb');
         const full = useGLTF('/models/Full.glb');
         const signatures = useGLTF('/models/Signatures.glb');
+        console.log(signatures.scene.children[3])
         const bubblegum = useGLTF('/models/BGum.glb');
         const sprinkles = useGLTF('/models/Sprinkles.glb');
 
@@ -1677,9 +1677,10 @@ export default function Configurator() {
                 },
                 braces: {
                     structure: (signatures.scene.children[3].children[0] as THREE.Mesh).geometry,
-                    stoneBases: (signatures.scene.children[3].children[4] as THREE.Mesh).geometry,
-                    stoneBasePosition: getOriginGlb(signatures.scene.children[3].children[4], 1),
-                    pave: (signatures.scene.children[3].children[3] as THREE.Mesh).geometry,
+                    stoneBases: (signatures.scene.children[3].children[5] as THREE.Mesh).geometry,
+                    stoneBasePosition: getOriginGlb(signatures.scene.children[3].children[5], 1),
+                    paveDx: (signatures.scene.children[3].children[3] as THREE.Mesh).geometry,
+                    paveSx: (signatures.scene.children[3].children[4] as THREE.Mesh).geometry,
                     stones: (signatures.scene.children[3].children[2] as THREE.Mesh).geometry,
                     outline: (signatures.scene.children[3].children[1] as THREE.Mesh).geometry,
                     position: new THREE.Vector3(-0.46473254221912974, 1.76660383113165, -0.15407294943985753)

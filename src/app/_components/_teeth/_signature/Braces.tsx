@@ -3,7 +3,6 @@ import {JSX, memo} from "react";
 import FullMaterial from "@/app/_components/_materials/FullMaterial";
 import {useTeethStore} from "@/app/_stores/teeth";
 import {State} from "@/app/_types/State";
-import DecalPave from "@/app/_components/_materials/DecalPave";
 import StonesMaterial from "@/app/_components/_materials/StonesMaterial";
 import Pave from "@/app/_components/_materials/Pave";
 import RoundPaveBase from "@/app/_components/_materials/RoundPaveBase";
@@ -15,7 +14,7 @@ export default function Braces() {
     const signatureVisibility = useTeethStore((state: State) => state.signatureVisibility.braces);
     const BRACES = memo(({visible, mat} : {visible: boolean, mat: string|undefined}): JSX.Element => {
         if(!signatureGeometry) return <></>
-        const geometry = [signatureGeometry.structure, signatureGeometry.pave, signatureGeometry.stones, signatureGeometry.outline, signatureGeometry.stoneBases];
+        const geometry = [signatureGeometry.structure, signatureGeometry.paveDx, signatureGeometry.stones, signatureGeometry.outline, signatureGeometry.stoneBases, signatureGeometry.paveSx];
         const position = [signatureGeometry.position, signatureGeometry.stoneBasePosition]
         let material:JSX.Element[];
         switch(mat) {
@@ -29,7 +28,8 @@ export default function Braces() {
                 material = [<FullMaterial color="white" finish="polished"/>, <StonesMaterial color="ruby"/>];
         }
 
-        resetUvs(signatureGeometry.pave, true)
+        resetUvs(signatureGeometry.paveDx, true, 'braces', 'dx');
+        resetUvs(signatureGeometry.paveSx, true, 'braces', 'sx');
 
             return (
                 <>
@@ -47,11 +47,26 @@ export default function Braces() {
                             : material[0]
                         }
                     </mesh>
+
+                    <mesh geometry={geometry[5]} visible={visible} position={position[0]}>
+                        {mat === 'pave'
+                            ? material[2]
+                            : material[0]
+                        }
+                    </mesh>
+
                     {mat === 'pave' &&
-                        <mesh geometry={geometry[1]} visible={visible} position={position[0]}>
-                            {material[0]}
-                            {material[3]}
-                        </mesh>
+                        <>
+                            <mesh geometry={geometry[1]} visible={visible} position={position[0]}>
+                                {material[0]}
+                                {material[3]}
+                            </mesh>
+                            <mesh geometry={geometry[5]} visible={visible} position={position[0]}>
+                                {material[0]}
+                                {material[3]}
+                            </mesh>
+                        </>
+
                     }
 
                     <mesh geometry={geometry[2]} visible={visible} position={position[0]}>
