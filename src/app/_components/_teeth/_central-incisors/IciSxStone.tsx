@@ -3,7 +3,6 @@ import {useTeethStore} from "@/app/_stores/teeth";
 import StonesMaterial from "@/app/_components/_materials/StonesMaterial";
 import {JSX, memo} from "react";
 import {State} from "@/app/_types/State";
-import * as THREE from 'three'
 import FullMaterial from "@/app/_components/_materials/FullMaterial";
 import getQuaternion from "@/app/_helpers/_models-modifiers/getQuaternion";
 export default function IciSxStone() {
@@ -20,6 +19,12 @@ export default function IciSxStone() {
 
         return(
             <>
+                <mesh geometry={tooth[toothStone.shape].geometries[0]}
+                      position={tooth[toothStone.shape].positions[0]}
+                      quaternion={getQuaternion(tooth[toothStone.shape].quaternions[0], false)}
+                      visible={false}
+                >
+                </mesh>
                 <mesh geometry={tooth[toothStone.shape].geometries[0]}
                       position={tooth[toothStone.shape].positions[0]}
                       quaternion={getQuaternion(tooth[toothStone.shape].quaternions[0], false)}
