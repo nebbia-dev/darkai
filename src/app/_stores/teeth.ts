@@ -980,19 +980,19 @@ export const useTeethStore = create<State>((set, get) => ({
                             state.teethPaves[tooth] = {shape: undefined, color: undefined};
                             if (tooth === 'icsdx') {
                                 state.teethJewelType.icssx = 'bar';
-                                state.teethJewelType.icssx = {shape: undefined, color: undefined};
+                                state.teethPaves.icssx = {shape: undefined, color: undefined};
                             }
                             if (tooth === 'icssx') {
                                 state.teethJewelType.icsdx = 'bar';
-                                state.teethJewelType.icsdx = {shape: undefined, color: undefined};
+                                state.teethPaves.icsdx = {shape: undefined, color: undefined};
                             }
                             if (tooth === 'icidx') {
                                 state.teethJewelType.icisx = 'bar';
-                                state.teethJewelType.icisx = {shape: undefined, color: undefined};
+                                state.teethPaves.icisx = {shape: undefined, color: undefined};
                             }
                             if (tooth === 'icisx') {
                                 state.teethJewelType.icidx = 'bar';
-                                state.teethJewelType.icidx = {shape: undefined, color: undefined};
+                                state.teethPaves.icidx = {shape: undefined, color: undefined};
                             }
                             break;
                         case 'fullDiamond':

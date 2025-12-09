@@ -3,7 +3,7 @@ import {State} from "@/app/_types/State";
 
 export default function StoneOptions({tooth, bezel, pave}:{tooth:string|undefined, bezel:boolean, pave:boolean}) {
    const paveColor = useTeethStore((state: State) => tooth ? state.teethPaves[tooth].color : undefined);
-   const bezelColor = useTeethStore((state: State) => tooth ? state.teethStones[tooth].color : undefined);
+   const bezelColor = useTeethStore((state: State) => tooth ? state.teethStones[tooth]?.color : undefined);
    const setActiveSubButton = useTeethStore((state: State) => state.setActiveSubButton);
    const setStone =  useTeethStore((state: State) => state.setStone);
    const setPave =  useTeethStore((state: State) => state.setPave);
