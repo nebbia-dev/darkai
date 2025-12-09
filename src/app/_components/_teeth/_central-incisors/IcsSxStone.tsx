@@ -6,7 +6,6 @@ import {State} from "@/app/_types/State";
 import * as THREE from 'three'
 import FullMaterial from "@/app/_components/_materials/FullMaterial";
 import getQuaternion from "@/app/_helpers/_models-modifiers/getQuaternion";
-import getOrigin from "@/app/_helpers/_models-modifiers/getOrigin";
 export default function IcsSxStone() {
     const tooth = useTeethStore((state: State) => state.teethGeometry.icssx ? state.teethGeometry.icssx.stones : undefined);
     const toothStone =  useTeethStore((state: State) => state.teethStones.icssx);
@@ -19,19 +18,23 @@ export default function IcsSxStone() {
             )
         }
 
-        getOrigin(tooth[toothStone.shape].positions[0]);
-        getOrigin(tooth[toothStone.shape].positions[1]);
-
         return(
             <>
                 <mesh geometry={tooth[toothStone.shape].geometries[0]}
-                      position={getOrigin(tooth[toothStone.shape].positions[0])}
+                      position={tooth[toothStone.shape].positions[0]}
+                      quaternion={getQuaternion(tooth[toothStone.shape].quaternions[0], true)}
+                      visible={false}
+                >
+                </mesh>
+
+                <mesh geometry={tooth[toothStone.shape].geometries[0]}
+                      position={tooth[toothStone.shape].positions[0]}
                       quaternion={getQuaternion(tooth[toothStone.shape].quaternions[0], true)}
                 >
                     <FullMaterial color={toothMaterial} finish={toothFinish}/>
                 </mesh>
                 <mesh geometry={tooth[toothStone.shape].geometries[1]}
-                      position={getOrigin(tooth[toothStone.shape].positions[1])}
+                      position={tooth[toothStone.shape].positions[1]}
                       quaternion={getQuaternion(tooth[toothStone.shape].quaternions[1], true)}
                 >
                     <StonesMaterial color={toothStone.color}/>

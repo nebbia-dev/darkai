@@ -198,8 +198,8 @@ export default function Configurator() {
                             (stones.scene.children[1].children[3].children[5] as THREE.Mesh).geometry,
                         ],
                         positions: [
-                            stones.scene.children[1].children[3].children[5].children[0],
-                            stones.scene.children[1].children[3].children[5].children[0]
+                            getOrigin(stones.scene.children[1].children[3].children[5].children[0]),
+                            getOrigin(stones.scene.children[1].children[3].children[5].children[0])
                         ],
                         quaternions: [
                             stones.scene.children[1].children[3].children[5],
@@ -212,8 +212,8 @@ export default function Configurator() {
                             (stones.scene.children[1].children[2].children[5] as THREE.Mesh).geometry,
                         ],
                         positions: [
-                            stones.scene.children[1].children[2].children[5].children[0],
-                            stones.scene.children[1].children[2].children[5].children[0]
+                            getOrigin(stones.scene.children[1].children[2].children[5].children[0]),
+                            getOrigin(stones.scene.children[1].children[2].children[5].children[0])
                         ],
                         quaternions: [
                             stones.scene.children[1].children[2].children[5],
@@ -226,8 +226,8 @@ export default function Configurator() {
                             (stones.scene.children[1].children[5].children[5] as THREE.Mesh).geometry,
                         ],
                         positions: [
-                            stones.scene.children[1].children[5].children[5].children[0],
-                            stones.scene.children[1].children[5].children[5].children[0]
+                            getOrigin(stones.scene.children[1].children[5].children[5].children[0]),
+                            getOrigin(stones.scene.children[1].children[5].children[5].children[0])
                         ],
                         quaternions: [
                             stones.scene.children[1].children[5].children[5],
@@ -240,8 +240,8 @@ export default function Configurator() {
                             (stones.scene.children[1].children[1].children[5] as THREE.Mesh).geometry,
                         ],
                         positions: [
-                            stones.scene.children[1].children[1].children[5].children[0],
-                            stones.scene.children[1].children[1].children[5].children[0]
+                            getOrigin(stones.scene.children[1].children[1].children[5].children[0]),
+                            getOrigin(stones.scene.children[1].children[1].children[5].children[0])
                         ],
                         quaternions: [
                             stones.scene.children[1].children[1].children[5],
@@ -254,8 +254,8 @@ export default function Configurator() {
                             (stones.scene.children[1].children[4].children[5] as THREE.Mesh).geometry,
                         ],
                         positions: [
-                            stones.scene.children[1].children[4].children[5].children[0],
-                            stones.scene.children[1].children[4].children[5].children[0]
+                            getOrigin(stones.scene.children[1].children[4].children[5].children[0]),
+                            getOrigin(stones.scene.children[1].children[4].children[5].children[0])
                         ],
                         quaternions: [
                             stones.scene.children[1].children[4].children[5],
@@ -268,8 +268,8 @@ export default function Configurator() {
                             (stones.scene.children[1].children[0].children[5] as THREE.Mesh).geometry,
                         ],
                         positions: [
-                            stones.scene.children[1].children[0].children[5].children[0],
-                            stones.scene.children[1].children[0].children[5].children[0]
+                            getOrigin(stones.scene.children[1].children[0].children[5].children[0]),
+                            getOrigin(stones.scene.children[1].children[0].children[5].children[0])
                         ],
                         quaternions: [
                             stones.scene.children[1].children[0].children[5],
