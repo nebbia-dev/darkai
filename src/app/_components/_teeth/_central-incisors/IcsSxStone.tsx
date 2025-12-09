@@ -18,6 +18,8 @@ export default function IcsSxStone() {
             )
         }
 
+        console.log('stone load: ', tooth[toothStone.shape].positions[0], getQuaternion(tooth[toothStone.shape].quaternions[0], true))
+
         return(
             <>
                 <mesh geometry={tooth[toothStone.shape].geometries[0]}

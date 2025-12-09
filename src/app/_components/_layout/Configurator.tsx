@@ -74,6 +74,8 @@ export default function Configurator() {
         const bubblegum = useGLTF('/models/BGum.glb');
         const sprinkles = useGLTF('/models/Sprinkles.glb');
 
+        console.log('config load: ', getOrigin(stones.scene.children[1].children[2].children[5].children[0]), stones.scene.children[1].children[5].children[5]);
+
         return {
 
             // INCISIVI CENTRALI
