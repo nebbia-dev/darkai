@@ -41,9 +41,9 @@ export default function CiDx() {
                 position = toothGeometry.fullDiamond.position;
                 break;
             case 'enamel':
-                geometry = [toothGeometry.fullDiamond.base, toothGeometry.fullDiamond.full];
+                geometry = [toothGeometry.frame.full, toothGeometry.enamel.geometry];
                 material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>, <FullEnamel color={toothEnamel ?? 'ivory'}/>]
-                position = new THREE.Vector3();
+                position = toothGeometry.enamel.position;
                 break;
             case 'frame':
                 geometry = [toothGeometry.frame.full];
@@ -89,12 +89,18 @@ export default function CiDx() {
                     <mesh geometry={geometry[0]} visible={visible}>
                         {material[0]}
                     </mesh>
-                    <mesh geometry={geometry[1]} visible={visible}>
-                        {material[1]}
-                    </mesh>
-                    {((type.includes('bigBar') && (toothPave.shape === "round" || toothPave.shape === "baguette"))
-                        || ((type.includes('bar') || type.includes('frame')) && toothPave.shape === "round")
-                        || ((type.includes('full') || type.includes('bezel')) && (toothPave.shape === "round" || toothPave.shape === "mosaic"))
+                    {type === 'enamel'
+                        ? <mesh geometry={geometry[1]} visible={visible} position={position}>
+                            {material[1]}
+                          </mesh>
+                        : <mesh geometry={geometry[1]} visible={visible}>
+                            {material[1]}
+                          </mesh>
+                    }
+                    {
+                        ((type.includes('bigBar') && (toothPave.shape === "round" || toothPave.shape === "baguette"))
+                            || ((type.includes('bar') || type.includes('frame')) && toothPave.shape === "round")
+                            || ((type.includes('full') || type.includes('bezel')) && (toothPave.shape === "round" || toothPave.shape === "mosaic"))
                         ) &&
                         <mesh geometry={geometry[1]} visible={visible}>
                             {material[0]}

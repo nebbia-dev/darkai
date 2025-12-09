@@ -43,9 +43,9 @@ export default function CsDx() {
                 position = new THREE.Vector3();
                 break;
             case 'enamel':
-                geometry = [toothGeometry.fullDiamond.base, toothGeometry.fullDiamond.full];
+                geometry = [toothGeometry.frame.full, toothGeometry.enamel.geometry];
                 material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>, <FullEnamel color={toothEnamel ?? 'ivory'}/>]
-                position = new THREE.Vector3();
+                position = toothGeometry.enamel.position;
                 break;
             case 'frameDiamond':
                 geometry = [toothGeometry.frame.diamond.base, toothGeometry.frame.diamond.full];
@@ -76,9 +76,14 @@ export default function CsDx() {
                     <mesh geometry={geometry[0]} visible={visible}>
                         {material[0]}
                     </mesh>
-                    <mesh geometry={geometry[1]} visible={visible}>
-                        {material[1]}
-                    </mesh>
+                    {type === 'enamel'
+                        ? <mesh geometry={geometry[1]} visible={visible} position={position}>
+                            {material[1]}
+                        </mesh>
+                        : <mesh geometry={geometry[1]} visible={visible}>
+                            {material[1]}
+                        </mesh>
+                    }
                     {(toothPave.shape === "round" || toothPave.shape === "mosaic") &&
                         <mesh geometry={geometry[1]} visible={visible}>
                             {material[0]}

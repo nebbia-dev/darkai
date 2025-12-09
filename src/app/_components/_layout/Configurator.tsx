@@ -64,6 +64,7 @@ export default function Configurator() {
 
     const teeth = useMemo((): FBX => {
         const fullDiamond = useGLTF('/models/Full_Pave.glb');
+        const enamel = useGLTF('/models/Enamel.glb');
         const frameDiamond = useGLTF('/models/Frame_Pave.glb');
         const barDiamond = useFBX('/models/Bar_Pave.fbx');
         const stones = useGLTF('/models/Stones.glb')
@@ -188,6 +189,10 @@ export default function Configurator() {
                         full: (frameDiamond.scene.children[0].children[7] as THREE.Mesh).geometry,
                         position: getOriginGlb(frameDiamond.scene.children[0].children[7], 1)
                     }
+                },
+                enamel: {
+                    geometry: (enamel.scene.children[0].children[8] as THREE.Mesh).geometry,
+                    position: getOriginGlb(enamel.scene.children[0].children[8], 1)
                 }
             },
             icssx: {
@@ -300,6 +305,10 @@ export default function Configurator() {
                         full: (frameDiamond.scene.children[0].children[6] as THREE.Mesh).geometry,
                         position: getOriginGlb(frameDiamond.scene.children[0].children[6], 1)
                     }
+                },
+                enamel: {
+                    geometry: (enamel.scene.children[0].children[9] as THREE.Mesh).geometry,
+                    position: getOriginGlb(enamel.scene.children[0].children[9], 1)
                 }
             },
             icidx: {
@@ -412,6 +421,10 @@ export default function Configurator() {
                         full: (frameDiamond.scene.children[1].children[7] as THREE.Mesh).geometry,
                         position: getOriginGlb(frameDiamond.scene.children[1].children[7], 1)
                     }
+                },
+                enamel: {
+                    geometry: (enamel.scene.children[0].children[0] as THREE.Mesh).geometry,
+                    position: getOriginGlb(enamel.scene.children[0].children[0], 1)
                 }
             },
             icisx: {
@@ -524,6 +537,10 @@ export default function Configurator() {
                         full: (frameDiamond.scene.children[1].children[6] as THREE.Mesh).geometry,
                         position: getOriginGlb(frameDiamond.scene.children[1].children[6], 1)
                     }
+                },
+                enamel: {
+                    geometry: (enamel.scene.children[0].children[1] as THREE.Mesh).geometry,
+                    position: getOriginGlb(enamel.scene.children[0].children[1], 1)
                 }
             },
             // INCISIVI LATERALI
@@ -635,6 +652,10 @@ export default function Configurator() {
                         full: (frameDiamond.scene.children[0].children[11] as THREE.Mesh).geometry,
                         position: getOriginGlb(frameDiamond.scene.children[0].children[11], 1)
                     }
+                },
+                enamel: {
+                    geometry: (enamel.scene.children[0].children[4] as THREE.Mesh).geometry,
+                    position: new THREE.Vector3(enamel.scene.children[0].children[4].position.x, enamel.scene.children[0].children[4].position.y, enamel.scene.children[0].children[4].position.z * 14)
                 }
             },
             ilssx: {
@@ -745,6 +766,10 @@ export default function Configurator() {
                         full: (frameDiamond.scene.children[0].children[10] as THREE.Mesh).geometry,
                         position: getOriginGlb(frameDiamond.scene.children[0].children[10], 1)
                     }
+                },
+                enamel: {
+                    geometry: (enamel.scene.children[0].children[5] as THREE.Mesh).geometry,
+                    position: new THREE.Vector3(enamel.scene.children[0].children[5].position.x, enamel.scene.children[0].children[5].position.y, enamel.scene.children[0].children[5].position.z * 14)
                 }
             },
             ilidx: {
@@ -855,6 +880,10 @@ export default function Configurator() {
                         full: (frameDiamond.scene.children[1].children[11] as THREE.Mesh).geometry,
                         position: getOriginGlb(frameDiamond.scene.children[1].children[11], 1)
                     }
+                },
+                enamel: {
+                    geometry: (enamel.scene.children[0].children[6] as THREE.Mesh).geometry,
+                    position: new THREE.Vector3(enamel.scene.children[0].children[6].position.x, enamel.scene.children[0].children[6].position.y, enamel.scene.children[0].children[6].position.z * 14)
                 }
             },
             ilisx: {
@@ -965,6 +994,10 @@ export default function Configurator() {
                         full: (frameDiamond.scene.children[1].children[10] as THREE.Mesh).geometry,
                         position: getOriginGlb(frameDiamond.scene.children[1].children[10], 1)
                     }
+                },
+                enamel: {
+                    geometry: (enamel.scene.children[0].children[7] as THREE.Mesh).geometry,
+                    position: new THREE.Vector3(enamel.scene.children[0].children[7].position.x, enamel.scene.children[0].children[7].position.y, enamel.scene.children[0].children[7].position.z * 14)
                 }
             },
             // CANINI
@@ -1076,6 +1109,10 @@ export default function Configurator() {
                         full: (frameDiamond.scene.children[0].children[3] as THREE.Mesh).geometry,
                         position: getOriginGlb(frameDiamond.scene.children[0].children[3], 1)
                     }
+                },
+                enamel: {
+                    geometry: (enamel.scene.children[0].children[2] as THREE.Mesh).geometry,
+                    position: getOriginGlb(enamel.scene.children[0].children[2], 1)
                 }
             },
             cssx: {
@@ -1186,6 +1223,10 @@ export default function Configurator() {
                         full: (frameDiamond.scene.children[0].children[2] as THREE.Mesh).geometry,
                         position: getOriginGlb(frameDiamond.scene.children[0].children[2], 1)
                     }
+                },
+                enamel: {
+                    geometry: (enamel.scene.children[0].children[3] as THREE.Mesh).geometry,
+                    position: getOriginGlb(enamel.scene.children[0].children[3], 1)
                 }
             },
             cidx: {
@@ -1304,6 +1345,10 @@ export default function Configurator() {
                         full: (frameDiamond.scene.children[2].children[1] as THREE.Mesh).geometry,
                         position: getOrigin(frameDiamond.scene.children[2].children[1])
                     }
+                },
+                enamel: {
+                    geometry: (enamel.scene.children[0].children[10] as THREE.Mesh).geometry,
+                    position: getOriginGlb(enamel.scene.children[0].children[10], 1)
                 }
             },
             cisx: {
@@ -1422,6 +1467,10 @@ export default function Configurator() {
                         full: (frameDiamond.scene.children[2].children[1] as THREE.Mesh).geometry,
                         position: getOrigin(frameDiamond.scene.children[2].children[1])
                     }
+                },
+                enamel: {
+                    geometry: (enamel.scene.children[0].children[11] as THREE.Mesh).geometry,
+                    position: getOriginGlb(enamel.scene.children[0].children[11], 1)
                 }
             },
             // PRIMI PREMOLARI
