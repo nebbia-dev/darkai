@@ -1830,8 +1830,9 @@ export default function Configurator() {
     return (
         <>
             <OrbitControls
-                // maxDistance={35}
+                maxDistance={35}
                 // minDistance={20}
+                enablePan={false}
                 minPolarAngle={nextStep ? Math.PI / 2.1 : Math.PI / 3 }
                 maxPolarAngle={nextStep ? Math.PI - Math.PI / 2.1 : Math.PI - Math.PI / 3}
                 minAzimuthAngle={nextStep ? -Math.PI / 4 : -Math.PI / 2}
