@@ -1,7 +1,7 @@
 import {useTeethStore} from "@/app/_stores/teeth";
 import {State} from "@/app/_types/State";
 import checkMolar from "@/app/_helpers/_checkers/checkMolar";
-import React from "react";
+import React, {useEffect} from "react";
 
 export default function DesignOptions({tooth}: { tooth: string|undefined }) {
     const jewelType = useTeethStore((state: State) => tooth ? state.teethJewelType[tooth] : undefined);
@@ -14,6 +14,12 @@ export default function DesignOptions({tooth}: { tooth: string|undefined }) {
             setActiveSubButton(e);
         }
     }
+
+    useEffect(() => {
+        console.log(jewelType);
+    // scrollTo opzione scelta, con id = jewelType
+    // anche quando viene cambiato ActiveSubButton
+    }, [jewelType])
 
     return (
         <>
