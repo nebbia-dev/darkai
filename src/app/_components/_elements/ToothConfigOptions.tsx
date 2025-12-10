@@ -98,7 +98,9 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
             } left-[48px]`}>
 
                 <div
-                    className={`pups text-center ${(active === '4' && jewelType?.includes('enamel')) ? 'h-[188px]' : (active === '2' && checkMolar(tooth)) ? 'h-[186px]' : 'h-[596px]'} w-[200px] bg-gray-50 rounded-3xl p-8 pr-4 border-1`}>
+                    className={`pups text-center ${(active === '4' && jewelType?.includes('enamel')) 
+                        ? 'h-[188px]' : (active === '2' && checkMolar(tooth)) ? 'h-[186px]' : 'h-[596px]'} 
+                        w-[200px] bg-gray-50 rounded-3xl p-8 pr-4 border-1 max-h-[70vh]`}>
                     <div onScroll={sync} ref={elementRef} className="overflow-y-scroll h-full pl-[2px] pr-4">
                         {renderOptions(active, tooth)}
                     </div>
@@ -107,7 +109,7 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
 
 
             <div
-                className={`${!active ? 'hidden' : 'block'} pups text-center h-[596px] w-[64px] absolute left-[240px] 
+                className={`${!active ? 'hidden' : 'block'} pups text-center max-h-[70vh] h-[596px] w-[64px] absolute left-[240px] 
                             ${active === '1'
                     ? 'top-[-30vh]'
                             : active === '6'

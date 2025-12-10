@@ -33,25 +33,25 @@ export default function ActionBar() {
     return(
         <div>
             <div
-                className="absolute flex items-center justify-center gap-4 bottom-20 left-[50%] translate-x-[-50%] w-2/4">
+                className="absolute flex items-center justify-center gap-4 bottom-10 bigger-bottom left-[50%] translate-x-[-50%] w-2/4">
                 <Tooltip title="Previous">
-                    <button onClick={doUndo} className="rounded-full border w-10 h-10 p-[6px] cursor-pointer">
+                    <button onClick={doUndo} className="rounded-full border w-8 h-8 bigger-icons p-[6px] cursor-pointer">
                         <img src="/action-bar-icons/undo.svg" alt="undo"/>
                     </button>
                 </Tooltip>
                 <Tooltip title="Next">
-                    <button onClick={doRedo} className="rounded-full border w-10 h-10 p-[6px] cursor-pointer">
+                    <button onClick={doRedo} className="rounded-full border w-8 h-8 bigger-icons p-[6px] cursor-pointer">
                         <img className="scale-x-[-1]" src="/action-bar-icons/undo.svg" alt="redo"/>
                     </button>
                 </Tooltip>
 
                 <Tooltip title="Reset camera">
-                    <button onClick={resetControls} className="rounded-full border w-10 h-10 p-[6px] cursor-pointer">
+                    <button onClick={resetControls} className="rounded-full border w-8 h-8 bigger-icons p-[6px] cursor-pointer">
                         <img src="/action-bar-icons/reset-view.svg" alt="reset-view"/>
                     </button>
                 </Tooltip>
                 <Tooltip title="Reset configuration">
-                    <button onClick={reset} className="rounded-full border w-10 h-10 p-[6px] cursor-pointer">
+                    <button onClick={reset} className="rounded-full border w-8 h-8 bigger-icons p-[6px] cursor-pointer">
                         <img src="/action-bar-icons/reset-config.svg" alt="reset-configuration"/>
                     </button>
                 </Tooltip>

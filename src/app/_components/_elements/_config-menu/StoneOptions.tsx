@@ -75,7 +75,7 @@ export default function StoneOptions({tooth, bezel, pave}:{tooth:string|undefine
             </button>
             <button type="button" disabled={!pave && !bezel} value="ameth"
                     onClick={(e) => setStoneColor(e.currentTarget.value)}
-                    className={`${(paveColor === 'ameth' || bezelColor === 'ameth') ? 'border-2' : ''} w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 px-2 pt-2 pb-3 ${(pave || bezel) ? 'text-slate-950 cursor-pointer' : 'text-slate-400'} flex flex-col items-center justify-center`}>
+                    className={`${(paveColor === 'ameth' || bezelColor === 'ameth') ? 'border-2' : ''} w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 ${pave || !bezel ? 'mb-4' : ''} px-2 pt-2 pb-3 ${(pave || bezel) ? 'text-slate-950 cursor-pointer' : 'text-slate-400'} flex flex-col items-center justify-center`}>
                 <img src="/color-icons/ameth.svg" alt="amethyst"/>
                 <span className="text-xs">Amethyst</span>
             </button>
@@ -89,7 +89,7 @@ export default function StoneOptions({tooth, bezel, pave}:{tooth:string|undefine
                     </button>
                     <button type="button" disabled={!pave} value="camo"
                             onClick={(e) => setStoneColor(e.currentTarget.value)}
-                            className={`${paveColor === 'camo' ? 'border-2' : ''} w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 px-2 pt-2 pb-3 ${pave ? 'text-slate-950 cursor-pointer' : 'text-slate-400'} flex flex-col items-center justify-center`}>
+                            className={`${paveColor === 'camo' ? 'border-2' : ''} w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 px-2 pt-2 pb-3 ${pave ? 'text-slate-950 cursor-pointer' : 'text-slate-400'} flex flex-col items-center justify-center`}>
                         <img src="/color-icons/camo.svg" alt="camo"/>
                         <span className="text-xs">Camo</span>
                     </button>

@@ -15,31 +15,32 @@ export default function Selection({activeButton, changeActiveButton} : {activeBu
 
     return (
         <>
-            <div className="flex">
-                <div className="w-full h-[calc(100vh-108px)] flex flex-col gap-[25%] ml-[5vw]">
-                    <div
-                        className="relative flex gap-4 top-10">
-                        <Tooltip title="Navigation info">
-                            <button className="cursor-pointer">
-                                <Info className="w-6 h-6" onClick={() => setShowManual((prev) => !prev)}/>
-                            </button>
-                        </Tooltip>
-                        {showManual &&
-                            <div
-                                className={`${activeButton ? 'left-[60%]' : 'left-[15%]' } absolute flex flex-col border border-gray-950/[33%] gap-1 top-[-100%] w-[300px] text-sm bg-gray-50 rounded py-2 px-4`}>
-                                <div className="flex items-center justify-between">
-                                    <p className="font-semibold">How to navigate the model</p>
-                                    <Close className="cursor-pointer w-5"
-                                           onClick={() => setShowManual((prev) => !prev)}/>
-                                </div>
-                                <ul className="mb-1 pr-2">
-                                    <li><span className="font-semibold">Move</span>: click + drag</li>
-                                    <li><span className="font-semibold">Zoom</span>: slide two fingers up/down or rotate the mouse wheel
-                                    </li>
-                                </ul>
+            <div className="flex-col flex">
+                <div
+                    className="relative flex gap-4 left-[calc(5vw+8px)]">
+                    <Tooltip title="Navigation info">
+                        <button className="cursor-pointer">
+                            <Info className="w-6 h-6" onClick={() => setShowManual((prev) => !prev)}/>
+                        </button>
+                    </Tooltip>
+                    {showManual &&
+                        <div
+                            className={`${activeButton ? 'left-[37.5%]' : 'left-[15%]'} absolute flex flex-col border border-gray-950/[33%] gap-1 top-[-150%] w-[300px] text-sm bg-gray-50 rounded py-2 px-4 z-50`}>
+                            <div className="flex items-center justify-between">
+                                <p className="font-semibold">How to navigate the model</p>
+                                <Close className="cursor-pointer w-5"
+                                       onClick={() => setShowManual((prev) => !prev)}/>
                             </div>
-                        }
-                    </div>
+                            <ul className="mb-1 pr-2">
+                                <li><span className="font-semibold">Move</span>: click + drag</li>
+                                <li><span className="font-semibold">Zoom</span>: slide two fingers up/down or rotate the
+                                    mouse wheel
+                                </li>
+                            </ul>
+                        </div>
+                    }
+                </div>
+                <div className="w-full h-[calc(100vh-108px)] flex flex-col justify-center ml-[5vw]">
                     <div className="flex flex-col gap-4">
                         <ConfiguratorButton tooth="alwaysActive" inverse={true} value="1" active={activeButton}
                                             onclick={changeActiveButton} label="Signature Designs">
