@@ -1,4 +1,4 @@
-import React, {useRef} from "react";
+import React, {useEffect, useRef} from "react";
 import {useTeethStore} from "@/app/_stores/teeth";
 import {State} from "@/app/_types/State";
 import ConfiguratorButton from "@/app/_components/_elements/_buttons/ConfiguratorButton";
@@ -16,23 +16,90 @@ import checkMolar from "@/app/_helpers/_checkers/checkMolar";
 
 export default function ToothConfigOptions({tooth, onclick, active} : {tooth: string | undefined, active:string|undefined, onclick: (value:string) => void}) {
     const pave = useTeethStore((state: State) => tooth ? state.teethPaves[tooth] : undefined);
+    const stone = useTeethStore((state: State) => tooth ? state.teethStones[tooth] : undefined);
+
+    const finish = useTeethStore((state: State) => tooth ? state.teethFinish[tooth] : undefined);
     const jewelType = useTeethStore((state: State) => tooth ? state.teethJewelType[tooth] : undefined);
     const visibility = useTeethStore((state: State) => tooth ? state.teethVisibility[tooth] : undefined);
+
     const elementRef = useRef<HTMLDivElement|null>(null);
     const selectorRef = useRef<HTMLDivElement|null>(null);
+    // ref to menus individual buttons
+    const fullRef = useRef<HTMLButtonElement|null>(null);
+    const frameRef = useRef<HTMLButtonElement|null>(null);
+    const barRef = useRef<HTMLButtonElement|null>(null);
+    const bigBarRef = useRef<HTMLButtonElement|null>(null);
+    const bezelRef = useRef<HTMLButtonElement|null>(null);
+    const enamelRef = useRef<HTMLButtonElement|null>(null);
+    const polishedRef = useRef<HTMLButtonElement|null>(null);
+    const sBlastRef = useRef<HTMLButtonElement|null>(null);
+    const dCutRef = useRef<HTMLButtonElement|null>(null);
+    const mosaicRef = useRef<HTMLButtonElement|null>(null);
+    const roundRef = useRef<HTMLButtonElement|null>(null);
+    const hexRef = useRef<HTMLButtonElement|null>(null);
+    const princessRef = useRef<HTMLButtonElement|null>(null);
+    const baguetteRef = useRef<HTMLButtonElement|null>(null);
+    const whDRef = useRef<HTMLButtonElement|null>(null);
+    const brDRef = useRef<HTMLButtonElement|null>(null);
+    const blDRef = useRef<HTMLButtonElement|null>(null);
+    const rubyRef = useRef<HTMLButtonElement|null>(null);
+    const emeraldRef = useRef<HTMLButtonElement|null>(null);
+    const bSapphRef = useRef<HTMLButtonElement|null>(null);
+    const pSapphRef = useRef<HTMLButtonElement|null>(null);
+    const ySapphRef = useRef<HTMLButtonElement|null>(null);
+    const aquaRef = useRef<HTMLButtonElement|null>(null);
+    const amethRef = useRef<HTMLButtonElement|null>(null);
+    const camoRef = useRef<HTMLButtonElement|null>(null);
+    const glitchRef = useRef<HTMLButtonElement|null>(null);
 
     function renderOptions(active:string|undefined, tooth:string|undefined) {
         switch(active) {
             case "1":
                 return <SignatureOptions/>
             case "2":
-                return <DesignOptions tooth={tooth} />
+                return <DesignOptions
+                    tooth={tooth}
+                    fullRef={fullRef}
+                    frameRef={frameRef}
+                    barRef={barRef}
+                    bigBarRef={bigBarRef}
+                    bezelRef={bezelRef}
+                    enamelRef={enamelRef}
+                />
             case "3":
                 return <GoldOptions tooth={tooth} signature={checkSignature(jewelType)}/>
             case "4":
-                return <FinishOptions tooth={tooth} jewelType={jewelType} visible={visibility} signature={checkSignature(jewelType)}/>
+                return <FinishOptions tooth={tooth}
+                                      jewelType={jewelType}
+                                      visible={visibility}
+                                      signature={checkSignature(jewelType)}
+                                      polishedRef={polishedRef}
+                                      sBlastRef={sBlastRef}
+                                      dCutRef={dCutRef}
+                                      mosaicRef={mosaicRef}
+                                      roundRef={roundRef}
+                                      hexRef={hexRef}
+                                      princessRef={princessRef}
+                                      baguetteRef={baguetteRef}
+                />
             case "5":
-                return <StoneOptions tooth={tooth} bezel={jewelType === 'bezel'|| jewelType === 'bezelDiamond'} pave={!!pave?.shape} />
+                return <StoneOptions
+                    tooth={tooth}
+                    bezel={jewelType === 'bezel'|| jewelType === 'bezelDiamond'}
+                    pave={!!pave?.shape}
+                    whDRef={whDRef}
+                    brDRef={brDRef}
+                    blDRef={blDRef}
+                    rubyRef={rubyRef}
+                    emeraldRef={emeraldRef}
+                    pSapphRef={pSapphRef}
+                    bSapphRef={bSapphRef}
+                    ySapphRef={ySapphRef}
+                    aquaRef={aquaRef}
+                    amethRef={amethRef}
+                    camoRef={camoRef}
+                    glitchRef={glitchRef}
+                />
             case "6":
                 return <PackagingOptions/>
             default:
@@ -56,6 +123,121 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
             selectorRef.current.scrollTop = elementRef.current.scrollTop;
         }
     }
+
+    useEffect(() => {
+        let ref;
+        if(active === '2') {
+            switch(jewelType) {
+                case 'full':
+                case 'fullDiamond':
+                    ref = fullRef.current;
+                    break;
+                case 'bar':
+                case 'barDiamond':
+                    ref = barRef.current;
+                    break;
+                case 'bigBar':
+                case 'bigBarDiamond':
+                    ref = bigBarRef.current;
+                    break;
+                case 'frame':
+                case 'frameDiamond':
+                    ref = frameRef.current;
+                    break;
+                case 'bezel':
+                case 'bezelDiamond':
+                    ref = bezelRef.current;
+                    break;
+                case 'enamel':
+                    ref = enamelRef.current;
+                    break;
+                default:
+                    ref = fullRef.current;
+            }
+        }
+        if(active === '4') {
+            if(pave?.shape) {
+                switch(pave.shape) {
+                    case 'mosaic':
+                        ref = mosaicRef.current;
+                        break;
+                    case 'round':
+                        ref = roundRef.current;
+                        break;
+                    case 'hexagon':
+                        ref = hexRef.current;
+                        break;
+                    case 'princess':
+                        ref = princessRef.current;
+                        break;
+                    case 'baguette':
+                        ref = baguetteRef.current;
+                        break;
+                    default:
+                        ref = polishedRef.current;
+                }
+            } else {
+                switch(finish) {
+                    case 'polished':
+                        ref = polishedRef.current;
+                        break;
+                    case 'sandblasted':
+                        ref = sBlastRef.current;
+                        break;
+                    case 'diamond_cut':
+                        ref = dCutRef.current;
+                        break;
+                    default:
+                        ref = polishedRef.current;
+                }
+            }
+        }
+        if(active === '5') {
+            const gem = stone?.color ?? pave?.color;
+            switch(gem) {
+                    case 'whD':
+                        ref = whDRef.current;
+                        break;
+                    case 'blD':
+                        ref = blDRef.current;
+                        break;
+                    case 'brD':
+                        ref = brDRef.current;
+                        break;
+                    case 'ruby':
+                        ref = rubyRef.current;
+                        break;
+                    case 'emerald':
+                        ref = emeraldRef.current;
+                        break;
+                    case 'bSapph':
+                        ref = bSapphRef.current;
+                        break;
+                    case 'ySapph':
+                        ref = ySapphRef.current;
+                        break;
+                    case 'pSapph':
+                        ref = pSapphRef.current;
+                        break;
+                    case 'ameth':
+                        ref = amethRef.current;
+                        break;
+                    case 'aqua':
+                        ref = aquaRef.current;
+                        break;
+                    case 'camo':
+                        ref = camoRef.current;
+                        break;
+                    case 'glitch':
+                        ref = glitchRef.current;
+                        break;
+                    default:
+                        ref = whDRef.current;
+                }
+        }
+        ref?.scrollIntoView();
+    }, [active])
+
 
     return(
 

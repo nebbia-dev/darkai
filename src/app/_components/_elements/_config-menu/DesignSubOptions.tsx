@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 import {useTeethStore} from "@/app/_stores/teeth";
 import {State} from "@/app/_types/State";
 
@@ -17,12 +17,6 @@ export default function DesignSubOptions({tooth, type}: { tooth: string|undefine
             setEnamel(tooth, e);
         }
     }
-
-    useEffect(() => {
-        console.log(value);
-        // scrollTo opzione scelta, con id = value(=== jewelType)+sub
-        // anche quando viene cambiato ActiveButton
-    }, [value])
 
     return (
         <>

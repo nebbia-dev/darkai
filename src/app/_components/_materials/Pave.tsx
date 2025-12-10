@@ -85,38 +85,87 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
     pairs.set('hexagon', hexagon.map);
     pairs.set('hexagonNormal', hexagon.normalMap);
 
+    /* HEXAGON CAMO PAVE*/
+    const hexagonCamo = useTexture({
+        map: 'textures/paves/Hexagon_Pave_Camo.webp',
+    });
+    hexagonCamo.map.colorSpace = THREE.SRGBColorSpace;
+    hexagonCamo.map.wrapS = hexagonCamo.map.wrapT = THREE.RepeatWrapping;
+    hexagonCamo.map.repeat.set(6, 6);
+
+    pairs.set('hexagonCamo', hexagonCamo.map);
+
+    /* PRINCESS CAMO PAVE*/
+    const princessCamo = useTexture({
+        map: 'textures/paves/Princess_Pave_Camo.webp',
+    });
+    princessCamo.map.colorSpace = THREE.SRGBColorSpace;
+    princessCamo.map.wrapS = princessCamo.map.wrapT = THREE.RepeatWrapping;
+    princessCamo.map.repeat.set(6, 6);
+
+    pairs.set('princessCamo', princessCamo.map);
+
+    /* BAGUETTE CAMO PAVE*/
+    const baguetteCamo = useTexture({
+        map: 'textures/paves/Baguette_Pave_Camo.webp',
+    });
+    baguetteCamo.map.colorSpace = THREE.SRGBColorSpace;
+    baguetteCamo.map.wrapS = baguetteCamo.map.wrapT = THREE.RepeatWrapping;
+    baguetteCamo.map.repeat.set(6, 6);
+
+    pairs.set('baguetteCamo', baguetteCamo.map);
+
     let hex;
+    let paveType;
 
     switch(stone) {
         case 'bSapph':
             hex = 0x0073b6;
+            paveType = pave;
             break;
         case 'aqua':
             hex = 0x00bdca;
+            paveType = pave;
             break;
         case 'emerald':
             hex = 0x0c8241;
+            paveType = pave;
             break;
         case 'ySapph':
             hex = 0xffc007;
+            paveType = pave;
             break;
         case 'ruby':
             hex = 0xe91825;
+            paveType = pave;
             break;
         case 'pSapph':
             hex = 0xff6588;
+            paveType = pave;
             break;
         case 'ameth':
             hex = 0xae3b9f;
+            paveType = pave;
             break;
         case 'whD':
             hex = 0xffffff;
+            paveType = pave;
             break;
         case 'brD':
             hex = 0x4c3e34;
+            paveType = pave;
             break;
         case 'blD':
             hex = 0x1d1e1e;
+            paveType = pave;
+            break;
+        case 'camo':
+            hex = 0xffffff;
+            paveType = pave + "Camo";
+            break;
+        case 'glitch':
+            hex = 0xffffff;
+            paveType = pave + "Glitch";
             break;
         default:
             hex = 0xffffff;
@@ -124,11 +173,10 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
     }
 
 
-
     return (
         <meshStandardMaterial
             transparent={true}
-            map={pairs.get(pave)}
+            map={pairs.get(paveType)}
             normalMap={pairs.get(pave + "Normal")}
             envMapIntensity={2}
             color={hex}
