@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {useTeethStore} from "@/app/_stores/teeth";
 import {State} from "@/app/_types/State";
 import ConfiguratorButton from "@/app/_components/_elements/_buttons/ConfiguratorButton";
@@ -13,6 +13,7 @@ import PackagingSubOptions from "@/app/_components/_elements/_config-menu/Packag
 import SignatureSubOptions from "@/app/_components/_elements/_config-menu/SignatureSubOptions";
 import checkSignature from "@/app/_helpers/_checkers/checkSignature";
 import checkMolar from "@/app/_helpers/_checkers/checkMolar";
+import {Close} from "@/app/_components/_icons/Close";
 
 export default function ToothConfigOptions({tooth, onclick, active} : {tooth: string | undefined, active:string|undefined, onclick: (value:string) => void}) {
     const pave = useTeethStore((state: State) => tooth ? state.teethPaves[tooth] : undefined);
@@ -22,6 +23,8 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
     const jewelType = useTeethStore((state: State) => tooth ? state.teethJewelType[tooth] : undefined);
     const visibility = useTeethStore((state: State) => tooth ? state.teethVisibility[tooth] : undefined);
     const signatures = useTeethStore((state: State) => state.signatureVisibility);
+    const gemBox = useTeethStore((state: State) => state.showGemTypeBox);
+    const showGemBox = useTeethStore((state: State) => state.setShowGemTypeBox);
 
     const elementRef = useRef<HTMLDivElement|null>(null);
     const selectorRef = useRef<HTMLDivElement|null>(null);
@@ -312,8 +315,12 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
         <div className="relative flex flex-col gap-4">
 
             <div
-                className={`${(active === '5' && (jewelType?.includes('Diamond') || jewelType?.includes('bezel'))) ? 'block' : 'hidden'} text-center absolute top-[-30vh] left-[38.5vw] rounded-3xl bg-gray-50 border-1 py-4 px-8 text-sm w-[200px] mb-4`}>You're
-                choosing the <strong>{jewelType?.includes('bezel') ? 'bezel' : 'pave'}</strong> stone color
+                className={`${
+                    (gemBox && (jewelType?.includes('Diamond') || jewelType?.includes('bezel'))) 
+                        ? 'flex justify-center gap-4' : 'hidden'} absolute top-[-32.5vh] left-[36.75vw] rounded-3xl bg-gray-50 border-1 py-4 px-8 text-sm w-[248px] mb-4`}>
+                <p>You're choosing the <strong>{jewelType?.includes('bezel') ? 'bezel' : 'pave'}</strong> stone color</p>
+                <Close className="cursor-pointer w-10" onClick={() => showGemBox(false)}
+                />
             </div>
 
 

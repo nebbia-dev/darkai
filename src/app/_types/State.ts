@@ -73,6 +73,8 @@ export interface State {
     teethPaves: Paves,
     activeButton: string|undefined,
     activeSubButton: string|undefined,
+    showGemTypeBox: boolean,
+    setShowGemTypeBox: (value:boolean) => void,
     loaded: boolean,
     prices: TempPrices | undefined | null,
     total: number,

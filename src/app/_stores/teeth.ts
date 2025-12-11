@@ -1176,6 +1176,9 @@ export const useTeethStore = create<State>((set, get) => ({
         ),
 
     // state and method to set the active side button;
+    // state toggler for bezel/pave informative box
+    showGemTypeBox: false,
+    setShowGemTypeBox: (value) => set({showGemTypeBox: value}),
     activeButton: undefined,
     setActiveButton: (button:string|undefined) =>
         set(
@@ -1185,6 +1188,9 @@ export const useTeethStore = create<State>((set, get) => ({
                     state.activeButton = undefined;
                 } else {
                     state.activeButton = button;
+                    if(button === '5') {
+                        state.showGemTypeBox = true;
+                    }
                 }
 
             })
