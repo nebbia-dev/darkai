@@ -193,6 +193,18 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
     pairs.set('roundGlitch', roundGlitch.map);
     pairs.set('roundGlitchNormal', roundGlitch.normalMap);
 
+    pairs.set('hexagonCamoNormal', hexagon.normalMap);
+    pairs.set('hexagonGlitchNormal', hexagon.normalMap);
+
+    pairs.set('princessCamoNormal', princess.normalMap);
+    pairs.set('princessGlitchNormal', princess.normalMap);
+
+    pairs.set('mosaicCamoNormal', mosaic.normalMap);
+    pairs.set('mosaicGlitchNormal', mosaic.normalMap);
+
+    pairs.set('baguetteCamoNormal', baguette.normalMap);
+    pairs.set('baguetteGlitchNormal', baguette.normalMap);
+
     let hex;
     let paveType;
 

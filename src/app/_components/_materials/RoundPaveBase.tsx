@@ -142,10 +142,14 @@ export default function RoundPaveBase({color, stone, pave} : {color: string|unde
     switch(stone) {
         case 'camo':
         case 'glitch':
-            paveType = pave + "Alt";
+            if(pave === 'round') {
+                paveType = pave + "Alt";
+            } else {
+                paveType = pave;
+            }
             break;
         default:
-            paveType = pave
+            paveType = pave;
             break;
     }
 
