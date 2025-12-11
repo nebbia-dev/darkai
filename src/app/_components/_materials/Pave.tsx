@@ -165,6 +165,34 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
 
     pairs.set('mosaicGlitch', mosaicGlitch.map);
 
+    /* ROUND CAMO PAVE*/
+    const roundCamo = useTexture({
+        map: 'textures/paves/round/Round_Pave_Camo.webp',
+        normalMap: 'textures/paves/round/Round_Pave_Normal.webp'
+    });
+    roundCamo.map.colorSpace = THREE.SRGBColorSpace;
+    roundCamo.map.wrapS = roundCamo.map.wrapT = THREE.RepeatWrapping;
+    roundCamo.map.repeat.set(7.5, 7.5);
+    roundCamo.normalMap.wrapS = roundCamo.normalMap.wrapT = THREE.RepeatWrapping;
+    roundCamo.normalMap.repeat.set(7.5, 7.5);
+
+    pairs.set('roundCamo', roundCamo.map);
+    pairs.set('roundCamoNormal', roundCamo.normalMap);
+
+    /* ROUND GLITCH PAVE*/
+    const roundGlitch = useTexture({
+        map: 'textures/paves/round/Round_Pave_Glitch.webp',
+        normalMap: 'textures/paves/round/Round_Pave_Normal.webp'
+    });
+    roundGlitch.map.colorSpace = THREE.SRGBColorSpace;
+    roundGlitch.map.wrapS = roundGlitch.map.wrapT = THREE.RepeatWrapping;
+    roundGlitch.map.repeat.set(7.5, 7.5);
+    roundGlitch.normalMap.wrapS = roundGlitch.normalMap.wrapT = THREE.RepeatWrapping;
+    roundGlitch.normalMap.repeat.set(7.5, 7.5);
+
+    pairs.set('roundGlitch', roundGlitch.map);
+    pairs.set('roundGlitchNormal', roundGlitch.normalMap);
+
     let hex;
     let paveType;
 
@@ -227,7 +255,7 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
         <meshStandardMaterial
             transparent={true}
             map={pairs.get(paveType)}
-            normalMap={pairs.get(pave + "Normal")}
+            normalMap={pairs.get(paveType + "Normal")}
             envMapIntensity={2}
             color={hex}
             metalness={1}

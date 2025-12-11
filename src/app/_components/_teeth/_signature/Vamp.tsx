@@ -3,7 +3,6 @@ import {JSX, memo} from "react";
 import FullMaterial from "@/app/_components/_materials/FullMaterial";
 import {useTeethStore} from "@/app/_stores/teeth";
 import {State} from "@/app/_types/State";
-import DecalPave from "@/app/_components/_materials/DecalPave";
 import Pave from "@/app/_components/_materials/Pave";
 import RoundPaveBase from "@/app/_components/_materials/RoundPaveBase";
 import resetUvs from "@/app/_helpers/_models-modifiers/resetUvs";
@@ -19,7 +18,7 @@ export default function Vamp() {
         let material:JSX.Element[];
         switch(mat) {
             case 'pave':
-                material = [<FullMaterial finish="polished" color="white"/>, <Pave pave="round" stone="whD"/>, <RoundPaveBase color="white" type="round"/>]
+                material = [<FullMaterial finish="polished" color="white"/>, <Pave pave="round" stone="whD"/>, <RoundPaveBase stone="whD" color="white" pave="round"/>]
                 break;
             case 'white':
                 material = [<FullMaterial finish="polished" color="white"/>]

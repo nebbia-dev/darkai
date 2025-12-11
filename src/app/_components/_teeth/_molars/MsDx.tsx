@@ -4,7 +4,6 @@ import FullMaterial from "@/app/_components/_materials/FullMaterial";
 import {useTeethStore} from "@/app/_stores/teeth";
 import {State} from "@/app/_types/State";
 import * as THREE from 'three'
-import DecalPave from "@/app/_components/_materials/DecalPave";
 import FullMaterial_ICS from "@/app/_components/_materials/FullMaterial_ICS";
 import Pave from "@/app/_components/_materials/Pave";
 import RoundPaveBase from "@/app/_components/_materials/RoundPaveBase";
@@ -28,7 +27,7 @@ export default function MsDx() {
                 break;
             case 'fullDiamond':
                 geometry = [toothGeometry.fullDiamond.base, toothGeometry.fullDiamond.full];
-                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>, <Pave pave={toothPave.shape} stone={toothPave.color}/>, <RoundPaveBase color={toothMaterial} type={toothPave.shape}/>]
+                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>, <Pave pave={toothPave.shape} stone={toothPave.color}/>, <RoundPaveBase stone={toothPave.color} color={toothMaterial} pave={toothPave.shape}/>]
                 position = toothGeometry.fullDiamond.position;
                 break;
             default:

@@ -19,7 +19,7 @@ export default function Braces() {
         let material:JSX.Element[];
         switch(mat) {
             case 'pave':
-                material = [<FullMaterial color="white" finish="polished"/>, <StonesMaterial color="emerald"/>, <Pave pave="round" stone="whD"/>, <RoundPaveBase color="white" type="round"/>]
+                material = [<FullMaterial color="white" finish="polished"/>, <StonesMaterial color="emerald"/>, <Pave pave="round" stone="whD"/>, <RoundPaveBase stone="whD" color="white" pave="round"/>]
                 break;
             case 'metal':
                 material = [<FullMaterial color="white" finish="polished"/>, <StonesMaterial color="ruby"/>]

@@ -3,8 +3,8 @@ import * as THREE from "three";
 import {useTeethStore} from "@/app/_stores/teeth";
 import firstCapital from "@/app/_helpers/_string-modders/firstCapital";
 
-export default function RoundPaveBase({color, type} : {color: string|undefined, type: string|undefined}) {
-    if(!color || !type) return;
+export default function RoundPaveBase({color, stone, pave} : {color: string|undefined, stone: string|undefined, pave: string|undefined}) {
+    if(!color || !pave) return;
 
     const envMap = useTeethStore((state) => state.envMap);
 
@@ -52,6 +52,48 @@ export default function RoundPaveBase({color, type} : {color: string|undefined, 
     roundBlack.map.repeat.set(15, 15);
     pairs.set('roundBlack', roundBlack.map);
 
+    // ROUND CAMO/GLITCH
+    const roundAltNormal = useTexture({
+        normalMap: 'textures/paves/round/Struttura_Normal.webp'
+    });
+
+    roundAltNormal.normalMap.wrapS = roundAltNormal.normalMap.wrapT = THREE.RepeatWrapping;
+    roundAltNormal.normalMap.repeat.set(7.5, 7.5);
+    pairs.set('roundAltNormal', roundAltNormal.normalMap);
+
+    //ROUND COLORS
+    const roundAltGold = useTexture({
+        map: 'textures/paves/round/Struttura_Oro_Giallo.webp',
+    });
+    roundAltGold.map.colorSpace = THREE.SRGBColorSpace;
+    roundAltGold.map.wrapS = roundAltGold.map.wrapT = THREE.RepeatWrapping;
+    roundAltGold.map.repeat.set(7.5, 7.5);
+    pairs.set('roundAltGold', roundAltGold.map);
+
+    const roundAltRose = useTexture({
+        map: 'textures/paves/round/Struttura_Oro_Rosa.webp',
+    });
+    roundAltRose.map.colorSpace = THREE.SRGBColorSpace;
+    roundAltRose.map.wrapS = roundAltRose.map.wrapT = THREE.RepeatWrapping;
+    roundAltRose.map.repeat.set(7.5, 7.5);
+    pairs.set('roundAltRose', roundAltRose.map);
+
+    const roundAltWhite = useTexture({
+        map: 'textures/paves/round/Struttura_Oro_Bianco.webp',
+    });
+    roundAltWhite.map.colorSpace = THREE.SRGBColorSpace;
+    roundAltWhite.map.wrapS = roundAltWhite.map.wrapT = THREE.RepeatWrapping;
+    roundAltWhite.map.repeat.set(7.5, 7.5);
+    pairs.set('roundAltWhite', roundAltWhite.map);
+
+    const roundAltBlack = useTexture({
+        map: 'textures/paves/round/Struttura_Oro_Nero.webp',
+    });
+    roundAltBlack.map.colorSpace = THREE.SRGBColorSpace;
+    roundAltBlack.map.wrapS = roundAltBlack.map.wrapT = THREE.RepeatWrapping;
+    roundAltBlack.map.repeat.set(7.5, 7.5);
+    pairs.set('roundAltBlack', roundAltBlack.map);
+
 
     // MOSAIC
     const mosaicNormal = useTexture({
@@ -95,12 +137,24 @@ export default function RoundPaveBase({color, type} : {color: string|undefined, 
     mosaicBlack.map.repeat.set(6, 6);
     pairs.set('mosaicBlack', mosaicBlack.map);
 
+    let paveType;
+
+    switch(stone) {
+        case 'camo':
+        case 'glitch':
+            paveType = pave + "Alt";
+            break;
+        default:
+            paveType = pave
+            break;
+    }
+
         return (
             <>
             <meshStandardMaterial
                 transparent={true}
-                map={pairs.get(type + firstCapital(color))}
-                normalMap={pairs.get(type + "Normal")}
+                map={pairs.get(paveType + firstCapital(color))}
+                normalMap={pairs.get(paveType + "Normal")}
                 metalness={0.6}
                 roughness={0.1}
                 envMap={envMap}

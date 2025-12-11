@@ -36,7 +36,7 @@ export default function IcsSx() {
             case 'fullDiamond':
             case 'bezelDiamond':
                 geometry = [toothGeometry.fullDiamond.base, toothGeometry.fullDiamond.full];
-                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>,<Pave pave={toothPave.shape} stone={toothPave.color}/>, <RoundPaveBase color={toothMaterial} type={toothPave.shape}/>];
+                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>,<Pave pave={toothPave.shape} stone={toothPave.color}/>, <RoundPaveBase stone={toothPave.color} color={toothMaterial} pave={toothPave.shape}/>];
                 position = toothGeometry.fullDiamond.position;
                 break;
             case 'frame':
