@@ -91,7 +91,7 @@ export default function FinishOptions({tooth, jewelType, visible, signature, pol
                 <img className="pb-1" src="/finish-icons/princess.svg" alt="princess-pave"/>
                 <span className="text-sm">Princess</span>
             </button>}
-            {(!jewelType || (jewelType.includes('full') || jewelType.includes('bezel') || jewelType.includes('bar') || jewelType.includes('big'))) &&
+            {(!jewelType || jewelType !== 'enamel') &&
                 <button ref={baguetteRef} disabled={isDisabled('pave')} onClick={(e) => changePaveShape(e.currentTarget.value)} type="button"
                      value="baguette"
                      className={`${pave?.shape === 'baguette' ? 'border-2' : ''} w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 p-2 ${isDisabled('pave') ? 'text-slate-400' : 'text-slate-950 cursor-pointer'} flex flex-col items-center justify-center`}>

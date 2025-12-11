@@ -2,7 +2,7 @@ import {useEnvironment, useTexture} from "@react-three/drei";
 import * as THREE from "three";
 import {useTeethStore} from "@/app/_stores/teeth";
 
-export default function PaveFrame({stone} : {stone:string|undefined}) {
+export default function PaveFrame({stone, pave} : {stone:string|undefined, pave:string|undefined}) {
     if(!stone) return;
 
     // const envMap = useTeethStore((state) => state.envMap);
@@ -13,19 +13,39 @@ export default function PaveFrame({stone} : {stone:string|undefined}) {
         // files: "envMaps/Diamond_HDRI.hdr"
     })
 
+    const pairs = new Map();
+
     /* ROUND PAVE */
     const round = useTexture({
         map: 'textures/frame/Frame_Round_Texture_Diamanti.webp',
     });
     round.map.colorSpace = THREE.SRGBColorSpace;
     round.map.flipY = false;
+    pairs.set('round', round.map);
 
-    /* NORMAL */
-    const normal = useTexture({
+    /* ROUND NORMAL */
+    const roundNormal = useTexture({
         normalMap: 'textures/frame/Frame_Round_Texture_Diamanti_Normal.webp',
     });
 
-   normal.normalMap.flipY = false;
+   roundNormal.normalMap.flipY = false;
+    pairs.set('roundNormal', roundNormal.normalMap);
+
+    /* BAGUETTE PAVE */
+    const baguette = useTexture({
+        map: 'textures/frame/Frame_Pave_Baguette.webp',
+    });
+    baguette.map.colorSpace = THREE.SRGBColorSpace;
+    baguette.map.flipY = false;
+    pairs.set('baguette', baguette.map);
+
+    /* BAGUETTE NORMAL */
+    const baguetteNormal = useTexture({
+        normalMap: 'textures/frame/Frame_Baguette_Texture_Diamanti_Normal.webp',
+    });
+
+    baguetteNormal.normalMap.flipY = false;
+    pairs.set('baguetteNormal', baguetteNormal.normalMap);
 
     let hex;
 
@@ -68,8 +88,8 @@ export default function PaveFrame({stone} : {stone:string|undefined}) {
     return (
         <meshStandardMaterial
             transparent={true}
-            map={round.map}
-            normalMap={normal.normalMap}
+            map={pairs.get(pave)}
+            normalMap={pairs.get(pave + "Normal")}
             envMapIntensity={2}
             color={hex}
             metalness={1}

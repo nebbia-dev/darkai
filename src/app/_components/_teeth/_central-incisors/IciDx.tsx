@@ -50,7 +50,7 @@ export default function IciDx() {
                 break;
             case 'frameDiamond':
                 geometry = [toothGeometry.frame.diamond.base, toothGeometry.frame.diamond.full];
-                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>, <PaveFrame stone={toothPave.color}/>, <RoundPaveBaseFrame color={toothMaterial}/>]
+                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>, <PaveFrame pave={toothPave.shape} stone={toothPave.color}/>, <RoundPaveBaseFrame color={toothMaterial}/>]
                 position = toothGeometry.frame.diamond.position;
                 break;
             case 'bar':
