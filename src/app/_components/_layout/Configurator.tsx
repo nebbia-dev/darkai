@@ -1733,7 +1733,7 @@ export default function Configurator() {
     useFrame((state, delta) => {
         if(groupRef.current && nextStep) {
             invalidate();
-            if(groupRef.current.position.x > -3) {
+            if(groupRef.current.position.x > -3.3) {
                 groupRef.current.position.x -= delta * 2;
                 camera.position.x -= delta * 2;
             }
