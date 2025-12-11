@@ -1859,6 +1859,9 @@ export const useTeethStore = create<State>((set, get) => ({
                     signature: 0
                 };
                 state.total = 0;
+
+                state.activeButton = undefined;
+                state.activeSubButton = undefined;
                 get().setHistory(state);
             })
         );

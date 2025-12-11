@@ -72,7 +72,6 @@ export default function Configurator() {
         const bars = useGLTF('/models/Bars.glb');
         const full = useGLTF('/models/Full.glb');
         const signatures = useGLTF('/models/Signatures.glb');
-        console.log(signatures.scene.children[3])
         const bubblegum = useGLTF('/models/BGum.glb');
         const sprinkles = useGLTF('/models/Sprinkles.glb');
 
