@@ -17,10 +17,11 @@ import checkMolar from "@/app/_helpers/_checkers/checkMolar";
 export default function ToothConfigOptions({tooth, onclick, active} : {tooth: string | undefined, active:string|undefined, onclick: (value:string) => void}) {
     const pave = useTeethStore((state: State) => tooth ? state.teethPaves[tooth] : undefined);
     const stone = useTeethStore((state: State) => tooth ? state.teethStones[tooth] : undefined);
-
+    const material = useTeethStore((state: State) => tooth ? state.teethMaterial[tooth] : undefined);
     const finish = useTeethStore((state: State) => tooth ? state.teethFinish[tooth] : undefined);
     const jewelType = useTeethStore((state: State) => tooth ? state.teethJewelType[tooth] : undefined);
     const visibility = useTeethStore((state: State) => tooth ? state.teethVisibility[tooth] : undefined);
+    const signatures = useTeethStore((state: State) => state.signatureVisibility);
 
     const elementRef = useRef<HTMLDivElement|null>(null);
     const selectorRef = useRef<HTMLDivElement|null>(null);
@@ -51,11 +52,26 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
     const amethRef = useRef<HTMLButtonElement|null>(null);
     const camoRef = useRef<HTMLButtonElement|null>(null);
     const glitchRef = useRef<HTMLButtonElement|null>(null);
+    const vampRef = useRef<HTMLButtonElement|null>(null);
+    const bracesRef = useRef<HTMLButtonElement|null>(null);
+    const crossRef = useRef<HTMLButtonElement|null>(null);
+    const hammeredRef = useRef<HTMLButtonElement|null>(null);
+    const sprinklesRef = useRef<HTMLButtonElement|null>(null);
+    const bubblegumRef = useRef<HTMLButtonElement|null>(null);
+    const tribalRef = useRef<HTMLButtonElement|null>(null);
 
     function renderOptions(active:string|undefined, tooth:string|undefined) {
         switch(active) {
             case "1":
-                return <SignatureOptions/>
+                return <SignatureOptions
+                    vampRef={vampRef}
+                    bracesRef={bracesRef}
+                    tribalRef={tribalRef}
+                    sprinklesRef={sprinklesRef}
+                    hammeredRef={hammeredRef}
+                    bubblegumRef={bubblegumRef}
+                    crossRef={crossRef}
+                />
             case "2":
                 return <DesignOptions
                     tooth={tooth}
@@ -69,37 +85,59 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
             case "3":
                 return <GoldOptions tooth={tooth} signature={checkSignature(jewelType)}/>
             case "4":
-                return <FinishOptions tooth={tooth}
-                                      jewelType={jewelType}
-                                      visible={visibility}
-                                      signature={checkSignature(jewelType)}
-                                      polishedRef={polishedRef}
-                                      sBlastRef={sBlastRef}
-                                      dCutRef={dCutRef}
-                                      mosaicRef={mosaicRef}
-                                      roundRef={roundRef}
-                                      hexRef={hexRef}
-                                      princessRef={princessRef}
-                                      baguetteRef={baguetteRef}
-                />
+                if(material === 'base') {
+                    return (
+                        <div className="flex items-center justify-center h-full w-full">
+                            Choose a design first!
+                        </div>
+                    )
+                } else {
+                    return <FinishOptions tooth={tooth}
+                                          jewelType={jewelType}
+                                          visible={visibility}
+                                          signature={checkSignature(jewelType)}
+                                          polishedRef={polishedRef}
+                                          sBlastRef={sBlastRef}
+                                          dCutRef={dCutRef}
+                                          mosaicRef={mosaicRef}
+                                          roundRef={roundRef}
+                                          hexRef={hexRef}
+                                          princessRef={princessRef}
+                                          baguetteRef={baguetteRef}
+                    />
+                }
             case "5":
-                return <StoneOptions
-                    tooth={tooth}
-                    bezel={jewelType === 'bezel'|| jewelType === 'bezelDiamond'}
-                    pave={!!pave?.shape}
-                    whDRef={whDRef}
-                    brDRef={brDRef}
-                    blDRef={blDRef}
-                    rubyRef={rubyRef}
-                    emeraldRef={emeraldRef}
-                    pSapphRef={pSapphRef}
-                    bSapphRef={bSapphRef}
-                    ySapphRef={ySapphRef}
-                    aquaRef={aquaRef}
-                    amethRef={amethRef}
-                    camoRef={camoRef}
-                    glitchRef={glitchRef}
-                />
+                if(material === 'base') {
+                    return (
+                        <div className="flex items-center justify-center h-full w-full">
+                            Choose a design first!
+                        </div>
+                    )
+                } else if(!jewelType?.includes('bezel') && !pave?.shape){
+                    return (
+                        <div className="flex items-center justify-center h-full w-full">
+                            Gems are not part of the current design :(
+                        </div>
+                    )
+                } else {
+                    return <StoneOptions
+                        tooth={tooth}
+                        bezel={jewelType === 'bezel' || jewelType === 'bezelDiamond'}
+                        pave={!!pave?.shape}
+                        whDRef={whDRef}
+                        brDRef={brDRef}
+                        blDRef={blDRef}
+                        rubyRef={rubyRef}
+                        emeraldRef={emeraldRef}
+                        pSapphRef={pSapphRef}
+                        bSapphRef={bSapphRef}
+                        ySapphRef={ySapphRef}
+                        aquaRef={aquaRef}
+                        amethRef={amethRef}
+                        camoRef={camoRef}
+                        glitchRef={glitchRef}
+                    />
+                }
             case "6":
                 return <PackagingOptions/>
             default:
@@ -126,6 +164,36 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
 
     useEffect(() => {
         let ref;
+        if(active === '1') {
+            for(let [key, value] of Object.entries(signatures)) {
+                if(value) {
+                    switch(key) {
+                        case 'vamp':
+                            ref = vampRef.current;
+                            break;
+                        case 'bubblegum':
+                            ref = bubblegumRef.current;
+                            break;
+                        case 'cross':
+                            ref = crossRef.current;
+                            break;
+                        case 'sprinkles':
+                            ref = sprinklesRef.current;
+                            break;
+                        case 'tribal':
+                            ref = tribalRef.current;
+                            break;
+                        case 'braces':
+                            ref = bracesRef.current;
+                            break;
+                        case 'hammered':
+                            ref = hammeredRef.current;
+                            break;
+                    }
+                    break;
+                }
+            }
+        }
         if(active === '2') {
             switch(jewelType) {
                 case 'full':
@@ -272,16 +340,22 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
                     ? 'top-[-20vh]'
                     : (active === '2' && checkMolar(tooth))
                         ? 'top-[-10vh]'
-                        : active === '4' && jewelType?.includes('enamel')
+                        : active === '4' && (jewelType?.includes('enamel') || material === 'base')
                             ? 'top-[4.5vh]'
-                            : active === '6'
-                                ? 'top-[13.5vh]'
-                                : 'top-[-20vh]'
+                                : active === '5' && (material === 'base' || (!jewelType?.includes('bezel') && !pave?.shape))
+                                    ? 'top-[11vh]'
+                                    : active === '6'
+                                        ? 'top-[13.5vh]'
+                                        : 'top-[-20vh]'
             } left-[48px]`}>
 
                 <div
-                    className={`pups text-center ${(active === '4' && jewelType?.includes('enamel')) 
-                        ? 'h-[188px]' : (active === '2' && checkMolar(tooth)) ? 'h-[186px]' : 'h-[596px]'} 
+                    className={`pups text-center ${
+                        (active === '4' && (jewelType?.includes('enamel') || material === 'base')) 
+                        || (active === '2' && checkMolar(tooth))
+                        || (active === '5' && (material === 'base' || (!jewelType?.includes('bezel') && !pave?.shape)))
+                            ? 'h-[186px]' 
+                            : 'h-[596px]'} 
                         w-[200px] bg-gray-50 rounded-3xl p-8 pr-4 border-1 max-h-[70vh]`}>
                     <div onScroll={sync} ref={elementRef} className="overflow-y-scroll h-full pl-[2px] pr-4">
                         {renderOptions(active, tooth)}

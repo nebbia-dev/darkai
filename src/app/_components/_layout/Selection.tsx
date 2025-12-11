@@ -47,9 +47,9 @@ export default function Selection({activeButton, changeActiveButton} : {activeBu
                             <img src="/config-menu-svgs/Vector.svg" alt="signature-logo"/>
                             <img className="ml-0.5" src="/config-menu-svgs/Vector-2.svg" alt="signature-logo"/>
                         </ConfiguratorButton>
-                        <span aria-hidden={true} className="relative z-20 inline-block h-[2px] w-8 bg-slate-950"></span>
+                        <span aria-hidden={true} className="relative z-20 inline-block h-[2px] w-10 bg-slate-950"></span>
                         <ToothConfigOptions tooth={activeTooth} active={activeButton} onclick={changeActiveButton}/>
-                        <span aria-hidden={true} className="relative z-20 inline-block h-[2px] w-8 bg-slate-950"></span>
+                        <span aria-hidden={true} className="relative z-20 inline-block h-[2px] w-10 bg-slate-950"></span>
 
                         {/*PACKAGING BUTTON*/}
                         {/*<ConfiguratorButton tooth="alwaysActive" inverse={false} value="6" active={activeButton}*/}
