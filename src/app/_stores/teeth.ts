@@ -1188,6 +1188,9 @@ export const useTeethStore = create<State>((set, get) => ({
                     state.activeButton = undefined;
                 } else {
                     state.activeButton = button;
+                    if (state.hovered) {
+                        state.hovered = undefined;
+                    }
                     if(button === '5') {
                         state.showGemTypeBox = true;
                     }
