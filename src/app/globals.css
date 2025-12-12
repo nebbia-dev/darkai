@@ -250,3 +250,14 @@ input[type="number"]:focus {
 ::-webkit-scrollbar-thumb:hover {
   background: #17171780;
 }
+
+@media(min-height: 640px) {
+  .bigger-icons {
+    width: 40px;
+    height: 40px;
+  }
+
+  .bigger-bottom {
+    bottom: calc(.25rem * 20);
+  }
+}

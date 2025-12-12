@@ -10,6 +10,7 @@ export default function IliSxStone() {
     const toothStone =  useTeethStore((state: State) => state.teethStones.ilisx);
     const toothMaterial = useTeethStore((state: State) => state.teethMaterial.ilisx);
     const toothFinish = useTeethStore((state: State) => state.teethFinish.ilisx);
+    const toothPave = useTeethStore((state: State) => state.teethPaves.ilisx.shape);
     const ILISXstone = memo(({visible, type, mat} : {visible: boolean, type: string|undefined, mat: string}): JSX.Element => {
         if(!tooth || !toothStone.shape) {
             return (
@@ -21,19 +22,19 @@ export default function IliSxStone() {
             <>
                 <mesh geometry={tooth[toothStone.shape].geometries[0]}
                       position={tooth[toothStone.shape].positions[0]}
-                      quaternion={getQuaternion(tooth[toothStone.shape].quaternions[0], false)}
+                      quaternion={getQuaternion(tooth[toothStone.shape].quaternions[0], false, (toothPave as unknown as boolean), false)}
                       visible={false}
                 >
                 </mesh>
                 <mesh geometry={tooth[toothStone.shape].geometries[0]}
                       position={tooth[toothStone.shape].positions[0]}
-                      quaternion={getQuaternion(tooth[toothStone.shape].quaternions[0], false)}
+                      quaternion={getQuaternion(tooth[toothStone.shape].quaternions[0], false, (toothPave as unknown as boolean), false)}
                 >
                     <FullMaterial color={toothMaterial} finish={toothFinish}/>
                 </mesh>
                 <mesh geometry={tooth[toothStone.shape].geometries[1]}
                       position={tooth[toothStone.shape].positions[1]}
-                      quaternion={getQuaternion(tooth[toothStone.shape].quaternions[1], false)}
+                      quaternion={getQuaternion(tooth[toothStone.shape].quaternions[1], false, (toothPave as unknown as boolean), false)}
                 >
                     <StonesMaterial color={toothStone.color}/>
                 </mesh>

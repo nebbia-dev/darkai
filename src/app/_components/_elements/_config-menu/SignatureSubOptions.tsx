@@ -6,6 +6,7 @@ export default function SignatureSubOptions() {
     const value = useTeethStore((state: State) => state.activeSubButton);
     const setSignature = useTeethStore((state: State) => state.setSignature);
     const signatureMaterial = useTeethStore((state: State) => state.signatureMaterial);
+    const signatureVisibility = useTeethStore((state: State) => state.signatureVisibility);
     function setSignatureDesign(type:string, e:string) {
         if(signatureMaterial[type] === e) {
             return;
@@ -15,7 +16,7 @@ export default function SignatureSubOptions() {
 
     return (
         <>
-            <div className={`${value === 'vamp' ? 'block' : 'invisible'} h-[120px] mb-4 pl-6 text-center`}>
+            <div className={`${(signatureVisibility.vamp || value === 'vamp') ? 'block' : 'invisible'} h-[120px] mb-4 pl-6 text-center`}>
                 <div className="w-[36px] flex flex-col gap-2 items-center bg-gray-50 rounded-full py-2 border-1">
                     <button type="button" value="white"
                             onClick={(e) => setSignatureDesign('vamp', e.currentTarget.value)}
@@ -30,7 +31,7 @@ export default function SignatureSubOptions() {
                             className="w-[24px] h-[24px] bg-slate-950 border-1 rounded-full cursor-pointer"></button>
                 </div>
             </div>
-            <div className={`${value === 'sprinkles' ? 'block' : 'invisible'} h-[120px] mb-4 pl-6 text-center`}>
+            <div className={`${(signatureVisibility.sprinkles || value === 'sprinkles') ? 'block' : 'invisible'} h-[120px] mb-4 pl-6 text-center`}>
                 <div className="w-[36px] flex flex-col gap-2 items-center bg-gray-50 rounded-full py-2 border-1">
                     <button type="button" value="white"
                             onClick={(e) => setSignatureDesign('sprinkles', e.currentTarget.value)}
@@ -46,7 +47,7 @@ export default function SignatureSubOptions() {
                     </button>
                 </div>
             </div>
-            <div className={`${value === 'bubblegum' ? 'block' : 'invisible'} h-[120px] mb-4 pl-6 text-center`}>
+            <div className={`${(signatureVisibility.bubblegum || value === 'bubblegum') ? 'block' : 'invisible'} h-[120px] mb-4 pl-6 text-center`}>
                 <div className="w-[36px] flex flex-col gap-2 items-center bg-gray-50 rounded-full py-2 border-1">
                     <button type="button" value="pink"
                             onClick={(e) => setSignatureDesign('bubblegum', e.currentTarget.value)}
@@ -62,7 +63,7 @@ export default function SignatureSubOptions() {
                     </button>
                 </div>
             </div>
-            <div className={`${value === 'braces' ? 'block' : 'invisible'} h-[120px] mb-4 pl-6 text-center`}>
+            <div className={`${(signatureVisibility.braces || value === 'braces') ? 'block' : 'invisible'} h-[120px] mb-4 pl-6 text-center`}>
                 <div className="w-[36px] flex flex-col gap-2 items-center bg-gray-50 rounded-full py-2 border-1">
                     <button type="button" value="white"
                             onClick={(e) => setSignatureDesign('braces', e.currentTarget.value)}
@@ -76,7 +77,7 @@ export default function SignatureSubOptions() {
                     </button>
                 </div>
             </div>
-            <div className={`${value === 'tribal' ? 'block' : 'invisible'} h-[120px] mb-4 pl-6 text-center`}>
+            <div className={`${(signatureVisibility.tribal || value === 'tribal') ? 'block' : 'invisible'} h-[120px] mb-4 pl-6 text-center`}>
                 <div className="w-[36px] flex flex-col gap-2 items-center bg-gray-50 rounded-full py-2 border-1">
                     <button type="button" value="white"
                             onClick={(e) => setSignatureDesign('tribal', e.currentTarget.value)}
@@ -93,7 +94,7 @@ export default function SignatureSubOptions() {
                     </button>
                 </div>
             </div>
-            <div className={`${value === 'cross' ? 'block' : 'invisible'} h-[120px] mb-4 pl-6 text-center`}>
+            <div className={`${(signatureVisibility.cross || value === 'cross') ? 'block' : 'invisible'} h-[120px] mb-4 pl-6 text-center`}>
                 <div className="w-[36px] flex flex-col gap-2 items-center bg-gray-50 rounded-full py-2 border-1">
                     <button type="button" value="white"
                             onClick={(e) => setSignatureDesign('cross', e.currentTarget.value)}
@@ -115,7 +116,7 @@ export default function SignatureSubOptions() {
 
                 </div>
             </div>
-            <div className={`${value === 'hammered' ? 'block' : 'invisible'} h-[120px] mb-4 pl-6 text-center`}>
+            <div className={`${(signatureVisibility.hammered || value === 'hammered') ? 'block' : 'invisible'} h-[120px] mb-4 pl-6 text-center`}>
                 <div className="w-[36px] flex flex-col gap-2 items-center bg-gray-50 rounded-full py-2 border-1">
                 <button type="button" value="white"
                             onClick={(e) => setSignatureDesign('hammered', e.currentTarget.value)}

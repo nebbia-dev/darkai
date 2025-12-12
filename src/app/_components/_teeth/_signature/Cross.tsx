@@ -3,7 +3,6 @@ import {JSX, memo} from "react";
 import FullMaterial from "@/app/_components/_materials/FullMaterial";
 import {useTeethStore} from "@/app/_stores/teeth";
 import {State} from "@/app/_types/State";
-import DecalPave from "@/app/_components/_materials/DecalPave";
 import * as THREE from "three";
 import Pave from "@/app/_components/_materials/Pave";
 import RoundPaveBase from "@/app/_components/_materials/RoundPaveBase";
@@ -20,7 +19,7 @@ export default function Cross() {
         switch(mat) {
             case 'pave':
                 geometry = [signatureGeometry.base, signatureGeometry.pave];
-                material = [<FullMaterial finish="polished" color="white"/>, <Pave pave="round" stone="whD"/>, <RoundPaveBase color="white" type="round"/>];
+                material = [<FullMaterial finish="polished" color="white"/>, <Pave pave="round" stone="whD"/>, <RoundPaveBase stone="whD" color="white" pave="round"/>];
                 break;
             case 'white':
                 geometry = [signatureGeometry.full];

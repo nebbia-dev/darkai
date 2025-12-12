@@ -63,8 +63,9 @@ export default function Configurator() {
 
     const teeth = useMemo((): FBX => {
         const fullDiamond = useGLTF('/models/Full_Pave.glb');
+        const enamel = useGLTF('/models/Enamel.glb');
         const frameDiamond = useGLTF('/models/Frame_Pave.glb');
-        const barDiamond = useFBX('/models/Bar_Pave.fbx');
+        const barDiamond = useGLTF('/models/Bar_Pave.glb');
         const stones = useGLTF('/models/Stones.glb')
         const frames = useFBX('/models/MOD_Frame_Capsula (2).fbx');
         const bigBar  = useGLTF('/models/BigBar.glb');
@@ -173,11 +174,11 @@ export default function Configurator() {
                 bar: {
                     full: (bars.scene.children[0].children[5] as THREE.Mesh).geometry,
                     diamond: {
-                        base: (barDiamond.children[0].children[0] as THREE.Mesh).geometry,
-                        basePosition: barDiamond.children[0].children[0].position,
-                        full: (barDiamond.children[0].children[1] as THREE.Mesh).geometry,
-                        fullPosition: barDiamond.children[0].children[1].position,
-                        diamondPosition: getOrigin(barDiamond.children[0].children[1])
+                        base: (barDiamond.scene.children[0].children[2] as THREE.Mesh).geometry,
+                        basePosition: barDiamond.scene.children[0].children[2].position,
+                        full: (barDiamond.scene.children[0].children[3] as THREE.Mesh).geometry,
+                        fullPosition: barDiamond.scene.children[0].children[3].position,
+                        diamondPosition: getOrigin(barDiamond.scene.children[0].children[3])
                     }
                 },
                 frame: {
@@ -187,6 +188,10 @@ export default function Configurator() {
                         full: (frameDiamond.scene.children[0].children[7] as THREE.Mesh).geometry,
                         position: getOriginGlb(frameDiamond.scene.children[0].children[7], 1)
                     }
+                },
+                enamel: {
+                    geometry: (enamel.scene.children[0].children[8] as THREE.Mesh).geometry,
+                    position: getOriginGlb(enamel.scene.children[0].children[8], 1)
                 }
             },
             icssx: {
@@ -285,11 +290,11 @@ export default function Configurator() {
                 bar: {
                     full: (bars.scene.children[0].children[5] as THREE.Mesh).geometry,
                     diamond: {
-                        base: (barDiamond.children[0].children[0] as THREE.Mesh).geometry,
-                        basePosition: barDiamond.children[0].children[0].position,
-                        full: (barDiamond.children[0].children[1] as THREE.Mesh).geometry,
-                        fullPosition: barDiamond.children[0].children[1].position,
-                        diamondPosition: getOrigin(barDiamond.children[0].children[1])
+                        base: (barDiamond.scene.children[0].children[2] as THREE.Mesh).geometry,
+                        basePosition: barDiamond.scene.children[0].children[2].position,
+                        full: (barDiamond.scene.children[0].children[3] as THREE.Mesh).geometry,
+                        fullPosition: barDiamond.scene.children[0].children[3].position,
+                        diamondPosition: getOrigin(barDiamond.scene.children[0].children[3])
                     }
                 },
                 frame: {
@@ -299,6 +304,10 @@ export default function Configurator() {
                         full: (frameDiamond.scene.children[0].children[6] as THREE.Mesh).geometry,
                         position: getOriginGlb(frameDiamond.scene.children[0].children[6], 1)
                     }
+                },
+                enamel: {
+                    geometry: (enamel.scene.children[0].children[9] as THREE.Mesh).geometry,
+                    position: getOriginGlb(enamel.scene.children[0].children[9], 1)
                 }
             },
             icidx: {
@@ -397,11 +406,11 @@ export default function Configurator() {
                 bar: {
                     full: (bars.scene.children[0].children[4] as THREE.Mesh).geometry,
                     diamond: {
-                        base: (barDiamond.children[0].children[2] as THREE.Mesh).geometry,
-                        basePosition: barDiamond.children[0].children[2].position,
-                        full: (barDiamond.children[0].children[3] as THREE.Mesh).geometry,
-                        fullPosition: barDiamond.children[0].children[3].position,
-                        diamondPosition: getOrigin(barDiamond.children[0].children[3])
+                        base: (barDiamond.scene.children[0].children[0] as THREE.Mesh).geometry,
+                        basePosition: barDiamond.scene.children[0].children[0].position,
+                        full: (barDiamond.scene.children[0].children[1] as THREE.Mesh).geometry,
+                        fullPosition: barDiamond.scene.children[0].children[1].position,
+                        diamondPosition: getOrigin(barDiamond.scene.children[0].children[1])
                     }
                 },
                 frame: {
@@ -411,6 +420,10 @@ export default function Configurator() {
                         full: (frameDiamond.scene.children[1].children[7] as THREE.Mesh).geometry,
                         position: getOriginGlb(frameDiamond.scene.children[1].children[7], 1)
                     }
+                },
+                enamel: {
+                    geometry: (enamel.scene.children[0].children[0] as THREE.Mesh).geometry,
+                    position: getOriginGlb(enamel.scene.children[0].children[0], 1)
                 }
             },
             icisx: {
@@ -509,11 +522,11 @@ export default function Configurator() {
                 bar: {
                     full: (bars.scene.children[0].children[4] as THREE.Mesh).geometry,
                     diamond: {
-                        base: (barDiamond.children[0].children[2] as THREE.Mesh).geometry,
-                        basePosition: barDiamond.children[0].children[2].position,
-                        full: (barDiamond.children[0].children[3] as THREE.Mesh).geometry,
-                        fullPosition: barDiamond.children[0].children[3].position,
-                        diamondPosition: getOrigin(barDiamond.children[0].children[3])
+                        base: (barDiamond.scene.children[0].children[0] as THREE.Mesh).geometry,
+                        basePosition: barDiamond.scene.children[0].children[0].position,
+                        full: (barDiamond.scene.children[0].children[1] as THREE.Mesh).geometry,
+                        fullPosition: barDiamond.scene.children[0].children[1].position,
+                        diamondPosition: getOrigin(barDiamond.scene.children[0].children[1])
                     }
                 },
                 frame: {
@@ -523,6 +536,10 @@ export default function Configurator() {
                         full: (frameDiamond.scene.children[1].children[6] as THREE.Mesh).geometry,
                         position: getOriginGlb(frameDiamond.scene.children[1].children[6], 1)
                     }
+                },
+                enamel: {
+                    geometry: (enamel.scene.children[0].children[1] as THREE.Mesh).geometry,
+                    position: getOriginGlb(enamel.scene.children[0].children[1], 1)
                 }
             },
             // INCISIVI LATERALI
@@ -622,9 +639,9 @@ export default function Configurator() {
                 bar: {
                     full: (bars.scene.children[0].children[8] as THREE.Mesh).geometry,
                     diamond: {
-                        base: (barDiamond.children[1].children[0] as THREE.Mesh).geometry,
-                        full: (barDiamond.children[1].children[2] as THREE.Mesh).geometry,
-                        position: getOrigin(barDiamond.children[1].children[2])
+                        base: (barDiamond.scene.children[1].children[13] as THREE.Mesh).geometry,
+                        full: (barDiamond.scene.children[1].children[15] as THREE.Mesh).geometry,
+                        position: getOrigin(barDiamond.scene.children[1].children[15])
                     }
                 },
                 frame: {
@@ -634,6 +651,10 @@ export default function Configurator() {
                         full: (frameDiamond.scene.children[0].children[11] as THREE.Mesh).geometry,
                         position: getOriginGlb(frameDiamond.scene.children[0].children[11], 1)
                     }
+                },
+                enamel: {
+                    geometry: (enamel.scene.children[0].children[4] as THREE.Mesh).geometry,
+                    position: new THREE.Vector3(enamel.scene.children[0].children[4].position.x, enamel.scene.children[0].children[4].position.y, enamel.scene.children[0].children[4].position.z * 14)
                 }
             },
             ilssx: {
@@ -732,9 +753,9 @@ export default function Configurator() {
                 bar: {
                     full: (bars.scene.children[0].children[9] as THREE.Mesh).geometry,
                     diamond: {
-                        base: (barDiamond.children[1].children[1] as THREE.Mesh).geometry,
-                        full: (barDiamond.children[1].children[3] as THREE.Mesh).geometry,
-                        position: getOrigin(barDiamond.children[1].children[3])
+                        base: (barDiamond.scene.children[1].children[12] as THREE.Mesh).geometry,
+                        full: (barDiamond.scene.children[1].children[14] as THREE.Mesh).geometry,
+                        position: getOrigin(barDiamond.scene.children[1].children[14])
                     }
                 },
                 frame: {
@@ -744,6 +765,10 @@ export default function Configurator() {
                         full: (frameDiamond.scene.children[0].children[10] as THREE.Mesh).geometry,
                         position: getOriginGlb(frameDiamond.scene.children[0].children[10], 1)
                     }
+                },
+                enamel: {
+                    geometry: (enamel.scene.children[0].children[5] as THREE.Mesh).geometry,
+                    position: new THREE.Vector3(enamel.scene.children[0].children[5].position.x, enamel.scene.children[0].children[5].position.y, enamel.scene.children[0].children[5].position.z * 14)
                 }
             },
             ilidx: {
@@ -842,9 +867,9 @@ export default function Configurator() {
                 bar: {
                     full: (bars.scene.children[0].children[6] as THREE.Mesh).geometry,
                     diamond: {
-                        base: (barDiamond.children[1].children[4] as THREE.Mesh).geometry,
-                        full: (barDiamond.children[1].children[6] as THREE.Mesh).geometry,
-                        position: getOrigin(barDiamond.children[1].children[6])
+                        base: (barDiamond.scene.children[1].children[9] as THREE.Mesh).geometry,
+                        full: (barDiamond.scene.children[1].children[11] as THREE.Mesh).geometry,
+                        position: getOrigin(barDiamond.scene.children[1].children[11])
                     }
                 },
                 frame: {
@@ -854,6 +879,10 @@ export default function Configurator() {
                         full: (frameDiamond.scene.children[1].children[11] as THREE.Mesh).geometry,
                         position: getOriginGlb(frameDiamond.scene.children[1].children[11], 1)
                     }
+                },
+                enamel: {
+                    geometry: (enamel.scene.children[0].children[6] as THREE.Mesh).geometry,
+                    position: new THREE.Vector3(enamel.scene.children[0].children[6].position.x, enamel.scene.children[0].children[6].position.y, enamel.scene.children[0].children[6].position.z * 14)
                 }
             },
             ilisx: {
@@ -952,9 +981,9 @@ export default function Configurator() {
                 bar: {
                     full: (bars.scene.children[0].children[7] as THREE.Mesh).geometry,
                     diamond: {
-                        base: (barDiamond.children[1].children[5] as THREE.Mesh).geometry,
-                        full: (barDiamond.children[1].children[7] as THREE.Mesh).geometry,
-                        position: getOrigin(barDiamond.children[1].children[7])
+                        base: (barDiamond.scene.children[1].children[8] as THREE.Mesh).geometry,
+                        full: (barDiamond.scene.children[1].children[10] as THREE.Mesh).geometry,
+                        position: getOrigin(barDiamond.scene.children[1].children[10])
                     }
                 },
                 frame: {
@@ -964,6 +993,10 @@ export default function Configurator() {
                         full: (frameDiamond.scene.children[1].children[10] as THREE.Mesh).geometry,
                         position: getOriginGlb(frameDiamond.scene.children[1].children[10], 1)
                     }
+                },
+                enamel: {
+                    geometry: (enamel.scene.children[0].children[7] as THREE.Mesh).geometry,
+                    position: new THREE.Vector3(enamel.scene.children[0].children[7].position.x, enamel.scene.children[0].children[7].position.y, enamel.scene.children[0].children[7].position.z * 14)
                 }
             },
             // CANINI
@@ -1063,9 +1096,9 @@ export default function Configurator() {
                 bar: {
                     full: (bars.scene.children[0].children[2] as THREE.Mesh).geometry,
                     diamond: {
-                        base: (barDiamond.children[1].children[8] as THREE.Mesh).geometry,
-                        full: (barDiamond.children[1].children[10] as THREE.Mesh).geometry,
-                        position: getOrigin(barDiamond.children[1].children[10])
+                        base: (barDiamond.scene.children[1].children[5] as THREE.Mesh).geometry,
+                        full: (barDiamond.scene.children[1].children[7] as THREE.Mesh).geometry,
+                        position: getOrigin(barDiamond.scene.children[1].children[7])
                     }
                 },
                 frame: {
@@ -1075,6 +1108,10 @@ export default function Configurator() {
                         full: (frameDiamond.scene.children[0].children[3] as THREE.Mesh).geometry,
                         position: getOriginGlb(frameDiamond.scene.children[0].children[3], 1)
                     }
+                },
+                enamel: {
+                    geometry: (enamel.scene.children[0].children[2] as THREE.Mesh).geometry,
+                    position: getOriginGlb(enamel.scene.children[0].children[2], 1)
                 }
             },
             cssx: {
@@ -1173,9 +1210,9 @@ export default function Configurator() {
                 bar: {
                     full: (bars.scene.children[0].children[3] as THREE.Mesh).geometry,
                     diamond: {
-                        base: (barDiamond.children[1].children[9] as THREE.Mesh).geometry,
-                        full: (barDiamond.children[1].children[11] as THREE.Mesh).geometry,
-                        position: getOrigin(barDiamond.children[1].children[11])
+                        base: (barDiamond.scene.children[1].children[4] as THREE.Mesh).geometry,
+                        full: (barDiamond.scene.children[1].children[6] as THREE.Mesh).geometry,
+                        position: getOrigin(barDiamond.scene.children[1].children[6])
                     }
                 },
                 frame: {
@@ -1185,6 +1222,10 @@ export default function Configurator() {
                         full: (frameDiamond.scene.children[0].children[2] as THREE.Mesh).geometry,
                         position: getOriginGlb(frameDiamond.scene.children[0].children[2], 1)
                     }
+                },
+                enamel: {
+                    geometry: (enamel.scene.children[0].children[3] as THREE.Mesh).geometry,
+                    position: getOriginGlb(enamel.scene.children[0].children[3], 1)
                 }
             },
             cidx: {
@@ -1291,9 +1332,9 @@ export default function Configurator() {
                 bar: {
                     full: (bars.scene.children[0].children[0] as THREE.Mesh).geometry,
                     diamond: {
-                        base: (barDiamond.children[1].children[12] as THREE.Mesh).geometry,
-                        full: (barDiamond.children[1].children[14] as THREE.Mesh).geometry,
-                        position: getOrigin(barDiamond.children[1].children[14])
+                        base: (barDiamond.scene.children[1].children[1] as THREE.Mesh).geometry,
+                        full: (barDiamond.scene.children[1].children[3] as THREE.Mesh).geometry,
+                        position: getOrigin(barDiamond.scene.children[1].children[3])
                     }
                 },
                 bigBar: {
@@ -1303,6 +1344,10 @@ export default function Configurator() {
                         full: (frameDiamond.scene.children[2].children[1] as THREE.Mesh).geometry,
                         position: getOrigin(frameDiamond.scene.children[2].children[1])
                     }
+                },
+                enamel: {
+                    geometry: (enamel.scene.children[0].children[10] as THREE.Mesh).geometry,
+                    position: getOriginGlb(enamel.scene.children[0].children[10], 1)
                 }
             },
             cisx: {
@@ -1409,9 +1454,9 @@ export default function Configurator() {
                 bar: {
                     full: (bars.scene.children[0].children[1] as THREE.Mesh).geometry,
                     diamond: {
-                        base: (barDiamond.children[1].children[13] as THREE.Mesh).geometry,
-                        full: (barDiamond.children[1].children[15] as THREE.Mesh).geometry,
-                        position: getOrigin(barDiamond.children[1].children[15])
+                        base: (barDiamond.scene.children[1].children[0] as THREE.Mesh).geometry,
+                        full: (barDiamond.scene.children[1].children[2] as THREE.Mesh).geometry,
+                        position: getOrigin(barDiamond.scene.children[1].children[2])
                     }
                 },
                 bigBar: {
@@ -1421,6 +1466,10 @@ export default function Configurator() {
                         full: (frameDiamond.scene.children[2].children[1] as THREE.Mesh).geometry,
                         position: getOrigin(frameDiamond.scene.children[2].children[1])
                     }
+                },
+                enamel: {
+                    geometry: (enamel.scene.children[0].children[11] as THREE.Mesh).geometry,
+                    position: getOriginGlb(enamel.scene.children[0].children[11], 1)
                 }
             },
             // PRIMI PREMOLARI
@@ -1627,7 +1676,10 @@ export default function Configurator() {
                 },
                 braces: {
                     structure: (signatures.scene.children[3].children[0] as THREE.Mesh).geometry,
-                    pave: (signatures.scene.children[3].children[3] as THREE.Mesh).geometry,
+                    stoneBases: (signatures.scene.children[3].children[5] as THREE.Mesh).geometry,
+                    stoneBasePosition: getOriginGlb(signatures.scene.children[3].children[5], 1),
+                    paveDx: (signatures.scene.children[3].children[3] as THREE.Mesh).geometry,
+                    paveSx: (signatures.scene.children[3].children[4] as THREE.Mesh).geometry,
                     stones: (signatures.scene.children[3].children[2] as THREE.Mesh).geometry,
                     outline: (signatures.scene.children[3].children[1] as THREE.Mesh).geometry,
                     position: new THREE.Vector3(-0.46473254221912974, 1.76660383113165, -0.15407294943985753)
@@ -1648,7 +1700,7 @@ export default function Configurator() {
     const resetControls = useTeethStore((state : State) => state.resetControls);
     const doResetControls = useTeethStore((state : State) => state.setResetControls);
     const orbitRef = useRef<OrbitControlsImpl>(null);
-    const groupRef = useRef<Group>(null)
+    const groupRef = useRef<Group>(null);
     const { gl, scene, camera } = useThree();
 
     useEffect(() => {
@@ -1681,7 +1733,7 @@ export default function Configurator() {
     useFrame((state, delta) => {
         if(groupRef.current && nextStep) {
             invalidate();
-            if(groupRef.current.position.x > -3) {
+            if(groupRef.current.position.x > -3.3) {
                 groupRef.current.position.x -= delta * 2;
                 camera.position.x -= delta * 2;
             }
@@ -1779,6 +1831,7 @@ export default function Configurator() {
             <OrbitControls
                 maxDistance={35}
                 minDistance={20}
+                enablePan={false}
                 minPolarAngle={nextStep ? Math.PI / 2.1 : Math.PI / 3 }
                 maxPolarAngle={nextStep ? Math.PI - Math.PI / 2.1 : Math.PI - Math.PI / 3}
                 minAzimuthAngle={nextStep ? -Math.PI / 4 : -Math.PI / 2}

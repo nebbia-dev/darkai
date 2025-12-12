@@ -15,7 +15,7 @@ export default function Scene() {
 
     return (
         <>
-            <Canvas camera={{fov: 20, near: 0.1, far: 200, position: [0, 3, 20]}} dpr={[1, 2]} frameloop="demand">
+            <Canvas camera={{fov: 20, near: 0.1, far: 200, position: [0, 3, 27]}} dpr={[1, 2]} frameloop="demand">
                 <Configurator/>
             </Canvas>
         </>

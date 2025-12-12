@@ -36,7 +36,7 @@ export default function IcsSx() {
             case 'fullDiamond':
             case 'bezelDiamond':
                 geometry = [toothGeometry.fullDiamond.base, toothGeometry.fullDiamond.full];
-                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>,<Pave pave={toothPave.shape} stone={toothPave.color}/>, <RoundPaveBase color={toothMaterial} type={toothPave.shape}/>];
+                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>,<Pave pave={toothPave.shape} stone={toothPave.color}/>, <RoundPaveBase stone={toothPave.color} color={toothMaterial} pave={toothPave.shape}/>];
                 position = toothGeometry.fullDiamond.position;
                 break;
             case 'frame':
@@ -45,13 +45,13 @@ export default function IcsSx() {
                 position = new THREE.Vector3();
                 break;
             case 'enamel':
-                geometry = [toothGeometry.fullDiamond.base, toothGeometry.fullDiamond.full];
+                geometry = [toothGeometry.frame.full, toothGeometry.enamel.geometry];
                 material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>, <FullEnamel color={toothEnamel ?? 'ivory'}/>];
-                position = new THREE.Vector3();
+                position = toothGeometry.enamel.position;
                 break;
             case 'frameDiamond':
                 geometry = [toothGeometry.frame.diamond.base, toothGeometry.frame.diamond.full];
-                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>, <PaveFrame stone={toothPave.color}/>, <RoundPaveBaseFrame color={toothMaterial}/>];
+                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>, <PaveFrame pave={toothPave.shape} stone={toothPave.color}/>, <RoundPaveBaseFrame color={toothMaterial}/>];
                 position = toothGeometry.frame.diamond.position;
                 break;
             case 'bar':
@@ -72,6 +72,8 @@ export default function IcsSx() {
         }
 
         resetUvs(toothGeometry.fullDiamond.full, false);
+        resetUvs(toothGeometry.bar.full, false, 'barDC');
+        resetUvs(toothGeometry.frame.full, false, 'barDC');
 
         if(geometry.length === 2) {
             return (
@@ -79,9 +81,14 @@ export default function IcsSx() {
                     <mesh geometry={geometry[0]} visible={visible} position={barPositions?.[0]}>
                         {material[0]}
                     </mesh>
-                    <mesh geometry={geometry[1]} visible={visible} position={barPositions?.[1]}>
-                        {material[1]}
-                    </mesh>
+                    {type === 'enamel'
+                        ? <mesh geometry={geometry[1]} visible={visible} position={position}>
+                            {material[1]}
+                        </mesh>
+                        : <mesh geometry={geometry[1]} visible={visible} position={barPositions?.[1]}>
+                            {material[1]}
+                        </mesh>
+                    }
                     {(((type.includes('bar') || type.includes('frame')) && toothPave.shape === "round")
                             || ((type.includes('full') || type.includes('bezel')) && (toothPave.shape === "round" || toothPave.shape === "mosaic"))
                         ) &&
