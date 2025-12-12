@@ -1700,7 +1700,7 @@ export default function Configurator() {
     const resetControls = useTeethStore((state : State) => state.resetControls);
     const doResetControls = useTeethStore((state : State) => state.setResetControls);
     const orbitRef = useRef<OrbitControlsImpl>(null);
-    const groupRef = useRef<Group>(null)
+    const groupRef = useRef<Group>(null);
     const { gl, scene, camera } = useThree();
 
     useEffect(() => {

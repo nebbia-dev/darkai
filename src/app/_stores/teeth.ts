@@ -348,7 +348,7 @@ export const useTeethStore = create<State>((set, get) => ({
                                 state.teethJewelType.icsdx = type + 'Diamond';
                                 state.teethVisibility.icsdx = true;
                                 if(type === 'bezel') {
-                                    state.teethStones.icsdx = {shape: 'circle', color: 'bSapph'};
+                                    state.teethStones.icsdx = {shape: 'circle', color: 'whD'};
                                     state.teethPaves.icsdx = {shape: state.teethPaves[tooth].shape, color: 'whD'};
                                 }
                                 break;
@@ -359,7 +359,7 @@ export const useTeethStore = create<State>((set, get) => ({
                                 state.teethJewelType.icssx = type + 'Diamond';
                                 state.teethVisibility.icssx = true;
                                 if(type === 'bezel') {
-                                    state.teethStones.icssx = {shape: 'circle', color: 'bSapph'};
+                                    state.teethStones.icssx = {shape: 'circle', color: 'whD'};
                                     state.teethPaves.icssx = {shape: state.teethPaves[tooth].shape, color: 'whD'};
                                 }
                                 break;
@@ -370,7 +370,7 @@ export const useTeethStore = create<State>((set, get) => ({
                                 state.teethJewelType.icidx = type + 'Diamond';
                                 state.teethVisibility.icidx = true;
                                 if(type === 'bezel') {
-                                    state.teethStones.icidx = {shape: 'circle', color: 'bSapph'};
+                                    state.teethStones.icidx = {shape: 'circle', color: 'whD'};
                                     state.teethPaves.icidx = {shape: state.teethPaves[tooth].shape, color: 'whD'};
                                 }
                                 break;
@@ -381,7 +381,7 @@ export const useTeethStore = create<State>((set, get) => ({
                                 state.teethJewelType.icisx = type + 'Diamond';
                                 state.teethVisibility.icisx = true;
                                 if(type === 'bezel') {
-                                    state.teethStones.icisx = {shape: 'circle', color: 'bSapph'};
+                                    state.teethStones.icisx = {shape: 'circle', color: 'whD'};
                                     state.teethPaves.icisx = {shape: state.teethPaves[tooth].shape, color: 'whD'};
                                 }
                                 break;
@@ -445,7 +445,7 @@ export const useTeethStore = create<State>((set, get) => ({
                             state.teethPaves[tooth].shape = 'round';
                         }
                         if(type === 'bezel') {
-                            state.teethStones[tooth] = {shape: 'circle', color: 'bSapph'};
+                            state.teethStones[tooth] = {shape: 'circle', color: 'whD'};
                             state.teethPaves[tooth] = {shape: state.teethPaves[tooth].shape, color: 'whD'};
                             state.teethPreciousness.diamonds = 'lab';
                         } else {
@@ -573,12 +573,18 @@ export const useTeethStore = create<State>((set, get) => ({
                                 if(state.teethJewelType[tooth] === 'bigBarDiamond') {
                                     state.teethJewelType.cidx = type + 'Diamond';
                                     state.teethPaves.cidx = {shape: 'round', color: 'whD'};
+                                    if(!state.teethPreciousness.diamonds) {
+                                        state.teethPreciousness.diamonds = 'lab';
+                                    }
                                 } else {
                                     state.teethJewelType.cidx = type;
                                 }
 
                                 if(type === 'bezel' || type === 'bezelDiamond') {
-                                    state.teethStones.cidx = {shape: 'circle', color: 'bSapph'};
+                                    state.teethStones.cidx = {shape: 'circle', color: 'whD'};
+                                    if(!state.teethPreciousness.diamonds) {
+                                        state.teethPreciousness.diamonds = 'lab';
+                                    }
                                 }
 
                                 if(type === 'enamel') {
@@ -596,12 +602,18 @@ export const useTeethStore = create<State>((set, get) => ({
                                 if(state.teethJewelType[tooth] === 'bigBarDiamond') {
                                     state.teethJewelType.cisx = type + 'Diamond';
                                     state.teethPaves.cisx = {shape: 'round', color: 'whD'};
+                                    if(!state.teethPreciousness.diamonds) {
+                                        state.teethPreciousness.diamonds = 'lab';
+                                    }
                                 } else {
                                     state.teethJewelType.cisx = type;
                                 }
 
                                 if(type === 'bezel' || type === 'bezelDiamond') {
-                                    state.teethStones.cisx = {shape: 'circle', color: 'bSapph'};
+                                    state.teethStones.cisx = {shape: 'circle', color: 'whD'};
+                                    if(!state.teethPreciousness.diamonds) {
+                                        state.teethPreciousness.diamonds = 'lab';
+                                    }
                                 }
 
                                 if(type === 'enamel') {
@@ -626,12 +638,18 @@ export const useTeethStore = create<State>((set, get) => ({
                             if(state.teethJewelType[tooth] === 'barDiamond') {
                                 state.teethJewelType.icsdx = type + 'Diamond';
                                 state.teethPaves.icsdx = {shape: 'round', color: 'whD'};
+                                if(!state.teethPreciousness.diamonds) {
+                                    state.teethPreciousness.diamonds = 'lab';
+                                }
                             } else {
                                 state.teethJewelType.icsdx = type;
                             }
 
                             if(type === 'bezel' || type === 'bezelDiamond') {
-                                state.teethStones.icsdx = {shape: 'circle', color: 'bSapph'};
+                                state.teethStones.icsdx = {shape: 'circle', color: 'whD'};
+                                if(!state.teethPreciousness.diamonds) {
+                                    state.teethPreciousness.diamonds = 'lab';
+                                }
                             }
 
                             if(type === 'enamel') {
@@ -650,12 +668,18 @@ export const useTeethStore = create<State>((set, get) => ({
                             if(state.teethJewelType[tooth] === 'barDiamond') {
                                 state.teethJewelType.icssx = type + 'Diamond';
                                 state.teethPaves.icssx = {shape: 'round', color: 'whD'};
+                                if(!state.teethPreciousness.diamonds) {
+                                    state.teethPreciousness.diamonds = 'lab';
+                                }
                             } else {
                                 state.teethJewelType.icssx = type;
                             }
 
                             if(type === 'bezel' || type === 'bezelDiamond') {
-                                state.teethStones.icssx = {shape: 'circle', color: 'bSapph'};
+                                state.teethStones.icssx = {shape: 'circle', color: 'whD'};
+                                if(!state.teethPreciousness.diamonds) {
+                                    state.teethPreciousness.diamonds = 'lab';
+                                }
                             }
 
                             if(type === 'enamel') {
@@ -672,12 +696,18 @@ export const useTeethStore = create<State>((set, get) => ({
                             if(state.teethJewelType[tooth] === 'bigBarDiamond') {
                                 state.teethJewelType.icidx = type + 'Diamond';
                                 state.teethPaves.icidx = {shape: 'round', color: 'whD'};
+                                if(!state.teethPreciousness.diamonds) {
+                                    state.teethPreciousness.diamonds = 'lab';
+                                }
                             } else {
                                 state.teethJewelType.icidx = type;
                             }
 
                             if(type === 'bezel' || type === 'bezelDiamond') {
-                                state.teethStones.icidx = {shape: 'circle', color: 'bSapph'};
+                                state.teethStones.icidx = {shape: 'circle', color: 'whD'};
+                                if(!state.teethPreciousness.diamonds) {
+                                    state.teethPreciousness.diamonds = 'lab';
+                                }
                             }
 
                             if(type === 'enamel') {
@@ -694,12 +724,18 @@ export const useTeethStore = create<State>((set, get) => ({
                             if(state.teethJewelType[tooth] === 'bigBarDiamond') {
                                 state.teethJewelType.icisx = type + 'Diamond';
                                 state.teethPaves.icisx = {shape: 'round', color: 'whD'};
+                                if(!state.teethPreciousness.diamonds) {
+                                    state.teethPreciousness.diamonds = 'lab';
+                                }
                             } else {
                                 state.teethJewelType.icisx = type;
                             }
 
                             if(type === 'bezel' || type === 'bezelDiamond') {
-                                state.teethStones.icisx = {shape: 'circle', color: 'bSapph'};
+                                state.teethStones.icisx = {shape: 'circle', color: 'whD'};
+                                if(!state.teethPreciousness.diamonds) {
+                                    state.teethPreciousness.diamonds = 'lab';
+                                }
                             }
 
                             if(type === 'enamel') {
@@ -722,7 +758,10 @@ export const useTeethStore = create<State>((set, get) => ({
                         state.teethMaterial[tooth] = state.teethMaterial[tooth] === 'base' ? 'gold' : state.teethMaterial[tooth];
 
                         if(type === 'bezel' || type === 'bezelDiamond') {
-                            state.teethStones[tooth] = {shape: 'circle', color: 'bSapph'};
+                            state.teethStones[tooth] = {shape: 'circle', color: 'whD'};
+                            if(!state.teethPreciousness.diamonds) {
+                                state.teethPreciousness.diamonds = 'lab';
+                            }
                         } else {
                             state.teethStones[tooth] = {shape: undefined, color: undefined};
                         }
@@ -762,6 +801,9 @@ export const useTeethStore = create<State>((set, get) => ({
                     }
                 }
 
+                if(!get().checkDiamonds(state)) {
+                    state.teethPreciousness.diamonds = undefined;
+                }
                 // calc total and set history step
                 get().calcTotal(state);
                 get().setHistory(state);
@@ -1260,7 +1302,7 @@ export const useTeethStore = create<State>((set, get) => ({
     },
     teethSignature: {
         vamp: ['csdx', 'cssx'],
-        hammered: ['icsdx', 'icssx', 'ilsdx', 'ilssx', 'icidx', 'icisx', 'ilidx', 'ilisx'],
+        hammered: ['ilsdx', 'ilssx', 'icidx', 'icisx', 'ilidx', 'ilisx'],
         cross: ['icsdx', 'icssx'],
         bubblegum: ['icsdx', 'icssx', 'ilsdx', 'ilssx'],
         sprinkles: ['csdx', 'cssx', 'ilsdx', 'ilssx'],

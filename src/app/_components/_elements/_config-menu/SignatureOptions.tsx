@@ -51,7 +51,7 @@ export default function SignatureOptions({crossRef, vampRef, bubblegumRef, sprin
                      alt="braces-logo"/>
             </button>
             <button ref={tribalRef} type="button" value="tribal"
-                    className={`${signature.braces ? 'border-2 border-sky-400' : ''} p-1 cursor-pointer w-[95%] h-[120px] mx-auto mb-4 bg-[#282828] bg-[url(/signatures-icons/signature-bg.svg)] rounded-3xl`}
+                    className={`${signature.tribal ? 'border-2 border-sky-400' : ''} p-1 cursor-pointer w-[95%] h-[120px] mx-auto mb-4 bg-[#282828] bg-[url(/signatures-icons/signature-bg.svg)] rounded-3xl`}
                     onClick={(e) => setSignatureDesign(e.currentTarget.value)}>
                 <img className="h-full object-cover object-center w-full"
                      src="/signatures-icons/tribal.svg"
