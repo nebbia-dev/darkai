@@ -16,7 +16,7 @@ export default function RoundPaveBase({color, stone, pave} : {color: string|unde
     });
 
     roundNormal.normalMap.wrapS = roundNormal.normalMap.wrapT = THREE.RepeatWrapping;
-    roundNormal.normalMap.repeat.set(15, 15);
+    roundNormal.normalMap.repeat.set(22, 22);
     pairs.set('roundNormal', roundNormal.normalMap);
 
     //ROUND COLORS
@@ -25,7 +25,7 @@ export default function RoundPaveBase({color, stone, pave} : {color: string|unde
     });
     roundGold.map.colorSpace = THREE.SRGBColorSpace;
     roundGold.map.wrapS = roundGold.map.wrapT = THREE.RepeatWrapping;
-    roundGold.map.repeat.set(15, 15);
+    roundGold.map.repeat.set(22, 22);
     pairs.set('roundGold', roundGold.map);
 
     const roundRose = useTexture({
