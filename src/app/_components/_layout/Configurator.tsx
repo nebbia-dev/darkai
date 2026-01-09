@@ -655,7 +655,7 @@ export default function Configurator() {
                 },
                 enamel: {
                     geometry: (enamel.scene.children[0].children[4] as THREE.Mesh).geometry,
-                    position: new THREE.Vector3(enamel.scene.children[0].children[4].position.x, enamel.scene.children[0].children[4].position.y, enamel.scene.children[0].children[4].position.z * 14)
+                    position: getOriginGlb(enamel.scene.children[0].children[4], 1)
                 }
             },
             ilssx: {
@@ -769,7 +769,7 @@ export default function Configurator() {
                 },
                 enamel: {
                     geometry: (enamel.scene.children[0].children[5] as THREE.Mesh).geometry,
-                    position: new THREE.Vector3(enamel.scene.children[0].children[5].position.x, enamel.scene.children[0].children[5].position.y, enamel.scene.children[0].children[5].position.z * 14)
+                    position: getOriginGlb(enamel.scene.children[0].children[5], 1)
                 }
             },
             ilidx: {
@@ -1343,7 +1343,7 @@ export default function Configurator() {
                     diamond: {
                         base: (bigBar.scene.children[1] as THREE.Mesh).geometry,
                         full: (bigBar.scene.children[2] as THREE.Mesh).geometry,
-                        position: getOrigin(frameDiamond.scene.children[2].children[1])
+                        position: getOrigin(bigBar.scene.children[2])
                     }
                 },
                 enamel: {
@@ -1465,7 +1465,7 @@ export default function Configurator() {
                     diamond: {
                         base: (bigBar.scene.children[1] as THREE.Mesh).geometry,
                         full: (bigBar.scene.children[2] as THREE.Mesh).geometry,
-                        position: getOrigin(frameDiamond.scene.children[2].children[1])
+                        position: getOrigin(bigBar.scene.children[2])
                     }
                 },
                 enamel: {

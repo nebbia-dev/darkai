@@ -17,7 +17,7 @@ export default function PaveBigBar({pave, stone} : {pave:string|undefined, stone
 
     /* ROUND PAVE */
     const round = useTexture({
-        map: 'textures/bar/bigBar/BigBar_Pavè_Round.webp',
+        map: 'textures/bar/bigBar/BigBar_Round_Pave.webp',
     });
     round.map.colorSpace = THREE.SRGBColorSpace;
     round.map.flipY = false;
@@ -25,14 +25,14 @@ export default function PaveBigBar({pave, stone} : {pave:string|undefined, stone
 
     /* NORMAL ROUND */
     const roundNormal = useTexture({
-        normalMap: 'textures/bar/bigBar/BigBar_Pavè_Round_Normal.webp',
+        normalMap: 'textures/bar/bigBar/BigBar_Round_Pave_Normal.webp',
     });
    roundNormal.normalMap.flipY = false;
     pairs.set('roundNormal', roundNormal.normalMap);
 
     /* BAGUETTE PAVE */
     const baguette = useTexture({
-        map: 'textures/bar/bigBar/BigBar_Pavè_Baguette.webp',
+        map: 'textures/bar/bigBar/BigBar_Pave_Baguette.webp',
     });
     baguette.map.colorSpace = THREE.SRGBColorSpace;
     baguette.map.flipY = false;
@@ -40,7 +40,7 @@ export default function PaveBigBar({pave, stone} : {pave:string|undefined, stone
 
     /* NORMAL BAGUETTE */
     const baguetteNormal = useTexture({
-        normalMap: 'textures/bar/bigBar/BigBar_Pavè_Baguette_Normal.webp',
+        normalMap: 'textures/bar/bigBar/BigBar_Pave_Baguette_Normal.webp',
     });
     baguetteNormal.normalMap.flipY = false;
     pairs.set('baguetteNormal', baguetteNormal.normalMap);
