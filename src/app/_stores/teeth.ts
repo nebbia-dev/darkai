@@ -1189,7 +1189,7 @@ export const useTeethStore = create<State>((set, get) => ({
                             break;
                     }
 
-                    if(!state.teethPreciousness.diamonds) {
+                    if(!state.teethPreciousness.diamonds && state.teethPaves[tooth].color.includes('D')) {
                         state.teethPreciousness.diamonds = 'lab';
                     }
 
