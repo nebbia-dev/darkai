@@ -34,27 +34,27 @@ export default function DesignSubOptions({tooth, type}: { tooth: string|undefine
                 <div className="w-[36px] flex flex-col gap-2 items-center bg-gray-50 rounded-full py-2 border-1">
                     <button type="button" onClick={(e) => setStoneShape(e.currentTarget.value)} value="circle"
                             className="w-[24px] h-[24px] bg-stone-200 rounded-full cursor-pointer border-1">
-                        <img src="/bezel-icons/circle.svg" alt="circle-bezel"/>
+                        <img src="/bezel-icons/circle.webp" alt="circle-bezel"/>
                     </button>
                     <button type="button" onClick={(e) => setStoneShape(e.currentTarget.value)} value="heart"
                             className="w-[24px] h-[24px] bg-stone-200 rounded-full cursor-pointer border-1">
-                        <img src="/bezel-icons/heart.svg" alt="heart-bezel"/>
+                        <img className="pt-[0.15em] px-[0.1em]" src="/bezel-icons/heart.webp" alt="heart-bezel"/>
                     </button>
                     <button type="button" onClick={(e) => setStoneShape(e.currentTarget.value)} value="tear"
                             className="w-[24px] h-[24px] bg-stone-200 rounded-full cursor-pointer border-1">
-                        <img src="/bezel-icons/drop.svg" alt="tear-bezel"/>
+                        <img className="pt-[0.05em]" src="/bezel-icons/drop.webp" alt="tear-bezel"/>
                     </button>
                     <button type="button" onClick={(e) => setStoneShape(e.currentTarget.value)} value="marquise"
                             className="w-[24px] h-[24px] bg-stone-200 rounded-full cursor-pointer border-1">
-                        <img src="/bezel-icons/marquise.svg" alt="marquise-bezel"/>
+                        <img className="pl-[1px]" src="/bezel-icons/marquise.webp" alt="marquise-bezel"/>
                     </button>
                     <button type="button" onClick={(e) => setStoneShape(e.currentTarget.value)} value="square"
                             className="w-[24px] h-[24px] bg-stone-200 rounded-full cursor-pointer border-1">
-                        <img src="/bezel-icons/princess.svg" alt="princess-bezel"/>
+                        <img src="/bezel-icons/princess.webp" alt="princess-bezel"/>
                     </button>
                     <button type="button" onClick={(e) => setStoneShape(e.currentTarget.value)} value="baguette"
                             className="w-[24px] h-[24px] bg-stone-200 rounded-full cursor-pointer border-1">
-                        <img src="/bezel-icons/baguette.svg" alt="baguette-bezel"/>
+                        <img className="pt-[0.025em]" src="/bezel-icons/baguette.webp" alt="baguette-bezel"/>
                     </button>
                 </div>
             </div>

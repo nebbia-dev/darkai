@@ -54,7 +54,7 @@ export default function Selection({activeButton, changeActiveButton} : {activeBu
                         {/*PACKAGING BUTTON*/}
                         {/*<ConfiguratorButton tooth="alwaysActive" inverse={false} value="6" active={activeButton}*/}
                         {/*                    onclick={changeActiveButton} label="Packaging">*/}
-                        {/*    <img className="p-0.5" src="/config-menu-svgs/packaging.svg" alt="packaging-option-logo"/>*/}
+                        {/*    <img className="p-0.5" src="/config-menu-svgs/packaging.webp" alt="packaging-option-logo"/>*/}
                         {/*</ConfiguratorButton>*/}
                         {/**/}
 
@@ -63,7 +63,7 @@ export default function Selection({activeButton, changeActiveButton} : {activeBu
                             <div className="relative">
                                 <div
                                     className="border-1 bg-gray-50 text-slate-950 p-0.5 rounded-full flex items-center justify-center w-10 h-10 relative z-20">
-                                    <img className="p-0.5" src="/config-menu-svgs/packaging.svg"
+                                    <img className="pl-0.5" src="/config-menu-svgs/packaging.webp"
                                          alt="packaging-option-logo"/>
                                 </div>
                             </div>

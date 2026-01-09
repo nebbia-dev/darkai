@@ -327,19 +327,19 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
 
             <ConfiguratorButton inverse={false} value="2" active={active} onclick={onclick} tooth={tooth}
                                 label="Grillz Type">
-                <img src="/config-menu-svgs/design.svg" alt="design-option-logo"/>
+                <img src="/config-menu-svgs/grillz.webp" className="pl-[0.5px]" alt="design-option-logo"/>
             </ConfiguratorButton>
             <ConfiguratorButton inverse={false} value="3" active={active} onclick={onclick} tooth={tooth}
                                 label="Gold Color">
-                <img src="/config-menu-svgs/gold.svg" alt="gold-option-logo"/>
+                <img className="px-[0.75px]" src="/config-menu-svgs/gold.webp" alt="gold-option-logo"/>
             </ConfiguratorButton>
             <ConfiguratorButton inverse={false} value="4" active={active} onclick={onclick} tooth={tooth}
                                 label="Finish">
-                <img src="/config-menu-svgs/colors.webp" className="mt-0.5 mr-1" alt="colors-option-logo"/>
+                <img src="/config-menu-svgs/finishing.webp" className="pt-0.5" alt="colors-option-logo"/>
             </ConfiguratorButton>
             <ConfiguratorButton inverse={false} value="5" active={active} onclick={onclick} tooth={tooth}
                                 label="Stone Color">
-                <img src="/config-menu-svgs/finish.svg" alt="color-option-logo"/>
+                <img src="/config-menu-svgs/colors.webp" alt="color-option-logo"/>
             </ConfiguratorButton>
 
             <div className={`absolute ${!active ? 'hidden' : 'block'} ${
@@ -364,7 +364,7 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
                             ? 'h-[186px]' 
                             : 'h-[596px]'} 
                         w-[200px] bg-gray-50 rounded-3xl p-8 pr-4 border-1 max-h-[70vh]`}>
-                    <div onScroll={sync} ref={elementRef} className="overflow-y-scroll h-full pl-[2px] pr-4">
+                    <div onScroll={sync} ref={elementRef} className="overflow-y-auto h-full pl-[2px] pr-4">
                         {renderOptions(active, tooth)}
                     </div>
                 </div>
