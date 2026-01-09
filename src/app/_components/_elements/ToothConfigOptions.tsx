@@ -317,7 +317,7 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
             <div
                 className={`${
                     (gemBox && (jewelType?.includes('Diamond') || jewelType?.includes('bezel'))) 
-                        ? 'flex justify-center gap-3' : 'hidden'} absolute top-[-32.5vh] left-[37.75vw] rounded-3xl bg-gray-50 border-1 pb-4 pt-2 pl-8 pr-2 text-sm w-[224px] mb-4`}>
+                        ? 'flex justify-center gap-3' : 'hidden' } absolute top-[-32.5vh] left-[37.75vw] rounded-3xl bg-gray-50 border-1 pb-4 pt-2 pl-8 pr-2 text-sm w-[224px] mb-4`}>
                 <p className="text-center pt-3">You're choosing the <strong>{jewelType?.includes('bezel') ? 'bezel' : 'pave'}</strong> stone color</p>
                 <div className="">
                     <Close className="cursor-pointer w-5 h-5" onClick={() => showGemBox(false)}/>

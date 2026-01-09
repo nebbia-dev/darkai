@@ -28,6 +28,10 @@ export default function RecapList({edit} : {edit:boolean}) {
         setHover(tooth);
     }
 
+    function checkDoubleTeeth(tooth:string, jewel:string) {
+        return ((jewel === 'bar' || jewel === 'barDiamond') && (tooth === 'icsdx' || tooth === 'icidx')) || ((jewel === 'bigBar' || jewel === 'bigBarDiamond') && tooth === 'cidx');
+    }
+
     return (
         <div className="pl-5 pr-3 py-4 h-full">
             <ul className="pr-2 h-full overflow-y-auto">
@@ -96,9 +100,9 @@ export default function RecapList({edit} : {edit:boolean}) {
                                            onMouseLeave: (e) => setCurrentHover(undefined, e)
                                             })}
                             className={`
-                                ${((tooth[1] === 'bar' || tooth[1] === 'barDiamond') && (tooth[0] === 'icsdx' || tooth[0] === 'icidx')) || ((tooth[1] === 'bigBar' || tooth[1] === 'bigBarDiamond') && tooth[0] === 'cidx') ? 'hidden' : 'block'} 
-                                ${tooth[0] ===  activeTooth ? 'bg-white/50' : ''}
-                                ${tooth[0] ===  hovered ? 'border-black' : 'border-gray-200/50'}
+                                ${checkDoubleTeeth(tooth[0], tooth[1]) ? 'hidden' : 'block'} 
+                                ${tooth[0] === activeTooth || checkDoubleTeeth(activeTooth as string, tooth[1]) ? 'bg-white/50' : ''}
+                                ${tooth[0] ===  hovered || checkDoubleTeeth(hovered as string, tooth[1]) ? 'border-black' : 'border-gray-200/50'}
                                 cursor-pointer mb-4 rounded p-2 border`}
                         >
                             {/*tooth name*/}
