@@ -40,7 +40,7 @@ export default function Selection({activeButton, changeActiveButton} : {activeBu
                         </div>
                     }
                 </div>
-                <div className="w-full h-[calc(100vh-108px)] flex flex-col justify-center ml-[5vw]">
+                <div className="cursor-auto w-full h-[calc(100vh-108px)] flex flex-col justify-center ml-[5vw]">
                     <div className="flex flex-col gap-4">
                         <ConfiguratorButton tooth="alwaysActive" inverse={true} value="1" active={activeButton}
                                             onclick={changeActiveButton} label="Signature Designs">

@@ -33,7 +33,7 @@ export default function RoundPaveBase({color, stone, pave} : {color: string|unde
     });
     roundRose.map.colorSpace = THREE.SRGBColorSpace;
     roundRose.map.wrapS = roundRose.map.wrapT = THREE.RepeatWrapping;
-    roundRose.map.repeat.set(15, 15);
+    roundRose.map.repeat.set(22, 22);
     pairs.set('roundRose', roundRose.map);
 
     const roundWhite = useTexture({
@@ -41,7 +41,7 @@ export default function RoundPaveBase({color, stone, pave} : {color: string|unde
     });
     roundWhite.map.colorSpace = THREE.SRGBColorSpace;
     roundWhite.map.wrapS = roundWhite.map.wrapT = THREE.RepeatWrapping;
-    roundWhite.map.repeat.set(15, 15);
+    roundWhite.map.repeat.set(22, 22);
     pairs.set('roundWhite', roundWhite.map);
 
     const roundBlack = useTexture({
@@ -49,7 +49,7 @@ export default function RoundPaveBase({color, stone, pave} : {color: string|unde
     });
     roundBlack.map.colorSpace = THREE.SRGBColorSpace;
     roundBlack.map.wrapS = roundBlack.map.wrapT = THREE.RepeatWrapping;
-    roundBlack.map.repeat.set(15, 15);
+    roundBlack.map.repeat.set(22, 22);
     pairs.set('roundBlack', roundBlack.map);
 
     // ROUND CAMO/GLITCH
@@ -58,7 +58,7 @@ export default function RoundPaveBase({color, stone, pave} : {color: string|unde
     });
 
     roundAltNormal.normalMap.wrapS = roundAltNormal.normalMap.wrapT = THREE.RepeatWrapping;
-    roundAltNormal.normalMap.repeat.set(7.5, 7.5);
+    roundAltNormal.normalMap.repeat.set(11.5, 11.5);
     pairs.set('roundAltNormal', roundAltNormal.normalMap);
 
     //ROUND COLORS
@@ -67,7 +67,7 @@ export default function RoundPaveBase({color, stone, pave} : {color: string|unde
     });
     roundAltGold.map.colorSpace = THREE.SRGBColorSpace;
     roundAltGold.map.wrapS = roundAltGold.map.wrapT = THREE.RepeatWrapping;
-    roundAltGold.map.repeat.set(7.5, 7.5);
+    roundAltGold.map.repeat.set(11.5, 11.5);
     pairs.set('roundAltGold', roundAltGold.map);
 
     const roundAltRose = useTexture({
@@ -75,7 +75,7 @@ export default function RoundPaveBase({color, stone, pave} : {color: string|unde
     });
     roundAltRose.map.colorSpace = THREE.SRGBColorSpace;
     roundAltRose.map.wrapS = roundAltRose.map.wrapT = THREE.RepeatWrapping;
-    roundAltRose.map.repeat.set(7.5, 7.5);
+    roundAltRose.map.repeat.set(11.5, 11.5);
     pairs.set('roundAltRose', roundAltRose.map);
 
     const roundAltWhite = useTexture({
@@ -83,7 +83,7 @@ export default function RoundPaveBase({color, stone, pave} : {color: string|unde
     });
     roundAltWhite.map.colorSpace = THREE.SRGBColorSpace;
     roundAltWhite.map.wrapS = roundAltWhite.map.wrapT = THREE.RepeatWrapping;
-    roundAltWhite.map.repeat.set(7.5, 7.5);
+    roundAltWhite.map.repeat.set(11.5, 11.5);
     pairs.set('roundAltWhite', roundAltWhite.map);
 
     const roundAltBlack = useTexture({
@@ -91,7 +91,7 @@ export default function RoundPaveBase({color, stone, pave} : {color: string|unde
     });
     roundAltBlack.map.colorSpace = THREE.SRGBColorSpace;
     roundAltBlack.map.wrapS = roundAltBlack.map.wrapT = THREE.RepeatWrapping;
-    roundAltBlack.map.repeat.set(7.5, 7.5);
+    roundAltBlack.map.repeat.set(11.5, 11.5);
     pairs.set('roundAltBlack', roundAltBlack.map);
 
 

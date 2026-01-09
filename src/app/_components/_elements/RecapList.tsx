@@ -12,10 +12,13 @@ import {Trash} from "@/app/_components/_icons/Trash";
 export default function RecapList({edit} : {edit:boolean}) {
 
     const teethPrices = useTeethStore((state:State) => state.teethPrices);
+    const teethSignature = useTeethStore((state:State) => state.teethSignature);
     const total = useTeethStore((state:State) => state.total);
     const history = useTeethStore((state:State) => state.history);
     const currentStep = useTeethStore((state:State) => state.currentHistory - 1);
+    const activeTooth = useTeethStore((state: State) => state.currentTooth)
     const setActive = useTeethStore((state: State) => state.setActiveTooth);
+    const hovered = useTeethStore((state: State) => state.hovered);
     const setHover = useTeethStore((state: State) => state.setHover);
     const resetTooth = useTeethStore((state: State) => state.resetTooth);
     const resetSignature = useTeethStore((state: State) => state.resetSignature);
@@ -26,8 +29,8 @@ export default function RecapList({edit} : {edit:boolean}) {
     }
 
     return (
-        <div className="pl-6 pr-3 py-4 h-full">
-            <ul className="pr-3 h-full overflow-y-scroll">
+        <div className="pl-5 pr-3 py-4 h-full">
+            <ul className="pr-2 h-full overflow-y-auto">
                 {(history.length === 0 || total === 0) &&
                     <li className="w-full h-full flex items-center justify-center">
                         <p>Choose your configs wisely!</p>
@@ -39,7 +42,9 @@ export default function RecapList({edit} : {edit:boolean}) {
                     return (
                         history[currentStep][0].signatureVisible[signature[0]] &&
                         <li key={signature[0]}
-                            className="cursor-pointer mb-4"
+                            className={`${teethSignature[signature[0]].includes(activeTooth as string) ? 'bg-white/50' : ''}
+                                ${teethSignature[signature[0]].includes(hovered as string) ? 'border-black' : 'border-gray-200/50'}
+                                cursor-pointer mb-4 rounded p-2 border`}
                         >
                             {/*tooth name*/}
                             <div className="flex justify-between items-center mb-1">
@@ -90,7 +95,11 @@ export default function RecapList({edit} : {edit:boolean}) {
                                            onMouseEnter: (e) => setCurrentHover(tooth[0], e),
                                            onMouseLeave: (e) => setCurrentHover(undefined, e)
                                             })}
-                            className={`${((tooth[1] === 'bar' || tooth[1] === 'barDiamond') && (tooth[0] === 'icsdx' || tooth[0] === 'icidx')) || ((tooth[1] === 'bigBar' || tooth[1] === 'bigBarDiamond') && tooth[0] === 'cidx') ? 'hidden' : 'block'} cursor-pointer mb-4`}
+                            className={`
+                                ${((tooth[1] === 'bar' || tooth[1] === 'barDiamond') && (tooth[0] === 'icsdx' || tooth[0] === 'icidx')) || ((tooth[1] === 'bigBar' || tooth[1] === 'bigBarDiamond') && tooth[0] === 'cidx') ? 'hidden' : 'block'} 
+                                ${tooth[0] ===  activeTooth ? 'bg-white/50' : ''}
+                                ${tooth[0] ===  hovered ? 'border-black' : 'border-gray-200/50'}
+                                cursor-pointer mb-4 rounded p-2 border`}
                         >
                             {/*tooth name*/}
                             <div className="flex justify-between items-center mb-1">

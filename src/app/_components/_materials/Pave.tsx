@@ -91,7 +91,7 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
     });
     hexagonCamo.map.colorSpace = THREE.SRGBColorSpace;
     hexagonCamo.map.wrapS = hexagonCamo.map.wrapT = THREE.RepeatWrapping;
-    hexagonCamo.map.repeat.set(6, 6);
+    hexagonCamo.map.repeat.set(5.5, 5.5);
 
     pairs.set('hexagonCamo', hexagonCamo.map);
 
@@ -101,7 +101,7 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
     });
     hexagonGlitch.map.colorSpace = THREE.SRGBColorSpace;
     hexagonGlitch.map.wrapS = hexagonGlitch.map.wrapT = THREE.RepeatWrapping;
-    hexagonGlitch.map.repeat.set(6, 6);
+    hexagonGlitch.map.repeat.set(5.5, 5.5);
 
     pairs.set('hexagonGlitch', hexagonGlitch.map);
 
@@ -111,7 +111,7 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
     });
     princessCamo.map.colorSpace = THREE.SRGBColorSpace;
     princessCamo.map.wrapS = princessCamo.map.wrapT = THREE.RepeatWrapping;
-    princessCamo.map.repeat.set(6, 6);
+    princessCamo.map.repeat.set(8, 8);
 
     pairs.set('princessCamo', princessCamo.map);
 
@@ -121,7 +121,7 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
     });
     princessGlitch.map.colorSpace = THREE.SRGBColorSpace;
     princessGlitch.map.wrapS = princessGlitch.map.wrapT = THREE.RepeatWrapping;
-    princessGlitch.map.repeat.set(6, 6);
+    princessGlitch.map.repeat.set(8, 8);
 
     pairs.set('princessGlitch', princessGlitch.map);
 
@@ -172,9 +172,9 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
     });
     roundCamo.map.colorSpace = THREE.SRGBColorSpace;
     roundCamo.map.wrapS = roundCamo.map.wrapT = THREE.RepeatWrapping;
-    roundCamo.map.repeat.set(7.5, 7.5);
+    roundCamo.map.repeat.set(11.5, 11.5);
     roundCamo.normalMap.wrapS = roundCamo.normalMap.wrapT = THREE.RepeatWrapping;
-    roundCamo.normalMap.repeat.set(7.5, 7.5);
+    roundCamo.normalMap.repeat.set(11.5, 11.5);
 
     pairs.set('roundCamo', roundCamo.map);
     pairs.set('roundCamoNormal', roundCamo.normalMap);
@@ -186,9 +186,9 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
     });
     roundGlitch.map.colorSpace = THREE.SRGBColorSpace;
     roundGlitch.map.wrapS = roundGlitch.map.wrapT = THREE.RepeatWrapping;
-    roundGlitch.map.repeat.set(7.5, 7.5);
+    roundGlitch.map.repeat.set(11.5, 11.5);
     roundGlitch.normalMap.wrapS = roundGlitch.normalMap.wrapT = THREE.RepeatWrapping;
-    roundGlitch.normalMap.repeat.set(7.5, 7.5);
+    roundGlitch.normalMap.repeat.set(11.5, 11.5);
 
     pairs.set('roundGlitch', roundGlitch.map);
     pairs.set('roundGlitchNormal', roundGlitch.normalMap);

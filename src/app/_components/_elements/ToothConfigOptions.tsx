@@ -342,10 +342,9 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
                 <img src="/config-menu-svgs/finish.svg" alt="color-option-logo"/>
             </ConfiguratorButton>
 
-            <div className={`absolute ${!active ? 'hidden' : 'block'} ${active === '1'
-                ? 'top-[-30vh]'
-                : (active === '2' && !checkMolar(tooth))
-                    ? 'top-[-20vh]'
+            <div className={`absolute ${!active ? 'hidden' : 'block'} ${
+                (active === '2' && !checkMolar(tooth))
+                    ? 'top-[-25vh]'
                     : (active === '2' && checkMolar(tooth))
                         ? 'top-[-10vh]'
                         : active === '4' && (jewelType?.includes('enamel') || material === 'base')
@@ -354,7 +353,7 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
                                     ? 'top-[11vh]'
                                     : active === '6'
                                         ? 'top-[13.5vh]'
-                                        : 'top-[-20vh]'
+                                        : 'top-[-25vh]'
             } left-[48px]`}>
 
                 <div
@@ -375,10 +374,10 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
             <div
                 className={`${!active ? 'hidden' : 'block'} pups text-center max-h-[70vh] h-[596px] w-[64px] absolute left-[240px] 
                             ${active === '1'
-                    ? 'top-[-30vh]'
+                    ? 'top-[-25vh]'
                             : active === '6'
                                 ? 'top-[-10vh]'
-                                : 'top-[-20vh]'
+                                : 'top-[-25vh]'
                 } py-8`}>
                 <div ref={selectorRef} className="whitespace-nowrap overflow-hidden h-full w-full">
                     {renderSubOptions(active, tooth)}

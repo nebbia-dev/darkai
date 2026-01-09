@@ -32,7 +32,7 @@ export default function CiSx() {
             case 'full':
             case 'bezel':
                 geometry = [toothGeometry.full];
-                material = [<FullMaterial_ICS color={toothMaterial} finish={toothFinish}/>]
+                material = [<FullMaterial color={toothMaterial} finish={toothFinish}/>]
                 position = new THREE.Vector3();
                 break;
             case 'fullDiamond':
@@ -84,6 +84,7 @@ export default function CiSx() {
 
         resetUvs(toothGeometry.bar.full, false, 'barDC_lat');
         resetUvs(toothGeometry.frame.full, false, 'barDC_lat');
+        resetUvs(toothGeometry.bigBar.full, false, 'barDC_lat');
 
         if(geometry.length === 2) {
             return (

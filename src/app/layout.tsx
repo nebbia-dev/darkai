@@ -24,7 +24,7 @@ export default function RootLayout({
     <html lang="en" className={`${worksans.variable}`}>
         <body>
         <AppRouterCacheProvider>
-            <div className="w-[100vw] flex justify-center bg-gray-200">
+            <div className="cursor-auto w-[100vw] flex justify-center bg-gray-200">
                 <img className="py-6 w-[132px]" src="/logo.png" alt="darkai logo"/>
             </div>
             {children}

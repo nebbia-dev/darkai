@@ -1,10 +1,10 @@
 'use client'
 import * as THREE from 'three';
-import {Outlines, useFBX, useGLTF, useTexture} from "@react-three/drei";
-import React, {JSX, memo, useMemo, useRef, useState} from "react";
+import {Outlines, useGLTF, useTexture} from "@react-three/drei";
+import React, {JSX, memo, useMemo, useState} from "react";
 import {useTeethStore} from "@/app/_stores/teeth";
 import {State} from "@/app/_types/State";
-import {useFrame, useThree} from "@react-three/fiber";
+import {useThree} from "@react-three/fiber";
 
 export default function Dentiera() {
     const dentiera = useMemo(() => {
@@ -492,7 +492,7 @@ export default function Dentiera() {
     })
 
     return (
-        <>
+        <group>
             <Base/>
 
             <Icisx outline={!nextStep && activeTooth === 'icisx'} hovered={!nextStep && hovered === 'icisx'}/>
@@ -524,6 +524,6 @@ export default function Dentiera() {
             <Mssx outline={!nextStep && activeTooth === 'mssx'} hovered={!nextStep && hovered === 'mssx'}/>
             <Midx outline={!nextStep && activeTooth === 'midx'} hovered={!nextStep && hovered === 'midx'}/>
             <Misx outline={!nextStep && activeTooth === 'misx'} hovered={!nextStep && hovered === 'misx'}/>
-        </>
+        </group>
     )
 }
