@@ -53,6 +53,7 @@ import Tribals from "@/app/_components/_teeth/_signature/Tribals";
 import Hammered from "@/app/_components/_teeth/_signature/Hammered";
 import Cross from "@/app/_components/_teeth/_signature/Cross";
 import {Group} from "three";
+import FullMaterial from "@/app/_components/_materials/FullMaterial";
 
 export default function Configurator() {
     const envMap = useEnvironment({
@@ -1340,8 +1341,8 @@ export default function Configurator() {
                 bigBar: {
                     full: (bigBar.scene.children[0] as THREE.Mesh).geometry,
                     diamond: {
-                        base: (frameDiamond.scene.children[2].children[0] as THREE.Mesh).geometry,
-                        full: (frameDiamond.scene.children[2].children[1] as THREE.Mesh).geometry,
+                        base: (bigBar.scene.children[1] as THREE.Mesh).geometry,
+                        full: (bigBar.scene.children[2] as THREE.Mesh).geometry,
                         position: getOrigin(frameDiamond.scene.children[2].children[1])
                     }
                 },
@@ -1462,8 +1463,8 @@ export default function Configurator() {
                 bigBar: {
                     full: (bigBar.scene.children[0] as THREE.Mesh).geometry,
                     diamond: {
-                        base: (frameDiamond.scene.children[2].children[0] as THREE.Mesh).geometry,
-                        full: (frameDiamond.scene.children[2].children[1] as THREE.Mesh).geometry,
+                        base: (bigBar.scene.children[1] as THREE.Mesh).geometry,
+                        full: (bigBar.scene.children[2] as THREE.Mesh).geometry,
                         position: getOrigin(frameDiamond.scene.children[2].children[1])
                     }
                 },

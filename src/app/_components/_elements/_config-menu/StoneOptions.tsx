@@ -19,6 +19,7 @@ export default function StoneOptions({tooth, bezel, pave, whDRef, brDRef, blDRef
     camoRef:Ref<HTMLButtonElement|null>,
     glitchRef:Ref<HTMLButtonElement|null>
 }) {
+   const jewelType = useTeethStore((state: State) => tooth ? state.teethJewelType[tooth] : undefined);
    const paveColor = useTeethStore((state: State) => tooth ? state.teethPaves[tooth].color : undefined);
    const bezelColor = useTeethStore((state: State) => tooth ? state.teethStones[tooth]?.color : undefined);
    const setActiveSubButton = useTeethStore((state: State) => state.setActiveSubButton);
@@ -108,7 +109,7 @@ export default function StoneOptions({tooth, bezel, pave, whDRef, brDRef, blDRef
                 <img className="pb-1 w-20" src="/color-icons/ameth.webp" alt="amethyst"/>
                 <span className="text-xs">Amethyst</span>
             </button>
-            {!bezel &&
+            {!bezel && jewelType?.includes('full') &&
                 <>
                     <button ref={glitchRef} type="button" disabled={!pave} value="glitch"
                             onClick={(e) => setStoneColor(e.currentTarget.value)}
