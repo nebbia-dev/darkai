@@ -12,8 +12,24 @@ import PaveBigBar from "@/app/_components/_materials/PaveBigBar";
 import RoundPaveBaseBigBar from "@/app/_components/_materials/RoundPaveBaseBigBar";
 import RoundPaveBaseBar from "@/app/_components/_materials/RoundPaveBaseBar";
 import PaveBar from "@/app/_components/_materials/PaveBar";
+import {useEffect} from "react";
+import {useTeethStore} from "@/app/_stores/teeth";
+import {State} from "@/app/_types/State";
 
 export default function LoadedMaterials() {
+
+    const setLoaded = useTeethStore((state: State) => state.setLoaded);
+
+    useEffect(() => {
+        setLoaded(true);
+        setTimeout(() => {
+            const loader = document.getElementById('loader');
+            if(loader) {
+                loader.style.display = 'none';
+            }
+        }, 1500);
+    }, []);
+
     return(
         <>
             <mesh position={[0, -10, 0]} visible={false}>
