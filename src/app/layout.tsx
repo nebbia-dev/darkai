@@ -20,11 +20,12 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html lang="en" className={`${worksans.variable}`}>
         <body>
         <AppRouterCacheProvider>
-            <div className="cursor-auto w-[100vw] flex justify-center bg-gray-200">
+            <div id="header" className="cursor-auto w-[100vw] flex transition duration-500 justify-center bg-black">
                 <img className="py-6 w-[132px]" src="/logo.png" alt="darkai logo"/>
             </div>
             {children}

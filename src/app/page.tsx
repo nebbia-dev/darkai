@@ -1,7 +1,7 @@
 'use client'
 import Scene from "@/app/_components/_layout/Scene";
 import Selection from "@/app/_components/_layout/Selection";
-import {Suspense, useEffect, useState} from "react";
+import {Suspense, useEffect} from "react";
 import Loading from "@/app/_components/_layout/Loading";
 import ActionBar from "@/app/_components/_elements/_buttons/ActionBar";
 import {useTeethStore} from "@/app/_stores/teeth";
@@ -15,17 +15,21 @@ export default function Config() {
     const loaded = useTeethStore((state) => state.loaded);
     const activeButton = useTeethStore((state) => state.activeButton);
     const changeActiveButton = useTeethStore((state) => state.setActiveButton);
-    const [isMounted, setIsMounted] = useState(false);
     const setActive = useTeethStore((state: State) => state.setActiveTooth);
-
-    useEffect(() => {
-        setTimeout(() => setIsMounted(true), 100);
-    });
 
     function setContinue() {
         setNextStep(!nextStep);
         setActive(undefined);
     }
+
+    useEffect(() => {
+        if(loaded) {
+            const header = document.getElementById('header');
+            if(header) {
+                header.style.backgroundColor = '#e5e7eb';
+            }
+        }
+    },[loaded])
 
     // useEffect(() => {
     //     function handleResize() {
@@ -43,10 +47,9 @@ export default function Config() {
     //     return () => window.removeEventListener("resize", handleResize);
     // }, []);
 
-    if(!isMounted) return <Loading/>
 
     return (
-        <div className='flex flex-row w-[100vw] mx-auto bg-gray-200 relative font-sans'>
+        <div className={`flex flex-row w-[100vw] transition duration-500 mx-auto ${loaded ? 'bg-gray-200' : 'bg-black'} relative font-sans`}>
             {/*<button className="absolute top-4 left-4 text-white bg-black rounded-[50%] h-12 w-12 cursor-pointer font-bold z-30" onClick={setUI}>UI</button>*/}
             <div className={`h-page-nav ${activeButton ? 'w-[10vw]' : 'w-[25vw]'} ${nextStep ? 'hidden' : 'block'} absolute z-15 left-0`}>
                 {loaded && <Selection activeButton={activeButton} changeActiveButton={changeActiveButton}/>}
