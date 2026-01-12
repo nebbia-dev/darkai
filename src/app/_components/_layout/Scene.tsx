@@ -1,7 +1,7 @@
 'use client'
 import {Canvas} from '@react-three/fiber';
 import Configurator from "@/app/_components/_layout/Configurator";
-import React} from "react";
+import React from "react";
 import {useTeethStore} from "@/app/_stores/teeth";
 
 export default function Scene() {
