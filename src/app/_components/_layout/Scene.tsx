@@ -16,7 +16,7 @@ export default function Scene() {
                 className={`${loaded ? 'opacity-0' : 'opacity-100'} transition duration-1500 w-[100vw] h-[100vh] flex justify-center items-center absolute z-30 bg-black`}>
                 <div
                     className={`${loaded ? 'opacity-0' : 'opacity-100'} transition duration-1000 flex flex-col justify-center items-center`}>
-                    <h1 className="font-bold text-gray-50 mx-auto text-4xl mb-8">DARKAI</h1>
+                    <h1 className="font-bold text-gray-50 mx-auto text-4xl mb-4">DARKAI</h1>
                     <p className="text-gray-50 mx-auto text-lg mb-10">
                         the world's first dental jewelry design interface
                     </p>

@@ -24,7 +24,7 @@ export default function Config() {
 
     return (
         <>
-            <div className={`flex flex-col w-[100vw] transition duration-1500 mx-auto ${loaded ? 'bg-gray-200' : 'bg-black'} relative font-sans`}>
+            <div className="flex flex-col w-[100vw] mx-auto bg-gray-200 relative font-sans">
                 <div className="absolute w-full flex justify-center ">
                     <img className="cursor-auto py-6 w-[132px]" src="/logo.png" alt="darkai logo"/>
                 </div>
