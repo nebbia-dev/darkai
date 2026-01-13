@@ -2,9 +2,6 @@ import React from "react";
 import {useTeethStore} from "@/app/_stores/teeth";
 import {State} from "@/app/_types/State";
 import Image from 'next/image';
-import Emerald from "@/../public/signatures-icons/emerald_pave.svg";
-import Ruby from "@/../public/signatures-icons/ruby_white.svg";
-import Pave from "@/../public/signatures-icons/pave.svg";
 
 export default function SignatureSubOptions() {
     const value = useTeethStore((state: State) => state.activeSubButton);
@@ -28,7 +25,7 @@ export default function SignatureSubOptions() {
                     <button type="button" value="pave"
                             onClick={(e) => setSignatureDesign('vamp', e.currentTarget.value)}
                             className="w-[24px] h-[24px] bg-gray-100 border-1 rounded-full cursor-pointer flex items-center justify-center">
-                        <Image priority loading="eager" fetchPriority="high" src={Pave} alt="pave-logo"/>
+                        <Image priority width={150} height={150} loading="eager" fetchPriority="high" src="/signatures-icons/pave.svg" alt="pave-logo"/>
                     </button>
                     <button type="button" value="black"
                             onClick={(e) => setSignatureDesign('vamp', e.currentTarget.value)}
@@ -72,12 +69,12 @@ export default function SignatureSubOptions() {
                     <button type="button" value="white"
                             onClick={(e) => setSignatureDesign('braces', e.currentTarget.value)}
                             className="w-[24px] h-[24px] bg-gray-100 rounded-full cursor-pointer border-1 flex items-center justify-center">
-                        <Image priority loading="eager" fetchPriority="high" src={Ruby} alt="pave-logo"/>
+                        <Image priority width={150} height={150} loading="eager" fetchPriority="high" src="/signatures-icons/ruby_white.svg" alt="pave-logo"/>
                     </button>
                     <button type="button" value="pave"
                             onClick={(e) => setSignatureDesign('braces', e.currentTarget.value)}
                             className="w-[24px] h-[24px] gray rounded-full cursor-pointer border-1 flex items-center justify-center">
-                        <Image priority loading="eager" fetchPriority="high" src={Emerald} alt="pave-logo"/>
+                        <Image priority width={150} height={150} loading="eager" fetchPriority="high" src="/signatures-icons/emerald_pave.svg" alt="pave-logo"/>
                     </button>
                 </div>
             </div>
@@ -94,7 +91,7 @@ export default function SignatureSubOptions() {
                     <button type="button" value="pave"
                             onClick={(e) => setSignatureDesign('tribal', e.currentTarget.value)}
                             className="w-[24px] h-[24px] bg-gray-100 rounded-full cursor-pointer border-1 flex items-center justify-center">
-                        <Image priority loading="eager" fetchPriority="high" src={Pave} alt="pave-logo"/>
+                        <Image priority width={150} height={150} loading="eager" fetchPriority="high" src="/signatures-icons/pave.svg" alt="pave-logo"/>
                     </button>
                 </div>
             </div>
@@ -107,7 +104,7 @@ export default function SignatureSubOptions() {
                     <button type="button" value="pave"
                             onClick={(e) => setSignatureDesign('cross', e.currentTarget.value)}
                             className="w-[24px] h-[24px] bg-gray-100 rounded-full cursor-pointer border-1 flex items-center justify-center">
-                        <Image priority loading="eager" fetchPriority="high" src={Pave} alt="pave-logo"/>
+                        <Image priority width={150} height={150} loading="eager" fetchPriority="high" src="/signatures-icons/pave.svg" alt="pave-logo"/>
                     </button>
                     <button type="button" value="gold"
                             onClick={(e) => setSignatureDesign('cross', e.currentTarget.value)}
