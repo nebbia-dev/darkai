@@ -2,6 +2,12 @@ import React from "react";
 import {useTeethStore} from "@/app/_stores/teeth";
 import {State} from "@/app/_types/State";
 import Image from 'next/image';
+import Baguette from "@/../public/bezel-icons/baguette.webp";
+import Circle from "@/../public/bezel-icons/circle.webp";
+import Drop from "@/../public/bezel-icons/drop.webp";
+import Heart from "@/../public/bezel-icons/heart.webp";
+import Marquise from "@/../public/bezel-icons/marquise.webp";
+import Princess from "@/../public/bezel-icons/princess.webp";
 
 export default function DesignSubOptions({tooth, type}: { tooth: string|undefined, type:string|undefined }) {
     const setStone =  useTeethStore((state: State) => state.setStone);
@@ -35,27 +41,27 @@ export default function DesignSubOptions({tooth, type}: { tooth: string|undefine
                 <div className="w-[36px] flex flex-col gap-2 items-center bg-gray-50 rounded-full py-2 border-1">
                     <button type="button" onClick={(e) => setStoneShape(e.currentTarget.value)} value="circle"
                             className="w-[24px] h-[24px] bg-stone-200 rounded-full cursor-pointer border-1">
-                        <Image unoptimized={true} priority width={150} height={150} loading="eager" fetchPriority="high" src="/bezel-icons/circle.webp" alt="circle-bezel"/>
+                        <Image unoptimized={true} loading="eager" fetchPriority="high" src={Circle} alt="circle-bezel"/>
                     </button>
                     <button type="button" onClick={(e) => setStoneShape(e.currentTarget.value)} value="heart"
                             className="w-[24px] h-[24px] bg-stone-200 rounded-full cursor-pointer border-1">
-                        <Image unoptimized={true} priority width={150} height={150} loading="eager" fetchPriority="high" className="pt-[0.15em] px-[0.1em]" src="/bezel-icons/heart.webp" alt="heart-bezel"/>
+                        <Image unoptimized={true} loading="eager" fetchPriority="high" className="pt-[0.15em] px-[0.1em]" src={Heart} alt="heart-bezel"/>
                     </button>
                     <button type="button" onClick={(e) => setStoneShape(e.currentTarget.value)} value="tear"
                             className="w-[24px] h-[24px] bg-stone-200 rounded-full cursor-pointer border-1">
-                        <Image unoptimized={true} priority width={150} height={150} loading="eager" fetchPriority="high" className="pt-[0.05em]" src="/bezel-icons/drop.webp" alt="tear-bezel"/>
+                        <Image unoptimized={true} loading="eager" fetchPriority="high" className="pt-[0.05em]" src={Drop} alt="tear-bezel"/>
                     </button>
                     <button type="button" onClick={(e) => setStoneShape(e.currentTarget.value)} value="marquise"
                             className="w-[24px] h-[24px] bg-stone-200 rounded-full cursor-pointer border-1">
-                        <Image unoptimized={true} priority width={150} height={150} loading="eager" fetchPriority="high" className="pl-[1px]" src="/bezel-icons/marquise.webp" alt="marquise-bezel"/>
+                        <Image unoptimized={true} loading="eager" fetchPriority="high" className="pl-[1px]" src={Marquise} alt="marquise-bezel"/>
                     </button>
                     <button type="button" onClick={(e) => setStoneShape(e.currentTarget.value)} value="square"
                             className="w-[24px] h-[24px] bg-stone-200 rounded-full cursor-pointer border-1">
-                        <Image unoptimized={true} priority width={150} height={150} loading="eager" fetchPriority="high" src="/bezel-icons/princess.webp" alt="princess-bezel"/>
+                        <Image unoptimized={true} loading="eager" fetchPriority="high" src={Princess} alt="princess-bezel"/>
                     </button>
                     <button type="button" onClick={(e) => setStoneShape(e.currentTarget.value)} value="baguette"
                             className="w-[24px] h-[24px] bg-stone-200 rounded-full cursor-pointer border-1">
-                        <Image unoptimized={true} priority width={150} height={150} loading="eager" fetchPriority="high" className="pt-[0.025em]" src="/bezel-icons/baguette.webp" alt="baguette-bezel"/>
+                        <Image unoptimized={true} loading="eager" fetchPriority="high" className="pt-[0.025em]" src={Baguette} alt="baguette-bezel"/>
                     </button>
                 </div>
             </div>

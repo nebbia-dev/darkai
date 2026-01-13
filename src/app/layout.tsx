@@ -23,11 +23,24 @@ export default function RootLayout({
 
   return (
     <html lang="en" className={`${worksans.variable}`}>
-        <body>
-        <AppRouterCacheProvider>
-            {children}
-        </AppRouterCacheProvider>
-        </body>
+    <head>
+        <link
+            rel="prefetch"
+            crossOrigin="anonymous"
+            href="https://www.gstatic.com/draco/versioned/decoders/1.5.5/draco_wasm_wrapper.js"
+        />
+        <link
+            rel="prefetch"
+            crossOrigin="anonymous"
+            href="https://www.gstatic.com/draco/versioned/decoders/1.5.5/draco_decoder.wasm"
+        />
+
+    </head>
+    <body>
+    <AppRouterCacheProvider>
+        {children}
+    </AppRouterCacheProvider>
+    </body>
     </html>
   );
 }
