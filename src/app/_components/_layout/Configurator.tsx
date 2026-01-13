@@ -5,7 +5,6 @@ import Dentiera from "@/app/_components/_teeth/Dentiera";
 import {useTeethStore} from "@/app/_stores/teeth";
 import IlsDx from "@/app/_components/_teeth/_lateral-incisors/IlsDx";
 import IlsSx from "@/app/_components/_teeth/_lateral-incisors/IlsSx";
-import LoadedMaterials from "@/app/_components/_layout/LoadedMaterials";
 import {useEffect, useMemo, useRef} from "react";
 import FBX from "@/app/_types/FBX";
 import IcsSx from "@/app/_components/_teeth/_central-incisors/IcsSx";
@@ -1702,6 +1701,7 @@ export default function Configurator() {
     const orbitRef = useRef<OrbitControlsImpl>(null);
     const groupRef = useRef<Group>(null);
     const { gl, scene, camera } = useThree();
+    const setLoaded = useTeethStore((state: State) => state.setLoaded);
 
     useEffect(() => {
         if(screenshot && orbitRef.current) {
@@ -1728,6 +1728,15 @@ export default function Configurator() {
     useEffect(() => {
         setTeeth(teeth);
         setEnvMap(envMap);
+        setTimeout(() => {
+            setLoaded(true);
+        }, 1500);
+        setTimeout(() => {
+            const loader = document.getElementById('loader');
+            if(loader) {
+                loader.style.display = 'none';
+            }
+        }, 3000);
     }, []);
 
     useFrame((state, delta) => {
@@ -1830,7 +1839,7 @@ export default function Configurator() {
         <>
             <OrbitControls
                 maxDistance={35}
-                // minDistance={20}
+                minDistance={20}
                 enablePan={false}
                 minPolarAngle={nextStep ? Math.PI / 2.1 : Math.PI / 3 }
                 maxPolarAngle={nextStep ? Math.PI - Math.PI / 2.1 : Math.PI - Math.PI / 3}
@@ -1838,8 +1847,6 @@ export default function Configurator() {
                 maxAzimuthAngle={nextStep ? Math.PI / 7 : Math.PI / 2}
                 ref={orbitRef}
             />
-
-            {savedEnvMap && <LoadedMaterials/>}
             {savedTeeth && savedEnvMap &&
                 <group ref={groupRef} position={[0, 0, 3]}>
 

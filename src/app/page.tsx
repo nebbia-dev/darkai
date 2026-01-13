@@ -1,8 +1,7 @@
 'use client'
 import Scene from "@/app/_components/_layout/Scene";
 import Selection from "@/app/_components/_layout/Selection";
-import {Suspense, useEffect} from "react";
-import Loading from "@/app/_components/_layout/Loading";
+import React from "react";
 import ActionBar from "@/app/_components/_elements/_buttons/ActionBar";
 import {useTeethStore} from "@/app/_stores/teeth";
 import Recap from "@/app/_components/_layout/Recap";
@@ -22,48 +21,28 @@ export default function Config() {
         setActive(undefined);
     }
 
-    useEffect(() => {
-        if(loaded) {
-            const header = document.getElementById('header');
-            if(header) {
-                header.style.backgroundColor = '#e5e7eb';
-            }
-        }
-    },[loaded])
-
-    // useEffect(() => {
-    //     function handleResize() {
-    //         const width = window.innerWidth;
-    //         const height = window.innerHeight;
-    //
-    //         if(height > width) {
-    //             setUI(true);
-    //         } else {
-    //             setUI(false);
-    //         }
-    //     }
-    //     window.addEventListener("resize", handleResize);
-    //     handleResize();
-    //     return () => window.removeEventListener("resize", handleResize);
-    // }, []);
-
 
     return (
-        <div className={`flex flex-row w-[100vw] transition duration-500 mx-auto ${loaded ? 'bg-gray-200' : 'bg-black'} relative font-sans`}>
-            {/*<button className="absolute top-4 left-4 text-white bg-black rounded-[50%] h-12 w-12 cursor-pointer font-bold z-30" onClick={setUI}>UI</button>*/}
-            <div className={`h-page-nav ${activeButton ? 'w-[10vw]' : 'w-[25vw]'} ${nextStep ? 'hidden' : 'block'} absolute z-15 left-0`}>
-                {loaded && <Selection activeButton={activeButton} changeActiveButton={changeActiveButton}/>}
+        <>
+            <div className={`flex flex-col w-[100vw] transition duration-1500 mx-auto ${loaded ? 'bg-gray-200' : 'bg-black'} relative font-sans`}>
+                <div className="absolute w-full flex justify-center ">
+                    <img className="cursor-auto py-6 w-[132px]" src="/logo.png" alt="darkai logo"/>
+                </div>
+                <div className="flex flex-row w-full">
+                    <div
+                        className={`h-page-nav ${activeButton ? 'w-[10vw]' : 'w-[25vw]'} ${nextStep ? 'hidden' : 'block'} absolute z-15 left-0 top-[72px]`}>
+                        {loaded && <Selection activeButton={activeButton} changeActiveButton={changeActiveButton}/>}
+                    </div>
+
+                    <div className={`h-[100vh] w-full mx-auto`}>
+                        <Scene/>
+                        {loaded && !nextStep && <ActionBar/>}
+                    </div>
+                    <div className={`h-page-nav ${nextStep ? 'w-[40vw]' : 'w-[30vw]'} absolute z-15 top-[72px] right-0`}>
+                        {loaded && <Recap next={nextStep} onclick={setContinue}/>}
+                    </div>
+                </div>
             </div>
-            <div className={`h-page-nav w-full mx-auto`}>
-            {/*${nextStep ? 'w-[60%]' : 'w-full mx-auto'}`}>*/}
-                <Suspense fallback={<Loading/>}>
-                    <Scene/>
-                </Suspense>
-                {loaded && !nextStep && <ActionBar/>}
-            </div>
-            <div className={`h-page-nav ${nextStep ? 'w-[40vw]' : 'w-[30vw]'} absolute z-15 right-0`}>
-                {loaded && <Recap next={nextStep} onclick={setContinue} />}
-            </div>
-        </div>
+        </>
     );
 }
