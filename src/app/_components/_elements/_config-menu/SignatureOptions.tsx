@@ -1,7 +1,14 @@
 import {useTeethStore} from "@/app/_stores/teeth";
 import {State} from "@/app/_types/State";
 import {Ref} from "react";
-import Image from 'next/image'
+import Image from 'next/image';
+import Braces from "@/../public/signatures-icons/braces.webp";
+import Bubblegum from "@/../public/signatures-icons/bubblegum.webp";
+import Cross from "@/../public/signatures-icons/cross.webp";
+import Hammered from "@/../public/signatures-icons/hammered.webp";
+import Sprinkles from "@/../public/signatures-icons/sprinkles.webp";
+import Tribal from "@/../public/signatures-icons/tribal.webp";
+import Vamp from "@/../public/signatures-icons/vamp.webp";
 
 export default function SignatureOptions({crossRef, vampRef, bubblegumRef, sprinklesRef, bracesRef, hammeredRef, tribalRef} : {
     crossRef:Ref<HTMLButtonElement|null>,
@@ -27,49 +34,49 @@ export default function SignatureOptions({crossRef, vampRef, bubblegumRef, sprin
             <button ref={vampRef} type="button" value="vamp"
                     className={`${signature.vamp ? 'border-2 border-sky-400 rounded-25xl' : ''} cursor-pointer flex items-center justify-center w-[95%] h-[120px] mx-auto mb-4`}
                     onClick={(e) => setSignatureDesign(e.currentTarget.value)}>
-                <Image unoptimized={true} priority width={150} height={150} loading="eager" fetchPriority="high" className="h-full"
-                     src="/signatures-icons/vamp.webp" alt="vamp-logo"/>
+                <Image placeholder="blur" unoptimized={true} priority width={150} height={150} loading="eager" fetchPriority="high" className="h-full"
+                     src={Vamp} alt="vamp-logo"/>
             </button>
             <button ref={sprinklesRef} type="button" value="sprinkles"
                     className={`${signature.sprinkles ? 'border-2 border-sky-400 rounded-25xl' : ''} cursor-pointer flex items-center justify-center w-[95%] h-[120px] mx-auto mb-4`}
                     onClick={(e) => setSignatureDesign(e.currentTarget.value)}>
-                <Image unoptimized={true} priority width={150} height={150} loading="eager" fetchPriority="high" className="h-full"
-                     src="/signatures-icons/sprinkles.webp"
+                <Image placeholder="blur" unoptimized={true} priority width={150} height={150} loading="eager" fetchPriority="high" className="h-full"
+                     src={Sprinkles}
                      alt="sprinkles-logo"/>
             </button>
             <button ref={bubblegumRef} type="button" value="bubblegum"
                     className={`${signature.bubblegum ? 'border-2 border-sky-400 rounded-25xl' : ''} cursor-pointer flex items-center justify-center w-[95%] h-[120px] mx-auto mb-4`}
                     onClick={(e) => setSignatureDesign(e.currentTarget.value)}>
-                <Image unoptimized={true} priority width={150} height={150} loading="eager" fetchPriority="high" className="h-full"
-                     src="/signatures-icons/bubblegum.webp"
+                <Image placeholder="blur" unoptimized={true} priority width={150} height={150} loading="eager" fetchPriority="high" className="h-full"
+                     src={Bubblegum}
                      alt="bubblegum-logo"/>
             </button>
             <button ref={bracesRef} type="button" value="braces"
                     className={`${signature.braces ? 'border-2 border-sky-400 rounded-25xl' : ''} cursor-pointer flex items-center justify-center w-[95%] h-[120px] mx-auto mb-4`}
                     onClick={(e) => setSignatureDesign(e.currentTarget.value)}>
-                <Image unoptimized={true} priority width={150} height={150} loading="eager" fetchPriority="high" className="h-full"
-                     src="/signatures-icons/braces.webp"
+                <Image placeholder="blur" unoptimized={true} priority width={150} height={150} loading="eager" fetchPriority="high" className="h-full"
+                     src={Braces}
                      alt="braces-logo"/>
             </button>
             <button ref={tribalRef} type="button" value="tribal"
                     className={`${signature.tribal ? 'border-2 border-sky-400 rounded-25xl' : ''} cursor-pointer flex items-center justify-center w-[95%] h-[120px] mx-auto mb-4`}
                     onClick={(e) => setSignatureDesign(e.currentTarget.value)}>
-                <Image unoptimized={true} priority width={150} height={150} loading="eager" fetchPriority="high" className="h-full"
-                     src="/signatures-icons/tribal.webp"
+                <Image placeholder="blur" unoptimized={true} priority width={150} height={150} loading="eager" fetchPriority="high" className="h-full"
+                     src={Tribal}
                      alt="tribals-logo"/>
             </button>
             <button ref={crossRef} type="button" value="cross"
                     className={`${signature.cross ? 'border-2 border-sky-400 rounded-25xl' : ''} cursor-pointer flex items-center justify-center w-[95%] h-[120px] mx-auto mb-4`}
                     onClick={(e) => setSignatureDesign(e.currentTarget.value)}>
-                <Image unoptimized={true} priority width={150} height={150} loading="eager" fetchPriority="high" className="h-full"
-                     src="/signatures-icons/cross.webp"
+                <Image placeholder="blur" unoptimized={true} priority width={150} height={150} loading="eager" fetchPriority="high" className="h-full"
+                     src={Cross}
                      alt="cross-logo"/>
             </button>
             <button ref={hammeredRef} type="button" value="hammered"
                     className={`${signature.hammered ? 'border-2 border-sky-400 rounded-25xl' : ''} cursor-pointer flex items-center justify-center w-[95%] h-[120px] mx-auto`}
                     onClick={(e) => setSignatureDesign(e.currentTarget.value)}>
-                <Image unoptimized={true} priority width={150} height={150} loading="eager" fetchPriority="high" className="h-full"
-                     src="/signatures-icons/hammered.webp"
+                <Image placeholder="blur" unoptimized={true} priority width={150} height={150} loading="eager" fetchPriority="high" className="h-full"
+                     src={Hammered}
                      alt="hammered-logo"/>
             </button>
         </>
