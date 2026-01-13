@@ -25,7 +25,7 @@ export default function SignatureSubOptions() {
                     <button type="button" value="pave"
                             onClick={(e) => setSignatureDesign('vamp', e.currentTarget.value)}
                             className="w-[24px] h-[24px] bg-gray-100 border-1 rounded-full cursor-pointer flex items-center justify-center">
-                        <Image priority width={150} height={150} loading="eager" fetchPriority="high" src="/signatures-icons/pave.svg" alt="pave-logo"/>
+                        <Image unoptimized={true} priority width={150} height={150} loading="eager" fetchPriority="high" src="/signatures-icons/pave.svg" alt="pave-logo"/>
                     </button>
                     <button type="button" value="black"
                             onClick={(e) => setSignatureDesign('vamp', e.currentTarget.value)}
@@ -69,12 +69,12 @@ export default function SignatureSubOptions() {
                     <button type="button" value="white"
                             onClick={(e) => setSignatureDesign('braces', e.currentTarget.value)}
                             className="w-[24px] h-[24px] bg-gray-100 rounded-full cursor-pointer border-1 flex items-center justify-center">
-                        <Image priority width={150} height={150} loading="eager" fetchPriority="high" src="/signatures-icons/ruby_white.svg" alt="pave-logo"/>
+                        <Image unoptimized={true} priority width={150} height={150} loading="eager" fetchPriority="high" src="/signatures-icons/ruby_white.svg" alt="pave-logo"/>
                     </button>
                     <button type="button" value="pave"
                             onClick={(e) => setSignatureDesign('braces', e.currentTarget.value)}
                             className="w-[24px] h-[24px] gray rounded-full cursor-pointer border-1 flex items-center justify-center">
-                        <Image priority width={150} height={150} loading="eager" fetchPriority="high" src="/signatures-icons/emerald_pave.svg" alt="pave-logo"/>
+                        <Image unoptimized={true} priority width={150} height={150} loading="eager" fetchPriority="high" src="/signatures-icons/emerald_pave.svg" alt="pave-logo"/>
                     </button>
                 </div>
             </div>
@@ -91,7 +91,7 @@ export default function SignatureSubOptions() {
                     <button type="button" value="pave"
                             onClick={(e) => setSignatureDesign('tribal', e.currentTarget.value)}
                             className="w-[24px] h-[24px] bg-gray-100 rounded-full cursor-pointer border-1 flex items-center justify-center">
-                        <Image priority width={150} height={150} loading="eager" fetchPriority="high" src="/signatures-icons/pave.svg" alt="pave-logo"/>
+                        <Image unoptimized={true} priority width={150} height={150} loading="eager" fetchPriority="high" src="/signatures-icons/pave.svg" alt="pave-logo"/>
                     </button>
                 </div>
             </div>
@@ -104,7 +104,7 @@ export default function SignatureSubOptions() {
                     <button type="button" value="pave"
                             onClick={(e) => setSignatureDesign('cross', e.currentTarget.value)}
                             className="w-[24px] h-[24px] bg-gray-100 rounded-full cursor-pointer border-1 flex items-center justify-center">
-                        <Image priority width={150} height={150} loading="eager" fetchPriority="high" src="/signatures-icons/pave.svg" alt="pave-logo"/>
+                        <Image unoptimized={true} priority width={150} height={150} loading="eager" fetchPriority="high" src="/signatures-icons/pave.svg" alt="pave-logo"/>
                     </button>
                     <button type="button" value="gold"
                             onClick={(e) => setSignatureDesign('cross', e.currentTarget.value)}

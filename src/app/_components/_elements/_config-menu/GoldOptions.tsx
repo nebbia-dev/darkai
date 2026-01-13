@@ -17,22 +17,22 @@ export default function GoldOptions({tooth, signature}:{tooth:string|undefined, 
         <>
             <button disabled={signature} type="button" value="gold" onClick={(e) => setGold(e.currentTarget.value)}
                     className={`${signature ? 'text-slate-400' : 'text-slate-950 cursor-pointer'} ${material && material === 'gold' ? 'border-2' : ''} w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 px-2 pt-2 pb-3 flex flex-col items-center justify-center`}>
-                <Image priority width={150} height={150} loading="eager" fetchPriority="high" className="pt-2 pb-1 w-24" src="/gold-icons/gold.webp" alt="yellow-gold-bar"/>
+                <Image unoptimized={true} priority width={150} height={150} loading="eager" fetchPriority="high" className="pt-2 pb-1 w-24" src="/gold-icons/gold.webp" alt="yellow-gold-bar"/>
                 <span className="text-sm">Gold</span>
             </button>
             <button disabled={signature} type="button" value="rose" onClick={(e) => setGold(e.currentTarget.value)}
                     className={`${signature ? 'text-slate-400' : 'text-slate-950 cursor-pointer'} ${material && material === 'rose' ? 'border-2' : ''} w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 px-2 pt-2 pb-3 flex flex-col items-center justify-center`}>
-                <Image priority width={150} height={150} loading="eager" fetchPriority="high" className="pt-2 pb-1 w-24" src="/gold-icons/rose.webp" alt="rose-gold-bar"/>
+                <Image unoptimized={true} priority width={150} height={150} loading="eager" fetchPriority="high" className="pt-2 pb-1 w-24" src="/gold-icons/rose.webp" alt="rose-gold-bar"/>
                 <span className="text-sm">Rose</span>
             </button>
             <button disabled={signature} type="button" value="white" onClick={(e) => setGold(e.currentTarget.value)}
                     className={`${signature ? 'text-slate-400' : 'text-slate-950 cursor-pointer'} ${material && material === 'white' ? 'border-2' : ''} w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 px-2 pt-2 pb-3 flex flex-col items-center justify-center`}>
-                <Image priority width={150} height={150} loading="eager" fetchPriority="high" className="pt-2 pb-1 w-24" src="/gold-icons/white.webp" alt="white-gold-bar"/>
+                <Image unoptimized={true} priority width={150} height={150} loading="eager" fetchPriority="high" className="pt-2 pb-1 w-24" src="/gold-icons/white.webp" alt="white-gold-bar"/>
                 <span className="text-sm">White</span>
             </button>
             <button disabled={signature} type="button" value="black" onClick={(e) => setGold(e.currentTarget.value)}
                     className={`${signature ? 'text-slate-400' : 'text-slate-950 cursor-pointer'} ${material && material === 'black' ? 'border-2' : ''} w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 px-2 pt-2 pb-3 flex flex-col items-center justify-center`}>
-                <Image priority width={150} height={150} loading="eager" fetchPriority="high" className="pt-2 pb-1 w-24" src="/gold-icons/black.webp" alt="black-gold-bar"/>
+                <Image unoptimized={true} priority width={150} height={150} loading="eager" fetchPriority="high" className="pt-2 pb-1 w-24" src="/gold-icons/black.webp" alt="black-gold-bar"/>
                 <span className="text-sm">Black</span>
             </button>
         </>
