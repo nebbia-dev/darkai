@@ -84,6 +84,7 @@ export default function CiDx() {
 
         resetUvs(toothGeometry.bar.full, false, 'barDC_lat');
         resetUvs(toothGeometry.frame.full, false, 'barDC_lat');
+        resetUvs(toothGeometry.bigBar.full, false, 'barDC_lat');
 
         if(geometry.length === 2) {
             return (
@@ -100,7 +101,7 @@ export default function CiDx() {
                           </mesh>
                     }
                     {
-                        ((type.includes('bigBar') && (toothPave.shape === "round" || toothPave.shape === "baguette"))
+                        ((type.includes('bigBar') && toothPave.shape === "round")
                             || ((type.includes('bar') || type.includes('frame')) && toothPave.shape === "round")
                             || ((type.includes('full') || type.includes('bezel')) && (toothPave.shape === "round" || toothPave.shape === "mosaic"))
                         ) &&

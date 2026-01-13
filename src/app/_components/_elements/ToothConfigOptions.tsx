@@ -317,7 +317,7 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
             <div
                 className={`${
                     (gemBox && (jewelType?.includes('Diamond') || jewelType?.includes('bezel'))) 
-                        ? 'flex justify-center gap-3' : 'hidden'} absolute top-[-32.5vh] left-[37.75vw] rounded-3xl bg-gray-50 border-1 pb-4 pt-2 pl-8 pr-2 text-sm w-[224px] mb-4`}>
+                        ? 'flex justify-center gap-3' : 'hidden' } absolute top-[-32.5vh] left-[37.75vw] rounded-3xl bg-gray-50 border-1 pb-4 pt-2 pl-8 pr-2 text-sm w-[224px] mb-4`}>
                 <p className="text-center pt-3">You're choosing the <strong>{jewelType?.includes('bezel') ? 'bezel' : 'pave'}</strong> stone color</p>
                 <div className="">
                     <Close className="cursor-pointer w-5 h-5" onClick={() => showGemBox(false)}/>
@@ -327,25 +327,24 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
 
             <ConfiguratorButton inverse={false} value="2" active={active} onclick={onclick} tooth={tooth}
                                 label="Grillz Type">
-                <img src="/config-menu-svgs/design.svg" alt="design-option-logo"/>
+                <img src="/config-menu-svgs/grillz.webp" className="pl-[0.5px]" alt="design-option-logo"/>
             </ConfiguratorButton>
             <ConfiguratorButton inverse={false} value="3" active={active} onclick={onclick} tooth={tooth}
                                 label="Gold Color">
-                <img src="/config-menu-svgs/gold.svg" alt="gold-option-logo"/>
+                <img className="px-[0.75px]" src="/config-menu-svgs/gold.webp" alt="gold-option-logo"/>
             </ConfiguratorButton>
             <ConfiguratorButton inverse={false} value="4" active={active} onclick={onclick} tooth={tooth}
                                 label="Finish">
-                <img src="/config-menu-svgs/colors.webp" className="mt-0.5 mr-1" alt="colors-option-logo"/>
+                <img src="/config-menu-svgs/finishing.webp" className="pt-0.5" alt="colors-option-logo"/>
             </ConfiguratorButton>
             <ConfiguratorButton inverse={false} value="5" active={active} onclick={onclick} tooth={tooth}
                                 label="Stone Color">
-                <img src="/config-menu-svgs/finish.svg" alt="color-option-logo"/>
+                <img src="/config-menu-svgs/colors.webp" alt="color-option-logo"/>
             </ConfiguratorButton>
 
-            <div className={`absolute ${!active ? 'hidden' : 'block'} ${active === '1'
-                ? 'top-[-30vh]'
-                : (active === '2' && !checkMolar(tooth))
-                    ? 'top-[-20vh]'
+            <div className={`absolute ${!active ? 'hidden' : 'block'} ${
+                (active === '2' && !checkMolar(tooth))
+                    ? 'top-[-25vh]'
                     : (active === '2' && checkMolar(tooth))
                         ? 'top-[-10vh]'
                         : active === '4' && (jewelType?.includes('enamel') || material === 'base')
@@ -354,7 +353,7 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
                                     ? 'top-[11vh]'
                                     : active === '6'
                                         ? 'top-[13.5vh]'
-                                        : 'top-[-20vh]'
+                                        : 'top-[-25vh]'
             } left-[48px]`}>
 
                 <div
@@ -365,7 +364,7 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
                             ? 'h-[186px]' 
                             : 'h-[596px]'} 
                         w-[200px] bg-gray-50 rounded-3xl p-8 pr-4 border-1 max-h-[70vh]`}>
-                    <div onScroll={sync} ref={elementRef} className="overflow-y-scroll h-full pl-[2px] pr-4">
+                    <div onScroll={sync} ref={elementRef} className="overflow-y-auto h-full pl-[2px] pr-4">
                         {renderOptions(active, tooth)}
                     </div>
                 </div>
@@ -375,10 +374,10 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
             <div
                 className={`${!active ? 'hidden' : 'block'} pups text-center max-h-[70vh] h-[596px] w-[64px] absolute left-[240px] 
                             ${active === '1'
-                    ? 'top-[-30vh]'
+                    ? 'top-[-25vh]'
                             : active === '6'
                                 ? 'top-[-10vh]'
-                                : 'top-[-20vh]'
+                                : 'top-[-25vh]'
                 } py-8`}>
                 <div ref={selectorRef} className="whitespace-nowrap overflow-hidden h-full w-full">
                     {renderSubOptions(active, tooth)}

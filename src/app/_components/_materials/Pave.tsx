@@ -21,9 +21,9 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
     });
     round.map.colorSpace = THREE.SRGBColorSpace;
     round.map.wrapS = round.map.wrapT = THREE.RepeatWrapping;
-    round.map.repeat.set(15, 15);
+    round.map.repeat.set(22, 22);
     round.normalMap.wrapS = round.normalMap.wrapT = THREE.RepeatWrapping;
-    round.normalMap.repeat.set(15, 15);
+    round.normalMap.repeat.set(22, 22);
 
     pairs.set('round', round.map);
     pairs.set('roundNormal', round.normalMap);
@@ -50,9 +50,9 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
     });
     princess.map.colorSpace = THREE.SRGBColorSpace;
     princess.map.wrapS = princess.map.wrapT = THREE.RepeatWrapping;
-    princess.map.repeat.set(9, 9);
+    princess.map.repeat.set(8, 8);
     princess.normalMap.wrapS = princess.normalMap.wrapT = THREE.RepeatWrapping;
-    princess.normalMap.repeat.set(9, 9);
+    princess.normalMap.repeat.set(8, 8);
 
     pairs.set('princess', princess.map);
     pairs.set('princessNormal', princess.normalMap);
@@ -78,9 +78,9 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
     });
     hexagon.map.colorSpace = THREE.SRGBColorSpace;
     hexagon.map.wrapS = hexagon.map.wrapT = THREE.RepeatWrapping;
-    hexagon.map.repeat.set(6, 6);
+    hexagon.map.repeat.set(5.5, 5.5);
     hexagon.normalMap.wrapS = hexagon.normalMap.wrapT = THREE.RepeatWrapping;
-    hexagon.normalMap.repeat.set(6, 6);
+    hexagon.normalMap.repeat.set(5.5, 5.5);
 
     pairs.set('hexagon', hexagon.map);
     pairs.set('hexagonNormal', hexagon.normalMap);
@@ -91,7 +91,7 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
     });
     hexagonCamo.map.colorSpace = THREE.SRGBColorSpace;
     hexagonCamo.map.wrapS = hexagonCamo.map.wrapT = THREE.RepeatWrapping;
-    hexagonCamo.map.repeat.set(6, 6);
+    hexagonCamo.map.repeat.set(5.5, 5.5);
 
     pairs.set('hexagonCamo', hexagonCamo.map);
 
@@ -101,7 +101,7 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
     });
     hexagonGlitch.map.colorSpace = THREE.SRGBColorSpace;
     hexagonGlitch.map.wrapS = hexagonGlitch.map.wrapT = THREE.RepeatWrapping;
-    hexagonGlitch.map.repeat.set(6, 6);
+    hexagonGlitch.map.repeat.set(5.5, 5.5);
 
     pairs.set('hexagonGlitch', hexagonGlitch.map);
 
@@ -111,7 +111,7 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
     });
     princessCamo.map.colorSpace = THREE.SRGBColorSpace;
     princessCamo.map.wrapS = princessCamo.map.wrapT = THREE.RepeatWrapping;
-    princessCamo.map.repeat.set(6, 6);
+    princessCamo.map.repeat.set(8, 8);
 
     pairs.set('princessCamo', princessCamo.map);
 
@@ -121,7 +121,7 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
     });
     princessGlitch.map.colorSpace = THREE.SRGBColorSpace;
     princessGlitch.map.wrapS = princessGlitch.map.wrapT = THREE.RepeatWrapping;
-    princessGlitch.map.repeat.set(6, 6);
+    princessGlitch.map.repeat.set(8, 8);
 
     pairs.set('princessGlitch', princessGlitch.map);
 
@@ -172,9 +172,9 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
     });
     roundCamo.map.colorSpace = THREE.SRGBColorSpace;
     roundCamo.map.wrapS = roundCamo.map.wrapT = THREE.RepeatWrapping;
-    roundCamo.map.repeat.set(7.5, 7.5);
+    roundCamo.map.repeat.set(11.5, 11.5);
     roundCamo.normalMap.wrapS = roundCamo.normalMap.wrapT = THREE.RepeatWrapping;
-    roundCamo.normalMap.repeat.set(7.5, 7.5);
+    roundCamo.normalMap.repeat.set(11.5, 11.5);
 
     pairs.set('roundCamo', roundCamo.map);
     pairs.set('roundCamoNormal', roundCamo.normalMap);
@@ -186,9 +186,9 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
     });
     roundGlitch.map.colorSpace = THREE.SRGBColorSpace;
     roundGlitch.map.wrapS = roundGlitch.map.wrapT = THREE.RepeatWrapping;
-    roundGlitch.map.repeat.set(7.5, 7.5);
+    roundGlitch.map.repeat.set(11.5, 11.5);
     roundGlitch.normalMap.wrapS = roundGlitch.normalMap.wrapT = THREE.RepeatWrapping;
-    roundGlitch.normalMap.repeat.set(7.5, 7.5);
+    roundGlitch.normalMap.repeat.set(11.5, 11.5);
 
     pairs.set('roundGlitch', roundGlitch.map);
     pairs.set('roundGlitchNormal', roundGlitch.normalMap);
@@ -242,7 +242,7 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
             paveType = pave;
             break;
         case 'brD':
-            hex = 0x4c3e34;
+            hex = 0x6e4315;
             paveType = pave;
             break;
         case 'blD':

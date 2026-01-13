@@ -66,7 +66,7 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
 
     return(
         <>
-            <div className="rounded-3xl mr-[5vw] h-[82.5vh] text-sm">
+            <div className="cursor-auto rounded-3xl mr-[5vw] h-[82.5vh] text-sm">
                 {!next
                     ? <div className="flex flex-col items-center justify-end h-full">
                         {/* MyConfig Top */}

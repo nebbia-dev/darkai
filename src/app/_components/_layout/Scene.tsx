@@ -1,22 +1,35 @@
 'use client'
 import {Canvas} from '@react-three/fiber';
 import Configurator from "@/app/_components/_layout/Configurator";
-import {useEffect} from "react";
+import React, {Suspense} from "react";
 import {useTeethStore} from "@/app/_stores/teeth";
-import {State} from "@/app/_types/State";
+import LoadedMaterials from "@/app/_components/_layout/LoadedMaterials";
+import Loading from "@/app/_components/_layout/Loading";
 
 export default function Scene() {
-
-    const setLoaded = useTeethStore((state: State) => state.setLoaded);
-
-    useEffect(() => {
-        setTimeout(() => setLoaded(true), 1000);
-    }, []);
+    const loaded = useTeethStore((state) => state.loaded);
 
     return (
         <>
+            <div
+                id="loader"
+                className={`${loaded ? 'opacity-0' : 'opacity-100'} transition duration-1500 w-[100vw] h-[100vh] flex justify-center items-center absolute z-30 bg-black`}>
+                <div
+                    className={`${loaded ? 'opacity-0' : 'opacity-100'} transition duration-1000 flex flex-col justify-center items-center`}>
+                    <h1 className="font-bold text-gray-50 mx-auto text-4xl mb-4">DARKAI</h1>
+                    <p className="text-gray-50 mx-auto text-lg mb-10">
+                        the world's first dental jewelry design interface
+                    </p>
+                    <span className="loader mb-8 inline-block mx-auto"></span>
+                </div>
+            </div>
             <Canvas camera={{fov: 20, near: 0.1, far: 200, position: [0, 3, 27]}} dpr={[1, 2]} frameloop="demand">
-                <Configurator/>
+                <Suspense fallback={<Loading/>}>
+                    <Configurator/>
+                </Suspense>
+                <Suspense fallback={null}>
+                    <LoadedMaterials/>
+                </Suspense>
             </Canvas>
         </>
     );

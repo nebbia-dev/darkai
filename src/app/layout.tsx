@@ -20,16 +20,27 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html lang="en" className={`${worksans.variable}`}>
-        <body>
-        <AppRouterCacheProvider>
-            <div className="w-[100vw] flex justify-center bg-gray-200">
-                <img className="py-6 w-[132px]" src="/logo.png" alt="darkai logo"/>
-            </div>
-            {children}
-        </AppRouterCacheProvider>
-        </body>
+    <head>
+        <link
+            rel="prefetch"
+            crossOrigin="anonymous"
+            href="https://www.gstatic.com/draco/versioned/decoders/1.5.5/draco_wasm_wrapper.js"
+        />
+        <link
+            rel="prefetch"
+            crossOrigin="anonymous"
+            href="https://www.gstatic.com/draco/versioned/decoders/1.5.5/draco_decoder.wasm"
+        />
+
+    </head>
+    <body>
+    <AppRouterCacheProvider>
+        {children}
+    </AppRouterCacheProvider>
+    </body>
     </html>
   );
 }

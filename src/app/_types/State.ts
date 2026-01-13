@@ -111,6 +111,6 @@ export interface State {
     reset: () => void,
     calcTotal: (state:State) => void,
     setHistory: (state:State) => void,
-    resetList: (state:State, tooth:string) => void
-    checkDiamonds: (state: State) => boolean;
+    resetList: (state:State, tooth:string) => void,
+    checkDiamonds: (state: State) => boolean,
 }

@@ -14,6 +14,7 @@ import RoundPaveBaseBar from "@/app/_components/_materials/RoundPaveBaseBar";
 import PaveBar from "@/app/_components/_materials/PaveBar";
 
 export default function LoadedMaterials() {
+
     return(
         <>
             <mesh position={[0, -10, 0]} visible={false}>

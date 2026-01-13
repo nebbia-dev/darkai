@@ -417,8 +417,14 @@ export const useTeethStore = create<State>((set, get) => ({
                             state.teethMaterial[tooth] = 'gold';
                         }
 
-                        // if you switch to a spacer, the pave type can be only round
-                        state.teethPaves[tooth].shape = 'round';
+                        // if you switch to a spacer, the pave type can be only round/baguette and not camo/glitch
+                        if(state.teethPaves[tooth].shape !== 'round' && state.teethPaves[tooth].shape !== 'baguette') {
+                            state.teethPaves[tooth].shape = 'round';
+                        }
+                        if(state.teethPaves[tooth].color === 'camo' || state.teethPaves[tooth].color === 'glitch') {
+                            state.teethPaves[tooth].color = 'whD';
+                            state.teethPreciousness.diamonds = 'lab';
+                        }
 
                         switch (tooth) {
                             case 'icsdx':
@@ -442,7 +448,13 @@ export const useTeethStore = create<State>((set, get) => ({
                     } else {
                         state.teethJewelType[tooth] = type + 'Diamond';
                         if(type === 'frame' || type === 'bar') {
-                            state.teethPaves[tooth].shape = 'round';
+                            if(state.teethPaves[tooth].shape !== 'round' && state.teethPaves[tooth].shape !== 'baguette') {
+                                state.teethPaves[tooth].shape = 'round';
+                            }
+                            if(state.teethPaves[tooth].color === 'camo' || state.teethPaves[tooth].color === 'glitch') {
+                                state.teethPaves[tooth].color = 'whD';
+                                state.teethPreciousness.diamonds = 'lab';
+                            }
                         }
                         if(type === 'bezel') {
                             state.teethStones[tooth] = {shape: 'circle', color: 'whD'};
@@ -472,7 +484,13 @@ export const useTeethStore = create<State>((set, get) => ({
                     state.teethMaterial.cisx = state.teethMaterial[tooth];
                     state.teethJewelType.cidx = type + 'Diamond';
                     state.teethJewelType.cisx = type + 'Diamond';
-                    state.teethPaves[tooth].shape = 'round';
+                    if(state.teethPaves[tooth].shape !== 'round' && state.teethPaves[tooth].shape !== 'baguette') {
+                        state.teethPaves[tooth].shape = 'round';
+                    }
+                    if(state.teethPaves[tooth].color === 'camo' || state.teethPaves[tooth].color === 'glitch') {
+                        state.teethPaves[tooth].color = 'whD';
+                        state.teethPreciousness.diamonds = 'lab';
+                    }
                     state.teethPaves.cidx = state.teethPaves[tooth];
                     state.teethPaves.cisx = state.teethPaves[tooth];
                     state.teethStones.cisx = {shape: undefined, color: undefined};
@@ -768,6 +786,7 @@ export const useTeethStore = create<State>((set, get) => ({
 
                         if(type === 'enamel') {
                             state.teethEnamel[tooth] = 'blue';
+                            state.teethFinish[tooth] = 'polished'
                         } else {
                             state.teethEnamel[tooth] = undefined;
                         }
@@ -1170,7 +1189,7 @@ export const useTeethStore = create<State>((set, get) => ({
                             break;
                     }
 
-                    if(!state.teethPreciousness.diamonds) {
+                    if(!state.teethPreciousness.diamonds && state.teethPaves[tooth].color.includes('D')) {
                         state.teethPreciousness.diamonds = 'lab';
                     }
 
@@ -1233,9 +1252,7 @@ export const useTeethStore = create<State>((set, get) => ({
                     if (state.hovered) {
                         state.hovered = undefined;
                     }
-                    if(button === '5') {
-                        state.showGemTypeBox = true;
-                    }
+                    state.showGemTypeBox = button === '5';
                 }
 
             })
@@ -1260,10 +1277,6 @@ export const useTeethStore = create<State>((set, get) => ({
     setActiveTooth: (tooth) =>
         set(
             produce((state) => {
-                // if a tooth is selected when the default tab is active, the active tab becomes the custom one
-                if(state.activeTab === 0) {
-                    state.activeTab = 1;
-                }
 
                 // active tooth toggler
                 if(state.currentTooth === tooth) {
@@ -1272,10 +1285,25 @@ export const useTeethStore = create<State>((set, get) => ({
                     state.currentTooth = undefined;
                     state.lastActivatedTooth = undefined;
                 } else {
-                    state.activeButton = '2';
-                    state.activeSubButton = undefined;
-                    state.currentTooth = tooth;
-                    state.lastActivatedTooth = tooth;
+                    if(tooth) {
+                        switch(state.teethJewelType[tooth]) {
+                            case 'sprinkles':
+                            case 'bubblegum':
+                            case 'hammered':
+                            case 'braces':
+                            case 'cross':
+                            case 'vamp':
+                            case 'tribal':
+                                state.activeButton = '1';
+                                break;
+                            default:
+                                state.activeButton = '2';
+                        }
+
+                        state.activeSubButton = undefined;
+                        state.currentTooth = tooth;
+                        state.lastActivatedTooth = tooth;
+                    }
                 }
 
             })
@@ -1360,7 +1388,7 @@ export const useTeethStore = create<State>((set, get) => ({
                 } else if(material !== 'pave' && !get().checkDiamonds(state)) {
                     state.teethPreciousness.diamonds = undefined;
                 }
-
+                console.log(JSON.stringify(state.teethJewelType))
                 get().calcTotal(state);
                 get().setHistory(state);
             })

@@ -5,7 +5,6 @@ import Dentiera from "@/app/_components/_teeth/Dentiera";
 import {useTeethStore} from "@/app/_stores/teeth";
 import IlsDx from "@/app/_components/_teeth/_lateral-incisors/IlsDx";
 import IlsSx from "@/app/_components/_teeth/_lateral-incisors/IlsSx";
-import LoadedMaterials from "@/app/_components/_layout/LoadedMaterials";
 import {useEffect, useMemo, useRef} from "react";
 import FBX from "@/app/_types/FBX";
 import IcsSx from "@/app/_components/_teeth/_central-incisors/IcsSx";
@@ -654,7 +653,7 @@ export default function Configurator() {
                 },
                 enamel: {
                     geometry: (enamel.scene.children[0].children[4] as THREE.Mesh).geometry,
-                    position: new THREE.Vector3(enamel.scene.children[0].children[4].position.x, enamel.scene.children[0].children[4].position.y, enamel.scene.children[0].children[4].position.z * 14)
+                    position: getOriginGlb(enamel.scene.children[0].children[4], 1)
                 }
             },
             ilssx: {
@@ -768,7 +767,7 @@ export default function Configurator() {
                 },
                 enamel: {
                     geometry: (enamel.scene.children[0].children[5] as THREE.Mesh).geometry,
-                    position: new THREE.Vector3(enamel.scene.children[0].children[5].position.x, enamel.scene.children[0].children[5].position.y, enamel.scene.children[0].children[5].position.z * 14)
+                    position: getOriginGlb(enamel.scene.children[0].children[5], 1)
                 }
             },
             ilidx: {
@@ -1340,9 +1339,9 @@ export default function Configurator() {
                 bigBar: {
                     full: (bigBar.scene.children[0] as THREE.Mesh).geometry,
                     diamond: {
-                        base: (frameDiamond.scene.children[2].children[0] as THREE.Mesh).geometry,
-                        full: (frameDiamond.scene.children[2].children[1] as THREE.Mesh).geometry,
-                        position: getOrigin(frameDiamond.scene.children[2].children[1])
+                        base: (bigBar.scene.children[1] as THREE.Mesh).geometry,
+                        full: (bigBar.scene.children[2] as THREE.Mesh).geometry,
+                        position: getOrigin(bigBar.scene.children[2])
                     }
                 },
                 enamel: {
@@ -1462,9 +1461,9 @@ export default function Configurator() {
                 bigBar: {
                     full: (bigBar.scene.children[0] as THREE.Mesh).geometry,
                     diamond: {
-                        base: (frameDiamond.scene.children[2].children[0] as THREE.Mesh).geometry,
-                        full: (frameDiamond.scene.children[2].children[1] as THREE.Mesh).geometry,
-                        position: getOrigin(frameDiamond.scene.children[2].children[1])
+                        base: (bigBar.scene.children[1] as THREE.Mesh).geometry,
+                        full: (bigBar.scene.children[2] as THREE.Mesh).geometry,
+                        position: getOrigin(bigBar.scene.children[2])
                     }
                 },
                 enamel: {
@@ -1702,6 +1701,7 @@ export default function Configurator() {
     const orbitRef = useRef<OrbitControlsImpl>(null);
     const groupRef = useRef<Group>(null);
     const { gl, scene, camera } = useThree();
+    const setLoaded = useTeethStore((state: State) => state.setLoaded);
 
     useEffect(() => {
         if(screenshot && orbitRef.current) {
@@ -1728,6 +1728,15 @@ export default function Configurator() {
     useEffect(() => {
         setTeeth(teeth);
         setEnvMap(envMap);
+        setTimeout(() => {
+            setLoaded(true);
+        }, 1500);
+        setTimeout(() => {
+            const loader = document.getElementById('loader');
+            if(loader) {
+                loader.style.display = 'none';
+            }
+        }, 3000);
     }, []);
 
     useFrame((state, delta) => {
@@ -1838,8 +1847,6 @@ export default function Configurator() {
                 maxAzimuthAngle={nextStep ? Math.PI / 7 : Math.PI / 2}
                 ref={orbitRef}
             />
-
-            {savedEnvMap && <LoadedMaterials/>}
             {savedTeeth && savedEnvMap &&
                 <group ref={groupRef} position={[0, 0, 3]}>
 
