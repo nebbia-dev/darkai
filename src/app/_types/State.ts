@@ -52,6 +52,14 @@ interface TempPrices {
     signature: any[]
 }
 
+interface Packaging {
+    premium: boolean,
+    out: string,
+    in: string,
+    details: string,
+    text: string
+}
+
 export interface State {
     envMap: Texture | CubeTexture | undefined,
     hovered: string|undefined,
@@ -113,4 +121,6 @@ export interface State {
     setHistory: (state:State) => void,
     resetList: (state:State, tooth:string) => void,
     checkDiamonds: (state: State) => boolean,
+    packaging: Packaging,
+    setPackaging: (prop:string, value:string|boolean) => void
 }

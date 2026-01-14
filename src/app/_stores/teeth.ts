@@ -1394,6 +1394,23 @@ export const useTeethStore = create<State>((set, get) => ({
             })
         ),
 
+    // state and methods to set packaging
+    packaging:{
+        premium: false,
+        out: 'black',
+        in: 'black',
+        details: 'gold',
+        text: ''
+    },
+    setPackaging: (prop:string, value:string|boolean) => {
+        set(
+            produce((state) => {
+                state.packaging[prop] = value;
+                console.log(JSON.stringify(state.packaging))
+            })
+        )
+    },
+
     // method to remove the configuration from a tooth
     resetList(state, tooth) {
         if(state.teethJewelType[tooth] === 'bigBar' || state.teethJewelType[tooth] === 'bigBarDiamond') {
