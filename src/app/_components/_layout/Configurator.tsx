@@ -22,7 +22,7 @@ import CiDx from "@/app/_components/_teeth/_canines/CiDx";
 import CiSx from "@/app/_components/_teeth/_canines/CiSx";
 import CiSxStone from "@/app/_components/_teeth/_canines/CiSxStone";
 import {State} from "@/app/_types/State";
-import * as THREE from 'three'
+import * as THREE from 'three';
 import {invalidate, useFrame, useThree} from "@react-three/fiber";
 import IlsSxStone from "@/app/_components/_teeth/_lateral-incisors/IlsSxStone";
 import IlsDxStone from "@/app/_components/_teeth/_lateral-incisors/IlsDxStone";
@@ -52,6 +52,7 @@ import Tribals from "@/app/_components/_teeth/_signature/Tribals";
 import Hammered from "@/app/_components/_teeth/_signature/Hammered";
 import Cross from "@/app/_components/_teeth/_signature/Cross";
 import {Group} from "three";
+import PremiumBox from "@/app/_components/_teeth/PremiumBox";
 
 export default function Configurator() {
     const envMap = useEnvironment({
@@ -61,6 +62,7 @@ export default function Configurator() {
     // Se voglio piazzare anche l'fbx in LoadedMaterials, verosimilmente devo usare qui uno useEffect
 
     const teeth = useMemo((): FBX => {
+
         const fullDiamond = useGLTF('/models/Full_Pave.glb');
         const enamel = useGLTF('/models/Enamel.glb');
         const frameDiamond = useGLTF('/models/Frame_Pave.glb');
@@ -1702,6 +1704,7 @@ export default function Configurator() {
     const groupRef = useRef<Group>(null);
     const { gl, scene, camera } = useThree();
     const setLoaded = useTeethStore((state: State) => state.setLoaded);
+    const packagingScene = useTeethStore((state: State) => state.packagingScene);
 
     useEffect(() => {
         if(screenshot && orbitRef.current) {
@@ -1739,14 +1742,36 @@ export default function Configurator() {
         }, 3000);
     }, []);
 
+    // box position when not rendered {x: 20.060500000193823, y: 0, z: -9.505650000058095}
+
     useFrame((state, delta) => {
         if(groupRef.current && nextStep) {
+
             invalidate();
             if(groupRef.current.position.x > -3.3) {
                 groupRef.current.position.x -= delta * 2;
                 camera.position.x -= delta * 2;
             }
+
+        } else if(groupRef.current && packagingScene) {
+            invalidate();
+
+            if(groupRef.current.position.x < 20) {
+                groupRef.current.position.x += (delta + 0.02) * 2.5;
+                groupRef.current.position.z -= (delta + 0.05) * 0.75;
+                console.log(groupRef.current.position)
+            }
+
+        } else if(groupRef.current && !packagingScene) {
+
+            invalidate();
+            if(groupRef.current.position.x > 0) {
+                groupRef.current.position.x -= (delta + 0.02) * 2.5;
+                groupRef.current.position.z += (delta + 0.05) * 0.75;
+            }
+
         } else if(groupRef.current && !nextStep) {
+
             invalidate();
             if(groupRef.current.position.x < 0) {
                 groupRef.current.position.x += delta * 2;
@@ -1849,6 +1874,8 @@ export default function Configurator() {
             />
             {savedTeeth && savedEnvMap &&
                 <group ref={groupRef} position={[0, 0, 3]}>
+
+                    {/*<PremiumBox/>*/}
 
                     {/*SIGNATURE*/}
                     <Vamp/>

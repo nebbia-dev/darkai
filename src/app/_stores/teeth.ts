@@ -1247,16 +1247,18 @@ export const useTeethStore = create<State>((set, get) => ({
                 // if a tooth is selected when the default tab is active, the active tab becomes the custom one
                 if(button === state.activeButton) {
                     state.activeButton = undefined;
+                    state.packagingScene = false;
                 } else {
                     state.activeButton = button;
                     if (state.hovered) {
                         state.hovered = undefined;
                     }
                     state.showGemTypeBox = button === '5';
+                    state.packagingScene = button === '6';
                 }
-
             })
         ),
+    packagingScene: false,
     activeSubButton: undefined,
     setActiveSubButton: (button:string|undefined) =>
         set(

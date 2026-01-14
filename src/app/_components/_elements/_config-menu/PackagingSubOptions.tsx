@@ -7,6 +7,7 @@ export default function PackagingSubOptions() {
 
     const value = useTeethStore((state: State) => state.activeSubButton);
     const setPackaging = useTeethStore((state: State) => state.setPackaging);
+    const customText = useTeethStore((state: State) => state.packaging.text);
     function updateCustomText(e:any) {
         e.preventDefault();
         const customText = (document.getElementById('customText') as HTMLInputElement)?.value;
@@ -68,7 +69,7 @@ export default function PackagingSubOptions() {
             <div className={`${value === 'text' ? 'block' : 'invisible'} h-[120px] pt-4 mb-4 pl-6 text-center absolute translate-y-[36px]`}>
                 <div className="flex items-center bg-gray-50 rounded-full p-2 border-1">
                     <form className="max-w-[196px] flex items-center" onSubmit={(e) => updateCustomText(e)}>
-                        <input id="customText" type="text" className="border bg-gray-200 rounded-full py-1 px-2"/>
+                        <input id="customText" value={customText} onChange={(e) => setPackaging('text', e.currentTarget.value)} type="text" className="border bg-gray-200 rounded-full py-1 px-2"/>
                         <button type="submit"
                                 className="cursor-pointer relative translate-x-[-33px] border border-green-500 text-green-500 font-bold rounded-full bg-green-200 p-0.5">
                             <Confirm className="w-6 h-6"/>

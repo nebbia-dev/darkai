@@ -121,6 +121,7 @@ export interface State {
     setHistory: (state:State) => void,
     resetList: (state:State, tooth:string) => void,
     checkDiamonds: (state: State) => boolean,
+    packagingScene: boolean,
     packaging: Packaging,
     setPackaging: (prop:string, value:string|boolean) => void
 }
