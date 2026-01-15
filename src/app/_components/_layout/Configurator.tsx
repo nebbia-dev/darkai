@@ -1702,6 +1702,7 @@ export default function Configurator() {
     const doResetControls = useTeethStore((state : State) => state.setResetControls);
     const orbitRef = useRef<OrbitControlsImpl>(null);
     const groupRef = useRef<Group>(null);
+    const packagingRef = useRef<Group>(null);
     const { gl, scene, camera } = useThree();
     const setLoaded = useTeethStore((state: State) => state.setLoaded);
     const packagingScene = useTeethStore((state: State) => state.packagingScene);
@@ -1742,8 +1743,6 @@ export default function Configurator() {
         }, 3000);
     }, []);
 
-    // box position when not rendered {x: 20.060500000193823, y: 0, z: -9.505650000058095}
-
     useFrame((state, delta) => {
         if(groupRef.current && nextStep) {
 
@@ -1753,21 +1752,28 @@ export default function Configurator() {
                 camera.position.x -= delta * 2;
             }
 
-        } else if(groupRef.current && packagingScene) {
+        } else if(groupRef.current && packagingRef.current && packagingScene) {
             invalidate();
 
             if(groupRef.current.position.x < 20) {
                 groupRef.current.position.x += (delta + 0.02) * 2.5;
                 groupRef.current.position.z -= (delta + 0.05) * 0.75;
-                console.log(groupRef.current.position)
+
+                packagingRef.current.position.x += (delta + 0.02) * 2.5;
+                packagingRef.current.position.z += (delta + 0.05) * 0.75;
+                console.log(packagingRef.current.position)
             }
 
-        } else if(groupRef.current && !packagingScene) {
+        } else if(groupRef.current && packagingRef.current && !packagingScene) {
 
             invalidate();
             if(groupRef.current.position.x > 0) {
                 groupRef.current.position.x -= (delta + 0.02) * 2.5;
                 groupRef.current.position.z += (delta + 0.05) * 0.75;
+
+                packagingRef.current.position.x -= (delta + 0.02) * 2.5;
+                packagingRef.current.position.z -= (delta + 0.05) * 0.75;
+                console.log(packagingRef.current.position)
             }
 
         } else if(groupRef.current && !nextStep) {
@@ -1863,8 +1869,8 @@ export default function Configurator() {
     return (
         <>
             <OrbitControls
-                maxDistance={35}
-                minDistance={20}
+                // maxDistance={35}
+                // minDistance={20}
                 enablePan={false}
                 minPolarAngle={nextStep ? Math.PI / 2.1 : Math.PI / 3 }
                 maxPolarAngle={nextStep ? Math.PI - Math.PI / 2.1 : Math.PI - Math.PI / 3}
@@ -1873,60 +1879,62 @@ export default function Configurator() {
                 ref={orbitRef}
             />
             {savedTeeth && savedEnvMap &&
-                <group ref={groupRef} position={[0, 0, 3]}>
+                <>
+                    <PremiumBox ref={packagingRef}/>
+                    <group ref={groupRef} position={[0, 0, 3]}>
 
-                    {/*<PremiumBox/>*/}
+                        {/*SIGNATURE*/}
+                        <Vamp/>
+                        <Sprinkles/>
+                        <BubbleGum/>
+                        <Braces/>
+                        <Tribals/>
+                        <Cross/>
+                        <Hammered/>
+                        {/*DENTI SUPERIORI*/}
+                        <IlsSx/>
+                        <IlsSxStone/>
+                        <IlsDx/>
+                        <IlsDxStone/>
+                        <IcsSx/>
+                        <IcsSxStone/>
+                        <IcsDx/>
+                        <IcsDxStone/>
+                        <CsDx/>
+                        <CsDxStone/>
+                        <CsSx/>
+                        <CsSxStone/>
+                        {/*DENTI INFERIORI*/}
+                        <IliSx/>
+                        <IliSxStone/>
+                        <IliDx/>
+                        <IliDxStone/>
+                        <IciSx/>
+                        <IciSxStone/>
+                        <IciDx/>
+                        <IciDxStone/>
+                        <CiDx/>
+                        <CiDxStone/>
+                        <CiSx/>
+                        <CiSxStone/>
+                        {/*MOLARI E PREMOLARI*/}
+                        <PprsDx/>
+                        <PprsSx/>
+                        <PpriDx/>
+                        <PpriSx/>
+                        <SprsDx/>
+                        <SprsSx/>
+                        <SpriDx/>
+                        <SpriSx/>
+                        <MsDx/>
+                        <MsSx/>
+                        <MiDx/>
+                        <MiSx/>
+                        {/*BASE*/}
+                        <Dentiera/>
+                    </group>
+                </>
 
-                    {/*SIGNATURE*/}
-                    <Vamp/>
-                    <Sprinkles/>
-                    <BubbleGum/>
-                    <Braces/>
-                    <Tribals/>
-                    <Cross/>
-                    <Hammered/>
-                    {/*DENTI SUPERIORI*/}
-                    <IlsSx/>
-                    <IlsSxStone/>
-                    <IlsDx/>
-                    <IlsDxStone/>
-                    <IcsSx/>
-                    <IcsSxStone/>
-                    <IcsDx/>
-                    <IcsDxStone/>
-                    <CsDx/>
-                    <CsDxStone/>
-                    <CsSx/>
-                    <CsSxStone/>
-                    {/*DENTI INFERIORI*/}
-                    <IliSx/>
-                    <IliSxStone/>
-                    <IliDx/>
-                    <IliDxStone/>
-                    <IciSx/>
-                    <IciSxStone/>
-                    <IciDx/>
-                    <IciDxStone/>
-                    <CiDx/>
-                    <CiDxStone/>
-                    <CiSx/>
-                    <CiSxStone/>
-                    {/*MOLARI E PREMOLARI*/}
-                    <PprsDx/>
-                    <PprsSx/>
-                    <PpriDx/>
-                    <PpriSx/>
-                    <SprsDx/>
-                    <SprsSx/>
-                    <SpriDx/>
-                    <SpriSx/>
-                    <MsDx/>
-                    <MsSx/>
-                    <MiDx/>
-                    <MiSx/>
-                    {/*BASE*/}
-                    <Dentiera/>
-                </group>
             }
         </>
     );
