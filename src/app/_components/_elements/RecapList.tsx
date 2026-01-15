@@ -8,6 +8,7 @@ import {State} from "@/app/_types/State";
 import elabMaterial from "@/app/_helpers/_string-modders/elabMaterial";
 import elabSignatureName from "@/app/_helpers/_string-modders/elabSignatureName";
 import {Trash} from "@/app/_components/_icons/Trash";
+import elabVelvetName from "@/app/_helpers/_string-modders/elabVelvetName";
 
 export default function RecapList({edit} : {edit:boolean}) {
 
@@ -22,6 +23,8 @@ export default function RecapList({edit} : {edit:boolean}) {
     const setHover = useTeethStore((state: State) => state.setHover);
     const resetTooth = useTeethStore((state: State) => state.resetTooth);
     const resetSignature = useTeethStore((state: State) => state.resetSignature);
+    const packaging = useTeethStore((state: State) => state.packaging);
+    const setPackaging = useTeethStore((state: State) => state.setPackaging);
 
     function setCurrentHover(tooth:string|undefined, e:any) {
         e.stopPropagation();
@@ -153,6 +156,37 @@ export default function RecapList({edit} : {edit:boolean}) {
                         </li>
                     )
                 })}
+
+                {packaging.premium &&
+                    <li>
+                        {/*tooth name*/}
+                        <div className="flex justify-between items-center mb-1">
+                            <h4 className="font-semibold">
+                                Premium Box
+                            </h4>
+                            {edit && <Tooltip title="Delete configuration">
+                                <Trash className="cursor-pointer rounded-full border-1 p-0.5 w-5 h-5"
+                                       onClick={() => setPackaging('premium', false)}/>
+                            </Tooltip>
+                            }
+                        </div>
+                        {/*type + material*/}
+                        <p>
+                            {firstCapital(packaging.out)} box w/ {elabVelvetName(packaging.in)} velvet and {elabMaterial(packaging.details, 'gold')} gold details
+                        </p>
+                        { packaging.text.length > 0 &&
+                            <p>
+                                Custom text: {packaging.text}
+                            </p>
+                        }
+                        <p className="w-full font-medium text-left mt-1.5">{
+                            new Intl.NumberFormat("de-DE", {
+                                    style: "currency",
+                                    currency: "EUR"
+                                }).format(300)
+                        }</p>
+                    </li>
+                }
             </ul>
         </div>
     )

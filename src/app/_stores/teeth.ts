@@ -1253,6 +1253,9 @@ export const useTeethStore = create<State>((set, get) => ({
                     if (state.hovered) {
                         state.hovered = undefined;
                     }
+                    if(button === '6') {
+                        state.packaging.premium = true;
+                    }
                     state.showGemTypeBox = button === '5';
                     state.packagingScene = button === '6';
                 }
