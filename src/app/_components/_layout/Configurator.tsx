@@ -1758,22 +1758,49 @@ export default function Configurator() {
             if(groupRef.current.position.x < 20) {
                 groupRef.current.position.x += (delta + 0.02) * 2.5;
                 groupRef.current.position.z -= (delta + 0.05) * 0.75;
-
-                packagingRef.current.position.x += (delta + 0.02) * 2.5;
-                packagingRef.current.position.z += (delta + 0.05) * 0.75;
-                console.log(packagingRef.current.position)
+                groupRef.current.visible = true;
+            } else {
+                groupRef.current.visible = false;
             }
+
+            if(packagingRef.current.position.x < 0) {
+                packagingRef.current.position.x += (delta + 0.02) * 2.5;
+            }
+
+            if(packagingRef.current.position.z < 0) {
+                packagingRef.current.position.z += (delta + 0.05) * 0.575;
+            }
+
+            if(packagingRef.current.position.x <= -20 || packagingRef.current.position.z <= -9 ) {
+                packagingRef.current.visible = false;
+            } else {
+                packagingRef.current.visible = true;
+            }
+
 
         } else if(groupRef.current && packagingRef.current && !packagingScene) {
 
             invalidate();
+
+            groupRef.current.visible = true;
+
             if(groupRef.current.position.x > 0) {
                 groupRef.current.position.x -= (delta + 0.02) * 2.5;
                 groupRef.current.position.z += (delta + 0.05) * 0.75;
+            }
 
+            if(packagingRef.current.position.x > -20) {
                 packagingRef.current.position.x -= (delta + 0.02) * 2.5;
-                packagingRef.current.position.z -= (delta + 0.05) * 0.75;
-                console.log(packagingRef.current.position)
+            }
+
+            if(packagingRef.current.position.z > -9) {
+                packagingRef.current.position.z -= (delta + 0.05) * 0.575;
+            }
+
+            if(packagingRef.current.position.x <= -20 || packagingRef.current.position.z <= -9 ) {
+                packagingRef.current.visible = false;
+            } else {
+                packagingRef.current.visible = true;
             }
 
         } else if(groupRef.current && !nextStep) {
@@ -1869,13 +1896,13 @@ export default function Configurator() {
     return (
         <>
             <OrbitControls
-                // maxDistance={35}
-                // minDistance={20}
+                maxDistance={35}
+                minDistance={20}
                 enablePan={false}
                 minPolarAngle={nextStep ? Math.PI / 2.1 : Math.PI / 3 }
                 maxPolarAngle={nextStep ? Math.PI - Math.PI / 2.1 : Math.PI - Math.PI / 3}
-                minAzimuthAngle={nextStep ? -Math.PI / 4 : -Math.PI / 2}
-                maxAzimuthAngle={nextStep ? Math.PI / 7 : Math.PI / 2}
+                minAzimuthAngle={packagingScene ? -Infinity : nextStep ? -Math.PI / 4 : -Math.PI / 2}
+                maxAzimuthAngle={packagingScene ? -Infinity : nextStep ? Math.PI / 7 : Math.PI / 2}
                 ref={orbitRef}
             />
             {savedTeeth && savedEnvMap &&

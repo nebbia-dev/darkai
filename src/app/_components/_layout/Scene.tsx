@@ -23,6 +23,7 @@ export default function Scene() {
                     <span className="loader mb-8 inline-block mx-auto"></span>
                 </div>
             </div>
+
             <Canvas camera={{fov: 20, near: 0.1, far: 100, position: [0, 3, 27]}} dpr={[1, 2]} frameloop="demand">
                 <Suspense fallback={<Loading/>}>
                     <Configurator/>

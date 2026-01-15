@@ -5,6 +5,7 @@ import React, {JSX, memo, useMemo, useState} from "react";
 import {useTeethStore} from "@/app/_stores/teeth";
 import {State} from "@/app/_types/State";
 import {useThree} from "@react-three/fiber";
+import ShadowMaterial from "@/app/_components/_materials/ShadowMaterial";
 
 export default function Dentiera() {
     const dentiera = useMemo(() => {
@@ -30,10 +31,6 @@ export default function Dentiera() {
     props.roughnessMap.flipY = false;
     props.aoMap.flipY = false;
 
-    const shadow = useTexture({
-        map: 'textures/dentiera_ombra.webp',
-    });
-
     const nextStep = useTeethStore((state) => state.nextStep);
     const hovered = useTeethStore((state: State) => state.hovered);
     const setHover = useTeethStore((state: State) => state.setHover);
@@ -48,14 +45,6 @@ export default function Dentiera() {
             metalness: 0.5,
             roughness: 0.7,
             envMap: envMap
-        })
-    }, []);
-    const shadowMaterial = useMemo(() => {
-
-        return new THREE.MeshBasicMaterial({
-            map: shadow.map,
-            transparent: true,
-            opacity: 0.65
         })
     }, []);
 
@@ -484,8 +473,9 @@ export default function Dentiera() {
                       geometry={(dentiera.scene.children[3].children[11] as THREE.Mesh).geometry} material={dentieraMaterial}>
                 </mesh>
 
-                <mesh material={shadowMaterial} position={[0, -4, -4]} rotation={[-Math.PI/2, 0, 0]}>
+                <mesh position={[0, -4, -4]} rotation={[-Math.PI/2, 0, 0]}>
                     <planeGeometry args={[7.5, 7.5]}/>
+                    <ShadowMaterial/>
                 </mesh>
             </group>
         )
