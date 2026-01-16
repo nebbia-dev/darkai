@@ -35,6 +35,30 @@ export default function RecapList({edit} : {edit:boolean}) {
         return ((jewel === 'bar' || jewel === 'barDiamond') && (tooth === 'icsdx' || tooth === 'icidx')) || ((jewel === 'bigBar' || jewel === 'bigBarDiamond') && tooth === 'cidx');
     }
 
+    function checkDoubleTeethHover(tooth:string, jewel:string) {
+        if(tooth === 'icssx' && hovered === 'icsdx' && (jewel === 'bar' || jewel === 'barDiamond')) {
+            return true;
+        } else if(tooth === 'icisx' && hovered === 'icidx' && (jewel === 'bar' || jewel === 'barDiamond')) {
+            return true;
+        }else if(tooth === 'cisx' && hovered === 'cidx' && (jewel === 'bigBar' || jewel === 'bigBarDiamond')) {
+            return true;
+        } else {
+            return tooth === hovered;
+        }
+    }
+
+    function checkDoubleTeethActive(tooth:string, jewel:string) {
+        if(tooth === 'icssx' && activeTooth === 'icsdx' && (jewel === 'bar' || jewel === 'barDiamond')) {
+            return true;
+        } else if(tooth === 'icisx' && activeTooth === 'icidx' && (jewel === 'bar' || jewel === 'barDiamond')) {
+            return true;
+        }else if(tooth === 'cisx' && activeTooth === 'cidx' && (jewel === 'bigBar' || jewel === 'bigBarDiamond')) {
+            return true;
+        } else {
+            return tooth === activeTooth;
+        }
+    }
+
     return (
         <div className="pl-5 pr-3 py-4 h-full">
             <ul className="pr-2 h-full overflow-y-auto">
@@ -104,8 +128,8 @@ export default function RecapList({edit} : {edit:boolean}) {
                                             })}
                             className={`
                                 ${checkDoubleTeeth(tooth[0], tooth[1]) ? 'hidden' : 'block'} 
-                                ${tooth[0] === activeTooth || checkDoubleTeeth(activeTooth as string, tooth[1]) ? 'bg-white/50' : ''}
-                                ${tooth[0] ===  hovered || checkDoubleTeeth(hovered as string, tooth[1]) ? 'border-black' : 'border-gray-200/50'}
+                                ${checkDoubleTeethActive(tooth[0], tooth[1]) ? 'bg-white/50' : ''}
+                                ${checkDoubleTeethHover(tooth[0], tooth[1]) ? 'border-black' : 'border-gray-200/50'}
                                 cursor-pointer mb-4 rounded p-2 border`}
                         >
                             {/*tooth name*/}

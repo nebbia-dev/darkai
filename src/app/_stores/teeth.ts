@@ -806,12 +806,6 @@ export const useTeethStore = create<State>((set, get) => ({
                         // if the tooth is not visible, it becomes the active tooth
                         if(!state.teethVisibility[tooth]) {
                             state.currentTooth = tooth;
-                        } else {
-                            // if the tooth is visible and the jewel type is not full/fullDiamond,
-                            // eventual stones are removed
-                            // if(type !== 'full' && type !== 'fullDiamond') {
-                            //     state.teethStones[tooth] = {shape: undefined, color: undefined};
-                            // }
                         }
 
                         // if the jewel type change happens on a lower tooth when the lower canines
