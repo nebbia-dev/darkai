@@ -536,9 +536,11 @@ export const useTeethStore = create<State>((set, get) => ({
 
                     if (tooth === 'cidx') {
                         state.teethMaterial.cisx = state.teethMaterial.cidx;
+                        state.teethFinish.cisx = state.teethFinish.cidx;
                     }
                     if (tooth === 'cisx') {
                         state.teethMaterial.cidx = state.teethMaterial.cisx;
+                        state.teethFinish.cidx = state.teethFinish.cisx;
                     }
                 // SECOND, it manages the upper/lower central incisor bar/barDiamond special case
                 } else if((type === 'bar' || type === 'barDiamond')
@@ -571,15 +573,19 @@ export const useTeethStore = create<State>((set, get) => ({
                         if(state.teethMaterial[tooth] === 'base') state.teethMaterial[tooth]  = 'gold';
                         if (tooth === 'icsdx') {
                             state.teethMaterial.icssx = state.teethMaterial.icsdx;
+                            state.teethFinish.icssx = state.teethFinish.icsdx;
                         }
                         if (tooth === 'icssx') {
                             state.teethMaterial.icsdx = state.teethMaterial.icssx;
+                            state.teethFinish.icsdx = state.teethFinish.icssx;
                         }
                         if (tooth === 'icidx') {
                             state.teethMaterial.icisx = state.teethMaterial.icidx;
+                            state.teethFinish.icisx = state.teethFinish.icidx;
                         }
                         if (tooth === 'icisx') {
                             state.teethMaterial.icidx = state.teethMaterial.icisx;
+                            state.teethFinish.icidx = state.teethFinish.icisx;
                         }
                 // THIRD, it manages all the other cases
                 } else {
@@ -613,6 +619,7 @@ export const useTeethStore = create<State>((set, get) => ({
                                 state.teethJewelType.cisx = 'full';
                                 state.teethVisibility.cisx = false;
                                 state.teethMaterial.cisx = 'base';
+                                state.teethFinish.cisx = 'polished';
                                 state.teethPaves.cisx = {shape: undefined, color: undefined};
                                 break;
                             // the process is the same for both lower canines
@@ -641,6 +648,7 @@ export const useTeethStore = create<State>((set, get) => ({
                                 state.teethJewelType.cidx = 'full';
                                 state.teethVisibility.cidx = false;
                                 state.teethMaterial.cidx = 'base';
+                                state.teethFinish.cidx = 'polished';
                                 state.teethPaves.cidx = {shape: undefined, color: undefined};
                                 break;
                         }
@@ -678,6 +686,7 @@ export const useTeethStore = create<State>((set, get) => ({
                             state.teethJewelType.icssx = 'full';
                             state.teethVisibility.icssx = false;
                             state.teethMaterial.icssx = 'base';
+                            state.teethFinish.icssx = 'polished';
                             state.teethPaves.icssx = {shape: undefined, color: undefined};
                             break;
 
@@ -707,6 +716,7 @@ export const useTeethStore = create<State>((set, get) => ({
                             state.teethJewelType.icsdx = 'full';
                             state.teethVisibility.icsdx = false;
                             state.teethMaterial.icsdx = 'base';
+                            state.teethFinish.icsdx = 'polished';
                             state.teethPaves.icsdx = {shape: undefined, color: undefined};
                             break;
 
@@ -735,6 +745,7 @@ export const useTeethStore = create<State>((set, get) => ({
                             state.teethJewelType.icisx = 'full';
                             state.teethVisibility.icisx = false;
                             state.teethMaterial.icisx = 'base';
+                            state.teethFinish.icisx = 'polished';
                             state.teethPaves.icisx = {shape: undefined, color: undefined};
                             break;
 
@@ -763,6 +774,7 @@ export const useTeethStore = create<State>((set, get) => ({
                             state.teethJewelType.icidx = 'full';
                             state.teethVisibility.icidx = false;
                             state.teethMaterial.icidx = 'base';
+                            state.teethFinish.icidx = 'polished';
                             state.teethPaves.icidx = {shape: undefined, color: undefined};
                             break;
                         }
