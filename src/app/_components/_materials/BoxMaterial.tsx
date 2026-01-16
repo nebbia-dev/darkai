@@ -1,11 +1,16 @@
 import {useTeethStore} from "@/app/_stores/teeth";
 import {State} from "@/app/_types/State";
-// import {useTexture} from "@react-three/drei";
+import {useTexture} from "@react-three/drei";
 
 export default function BoxMaterial() {
     const color = useTeethStore((state: State) => state.packaging.out);
     const envMap = useTeethStore((state: State) => state.envMap);
-    // const matcap = useTexture('/textures/matcaps/10.webp')
+    // const matcap = useTexture('/textures/matcaps/10.webp');
+    // const velvet = useTexture({
+    //     map: 'textures/packaging/Pattern_Velluto.webp',
+    //     normalMap: 'textures/packaging/Velluto_Normal.webp',
+    // });
+
     let hex;
     switch(color) {
         case 'turquoise':
@@ -60,6 +65,8 @@ export default function BoxMaterial() {
             roughness={0.75}
         />
         // <meshMatcapMaterial
+        //     map={velvet.map}
+        //     normalMap={velvet.normalMap}
         //     color={hex}
         //     matcap={matcap}
         // />

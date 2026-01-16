@@ -53,13 +53,12 @@ import Hammered from "@/app/_components/_teeth/_signature/Hammered";
 import Cross from "@/app/_components/_teeth/_signature/Cross";
 import {Group} from "three";
 import PremiumBox from "@/app/_components/_teeth/PremiumBox";
+import FullMaterial from "@/app/_components/_materials/FullMaterial";
 
 export default function Configurator() {
     const envMap = useEnvironment({
         files: "envMaps/HDR_Light_Studio_Free_HDRI_Design_13.exr"
     })
-
-    // Se voglio piazzare anche l'fbx in LoadedMaterials, verosimilmente devo usare qui uno useEffect
 
     const teeth = useMemo((): FBX => {
 
@@ -68,7 +67,7 @@ export default function Configurator() {
         const frameDiamond = useGLTF('/models/Frame_Pave.glb');
         const barDiamond = useGLTF('/models/Bar_Pave.glb');
         const stones = useGLTF('/models/Stones.glb')
-        const frames = useFBX('/models/MOD_Frame_Capsula (2).fbx');
+        const frames = useGLTF('/models/Frames.glb');
         const bigBar  = useGLTF('/models/BigBar.glb');
         const bars = useGLTF('/models/Bars.glb');
         const full = useGLTF('/models/Full.glb');
@@ -183,7 +182,7 @@ export default function Configurator() {
                     }
                 },
                 frame: {
-                    full: (frames.children[1] as THREE.Mesh).geometry,
+                    full: (frames.scene.children[1] as THREE.Mesh).geometry,
                     diamond: {
                         base: (frameDiamond.scene.children[0].children[5] as THREE.Mesh).geometry,
                         full: (frameDiamond.scene.children[0].children[7] as THREE.Mesh).geometry,
@@ -299,7 +298,7 @@ export default function Configurator() {
                     }
                 },
                 frame: {
-                    full: (frames.children[0] as THREE.Mesh).geometry,
+                    full: (frames.scene.children[0] as THREE.Mesh).geometry,
                     diamond: {
                         base: (frameDiamond.scene.children[0].children[4] as THREE.Mesh).geometry,
                         full: (frameDiamond.scene.children[0].children[6] as THREE.Mesh).geometry,
@@ -415,7 +414,7 @@ export default function Configurator() {
                     }
                 },
                 frame: {
-                    full: (frames.children[6] as THREE.Mesh).geometry,
+                    full: (frames.scene.children[6] as THREE.Mesh).geometry,
                     diamond: {
                         base: (frameDiamond.scene.children[1].children[5] as THREE.Mesh).geometry,
                         full: (frameDiamond.scene.children[1].children[7] as THREE.Mesh).geometry,
@@ -531,7 +530,7 @@ export default function Configurator() {
                     }
                 },
                 frame: {
-                    full: (frames.children[7] as THREE.Mesh).geometry,
+                    full: (frames.scene.children[7] as THREE.Mesh).geometry,
                     diamond: {
                         base: (frameDiamond.scene.children[1].children[4] as THREE.Mesh).geometry,
                         full: (frameDiamond.scene.children[1].children[6] as THREE.Mesh).geometry,
@@ -646,7 +645,7 @@ export default function Configurator() {
                     }
                 },
                 frame: {
-                    full: (frames.children[2] as THREE.Mesh).geometry,
+                    full: (frames.scene.children[2] as THREE.Mesh).geometry,
                     diamond: {
                         base: (frameDiamond.scene.children[0].children[9] as THREE.Mesh).geometry,
                         full: (frameDiamond.scene.children[0].children[11] as THREE.Mesh).geometry,
@@ -760,7 +759,7 @@ export default function Configurator() {
                     }
                 },
                 frame: {
-                    full: (frames.children[3] as THREE.Mesh).geometry,
+                    full: (frames.scene.children[3] as THREE.Mesh).geometry,
                     diamond: {
                         base: (frameDiamond.scene.children[0].children[8] as THREE.Mesh).geometry,
                         full: (frameDiamond.scene.children[0].children[10] as THREE.Mesh).geometry,
@@ -874,7 +873,7 @@ export default function Configurator() {
                     }
                 },
                 frame: {
-                    full: (frames.children[8] as THREE.Mesh).geometry,
+                    full: (frames.scene.children[8] as THREE.Mesh).geometry,
                     diamond: {
                         base: (frameDiamond.scene.children[1].children[9] as THREE.Mesh).geometry,
                         full: (frameDiamond.scene.children[1].children[11] as THREE.Mesh).geometry,
@@ -988,7 +987,7 @@ export default function Configurator() {
                     }
                 },
                 frame: {
-                    full: (frames.children[9] as THREE.Mesh).geometry,
+                    full: (frames.scene.children[9] as THREE.Mesh).geometry,
                     diamond: {
                         base: (frameDiamond.scene.children[1].children[8] as THREE.Mesh).geometry,
                         full: (frameDiamond.scene.children[1].children[10] as THREE.Mesh).geometry,
@@ -1103,7 +1102,7 @@ export default function Configurator() {
                     }
                 },
                 frame: {
-                    full: (frames.children[4] as THREE.Mesh).geometry,
+                    full: (frames.scene.children[4] as THREE.Mesh).geometry,
                     diamond: {
                         base: (frameDiamond.scene.children[0].children[1] as THREE.Mesh).geometry,
                         full: (frameDiamond.scene.children[0].children[3] as THREE.Mesh).geometry,
@@ -1217,7 +1216,7 @@ export default function Configurator() {
                     }
                 },
                 frame: {
-                    full: (frames.children[5] as THREE.Mesh).geometry,
+                    full: (frames.scene.children[5] as THREE.Mesh).geometry,
                     diamond: {
                         base: (frameDiamond.scene.children[0].children[0] as THREE.Mesh).geometry,
                         full: (frameDiamond.scene.children[0].children[2] as THREE.Mesh).geometry,
@@ -1323,7 +1322,7 @@ export default function Configurator() {
                     position: getOriginGlb(fullDiamond.scene.children[1].children[14], 1)
                 },
                 frame: {
-                    full: (frames.children[10] as THREE.Mesh).geometry,
+                    full: (frames.scene.children[10] as THREE.Mesh).geometry,
                     diamond: {
                         base: (frameDiamond.scene.children[1].children[1] as THREE.Mesh).geometry,
                         full: (frameDiamond.scene.children[1].children[3] as THREE.Mesh).geometry,
@@ -1445,7 +1444,7 @@ export default function Configurator() {
                     position: getOriginGlb(fullDiamond.scene.children[1].children[6], 1)
                 },
                 frame: {
-                    full: (frames.children[11] as THREE.Mesh).geometry,
+                    full: (frames.scene.children[11] as THREE.Mesh).geometry,
                     diamond: {
                         base: (frameDiamond.scene.children[1].children[0] as THREE.Mesh).geometry,
                         full: (frameDiamond.scene.children[1].children[2] as THREE.Mesh).geometry,

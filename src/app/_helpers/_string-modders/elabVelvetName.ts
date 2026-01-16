@@ -40,7 +40,7 @@ export default function elabVelvetName(color: string) {
         case '54':
             velvet = 'green';
             break;
-        case '75':
+        case '76':
             velvet = 'forest';
             break;
         default:
