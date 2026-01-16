@@ -250,10 +250,20 @@ export const useTeethStore = create<State>((set, get) => ({
                     state.teethPaves.cisx = {shape: undefined, color: undefined};
                 }
 
-                // if the bigBar is selected and one or more lower teeth are configured,
-                // these teeth are reset
-                if(type === 'bigBar' || type === 'bigBarDiamond') {
 
+                if(type === 'bar' || type === 'barDiamond') {
+                    if(state.teethMaterial[state.teethNeighboursInt[tooth]] !== 'base'
+                        && (state.teethJewelType[state.teethNeighboursInt[tooth]] !== 'bar' && state.teethJewelType[state.teethNeighboursInt[tooth]] !== 'barDiamond')) {
+                        state.teethJewelType[state.teethNeighboursInt[tooth]] = 'full';
+                        state.teethVisibility[state.teethNeighboursInt[tooth]] = false;
+                        state.teethMaterial[state.teethNeighboursInt[tooth]] = 'base';
+                        state.teethFinish[state.teethNeighboursInt[tooth]] = 'polished';
+                        state.teethStones[state.teethNeighboursInt[tooth]] = {shape: undefined, color: undefined};
+                        state.teethPaves[state.teethNeighboursInt[tooth]] = {shape: undefined, color: undefined};
+                    }
+                    // if the bigBar is selected and one or more lower teeth are configured,
+                    // these teeth are reset
+                } else if(type === 'bigBar' || type === 'bigBarDiamond') {
                     state.teethJewelType.icidx = 'full';
                     state.teethJewelType.icisx = 'full';
                     state.teethVisibility.icidx = false;
@@ -279,7 +289,19 @@ export const useTeethStore = create<State>((set, get) => ({
                     state.teethStones.ilisx = {shape: undefined, color: undefined};
                     state.teethPaves.ilidx = {shape: undefined, color: undefined};
                     state.teethPaves.ilisx = {shape: undefined, color: undefined};
+                } else {
+                    if(state.teethMaterial[state.teethNeighboursEst[tooth]] !== 'base'
+                        && (state.teethJewelType[state.teethNeighboursEst[tooth]] === 'bar' || state.teethJewelType[state.teethNeighboursEst[tooth]] === 'barDiamond')) {
+                        state.teethJewelType[state.teethNeighboursEst[tooth]] = 'full';
+                        state.teethVisibility[state.teethNeighboursEst[tooth]] = false;
+                        state.teethMaterial[state.teethNeighboursEst[tooth]] = 'base';
+                        state.teethFinish[state.teethNeighboursEst[tooth]] = 'polished';
+                        state.teethStones[state.teethNeighboursEst[tooth]] = {shape: undefined, color: undefined};
+                        state.teethPaves[state.teethNeighboursEst[tooth]] = {shape: undefined, color: undefined};
+                    }
                 }
+
+                get().checkDiamonds(state);
 
                 // EXCEPTION: if the diamond version of a jewel type is active, clicking on the base jewel type removes that
                 // config from the tooth, just like it were the diamondless version. The function then RETURNS
@@ -868,6 +890,36 @@ export const useTeethStore = create<State>((set, get) => ({
                 get().setHistory(state);
             }),
         ),
+
+    // list of teeth neighbours to implement spacer exception
+    teethNeighboursInt: {
+        icsdx: undefined,
+        icssx: undefined,
+        icidx: undefined,
+        icisx: undefined,
+        ilsdx: 'icsdx',
+        ilssx: 'icssx',
+        ilidx: 'icidx',
+        ilisx: 'icisx',
+        csdx: 'ilsdx',
+        cssx: 'ilssx',
+        cidx: 'ilidx',
+        cisx: 'ilisx',
+    },
+    teethNeighboursEst: {
+        icsdx: 'ilsdx',
+        icssx: 'ilssx',
+        icidx: 'ilidx',
+        icisx: 'ilisx',
+        ilsdx: 'csdx',
+        ilssx: 'cssx',
+        ilidx: 'cidx',
+        ilisx: 'cisx',
+        csdx: undefined,
+        cssx: undefined,
+        cidx: undefined,
+        cisx: undefined,
+    },
 
     // state and methods to set the gems
     teethStones: {

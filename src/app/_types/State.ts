@@ -9,7 +9,7 @@ import {
     SignatureTeeth,
     SignMaterial,
     SignVisibility,
-    Stones, Visibility, History
+    Stones, Visibility, History, Neighbours
 } from "@/app/_types/TeethOptions";
 
 interface TempPrices {
@@ -73,6 +73,8 @@ export interface State {
     signatureMaterial: SignMaterial,
     signatureVisibility: SignVisibility,
     teethSignature: SignatureTeeth,
+    teethNeighboursInt: Neighbours,
+    teethNeighboursEst: Neighbours,
     history: History[][],
     currentHistory: number,
     currentTooth: string | undefined,

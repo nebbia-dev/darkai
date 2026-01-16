@@ -269,3 +269,19 @@ export interface History {
     signatureVisible: SignVisibility,
     signatureMaterial: SignMaterial
 }
+
+export interface Neighbours {
+    [key: string]: undefined|string
+    icsdx: undefined|string,
+    icssx: undefined|string,
+    icidx: undefined|string,
+    icisx: undefined|string,
+    ilsdx: undefined|string,
+    ilssx: undefined|string,
+    ilidx: undefined|string,
+    ilisx: undefined|string,
+    csdx: undefined|string,
+    cssx: undefined|string,
+    cidx: undefined|string,
+    cisx: undefined|string,
+}
