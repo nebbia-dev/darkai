@@ -270,6 +270,9 @@ export interface History {
     signatureMaterial: SignMaterial
 }
 
+export interface HistoryPack {
+    packaging: Packaging
+}
 export interface Neighbours {
     [key: string]: undefined|string
     icsdx: undefined|string,
@@ -284,4 +287,13 @@ export interface Neighbours {
     cssx: undefined|string,
     cidx: undefined|string,
     cisx: undefined|string,
+}
+
+export interface Packaging {
+    [key: string]: boolean|string
+    premium: boolean,
+    out: string,
+    in: string,
+    details: string,
+    text: string
 }

@@ -9,7 +9,7 @@ import {
     SignatureTeeth,
     SignMaterial,
     SignVisibility,
-    Stones, Visibility, History, Neighbours
+    Stones, Visibility, History, Neighbours, HistoryPack, Packaging
 } from "@/app/_types/TeethOptions";
 
 interface TempPrices {
@@ -52,14 +52,6 @@ interface TempPrices {
     signature: any[]
 }
 
-interface Packaging {
-    premium: boolean,
-    out: string,
-    in: string,
-    details: string,
-    text: string
-}
-
 export interface State {
     envMap: Texture | CubeTexture | undefined,
     hovered: string|undefined,
@@ -77,6 +69,8 @@ export interface State {
     teethNeighboursEst: Neighbours,
     history: History[][],
     currentHistory: number,
+    historyPack: HistoryPack[][],
+    currentHistoryPack: number,
     currentTooth: string | undefined,
     lastActivatedTooth: string | undefined,
     teethEnamel: Enamel,
@@ -116,11 +110,16 @@ export interface State {
     fetchPrices: () => void,
     undo: () => void,
     redo: () => void,
+    undoPack: () => void,
+    redoPack: () => void,
     resetHistoryStep: (state:State) => void,
+    resetHistoryPackStep: (state:State) => void,
     resetSignature: (signature: string) => void,
     reset: () => void,
+    resetPack: () => void,
     calcTotal: (state:State) => void,
     setHistory: (state:State) => void,
+    setHistoryPack: (state:State) => void,
     resetList: (state:State, tooth:string) => void,
     checkDiamonds: (state: State) => boolean,
     packagingScene: boolean,

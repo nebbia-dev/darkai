@@ -4,25 +4,54 @@ import {Tooltip} from "@mui/material";
 import React from "react";
 
 export default function ActionBar() {
+    const activeButton = useTeethStore((state) => state.activeButton);
+
     const current = useTeethStore((state:State) => state.currentHistory);
     const history = useTeethStore((state:State) => state.history);
     const reset = useTeethStore((state:State) => state.reset);
     const undo = useTeethStore((state:State) => state.undo);
     const redo = useTeethStore((state:State) => state.redo);
+
+    const currentPack = useTeethStore((state:State) => state.currentHistoryPack);
+    const historyPack = useTeethStore((state:State) => state.historyPack);
+    const resetPack = useTeethStore((state:State) => state.resetPack);
+    const undoPack = useTeethStore((state:State) => state.undoPack);
+    const redoPack = useTeethStore((state:State) => state.redoPack);
+
     const doResetControls = useTeethStore((state:State) => state.setResetControls);
     function resetControls() {
         doResetControls(true);
     }
 
     function doUndo() {
-        if(current > 1) {
-            undo();
+        if(activeButton === '6') {
+            if(currentPack > 1) {
+                undoPack();
+            }
+        } else {
+            if(current > 1) {
+                undo();
+            }
         }
     }
 
     function doRedo() {
-        if(current < history.length) {
-            redo();
+        if(activeButton === '6') {
+            if(currentPack < historyPack.length) {
+                redoPack();
+            }
+        } else {
+            if(current < history.length) {
+                redo();
+            }
+        }
+    }
+
+    function doReset() {
+        if(activeButton === '6') {
+            resetPack();
+        } else {
+            reset();
         }
     }
 
@@ -47,7 +76,7 @@ export default function ActionBar() {
                     </button>
                 </Tooltip>
                 <Tooltip title="Reset configuration">
-                    <button onClick={reset} className="bg-white/50 rounded-full border w-8 h-8 bigger-icons p-[6px] cursor-pointer">
+                    <button onClick={doReset} className="bg-white/50 rounded-full border w-8 h-8 bigger-icons p-[6px] cursor-pointer">
                         <img src="/action-bar-icons/reset-config.svg" alt="reset-configuration"/>
                     </button>
                 </Tooltip>

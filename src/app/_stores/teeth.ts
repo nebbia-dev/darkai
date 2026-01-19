@@ -1349,6 +1349,7 @@ export const useTeethStore = create<State>((set, get) => ({
                         state.packaging.premium = true;
                         state.hovered = undefined;
                         state.currentTooth = undefined;
+                        get().setHistoryPack(state);
                         get().calcTotal(state);
                     }
                     state.showGemTypeBox = button === '5';
@@ -1506,7 +1507,16 @@ export const useTeethStore = create<State>((set, get) => ({
     setPackaging: (prop:string, value:string|boolean) => {
         set(
             produce((state) => {
+
+                // update current history step
+                if(state.currentHistoryPack < state.historyPack.length) {
+                    state.historyPack = state.historyPack.splice(0, state.currentHistoryPack);
+                }
+                state.currentHistoryPack++;
+
                 state.packaging[prop] = value;
+                get().setHistoryPack(state);
+
                 if(prop === 'premium' && value === false) {
                     get().calcTotal(state);
                 }
@@ -2081,6 +2091,62 @@ export const useTeethStore = create<State>((set, get) => ({
                 signatureMaterial: state.signatureMaterial
             }]
         ];
+    },
+
+    // states and methods to set the PACKAGING configuration steps
+    // history and navigate among the various step of the user experience
+    historyPack: [],
+    currentHistoryPack: 0,
+    undoPack: () =>
+        set(
+            produce((state) => {
+                state.currentHistoryPack = state.currentHistoryPack - 1;
+                get().resetHistoryPackStep(state);
+            })
+        ),
+    redoPack: () =>
+        set(
+            produce((state) => {
+                state.currentHistoryPack = state.currentHistoryPack + 1;
+                get().resetHistoryPackStep(state);
+            })
+        ),
+    resetHistoryPackStep: (state) => {
+        for(const box of state.historyPack[state.currentHistoryPack - 1]) {
+            for(const [key, value] of Object.entries(box.packaging)) {
+                state.packaging[key] = value;
+            }
+
+        }
+    },
+    resetPack: () => {
+        set(
+            produce((state) => {
+                // update current history step
+                if(state.currentHistoryPack < state.historyPack.length) {
+                    state.historyPack = state.historyPack.splice(0, state.currentHistoryPack);
+                }
+                state.currentHistoryPack++;
+
+                state.packaging = {
+                    premium: true,
+                    out: 'black',
+                    in: 'black',
+                    details: 'gold',
+                    text: ''}
+
+                get().setHistoryPack(state);
+            })
+        );
+    },
+    setHistoryPack: (state) => {
+        state.historyPack = [...state.historyPack,
+            [{
+                packaging: state.packaging,
+            }]
+        ];
+
+        console.log(JSON.stringify(state.historyPack))
     },
 
     // states and method to calculate the total price of the current configuration
