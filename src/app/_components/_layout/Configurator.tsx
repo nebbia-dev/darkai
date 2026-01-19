@@ -1,5 +1,5 @@
 'use client'
-import {OrbitControls, useEnvironment, useFBX, useGLTF} from '@react-three/drei';
+import {OrbitControls, useEnvironment, useGLTF} from '@react-three/drei';
 import type { OrbitControls as OrbitControlsImpl } from 'three-stdlib';
 import Dentiera from "@/app/_components/_teeth/Dentiera";
 import {useTeethStore} from "@/app/_stores/teeth";
@@ -53,7 +53,6 @@ import Hammered from "@/app/_components/_teeth/_signature/Hammered";
 import Cross from "@/app/_components/_teeth/_signature/Cross";
 import {Group} from "three";
 import PremiumBox from "@/app/_components/_teeth/PremiumBox";
-import FullMaterial from "@/app/_components/_materials/FullMaterial";
 
 export default function Configurator() {
     const envMap = useEnvironment({
