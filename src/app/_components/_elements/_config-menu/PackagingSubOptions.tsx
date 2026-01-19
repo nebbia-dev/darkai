@@ -1,17 +1,24 @@
-import React from "react";
+import React, {useState} from "react";
 import {useTeethStore} from "@/app/_stores/teeth";
 import {State} from "@/app/_types/State";
 import {Confirm} from "@/app/_components/_icons/Confirm";
+import {CloseTwo} from "@/app/_components/_icons/CloseTwo";
 
 export default function PackagingSubOptions() {
 
     const value = useTeethStore((state: State) => state.activeSubButton);
     const setPackaging = useTeethStore((state: State) => state.setPackaging);
     const customText = useTeethStore((state: State) => state.packaging.text);
+    const [reset, setReset] = useState<boolean>(false);
     function updateCustomText(e:any) {
         e.preventDefault();
-        const customText = (document.getElementById('customText') as HTMLInputElement)?.value;
-        setPackaging('text', customText)
+        setReset(prev => !prev);
+        if(reset) {
+            setPackaging('text', '');
+        }  else {
+            const customText = (document.getElementById('customText') as HTMLInputElement)?.value;
+            setPackaging('text', customText)
+        }
     }
 
     return (
@@ -66,13 +73,16 @@ export default function PackagingSubOptions() {
                 </div>
             </div>
 
-            <div className={`${value === 'text' ? 'block' : 'invisible'} h-[120px] pt-4 mb-4 pl-6 text-center absolute translate-y-[36px]`}>
-                <div className="flex items-center bg-gray-50 rounded-full p-2 border-1">
-                    <form className="max-w-[196px] flex items-center" onSubmit={(e) => updateCustomText(e)}>
+            <div className={`${value === 'text' ? 'block' : 'invisible'} h-[120px] pt-4 mb-4 pl-6 text-center translate-y-[25%]`}>
+                <div className="flex items-center bg-gray-50 rounded-full p-2 border-1 gap-0 max-w-[216px]">
+                    <form className="flex items-center" onSubmit={(e) => updateCustomText(e)}>
                         <input id="customText" value={customText} onChange={(e) => setPackaging('text', e.currentTarget.value)} type="text" className="border bg-gray-200 rounded-full py-1 px-2"/>
                         <button type="submit"
-                                className="cursor-pointer relative translate-x-[-33px] border border-green-500 text-green-500 font-bold rounded-full bg-green-200 p-0.5">
-                            <Confirm className="w-6 h-6"/>
+                                className={`${customText.length > 0 ? 'block' : 'hidden'} ${reset ? 'border-gray-500 text-gray-500 bg-gray-200' : 'border-green-500 text-green-500 bg-green-200'} cursor-pointer relative translate-x-[-33px] border font-bold rounded-full p-0.5`}>
+                            {reset
+                                ? <CloseTwo className="w-6 h-6"/>
+                                : <Confirm className="w-6 h-6"/>
+                            }
                         </button>
                     </form>
                 </div>

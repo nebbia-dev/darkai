@@ -1347,6 +1347,9 @@ export const useTeethStore = create<State>((set, get) => ({
                     }
                     if(button === '6') {
                         state.packaging.premium = true;
+                        state.hovered = undefined;
+                        state.currentTooth = undefined;
+                        get().calcTotal(state);
                     }
                     state.showGemTypeBox = button === '5';
                     state.packagingScene = button === '6';
@@ -1400,6 +1403,7 @@ export const useTeethStore = create<State>((set, get) => ({
                         state.activeSubButton = undefined;
                         state.currentTooth = tooth;
                         state.lastActivatedTooth = tooth;
+                        state.showGemTypeBox = false;
                     }
                 }
 
@@ -1503,7 +1507,9 @@ export const useTeethStore = create<State>((set, get) => ({
         set(
             produce((state) => {
                 state.packaging[prop] = value;
-                console.log(JSON.stringify(state.packaging))
+                if(prop === 'premium' && value === false) {
+                    get().calcTotal(state);
+                }
             })
         )
     },
@@ -2232,6 +2238,11 @@ export const useTeethStore = create<State>((set, get) => ({
                     }
                 }
             }
+
+            if(state.packaging.premium) {
+                state.total += 300;
+            }
+
             if (state.hovered) {
                 state.hovered = undefined;
             }

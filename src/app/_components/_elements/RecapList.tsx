@@ -62,7 +62,7 @@ export default function RecapList({edit} : {edit:boolean}) {
     return (
         <div className="pl-5 pr-3 py-4 h-full">
             <ul className="pr-2 h-full overflow-y-auto">
-                {(history.length === 0 || total === 0) &&
+                {((history.length === 0 || total === 0) && !packaging.premium) &&
                     <li className="w-full h-full flex items-center justify-center">
                         <p>Choose your configs wisely!</p>
                     </li>
@@ -182,7 +182,7 @@ export default function RecapList({edit} : {edit:boolean}) {
                 })}
 
                 {packaging.premium &&
-                    <li>
+                    <li className="rounded p-2">
                         {/*tooth name*/}
                         <div className="flex justify-between items-center mb-1">
                             <h4 className="font-semibold">

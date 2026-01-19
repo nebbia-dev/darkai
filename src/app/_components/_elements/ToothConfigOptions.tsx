@@ -370,7 +370,7 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
 
 
             <div
-                className={`${!active ? 'hidden' : 'block'} pups text-center max-h-[70vh] ${active === '6' ? 'h-[604px] py-4' : 'h-[596px] py-8'}  w-[64px] absolute left-[240px] top-[-25vh]`}>
+                className={`${!active ? 'hidden' : 'block'} pups text-center max-h-[70vh] ${active === '6' ? 'h-[604px] py-4 w-[250px]' : 'h-[596px] py-8 w-[64px]'} absolute left-[240px] top-[-25vh]`}>
                 <div ref={selectorRef} className="whitespace-nowrap overflow-hidden h-full w-full">
                     {renderSubOptions(active, tooth)}
                 </div>
