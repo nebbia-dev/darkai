@@ -19,8 +19,11 @@ export default function PremiumBox({ref} : {ref:Ref<Group|null>}) {
 
     return(
         <>
-            <group ref={ref} rotation={[0, Math.PI / 4, 0]} position={[-20.060500000193823, 0, -9.505650000058095]}>
-                <group rotation={[Math.PI / 2, Math.PI, Math.PI / 2]} scale={[3, 3, 3]}>
+            <group ref={ref}
+                   // rotation={[0, Math.PI / 4, 0]}
+                   // position={[-20.060500000193823, 0, -9.505650000058095]} per l'animazione
+            >
+                <group rotation={[Math.PI / 2, Math.PI, Math.PI / 2]} scale={[3.5, 3.5, 3.5]}>
 
                     {/*TOP*/}
                     <mesh geometry={(premiumBox.scene.children[0].children[2].children[0] as THREE.Mesh).geometry}>
@@ -60,7 +63,7 @@ export default function PremiumBox({ref} : {ref:Ref<Group|null>}) {
                     </mesh>
                 </group>
 
-                <mesh position={[0, -3, 0.75]} rotation={[-Math.PI / 2, 0, 0]}>
+                <mesh position={[0, -4, 0.75]} rotation={[-Math.PI / 2, 0, 0]}>
                     <planeGeometry args={[4, 4]}/>
                     <ShadowMaterial/>
                 </mesh>

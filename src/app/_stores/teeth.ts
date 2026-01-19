@@ -2145,8 +2145,6 @@ export const useTeethStore = create<State>((set, get) => ({
                 packaging: state.packaging,
             }]
         ];
-
-        console.log(JSON.stringify(state.historyPack))
     },
 
     // states and method to calculate the total price of the current configuration

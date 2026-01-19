@@ -1750,57 +1750,57 @@ export default function Configurator() {
                 groupRef.current.position.x -= delta * 2;
                 camera.position.x -= delta * 2;
             }
-
-        } else if(groupRef.current && packagingRef.current && packagingScene) {
-            invalidate();
-
-            if(groupRef.current.position.x < 20) {
-                groupRef.current.position.x += (delta + 0.02) * 2.5;
-                groupRef.current.position.z -= (delta + 0.05) * 0.75;
-                groupRef.current.visible = true;
-            } else {
-                groupRef.current.visible = false;
-            }
-
-            if(packagingRef.current.position.x < 0) {
-                packagingRef.current.position.x += (delta + 0.02) * 2.5;
-            }
-
-            if(packagingRef.current.position.z < 0) {
-                packagingRef.current.position.z += (delta + 0.05) * 0.575;
-            }
-
-            if(packagingRef.current.position.x <= -20 || packagingRef.current.position.z <= -9 ) {
-                packagingRef.current.visible = false;
-            } else {
-                packagingRef.current.visible = true;
-            }
-
-
-        } else if(groupRef.current && packagingRef.current && !packagingScene) {
-
-            invalidate();
-
-            groupRef.current.visible = true;
-
-            if(groupRef.current.position.x > 0) {
-                groupRef.current.position.x -= (delta + 0.02) * 2.5;
-                groupRef.current.position.z += (delta + 0.05) * 0.75;
-            }
-
-            if(packagingRef.current.position.x > -20) {
-                packagingRef.current.position.x -= (delta + 0.02) * 2.5;
-            }
-
-            if(packagingRef.current.position.z > -9) {
-                packagingRef.current.position.z -= (delta + 0.05) * 0.575;
-            }
-
-            if(packagingRef.current.position.x <= -20 || packagingRef.current.position.z <= -9 ) {
-                packagingRef.current.visible = false;
-            } else {
-                packagingRef.current.visible = true;
-            }
+        // animazione scorrimento packaging
+        // } else if(groupRef.current && packagingRef.current && packagingScene) {
+        //     invalidate();
+        //
+        //     if(groupRef.current.position.x < 20) {
+        //         groupRef.current.position.x += (delta + 0.02) * 2.5;
+        //         groupRef.current.position.z -= (delta + 0.05) * 0.75;
+        //         groupRef.current.visible = true;
+        //     } else {
+        //         groupRef.current.visible = false;
+        //     }
+        //
+        //     if(packagingRef.current.position.x < 0) {
+        //         packagingRef.current.position.x += (delta + 0.02) * 2.5;
+        //     }
+        //
+        //     if(packagingRef.current.position.z < 0) {
+        //         packagingRef.current.position.z += (delta + 0.05) * 0.575;
+        //     }
+        //
+        //     if(packagingRef.current.position.x <= -20 || packagingRef.current.position.z <= -9 ) {
+        //         packagingRef.current.visible = false;
+        //     } else {
+        //         packagingRef.current.visible = true;
+        //     }
+        //
+        //
+        // } else if(groupRef.current && packagingRef.current && !packagingScene) {
+        //
+        //     invalidate();
+        //
+        //     groupRef.current.visible = true;
+        //
+        //     if(groupRef.current.position.x > 0) {
+        //         groupRef.current.position.x -= (delta + 0.02) * 2.5;
+        //         groupRef.current.position.z += (delta + 0.05) * 0.75;
+        //     }
+        //
+        //     if(packagingRef.current.position.x > -20) {
+        //         packagingRef.current.position.x -= (delta + 0.02) * 2.5;
+        //     }
+        //
+        //     if(packagingRef.current.position.z > -9) {
+        //         packagingRef.current.position.z -= (delta + 0.05) * 0.575;
+        //     }
+        //
+        //     if(packagingRef.current.position.x <= -20 || packagingRef.current.position.z <= -9 ) {
+        //         packagingRef.current.visible = false;
+        //     } else {
+        //         packagingRef.current.visible = true;
+        //     }
 
         } else if(groupRef.current && !nextStep) {
 
@@ -1906,59 +1906,60 @@ export default function Configurator() {
             />
             {savedTeeth && savedEnvMap &&
                 <>
-                    <PremiumBox ref={packagingRef}/>
-                    <group ref={groupRef} position={[0, 0, 3]}>
+                {packagingScene
+                    ? <PremiumBox ref={packagingRef}/>
+                    : <group ref={groupRef} position={[0, 0, 3]}>
 
-                        {/*SIGNATURE*/}
-                        <Vamp/>
-                        <Sprinkles/>
-                        <BubbleGum/>
-                        <Braces/>
-                        <Tribals/>
-                        <Cross/>
-                        <Hammered/>
-                        {/*DENTI SUPERIORI*/}
-                        <IlsSx/>
-                        <IlsSxStone/>
-                        <IlsDx/>
-                        <IlsDxStone/>
-                        <IcsSx/>
-                        <IcsSxStone/>
-                        <IcsDx/>
-                        <IcsDxStone/>
-                        <CsDx/>
-                        <CsDxStone/>
-                        <CsSx/>
-                        <CsSxStone/>
-                        {/*DENTI INFERIORI*/}
-                        <IliSx/>
-                        <IliSxStone/>
-                        <IliDx/>
-                        <IliDxStone/>
-                        <IciSx/>
-                        <IciSxStone/>
-                        <IciDx/>
-                        <IciDxStone/>
-                        <CiDx/>
-                        <CiDxStone/>
-                        <CiSx/>
-                        <CiSxStone/>
-                        {/*MOLARI E PREMOLARI*/}
-                        <PprsDx/>
-                        <PprsSx/>
-                        <PpriDx/>
-                        <PpriSx/>
-                        <SprsDx/>
-                        <SprsSx/>
-                        <SpriDx/>
-                        <SpriSx/>
-                        <MsDx/>
-                        <MsSx/>
-                        <MiDx/>
-                        <MiSx/>
-                        {/*BASE*/}
-                        <Dentiera/>
-                    </group>
+                {/*SIGNATURE*/}
+                <Vamp/>
+                <Sprinkles/>
+                <BubbleGum/>
+                <Braces/>
+                <Tribals/>
+                <Cross/>
+                <Hammered/>
+                {/*DENTI SUPERIORI*/}
+                <IlsSx/>
+                <IlsSxStone/>
+                <IlsDx/>
+                <IlsDxStone/>
+                <IcsSx/>
+                <IcsSxStone/>
+                <IcsDx/>
+                <IcsDxStone/>
+                <CsDx/>
+                <CsDxStone/>
+                <CsSx/>
+                <CsSxStone/>
+                {/*DENTI INFERIORI*/}
+                <IliSx/>
+                <IliSxStone/>
+                <IliDx/>
+                <IliDxStone/>
+                <IciSx/>
+                <IciSxStone/>
+                <IciDx/>
+                <IciDxStone/>
+                <CiDx/>
+                <CiDxStone/>
+                <CiSx/>
+                <CiSxStone/>
+                {/*MOLARI E PREMOLARI*/}
+                <PprsDx/>
+                <PprsSx/>
+                <PpriDx/>
+                <PpriSx/>
+                <SprsDx/>
+                <SprsSx/>
+                <SpriDx/>
+                <SpriSx/>
+                <MsDx/>
+                <MsSx/>
+                <MiDx/>
+                <MiSx/>
+                {/*BASE*/}
+                <Dentiera/>
+                </group>}
                 </>
 
             }
