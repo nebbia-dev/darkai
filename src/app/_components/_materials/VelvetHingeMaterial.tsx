@@ -1,14 +1,29 @@
 import {useTeethStore} from "@/app/_stores/teeth";
 import {State} from "@/app/_types/State";
-import {useTexture} from "@react-three/drei";
+import {useEnvironment, useTexture} from "@react-three/drei";
+import * as THREE from "three";
 
-export default function VelvetMaterial() {
-    const envMap = useTeethStore((state: State) => state.envMap);
+export default function VelvetHingeMaterial() {
     const color = useTeethStore((state:State) => state.packaging.in);
+    // const envMap = useTeethStore((state: State) => state.envMap);
+
+    const envMap = useEnvironment({
+        // files: "envMaps/rosendal_park_sunset_puresky_1k.exr"
+        files: "envMaps/Diamond_HDRI_Schiarita.hdr"
+        // files: "envMaps/Diamond_HDRI.hdr"
+    })
 
     const velvet = useTexture({
-        normalMap: 'textures/packaging/Velluto_Normal.webp',
+        map: 'textures/packaging/Linguetta_Base_color.webp',
+        normalMap: 'textures/packaging/Linguetta_Normal.webp',
+        metalnessMap: 'textures/packaging/Linguetta_Metallic.webp',
+        roughnessMap: 'textures/packaging/Linguetta_Roughness.webp',
     });
+    velvet.map.colorSpace = THREE.SRGBColorSpace;
+    velvet.map.flipY = false;
+    velvet.normalMap.flipY = false;
+    velvet.metalnessMap.flipY = false;
+    velvet.roughnessMap.flipY = false;
 
     let hex;
     switch(color) {
@@ -64,11 +79,12 @@ export default function VelvetMaterial() {
 
     return(
         <meshStandardMaterial
-            normalMap={velvet.normalMap}
             color={hex}
             envMap={envMap}
-            metalness={0}
-            roughness={0.5}
+            map={velvet.map}
+            normalMap={velvet.normalMap}
+            metalnessMap={velvet.metalnessMap}
+            roughnessMap={velvet.roughnessMap}
         />
     )
 }

@@ -3,9 +3,8 @@ import {State} from "@/app/_types/State";
 import {useEnvironment, useTexture} from "@react-three/drei";
 import * as THREE from "three";
 
-export default function VelvetPatternMaterial() {
+export default function VelvetCavityMaterial() {
     const color = useTeethStore((state:State) => state.packaging.in);
-    // const envMap = useTeethStore((state: State) => state.envMap);
 
     const envMap = useEnvironment({
         // files: "envMaps/rosendal_park_sunset_puresky_1k.exr"
@@ -14,11 +13,11 @@ export default function VelvetPatternMaterial() {
     })
 
     const velvet = useTexture({
-        map: 'textures/packaging/Velvet_Base_color.webp',
-        normalMap: 'textures/packaging/Velvet_Normal.webp',
-        metalnessMap: 'textures/packaging/Velvet_Metallic.webp',
-        roughnessMap: 'textures/packaging/Velvet_Roughness.webp',
-        aoMap: 'textures/packaging/Porta_Grillz.webp',
+        map: 'textures/packaging/Cassetti_Base_color.webp',
+        normalMap: 'textures/packaging/Cassetti_Normal.webp',
+        metalnessMap: 'textures/packaging/Cassetti_Metallic.webp',
+        roughnessMap: 'textures/packaging/Cassetti_Roughness.webp',
+        aoMap: 'textures/packaging/Cassetti.webp',
     });
     velvet.map.colorSpace = THREE.SRGBColorSpace;
     velvet.map.flipY = false;

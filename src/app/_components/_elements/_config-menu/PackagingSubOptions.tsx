@@ -36,7 +36,7 @@ export default function PackagingSubOptions() {
                     <button onClick={(e) => setPackaging('out', e.currentTarget.value)} value="blue" className="cursor-pointer w-[24px] h-[24px] border bg-[#2b4592] rounded-full"></button>
                     <button onClick={(e) => setPackaging('out', e.currentTarget.value)} value="purple" className="cursor-pointer w-[24px] h-[24px] border bg-[#380078] rounded-full"></button>
                     <button onClick={(e) => setPackaging('out', e.currentTarget.value)} value="gray" className="cursor-pointer w-[24px] h-[24px] border bg-[#7b878e] rounded-full"></button>
-                    <button onClick={(e) => setPackaging('out', e.currentTarget.value)} value="silver" className="cursor-pointer w-[24px] h-[24px] border bg-[#f6f6f6] rounded-full"></button>
+                    <button onClick={(e) => setPackaging('out', e.currentTarget.value)} value="silver" className="cursor-pointer w-[24px] h-[24px] border bg-[#c0c0c0] rounded-full"></button>
                     <button onClick={(e) => setPackaging('out', e.currentTarget.value)} value="black" className="cursor-pointer w-[24px] h-[24px] border bg-[#221f20] rounded-full"></button>
                     <button onClick={(e) => setPackaging('out', e.currentTarget.value)} value="white" className="cursor-pointer w-[24px] h-[24px] border bg-[#ffffff] rounded-full"></button>
                 </div>

@@ -1,20 +1,24 @@
 import React, {Ref, useMemo} from "react";
-import {useGLTF} from "@react-three/drei";
+import {useGLTF, useTexture} from "@react-three/drei";
 import {useTeethStore} from "@/app/_stores/teeth";
 import * as THREE from 'three';
 import {State} from "@/app/_types/State";
 import FullMaterial from "@/app/_components/_materials/FullMaterial";
 import {Group} from "three";
 import ShadowMaterial from "@/app/_components/_materials/ShadowMaterial";
-import BoxMaterial from "@/app/_components/_materials/BoxMaterial";
-import VelvetMaterial from "@/app/_components/_materials/VelvetMaterial";
 import VelvetPatternMaterial from "@/app/_components/_materials/VelvetPatternMaterial";
+import VelvetCavityMaterial from "@/app/_components/_materials/VelvetCavityMaterial";
+import VelvetHingeMaterial from "@/app/_components/_materials/VelvetHingeMaterial";
+import BoxMaterialSup from "@/app/_components/_materials/BoxMaterialSup";
+import BoxMaterialInf from "@/app/_components/_materials/BoxMaterialInf";
 
 export default function PremiumBox({ref} : {ref:Ref<Group|null>}) {
     const premiumBox = useMemo(() => {
         return useGLTF('/models/Packaging.glb')
     }, []);
 
+    const lightDisks = useTexture('/textures/packaging/Light.webp');
+    lightDisks.flipY = false;
     const packaging = useTeethStore((state: State) => state.packaging);
 
     return(
@@ -26,31 +30,27 @@ export default function PremiumBox({ref} : {ref:Ref<Group|null>}) {
                 <group rotation={[Math.PI / 2, Math.PI, Math.PI / 2]} scale={[3.5, 3.5, 3.5]}>
 
                     {/*TOP*/}
-                    <mesh geometry={(premiumBox.scene.children[0].children[2].children[0] as THREE.Mesh).geometry}>
-                        <BoxMaterial/>
+                    {/*Sportello*/}
+                    <mesh geometry={(premiumBox.scene.children[0].children[5].children[0] as THREE.Mesh).geometry}>
+                        <BoxMaterialSup/>
                     </mesh>
-                    <mesh geometry={(premiumBox.scene.children[0].children[2].children[1] as THREE.Mesh).geometry}>
+                    {/*Stelle*/}
+                    <mesh geometry={(premiumBox.scene.children[0].children[5].children[1] as THREE.Mesh).geometry}>
                         <FullMaterial color={packaging.details} finish="polished"/>
                     </mesh>
-                    <mesh geometry={(premiumBox.scene.children[0].children[2].children[2] as THREE.Mesh).geometry}>
+                    <mesh geometry={(premiumBox.scene.children[0].children[5].children[2] as THREE.Mesh).geometry}>
                         <FullMaterial color={packaging.details} finish="polished"/>
                     </mesh>
-
-                    {/*MID*/}
-                    <mesh geometry={(premiumBox.scene.children[0].children[0] as THREE.Mesh).geometry}>
-                        <FullMaterial color={packaging.details} finish="polished"/>
-                    </mesh>
-
-                    {/*BOTTOM*/}
+                    {/*Loghi*/}
+                    {/*esterno*/}
                     <mesh geometry={(premiumBox.scene.children[0].children[1].children[0] as THREE.Mesh).geometry}>
-                        <VelvetPatternMaterial/>
-                        <VelvetMaterial/>
+                        <FullMaterial color={packaging.details} finish="polished"/>
                     </mesh>
                     <mesh geometry={(premiumBox.scene.children[0].children[1].children[1] as THREE.Mesh).geometry}>
-                        <VelvetMaterial/>
+                        <FullMaterial color={packaging.details} finish="polished"/>
                     </mesh>
                     <mesh geometry={(premiumBox.scene.children[0].children[1].children[2] as THREE.Mesh).geometry}>
-                        <BoxMaterial/>
+                        <FullMaterial color={packaging.details} finish="polished"/>
                     </mesh>
                     <mesh geometry={(premiumBox.scene.children[0].children[1].children[3] as THREE.Mesh).geometry}>
                         <FullMaterial color={packaging.details} finish="polished"/>
@@ -58,8 +58,60 @@ export default function PremiumBox({ref} : {ref:Ref<Group|null>}) {
                     <mesh geometry={(premiumBox.scene.children[0].children[1].children[4] as THREE.Mesh).geometry}>
                         <FullMaterial color={packaging.details} finish="polished"/>
                     </mesh>
-                    <mesh geometry={(premiumBox.scene.children[0].children[1].children[5] as THREE.Mesh).geometry}>
-                        <VelvetMaterial/>
+                    {/*interno*/}
+                    <mesh geometry={(premiumBox.scene.children[0].children[2].children[0] as THREE.Mesh).geometry}>
+                        <FullMaterial color={packaging.details} finish="polished"/>
+                    </mesh>
+                    <mesh geometry={(premiumBox.scene.children[0].children[2].children[1] as THREE.Mesh).geometry}>
+                        <FullMaterial color={packaging.details} finish="polished"/>
+                    </mesh>
+                    <mesh geometry={(premiumBox.scene.children[0].children[2].children[2] as THREE.Mesh).geometry}>
+                        <FullMaterial color={packaging.details} finish="polished"/>
+                    </mesh>
+                    <mesh geometry={(premiumBox.scene.children[0].children[2].children[3] as THREE.Mesh).geometry}>
+                        <FullMaterial color={packaging.details} finish="polished"/>
+                    </mesh>
+                    <mesh geometry={(premiumBox.scene.children[0].children[2].children[4] as THREE.Mesh).geometry}>
+                        <FullMaterial color={packaging.details} finish="polished"/>
+                    </mesh>
+
+                    {/*FARETTI*/}
+                    <mesh geometry={(premiumBox.scene.children[0].children[3] as THREE.Mesh).geometry}>
+                        <meshBasicMaterial
+                            color={0xffffff}
+                            map={lightDisks}
+                            transparent={true}
+                        />
+                    </mesh>
+
+                    {/*CERNIERA*/}
+                    <mesh geometry={(premiumBox.scene.children[0].children[0] as THREE.Mesh).geometry}>
+                        <FullMaterial color={packaging.details} finish="polished"/>
+                    </mesh>
+
+                    {/*BOTTOM*/}
+                    {/*Pattern*/}
+                    <mesh geometry={(premiumBox.scene.children[0].children[4].children[1] as THREE.Mesh).geometry}>
+                        <VelvetPatternMaterial/>
+                    </mesh>
+                    {/*Cassetti*/}
+                    <mesh geometry={(premiumBox.scene.children[0].children[4].children[0] as THREE.Mesh).geometry}>
+                        <VelvetCavityMaterial/>
+                    </mesh>
+                    {/*Sportello*/}
+                    <mesh geometry={(premiumBox.scene.children[0].children[4].children[2] as THREE.Mesh).geometry}>
+                        <BoxMaterialInf/>
+                    </mesh>
+                    {/*Stelle*/}
+                    <mesh geometry={(premiumBox.scene.children[0].children[4].children[3] as THREE.Mesh).geometry}>
+                        <FullMaterial color={packaging.details} finish="polished"/>
+                    </mesh>
+                    <mesh geometry={(premiumBox.scene.children[0].children[4].children[4] as THREE.Mesh).geometry}>
+                        <FullMaterial color={packaging.details} finish="polished"/>
+                    </mesh>
+                    {/*Cerniera*/}
+                    <mesh geometry={(premiumBox.scene.children[0].children[4].children[5] as THREE.Mesh).geometry}>
+                        <VelvetHingeMaterial/>
                     </mesh>
                 </group>
 

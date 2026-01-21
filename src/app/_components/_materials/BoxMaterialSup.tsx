@@ -2,14 +2,12 @@ import {useTeethStore} from "@/app/_stores/teeth";
 import {State} from "@/app/_types/State";
 import {useTexture} from "@react-three/drei";
 
-export default function BoxMaterial() {
+export default function BoxMaterialSup() {
     const color = useTeethStore((state: State) => state.packaging.out);
     const envMap = useTeethStore((state: State) => state.envMap);
-    // const matcap = useTexture('/textures/matcaps/10.webp');
-    // const velvet = useTexture({
-    //     map: 'textures/packaging/Pattern_Velluto.webp',
-    //     normalMap: 'textures/packaging/Velluto_Normal.webp',
-    // });
+
+    const box = useTexture('textures/packaging/Superiore.webp');
+    box.flipY = false;
 
     let hex;
     switch(color) {
@@ -47,7 +45,7 @@ export default function BoxMaterial() {
             hex = 0x7b878e;
             break;
         case 'silver':
-            hex = 0xf6f6f6;
+            hex = 0xc0c0c0;
             break;
         case 'black':
             hex = 0x221f20;
@@ -61,14 +59,9 @@ export default function BoxMaterial() {
         <meshStandardMaterial
             color={hex}
             envMap={envMap}
-            metalness={0.25}
-            roughness={0.75}
+            metalness={color === 'silver' ? 0.8 : 0.25}
+            roughness={color === 'silver' ? 0.2 : 0.75}
+            aoMap={box}
         />
-        // <meshMatcapMaterial
-        //     map={velvet.map}
-        //     normalMap={velvet.normalMap}
-        //     color={hex}
-        //     matcap={matcap}
-        // />
     )
 }
