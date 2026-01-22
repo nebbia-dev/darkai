@@ -1,5 +1,5 @@
 'use client'
-import {OrbitControls, useEnvironment, useFBX, useGLTF} from '@react-three/drei';
+import {OrbitControls, useEnvironment, useGLTF} from '@react-three/drei';
 import type { OrbitControls as OrbitControlsImpl } from 'three-stdlib';
 import Dentiera from "@/app/_components/_teeth/Dentiera";
 import {useTeethStore} from "@/app/_stores/teeth";
@@ -22,7 +22,7 @@ import CiDx from "@/app/_components/_teeth/_canines/CiDx";
 import CiSx from "@/app/_components/_teeth/_canines/CiSx";
 import CiSxStone from "@/app/_components/_teeth/_canines/CiSxStone";
 import {State} from "@/app/_types/State";
-import * as THREE from 'three'
+import * as THREE from 'three';
 import {invalidate, useFrame, useThree} from "@react-three/fiber";
 import IlsSxStone from "@/app/_components/_teeth/_lateral-incisors/IlsSxStone";
 import IlsDxStone from "@/app/_components/_teeth/_lateral-incisors/IlsDxStone";
@@ -52,21 +52,21 @@ import Tribals from "@/app/_components/_teeth/_signature/Tribals";
 import Hammered from "@/app/_components/_teeth/_signature/Hammered";
 import Cross from "@/app/_components/_teeth/_signature/Cross";
 import {Group} from "three";
+import PremiumBox from "@/app/_components/_teeth/PremiumBox";
 
 export default function Configurator() {
     const envMap = useEnvironment({
         files: "envMaps/HDR_Light_Studio_Free_HDRI_Design_13.exr"
     })
 
-    // Se voglio piazzare anche l'fbx in LoadedMaterials, verosimilmente devo usare qui uno useEffect
-
     const teeth = useMemo((): FBX => {
+
         const fullDiamond = useGLTF('/models/Full_Pave.glb');
         const enamel = useGLTF('/models/Enamel.glb');
         const frameDiamond = useGLTF('/models/Frame_Pave.glb');
         const barDiamond = useGLTF('/models/Bar_Pave.glb');
         const stones = useGLTF('/models/Stones.glb')
-        const frames = useFBX('/models/MOD_Frame_Capsula (2).fbx');
+        const frames = useGLTF('/models/Frames.glb');
         const bigBar  = useGLTF('/models/BigBar.glb');
         const bars = useGLTF('/models/Bars.glb');
         const full = useGLTF('/models/Full.glb');
@@ -181,7 +181,7 @@ export default function Configurator() {
                     }
                 },
                 frame: {
-                    full: (frames.children[1] as THREE.Mesh).geometry,
+                    full: (frames.scene.children[1] as THREE.Mesh).geometry,
                     diamond: {
                         base: (frameDiamond.scene.children[0].children[5] as THREE.Mesh).geometry,
                         full: (frameDiamond.scene.children[0].children[7] as THREE.Mesh).geometry,
@@ -297,7 +297,7 @@ export default function Configurator() {
                     }
                 },
                 frame: {
-                    full: (frames.children[0] as THREE.Mesh).geometry,
+                    full: (frames.scene.children[0] as THREE.Mesh).geometry,
                     diamond: {
                         base: (frameDiamond.scene.children[0].children[4] as THREE.Mesh).geometry,
                         full: (frameDiamond.scene.children[0].children[6] as THREE.Mesh).geometry,
@@ -413,7 +413,7 @@ export default function Configurator() {
                     }
                 },
                 frame: {
-                    full: (frames.children[6] as THREE.Mesh).geometry,
+                    full: (frames.scene.children[6] as THREE.Mesh).geometry,
                     diamond: {
                         base: (frameDiamond.scene.children[1].children[5] as THREE.Mesh).geometry,
                         full: (frameDiamond.scene.children[1].children[7] as THREE.Mesh).geometry,
@@ -529,7 +529,7 @@ export default function Configurator() {
                     }
                 },
                 frame: {
-                    full: (frames.children[7] as THREE.Mesh).geometry,
+                    full: (frames.scene.children[7] as THREE.Mesh).geometry,
                     diamond: {
                         base: (frameDiamond.scene.children[1].children[4] as THREE.Mesh).geometry,
                         full: (frameDiamond.scene.children[1].children[6] as THREE.Mesh).geometry,
@@ -644,7 +644,7 @@ export default function Configurator() {
                     }
                 },
                 frame: {
-                    full: (frames.children[2] as THREE.Mesh).geometry,
+                    full: (frames.scene.children[2] as THREE.Mesh).geometry,
                     diamond: {
                         base: (frameDiamond.scene.children[0].children[9] as THREE.Mesh).geometry,
                         full: (frameDiamond.scene.children[0].children[11] as THREE.Mesh).geometry,
@@ -758,7 +758,7 @@ export default function Configurator() {
                     }
                 },
                 frame: {
-                    full: (frames.children[3] as THREE.Mesh).geometry,
+                    full: (frames.scene.children[3] as THREE.Mesh).geometry,
                     diamond: {
                         base: (frameDiamond.scene.children[0].children[8] as THREE.Mesh).geometry,
                         full: (frameDiamond.scene.children[0].children[10] as THREE.Mesh).geometry,
@@ -872,7 +872,7 @@ export default function Configurator() {
                     }
                 },
                 frame: {
-                    full: (frames.children[8] as THREE.Mesh).geometry,
+                    full: (frames.scene.children[8] as THREE.Mesh).geometry,
                     diamond: {
                         base: (frameDiamond.scene.children[1].children[9] as THREE.Mesh).geometry,
                         full: (frameDiamond.scene.children[1].children[11] as THREE.Mesh).geometry,
@@ -986,7 +986,7 @@ export default function Configurator() {
                     }
                 },
                 frame: {
-                    full: (frames.children[9] as THREE.Mesh).geometry,
+                    full: (frames.scene.children[9] as THREE.Mesh).geometry,
                     diamond: {
                         base: (frameDiamond.scene.children[1].children[8] as THREE.Mesh).geometry,
                         full: (frameDiamond.scene.children[1].children[10] as THREE.Mesh).geometry,
@@ -1101,7 +1101,7 @@ export default function Configurator() {
                     }
                 },
                 frame: {
-                    full: (frames.children[4] as THREE.Mesh).geometry,
+                    full: (frames.scene.children[4] as THREE.Mesh).geometry,
                     diamond: {
                         base: (frameDiamond.scene.children[0].children[1] as THREE.Mesh).geometry,
                         full: (frameDiamond.scene.children[0].children[3] as THREE.Mesh).geometry,
@@ -1215,7 +1215,7 @@ export default function Configurator() {
                     }
                 },
                 frame: {
-                    full: (frames.children[5] as THREE.Mesh).geometry,
+                    full: (frames.scene.children[5] as THREE.Mesh).geometry,
                     diamond: {
                         base: (frameDiamond.scene.children[0].children[0] as THREE.Mesh).geometry,
                         full: (frameDiamond.scene.children[0].children[2] as THREE.Mesh).geometry,
@@ -1321,7 +1321,7 @@ export default function Configurator() {
                     position: getOriginGlb(fullDiamond.scene.children[1].children[14], 1)
                 },
                 frame: {
-                    full: (frames.children[10] as THREE.Mesh).geometry,
+                    full: (frames.scene.children[10] as THREE.Mesh).geometry,
                     diamond: {
                         base: (frameDiamond.scene.children[1].children[1] as THREE.Mesh).geometry,
                         full: (frameDiamond.scene.children[1].children[3] as THREE.Mesh).geometry,
@@ -1443,7 +1443,7 @@ export default function Configurator() {
                     position: getOriginGlb(fullDiamond.scene.children[1].children[6], 1)
                 },
                 frame: {
-                    full: (frames.children[11] as THREE.Mesh).geometry,
+                    full: (frames.scene.children[11] as THREE.Mesh).geometry,
                     diamond: {
                         base: (frameDiamond.scene.children[1].children[0] as THREE.Mesh).geometry,
                         full: (frameDiamond.scene.children[1].children[2] as THREE.Mesh).geometry,
@@ -1700,8 +1700,10 @@ export default function Configurator() {
     const doResetControls = useTeethStore((state : State) => state.setResetControls);
     const orbitRef = useRef<OrbitControlsImpl>(null);
     const groupRef = useRef<Group>(null);
+    const packagingRef = useRef<Group>(null);
     const { gl, scene, camera } = useThree();
     const setLoaded = useTeethStore((state: State) => state.setLoaded);
+    const packagingScene = useTeethStore((state: State) => state.packagingScene);
 
     useEffect(() => {
         if(screenshot && orbitRef.current) {
@@ -1741,12 +1743,66 @@ export default function Configurator() {
 
     useFrame((state, delta) => {
         if(groupRef.current && nextStep) {
+
             invalidate();
             if(groupRef.current.position.x > -3.3) {
                 groupRef.current.position.x -= delta * 2;
                 camera.position.x -= delta * 2;
             }
+        // animazione scorrimento packaging
+        // } else if(groupRef.current && packagingRef.current && packagingScene) {
+        //     invalidate();
+        //
+        //     if(groupRef.current.position.x < 20) {
+        //         groupRef.current.position.x += (delta + 0.02) * 2.5;
+        //         groupRef.current.position.z -= (delta + 0.05) * 0.75;
+        //         groupRef.current.visible = true;
+        //     } else {
+        //         groupRef.current.visible = false;
+        //     }
+        //
+        //     if(packagingRef.current.position.x < 0) {
+        //         packagingRef.current.position.x += (delta + 0.02) * 2.5;
+        //     }
+        //
+        //     if(packagingRef.current.position.z < 0) {
+        //         packagingRef.current.position.z += (delta + 0.05) * 0.575;
+        //     }
+        //
+        //     if(packagingRef.current.position.x <= -20 || packagingRef.current.position.z <= -9 ) {
+        //         packagingRef.current.visible = false;
+        //     } else {
+        //         packagingRef.current.visible = true;
+        //     }
+        //
+        //
+        // } else if(groupRef.current && packagingRef.current && !packagingScene) {
+        //
+        //     invalidate();
+        //
+        //     groupRef.current.visible = true;
+        //
+        //     if(groupRef.current.position.x > 0) {
+        //         groupRef.current.position.x -= (delta + 0.02) * 2.5;
+        //         groupRef.current.position.z += (delta + 0.05) * 0.75;
+        //     }
+        //
+        //     if(packagingRef.current.position.x > -20) {
+        //         packagingRef.current.position.x -= (delta + 0.02) * 2.5;
+        //     }
+        //
+        //     if(packagingRef.current.position.z > -9) {
+        //         packagingRef.current.position.z -= (delta + 0.05) * 0.575;
+        //     }
+        //
+        //     if(packagingRef.current.position.x <= -20 || packagingRef.current.position.z <= -9 ) {
+        //         packagingRef.current.visible = false;
+        //     } else {
+        //         packagingRef.current.visible = true;
+        //     }
+
         } else if(groupRef.current && !nextStep) {
+
             invalidate();
             if(groupRef.current.position.x < 0) {
                 groupRef.current.position.x += delta * 2;
@@ -1758,6 +1814,13 @@ export default function Configurator() {
     function resetCameraPosition() {
         if(groupRef.current && orbitRef.current){
             if(groupRef.current.position.x < 0) {
+                orbitRef.current.setAzimuthalAngle(-0.12);
+            } else {
+                orbitRef.current.setAzimuthalAngle(0);
+            }
+            orbitRef.current.setPolarAngle(1.422);
+        } else if(packagingRef.current && orbitRef.current){
+            if(packagingRef.current.position.x < 0) {
                 orbitRef.current.setAzimuthalAngle(-0.12);
             } else {
                 orbitRef.current.setAzimuthalAngle(0);
@@ -1843,63 +1906,68 @@ export default function Configurator() {
                 enablePan={false}
                 minPolarAngle={nextStep ? Math.PI / 2.1 : Math.PI / 3 }
                 maxPolarAngle={nextStep ? Math.PI - Math.PI / 2.1 : Math.PI - Math.PI / 3}
-                minAzimuthAngle={nextStep ? -Math.PI / 4 : -Math.PI / 2}
-                maxAzimuthAngle={nextStep ? Math.PI / 7 : Math.PI / 2}
+                minAzimuthAngle={packagingScene ? -Infinity : nextStep ? -Math.PI / 4 : -Math.PI / 2}
+                maxAzimuthAngle={packagingScene ? -Infinity : nextStep ? Math.PI / 7 : Math.PI / 2}
                 ref={orbitRef}
             />
             {savedTeeth && savedEnvMap &&
-                <group ref={groupRef} position={[0, 0, 3]}>
+                <>
+                {packagingScene
+                    ? <PremiumBox ref={packagingRef}/>
+                    : <group ref={groupRef} position={[0, 0, 3]}>
 
-                    {/*SIGNATURE*/}
-                    <Vamp/>
-                    <Sprinkles/>
-                    <BubbleGum/>
-                    <Braces/>
-                    <Tribals/>
-                    <Cross/>
-                    <Hammered/>
-                    {/*DENTI SUPERIORI*/}
-                    <IlsSx/>
-                    <IlsSxStone/>
-                    <IlsDx/>
-                    <IlsDxStone/>
-                    <IcsSx/>
-                    <IcsSxStone/>
-                    <IcsDx/>
-                    <IcsDxStone/>
-                    <CsDx/>
-                    <CsDxStone/>
-                    <CsSx/>
-                    <CsSxStone/>
-                    {/*DENTI INFERIORI*/}
-                    <IliSx/>
-                    <IliSxStone/>
-                    <IliDx/>
-                    <IliDxStone/>
-                    <IciSx/>
-                    <IciSxStone/>
-                    <IciDx/>
-                    <IciDxStone/>
-                    <CiDx/>
-                    <CiDxStone/>
-                    <CiSx/>
-                    <CiSxStone/>
-                    {/*MOLARI E PREMOLARI*/}
-                    <PprsDx/>
-                    <PprsSx/>
-                    <PpriDx/>
-                    <PpriSx/>
-                    <SprsDx/>
-                    <SprsSx/>
-                    <SpriDx/>
-                    <SpriSx/>
-                    <MsDx/>
-                    <MsSx/>
-                    <MiDx/>
-                    <MiSx/>
-                    {/*BASE*/}
-                    <Dentiera/>
-                </group>
+                {/*SIGNATURE*/}
+                <Vamp/>
+                <Sprinkles/>
+                <BubbleGum/>
+                <Braces/>
+                <Tribals/>
+                <Cross/>
+                <Hammered/>
+                {/*DENTI SUPERIORI*/}
+                <IlsSx/>
+                <IlsSxStone/>
+                <IlsDx/>
+                <IlsDxStone/>
+                <IcsSx/>
+                <IcsSxStone/>
+                <IcsDx/>
+                <IcsDxStone/>
+                <CsDx/>
+                <CsDxStone/>
+                <CsSx/>
+                <CsSxStone/>
+                {/*DENTI INFERIORI*/}
+                <IliSx/>
+                <IliSxStone/>
+                <IliDx/>
+                <IliDxStone/>
+                <IciSx/>
+                <IciSxStone/>
+                <IciDx/>
+                <IciDxStone/>
+                <CiDx/>
+                <CiDxStone/>
+                <CiSx/>
+                <CiSxStone/>
+                {/*MOLARI E PREMOLARI*/}
+                <PprsDx/>
+                <PprsSx/>
+                <PpriDx/>
+                <PpriSx/>
+                <SprsDx/>
+                <SprsSx/>
+                <SpriDx/>
+                <SpriSx/>
+                <MsDx/>
+                <MsSx/>
+                <MiDx/>
+                <MiSx/>
+                {/*BASE*/}
+                <Dentiera/>
+                </group>}
+                </>
+
             }
         </>
     );

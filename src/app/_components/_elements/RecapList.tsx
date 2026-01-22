@@ -8,6 +8,7 @@ import {State} from "@/app/_types/State";
 import elabMaterial from "@/app/_helpers/_string-modders/elabMaterial";
 import elabSignatureName from "@/app/_helpers/_string-modders/elabSignatureName";
 import {Trash} from "@/app/_components/_icons/Trash";
+import elabVelvetName from "@/app/_helpers/_string-modders/elabVelvetName";
 
 export default function RecapList({edit} : {edit:boolean}) {
 
@@ -22,6 +23,8 @@ export default function RecapList({edit} : {edit:boolean}) {
     const setHover = useTeethStore((state: State) => state.setHover);
     const resetTooth = useTeethStore((state: State) => state.resetTooth);
     const resetSignature = useTeethStore((state: State) => state.resetSignature);
+    const packaging = useTeethStore((state: State) => state.packaging);
+    const setPackaging = useTeethStore((state: State) => state.setPackaging);
 
     function setCurrentHover(tooth:string|undefined, e:any) {
         e.stopPropagation();
@@ -32,10 +35,34 @@ export default function RecapList({edit} : {edit:boolean}) {
         return ((jewel === 'bar' || jewel === 'barDiamond') && (tooth === 'icsdx' || tooth === 'icidx')) || ((jewel === 'bigBar' || jewel === 'bigBarDiamond') && tooth === 'cidx');
     }
 
+    function checkDoubleTeethHover(tooth:string, jewel:string) {
+        if(tooth === 'icssx' && hovered === 'icsdx' && (jewel === 'bar' || jewel === 'barDiamond')) {
+            return true;
+        } else if(tooth === 'icisx' && hovered === 'icidx' && (jewel === 'bar' || jewel === 'barDiamond')) {
+            return true;
+        }else if(tooth === 'cisx' && hovered === 'cidx' && (jewel === 'bigBar' || jewel === 'bigBarDiamond')) {
+            return true;
+        } else {
+            return tooth === hovered;
+        }
+    }
+
+    function checkDoubleTeethActive(tooth:string, jewel:string) {
+        if(tooth === 'icssx' && activeTooth === 'icsdx' && (jewel === 'bar' || jewel === 'barDiamond')) {
+            return true;
+        } else if(tooth === 'icisx' && activeTooth === 'icidx' && (jewel === 'bar' || jewel === 'barDiamond')) {
+            return true;
+        }else if(tooth === 'cisx' && activeTooth === 'cidx' && (jewel === 'bigBar' || jewel === 'bigBarDiamond')) {
+            return true;
+        } else {
+            return tooth === activeTooth;
+        }
+    }
+
     return (
         <div className="pl-5 pr-3 py-4 h-full">
             <ul className="pr-2 h-full overflow-y-auto">
-                {(history.length === 0 || total === 0) &&
+                {((history.length === 0 || total === 0) && !packaging.premium) &&
                     <li className="w-full h-full flex items-center justify-center">
                         <p>Choose your configs wisely!</p>
                     </li>
@@ -101,8 +128,8 @@ export default function RecapList({edit} : {edit:boolean}) {
                                             })}
                             className={`
                                 ${checkDoubleTeeth(tooth[0], tooth[1]) ? 'hidden' : 'block'} 
-                                ${tooth[0] === activeTooth || checkDoubleTeeth(activeTooth as string, tooth[1]) ? 'bg-white/50' : ''}
-                                ${tooth[0] ===  hovered || checkDoubleTeeth(hovered as string, tooth[1]) ? 'border-black' : 'border-gray-200/50'}
+                                ${checkDoubleTeethActive(tooth[0], tooth[1]) ? 'bg-white/50' : ''}
+                                ${checkDoubleTeethHover(tooth[0], tooth[1]) ? 'border-black' : 'border-gray-200/50'}
                                 cursor-pointer mb-4 rounded p-2 border`}
                         >
                             {/*tooth name*/}
@@ -153,6 +180,37 @@ export default function RecapList({edit} : {edit:boolean}) {
                         </li>
                     )
                 })}
+
+                {packaging.premium &&
+                    <li className="rounded p-2">
+                        {/*tooth name*/}
+                        <div className="flex justify-between items-center mb-1">
+                            <h4 className="font-semibold">
+                                Premium Box
+                            </h4>
+                            {edit && <Tooltip title="Delete configuration">
+                                <Trash className="cursor-pointer rounded-full border-1 p-0.5 w-5 h-5"
+                                       onClick={() => setPackaging('premium', false)}/>
+                            </Tooltip>
+                            }
+                        </div>
+                        {/*type + material*/}
+                        <p>
+                            {firstCapital(packaging.out)} box w/ {elabVelvetName(packaging.in)} velvet and {elabMaterial(packaging.details, 'gold')} gold details
+                        </p>
+                        { packaging.text.length > 0 &&
+                            <p>
+                                Custom text: {packaging.text}
+                            </p>
+                        }
+                        <p className="w-full font-medium text-left mt-1.5">{
+                            new Intl.NumberFormat("de-DE", {
+                                    style: "currency",
+                                    currency: "EUR"
+                                }).format(300)
+                        }</p>
+                    </li>
+                }
             </ul>
         </div>
     )

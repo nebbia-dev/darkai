@@ -351,9 +351,7 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
                             ? 'top-[4.5vh]'
                                 : active === '5' && (material === 'base' || (!jewelType?.includes('bezel') && !pave?.shape))
                                     ? 'top-[11vh]'
-                                    : active === '6'
-                                        ? 'top-[13.5vh]'
-                                        : 'top-[-25vh]'
+                                    : 'top-[-25vh]'
             } left-[48px]`}>
 
                 <div
@@ -361,7 +359,7 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
                         (active === '4' && (jewelType?.includes('enamel') || material === 'base')) 
                         || (active === '2' && checkMolar(tooth))
                         || (active === '5' && (material === 'base' || (!jewelType?.includes('bezel') && !pave?.shape)))
-                            ? 'h-[186px]' 
+                            ? 'h-[186px]'
                             : 'h-[596px]'} 
                         w-[200px] bg-gray-50 rounded-3xl p-8 pr-4 border-1 max-h-[70vh]`}>
                     <div onScroll={sync} ref={elementRef} className="overflow-y-auto h-full pl-[2px] pr-4">
@@ -372,13 +370,7 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
 
 
             <div
-                className={`${!active ? 'hidden' : 'block'} pups text-center max-h-[70vh] h-[596px] w-[64px] absolute left-[240px] 
-                            ${active === '1'
-                    ? 'top-[-25vh]'
-                            : active === '6'
-                                ? 'top-[-10vh]'
-                                : 'top-[-25vh]'
-                } py-8`}>
+                className={`${!active ? 'hidden' : 'block'} pups text-center max-h-[70vh] ${active === '6' ? 'h-[604px] py-4 w-[250px]' : 'h-[596px] py-8 w-[64px]'} absolute left-[240px] top-[-25vh]`}>
                 <div ref={selectorRef} className="whitespace-nowrap overflow-hidden h-full w-full">
                     {renderSubOptions(active, tooth)}
                 </div>
