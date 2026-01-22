@@ -1819,6 +1819,13 @@ export default function Configurator() {
                 orbitRef.current.setAzimuthalAngle(0);
             }
             orbitRef.current.setPolarAngle(1.422);
+        } else if(packagingRef.current && orbitRef.current){
+            if(packagingRef.current.position.x < 0) {
+                orbitRef.current.setAzimuthalAngle(-0.12);
+            } else {
+                orbitRef.current.setAzimuthalAngle(0);
+            }
+            orbitRef.current.setPolarAngle(1.422);
         }
     }
 

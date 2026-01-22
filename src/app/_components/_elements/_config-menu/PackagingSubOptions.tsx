@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {useTeethStore} from "@/app/_stores/teeth";
 import {State} from "@/app/_types/State";
 import {Confirm} from "@/app/_components/_icons/Confirm";
-import {CloseTwo} from "@/app/_components/_icons/CloseTwo";
+import {Edit} from "@/app/_components/_icons/Edit";
 
 export default function PackagingSubOptions() {
 
@@ -74,13 +74,13 @@ export default function PackagingSubOptions() {
             </div>
 
             <div className={`${value === 'text' ? 'block' : 'invisible'} h-[120px] pt-4 mb-4 pl-6 text-center translate-y-[25%]`}>
-                <div className="flex items-center bg-gray-50 rounded-full p-2 border-1 gap-0 max-w-[216px]">
-                    <form className="flex items-center" onSubmit={(e) => updateCustomText(e)}>
-                        <input id="customText" value={customText} onChange={(e) => setPackaging('text', e.currentTarget.value)} type="text" className="border bg-gray-200 rounded-full py-1 px-2"/>
+                <div className="flex items-center bg-gray-50 rounded-full p-2 border-1 gap-0 max-w-[214px]">
+                    <form className="flex items-center relative" onSubmit={(e) => updateCustomText(e)}>
+                        <input id="customText" value={customText} onChange={(e) => setPackaging('text', e.currentTarget.value)} type="text" className="border bg-gray-200 rounded-full py-1 px-2 w-full"/>
                         <button type="submit"
-                                className={`${customText.length > 0 ? 'block' : 'hidden'} ${reset ? 'border-gray-500 text-gray-500 bg-gray-200' : 'border-green-500 text-green-500 bg-green-200'} cursor-pointer relative translate-x-[-33px] border font-bold rounded-full p-0.5`}>
+                                className={`${customText.length > 0 ? 'block' : 'hidden'} ${reset ? 'border-gray-500 text-gray-500 bg-gray-200' : 'border-green-500 text-green-500 bg-green-200'} cursor-pointer absolute right-[2px] border font-bold rounded-full p-0.5`}>
                             {reset
-                                ? <CloseTwo className="w-6 h-6"/>
+                                ? <Edit className="w-6 h-6 p-1"/>
                                 : <Confirm className="w-6 h-6"/>
                             }
                         </button>
