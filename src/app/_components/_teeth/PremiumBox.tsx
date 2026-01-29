@@ -1,5 +1,5 @@
 import React, {Ref, useMemo} from "react";
-import {useGLTF, useTexture} from "@react-three/drei";
+import {Text3D, useGLTF, useTexture} from "@react-three/drei";
 import {useTeethStore} from "@/app/_stores/teeth";
 import * as THREE from 'three';
 import {State} from "@/app/_types/State";
@@ -28,6 +28,11 @@ export default function PremiumBox({ref} : {ref:Ref<Group|null>}) {
                    // position={[-20.060500000193823, 0, -9.505650000058095]} per l'animazione
             >
                 <group rotation={[Math.PI / 2, Math.PI, Math.PI / 2]} scale={[3.5, 3.5, 3.5]}>
+
+                    {/*<Text3D font="/Inter_Bold.json">*/}
+                    {/*    Hello world!*/}
+                    {/*    <meshNormalMaterial />*/}
+                    {/*</Text3D>*/}
 
                     {/*TOP*/}
                     {/*Sportello*/}

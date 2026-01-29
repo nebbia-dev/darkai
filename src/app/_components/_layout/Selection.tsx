@@ -53,7 +53,7 @@ export default function Selection({activeButton, changeActiveButton} : {activeBu
 
                         {/*PACKAGING BUTTON*/}
                         <ConfiguratorButton tooth="alwaysActive" inverse={false} value="6" active={activeButton}
-                                            onclick={changeActiveButton} label="Packaging">
+                                            onclick={changeActiveButton} label="Packaging (Opt.)">
                             <img className="p-0.5" src="/config-menu-svgs/packaging.webp" alt="packaging-option-logo"/>
                         </ConfiguratorButton>
                         {/**/}
