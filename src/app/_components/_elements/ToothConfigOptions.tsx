@@ -91,7 +91,7 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
                 if(material === 'base') {
                     return (
                         <div className="flex items-center justify-center h-full w-full">
-                            Choose a design first!
+                            Start by selecting a grillz type
                         </div>
                     )
                 } else {
@@ -113,13 +113,13 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
                 if(material === 'base') {
                     return (
                         <div className="flex items-center justify-center h-full w-full">
-                            Choose a design first!
+                            Start by selecting a grillz type
                         </div>
                     )
                 } else if(!jewelType?.includes('bezel') && !pave?.shape){
                     return (
                         <div className="flex items-center justify-center h-full w-full">
-                            Gems are not part of the current design :(
+                            Add gems to your design to edit colors
                         </div>
                     )
                 } else {
@@ -334,7 +334,7 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
                 <img className="px-[0.75px]" src="/config-menu-svgs/gold.webp" alt="gold-option-logo"/>
             </ConfiguratorButton>
             <ConfiguratorButton inverse={false} value="4" active={active} onclick={onclick} tooth={tooth}
-                                label="Finish">
+                                label="Setting / Finishing">
                 <img src="/config-menu-svgs/finishing.webp" className="pt-0.5" alt="colors-option-logo"/>
             </ConfiguratorButton>
             <ConfiguratorButton inverse={false} value="5" active={active} onclick={onclick} tooth={tooth}

@@ -64,7 +64,7 @@ export default function RecapList({edit} : {edit:boolean}) {
             <ul className="pr-2 h-full overflow-y-auto">
                 {((history.length === 0 || total === 0) && !packaging.premium) &&
                     <li className="w-full h-full flex items-center justify-center">
-                        <p>Choose your configs wisely!</p>
+                        <p>Start your design</p>
                     </li>
                 }
                 {history.length > 0 && Object.entries(history[currentStep][0].signatureVisible).map(signature => {
@@ -209,6 +209,7 @@ export default function RecapList({edit} : {edit:boolean}) {
                                     currency: "EUR"
                                 }).format(300)
                         }</p>
+                        <p className="mt-2 p-2 bg-gray-100 rounded">Note: the premium box is optional.<br/>If you don't choose one, a standard box will be included with your order free of charge.</p>
                     </li>
                 }
             </ul>
