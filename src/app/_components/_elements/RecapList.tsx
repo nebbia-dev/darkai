@@ -209,7 +209,7 @@ export default function RecapList({edit} : {edit:boolean}) {
                                     currency: "EUR"
                                 }).format(300)
                         }</p>
-                        <p className="mt-2 p-2 bg-gray-100 rounded">Remember: <span className="font-semibold">the premium box is optional</span>. <br/>If you don't choose one, a free-of-charge standard box will be used.</p>
+                        <p className="mt-2 p-2 bg-gray-100 rounded">Note: the premium box is optional.<br/>If you don't choose one, a standard box will be included with your order free of charge.</p>
                     </li>
                 }
             </ul>
