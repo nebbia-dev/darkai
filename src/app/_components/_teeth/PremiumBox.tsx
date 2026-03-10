@@ -39,7 +39,7 @@ export default function PremiumBox({ref} : {ref:Ref<Group|null>}) {
             >
                 <group rotation={[Math.PI / 2, Math.PI, Math.PI / 2]} scale={[3.5, 3.5, 3.5]}>
                     <Center rotation={[0, 0.91, 1.58]} position={[-0.02, 0, -0.07]} visible={customText !== ''}>
-                        <Text3D font="/Inter_Bold.json" size={0.1} ref={textRef}>
+                        <Text3D font="/Archivo_Expanded_Bold.json" size={0.065} ref={textRef}>
                             {customText}
                             <FullMaterial color={packaging.details} finish="polished"/>
                         </Text3D>

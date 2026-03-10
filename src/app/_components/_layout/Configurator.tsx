@@ -1840,64 +1840,6 @@ export default function Configurator() {
         return new THREE.Vector3((vec3.x * 100), (vec3.z * 100), vec3.y * -(100 * factor));
     }
 
-    // Instances prova
-    // const particles = Array.from({length: 15}, () => ({
-    //     factor: MathUtils.randInt(20, 100),
-    //     speed: MathUtils.randFloat(0.01, 0.75),
-    //     xFactor: MathUtils.randFloatSpread(40),
-    //     yFactor: MathUtils.randFloatSpread(10),
-    //     zFactor: MathUtils.randFloatSpread(10)
-    // }))
-
-    // function Bubbles() {
-    //     const diamond = useFBX('/models/MOD_Diamante_LOD.fbx');
-    //     const fullDiamond = useGLTF('/models/Full_Pave.glb');
-    //     const pos = [];
-    //     for(let i = 0; i < 627; i++) {
-    //         pos.push([
-    //             fullDiamond.scene.children[1].children[45].geometry.attributes.position.array[i],
-    //             fullDiamond.scene.children[1].children[45].geometry.attributes.position.array[i+1],
-    //             fullDiamond.scene.children[1].children[45].geometry.attributes.position.array[i+2]
-    //         ])
-    //     }
-    //
-    //     return (
-    //         <Instances limit={particles.length}
-    //                    scale={[0.0005, 0.0005, 0.0005]} rotation={[Math.PI/2, 0, 0]}
-    //         >
-    //             {/*<boxGeometry/>*/}
-    //             <bufferGeometry>
-    //                 <bufferAttribute
-    //                     attach='attributes-position'
-    //                     array={diamond.children[0].geometry.attributes.position.array}
-    //                     count={diamond.children[0].geometry.attributes.position.array.length / 3}
-    //                     itemSize={3}
-    //                 ></bufferAttribute>
-    //                 <bufferAttribute
-    //                     attach='attributes-normal'
-    //                     array={diamond.children[0].geometry.attributes.normal.array}
-    //                     count={diamond.children[0].geometry.attributes.normal.array.length / 3}
-    //                     itemSize={3}
-    //                 ></bufferAttribute>
-    //                 <bufferAttribute
-    //                     attach='attributes-uv'
-    //                     array={diamond.children[0].geometry.attributes.uv.array}
-    //                     count={diamond.children[0].geometry.attributes.uv.array.length / 2}
-    //                     itemSize={2}
-    //                 ></bufferAttribute>
-    //             </bufferGeometry>
-    //            <FullMaterial color="gold" finish="polished"/>
-    //             {particles.map((data, i) => (
-    //                 <Instance key={i} position={[
-    //                     pos[i][0] * 300,
-    //                     pos[i][1] * 300,
-    //                     pos[i][2] * 300
-    //                 ]} />
-    //             ))}
-    //         </Instances>
-    //     )
-    // }
-
     return (
         <>
             <OrbitControls

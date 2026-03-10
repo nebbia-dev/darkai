@@ -10,6 +10,27 @@ export default function PackagingSubOptions() {
     const setPackaging = useTeethStore((state: State) => state.setPackaging);
     const customText = useTeethStore((state: State) => state.packaging.text);
     const [reset, setReset] = useState<boolean>(false);
+    const [backspace, setBackspace] = useState<boolean>(false);
+
+    function checkAndSetPackaging(type:string, e:any) {
+        const canvas = document.createElement("canvas");
+        const context = canvas.getContext("2d");
+        const width = context!.measureText(customText).width;
+        canvas.remove();
+        if((width <= 45 && !backspace) || backspace) {
+            setPackaging(type, e)
+        }
+    }
+
+    function checkBackKeydown(e:any) {
+        if(e.code === 'Backspace' && !backspace) {
+            setBackspace(true);
+        } else if(e.code !== 'Backspace' && backspace) {
+            setBackspace(false);
+        } else {
+            return;
+        }
+    }
     function updateCustomText(e:any) {
         e.preventDefault();
         setReset(prev => !prev);
@@ -76,7 +97,7 @@ export default function PackagingSubOptions() {
             <div className={`${value === 'text' ? 'block' : 'invisible'} h-[120px] pt-4 mb-4 pl-6 text-center translate-y-[25%]`}>
                 <div className="flex items-center bg-gray-50 rounded-full p-2 border-1 gap-0 max-w-[214px]">
                     <form className="flex items-center relative" onSubmit={(e) => updateCustomText(e)}>
-                        <input id="customText" value={customText} onChange={(e) => setPackaging('text', e.currentTarget.value)} type="text" className="border bg-gray-200 rounded-full py-1 px-2 w-full"/>
+                        <input id="customText" value={customText} onKeyDown={(e) => checkBackKeydown(e)} onChange={(e) => checkAndSetPackaging('text', e.currentTarget.value)} type="text" className="border bg-gray-200 rounded-full py-1 px-2 w-full"/>
                         <button type="submit"
                                 className={`${customText.length > 0 ? 'block' : 'hidden'} ${reset ? 'border-gray-500 text-gray-500 bg-gray-200' : 'border-green-500 text-green-500 bg-green-200'} cursor-pointer absolute right-[2px] border font-bold rounded-full p-0.5`}>
                             {reset

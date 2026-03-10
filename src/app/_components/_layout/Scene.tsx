@@ -5,6 +5,7 @@ import React, {Suspense} from "react";
 import {useTeethStore} from "@/app/_stores/teeth";
 import LoadedMaterials from "@/app/_components/_layout/LoadedMaterials";
 import Loading from "@/app/_components/_layout/Loading";
+import {Perf} from "r3f-perf";
 
 export default function Scene() {
     const loaded = useTeethStore((state) => state.loaded);
@@ -25,6 +26,7 @@ export default function Scene() {
             </div>
 
             <Canvas camera={{fov: 20, near: 0.1, far: 100, position: [0, 3, 27]}} dpr={[1, 2]} frameloop="demand">
+                <Perf/>
                 <Suspense fallback={<Loading/>}>
                     <Configurator/>
                 </Suspense>
