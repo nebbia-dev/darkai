@@ -14,7 +14,9 @@ import BoxMaterialInf from "@/app/_components/_materials/BoxMaterialInf";
 
 export default function PremiumBox({ref} : {ref:Ref<Group|null>}) {
 
-    const textRef = useRef(null);
+    const firstTextRef = useRef(null);
+    const secondTextRef = useRef(null);
+
     const customText = useTeethStore((state: State) => state.packaging.text);
 
     const premiumBox = useMemo(() => {
@@ -26,10 +28,18 @@ export default function PremiumBox({ref} : {ref:Ref<Group|null>}) {
     const packaging = useTeethStore((state: State) => state.packaging);
 
     useEffect(() => {
-        if(textRef.current) {
-            (textRef.current as THREE.Mesh).geometry.center();
+        if(firstTextRef.current) {
+            (firstTextRef.current as THREE.Mesh).geometry.center();
         }
+
+        if(secondTextRef.current) {
+            (secondTextRef.current as THREE.Mesh).geometry.center();
+        }
+
     }, [customText])
+
+    // single line: position={[-0.001, 0, -0.09]}
+    // double line: 1st: position={[-0.045, 0, -0.04]}; 2nd: position={[0.02, 0, -0.12]}
 
     return(
         <>
@@ -38,9 +48,23 @@ export default function PremiumBox({ref} : {ref:Ref<Group|null>}) {
                    // position={[-20.060500000193823, 0, -9.505650000058095]} per l'animazione
             >
                 <group rotation={[Math.PI / 2, Math.PI, Math.PI / 2]} scale={[3.5, 3.5, 3.5]}>
-                    <Center rotation={[0, 0.91, 1.58]} position={[-0.02, 0, -0.07]} visible={customText !== ''}>
-                        <Text3D font="/Archivo_Expanded_Bold.json" size={0.065} ref={textRef}>
-                            {customText}
+                    <Center
+                        rotation={[0, 0.91, 1.58]}
+                        position={customText.secondLine !== '' ? [-0.045, 0, -0.04] : [-0.001, 0, -0.09]}
+                        visible={customText.firstLine !== ''}
+                    >
+                        <Text3D font="/Archivo_Expanded_Bold.json" size={0.039} ref={firstTextRef}>
+                            {customText.firstLine}
+                            <FullMaterial color={packaging.details} finish="polished"/>
+                        </Text3D>
+                    </Center>
+
+                    <Center
+                        rotation={[0, 0.91, 1.58]}
+                        position={customText.firstLine !== '' ? [0.02, 0, -0.12] : [-0.001, 0, -0.09]}
+                        visible={customText.secondLine !== ''}>
+                        <Text3D font="/Archivo_Expanded_Bold.json" size={0.039} ref={secondTextRef}>
+                            {customText.secondLine}
                             <FullMaterial color={packaging.details} finish="polished"/>
                         </Text3D>
                     </Center>

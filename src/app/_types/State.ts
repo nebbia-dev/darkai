@@ -88,6 +88,7 @@ export interface State {
     teethPreciousness: Preciousness,
     nextStep: boolean,
     setNextStep: (bool: boolean) => void,
+    setPackagingScene: (bool: boolean) => void,
     setRecap: (bool:boolean) => void,
     setActiveButton: (button:string|undefined) => void,
     setActiveSubButton: (button:string|undefined) => void,
@@ -124,5 +125,5 @@ export interface State {
     checkDiamonds: (state: State) => boolean,
     packagingScene: boolean,
     packaging: Packaging,
-    setPackaging: (prop:string, value:string|boolean) => void
+    setPackaging: (prop:string, value:string|boolean, line?:number|undefined) => void
 }

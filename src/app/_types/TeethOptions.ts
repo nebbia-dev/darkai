@@ -46,7 +46,7 @@ export interface Enamel {
     cisx: string | undefined,
 }
 export interface Finish {
-    [key: string]: string
+    [key: string]: 'polished' | 'sandblasted' | 'diamond_cut'
     icsdx: 'polished' | 'sandblasted' | 'diamond_cut',
     icssx: 'polished' | 'sandblasted' | 'diamond_cut',
     icidx: 'polished' | 'sandblasted' | 'diamond_cut',
@@ -290,10 +290,10 @@ export interface Neighbours {
 }
 
 export interface Packaging {
-    [key: string]: boolean|string
+    [key: string]: boolean|string|{firstLine: string, secondLine: string}
     premium: boolean,
     out: string,
     in: string,
     details: string,
-    text: string
+    text: {firstLine: string, secondLine: string}
 }

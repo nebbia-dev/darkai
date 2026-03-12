@@ -4,21 +4,29 @@ import {State} from "@/app/_types/State";
 import {Confirm} from "@/app/_components/_icons/Confirm";
 import {Edit} from "@/app/_components/_icons/Edit";
 
+type Text = {
+    firstLine: string,
+    secondLine: string
+}
+
 export default function PackagingSubOptions() {
 
     const value = useTeethStore((state: State) => state.activeSubButton);
     const setPackaging = useTeethStore((state: State) => state.setPackaging);
-    const customText = useTeethStore((state: State) => state.packaging.text);
-    const [reset, setReset] = useState<boolean>(false);
+    const customText:Text = useTeethStore((state: State) => state.packaging.text);
+    const [firstReset, setFirstReset] = useState<boolean>(false);
+    const [secondReset, setSecondReset] = useState<boolean>(false);
+
     const [backspace, setBackspace] = useState<boolean>(false);
 
-    function checkAndSetPackaging(type:string, e:any) {
+    function checkAndSetPackaging(type:string, e:any, lineNumber:number) {
+        const line = lineNumber === 1 ? customText.firstLine : customText.secondLine
         const canvas = document.createElement("canvas");
         const context = canvas.getContext("2d");
-        const width = context!.measureText(customText).width;
+        const width = context!.measureText(line).width;
         canvas.remove();
-        if((width <= 45 && !backspace) || backspace) {
-            setPackaging(type, e)
+        if((width <= 73 && !backspace) || backspace) {
+            setPackaging(type, e, lineNumber)
         }
     }
 
@@ -31,14 +39,17 @@ export default function PackagingSubOptions() {
             return;
         }
     }
-    function updateCustomText(e:any) {
-        e.preventDefault();
-        setReset(prev => !prev);
-        if(reset) {
-            setPackaging('text', '');
-        }  else {
-            const customText = (document.getElementById('customText') as HTMLInputElement)?.value;
-            setPackaging('text', customText)
+    function updateCustomText(lineNumber:number) {
+        if(lineNumber === 1){
+            setFirstReset(prev => !prev);
+            if (firstReset) {
+                setPackaging('text', '', 1);
+            }
+        } else if(lineNumber === 2) {
+            setSecondReset(prev => !prev);
+            if (secondReset) {
+                setPackaging('text', '', 2);
+            }
         }
     }
 
@@ -94,18 +105,45 @@ export default function PackagingSubOptions() {
                 </div>
             </div>
 
-            <div className={`${value === 'text' ? 'block' : 'invisible'} h-[120px] pt-4 mb-4 pl-6 text-center translate-y-[25%]`}>
-                <div className="flex items-center bg-gray-50 rounded-full p-2 border-1 gap-0 max-w-[214px]">
-                    <form className="flex items-center relative" onSubmit={(e) => updateCustomText(e)}>
-                        <input id="customText" value={customText} onKeyDown={(e) => checkBackKeydown(e)} onChange={(e) => checkAndSetPackaging('text', e.currentTarget.value)} type="text" className="border bg-gray-200 rounded-full py-1 px-2 w-full"/>
-                        <button type="submit"
-                                className={`${customText.length > 0 ? 'block' : 'hidden'} ${reset ? 'border-gray-500 text-gray-500 bg-gray-200' : 'border-green-500 text-green-500 bg-green-200'} cursor-pointer absolute right-[2px] border font-bold rounded-full p-0.5`}>
-                            {reset
+            <div className={`${value === 'text' ? 'block' : 'invisible'} h-[120px] pt-4 mb-4 pl-6 text-center translate-y-[15%]`}>
+                <div className="flex items-center bg-gray-50 rounded-3xl p-2 border-1 gap-0 max-w-[214px]">
+                    <div className="flex flex-col gap-2 items-center relative"
+                    >
+                        <input value={customText.firstLine} onKeyDown={(e) => checkBackKeydown(e)}
+                               onChange={(e) => checkAndSetPackaging('text', e.currentTarget.value, 1)} type="text"
+                               className="border bg-gray-200 rounded-full py-1 px-2 w-full"
+                               placeholder="Line 1"
+                        />
+
+                        <button type="button"
+                                onClick={(e) => updateCustomText(1)}
+                                className={`${customText.firstLine.length > 0 ? 'block' : 'hidden'} 
+                                ${firstReset ? 'border-gray-500 text-gray-500 bg-gray-200' : 'border-green-500 text-green-500 bg-green-200'} 
+                                cursor-pointer absolute top-[2px] right-[2px] border font-bold rounded-full p-0.5`}>
+                            {firstReset
                                 ? <Edit className="w-6 h-6 p-1"/>
                                 : <Confirm className="w-6 h-6"/>
                             }
                         </button>
-                    </form>
+
+                        <input value={customText.secondLine} onKeyDown={(e) => checkBackKeydown(e)}
+                               onChange={(e) => checkAndSetPackaging('text', e.currentTarget.value, 2)} type="text"
+                               className="border bg-gray-200 rounded-full py-1 px-2 w-full"
+                               placeholder="Line 2"
+                        />
+
+                        <button type="button"
+                                onClick={(e) => updateCustomText(2)}
+                                className={`${customText.secondLine.length > 0 ? 'block' : 'hidden'} 
+                                ${secondReset ? 'border-gray-500 text-gray-500 bg-gray-200' : 'border-green-500 text-green-500 bg-green-200'} 
+                                cursor-pointer absolute top-[44px] right-[2px] border font-bold rounded-full p-0.5`}>
+                            {secondReset
+                                ? <Edit className="w-6 h-6 p-1"/>
+                                : <Confirm className="w-6 h-6"/>
+                            }
+                        </button>
+
+                    </div>
                 </div>
             </div>
         </>

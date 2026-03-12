@@ -1358,6 +1358,7 @@ export const useTeethStore = create<State>((set, get) => ({
             })
         ),
     packagingScene: false,
+    setPackagingScene: (bool) => set({packagingScene: bool}),
     activeSubButton: undefined,
     setActiveSubButton: (button:string|undefined) =>
         set(
@@ -1502,9 +1503,9 @@ export const useTeethStore = create<State>((set, get) => ({
         out: 'black',
         in: 'black',
         details: 'gold',
-        text: ''
+        text: {firstLine: '', secondLine: ''}
     },
-    setPackaging: (prop:string, value:string|boolean) => {
+    setPackaging: (prop:string, value:string|boolean, line?:number|undefined) => {
         set(
             produce((state) => {
 
@@ -1514,7 +1515,14 @@ export const useTeethStore = create<State>((set, get) => ({
                 }
                 state.currentHistoryPack++;
 
-                state.packaging[prop] = value;
+                if(line === 1) {
+                    state.packaging.text.firstLine = value;
+                } else if(line === 2) {
+                    state.packaging.text.secondLine = value;
+                } else {
+                    state.packaging[prop] = value;
+                }
+
                 get().setHistoryPack(state);
 
                 if(prop === 'premium' && value === false) {
@@ -1621,7 +1629,18 @@ export const useTeethStore = create<State>((set, get) => ({
 
     // state and method to check if the user has clicked on the "Continue" button
     nextStep: false,
-    setNextStep: (bool) => set(() => ({nextStep: bool})),
+    setNextStep: (bool) =>
+        set(
+            produce((state) => {
+                state.nextStep = bool;
+                state.currentTooth = undefined;
+                state.lastActivatedTooth = undefined;
+                state.hovered = undefined;
+                if(state.packagingScene) {
+                    state.packagingScene = false;
+                }
+            })
+        ),
 
     // state and method to get back and forth the recap view
     recap: false,
@@ -2133,7 +2152,8 @@ export const useTeethStore = create<State>((set, get) => ({
                     out: 'black',
                     in: 'black',
                     details: 'gold',
-                    text: ''}
+                    text: {firstLine: '', secondLine: ''}
+                }
 
                 get().setHistoryPack(state);
             })

@@ -26,7 +26,7 @@ export default function Scene() {
             </div>
 
             <Canvas camera={{fov: 20, near: 0.1, far: 100, position: [0, 3, 27]}} dpr={[1, 2]} frameloop="demand">
-                <Perf/>
+                {/*<Perf/>*/}
                 <Suspense fallback={<Loading/>}>
                     <Configurator/>
                 </Suspense>

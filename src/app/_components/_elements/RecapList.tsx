@@ -25,6 +25,15 @@ export default function RecapList({edit} : {edit:boolean}) {
     const resetSignature = useTeethStore((state: State) => state.resetSignature);
     const packaging = useTeethStore((state: State) => state.packaging);
     const setPackaging = useTeethStore((state: State) => state.setPackaging);
+    const packagingScene = useTeethStore((state: State) => state.packagingScene);
+    const setPackagingScene = useTeethStore((state: State) => state.setPackagingScene);
+
+    function activateTooth(tooth:string) {
+        setActive(tooth);
+        if(packagingScene) {
+            setPackagingScene(false);
+        }
+    }
 
     function setCurrentHover(tooth:string|undefined, e:any) {
         e.stopPropagation();
@@ -122,7 +131,7 @@ export default function RecapList({edit} : {edit:boolean}) {
                     return (
                         history[currentStep][0].visible[tooth[0]] &&
                         <li key={tooth[0]}
-                            {...(edit && { onClick: () => setActive(tooth[0]),
+                            {...(edit && { onClick: () => activateTooth(tooth[0]),
                                            onMouseEnter: (e) => setCurrentHover(tooth[0], e),
                                            onMouseLeave: (e) => setCurrentHover(undefined, e)
                                             })}
@@ -198,9 +207,9 @@ export default function RecapList({edit} : {edit:boolean}) {
                         <p>
                             {firstCapital(packaging.out)} box w/ {elabVelvetName(packaging.in)} velvet and {elabMaterial(packaging.details, 'gold')} gold details
                         </p>
-                        { packaging.text.length > 0 &&
+                        { (packaging.text.firstLine.length > 0 || packaging.text.secondLine.length > 0) &&
                             <p>
-                                Custom text: {packaging.text}
+                                Custom text: {packaging.text.firstLine} {packaging.text.secondLine}
                             </p>
                         }
                         <p className="w-full font-medium text-left mt-1.5">{

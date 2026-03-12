@@ -139,7 +139,7 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
                         {/* MyConfig Middle w/Recap */}
                         {/* DA SOSTITUIRE CON IL NUOVO */}
                         <div
-                            className={`${showRecap ? 'h-[30vh]' : 'h-0'} transition-[height] duration-500 w-full relative`}>
+                            className={`${showRecap ? 'h-[45%]' : 'h-0'} transition-[height] duration-500 w-full relative`}>
                             <div
                                 className="absolute h-[15%] bottom-0 w-full bg-linear-to-t from-gray-50 to-indigo-0"></div>
 

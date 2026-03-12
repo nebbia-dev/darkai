@@ -1725,7 +1725,7 @@ export default function Configurator() {
             resetCameraPosition();
             doResetControls(undefined);
         }
-    }, [resetControls, nextStep]);
+    }, [resetControls, nextStep, packagingScene]);
 
     useEffect(() => {
         setTeeth(teeth);
