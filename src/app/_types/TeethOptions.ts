@@ -252,9 +252,8 @@ export interface Stones {
     cisx: Stone,
 }
 export interface Preciousness {
-    [key: string]: string | number | undefined,
+    [key: string]: number,
     carats: number,
-    diamonds: string | undefined
 }
 export interface History {
     material: Materials,

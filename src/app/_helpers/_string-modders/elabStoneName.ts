@@ -3,34 +3,37 @@ export default function elabStoneName(color: string) {
     // SWITCH per i 5k colori che hanno deciso di inserirci
     switch(color) {
         case 'bSapph':
-            stoneColor = 'blue sapphire';
+            stoneColor = 'lab blue sapphire';
             break;
         case 'ruby':
-            stoneColor = 'ruby';
+            stoneColor = 'lab ruby';
             break;
         case 'ameth':
-            stoneColor = 'amethyst';
+            stoneColor = 'lab amethyst';
             break;
         case 'emerald':
-            stoneColor = 'emerald';
+            stoneColor = 'lab emerald';
             break;
-        case 'whD':
-            stoneColor = 'white diamond';
+        case 'whD_lab':
+            stoneColor = 'lab white diamond';
             break;
-        case 'brD':
-            stoneColor = 'brown diamond';
+        case 'whD_nat':
+            stoneColor = 'natural white diamond';
             break;
-        case 'blD':
-            stoneColor = 'black diamond';
+        case 'brD_nat':
+            stoneColor = 'natural brown diamond';
+            break;
+        case 'blD_nat':
+            stoneColor = 'natural black diamond';
             break;
         case 'ySapph':
-            stoneColor = 'yellow sapphire';
+            stoneColor = 'lab yellow sapphire';
             break;
         case 'pSapph':
-            stoneColor = 'pink sapphire';
+            stoneColor = 'lab pink sapphire';
             break;
         case 'aqua':
-            stoneColor = 'aquamarine';
+            stoneColor = 'lab aquamarine';
             break;
         case 'camo':
             stoneColor = 'camo pattern';

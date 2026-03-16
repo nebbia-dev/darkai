@@ -71,7 +71,10 @@ export default function RecapList({edit} : {edit:boolean}) {
     return (
         <div className="pl-5 pr-3 py-4 h-full">
             <ul className="pr-2 h-full overflow-y-auto">
-                {((history.length === 0 || total === 0) && !packaging.premium) &&
+                {((history.length === 0
+                        // || total === 0
+                        )
+                        && !packaging.premium) &&
                     <li className="w-full h-full flex items-center justify-center">
                         <p>Start your design</p>
                     </li>

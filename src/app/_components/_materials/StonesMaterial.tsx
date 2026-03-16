@@ -20,13 +20,14 @@ export default function StonesMaterial({color} : {color: string | undefined}) {
             case 'emerald':
                 stoneColor = 0x0f6151;
                 break;
-            case 'whD':
+            case 'whD_lab':
+            case 'whD_nat':
                 stoneColor = 0xffffff;
                 break;
-            case 'brD':
+            case 'brD_nat':
                 stoneColor = 0x6e6869;
                 break;
-            case 'blD':
+            case 'blD_nat':
                 stoneColor = 0x515252;
                 break;
             case 'ySapph':

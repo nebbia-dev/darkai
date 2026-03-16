@@ -20,35 +20,11 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
     const [sent, setSent] = useState<boolean>(false);
     const takeScreenshot = useTeethStore((state:State) => state.setIsScreenshotNeeded);
     const setPreciousness = useTeethStore((state:State) => state.setTeethPreciousness);
-    function checkDiamonds():boolean {
-        for(let stone of Object.values(teethStones)) {
-            if(stone.color === 'whD' || stone.color === 'brD' || stone.color === 'blD') {
-                return true;
-            }
-        }
-
-        for(let pave of Object.values(teethPaves)) {
-            if(pave.color === 'whD' || pave.color === 'brD' || pave.color === 'blD') {
-                return true;
-            }
-        }
-
-        for(let material of Object.values(signatureMaterial)) {
-            if(material === 'pave') {
-                return true;
-            }
-        }
-
-        return false;
-    }
     function toggleRecap() {
         setShowRecap(prev => !prev);
     }
     function setCarat(e:any) {
-        setPreciousness(Number(e), teethPreciousness.diamonds);
-    }
-    function setDiamonds(e:any) {
-        setPreciousness(teethPreciousness.carats, e);
+        setPreciousness(Number(e));
     }
     function download(e:FormEvent) {
         e.preventDefault();
@@ -87,7 +63,7 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
                             <RecapList edit={true}/>
                         </div>
                         {/* MyConfig Bottom w/ Carats+Diamonds */}
-                        <div className="border-1 rounded-b-3xl w-full bg-gray-50 px-6 pt-4 pb-6">
+                        <div className="border-1 rounded-b-3xl w-full bg-gray-50 px-6 py-4">
                             <div className="flex gap-4 mb-2 items-center">
                                 <span className="inline-block w-[72px]">Carats:</span>
                                 <div className="flex gap-4">
@@ -99,17 +75,6 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
                                     </button>
                                     <button type="button" className={`${teethPreciousness.carats === 18 ? 'font-medium bg-sky-400 text-gray-50' : 'bg-gray-50 text-slate-950'} px-2 py-1 rounded-3xl cursor-pointer`} value="18"
                                             onClick={(e) => setCarat(e.currentTarget.value)}>18K
-                                    </button>
-                                </div>
-                            </div>
-                            <div className="flex gap-4 items-center">
-                                <span className={`inline-block w-[72px] ${!checkDiamonds() ? 'text-slate-400' : 'text-slate-950'}`}>Diamonds:</span>
-                                <div className="flex gap-4">
-                                    <button disabled={!checkDiamonds()} type="button" className={`${teethPreciousness.diamonds === 'lab' ? 'font-medium bg-sky-400 text-gray-50' : !checkDiamonds() ? 'bg-gray-50 text-slate-400' : 'bg-gray-50 text-slate-950'} px-2 py-1 rounded-3xl ${!checkDiamonds() ? '' : 'cursor-pointer'}`} value="lab"
-                                            onClick={(e) => setDiamonds(e.currentTarget.value)}>Lab
-                                    </button>
-                                    <button disabled={!checkDiamonds()} type="button" className={`${teethPreciousness.diamonds === 'nat' ? 'font-medium bg-sky-400 text-gray-50' : !checkDiamonds() ? 'bg-gray-50 text-slate-400' : 'bg-gray-50 text-slate-950'} px-2 py-1 rounded-3xl ${!checkDiamonds() ? '' : 'cursor-pointer'}`} value="nat"
-                                            onClick={(e) => setDiamonds(e.currentTarget.value)}>Natural
                                     </button>
                                 </div>
                             </div>
