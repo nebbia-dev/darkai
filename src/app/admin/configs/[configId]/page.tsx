@@ -70,7 +70,7 @@ export default async function Config({params}: { params: Promise<{ configId: str
                                     {data?.[0].config.preciousness
                                         && Object.entries(data?.[0].config.preciousness as Preciousness).map(feat => {
                                             return <li key={feat[0] + feat[1]}
-                                                       className="pl-2">{firstCapital(feat[0])}: {firstCapital(feat[1] as string)}</li>
+                                                       className="pl-2">{firstCapital(feat[0])}: {feat[1]}</li>
                                         })
                                     }
                                 </ul>
