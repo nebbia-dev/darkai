@@ -108,7 +108,7 @@ export default function Configurator() {
                             stones.scene.children[1].children[2].children[2]
                         ]
                     },
-                    circle: {
+                    round: {
                         geometries: [
                             (stones.scene.children[1].children[5].children[2].children[0] as THREE.Mesh).geometry,
                             (stones.scene.children[1].children[5].children[2] as THREE.Mesh).geometry,
@@ -122,7 +122,7 @@ export default function Configurator() {
                             stones.scene.children[1].children[5].children[2]
                         ]
                     },
-                    tear: {
+                    drop: {
                         geometries: [
                             (stones.scene.children[1].children[1].children[2].children[0] as THREE.Mesh).geometry,
                             (stones.scene.children[1].children[1].children[2] as THREE.Mesh).geometry,
@@ -136,7 +136,7 @@ export default function Configurator() {
                             stones.scene.children[1].children[1].children[2]
                         ]
                     },
-                    square: {
+                    princess: {
                         geometries: [
                             (stones.scene.children[1].children[4].children[2].children[0] as THREE.Mesh).geometry,
                             (stones.scene.children[1].children[4].children[2] as THREE.Mesh).geometry,
@@ -224,7 +224,7 @@ export default function Configurator() {
                             stones.scene.children[1].children[2].children[5]
                         ]
                     },
-                    circle: {
+                    round: {
                         geometries: [
                             (stones.scene.children[1].children[5].children[5].children[0] as THREE.Mesh).geometry,
                             (stones.scene.children[1].children[5].children[5] as THREE.Mesh).geometry,
@@ -238,7 +238,7 @@ export default function Configurator() {
                             stones.scene.children[1].children[5].children[5]
                         ]
                     },
-                    tear: {
+                    drop: {
                         geometries: [
                             (stones.scene.children[1].children[1].children[5].children[0] as THREE.Mesh).geometry,
                             (stones.scene.children[1].children[1].children[5] as THREE.Mesh).geometry,
@@ -252,7 +252,7 @@ export default function Configurator() {
                             stones.scene.children[1].children[1].children[5]
                         ]
                     },
-                    square: {
+                    princess: {
                         geometries: [
                             (stones.scene.children[1].children[4].children[5].children[0] as THREE.Mesh).geometry,
                             (stones.scene.children[1].children[4].children[5] as THREE.Mesh).geometry,
@@ -340,7 +340,7 @@ export default function Configurator() {
                             stones.scene.children[0].children[2].children[2]
                         ]
                     },
-                    circle: {
+                    round: {
                         geometries: [
                             (stones.scene.children[0].children[5].children[2].children[0] as THREE.Mesh).geometry,
                             (stones.scene.children[0].children[5].children[2] as THREE.Mesh).geometry,
@@ -354,7 +354,7 @@ export default function Configurator() {
                             stones.scene.children[0].children[5].children[2]
                         ]
                     },
-                    tear: {
+                    drop: {
                         geometries: [
                             (stones.scene.children[0].children[1].children[2].children[0] as THREE.Mesh).geometry,
                             (stones.scene.children[0].children[1].children[2] as THREE.Mesh).geometry,
@@ -368,7 +368,7 @@ export default function Configurator() {
                             stones.scene.children[0].children[1].children[2]
                         ]
                     },
-                    square: {
+                    princess: {
                         geometries: [
                             (stones.scene.children[0].children[4].children[2].children[0] as THREE.Mesh).geometry,
                             (stones.scene.children[0].children[4].children[2] as THREE.Mesh).geometry,
@@ -456,7 +456,7 @@ export default function Configurator() {
                             stones.scene.children[0].children[2].children[5]
                         ]
                     },
-                    circle: {
+                    round: {
                         geometries: [
                             (stones.scene.children[0].children[5].children[5].children[0] as THREE.Mesh).geometry,
                             (stones.scene.children[0].children[5].children[5] as THREE.Mesh).geometry,
@@ -470,7 +470,7 @@ export default function Configurator() {
                             stones.scene.children[0].children[5].children[5]
                         ]
                     },
-                    tear: {
+                    drop: {
                         geometries: [
                             (stones.scene.children[0].children[1].children[5].children[0] as THREE.Mesh).geometry,
                             (stones.scene.children[0].children[1].children[5] as THREE.Mesh).geometry,
@@ -484,7 +484,7 @@ export default function Configurator() {
                             stones.scene.children[0].children[1].children[5]
                         ]
                     },
-                    square: {
+                    princess: {
                         geometries: [
                             (stones.scene.children[0].children[4].children[5].children[0] as THREE.Mesh).geometry,
                             (stones.scene.children[0].children[4].children[5] as THREE.Mesh).geometry,
@@ -573,7 +573,7 @@ export default function Configurator() {
                             stones.scene.children[1].children[2].children[1]
                         ]
                     },
-                    circle: {
+                    round: {
                         geometries: [
                             (stones.scene.children[1].children[5].children[1].children[0] as THREE.Mesh).geometry,
                             (stones.scene.children[1].children[5].children[1] as THREE.Mesh).geometry,
@@ -587,7 +587,7 @@ export default function Configurator() {
                             stones.scene.children[1].children[5].children[1]
                         ]
                     },
-                    tear: {
+                    drop: {
                         geometries: [
                             (stones.scene.children[1].children[1].children[1].children[0] as THREE.Mesh).geometry,
                             (stones.scene.children[1].children[1].children[1] as THREE.Mesh).geometry,
@@ -601,7 +601,7 @@ export default function Configurator() {
                             stones.scene.children[1].children[1].children[1]
                         ]
                     },
-                    square: {
+                    princess: {
                         geometries: [
                             (stones.scene.children[1].children[4].children[1].children[0] as THREE.Mesh).geometry,
                             (stones.scene.children[1].children[4].children[1] as THREE.Mesh).geometry,
@@ -687,7 +687,7 @@ export default function Configurator() {
                             stones.scene.children[1].children[2].children[4]
                         ]
                     },
-                    circle: {
+                    round: {
                         geometries: [
                             (stones.scene.children[1].children[5].children[4].children[0] as THREE.Mesh).geometry,
                             (stones.scene.children[1].children[5].children[4] as THREE.Mesh).geometry,
@@ -701,7 +701,7 @@ export default function Configurator() {
                             stones.scene.children[1].children[5].children[4]
                         ]
                     },
-                    tear: {
+                    drop: {
                         geometries: [
                             (stones.scene.children[1].children[1].children[4].children[0] as THREE.Mesh).geometry,
                             (stones.scene.children[1].children[1].children[4] as THREE.Mesh).geometry,
@@ -715,7 +715,7 @@ export default function Configurator() {
                             stones.scene.children[1].children[1].children[4]
                         ]
                     },
-                    square: {
+                    princess: {
                         geometries: [
                             (stones.scene.children[1].children[4].children[4].children[0] as THREE.Mesh).geometry,
                             (stones.scene.children[1].children[4].children[4] as THREE.Mesh).geometry,
@@ -801,7 +801,7 @@ export default function Configurator() {
                             stones.scene.children[0].children[2].children[1]
                         ]
                     },
-                    circle: {
+                    round: {
                         geometries: [
                             (stones.scene.children[0].children[5].children[1].children[0] as THREE.Mesh).geometry,
                             (stones.scene.children[0].children[5].children[1] as THREE.Mesh).geometry,
@@ -815,7 +815,7 @@ export default function Configurator() {
                             stones.scene.children[0].children[5].children[1]
                         ]
                     },
-                    tear: {
+                    drop: {
                         geometries: [
                             (stones.scene.children[0].children[1].children[1].children[0] as THREE.Mesh).geometry,
                             (stones.scene.children[0].children[1].children[1] as THREE.Mesh).geometry,
@@ -829,7 +829,7 @@ export default function Configurator() {
                             stones.scene.children[0].children[1].children[1]
                         ]
                     },
-                    square: {
+                    princess: {
                         geometries: [
                             (stones.scene.children[0].children[4].children[1].children[0] as THREE.Mesh).geometry,
                             (stones.scene.children[0].children[4].children[1] as THREE.Mesh).geometry,
@@ -915,7 +915,7 @@ export default function Configurator() {
                             stones.scene.children[0].children[2].children[4]
                         ]
                     },
-                    circle:{
+                    round:{
                         geometries: [
                             (stones.scene.children[0].children[5].children[4].children[0] as THREE.Mesh).geometry,
                             (stones.scene.children[0].children[5].children[4] as THREE.Mesh).geometry,
@@ -929,7 +929,7 @@ export default function Configurator() {
                             stones.scene.children[0].children[5].children[4]
                         ]
                     },
-                    tear: {
+                    drop: {
                         geometries: [
                             (stones.scene.children[0].children[1].children[4].children[0] as THREE.Mesh).geometry,
                             (stones.scene.children[0].children[1].children[4] as THREE.Mesh).geometry,
@@ -943,7 +943,7 @@ export default function Configurator() {
                             stones.scene.children[0].children[1].children[4]
                         ]
                     },
-                    square: {
+                    princess: {
                         geometries: [
                             (stones.scene.children[0].children[4].children[4].children[0] as THREE.Mesh).geometry,
                             (stones.scene.children[0].children[4].children[4] as THREE.Mesh).geometry,
@@ -1030,7 +1030,7 @@ export default function Configurator() {
                             stones.scene.children[1].children[2].children[0]
                         ]
                     },
-                    circle: {
+                    round: {
                         geometries: [
                             (stones.scene.children[1].children[5].children[0].children[0] as THREE.Mesh).geometry,
                             (stones.scene.children[1].children[5].children[0] as THREE.Mesh).geometry,
@@ -1044,7 +1044,7 @@ export default function Configurator() {
                             stones.scene.children[1].children[5].children[0]
                         ]
                     },
-                    tear: {
+                    drop: {
                         geometries: [
                             (stones.scene.children[1].children[1].children[0].children[0] as THREE.Mesh).geometry,
                             (stones.scene.children[1].children[1].children[0] as THREE.Mesh).geometry,
@@ -1058,7 +1058,7 @@ export default function Configurator() {
                             stones.scene.children[1].children[1].children[0]
                         ]
                     },
-                    square: {
+                    princess: {
                         geometries: [
                             (stones.scene.children[1].children[4].children[0].children[0] as THREE.Mesh).geometry,
                             (stones.scene.children[1].children[4].children[0] as THREE.Mesh).geometry,
@@ -1144,7 +1144,7 @@ export default function Configurator() {
                             stones.scene.children[1].children[2].children[3]
                         ]
                     },
-                    circle: {
+                    round: {
                         geometries: [
                             (stones.scene.children[1].children[5].children[3].children[0] as THREE.Mesh).geometry,
                             (stones.scene.children[1].children[5].children[3] as THREE.Mesh).geometry,
@@ -1158,7 +1158,7 @@ export default function Configurator() {
                             stones.scene.children[1].children[5].children[3]
                         ]
                     },
-                    tear: {
+                    drop: {
                         geometries: [
                             (stones.scene.children[1].children[1].children[3].children[0] as THREE.Mesh).geometry,
                             (stones.scene.children[1].children[1].children[3] as THREE.Mesh).geometry,
@@ -1172,7 +1172,7 @@ export default function Configurator() {
                             stones.scene.children[1].children[1].children[3]
                         ]
                     },
-                    square: {
+                    princess: {
                         geometries: [
                             (stones.scene.children[1].children[4].children[3].children[0] as THREE.Mesh).geometry,
                             (stones.scene.children[1].children[4].children[3] as THREE.Mesh).geometry,
@@ -1258,7 +1258,7 @@ export default function Configurator() {
                             stones.scene.children[0].children[2].children[0]
                         ]
                     },
-                    circle: {
+                    round: {
                         geometries: [
                             (stones.scene.children[0].children[5].children[0].children[0] as THREE.Mesh).geometry,
                             (stones.scene.children[0].children[5].children[0] as THREE.Mesh).geometry,
@@ -1272,7 +1272,7 @@ export default function Configurator() {
                             stones.scene.children[0].children[5].children[0]
                         ]
                     },
-                    tear: {
+                    drop: {
                         geometries: [
                             (stones.scene.children[0].children[1].children[0].children[0] as THREE.Mesh).geometry,
                             (stones.scene.children[0].children[1].children[0] as THREE.Mesh).geometry,
@@ -1286,7 +1286,7 @@ export default function Configurator() {
                             stones.scene.children[0].children[1].children[0]
                         ]
                     },
-                    square: {
+                    princess: {
                         geometries: [
                             (stones.scene.children[0].children[4].children[0].children[0] as THREE.Mesh).geometry,
                             (stones.scene.children[0].children[4].children[0] as THREE.Mesh).geometry,
@@ -1380,7 +1380,7 @@ export default function Configurator() {
                             stones.scene.children[0].children[2].children[3]
                         ]
                     },
-                    circle: {
+                    round: {
                         geometries: [
                             (stones.scene.children[0].children[5].children[3].children[0] as THREE.Mesh).geometry,
                             (stones.scene.children[0].children[5].children[3] as THREE.Mesh).geometry,
@@ -1394,7 +1394,7 @@ export default function Configurator() {
                             stones.scene.children[0].children[5].children[3]
                         ]
                     },
-                    tear: {
+                    drop: {
                         geometries: [
                             (stones.scene.children[0].children[1].children[3].children[0] as THREE.Mesh).geometry,
                             (stones.scene.children[0].children[1].children[3] as THREE.Mesh).geometry,
@@ -1408,7 +1408,7 @@ export default function Configurator() {
                             stones.scene.children[0].children[1].children[3]
                         ]
                     },
-                    square: {
+                    princess: {
                         geometries: [
                             (stones.scene.children[0].children[4].children[3].children[0] as THREE.Mesh).geometry,
                             (stones.scene.children[0].children[4].children[3] as THREE.Mesh).geometry,

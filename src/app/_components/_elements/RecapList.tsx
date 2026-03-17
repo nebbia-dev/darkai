@@ -9,6 +9,7 @@ import elabMaterial from "@/app/_helpers/_string-modders/elabMaterial";
 import elabSignatureName from "@/app/_helpers/_string-modders/elabSignatureName";
 import {Trash} from "@/app/_components/_icons/Trash";
 import elabVelvetName from "@/app/_helpers/_string-modders/elabVelvetName";
+import elabSignatureGold from "@/app/_helpers/_string-modders/elabSignatureGold";
 
 export default function RecapList({edit} : {edit:boolean}) {
 
@@ -102,14 +103,14 @@ export default function RecapList({edit} : {edit:boolean}) {
                             {/*material*/}
                             <p>
                                 {
-                                    !history[currentStep][0].signatureMaterial[signature[0]]?.includes('pave')
-                                        ? (history[currentStep][0].signatureMaterial[signature[0]] === 'gold' ? 'Yellow' : firstCapital(history[currentStep][0].signatureMaterial[signature[0]] as string))
-                                        : 'White'
-                                } gold
+                                    elabSignatureGold(history[currentStep][0].signatureMaterial[signature[0]], signature[0])
+                                }
                             </p>
 
                             {
-                                history[currentStep][0].signatureMaterial[signature[0]]?.includes('pave') &&
+                                (history[currentStep][0].signatureMaterial[signature[0]]?.includes('lab')
+                                || history[currentStep][0].signatureMaterial[signature[0]]?.includes('nat')
+                                ) &&
                                 <p>Round pave w/ {
                                     history[currentStep][0].signatureMaterial[signature[0]]?.includes('lab')
                                     ? 'lab'

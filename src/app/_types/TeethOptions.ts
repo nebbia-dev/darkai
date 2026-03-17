@@ -233,7 +233,7 @@ export interface SignVisibility {
 }
 export interface Stone {
     // aggiungere i colori
-    shape: 'circle' |  'square' | 'baguette' | 'tear' | 'heart' | 'marquise' | undefined,
+    shape: 'round' |  'princess' | 'baguette' | 'drop' | 'heart' | 'marquise' | undefined,
     color: string | undefined
 }
 export interface Stones {

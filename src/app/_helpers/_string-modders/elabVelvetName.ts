@@ -41,7 +41,7 @@ export default function elabVelvetName(color: string) {
             velvet = 'green';
             break;
         case '76':
-            velvet = 'forest';
+            velvet = 'forest green';
             break;
         default:
             velvet = color;

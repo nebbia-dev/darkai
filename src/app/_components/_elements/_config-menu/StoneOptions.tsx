@@ -100,7 +100,7 @@ export default function StoneOptions({tooth, bezel, pave, whDLabRef, whDNatRef, 
             }
 
             {/*bezel circle/pave round, pave mosaic */}
-            { ((!bezel && (paveShape === 'round' || paveShape === 'mosaic')) || bezelShape === 'circle') &&
+            { ((!bezel && (paveShape === 'round' || paveShape === 'mosaic')) || bezelShape === 'round') &&
                 <button ref={blDNatRef} type="button" disabled={!pave && !bezel} value="blD_nat"
                      onClick={(e) => setStoneColor(e.currentTarget.value)}
                      className={`${highlightSelected('blD') ? 'border-2' : ''} w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 px-2 py-3 ${(pave || bezel) ? 'text-slate-950 cursor-pointer' : 'text-slate-400'} flex flex-col items-center justify-center`}>
