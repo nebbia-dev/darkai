@@ -64,16 +64,16 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
                         </div>
                         {/* MyConfig Bottom w/ Carats+Diamonds */}
                         <div className="border-1 rounded-b-3xl w-full bg-gray-50 px-6 py-4">
-                            <div className="flex gap-4 mb-2 items-center">
-                                <span className="inline-block w-[72px]">Carats:</span>
-                                <div className="flex gap-4">
-                                    <button type="button" className={`${teethPreciousness.carats === 10 ? 'font-medium bg-sky-400 text-gray-50' : 'bg-gray-50 text-slate-950'} px-2 py-1 rounded-3xl cursor-pointer`} value="10"
+                            <div className="flex gap-4 items-center">
+                                <span className="font-medium inline-block w-[72px]">Carats:</span>
+                                <div className="flex justify-evenly gap-4 w-full">
+                                    <button type="button" className={`${teethPreciousness.carats === 10 ? 'font-medium border-sky-400 bg-sky-400 text-gray-50' : 'border-slate-950 bg-gray-50 text-slate-950'} border-1 px-4 py-2 rounded-full cursor-pointer`} value="10"
                                             onClick={(e) => setCarat(e.currentTarget.value)}>10K
                                     </button>
-                                    <button type="button" className={`${teethPreciousness.carats === 14 ? 'font-medium bg-sky-400 text-gray-50' : 'bg-gray-50 text-slate-950'} px-2 py-1 rounded-3xl cursor-pointer`} value="14"
+                                    <button type="button" className={`${teethPreciousness.carats === 14 ? 'font-medium border-sky-400 bg-sky-400 text-gray-50' : 'border-slate-950 bg-gray-50 text-slate-950'} border-1 px-4 py-2 rounded-full cursor-pointer`} value="14"
                                             onClick={(e) => setCarat(e.currentTarget.value)}>14K
                                     </button>
-                                    <button type="button" className={`${teethPreciousness.carats === 18 ? 'font-medium bg-sky-400 text-gray-50' : 'bg-gray-50 text-slate-950'} px-2 py-1 rounded-3xl cursor-pointer`} value="18"
+                                    <button type="button" className={`${teethPreciousness.carats === 18 ? 'font-medium border-sky-400 bg-sky-400 text-gray-50' : 'border-slate-950 bg-gray-50 text-slate-950'} border-1 px-4 py-2 rounded-full cursor-pointer`} value="18"
                                             onClick={(e) => setCarat(e.currentTarget.value)}>18K
                                     </button>
                                 </div>

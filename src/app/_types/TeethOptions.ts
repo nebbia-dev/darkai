@@ -203,13 +203,13 @@ export interface Visibility {
 }
 export interface SignMaterial {
     [key: string]: string | undefined,
-    vamp: 'white' | 'pave' | 'black' | undefined,
-    hammered: 'white' | 'gold' | 'black' | undefined,
-    cross: 'white' | 'pave' | 'rose' | 'black' | undefined,
+    vamp: 'base_white' | 'pave_lab' | 'pave_nat' | 'base_black' | undefined,
+    hammered: 'base_white' | 'base_gold' | 'base_black' | undefined,
+    cross: 'base_white' | 'pave_lab' | 'pave_nat' | 'base_rose' | 'base_black' | undefined,
     bubblegum: 'pink' | 'blue' | 'green' | undefined,
-    sprinkles: 'white' | 'gold' | 'rose' | undefined,
-    tribal: 'white' | 'pave' | 'gold' | undefined,
-    braces: 'emerald' | 'ruby' | undefined
+    sprinkles: 'white_lab' | 'gold_lab' | 'rose_lab' | 'white_nat' | 'gold_nat' | 'rose_nat' | undefined,
+    tribal: 'base_white' | 'pave_lab' | 'pave_nat' | 'base_gold' | undefined,
+    braces: 'base_white' | 'pave_lab' | undefined
 }
 export interface SignatureTeeth {
     [key: string]: string[],

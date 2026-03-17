@@ -71,9 +71,7 @@ export default function RecapList({edit} : {edit:boolean}) {
     return (
         <div className="pl-5 pr-3 py-4 h-full">
             <ul className="pr-2 h-full overflow-y-auto">
-                {((history.length === 0
-                        // || total === 0
-                        )
+                {((history.length === 0 || total === 0)
                         && !packaging.premium) &&
                     <li className="w-full h-full flex items-center justify-center">
                         <p>Start your design</p>
@@ -104,15 +102,19 @@ export default function RecapList({edit} : {edit:boolean}) {
                             {/*material*/}
                             <p>
                                 {
-                                    history[currentStep][0].signatureMaterial[signature[0]] !== 'pave'
+                                    !history[currentStep][0].signatureMaterial[signature[0]]?.includes('pave')
                                         ? (history[currentStep][0].signatureMaterial[signature[0]] === 'gold' ? 'Yellow' : firstCapital(history[currentStep][0].signatureMaterial[signature[0]] as string))
                                         : 'White'
                                 } gold
                             </p>
 
                             {
-                                history[currentStep][0].signatureMaterial[signature[0]] === 'pave' &&
-                                <p>Round pave w/ white diamonds</p>
+                                history[currentStep][0].signatureMaterial[signature[0]]?.includes('pave') &&
+                                <p>Round pave w/ {
+                                    history[currentStep][0].signatureMaterial[signature[0]]?.includes('lab')
+                                    ? 'lab'
+                                    : 'natural'
+                                } white diamonds</p>
                             }
 
                             {/*<span aria-hidden={true}*/}

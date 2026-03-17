@@ -13,13 +13,13 @@ export default function Hammered() {
         const geometry = [signatureGeometry.icidx, signatureGeometry.ilssx, signatureGeometry.ilsdx, signatureGeometry.ilisx];
         let material:JSX.Element[];
         switch(mat) {
-            case 'gold':
+            case 'base_gold':
                 material = [<FullMaterial finish="hammered" color="gold"/>]
                 break;
-            case 'white':
+            case 'base_white':
                 material = [<FullMaterial finish="hammered" color="white"/>]
                 break;
-            case 'black':
+            case 'base_black':
                 material = [<FullMaterial finish="hammered" color="black"/>]
                 break;
             default:

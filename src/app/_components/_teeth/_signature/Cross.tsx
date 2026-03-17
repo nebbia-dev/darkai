@@ -17,19 +17,20 @@ export default function Cross() {
         const position = signatureGeometry.position
         let geometry:THREE.BufferGeometry[], material:JSX.Element[];
         switch(mat) {
-            case 'pave':
+            case 'pave_lab':
+            case 'pave_nat':
                 geometry = [signatureGeometry.base, signatureGeometry.pave];
-                material = [<FullMaterial finish="polished" color="white"/>, <Pave pave="round" stone="whD"/>, <RoundPaveBase stone="whD" color="white" pave="round"/>];
+                material = [<FullMaterial finish="polished" color="white"/>, <Pave pave="round" stone="whD_lab"/>, <RoundPaveBase stone="whD_lab" color="white" pave="round"/>];
                 break;
-            case 'white':
+            case 'base_white':
                 geometry = [signatureGeometry.full];
                 material = [<FullMaterial finish="polished" color="white"/>]
                 break;
-            case 'gold':
+            case 'base_gold':
                 geometry = [signatureGeometry.full];
                 material = [<FullMaterial finish="polished" color="gold"/>]
                 break;
-            case 'rose':
+            case 'base_rose':
                 geometry = [signatureGeometry.full];
                 material = [<FullMaterial finish="polished" color="rose"/>]
                 break;

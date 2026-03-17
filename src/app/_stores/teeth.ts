@@ -178,7 +178,7 @@ export const useTeethStore = create<State>((set, get) => ({
                 // state.currentTooth = tooth;
 
                 // calc total and set history step
-                // get().calcTotal(state);
+                get().calcTotal(state);
                 get().setHistory(state);
             }),
         ),
@@ -327,7 +327,7 @@ export const useTeethStore = create<State>((set, get) => ({
                             state.teethPaves.cisx = {shape: undefined, color: undefined};
 
                             // calc total and set history step
-                            // get().calcTotal(state);
+                            get().calcTotal(state);
                             get().setHistory(state);
                             return;
                         }
@@ -373,7 +373,7 @@ export const useTeethStore = create<State>((set, get) => ({
                             }
 
                             // calc total and set history step
-                            // get().calcTotal(state);
+                            get().calcTotal(state);
                             get().setHistory(state);
                             return;
                         }
@@ -385,7 +385,7 @@ export const useTeethStore = create<State>((set, get) => ({
                         state.teethPaves[tooth] = {shape: undefined, color: undefined};
 
                         // calc total and set history step
-                        // get().calcTotal(state);
+                        get().calcTotal(state);
                         get().setHistory(state);
                         return;
                 }
@@ -534,7 +534,7 @@ export const useTeethStore = create<State>((set, get) => ({
                     }
 
                     // calc total
-                    // get().calcTotal(state);
+                    get().calcTotal(state);
                     get().setHistory(state);
                     return;
                 }
@@ -563,7 +563,7 @@ export const useTeethStore = create<State>((set, get) => ({
                     state.teethStones.cisx = {shape: undefined, color: undefined};
                     state.teethStones.cidx = {shape: undefined, color: undefined};
                     // calc total
-                    // get().calcTotal(state);
+                    get().calcTotal(state);
                     get().setHistory(state);
                     return;
                 }
@@ -838,7 +838,7 @@ export const useTeethStore = create<State>((set, get) => ({
                     }
                 }
                 // calc total and set history step
-                // get().calcTotal(state);
+                get().calcTotal(state);
                 get().setHistory(state);
             }),
         ),
@@ -957,7 +957,7 @@ export const useTeethStore = create<State>((set, get) => ({
                 }
 
                 // calc total and set history step
-                // get().calcTotal(state);
+                get().calcTotal(state);
                 get().setHistory(state);
             }),
         ),
@@ -996,7 +996,7 @@ export const useTeethStore = create<State>((set, get) => ({
                 state.teethEnamel[tooth] = color;
 
                 // calc total and set history step
-                // get().calcTotal(state);
+                get().calcTotal(state);
                 get().setHistory(state);
             }),
         ),
@@ -1255,7 +1255,7 @@ export const useTeethStore = create<State>((set, get) => ({
                 }
 
                 // calc total and set history step
-                //     get().calcTotal(state);
+                    get().calcTotal(state);
                     get().setHistory(state);
             })
         ),
@@ -1282,7 +1282,7 @@ export const useTeethStore = create<State>((set, get) => ({
                         state.hovered = undefined;
                         state.currentTooth = undefined;
                         get().setHistoryPack(state);
-                        // get().calcTotal(state);
+                        get().calcTotal(state);
                     }
                     state.showGemTypeBox = button === '5';
                     state.packagingScene = button === '6';
@@ -1418,7 +1418,7 @@ export const useTeethStore = create<State>((set, get) => ({
 
                 }
 
-                // get().calcTotal(state);
+                get().calcTotal(state);
                 get().setHistory(state);
             })
         ),
@@ -1452,7 +1452,7 @@ export const useTeethStore = create<State>((set, get) => ({
                 get().setHistoryPack(state);
 
                 if(prop === 'premium' && value === false) {
-                    // get().calcTotal(state);
+                    get().calcTotal(state);
                 }
             })
         )
@@ -1520,7 +1520,7 @@ export const useTeethStore = create<State>((set, get) => ({
 
                 get().resetList(state, tooth);
                 state.activeSubButton = undefined;
-                // get().calcTotal(state);
+                get().calcTotal(state);
                 get().setHistory(state);
             })
         ),
@@ -1537,7 +1537,7 @@ export const useTeethStore = create<State>((set, get) => ({
                 }
 
                 state.activeSubButton = undefined;
-                // get().calcTotal(state);
+                get().calcTotal(state);
                 get().setHistory(state);
             })
 
@@ -1658,7 +1658,7 @@ export const useTeethStore = create<State>((set, get) => ({
             produce((state) => {
                 state.currentHistory = state.currentHistory - 1;
                 get().resetHistoryStep(state);
-                // get().calcTotal(state);
+                get().calcTotal(state);
             })
         ),
     redo: () =>
@@ -1666,7 +1666,7 @@ export const useTeethStore = create<State>((set, get) => ({
             produce((state) => {
                 state.currentHistory = state.currentHistory + 1;
                 get().resetHistoryStep(state);
-                // get().calcTotal(state);
+                get().calcTotal(state);
             })
         ),
     resetHistoryStep: (state) => {
@@ -2082,14 +2082,13 @@ export const useTeethStore = create<State>((set, get) => ({
             for (let [tooth, visibility] of Object.entries(state.teethVisibility)) {
                 if (visibility) {
                     let priceToFind;
-                    let diamonds;
                     switch (state.teethJewelType[tooth]) {
                         case 'full':
                         case 'frame':
                         case 'enamel':
                         case 'bar':
                         case 'bigBar':
-                            priceToFind = state.prices.base.filter(p => p.type === state.teethJewelType[tooth] && p.carats === state.teethPreciousness.carats);
+                            priceToFind = state.prices.base.filter(p => p.type === state.teethJewelType[tooth] && p.carats === state.teethPreciousness.carats && p.finish.includes(state.teethFinish[tooth]));
                             if ((state.teethJewelType[tooth] === 'bar' && (tooth === 'icsdx' || tooth === 'icssx'))
                                 || (state.teethJewelType[tooth] === 'bar' && (tooth === 'icidx' || tooth === 'icisx'))
                                 || (state.teethJewelType[tooth] === 'bigBar' && (tooth === 'cidx' || tooth === 'cisx'))
@@ -2102,8 +2101,22 @@ export const useTeethStore = create<State>((set, get) => ({
                             }
                             break;
                         case 'bezel':
-                            const bezelStone = state.prices.bezel[state.teethStones[tooth].color + '_b'];
-                            priceToFind = bezelStone.filter(p => p.carats === state.teethPreciousness.carats && !p.pave && p.shape === state.teethStones[tooth].shape);
+                            let stoneToFind;
+                            switch(state.teethStones[tooth].color) {
+                                case 'whD_lab':
+                                    stoneToFind = 'whDLab_b';
+                                    break;
+                                case 'whD_nat':
+                                    stoneToFind = 'whDNat_b';
+                                    break;
+                                case 'blD_nat':
+                                    stoneToFind = 'blDNat_b';
+                                    break;
+                                default:
+                                    stoneToFind = 'stone_b';
+                            }
+                            const bezelStone = state.prices.bezel[stoneToFind];
+                            priceToFind = bezelStone.filter(p => p.carats === state.teethPreciousness.carats && !p.pave && p.shape === state.teethStones[tooth].shape && p.finish.includes(state.teethFinish[tooth]));
                             state.teethPrices[tooth] = priceToFind[0].price;
                             state.total += priceToFind[0].price;
                             break;
@@ -2111,9 +2124,32 @@ export const useTeethStore = create<State>((set, get) => ({
                         case 'frameDiamond':
                         case 'barDiamond':
                         case 'bigBarDiamond':
+                            let paveToFind;
+                            switch(state.teethPaves[tooth].color) {
+                                case 'whD_lab':
+                                    paveToFind = 'whDLab_p';
+                                    break;
+                                case 'whD_nat':
+                                    paveToFind = 'whDNat_p';
+                                    break;
+                                case 'brD_nat':
+                                    paveToFind = 'brDNat_p';
+                                    break;
+                                case 'blD_nat':
+                                    paveToFind = 'blDNat_p';
+                                    break;
+                                case 'camo':
+                                    paveToFind = 'camo_p';
+                                    break;
+                                case 'glitch':
+                                    paveToFind = 'glitch_p';
+                                    break;
+                                default:
+                                    paveToFind = 'stone_p';
+                            }
                             const prevType = state.teethJewelType[tooth].slice();
                             const realType = prevType.replace('Diamond', '');
-                            const paveStone = state.prices.pave[state.teethPaves[tooth].color + '_p'];
+                            const paveStone = state.prices.pave[paveToFind];
                             priceToFind = paveStone.filter(p => p.type === realType && p.carats === state.teethPreciousness.carats && p.shape === state.teethPaves[tooth].shape);
                             if ((state.teethJewelType[tooth] === 'barDiamond' && (tooth === 'icsdx' || tooth === 'icssx'))
                                 || (state.teethJewelType[tooth] === 'barDiamond' && (tooth === 'icidx' || tooth === 'icisx'))
@@ -2127,60 +2163,67 @@ export const useTeethStore = create<State>((set, get) => ({
                             }
                             break;
                         case 'bezelDiamond':
-                            const paveStoneP = state.prices.pave[state.teethPaves[tooth].color + '_p'];
-                            const bezelStoneP = state.prices.bezel[state.teethStones[tooth].color + '_b'];
-                            priceToFind = paveStoneP.filter(p => p.carats === state.teethPreciousness.carats && p.type === 'full' && p.shape === state.teethPaves[tooth].shape);
-                            let addonBezel = bezelStoneP.filter(p => p.carats === state.teethPreciousness.carats && p.pave && p.shape === state.teethStones[tooth].shape);
-                            state.teethPrices[tooth] = priceToFind[0].price + addonBezel[0].price;
-                            state.total += priceToFind[0].price + addonBezel[0].price;
+                            let stoneToFindP;
+                            switch(state.teethStones[tooth].color) {
+                                case 'whD_lab':
+                                    stoneToFindP = 'whDLab_b';
+                                    break;
+                                case 'whD_nat':
+                                    stoneToFindP = 'whDNat_b';
+                                    break;
+                                case 'blD_nat':
+                                    stoneToFindP = 'blDNat_b';
+                                    break;
+                                default:
+                                    stoneToFindP = 'stone_b';
+                            }
+                            const bezelStoneP = state.prices.bezel[stoneToFindP];
+                            priceToFind = bezelStoneP.filter(p => p.carats === state.teethPreciousness.carats && p.shape === state.teethPaves[tooth].shape && (p.finish.includes(state.teethFinish[tooth]) || p.finish.includes(state.teethPaves[tooth].shape)));
+                            state.teethPrices[tooth] = priceToFind[0].price;
+                            state.total += priceToFind[0].price;
                             break;
-                    }
-
-                    if (state.teethFinish[tooth] !== 'polished') {
-                        const priceFinish = state.prices.finish.filter(p => p.carats === state.teethPreciousness.carats && p.type === state.teethFinish[tooth]);
-                        if ((state.teethJewelType[tooth] === 'bar' && (tooth === 'icsdx' || tooth === 'icssx'))
-                            || (state.teethJewelType[tooth] === 'bar' && (tooth === 'icidx' || tooth === 'icisx'))
-                            || (state.teethJewelType[tooth] === 'bigBar' && (tooth === 'cidx' || tooth === 'cisx'))
-                        ) {
-                            state.teethPrices[tooth] += priceFinish[0].price / 2;
-                            state.total += priceFinish[0].price / 2;
-                        } else {
-                            state.teethPrices[tooth] += priceFinish[0].price;
-                            state.total += priceFinish[0].price;
-                        }
                     }
                 }
             }
             for (let [signature, visibility] of Object.entries(state.signatureVisibility)) {
                 if (visibility) {
-                    let signatureToFind;
+                    const signatureToFind = state.prices.signature.filter(p => p.type.includes(signature) && p.carats === state.teethPreciousness.carats);;
                     let chosenSignature;
                     switch (signature) {
-                        // "_" to differentiate variants w/ or w/o pave (base, lab, nat)
                         case 'vamp':
+                          chosenSignature = signatureToFind.filter(p => p.type.includes(state.signatureMaterial[signature]));
+                          break;
                         case 'cross':
                         case 'braces':
                         case 'tribal':
-                            signatureToFind = state.prices.signature.filter(p => p.type.includes(signature) && p.carats === state.teethPreciousness.carats);
-                            if (state.signatureMaterial[signature] !== 'pave') {
-                                // scelta del tipo di base per i signature
-                                // chosenSignature = signatureToFind.filter(p => p.type.includes('_base'));
+                            if(state.signatureMaterial[signature]?.includes('base')) {
+                                chosenSignature = signatureToFind.filter(p => p.type === signature + '_base');
                             } else {
-                                // scelta del tipo di diamanti per i signature
-                                // chosenSignature = signatureToFind.filter(p => p.type.includes('_' + state.teethPreciousness.diamonds));
+                                chosenSignature = signatureToFind.filter(p => p.type.includes(state.signatureMaterial[signature]));
                             }
-                            state.teethPrices.signature = chosenSignature[0].price;
-                            state.total += chosenSignature[0].price;
                             break;
-                        // no paves
-                        case 'bubblegum':
                         case 'sprinkles':
-                        case 'hammered':
-                            signatureToFind = state.prices.signature.filter(p => p.type === signature && p.carats === state.teethPreciousness.carats);
-                            state.teethPrices.signature = signatureToFind[0].price;
-                            state.total += signatureToFind[0].price;
+                            if(state.signatureMaterial[signature]?.includes('lab')) {
+                                chosenSignature = signatureToFind.filter(p => p.type.includes('lab'));
+                            } else {
+                                chosenSignature = signatureToFind.filter(p => p.type.includes('nat'));
+                            }
                             break;
+                        case 'hammered':
+                            if(state.signatureMaterial[signature]?.includes('black')) {
+                                chosenSignature = signatureToFind.filter(p => p.type.includes('black'));
+                            } else {
+                                chosenSignature = signatureToFind.filter(p => p.type.includes('white'));
+                            }
+                            break;
+                        case 'bubblegum':
+                            chosenSignature = signatureToFind;
+                            break;
+                        default:
+                            chosenSignature = [{price: 0}];
                     }
+                    state.teethPrices.signature = chosenSignature[0].price;
+                    state.total += chosenSignature[0].price;
                 }
             }
 
@@ -2202,7 +2245,7 @@ export const useTeethStore = create<State>((set, get) => ({
         set(
             produce((state) => {
                 state.teethPreciousness.carats = carats;
-                // get().calcTotal(state);
+                get().calcTotal(state);
             })
         ),
 }))

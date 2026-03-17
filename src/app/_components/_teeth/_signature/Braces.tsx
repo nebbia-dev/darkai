@@ -18,10 +18,10 @@ export default function Braces() {
         const position = [signatureGeometry.position, signatureGeometry.stoneBasePosition]
         let material:JSX.Element[];
         switch(mat) {
-            case 'pave':
-                material = [<FullMaterial color="white" finish="polished"/>, <StonesMaterial color="emerald"/>, <Pave pave="round" stone="whD"/>, <RoundPaveBase stone="whD" color="white" pave="round"/>]
+            case 'pave_lab':
+                material = [<FullMaterial color="white" finish="polished"/>, <StonesMaterial color="emerald"/>, <Pave pave="round" stone="whD_lab"/>, <RoundPaveBase stone="whD_lab" color="white" pave="round"/>]
                 break;
-            case 'metal':
+            case 'base_white':
                 material = [<FullMaterial color="white" finish="polished"/>, <StonesMaterial color="ruby"/>]
                 break;
             default:
@@ -42,20 +42,20 @@ export default function Braces() {
                     </mesh>
 
                     <mesh geometry={geometry[1]} visible={visible} position={position[0]}>
-                        {mat === 'pave'
+                        {mat === 'pave_lab'
                             ? material[2]
                             : material[0]
                         }
                     </mesh>
 
                     <mesh geometry={geometry[5]} visible={visible} position={position[0]}>
-                        {mat === 'pave'
+                        {mat === 'pave_lab'
                             ? material[2]
                             : material[0]
                         }
                     </mesh>
 
-                    {mat === 'pave' &&
+                    {mat === 'pave_lab' &&
                         <>
                             <mesh geometry={geometry[1]} visible={visible} position={position[0]}>
                                 {material[0]}

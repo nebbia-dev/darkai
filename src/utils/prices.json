@@ -6,7 +6,7 @@
       "type": "bar",
       "carats": 10,
       "price": 330,
-      "finish": "polished"
+      "finish": "polished/sandblasted"
     },
     {
       "id": 2,
@@ -14,7 +14,7 @@
       "type": "bar",
       "carats": 14,
       "price": 440,
-      "finish": "polished"
+      "finish": "polished/sandblasted"
     },
     {
       "id": 3,
@@ -22,7 +22,7 @@
       "type": "bar",
       "carats": 18,
       "price": 550,
-      "finish": "polished"
+      "finish": "polished/sandblasted"
     },
     {
       "id": 4,
@@ -30,7 +30,7 @@
       "type": "bigBar",
       "carats": 10,
       "price": 860,
-      "finish": "polished"
+      "finish": "polished/sandblasted"
     },
     {
       "id": 5,
@@ -38,7 +38,7 @@
       "type": "bigBar",
       "carats": 14,
       "price": 1220,
-      "finish": "polished"
+      "finish": "polished/sandblasted"
     },
     {
       "id": 6,
@@ -46,7 +46,7 @@
       "type": "bigBar",
       "carats": 18,
       "price": 1770,
-      "finish": "polished"
+      "finish": "polished/sandblasted"
     },
     {
       "id": 7,
@@ -54,7 +54,7 @@
       "type": "enamel",
       "carats": 10,
       "price": 840,
-      "finish": "polished"
+      "finish": "polished/sandblasted"
     },
     {
       "id": 8,
@@ -62,7 +62,7 @@
       "type": "enamel",
       "carats": 14,
       "price": 1150,
-      "finish": "polished"
+      "finish": "polished/sandblasted"
     },
     {
       "id": 9,
@@ -70,7 +70,7 @@
       "type": "enamel",
       "carats": 18,
       "price": 1630,
-      "finish": "polished"
+      "finish": "polished/sandblasted"
     },
     {
       "id": 10,
@@ -78,7 +78,7 @@
       "type": "frame",
       "carats": 10,
       "price": 440,
-      "finish": "polished"
+      "finish": "polished/sandblasted"
     },
     {
       "id": 11,
@@ -86,7 +86,7 @@
       "type": "frame",
       "carats": 14,
       "price": 590,
-      "finish": "polished"
+      "finish": "polished/sandblasted"
     },
     {
       "id": 12,
@@ -94,7 +94,7 @@
       "type": "frame",
       "carats": 18,
       "price": 840,
-      "finish": "polished"
+      "finish": "polished/sandblasted"
     },
     {
       "id": 13,
@@ -102,7 +102,7 @@
       "type": "full",
       "carats": 10,
       "price": 760,
-      "finish": "polished"
+      "finish": "polished/sandblasted"
     },
     {
       "id": 14,
@@ -110,7 +110,7 @@
       "type": "full",
       "carats": 14,
       "price": 1070,
-      "finish": "polished"
+      "finish": "polished/sandblasted"
     },
     {
       "id": 15,
@@ -118,7 +118,7 @@
       "type": "full",
       "carats": 18,
       "price": 1550,
-      "finish": "polished"
+      "finish": "polished/sandblasted"
     },
     {
       "id": 16,
@@ -249,7 +249,7 @@
         "stone": "white_diamond_lab",
         "carats": 10,
         "price": 950,
-        "finish": "polished",
+        "finish": "polished/sandblasted",
         "shape": "heart"
       },
       {
@@ -258,7 +258,7 @@
         "stone": "white_diamond_lab",
         "carats": 14,
         "price": 1260,
-        "finish": "polished",
+        "finish": "polished/sandblasted",
         "shape": "heart"
       },
       {
@@ -267,7 +267,7 @@
         "stone": "white_diamond_lab",
         "carats": 18,
         "price": 1760,
-        "finish": "polished",
+        "finish": "polished/sandblasted",
         "shape": "heart"
       },
       {
@@ -438,7 +438,7 @@
         "stone": "white_diamond_lab",
         "carats": 10,
         "price": 970,
-        "finish": "polished",
+        "finish": "polished/sandblasted",
         "shape": "princess"
       },
       {
@@ -447,7 +447,7 @@
         "stone": "white_diamond_lab",
         "carats": 14,
         "price": 1290,
-        "finish": "polished",
+        "finish": "polished/sandblasted",
         "shape": "princess"
       },
       {
@@ -456,7 +456,7 @@
         "stone": "white_diamond_lab",
         "carats": 18,
         "price": 1790,
-        "finish": "polished",
+        "finish": "polished/sandblasted",
         "shape": "princess"
       },
       {
@@ -627,7 +627,7 @@
         "stone": "white_diamond_lab",
         "carats": 10,
         "price": 880,
-        "finish": "polished",
+        "finish": "polished/sandblasted",
         "shape": "round"
       },
       {
@@ -636,7 +636,7 @@
         "stone": "white_diamond_lab",
         "carats": 14,
         "price": 1200,
-        "finish": "polished",
+        "finish": "polished/sandblasted",
         "shape": "round"
       },
       {
@@ -645,7 +645,7 @@
         "stone": "white_diamond_lab",
         "carats": 18,
         "price": 1700,
-        "finish": "polished",
+        "finish": "polished/sandblasted",
         "shape": "round"
       },
       {
@@ -816,7 +816,7 @@
         "stone": "white_diamond_lab",
         "carats": 10,
         "price": 980,
-        "finish": "polished",
+        "finish": "polished/sandblasted",
         "shape": "baguette"
       },
       {
@@ -825,7 +825,7 @@
         "stone": "white_diamond_lab",
         "carats": 14,
         "price": 1300,
-        "finish": "polished",
+        "finish": "polished/sandblasted",
         "shape": "baguette"
       },
       {
@@ -834,7 +834,7 @@
         "stone": "white_diamond_lab",
         "carats": 18,
         "price": 1790,
-        "finish": "polished",
+        "finish": "polished/sandblasted",
         "shape": "baguette"
       },
       {
@@ -1005,7 +1005,7 @@
         "stone": "white_diamond_lab",
         "carats": 10,
         "price": 950,
-        "finish": "polished",
+        "finish": "polished/sandblasted",
         "shape": "drop"
       },
       {
@@ -1014,7 +1014,7 @@
         "stone": "white_diamond_lab",
         "carats": 14,
         "price": 1260,
-        "finish": "polished",
+        "finish": "polished/sandblasted",
         "shape": "drop"
       },
       {
@@ -1023,7 +1023,7 @@
         "stone": "white_diamond_lab",
         "carats": 18,
         "price": 1760,
-        "finish": "polished",
+        "finish": "polished/sandblasted",
         "shape": "drop"
       },
       {
@@ -1194,7 +1194,7 @@
         "stone": "white_diamond_lab",
         "carats": 10,
         "price": 950,
-        "finish": "polished",
+        "finish": "polished/sandblasted",
         "shape": "marquise"
       },
       {
@@ -1203,7 +1203,7 @@
         "stone": "white_diamond_lab",
         "carats": 14,
         "price": 1260,
-        "finish": "polished",
+        "finish": "polished/sandblasted",
         "shape": "marquise"
       },
       {
@@ -1212,7 +1212,7 @@
         "stone": "white_diamond_lab",
         "carats": 18,
         "price": 1760,
-        "finish": "polished",
+        "finish": "polished/sandblasted",
         "shape": "marquise"
       },
       {
@@ -1385,7 +1385,7 @@
         "stone": "white_diamond_nat",
         "carats": 10,
         "price": 1990,
-        "finish": "polished",
+        "finish": "polished/sandblasted",
         "shape": "heart"
       },
       {
@@ -1394,7 +1394,7 @@
         "stone": "white_diamond_nat",
         "carats": 14,
         "price": 2300,
-        "finish": "polished",
+        "finish": "polished/sandblasted",
         "shape": "heart"
       },
       {
@@ -1403,7 +1403,7 @@
         "stone": "white_diamond_nat",
         "carats": 18,
         "price": 2800,
-        "finish": "polished",
+        "finish": "polished/sandblasted",
         "shape": "heart"
       },
       {
@@ -1574,7 +1574,7 @@
         "stone": "white_diamond_nat",
         "carats": 10,
         "price": 2000,
-        "finish": "polished",
+        "finish": "polished/sandblasted",
         "shape": "princess"
       },
       {
@@ -1583,7 +1583,7 @@
         "stone": "white_diamond_nat",
         "carats": 14,
         "price": 2320,
-        "finish": "polished",
+        "finish": "polished/sandblasted",
         "shape": "princess"
       },
       {
@@ -1592,7 +1592,7 @@
         "stone": "white_diamond_nat",
         "carats": 18,
         "price": 2820,
-        "finish": "polished",
+        "finish": "polished/sandblasted",
         "shape": "princess"
       },
       {
@@ -1763,7 +1763,7 @@
         "stone": "white_diamond_nat",
         "carats": 10,
         "price": 1660,
-        "finish": "polished",
+        "finish": "polished/sandblasted",
         "shape": "round"
       },
       {
@@ -1772,7 +1772,7 @@
         "stone": "white_diamond_nat",
         "carats": 14,
         "price": 1970,
-        "finish": "polished",
+        "finish": "polished/sandblasted",
         "shape": "round"
       },
       {
@@ -1781,7 +1781,7 @@
         "stone": "white_diamond_nat",
         "carats": 18,
         "price": 2470,
-        "finish": "polished",
+        "finish": "polished/sandblasted",
         "shape": "round"
       },
       {
@@ -1952,7 +1952,7 @@
         "stone": "white_diamond_nat",
         "carats": 10,
         "price": 2620,
-        "finish": "polished",
+        "finish": "polished/sandblasted",
         "shape": "baguette"
       },
       {
@@ -1961,7 +1961,7 @@
         "stone": "white_diamond_nat",
         "carats": 14,
         "price": 2940,
-        "finish": "polished",
+        "finish": "polished/sandblasted",
         "shape": "baguette"
       },
       {
@@ -1970,7 +1970,7 @@
         "stone": "white_diamond_nat",
         "carats": 18,
         "price": 3440,
-        "finish": "polished",
+        "finish": "polished/sandblasted",
         "shape": "baguette"
       },
       {
@@ -2141,7 +2141,7 @@
         "stone": "white_diamond_nat",
         "carats": 10,
         "price": 1810,
-        "finish": "polished",
+        "finish": "polished/sandblasted",
         "shape": "drop"
       },
       {
@@ -2150,7 +2150,7 @@
         "stone": "white_diamond_nat",
         "carats": 14,
         "price": 2130,
-        "finish": "polished",
+        "finish": "polished/sandblasted",
         "shape": "drop"
       },
       {
@@ -2159,7 +2159,7 @@
         "stone": "white_diamond_nat",
         "carats": 18,
         "price": 2620,
-        "finish": "polished",
+        "finish": "polished/sandblasted",
         "shape": "drop"
       },
       {
@@ -2330,7 +2330,7 @@
         "stone": "white_diamond_nat",
         "carats": 10,
         "price": 2010,
-        "finish": "polished",
+        "finish": "polished/sandblasted",
         "shape": "marquise"
       },
       {
@@ -2339,7 +2339,7 @@
         "stone": "white_diamond_nat",
         "carats": 14,
         "price": 2330,
-        "finish": "polished",
+        "finish": "polished/sandblasted",
         "shape": "marquise"
       },
       {
@@ -2348,7 +2348,7 @@
         "stone": "white_diamond_nat",
         "carats": 18,
         "price": 2830,
-        "finish": "polished",
+        "finish": "polished/sandblasted",
         "shape": "marquise"
       },
       {
@@ -2521,7 +2521,7 @@
         "stone": "black_diamond_nat",
         "carats": 10,
         "price": 910,
-        "finish": "polished",
+        "finish": "polished/sandblasted",
         "shape": "round"
       },
       {
@@ -2530,7 +2530,7 @@
         "stone": "black_diamond_nat",
         "carats": 14,
         "price": 1230,
-        "finish": "polished",
+        "finish": "polished/sandblasted",
         "shape": "round"
       },
       {
@@ -2539,7 +2539,7 @@
         "stone": "black_diamond_nat",
         "carats": 18,
         "price": 1730,
-        "finish": "polished",
+        "finish": "polished/sandblasted",
         "shape": "round"
       },
       {
@@ -2712,7 +2712,7 @@
         "stone": "stone_lab",
         "carats": 10,
         "price": 920,
-        "finish": "polished",
+        "finish": "polished/sandblasted",
         "shape": "heart"
       },
       {
@@ -2721,7 +2721,7 @@
         "stone": "stone_lab",
         "carats": 14,
         "price": 1240,
-        "finish": "polished",
+        "finish": "polished/sandblasted",
         "shape": "heart"
       },
       {
@@ -2730,7 +2730,7 @@
         "stone": "stone_lab",
         "carats": 18,
         "price": 1740,
-        "finish": "polished",
+        "finish": "polished/sandblasted",
         "shape": "heart"
       },
       {
@@ -2901,7 +2901,7 @@
         "stone": "stone_lab",
         "carats": 10,
         "price": 940,
-        "finish": "polished",
+        "finish": "polished/sandblasted",
         "shape": "princess"
       },
       {
@@ -2910,7 +2910,7 @@
         "stone": "stone_lab",
         "carats": 14,
         "price": 1260,
-        "finish": "polished",
+        "finish": "polished/sandblasted",
         "shape": "princess"
       },
       {
@@ -2919,7 +2919,7 @@
         "stone": "stone_lab",
         "carats": 18,
         "price": 1760,
-        "finish": "polished",
+        "finish": "polished/sandblasted",
         "shape": "princess"
       },
       {
@@ -3090,7 +3090,7 @@
         "stone": "stone_lab",
         "carats": 10,
         "price": 890,
-        "finish": "polished",
+        "finish": "polished/sandblasted",
         "shape": "round"
       },
       {
@@ -3099,7 +3099,7 @@
         "stone": "stone_lab",
         "carats": 14,
         "price": 1210,
-        "finish": "polished",
+        "finish": "polished/sandblasted",
         "shape": "round"
       },
       {
@@ -3108,7 +3108,7 @@
         "stone": "stone_lab",
         "carats": 18,
         "price": 1710,
-        "finish": "polished",
+        "finish": "polished/sandblasted",
         "shape": "round"
       },
       {
@@ -3279,7 +3279,7 @@
         "stone": "stone_lab",
         "carats": 10,
         "price": 940,
-        "finish": "polished",
+        "finish": "polished/sandblasted",
         "shape": "baguette"
       },
       {
@@ -3288,7 +3288,7 @@
         "stone": "stone_lab",
         "carats": 14,
         "price": 1260,
-        "finish": "polished",
+        "finish": "polished/sandblasted",
         "shape": "baguette"
       },
       {
@@ -3297,7 +3297,7 @@
         "stone": "stone_lab",
         "carats": 18,
         "price": 1760,
-        "finish": "polished",
+        "finish": "polished/sandblasted",
         "shape": "baguette"
       },
       {
@@ -3468,7 +3468,7 @@
         "stone": "stone_lab",
         "carats": 10,
         "price": 920,
-        "finish": "polished",
+        "finish": "polished/sandblasted",
         "shape": "drop"
       },
       {
@@ -3477,7 +3477,7 @@
         "stone": "stone_lab",
         "carats": 14,
         "price": 1240,
-        "finish": "polished",
+        "finish": "polished/sandblasted",
         "shape": "drop"
       },
       {
@@ -3486,7 +3486,7 @@
         "stone": "stone_lab",
         "carats": 18,
         "price": 1740,
-        "finish": "polished",
+        "finish": "polished/sandblasted",
         "shape": "drop"
       },
       {
@@ -3657,7 +3657,7 @@
         "stone": "stone_lab",
         "carats": 10,
         "price": 920,
-        "finish": "polished",
+        "finish": "polished/sandblasted",
         "shape": "marquise"
       },
       {
@@ -3666,7 +3666,7 @@
         "stone": "stone_lab",
         "carats": 14,
         "price": 1240,
-        "finish": "polished",
+        "finish": "polished/sandblasted",
         "shape": "marquise"
       },
       {
@@ -3675,7 +3675,7 @@
         "stone": "stone_lab",
         "carats": 18,
         "price": 1740,
-        "finish": "polished",
+        "finish": "polished/sandblasted",
         "shape": "marquise"
       },
       {
@@ -5266,126 +5266,126 @@
     {
       "id": 1,
       "created_at": "2026-03-13T14:27:48.28307+00:00",
-      "type": "vamp_base_w",
+      "type": "vamp_base_white",
       "carats": 10,
       "price": 1460
     },
     {
       "id": 2,
       "created_at": "2026-03-13T14:27:48.28307+00:00",
-      "type": "vamp_base_w",
+      "type": "vamp_base_white",
       "carats": 14,
       "price": 2030
     },
     {
       "id": 3,
       "created_at": "2026-03-13T14:27:48.28307+00:00",
-      "type": "vamp_base_w",
+      "type": "vamp_base_white",
       "carats": 18,
       "price": 2880
     },
     {
       "id": 4,
       "created_at": "2026-03-13T14:27:48.28307+00:00",
-      "type": "vamp_base_b",
+      "type": "vamp_base_black",
       "carats": 10,
       "price": 1560
     },
     {
       "id": 5,
       "created_at": "2026-03-13T14:27:48.28307+00:00",
-      "type": "vamp_base_b",
+      "type": "vamp_base_black",
       "carats": 14,
       "price": 2140
     },
     {
       "id": 6,
       "created_at": "2026-03-13T14:27:48.28307+00:00",
-      "type": "vamp_base_b",
+      "type": "vamp_base_black",
       "carats": 18,
       "price": 2980
     },
     {
       "id": 7,
       "created_at": "2026-03-13T14:27:48.28307+00:00",
-      "type": "vamp_lab",
+      "type": "vamp_pave_lab",
       "carats": 10,
       "price": 1800
     },
     {
       "id": 8,
       "created_at": "2026-03-13T14:27:48.28307+00:00",
-      "type": "vamp_lab",
+      "type": "vamp_pave_lab",
       "carats": 14,
       "price": 2350
     },
     {
       "id": 9,
       "created_at": "2026-03-13T14:27:48.28307+00:00",
-      "type": "vamp_lab",
+      "type": "vamp_pave_lab",
       "carats": 18,
       "price": 3190
     },
     {
       "id": 10,
       "created_at": "2026-03-13T14:27:48.28307+00:00",
-      "type": "vamp_nat",
+      "type": "vamp_pave_nat",
       "carats": 10,
       "price": 2760
     },
     {
       "id": 11,
       "created_at": "2026-03-13T14:27:48.28307+00:00",
-      "type": "vamp_nat",
+      "type": "vamp_pave_nat",
       "carats": 14,
       "price": 3320
     },
     {
       "id": 12,
       "created_at": "2026-03-13T14:27:48.28307+00:00",
-      "type": "vamp_nat",
+      "type": "vamp_pave_nat",
       "carats": 18,
       "price": 4150
     },
     {
       "id": 13,
       "created_at": "2026-03-13T14:27:48.28307+00:00",
-      "type": "bracer_base",
+      "type": "braces_base",
       "carats": 10,
       "price": 1780
     },
     {
       "id": 14,
       "created_at": "2026-03-13T14:27:48.28307+00:00",
-      "type": "bracer_base",
+      "type": "braces_base",
       "carats": 14,
       "price": 2450
     },
     {
       "id": 15,
       "created_at": "2026-03-13T14:27:48.28307+00:00",
-      "type": "bracer_base",
+      "type": "braces_base",
       "carats": 18,
       "price": 3380
     },
     {
       "id": 16,
       "created_at": "2026-03-13T14:27:48.28307+00:00",
-      "type": "bracer_lab",
+      "type": "braces_pave_lab",
       "carats": 10,
       "price": 2470
     },
     {
       "id": 17,
       "created_at": "2026-03-13T14:27:48.28307+00:00",
-      "type": "bracer_lab",
+      "type": "braces_pave_lab",
       "carats": 14,
       "price": 2990
     },
     {
       "id": 18,
       "created_at": "2026-03-13T14:27:48.28307+00:00",
-      "type": "bracer_lab",
+      "type": "braces_pave_lab",
       "carats": 18,
       "price": 3740
     },
@@ -5413,42 +5413,42 @@
     {
       "id": 22,
       "created_at": "2026-03-13T14:27:48.28307+00:00",
-      "type": "tribal_lab",
+      "type": "tribal_pave_lab",
       "carats": 10,
       "price": 2220
     },
     {
       "id": 23,
       "created_at": "2026-03-13T14:27:48.28307+00:00",
-      "type": "tribal_lab",
+      "type": "tribal_pave_lab",
       "carats": 14,
       "price": 2870
     },
     {
       "id": 24,
       "created_at": "2026-03-13T14:27:48.28307+00:00",
-      "type": "tribal_lab",
+      "type": "tribal_pave_lab",
       "carats": 18,
       "price": 3720
     },
     {
       "id": 25,
       "created_at": "2026-03-13T14:27:48.28307+00:00",
-      "type": "tribal_nat",
+      "type": "tribal_pave_nat",
       "carats": 10,
       "price": 3320
     },
     {
       "id": 26,
       "created_at": "2026-03-13T14:27:48.28307+00:00",
-      "type": "tribal_nat",
+      "type": "tribal_pave_nat",
       "carats": 14,
       "price": 3970
     },
     {
       "id": 27,
       "created_at": "2026-03-13T14:27:48.28307+00:00",
-      "type": "tribal_nat",
+      "type": "tribal_pave_nat",
       "carats": 18,
       "price": 4830
     },
@@ -5476,126 +5476,126 @@
     {
       "id": 31,
       "created_at": "2026-03-13T14:27:48.28307+00:00",
-      "type": "cross_lab",
+      "type": "cross_pave_lab",
       "carats": 10,
       "price": 530
     },
     {
       "id": 32,
       "created_at": "2026-03-13T14:27:48.28307+00:00",
-      "type": "cross_lab",
+      "type": "cross_pave_lab",
       "carats": 14,
       "price": 720
     },
     {
       "id": 33,
       "created_at": "2026-03-13T14:27:48.28307+00:00",
-      "type": "cross_lab",
+      "type": "cross_pave_lab",
       "carats": 18,
       "price": 990
     },
     {
       "id": 34,
       "created_at": "2026-03-13T14:27:48.28307+00:00",
-      "type": "cross_nat",
+      "type": "cross_pave_nat",
       "carats": 10,
       "price": 550
     },
     {
       "id": 35,
       "created_at": "2026-03-13T14:27:48.28307+00:00",
-      "type": "cross_nat",
+      "type": "cross_pave_nat",
       "carats": 14,
       "price": 730
     },
     {
       "id": 36,
       "created_at": "2026-03-13T14:27:48.28307+00:00",
-      "type": "cross_nat",
+      "type": "cross_pave_nat",
       "carats": 18,
       "price": 1020
     },
     {
       "id": 37,
       "created_at": "2026-03-13T14:27:48.28307+00:00",
-      "type": "hammered_w",
+      "type": "hammered_base_white",
       "carats": 10,
       "price": 1040
     },
     {
       "id": 38,
       "created_at": "2026-03-13T14:27:48.28307+00:00",
-      "type": "hammered_w",
+      "type": "hammered_base_white",
       "carats": 14,
       "price": 1320
     },
     {
       "id": 39,
       "created_at": "2026-03-13T14:27:48.28307+00:00",
-      "type": "hammered_w",
+      "type": "hammered_base_white",
       "carats": 18,
       "price": 1740
     },
     {
       "id": 40,
       "created_at": "2026-03-13T14:27:48.28307+00:00",
-      "type": "hammered_b",
+      "type": "hammered_base_black",
       "carats": 10,
       "price": 1110
     },
     {
       "id": 41,
       "created_at": "2026-03-13T14:27:48.28307+00:00",
-      "type": "hammered_b",
+      "type": "hammered_base_black",
       "carats": 14,
       "price": 1390
     },
     {
       "id": 42,
       "created_at": "2026-03-13T14:27:48.28307+00:00",
-      "type": "hammered_b",
+      "type": "hammered_base_black",
       "carats": 18,
       "price": 1810
     },
     {
       "id": 43,
       "created_at": "2026-03-13T14:27:48.28307+00:00",
-      "type": "sprinkles_lab",
+      "type": "sprinkles_pave_lab",
       "carats": 10,
       "price": 3440
     },
     {
       "id": 44,
       "created_at": "2026-03-13T14:27:48.28307+00:00",
-      "type": "sprinkles_lab",
+      "type": "sprinkles_pave_lab",
       "carats": 14,
       "price": 4720
     },
     {
       "id": 45,
       "created_at": "2026-03-13T14:27:48.28307+00:00",
-      "type": "sprinkles_lab",
+      "type": "sprinkles_pave_lab",
       "carats": 18,
       "price": 6710
     },
     {
       "id": 46,
       "created_at": "2026-03-13T14:27:48.28307+00:00",
-      "type": "sprinkles_nat",
+      "type": "sprinkles_pave_nat",
       "carats": 10,
       "price": 3510
     },
     {
       "id": 47,
       "created_at": "2026-03-13T14:27:48.28307+00:00",
-      "type": "sprinkles_nat",
+      "type": "sprinkles_pave_nat",
       "carats": 14,
       "price": 4790
     },
     {
       "id": 48,
       "created_at": "2026-03-13T14:27:48.28307+00:00",
-      "type": "sprinkles_nat",
+      "type": "sprinkles_pave_nat",
       "carats": 18,
       "price": 6780
     },
