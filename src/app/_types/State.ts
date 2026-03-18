@@ -106,5 +106,15 @@ export interface State {
     resetList: (state:State, tooth:string) => void,
     packagingScene: boolean,
     packaging: Packaging,
-    setPackaging: (prop:string, value:string|boolean, line?:number|undefined) => void
+    setPackaging: (prop:string, value:string|boolean, line?:number|undefined) => void,
+    resetBigBar: (state: State, tooth: string) => void,
+    resetNeighbours: (state:State, type:string, tooth:string) => void,
+    resetSameDiamondDesign: (state:State, type:string, tooth:string) => boolean
+    changeDiamondDesign: (state:State, type:string, tooth:string) => boolean,
+    changeDiamondDesignBB: (state:State, type:string, tooth:string) => boolean,
+    manageBigBar: (state:State, type:string, tooth:string) => void,
+    manageCentralBar: (state:State, type:string, tooth:string) => void,
+    managePreviousBigBar: (state:State, type:string, tooth:string) => void
+    managePreviousCentralBar: (state:State, type:string, tooth:string) => void,
+    manageDefault: (state:State, type:string, tooth:string) => void
 }
