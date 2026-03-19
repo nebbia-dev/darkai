@@ -1,7 +1,7 @@
 'use client'
 import {Canvas} from '@react-three/fiber';
 import Configurator from "@/app/_components/_layout/Configurator";
-import React, {Suspense} from "react";
+import React, {Suspense, useEffect, useState} from "react";
 import {useTeethStore} from "@/app/_stores/teeth";
 import LoadedMaterials from "@/app/_components/_layout/LoadedMaterials";
 import Loading from "@/app/_components/_layout/Loading";
@@ -9,6 +9,12 @@ import {Perf} from "r3f-perf";
 
 export default function Scene() {
     const loaded = useTeethStore((state) => state.loaded);
+    const innerWidth = useTeethStore((state) => state.innerWidth);
+    // const [zCamera, setZcamera] = useState<number>(0);
+    //
+    // useEffect(() => {
+    //     window.innerWidth >= 1024 ? setZcamera(27) : setZcamera(42);
+    // }, []);
 
     return (
         <>
@@ -25,7 +31,7 @@ export default function Scene() {
                 </div>
             </div>
 
-            <Canvas camera={{fov: 20, near: 0.1, far: 100, position: [0, 3, 27]}} dpr={[1, 2]} frameloop="demand">
+            <Canvas camera={{fov: 20, near: 0.1, far: 100, position: [0, 3, (innerWidth >= 1024 ? 27 : 42)]}} dpr={[1, 2]} frameloop="demand">
                 {/*<Perf/>*/}
                 <Suspense fallback={<Loading/>}>
                     <Configurator/>

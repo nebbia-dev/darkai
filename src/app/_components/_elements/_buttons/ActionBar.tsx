@@ -5,7 +5,6 @@ import React from "react";
 
 export default function ActionBar() {
     const activeButton = useTeethStore((state) => state.activeButton);
-
     const current = useTeethStore((state:State) => state.currentHistory);
     const history = useTeethStore((state:State) => state.history);
     const reset = useTeethStore((state:State) => state.reset);
@@ -58,7 +57,7 @@ export default function ActionBar() {
     return(
         <div>
             <div
-                className="absolute flex items-center justify-center gap-4 bottom-10 bigger-bottom left-[50%] translate-x-[-50%] w-2/4">
+                className="absolute flex items-center justify-center gap-4 bottom-35 lg:bottom-20 bigger-bottom left-[50%] translate-x-[-50%] w-2/4">
                 <Tooltip title="Previous">
                     <button onClick={doUndo} className="bg-white/50 rounded-full border w-8 h-8 bigger-icons p-[6px] cursor-pointer">
                         <img src="/action-bar-icons/undo.svg" alt="undo"/>

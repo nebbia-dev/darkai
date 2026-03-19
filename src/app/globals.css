@@ -55,6 +55,7 @@
   z-index: 10;
   bottom: -1px;
   background: #f9fafb;
+
 }
 
 .li:before {
@@ -92,6 +93,28 @@
   -moz-border-radius-bottomleft:48px;
   border-left:1px solid #222;
 }
+
+/*.pups:before {*/
+/*  position: absolute;*/
+/*  top: calc(0.25rem * 8);*/
+/*  left: -56px;*/
+/*  z-index: 10;*/
+/*  content: '';*/
+/*  width: 56px;*/
+/*  height: calc(100% - (0.25rem * 16));*/
+/*  background: linear-gradient(90deg,rgba(245, 246, 248, 0) 0%, rgba(245, 246, 248, 1) 50%, rgba(245, 246, 248, 1) 100%);*/
+/*}*/
+
+/*.pups:after {*/
+/*  position: absolute;*/
+/*  top: calc(0.25rem * 8);*/
+/*  left: 2px;*/
+/*  z-index: 10;*/
+/*  content: '';*/
+/*  width: 36px;*/
+/*  height: calc(100% - (0.25rem * 16));*/
+/*  background: linear-gradient(270deg,rgba(245, 246, 248, 0) 0%, rgba(245, 246, 248, 1) 50%, rgba(245, 246, 248, 1) 100%);*/
+/*}*/
 
 body {
   color: var(--foreground);
@@ -246,8 +269,16 @@ input[type="number"]:focus {
     width: 40px;
     height: 40px;
   }
+}
 
+@media(max-height: 640px) {
   .bigger-bottom {
-    bottom: calc(.25rem * 20);
+    bottom: calc(0.25rem * 10);
+  }
+}
+
+@media(max-width:1024px) {
+  .a:before, .a:after {
+    background: #f9fafb;
   }
 }

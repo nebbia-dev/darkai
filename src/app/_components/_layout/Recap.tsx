@@ -10,9 +10,6 @@ import {Dropdown} from "@/app/_components/_icons/Dropdown";
 
 export default function Recap({next, onclick} : {next:boolean, onclick:() => void }){
     const teethPreciousness = useTeethStore((state:State) => state.teethPreciousness);
-    const teethStones = useTeethStore((state:State) => state.teethStones);
-    const teethPaves = useTeethStore((state:State) => state.teethPaves);
-    const signatureMaterial = useTeethStore((state:State) => state.signatureMaterial);
     const total = useTeethStore((state:State) => state.total);
     const [showRecap, setShowRecap] = useState<boolean>(true);
     const [open, setOpen] = useState<boolean>(false);

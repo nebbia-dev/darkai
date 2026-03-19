@@ -1698,6 +1698,9 @@ export const useTeethStore = create<State>((set, get) => ({
             })
         ),
 
+    innerWidth: 0,
+    setInnerWidth:  (width) => set(() => ({innerWidth: width})),
+
     // utils to simplify the setType function
     resetBigBar: (state, tooth) => {
         // if the jewel type change happens on a lower tooth when the lower canines
