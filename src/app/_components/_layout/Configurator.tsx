@@ -5,7 +5,7 @@ import Dentiera from "@/app/_components/_teeth/Dentiera";
 import {useTeethStore} from "@/app/_stores/teeth";
 import IlsDx from "@/app/_components/_teeth/_lateral-incisors/IlsDx";
 import IlsSx from "@/app/_components/_teeth/_lateral-incisors/IlsSx";
-import {useEffect, useMemo, useRef, useState} from "react";
+import {useEffect, useMemo, useRef} from "react";
 import FBX from "@/app/_types/FBX";
 import IcsSx from "@/app/_components/_teeth/_central-incisors/IcsSx";
 import IcsDx from "@/app/_components/_teeth/_central-incisors/IcsDx";
@@ -1705,7 +1705,6 @@ export default function Configurator() {
     const setLoaded = useTeethStore((state: State) => state.setLoaded);
     const packagingScene = useTeethStore((state: State) => state.packagingScene);
     const innerWidth = useTeethStore((state: State) => state.innerWidth);
-    // const [screenWidth, setScreenWidth] = useState<number>(0);
 
     useEffect(() => {
         if(screenshot && orbitRef.current) {
@@ -1745,7 +1744,7 @@ export default function Configurator() {
     }, []);
 
     useFrame((state, delta) => {
-        if(groupRef.current && nextStep) {
+        if(groupRef.current && nextStep && innerWidth >= 1024) {
 
             invalidate();
             if(groupRef.current.position.x > -3.3) {
@@ -1804,7 +1803,7 @@ export default function Configurator() {
         //         packagingRef.current.visible = true;
         //     }
 
-        } else if(groupRef.current && !nextStep) {
+        } else if(groupRef.current && !nextStep && innerWidth >= 1024) {
 
             invalidate();
             if(groupRef.current.position.x < 0) {

@@ -40,9 +40,9 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
 
     return(
         <>
-            <div className="cursor-auto rounded-3xl lg:mr-[5vw] h-[82.5vh] text-sm">
+            <div className={`cursor-auto rounded-3xl lg:mr-[5vw] ${next ? 'h-[calc(100vh-72px-(0.25rem*10))] lg:h-[82.5vh]' : 'h-[82.5vh]'} text-sm`}>
                 {!next
-                    ? <div className="flex flex-col items-center justify-start lg:justify-end h-full">
+                    ? <div className="flex flex-col items-center justify-end h-full relative lg:static bottom-20">
                         {/* MyConfig Top */}
                         <div
                             className={`${!showRecap ? 'border-b-0' : ''} border-1 rounded-t-3xl w-full bg-gray-50 px-6 py-4 text-center flex items-center justify-center gap-2`}>
@@ -57,7 +57,7 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
                         </div>
                         {/* MyConfig Middle w/Recap */}
                         <div
-                            className={`${showRecap && innerWidth >= 1024 ? 'h-[50vh]' : showRecap && innerWidth < 1024 ? 'h-[60vh]' :'h-0'} bg-gray-200/50 transition-[height] duration-500 w-[calc(100%-2px)] relative`}>
+                            className={`${showRecap && innerWidth >= 1024 ? 'h-[50vh]' : showRecap && innerWidth < 1024 ? 'h-[60vh]' :'h-0'} bg-gray-200/50 lg:transition-[height] lg:duration-500 w-[calc(100%-2px)] relative`}>
                             <div
                                 className="absolute h-[15%] bottom-0 w-full bg-linear-to-t from-gray-50 to-indigo-0"></div>
                             <RecapList edit={true}/>
@@ -100,16 +100,16 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
                         <div
                             className={`${!showRecap ? 'border-b-0' : ''} border-1 rounded-t-3xl w-full bg-gray-50 px-6 py-4 text-center flex items-center justify-center gap-2`}>
                             <h2 className="font-semibold">Review your order</h2>
-                            <button type="button"
-                                    className="h-4 w-4 bg-slate-950 rounded-full cursor-pointer text-gray-50 flex items-center justify-center"
-                                    onClick={toggleRecap}>
-                                <Dropdown/>
-                            </button>
+                            {innerWidth >= 1024 &&
+                                <button type="button"
+                                     className="h-4 w-4 bg-slate-950 rounded-full cursor-pointer text-gray-50 flex items-center justify-center"
+                                     onClick={toggleRecap}>
+                                    <Dropdown/>
+                                </button>
+                            }
                         </div>
-                        {/* MyConfig Middle w/Recap */}
-                        {/* DA SOSTITUIRE CON IL NUOVO */}
                         <div
-                            className={`${showRecap ? 'h-[45%]' : 'h-0'} transition-[height] duration-500 w-full relative`}>
+                            className={`${showRecap ? 'h-[45%]' : 'h-0'} lg:transition-[height] lg:duration-500 w-full relative`}>
                             <div
                                 className="absolute h-[15%] bottom-0 w-full bg-linear-to-t from-gray-50 to-indigo-0"></div>
 
@@ -124,11 +124,17 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
                         {/* Nav Buttons */}
                         <div
                             className="border-1 rounded-3xl w-full bg-gray-50 px-2 py-2 flex items-center justify-between mt-4">
-                            <button
-                                className="rounded-3xl bg-gray-50 text-slate-950 px-5 py-2 h-full cursor-pointer border-1"
-                                onClick={onclick}>&larr; Back
-                            </button>
-                            <div className="flex gap-2">
+                            {innerWidth < 1024
+                                ? <button
+                                    className="rounded-full bg-gray-50 text-slate-950 px-3 py-2 h-full cursor-pointer border-1"
+                                    onClick={onclick}>&larr;
+                                    </button>
+                                : <button
+                                    className="rounded-3xl bg-gray-50 text-slate-950 px-5 py-2 h-full cursor-pointer border-1"
+                                    onClick={onclick}>&larr; Back
+                                </button>
+                            }
+                            <div className="flex gap-2 items-center">
                                 <button
                                     onClick={() => setOpen(true)}
                                     className="rounded-3xl bg-slate-950 text-gray-50 px-5 py-2 h-full cursor-pointer">Save
@@ -150,7 +156,7 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <div className="absolute top-[50%] left-[50%] translate-[-50%] bg-gray-50 rounded py-8 px-12">
+                <div className="w-[90%] lg:w-[50%] absolute top-[50%] left-[50%] translate-[-50%] bg-gray-50 rounded py-8 px-8 lg:px-12">
                     {isSending
                         ?
                         <div className="w-full text-center">
@@ -177,8 +183,8 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
                                     <input className="w-full rounded bg-stone-200 py-2 px-4" placeholder="Your email"
                                            type="email"
                                            required/>
-                                    <label className="flex items-center gap-2 mt-2">
-                                        <input className="mr-4" type="checkbox"/>
+                                    <label className="flex items-baseline lg:items-center gap-2 mt-2">
+                                        <input className="mr-4 min-w-[4.5vw] min-h-[4.5vw] lg:min-w-auto lg:min-h-auto" type="checkbox"/>
                                         I'd like to receive more information about Darkai products
                                     </label>
                                     <div className="w-full text-right mt-4">

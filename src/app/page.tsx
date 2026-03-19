@@ -69,7 +69,7 @@ export default function Config() {
     return (
         <>
             <div className="flex flex-col w-[100vw] mx-auto bg-gray-200 relative font-sans">
-                <div className="absolute w-full flex justify-center ">
+                <div className="absolute w-full flex justify-center z-16">
                     <img className="cursor-auto py-6 w-[132px]" src="/logo.png" alt="darkai logo"/>
                 </div>
                 {loaded && innerWidth < 1024 && !nextStep &&
@@ -98,7 +98,7 @@ export default function Config() {
                     <div className={`h-[100vh] w-full mx-auto relative`}>
                         <Scene/>
                         {loaded && !nextStep && <ActionBar/>}
-                        {loaded && innerWidth < 1024 &&
+                        {loaded && innerWidth < 1024 && !nextStep &&
                             <div
                                 className="absolute z-16 bottom-10 left-[50%] translate-x-[-50%] border-1 rounded-3xl w-[90%] bg-gray-50 pl-6 pr-2 py-2 flex items-center justify-between mt-4">
                                 <div>
@@ -113,7 +113,7 @@ export default function Config() {
                             </div>
                         }
                     </div>
-                    <div className={`lg:h-page-nav ${nextStep && innerWidth >= 1024  ? 'w-[40vw]' : innerWidth < 1024 ? 'w-[90vw] mx-auto left-[50%] translate-x-[-50%]' : 'w-[30vw]'} ${!showRecap && !nextStep ? 'hidden' : 'block'} absolute z-15 top-[124px] lg:top-[72px] lg:right-0`}>
+                    <div className={`lg:h-page-nav ${nextStep && innerWidth >= 1024  ? 'w-[40vw]' : innerWidth < 1024 ? 'w-[90vw] mx-auto left-[50%] translate-x-[-50%]' : 'w-[30vw]'} ${!showRecap && !nextStep ? 'hidden' : 'block'} absolute z-15 ${nextStep ? 'top-[76px]' : 'top-[124px]'} lg:top-[72px] lg:right-0`}>
                         {loaded && <Recap next={nextStep} onclick={setContinue}/>}
                     </div>
                 </div>
