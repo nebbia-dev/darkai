@@ -17,6 +17,7 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
     const [sent, setSent] = useState<boolean>(false);
     const takeScreenshot = useTeethStore((state:State) => state.setIsScreenshotNeeded);
     const setPreciousness = useTeethStore((state:State) => state.setTeethPreciousness);
+    const innerWidth = useTeethStore((state:State) => state.innerWidth);
     function toggleRecap() {
         setShowRecap(prev => !prev);
     }
@@ -39,22 +40,24 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
 
     return(
         <>
-            <div className="cursor-auto rounded-3xl mr-[5vw] h-[82.5vh] text-sm">
+            <div className="cursor-auto rounded-3xl lg:mr-[5vw] h-[82.5vh] text-sm">
                 {!next
-                    ? <div className="flex flex-col items-center justify-end h-full">
+                    ? <div className="flex flex-col items-center justify-start lg:justify-end h-full">
                         {/* MyConfig Top */}
                         <div
                             className={`${!showRecap ? 'border-b-0' : ''} border-1 rounded-t-3xl w-full bg-gray-50 px-6 py-4 text-center flex items-center justify-center gap-2`}>
                             <h2 className="font-semibold">My Configuration</h2>
-                            <button type="button"
-                                    className="h-4 w-4 bg-slate-950 rounded-full cursor-pointer text-gray-50 flex items-center justify-center"
-                                    onClick={toggleRecap}>
-                                <Dropdown/>
-                            </button>
+                            {innerWidth >= 1024 &&
+                                <button type="button"
+                                     className="h-4 w-4 bg-slate-950 rounded-full cursor-pointer text-gray-50 flex items-center justify-center"
+                                     onClick={toggleRecap}>
+                                    <Dropdown/>
+                                </button>
+                            }
                         </div>
                         {/* MyConfig Middle w/Recap */}
                         <div
-                            className={`${showRecap ? 'h-[50vh]' : 'h-0'} bg-gray-200/50 transition-[height] duration-500 w-[calc(100%-2px)] relative`}>
+                            className={`${showRecap && innerWidth >= 1024 ? 'h-[50vh]' : showRecap && innerWidth < 1024 ? 'h-[60vh]' :'h-0'} bg-gray-200/50 transition-[height] duration-500 w-[calc(100%-2px)] relative`}>
                             <div
                                 className="absolute h-[15%] bottom-0 w-full bg-linear-to-t from-gray-50 to-indigo-0"></div>
                             <RecapList edit={true}/>
@@ -77,15 +80,20 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
                             </div>
                         </div>
                         {/* Price */}
-                        <div
+                        {innerWidth >= 1024 &&
+                            <div
                             className="border-1 rounded-3xl w-full bg-gray-50 pl-6 pr-2 py-2 flex items-center justify-between mt-4">
-                            <div>
-                                <h3 className="font-semibold inline">Price: </h3>
-                                <span>{new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR" }).format(total)}</span>
+                                <div>
+                                    <h3 className="font-semibold inline">Price: </h3>
+                                    <span>{new Intl.NumberFormat("de-DE", {
+                                        style: "currency",
+                                        currency: "EUR"
+                                    }).format(total)}</span>
+                                </div>
+                                <button className="rounded-3xl bg-slate-950 text-gray-50 px-5 py-2 h-full cursor-pointer"
+                                        onClick={onclick}>Continue &rarr;</button>
                             </div>
-                            <button className="rounded-3xl bg-slate-950 text-gray-50 px-5 py-2 h-full cursor-pointer"
-                                    onClick={onclick}>Continue &rarr;</button>
-                        </div>
+                        }
                     </div>
                     : <div className="flex flex-col items-center justify-end h-full">
                         {/* MyConfig Top */}

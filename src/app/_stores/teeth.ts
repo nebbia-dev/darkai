@@ -970,6 +970,7 @@ export const useTeethStore = create<State>((set, get) => ({
                 state.currentHistory++;
 
                 get().resetList(state, tooth);
+                state.activeButton = undefined;
                 state.activeSubButton = undefined;
                 get().calcTotal(state);
                 get().setHistory(state);

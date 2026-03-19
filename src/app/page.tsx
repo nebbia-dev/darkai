@@ -44,23 +44,52 @@ export default function Config() {
         }
     }
 
+    function closeAllUIs() {
+        setShowMenu(false);
+        setShowRecap(false);
+    }
+
+    function toggleUI(ui:"menu"|"recap") {
+        switch(ui) {
+            case "menu":
+                setShowMenu(prev => !prev);
+                if(showRecap) {
+                    setShowRecap(false)
+                }
+                break;
+            case "recap":
+                setShowRecap(prev => !prev);
+                if(showMenu) {
+                    setShowMenu(false)
+                }
+                break;
+        }
+    }
+
     return (
         <>
             <div className="flex flex-col w-[100vw] mx-auto bg-gray-200 relative font-sans">
                 <div className="absolute w-full flex justify-center ">
                     <img className="cursor-auto py-6 w-[132px]" src="/logo.png" alt="darkai logo"/>
                 </div>
-                {innerWidth < 1024 &&
+                {loaded && innerWidth < 1024 && !nextStep &&
                     <div
-                    className="z-100 absolute top-[76px] left-[50%] translate-x-[-50%] w-[90%] flex items-center justify-between ">
-                        <button onClick={() => setShowMenu(prev => !prev)} type="button"
+                        className="z-29 absolute top-[70px] left-[50%] translate-x-[-50%] w-[90%] flex items-center justify-between">
+                        <button onClick={() => toggleUI('menu')} type="button"
                                 className="bg-gray-50 border-1 rounded-full w-10 h-10">M
                         </button>
-                        <button onClick={() => setShowRecap(prev => !prev)} type="button" className="bg-gray-50 border-1 rounded-full w-10 h-10">R</button>
+                        {(showMenu || showRecap) &&
+                            <button onClick={closeAllUIs} type="button"
+                                 className="bg-gray-50 border-1 rounded-full w-10 h-10">X
+                            </button>
+                        }
+                        <button onClick={() => toggleUI('recap')} type="button"
+                                className="bg-gray-50 border-1 rounded-full w-10 h-10">R
+                        </button>
                     </div>
                 }
                 <div className="flex flex-row w-full">
-                    {innerWidth < 1024 && showMenu && <div className="w-screen h-screen absolute z-15 bg-gray-50/75"></div>}
+                    {innerWidth < 1024 && (showMenu || showRecap || nextStep) && <div className="w-screen h-screen absolute z-15 bg-gray-50/75"></div>}
                     <div
                         className={`h-screen lg:h-page-nav ${activeButton ? 'w-[10vw]' : innerWidth < 1024 ? 'w-full' : 'w-[25vw]'} ${nextStep || !showMenu ? 'hidden' : 'block'} absolute z-20 left-0 lg:top-[72px]`}>
                         {loaded && <Selection activeButton={activeButton} changeActiveButton={changeActiveButton}/>}
@@ -71,7 +100,7 @@ export default function Config() {
                         {loaded && !nextStep && <ActionBar/>}
                         {loaded && innerWidth < 1024 &&
                             <div
-                                className="absolute bottom-10 left-[50%] translate-x-[-50%] border-1 rounded-3xl w-[90%] bg-gray-50 pl-6 pr-2 py-2 flex items-center justify-between mt-4">
+                                className="absolute z-16 bottom-10 left-[50%] translate-x-[-50%] border-1 rounded-3xl w-[90%] bg-gray-50 pl-6 pr-2 py-2 flex items-center justify-between mt-4">
                                 <div>
                                     <h3 className="font-semibold inline">Price: </h3>
                                     <span>{new Intl.NumberFormat("de-DE", {
@@ -84,7 +113,7 @@ export default function Config() {
                             </div>
                         }
                     </div>
-                    <div className={`h-page-nav ${nextStep ? 'w-[40vw]' : 'w-[30vw]'} ${!showRecap ? 'hidden' : 'block'} absolute z-15 top-[72px] right-0`}>
+                    <div className={`lg:h-page-nav ${nextStep && innerWidth >= 1024  ? 'w-[40vw]' : innerWidth < 1024 ? 'w-[90vw] mx-auto left-[50%] translate-x-[-50%]' : 'w-[30vw]'} ${!showRecap && !nextStep ? 'hidden' : 'block'} absolute z-15 top-[124px] lg:top-[72px] lg:right-0`}>
                         {loaded && <Recap next={nextStep} onclick={setContinue}/>}
                     </div>
                 </div>

@@ -30,9 +30,11 @@ export default function RecapList({edit} : {edit:boolean}) {
     const setPackagingScene = useTeethStore((state: State) => state.setPackagingScene);
 
     function activateTooth(tooth:string) {
-        setActive(tooth);
-        if(packagingScene) {
-            setPackagingScene(false);
+        if(innerWidth >= 1024) {
+            setActive(tooth);
+            if (packagingScene) {
+                setPackagingScene(false);
+            }
         }
     }
 
@@ -84,9 +86,9 @@ export default function RecapList({edit} : {edit:boolean}) {
                     return (
                         history[currentStep][0].signatureVisible[signature[0]] &&
                         <li key={signature[0]}
-                            className={`${teethSignature[signature[0]].includes(activeTooth as string) ? 'bg-white/50' : ''}
-                                ${teethSignature[signature[0]].includes(hovered as string) ? 'border-black' : 'border-gray-200/50'}
-                                cursor-pointer mb-4 rounded p-2 border`}
+                            className={`${teethSignature[signature[0]].includes(activeTooth as string) ? 'lg:bg-white/50' : ''}
+                                ${teethSignature[signature[0]].includes(hovered as string) ? 'lg:border-black' : 'lg:border-gray-200/50'}
+                                cursor-pointer mb-4 rounded p-2 lg:border`}
                         >
                             {/*tooth name*/}
                             <div className="flex justify-between items-center mb-1">
@@ -143,9 +145,9 @@ export default function RecapList({edit} : {edit:boolean}) {
                                             })}
                             className={`
                                 ${checkDoubleTeeth(tooth[0], tooth[1]) ? 'hidden' : 'block'} 
-                                ${checkDoubleTeethActive(tooth[0], tooth[1]) ? 'bg-white/50' : ''}
-                                ${checkDoubleTeethHover(tooth[0], tooth[1]) ? 'border-black' : 'border-gray-200/50'}
-                                cursor-pointer mb-4 rounded p-2 border`}
+                                ${checkDoubleTeethActive(tooth[0], tooth[1]) ? 'lg:bg-white/50' : ''}
+                                ${checkDoubleTeethHover(tooth[0], tooth[1]) ? 'lg:border-black' : 'lg:border-gray-200/50'}
+                                cursor-pointer mb-4 rounded p-2 lg:border`}
                         >
                             {/*tooth name*/}
                             <div className="flex justify-between items-center mb-1">
