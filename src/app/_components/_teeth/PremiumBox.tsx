@@ -16,6 +16,8 @@ export default function PremiumBox({ref} : {ref:Ref<Group|null>}) {
 
     const firstTextRef = useRef(null);
     const secondTextRef = useRef(null);
+    const centerFirstRef = useRef(null);
+    const centerSecondRef = useRef(null);
 
     const customText = useTeethStore((state: State) => state.packaging.text);
 
@@ -38,6 +40,18 @@ export default function PremiumBox({ref} : {ref:Ref<Group|null>}) {
 
     }, [customText])
 
+    useEffect(() => {
+        if(centerFirstRef.current) {
+            const pos = customText.secondLine !== '' ? [-0.001, 0, -0.015] : [0.0275, 0, -0.05];
+            (centerFirstRef.current as any).position.set(pos[0], pos[1], pos[2]);
+        }
+
+        if(centerSecondRef.current) {
+            const pos = customText.firstLine !== '' ? [0.07, 0, -0.1] : [0.0275, 0, -0.05];
+            (centerSecondRef.current as any).position.set(pos[0], pos[1], pos[2]);
+        }
+    }, [])
+
     return(
         <>
             <group ref={ref}
@@ -46,6 +60,7 @@ export default function PremiumBox({ref} : {ref:Ref<Group|null>}) {
             >
                 <group rotation={[Math.PI / 2, Math.PI, Math.PI / 2]} scale={[3.5, 3.5, 3.5]}>
                     <Center
+                        ref={centerFirstRef}
                         rotation={[0, 0.91, 1.58]}
                         scale={[1,1,0.5]}
                         position={customText.secondLine !== '' ? [-0.001, 0, -0.015] : [0.0275, 0, -0.05]}
@@ -58,6 +73,7 @@ export default function PremiumBox({ref} : {ref:Ref<Group|null>}) {
                     </Center>
 
                     <Center
+                        ref={centerSecondRef}
                         rotation={[0, 0.91, 1.58]}
                         position={customText.firstLine !== '' ? [0.07, 0, -0.1] : [0.0275, 0, -0.05]}
                         scale={[1,1,0.5]}
