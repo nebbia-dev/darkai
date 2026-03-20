@@ -50,6 +50,7 @@ export default function PremiumBox({ref} : {ref:Ref<Group|null>}) {
             const pos = customText.firstLine !== '' ? [0.07, 0, -0.1] : [0.0275, 0, -0.05];
             (centerSecondRef.current as any).position.set(pos[0], pos[1], pos[2]);
         }
+        console.log((centerFirstRef.current as any).position)
     }, [])
 
     return(
