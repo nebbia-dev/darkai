@@ -20,7 +20,7 @@ export default interface OrderInfo {
         postalCode: string,
         state: string
     },
-    status: 'In produzione' | 'Spedito' | 'Consegnato' | 'Nuovo' | 'Annullato' | undefined,
+    status: 'In production' | 'Shipped' | 'Delivered' | 'New' | 'Canceled' | undefined,
     order_id: number,
     user_id: {
         id: number,

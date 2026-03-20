@@ -10,7 +10,7 @@ export default async function Config({params}: { params: Promise<{ configId: str
     const { configId } = await params;
     const supabase = await createClient();
     const {data, error } = await supabase
-        .from('Configurations')
+        .from('Configs')
         .select('*')
         .eq('id', configId);
 
@@ -33,8 +33,12 @@ export default async function Config({params}: { params: Promise<{ configId: str
                     : elabToothName(tooth[0], false);
 
         const propValue = firstCapital(toothProp.material[tooth[0]] as string)
-                                + ' ' + (toothProp.type[tooth[0]].replace('Diamond', '') === 'bigBar' ? 'big bar' : toothProp.type[tooth[0]].replace('Diamond', ''))
-                                + (toothProp.type[tooth[0]].includes('Diamond') ? ' with ' + toothProp.pave[tooth[0]] + 's pave' : '')
+                                + ' ' + (toothProp.type[tooth[0]].replace('Diamond', '') === 'bigBar'
+                                            ? 'bar'
+                                            : toothProp.type[tooth[0]].replace('Diamond', '') === 'bigBar'
+                                                ? 'spacer'
+                                                : toothProp.type[tooth[0]].replace('Diamond', ''))
+                                + (toothProp.type[tooth[0]].includes('Diamond') ? ' with ' + toothProp.pave[tooth[0]].color + ' ' + toothProp.pave[tooth[0]].shape + ' pave' : '')
                                 + (toothProp.stones[tooth[0]].shape ? '. Gem: ' + toothProp.stones[tooth[0]].color as string + ', ' + toothProp.stones[tooth[0]].shape as string + ' cut' : '');
 
         teethConfig[propName as string] = propValue;
@@ -117,7 +121,7 @@ export default async function Config({params}: { params: Promise<{ configId: str
                         <div className="w-full">
                             <Image alt="config"
                                    className="object-cover w-full"
-                                   src={`https://ronyoylrbgiuxaawwtcb.supabase.co/storage/v1/object/public/configs/${data?.[0].screen}`}
+                                   src={`https://aiuptuoijjmfcxutusbc.supabase.co/storage/v1/object/public/configs/${data?.[0].screen}`}
                                    width={1000} height={1000} quality={70}/>
                         </div>
                     </div>

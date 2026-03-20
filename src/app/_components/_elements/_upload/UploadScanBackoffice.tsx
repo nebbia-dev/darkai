@@ -40,7 +40,7 @@ export default function UploadScanBackoffice ({userId, scanId}:{userId:OrderInfo
                         <EditScanIcons sendData={getData} file={file}/>
                     {!file && <Image alt="config"
                             className="object-cover h-[35vh] w-full pt-4 pl-8"
-                            src={`https://ronyoylrbgiuxaawwtcb.supabase.co/storage/v1/object/public/scans/${savedFile? savedFile : scanId}`}
+                            src={`https://aiuptuoijjmfcxutusbc.supabase.co/storage/v1/object/public/scans/${savedFile? savedFile : scanId}`}
                             width={1000} height={1000} quality={70}
                     />}
                     {file &&
@@ -53,7 +53,7 @@ export default function UploadScanBackoffice ({userId, scanId}:{userId:OrderInfo
                         <EditScanIcons sendData={getData} file={file}/>
                         {!file && <Image alt="config"
                                          className="object-cover h-[35vh] w-full pt-4 pl-8"
-                                         src={`https://ronyoylrbgiuxaawwtcb.supabase.co/storage/v1/object/public/scans/${savedFile}`}
+                                         src={`https://aiuptuoijjmfcxutusbc.supabase.co/storage/v1/object/public/scans/${savedFile}`}
                                          width={1000} height={1000} quality={70}
                         />}
                         {file &&

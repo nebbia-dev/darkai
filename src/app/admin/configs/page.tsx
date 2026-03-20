@@ -7,7 +7,7 @@ import ConfigInfo from "@/app/_types/ConfigInfo";
 export default async function Page() {
     const supabase = await createClient();
     let { data, error } = await supabase
-        .from('Configurations')
+        .from('Configs')
         .select('*');
     let { data:orders, error:ordersError } = await supabase
         .from('Orders')
@@ -15,11 +15,11 @@ export default async function Page() {
     data?.forEach(config => {
         orders?.forEach(order => {
             if(config.id === order.config) {
-                config['orderStatus'] = 'Order finalized'
+                config['orderStatus'] = 'Completed'
             }
         })
     })
-    console.log(data)
+
     return(
         <div className="relative left-[7.5vw] w-[92.5vw]">
             <div className="bg-gray-100 flex flex-col justify-center h-[15vh]">
@@ -58,7 +58,7 @@ export default async function Page() {
                                 <td scope="row" className="text-center h-[4rem] px-2">
                                         {new Intl.NumberFormat("it-IT", { style: "currency", currency: "EUR" }).format(config.total)}
                                 </td>
-                                <td className={`text-center h-[4rem] ${config.orderStatus ? 'bg-green-200' : 'bg-gray-200'}`}>{config.orderStatus ?? 'Order not finalized'}</td>
+                                <td className={`text-center h-[4rem] ${config.orderStatus === 'Completed' ? 'bg-green-200' : 'bg-gray-200'}`}>{config.orderStatus}</td>
                                 <td className="text-left h-[4rem] pl-12">
                                     <Link href={`/admin/configs/${config.id}`}>&rarr;</Link>
                                 </td>

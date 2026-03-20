@@ -12,13 +12,13 @@ export default function UserImages({configId, userId}:{configId:string|number|un
                 ? <div>
                     <Image alt="config"
                            className="object-cover h-[calc(80vh-20vh)] w-full"
-                           src={`https://dggrbfhwlvvsxbhnobig.supabase.co/storage/v1/object/public/configs/${configId}.png`}
+                           src={`https://aiuptuoijjmfcxutusbc.supabase.co/storage/v1/object/public/configs/${configId}.png`}
                            width={1000} height={1000} quality={70}/>
                 </div>
                 : <div>
                     <Image alt="scan"
                            className="object-cover h-[calc(80vh-20vh)] w-full"
-                           src={`https://dggrbfhwlvvsxbhnobig.supabase.co/storage/v1/object/public/scans/${userId}.jpg`}
+                           src={`https://aiuptuoijjmfcxutusbc.supabase.co/storage/v1/object/public/scans/${userId}.jpg`}
                            width={1000} height={1000} quality={70}/>
                 </div>
             }
