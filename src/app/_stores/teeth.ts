@@ -979,6 +979,13 @@ export const useTeethStore = create<State>((set, get) => ({
     resetSignature: (signature) =>
         set(
             produce((state) => {
+
+                // update current history step
+                if (state.currentHistory < state.history.length) {
+                    state.history = state.history.splice(0, state.currentHistory);
+                }
+                state.currentHistory++;
+
                 state.signatureMaterial[signature] = undefined;
                 state.signatureVisibility[signature] = false;
 
