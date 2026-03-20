@@ -41,18 +41,6 @@ export default function PremiumBox({ref} : {ref:Ref<Group|null>}) {
     }, [customText])
 
     useEffect(() => {
-        if(firstTextRef.current) {
-            (firstTextRef.current as THREE.Mesh).geometry.center();
-            (firstTextRef.current as THREE.Mesh).position.set(0,0,0);
-            (centerFirstRef.current as any).updateMatrix();
-        }
-
-        if(secondTextRef.current) {
-            (secondTextRef.current as THREE.Mesh).geometry.center();
-            (secondTextRef.current as THREE.Mesh).position.set(0,0,0);
-            (centerSecondRef.current as any).updateMatrix();
-        }
-
         console.log(centerFirstRef.current)
     }, [])
 
@@ -70,7 +58,7 @@ export default function PremiumBox({ref} : {ref:Ref<Group|null>}) {
                         position={customText.secondLine !== '' ? [-0.001, 0, -0.015] : [0.0275, 0, -0.05]}
                         visible={customText.firstLine !== ''}
                     >
-                        <Text3D font="/Archivo_Expanded_Bold.json" size={0.039} ref={firstTextRef}>
+                        <Text3D font="/Archivo_Expanded_Bold.json" size={0.039} ref={firstTextRef} position={[0, 0, 0]}>
                             {customText.firstLine}
                             <FullMaterial color={packaging.details} finish="polished"/>
                         </Text3D>
@@ -82,7 +70,7 @@ export default function PremiumBox({ref} : {ref:Ref<Group|null>}) {
                         position={customText.firstLine !== '' ? [0.07, 0, -0.1] : [0.0275, 0, -0.05]}
                         scale={[1,1,0.5]}
                         visible={customText.secondLine !== ''}>
-                        <Text3D font="/Archivo_Expanded_Bold.json" size={0.039} ref={secondTextRef}>
+                        <Text3D font="/Archivo_Expanded_Bold.json" size={0.039} ref={secondTextRef} position={[0, 0, 0]}>
                             {customText.secondLine}
                             <FullMaterial color={packaging.details} finish="polished"/>
                         </Text3D>
