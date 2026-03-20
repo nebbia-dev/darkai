@@ -26,7 +26,18 @@ export default function SignatureOptions({crossRef, vampRef, bubblegumRef, sprin
 
     function setSignatureDesign(e:string) {
         setActiveSubButton(e);
-        const material = (e === 'bubblegum') ? 'pink' : 'white';
+        let material;
+        switch(e) {
+            case 'bubblegum':
+                material = 'pink';
+                break;
+            case 'sprinkles':
+                material = 'white_lab';
+                break;
+            default:
+                material = 'base_white';
+        }
+
         setSignature(e, material, true);
     }
 

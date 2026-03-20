@@ -17,13 +17,14 @@ export default function Vamp() {
         const position = [signatureGeometry.csdx.pave.position, signatureGeometry.cssx.pave.position]
         let material:JSX.Element[];
         switch(mat) {
-            case 'pave':
-                material = [<FullMaterial finish="polished" color="white"/>, <Pave pave="round" stone="whD"/>, <RoundPaveBase stone="whD" color="white" pave="round"/>]
+            case 'pave_lab':
+            case 'pave_nat':
+                material = [<FullMaterial finish="polished" color="white"/>, <Pave pave="round" stone="whD_lab"/>, <RoundPaveBase stone="whD_lab" color="white" pave="round"/>]
                 break;
-            case 'white':
+            case 'base_white':
                 material = [<FullMaterial finish="polished" color="white"/>]
                 break;
-            case 'black':
+            case 'base_black':
                 material = [<FullMaterial finish="polished" color="black"/>]
                 break;
             default:
@@ -39,12 +40,12 @@ export default function Vamp() {
                         {material[0]}
                     </mesh>
                     <mesh geometry={geometry[1]} visible={visible}>
-                        {mat === 'pave'
+                        {mat?.includes('pave')
                             ? material[1]
                             : material[0]
                         }
                     </mesh>
-                    {mat === 'pave' &&
+                    {mat?.includes('pave') &&
                         <mesh geometry={geometry[1]} visible={visible}>
                             {material[0]}
                             {material[2]}
@@ -56,12 +57,12 @@ export default function Vamp() {
                         {material[0]}
                     </mesh>
                     <mesh geometry={geometry[3]} visible={visible}>
-                        {mat === 'pave'
+                        {mat?.includes('pave')
                             ? material[1]
                             : material[0]
                         }
                     </mesh>
-                    {mat === 'pave' &&
+                    {mat?.includes('pave') &&
                         <mesh geometry={geometry[3]} visible={visible}>
                             {material[0]}
                             {material[2]}

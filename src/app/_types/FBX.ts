@@ -7,9 +7,9 @@ interface Stone {
 interface Stones {
     marquise: Stone,
     heart: Stone,
-    circle: Stone,
-    tear: Stone,
-    square: Stone,
+    round: Stone,
+    drop: Stone,
+    princess: Stone,
     baguette: Stone
 }
 export default interface FBX {

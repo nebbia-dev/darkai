@@ -70,13 +70,14 @@ export default function PaveFrame({stone, pave} : {stone:string|undefined, pave:
         case 'ameth':
             hex = 0xae3b9f;
             break;
-        case 'whD':
+        case 'whD_lab':
+        case 'whD_nat':
             hex = 0xffffff;
             break;
-        case 'brD':
+        case 'brD_nat':
             hex = 0x4c3e34;
             break;
-        case 'blD':
+        case 'blD_nat':
             hex = 0x1d1e1e;
             break;
         default:

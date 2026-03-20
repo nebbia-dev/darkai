@@ -9,6 +9,7 @@ import elabMaterial from "@/app/_helpers/_string-modders/elabMaterial";
 import elabSignatureName from "@/app/_helpers/_string-modders/elabSignatureName";
 import {Trash} from "@/app/_components/_icons/Trash";
 import elabVelvetName from "@/app/_helpers/_string-modders/elabVelvetName";
+import elabSignatureGold from "@/app/_helpers/_string-modders/elabSignatureGold";
 
 export default function RecapList({edit} : {edit:boolean}) {
 
@@ -25,6 +26,15 @@ export default function RecapList({edit} : {edit:boolean}) {
     const resetSignature = useTeethStore((state: State) => state.resetSignature);
     const packaging = useTeethStore((state: State) => state.packaging);
     const setPackaging = useTeethStore((state: State) => state.setPackaging);
+    const packagingScene = useTeethStore((state: State) => state.packagingScene);
+    const setPackagingScene = useTeethStore((state: State) => state.setPackagingScene);
+
+    function activateTooth(tooth:string) {
+        setActive(tooth);
+        if(packagingScene) {
+            setPackagingScene(false);
+        }
+    }
 
     function setCurrentHover(tooth:string|undefined, e:any) {
         e.stopPropagation();
@@ -62,7 +72,8 @@ export default function RecapList({edit} : {edit:boolean}) {
     return (
         <div className="pl-5 pr-3 py-4 h-full">
             <ul className="pr-2 h-full overflow-y-auto">
-                {((history.length === 0 || total === 0) && !packaging.premium) &&
+                {((history.length === 0 || total === 0)
+                        && !packaging.premium) &&
                     <li className="w-full h-full flex items-center justify-center">
                         <p>Start your design</p>
                     </li>
@@ -92,15 +103,19 @@ export default function RecapList({edit} : {edit:boolean}) {
                             {/*material*/}
                             <p>
                                 {
-                                    history[currentStep][0].signatureMaterial[signature[0]] !== 'pave'
-                                        ? (history[currentStep][0].signatureMaterial[signature[0]] === 'gold' ? 'Yellow' : firstCapital(history[currentStep][0].signatureMaterial[signature[0]] as string))
-                                        : 'White'
-                                } gold
+                                    elabSignatureGold(history[currentStep][0].signatureMaterial[signature[0]], signature[0])
+                                }
                             </p>
 
                             {
-                                history[currentStep][0].signatureMaterial[signature[0]] === 'pave' &&
-                                <p>Round pave w/ white diamonds</p>
+                                (history[currentStep][0].signatureMaterial[signature[0]]?.includes('lab')
+                                || history[currentStep][0].signatureMaterial[signature[0]]?.includes('nat')
+                                ) &&
+                                <p>Round pave w/ {
+                                    history[currentStep][0].signatureMaterial[signature[0]]?.includes('lab')
+                                    ? 'lab'
+                                    : 'natural'
+                                } white diamonds</p>
                             }
 
                             {/*<span aria-hidden={true}*/}
@@ -122,7 +137,7 @@ export default function RecapList({edit} : {edit:boolean}) {
                     return (
                         history[currentStep][0].visible[tooth[0]] &&
                         <li key={tooth[0]}
-                            {...(edit && { onClick: () => setActive(tooth[0]),
+                            {...(edit && { onClick: () => activateTooth(tooth[0]),
                                            onMouseEnter: (e) => setCurrentHover(tooth[0], e),
                                            onMouseLeave: (e) => setCurrentHover(undefined, e)
                                             })}
@@ -198,9 +213,9 @@ export default function RecapList({edit} : {edit:boolean}) {
                         <p>
                             {firstCapital(packaging.out)} box w/ {elabVelvetName(packaging.in)} velvet and {elabMaterial(packaging.details, 'gold')} gold details
                         </p>
-                        { packaging.text.length > 0 &&
+                        { (packaging.text.firstLine.length > 0 || packaging.text.secondLine.length > 0) &&
                             <p>
-                                Custom text: {packaging.text}
+                                Custom text: {packaging.text.firstLine} {packaging.text.secondLine}
                             </p>
                         }
                         <p className="w-full font-medium text-left mt-1.5">{

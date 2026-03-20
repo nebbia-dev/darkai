@@ -17,13 +17,14 @@ export default function Tribals() {
         const position = [signatureGeometry.positionHangs, signatureGeometry.positionFull]
         let material:JSX.Element[];
         switch(mat) {
-            case 'pave':
-                material = [<FullMaterial finish="polished" color="white"/>, <Pave pave="round" stone="whD"/>, <RoundPaveBase stone="whD" color="white" pave="round"/>]
+            case 'pave_lab':
+            case 'pave_nat':
+                material = [<FullMaterial finish="polished" color="white"/>, <Pave pave="round" stone="whD_lab"/>, <RoundPaveBase stone="whD_lab" color="white" pave="round"/>]
                 break;
-            case 'white':
+            case 'base_white':
                 material = [<FullMaterial finish="polished" color="white"/>]
                 break;
-            case 'gold':
+            case 'base_gold':
                 material = [<FullMaterial finish="polished" color="gold"/>]
                 break;
             default:
@@ -38,7 +39,7 @@ export default function Tribals() {
                         {material[0]}
                     </mesh>
                     {
-                        mat === 'pave'
+                        mat?.includes('pave')
                             ?
                             <>
                                 <mesh geometry={geometry[2]} visible={visible} position={position[1]}>

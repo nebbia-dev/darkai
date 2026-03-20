@@ -34,7 +34,7 @@ export default function RootLayout({
             crossOrigin="anonymous"
             href="https://www.gstatic.com/draco/versioned/decoders/1.5.5/draco_decoder.wasm"
         />
-
+        <link rel="stylesheet" href="https://use.typekit.net/gqu6jpz.css"/>
     </head>
     <body>
     <AppRouterCacheProvider>

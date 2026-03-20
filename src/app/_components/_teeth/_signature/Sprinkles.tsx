@@ -13,13 +13,16 @@ export default function Sprinkles() {
         if(!signatureGeometry) return <></>
         let material:JSX.Element[];
         switch(mat) {
-            case 'gold':
+            case 'gold_lab':
+            case 'gold_nat':
                 material = [<FullMaterial finish="polished" color="gold"/>, <FullMaterial finish="sprinkles" color="gold"/>]
                 break;
-            case 'white':
+            case 'white_lab':
+            case 'white_nat':
                 material = [<FullMaterial finish="polished" color="white"/>, <FullMaterial finish="sprinkles" color="white"/>]
                 break;
-            case 'rose':
+            case 'rose_lab':
+            case 'rose_nat':
                 material = [<FullMaterial finish="polished" color="rose"/>, <FullMaterial finish="sprinkles" color="rose"/>]
                 break;
             default:

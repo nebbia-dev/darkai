@@ -43,9 +43,10 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
     const hexRef = useRef<HTMLButtonElement|null>(null);
     const princessRef = useRef<HTMLButtonElement|null>(null);
     const baguetteRef = useRef<HTMLButtonElement|null>(null);
-    const whDRef = useRef<HTMLButtonElement|null>(null);
-    const brDRef = useRef<HTMLButtonElement|null>(null);
-    const blDRef = useRef<HTMLButtonElement|null>(null);
+    const whDLabRef = useRef<HTMLButtonElement|null>(null);
+    const whDNatRef = useRef<HTMLButtonElement|null>(null);
+    const brDNatRef = useRef<HTMLButtonElement|null>(null);
+    const blDNatRef = useRef<HTMLButtonElement|null>(null);
     const rubyRef = useRef<HTMLButtonElement|null>(null);
     const emeraldRef = useRef<HTMLButtonElement|null>(null);
     const bSapphRef = useRef<HTMLButtonElement|null>(null);
@@ -127,9 +128,10 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
                         tooth={tooth}
                         bezel={jewelType === 'bezel' || jewelType === 'bezelDiamond'}
                         pave={!!pave?.shape}
-                        whDRef={whDRef}
-                        brDRef={brDRef}
-                        blDRef={blDRef}
+                        whDLabRef = {whDLabRef}
+                        whDNatRef={whDNatRef}
+                        brDNatRef={brDNatRef}
+                        blDNatRef={blDNatRef}
                         rubyRef={rubyRef}
                         emeraldRef={emeraldRef}
                         pSapphRef={pSapphRef}
@@ -266,14 +268,17 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
         if(active === '5') {
             const gem = stone?.color ?? pave?.color;
             switch(gem) {
-                    case 'whD':
-                        ref = whDRef.current;
+                    case 'whD_lab':
+                        ref = whDLabRef.current;
                         break;
-                    case 'blD':
-                        ref = blDRef.current;
+                    case 'whD_nat':
+                        ref = whDNatRef.current;
+                    break;
+                    case 'blD_nat':
+                        ref = blDNatRef.current;
                         break;
-                    case 'brD':
-                        ref = brDRef.current;
+                    case 'brD_nat':
+                        ref = brDNatRef.current;
                         break;
                     case 'ruby':
                         ref = rubyRef.current;
@@ -303,7 +308,7 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
                         ref = glitchRef.current;
                         break;
                     default:
-                        ref = whDRef.current;
+                        ref = whDLabRef.current;
                 }
         }
         ref?.scrollIntoView();

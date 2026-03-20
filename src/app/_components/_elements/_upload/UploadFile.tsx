@@ -30,12 +30,12 @@ export default function UploadFile({theme, sendData} : {theme:'dark' | 'light', 
     }
 
     return (
-        <div className="w-full">
+        <div className="w-[33%] h-[176px]">
             <label
-                className={`label w-full inline-block ${theme === 'dark' ? 'bg-gray-950/[80%] text-gray-50' : 'bg-gray-50 text-gray-950'} rounded px-8 py-8 cursor-pointer border-[#171717] border-1 text-center`}>
+                className={`label h-full w-full block ${theme === 'dark' ? 'bg-gray-950/[80%] text-gray-50' : 'bg-gray-50 text-gray-950'} rounded ${selectedFile ? 'p-2' : 'p-8'} cursor-pointer border-[#171717]`}>
                 {
                     selectedFile
-                        ?  <img className="mb-4 object-cover h-[128px] mx-auto" src={preview as string} alt="scan-preview"/>
+                        ?  <img className="rounded-xl w-[90%] h-[122px] object-cover mb-4 mx-auto" src={preview as string} alt="scan-preview"/>
                         :
                             <div className="w-full flex justify-center mb-2">
                             <svg xmlns="http://www.w3.org/2000/svg" width="48px" height="48px" viewBox="0 0 24 24">
@@ -48,7 +48,12 @@ export default function UploadFile({theme, sendData} : {theme:'dark' | 'light', 
                             </svg>
                         </div>
                 }
-                        Upload a dental scan{selectedFile && <span>: {selectedFile.name}</span>}
+                <span className="text-center line-clamp-2">
+                    {selectedFile
+                        ? <>{selectedFile.name}</>
+                        : "Upload a dental scan"
+                    }
+                </span>
                 <input type="file" onChange={handleChange}/>
             </label>
         </div>

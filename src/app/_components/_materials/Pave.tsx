@@ -237,15 +237,16 @@ export default function Pave({pave, stone} : {pave: string|undefined, stone:stri
             hex = 0xae3b9f;
             paveType = pave;
             break;
-        case 'whD':
+        case 'whD_lab':
+        case 'whD_nat':
             hex = 0xffffff;
             paveType = pave;
             break;
-        case 'brD':
+        case 'brD_nat':
             hex = 0x6e4315;
             paveType = pave;
             break;
-        case 'blD':
+        case 'blD_nat':
             hex = 0x1d1e1e;
             paveType = pave;
             break;

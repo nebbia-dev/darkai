@@ -81,7 +81,7 @@ export default async function Order({params}: { params: Promise<{ orderId: strin
                                     {(data as unknown as OrderInfo[])?.[0].config.config.preciousness
                                         && Object.entries((data as unknown as OrderInfo[])?.[0].config.config.preciousness as Preciousness).map(feat => {
                                             return <li key={feat[0] + feat[1]}
-                                                       className="pl-2">{firstCapital(feat[0])}: {firstCapital(feat[1] as string)}</li>
+                                                       className="pl-2">{firstCapital(feat[0])}: {feat[1]}</li>
                                         })
                                     }
                                 </ul>

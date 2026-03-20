@@ -46,7 +46,7 @@ export interface Enamel {
     cisx: string | undefined,
 }
 export interface Finish {
-    [key: string]: string
+    [key: string]: 'polished' | 'sandblasted' | 'diamond_cut'
     icsdx: 'polished' | 'sandblasted' | 'diamond_cut',
     icssx: 'polished' | 'sandblasted' | 'diamond_cut',
     icidx: 'polished' | 'sandblasted' | 'diamond_cut',
@@ -203,13 +203,13 @@ export interface Visibility {
 }
 export interface SignMaterial {
     [key: string]: string | undefined,
-    vamp: 'white' | 'pave' | 'black' | undefined,
-    hammered: 'white' | 'gold' | 'black' | undefined,
-    cross: 'white' | 'pave' | 'rose' | 'black' | undefined,
+    vamp: 'base_white' | 'pave_lab' | 'pave_nat' | 'base_black' | undefined,
+    hammered: 'base_white' | 'base_gold' | 'base_black' | undefined,
+    cross: 'base_white' | 'pave_lab' | 'pave_nat' | 'base_rose' | 'base_black' | undefined,
     bubblegum: 'pink' | 'blue' | 'green' | undefined,
-    sprinkles: 'white' | 'gold' | 'rose' | undefined,
-    tribal: 'white' | 'pave' | 'gold' | undefined,
-    braces: 'emerald' | 'ruby' | undefined
+    sprinkles: 'white_lab' | 'gold_lab' | 'rose_lab' | 'white_nat' | 'gold_nat' | 'rose_nat' | undefined,
+    tribal: 'base_white' | 'pave_lab' | 'pave_nat' | 'base_gold' | undefined,
+    braces: 'base_white' | 'pave_lab' | undefined
 }
 export interface SignatureTeeth {
     [key: string]: string[],
@@ -233,7 +233,7 @@ export interface SignVisibility {
 }
 export interface Stone {
     // aggiungere i colori
-    shape: 'circle' |  'square' | 'baguette' | 'tear' | 'heart' | 'marquise' | undefined,
+    shape: 'round' |  'princess' | 'baguette' | 'drop' | 'heart' | 'marquise' | undefined,
     color: string | undefined
 }
 export interface Stones {
@@ -252,9 +252,8 @@ export interface Stones {
     cisx: Stone,
 }
 export interface Preciousness {
-    [key: string]: string | number | undefined,
+    [key: string]: number,
     carats: number,
-    diamonds: string | undefined
 }
 export interface History {
     material: Materials,
@@ -290,10 +289,10 @@ export interface Neighbours {
 }
 
 export interface Packaging {
-    [key: string]: boolean|string
+    [key: string]: boolean|string|{firstLine: string, secondLine: string}
     premium: boolean,
     out: string,
     in: string,
     details: string,
-    text: string
+    text: {firstLine: string, secondLine: string}
 }
