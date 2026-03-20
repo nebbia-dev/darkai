@@ -43,10 +43,12 @@ export default function PremiumBox({ref} : {ref:Ref<Group|null>}) {
     useEffect(() => {
         if(firstTextRef.current) {
             (firstTextRef.current as THREE.Mesh).geometry.center();
+            (centerFirstRef.current as any).updateMatrix();
         }
 
         if(secondTextRef.current) {
             (secondTextRef.current as THREE.Mesh).geometry.center();
+            (centerSecondRef.current as any).updateMatrix();
         }
 
         console.log(centerFirstRef.current)
