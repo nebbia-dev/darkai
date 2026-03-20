@@ -28,6 +28,7 @@ export default function RecapList({edit} : {edit:boolean}) {
     const setPackaging = useTeethStore((state: State) => state.setPackaging);
     const packagingScene = useTeethStore((state: State) => state.packagingScene);
     const setPackagingScene = useTeethStore((state: State) => state.setPackagingScene);
+    const resetMenu = useTeethStore((state: State) => state.setActiveButton);
 
     function activateTooth(tooth:string) {
         if(innerWidth >= 1024) {
@@ -36,6 +37,12 @@ export default function RecapList({edit} : {edit:boolean}) {
                 setPackagingScene(false);
             }
         }
+    }
+
+    function resetPackaging() {
+        setPackaging('premium', false);
+        setPackagingScene(false);
+        resetMenu(undefined)
     }
 
     function setCurrentHover(tooth:string|undefined, e:any) {
@@ -207,7 +214,7 @@ export default function RecapList({edit} : {edit:boolean}) {
                             </h4>
                             {edit && <Tooltip title="Delete configuration">
                                 <Trash className="cursor-pointer rounded-full border-1 p-0.5 w-5 h-5"
-                                       onClick={() => setPackaging('premium', false)}/>
+                                       onClick={resetPackaging}/>
                             </Tooltip>
                             }
                         </div>
