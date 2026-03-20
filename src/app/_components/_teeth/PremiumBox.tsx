@@ -38,9 +38,6 @@ export default function PremiumBox({ref} : {ref:Ref<Group|null>}) {
 
     }, [customText])
 
-    // single line: position={[-0.001, 0, -0.09]}
-    // double line: 1st: position={[-0.045, 0, -0.04]}; 2nd: position={[0.02, 0, -0.12]}
-
     return(
         <>
             <group ref={ref}
@@ -50,7 +47,8 @@ export default function PremiumBox({ref} : {ref:Ref<Group|null>}) {
                 <group rotation={[Math.PI / 2, Math.PI, Math.PI / 2]} scale={[3.5, 3.5, 3.5]}>
                     <Center
                         rotation={[0, 0.91, 1.58]}
-                        position={customText.secondLine !== '' ? [-0.045, 0, -0.04] : [-0.001, 0, -0.09]}
+                        scale={[1,1,0.5]}
+                        position={customText.secondLine !== '' ? [-0.001, 0, -0.015] : [0.0275, 0, -0.05]}
                         visible={customText.firstLine !== ''}
                     >
                         <Text3D font="/Archivo_Expanded_Bold.json" size={0.039} ref={firstTextRef}>
@@ -61,7 +59,8 @@ export default function PremiumBox({ref} : {ref:Ref<Group|null>}) {
 
                     <Center
                         rotation={[0, 0.91, 1.58]}
-                        position={customText.firstLine !== '' ? [0.02, 0, -0.12] : [-0.001, 0, -0.09]}
+                        position={customText.firstLine !== '' ? [0.07, 0, -0.1] : [0.0275, 0, -0.05]}
+                        scale={[1,1,0.5]}
                         visible={customText.secondLine !== ''}>
                         <Text3D font="/Archivo_Expanded_Bold.json" size={0.039} ref={secondTextRef}>
                             {customText.secondLine}
