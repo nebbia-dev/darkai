@@ -41,16 +41,10 @@ export default function PremiumBox({ref} : {ref:Ref<Group|null>}) {
     }, [customText])
 
     useEffect(() => {
-        if(centerFirstRef.current) {
-            const pos = customText.secondLine !== '' ? [-0.001, 0, -0.015] : [0.0275, 0, -0.05];
-            (centerFirstRef.current as any).position.set(pos[0], pos[1], pos[2]);
-        }
+        (centerFirstRef.current as any).children[0].updateMatrix();
+        (centerFirstRef.current as any).children[0].updateMatrixWorld()
 
-        if(centerSecondRef.current) {
-            const pos = customText.firstLine !== '' ? [0.07, 0, -0.1] : [0.0275, 0, -0.05];
-            (centerSecondRef.current as any).position.set(pos[0], pos[1], pos[2]);
-        }
-        console.log(ref, centerFirstRef.current)
+        console.log(centerFirstRef.current)
     }, [])
 
     return(
