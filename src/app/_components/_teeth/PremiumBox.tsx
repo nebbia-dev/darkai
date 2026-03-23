@@ -32,14 +32,18 @@ export default function PremiumBox({ref} : {ref:Ref<Group|null>}) {
     useEffect(() => {
         if(firstTextRef.current) {
             (firstTextRef.current as THREE.Mesh).geometry.center();
-            const position = customText.secondLine !== '' ? [-0.001, 0, -0.015] : [0.0275, 0, -0.05]
-            firstTextRef.current.position.set(...position)
+            const pos = customText.secondLine !== ''
+                ? [-0.001, 0, -0.015]
+                : [0.0275, 0, -0.05];
+            (firstTextRef.current as THREE.Mesh).position.set(pos[0], pos[1], pos[2])
         }
 
         if(secondTextRef.current) {
             (secondTextRef.current as THREE.Mesh).geometry.center();
-            const position = customText.secondLine !== '' ? [0.07, 0, -0.1] : [0.0275, 0, -0.05]
-            secondTextRef.current.position.set(...position)
+            const pos = customText.firstLine !== ''
+                ? [0.07, 0, -0.1]
+                : [0.0275, 0, -0.05];
+            (secondTextRef.current as THREE.Mesh).position.set(pos[0], pos[1], pos[2])
         }
 
     }, [customText])
