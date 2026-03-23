@@ -32,33 +32,15 @@ export default function PremiumBox({ref} : {ref:Ref<Group|null>}) {
     useEffect(() => {
         if(firstTextRef.current) {
             (firstTextRef.current as THREE.Mesh).geometry.center();
-            console.log('firstCenterRef: ', (centerFirstRef.current as any).matrixWorld, (centerFirstRef.current as any).matrix);
-            console.log('firstTextRef: ', (firstTextRef.current as THREE.Mesh).matrixWorld, (firstTextRef.current as THREE.Mesh).matrix)
         }
 
         if(secondTextRef.current) {
             (secondTextRef.current as THREE.Mesh).geometry.center();
-            console.log('secondCenterRef: ', (centerSecondRef.current as any).matrixWorld, (centerSecondRef.current as any).matrix);
-            console.log('secondTextRef: ', (secondTextRef.current as THREE.Mesh).matrixWorld, (secondTextRef.current as THREE.Mesh).matrix)
         }
 
     }, [customText])
 
     useEffect(() => {
-        if(firstTextRef.current) {
-            console.log('firstCenterRef: ', (centerFirstRef.current as any).matrixWorld, (centerFirstRef.current as any).matrix);
-            console.log('firstTextRef: ', (firstTextRef.current as THREE.Mesh).matrixWorld, (firstTextRef.current as THREE.Mesh).matrix);
-            (firstTextRef.current as THREE.Mesh).matrixAutoUpdate = false;
-            const newMatrix = (centerFirstRef.current as any).matrixWorld.clone();
-            (firstTextRef.current as THREE.Mesh).applyMatrix4(newMatrix);
-        }
-        if(secondTextRef.current) {
-            console.log('secondCenterRef: ', (centerSecondRef.current as any).matrixWorld, (centerSecondRef.current as any).matrix);
-            console.log('secondTextRef: ', (secondTextRef.current as THREE.Mesh).matrixWorld, (secondTextRef.current as THREE.Mesh).matrix);
-            (secondTextRef.current as THREE.Mesh).matrixAutoUpdate = false;
-            const newMatrix = (centerSecondRef.current as any).matrixWorld.clone();
-            (secondTextRef.current as THREE.Mesh).applyMatrix4(newMatrix);
-        }
 
     }, [])
 
