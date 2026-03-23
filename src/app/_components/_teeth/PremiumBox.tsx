@@ -32,21 +32,20 @@ export default function PremiumBox({ref} : {ref:Ref<Group|null>}) {
     useEffect(() => {
         if(firstTextRef.current) {
             (firstTextRef.current as THREE.Mesh).geometry.center();
-            const pos = customText.secondLine !== ''
-                ? [-0.001, 0, -0.015]
-                : [0.0275, 0, -0.05];
-            (firstTextRef.current as THREE.Mesh).position.set(pos[0], pos[1], pos[2])
         }
 
         if(secondTextRef.current) {
             (secondTextRef.current as THREE.Mesh).geometry.center();
-            const pos = customText.firstLine !== ''
-                ? [0.07, 0, -0.1]
-                : [0.0275, 0, -0.05];
-            (secondTextRef.current as THREE.Mesh).position.set(pos[0], pos[1], pos[2])
         }
 
     }, [customText])
+
+    useEffect(() => {
+        if(firstTextRef.current) {
+            console.log((firstTextRef.current as THREE.Mesh).position);
+            console.log((centerFirstRef.current as any).position);
+        }
+    }, []);
 
     return(
         <>
@@ -59,6 +58,7 @@ export default function PremiumBox({ref} : {ref:Ref<Group|null>}) {
                         ref={centerFirstRef}
                         rotation={[0, 0.91, 1.58]}
                         scale={[1,1,0.5]}
+                        position={customText.secondLine !== '' ? [-0.001, 0, -0.015] : [0.0275, 0, -0.05]}
                         visible={customText.firstLine !== ''}
                     >
                         <Text3D font="/Archivo_Expanded_Bold.json" size={0.039} ref={firstTextRef}>
@@ -70,6 +70,7 @@ export default function PremiumBox({ref} : {ref:Ref<Group|null>}) {
                     <Center
                         ref={centerSecondRef}
                         rotation={[0, 0.91, 1.58]}
+                        position={customText.firstLine !== '' ? [0.07, 0, -0.1] : [0.0275, 0, -0.05]}
                         scale={[1,1,0.5]}
                         visible={customText.secondLine !== ''}>
                         <Text3D font="/Archivo_Expanded_Bold.json" size={0.039} ref={secondTextRef}>
