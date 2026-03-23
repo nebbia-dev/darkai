@@ -48,15 +48,15 @@ export default function PremiumBox({ref} : {ref:Ref<Group|null>}) {
         if(firstTextRef.current) {
             console.log('firstCenterRef: ', (centerFirstRef.current as any).matrixWorld, (centerFirstRef.current as any).matrix);
             console.log('firstTextRef: ', (firstTextRef.current as THREE.Mesh).matrixWorld, (firstTextRef.current as THREE.Mesh).matrix);
-            const newMatrix = new THREE.Matrix4;
-            newMatrix.copy((centerFirstRef.current as any).matrixWorld);
+            (firstTextRef.current as THREE.Mesh).matrixAutoUpdate = false;
+            const newMatrix = (centerFirstRef.current as any).matrixWorld.clone();
             (firstTextRef.current as THREE.Mesh).applyMatrix4(newMatrix);
         }
         if(secondTextRef.current) {
             console.log('secondCenterRef: ', (centerSecondRef.current as any).matrixWorld, (centerSecondRef.current as any).matrix);
             console.log('secondTextRef: ', (secondTextRef.current as THREE.Mesh).matrixWorld, (secondTextRef.current as THREE.Mesh).matrix);
-            const newMatrix = new THREE.Matrix4;
-            newMatrix.copy((centerSecondRef.current as any).matrixWorld);
+            (secondTextRef.current as THREE.Mesh).matrixAutoUpdate = false;
+            const newMatrix = (centerSecondRef.current as any).matrixWorld.clone();
             (secondTextRef.current as THREE.Mesh).applyMatrix4(newMatrix);
         }
 
