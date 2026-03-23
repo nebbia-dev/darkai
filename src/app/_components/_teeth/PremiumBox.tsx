@@ -32,18 +32,21 @@ export default function PremiumBox({ref} : {ref:Ref<Group|null>}) {
     useEffect(() => {
         if(firstTextRef.current) {
             (firstTextRef.current as THREE.Mesh).geometry.center();
-            (firstTextRef.current as THREE.Mesh).position.set(0,0,0);
+            console.log('firstCenterRef: ', (centerFirstRef.current as any).matrixWorld, (centerFirstRef.current as any).matrix);
+            console.log('firstTextRef: ', (firstTextRef.current as THREE.Mesh).matrixWorld, (firstTextRef.current as THREE.Mesh).matrix)
         }
 
         if(secondTextRef.current) {
             (secondTextRef.current as THREE.Mesh).geometry.center();
-            (secondTextRef.current as THREE.Mesh).position.set(0,0,0);
         }
 
     }, [customText])
 
     useEffect(() => {
-        console.log(centerFirstRef.current)
+        if(firstTextRef.current) {
+            console.log('firstCenterRef: ', (centerFirstRef.current as any).matrixWorld, (centerFirstRef.current as any).matrix);
+            console.log('firstTextRef: ', (firstTextRef.current as THREE.Mesh).matrixWorld, (firstTextRef.current as THREE.Mesh).matrix);
+        }
     }, [])
 
     return(
