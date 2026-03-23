@@ -32,10 +32,14 @@ export default function PremiumBox({ref} : {ref:Ref<Group|null>}) {
     useEffect(() => {
         if(firstTextRef.current) {
             (firstTextRef.current as THREE.Mesh).geometry.center();
+            const position = customText.secondLine !== '' ? [-0.001, 0, -0.015] : [0.0275, 0, -0.05]
+            firstTextRef.current.position.set(...position)
         }
 
         if(secondTextRef.current) {
             (secondTextRef.current as THREE.Mesh).geometry.center();
+            const position = customText.secondLine !== '' ? [0.07, 0, -0.1] : [0.0275, 0, -0.05]
+            secondTextRef.current.position.set(...position)
         }
 
     }, [customText])
@@ -46,12 +50,11 @@ export default function PremiumBox({ref} : {ref:Ref<Group|null>}) {
                    // rotation={[0, Math.PI / 4, 0]}
                    // position={[-20.060500000193823, 0, -9.505650000058095]} per l'animazione
             >
-                <group rotation={[Math.PI / 2, Math.PI, Math.PI / 2]} scale={[3.5,3.5,3.5]}>
+                <group rotation={[Math.PI / 2, Math.PI, Math.PI / 2]} scale={[3.5, 3.5, 3.5]}>
                     <Center
                         ref={centerFirstRef}
                         rotation={[0, 0.91, 1.58]}
-                        // position={customText.secondLine !== '' ? [-0.001, 0, -0.015] : [0.0275, 0, -0.05]}
-                        position={[0.0275, 0, -0.05]}
+                        scale={[1,1,0.5]}
                         visible={customText.firstLine !== ''}
                     >
                         <Text3D font="/Archivo_Expanded_Bold.json" size={0.039} ref={firstTextRef}>
@@ -63,16 +66,13 @@ export default function PremiumBox({ref} : {ref:Ref<Group|null>}) {
                     <Center
                         ref={centerSecondRef}
                         rotation={[0, 0.91, 1.58]}
-                        position={customText.firstLine !== '' ? [0.07, 0, -0.1] : [0.0275, 0, -0.05]}
+                        scale={[1,1,0.5]}
                         visible={customText.secondLine !== ''}>
                         <Text3D font="/Archivo_Expanded_Bold.json" size={0.039} ref={secondTextRef}>
                             {customText.secondLine}
                             <FullMaterial color={packaging.details} finish="polished"/>
                         </Text3D>
                     </Center>
-                </group>
-
-                <group rotation={[Math.PI / 2, Math.PI, Math.PI / 2]} scale={[3.5, 3.5, 3.5]}>
 
                     {/*TOP*/}
                     {/*Sportello*/}
