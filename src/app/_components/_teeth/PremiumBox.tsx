@@ -42,8 +42,8 @@ export default function PremiumBox({ref} : {ref:Ref<Group|null>}) {
 
     useEffect(() => {
         if(firstTextRef.current) {
-            console.log((firstTextRef.current as THREE.Mesh).position);
-            console.log((centerFirstRef.current as any).position);
+            console.log(firstTextRef.current);
+            console.log(centerFirstRef.current);
         }
     }, []);
 
