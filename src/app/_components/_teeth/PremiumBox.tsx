@@ -50,7 +50,8 @@ export default function PremiumBox({ref} : {ref:Ref<Group|null>}) {
                     <Center
                         ref={centerFirstRef}
                         rotation={[0, 0.91, 1.58]}
-                        position={customText.secondLine !== '' ? [-0.001, 0, -0.015] : [0.0275, 0, -0.05]}
+                        // position={customText.secondLine !== '' ? [-0.001, 0, -0.015] : [0.0275, 0, -0.05]}
+                        position={[0.0275, 0, -0.05]}
                         visible={customText.firstLine !== ''}
                     >
                         <Text3D font="/Archivo_Expanded_Bold.json" size={0.039} ref={firstTextRef}>
