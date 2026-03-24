@@ -29,21 +29,48 @@ export default function PremiumBox({ref} : {ref:Ref<Group|null>}) {
     lightDisks.flipY = false;
     const packaging = useTeethStore((state: State) => state.packaging);
 
+    // {x: -1.0842021724855044e-19, y: 0, z: 3.469446951953614e-18} (1 riga di testo);
+    // {x: 2.710505431213761e-20, y: 1.734723475976807e-18, z: 3.469446951953614e-18} riga 1
+    // {x: -2.168404344971009e-19, y: 1.3877787807814457e-17, z: 1.0408340855860843e-17} riga 2
+
     useEffect(() => {
         if(firstTextRef.current) {
             (firstTextRef.current as THREE.Mesh).geometry.center();
+            if(customText.secondLine !== '') {
+                (firstTextRef.current as THREE.Mesh).position.set(2.710505431213761e-20, 1.734723475976807e-18, 3.469446951953614e-18);
+            } else {
+                (firstTextRef.current as THREE.Mesh).position.set(-1.0842021724855044e-19, 0, 3.469446951953614e-18);
+            }
         }
 
         if(secondTextRef.current) {
             (secondTextRef.current as THREE.Mesh).geometry.center();
+            if(customText.firstLine !== '') {
+                (secondTextRef.current as THREE.Mesh).position.set(-2.168404344971009e-19, 1.3877787807814457e-17, 1.0408340855860843e-17);
+            } else {
+                (secondTextRef.current as THREE.Mesh).position.set(-1.0842021724855044e-19, 0, 3.469446951953614e-18);
+            }
         }
 
     }, [customText])
 
     useEffect(() => {
         if(firstTextRef.current) {
-            console.log(firstTextRef.current);
-            console.log(centerFirstRef.current);
+            (firstTextRef.current as THREE.Mesh).geometry.center();
+            if(customText.secondLine !== '') {
+                (firstTextRef.current as THREE.Mesh).position.set(2.710505431213761e-20, 1.734723475976807e-18, 3.469446951953614e-18);
+            } else {
+                (firstTextRef.current as THREE.Mesh).position.set(-1.0842021724855044e-19, 0, 3.469446951953614e-18);
+            }
+        }
+
+        if(secondTextRef.current) {
+            (secondTextRef.current as THREE.Mesh).geometry.center();
+            if(customText.firstLine !== '') {
+                (secondTextRef.current as THREE.Mesh).position.set(-2.168404344971009e-19, 1.3877787807814457e-17, 1.0408340855860843e-17);
+            } else {
+                (secondTextRef.current as THREE.Mesh).position.set(-1.0842021724855044e-19, 0, 3.469446951953614e-18);
+            }
         }
     }, []);
 
