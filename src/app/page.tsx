@@ -69,7 +69,7 @@ export default function Config() {
     }
 
     return (
-            <div className="flex flex-col w-[100vw] mx-auto bg-gray-200 relative font-sans max-h-screen">
+            <div className="flex flex-col w-[100vw] mx-auto bg-gray-200 relative font-sans max-h-[max(100dvh,100vh)]">
                 <div className="absolute w-full flex justify-center z-16">
                     <img className="cursor-auto py-6 w-[132px]" src="/logo.png" alt="darkai logo"/>
                 </div>
@@ -93,13 +93,13 @@ export default function Config() {
                     </div>
                 }
                 <div className="flex flex-row w-full">
-                    {innerWidth < 1024 && (showMenu || showRecap || nextStep) && <div className="w-screen h-screen absolute z-15 bg-gray-50/75"></div>}
+                    {innerWidth < 1024 && (showMenu || showRecap || nextStep) && <div className="w-screen h-[max(100dvh,100vh)] absolute z-15 bg-gray-50/75"></div>}
                     <div
-                        className={`h-screen lg:h-page-nav ${activeButton ? 'w-[10vw]' : innerWidth < 1024 ? 'w-full' : 'w-[25vw]'} ${nextStep || !showMenu ? 'hidden' : 'block'} absolute z-20 left-0 lg:top-[72px]`}>
+                        className={`h-[max(100dvh,100vh)] lg:h-page-nav ${activeButton ? 'w-[10vw]' : innerWidth < 1024 ? 'w-full' : 'w-[25vw]'} ${nextStep || !showMenu ? 'hidden' : 'block'} absolute z-20 left-0 lg:top-[72px]`}>
                         {loaded && <Selection activeButton={activeButton} changeActiveButton={changeActiveButton}/>}
                     </div>
 
-                    <div className={`h-[100vh] w-full mx-auto relative`}>
+                    <div className={`h-[max(100dvh,100vh)] w-full mx-auto relative`}>
                         <Scene/>
                         {loaded && !nextStep && <ActionBar/>}
                         {loaded && innerWidth < 1024 && !nextStep &&
