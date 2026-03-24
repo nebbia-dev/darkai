@@ -56,7 +56,7 @@ export default function PackagingSubOptions() {
 
     return (
         <>
-            <div className={`${value === 'out' ? 'block' : 'invisible'} h-[20dvh] lg:h-[120px] pt-4 mb-4 pl-6 text-center`}>
+            <div className={`${value === 'out' ? 'block' : 'invisible'} h-[170px] lg:h-[120px] pt-4 mb-4 pl-6 text-center`}>
                 <div className="w-[36px] flex flex-col gap-2 items-center bg-gray-50 rounded-full py-2 border-1">
                     <Tooltip title="Turquoise" placement="right">
                         <button onClick={(e) => setPackaging('out', e.currentTarget.value)} value="turquoise" className="cursor-pointer w-[24px] h-[24px] border bg-[#7dcecb] rounded-full"></button>
@@ -104,7 +104,7 @@ export default function PackagingSubOptions() {
             </div>
 
             <div
-                className={`${value === 'in' ? 'block' : 'invisible'} relative top-[-15dvh] h-[20dvh] lg:h-[120px] mb-4 pl-6 text-center`}>
+                className={`${value === 'in' ? 'block' : 'invisible'} relative top-[-15dvh] h-[170px] lg:h-[120px] mb-4 pl-6 text-center`}>
                 <div className="w-[36px] flex flex-col gap-2 items-center bg-gray-50 rounded-full py-2 border-1">
                     <Tooltip title="White" placement="right">
                         <button onClick={(e) => setPackaging('in', e.currentTarget.value)} value="white" className="cursor-pointer w-[24px] h-[24px] border bg-[#f8f8f8] rounded-full"></button>
@@ -157,7 +157,7 @@ export default function PackagingSubOptions() {
                 </div>
             </div>
 
-            <div className={`${value === 'details' ? 'block' : 'invisible'} h-[20dvh] lg:h-[120px] pt-4 mb-4 pl-6 text-center`}>
+            <div className={`${value === 'details' ? 'block' : 'invisible'} h-[170px] lg:h-[120px] pt-4 mb-4 pl-6 text-center`}>
                 <div className="w-[36px] flex flex-col gap-2 items-center bg-gray-50 rounded-full py-2 border-1">
                     <Tooltip title="Yellow Gold" placement="right">
                         <button onClick={(e) => setPackaging('details', e.currentTarget.value)} value="gold" className="cursor-pointer w-[24px] h-[24px] border bg-[#e1c487] rounded-full"></button>
@@ -174,7 +174,7 @@ export default function PackagingSubOptions() {
                 </div>
             </div>
 
-            <div aria-hidden={true} className="lg:hidden block h-[20dvh] lg:h-[120px] pt-4 mb-4 pl-6"></div>
+            <div aria-hidden={true} className="lg:hidden block h-[170px] lg:h-[120px] pt-4 mb-4 pl-6"></div>
 
             <div className={`${value === 'text' ? 'block' : 'invisible'} lg:static absolute right-[100%] bottom-[-20dvh] z-100 w-[250px] h-[20vh] lg:h-[120px] pt-4 mb-4 pl-6 text-center lg:translate-y-[15%]`}>
                 <div className="flex items-center bg-gray-50 rounded-3xl p-2 border-1 gap-0 max-w-[214px]">

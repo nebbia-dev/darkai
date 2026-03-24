@@ -68,9 +68,9 @@ export default function StoneOptions({tooth, bezel, pave, whDLabRef, whDNatRef, 
         <>
             <button ref={whDLabRef} type="button" disabled={!pave && !bezel} value="whD_lab"
                     onClick={(e) => setStoneColor(e.currentTarget.value)}
-                    className={`${highlightSelected('whD_lab') ? 'lg:border-2 border-3' : 'lg:border-0 border-1' } w-[95%] h-[20dvh] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 px-2 py-3 ${(pave || bezel) ? 'text-slate-950 cursor-pointer' : 'text-slate-400'} flex flex-col items-center justify-center`}>
+                    className={`${highlightSelected('whD_lab') ? 'lg:border-2 border-3' : 'lg:border-0 border-1' } w-[95%] h-[170px] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 px-2 py-3 ${(pave || bezel) ? 'text-slate-950 cursor-pointer' : 'text-slate-400'} flex flex-col items-center justify-center`}>
                 <Image unoptimized={true} loading="eager" fetchPriority="high"
-                       className="lg:w-18 w-32 transition duration-250 opacity-0"
+                       className="lg:w-18 w-30 transition duration-250 opacity-0"
                        onLoad={(e) => startOpacityTransition(e.target)} src={WHD} alt="white-diamond"/>
                 <span className="text-sm lg:text-xs">White Diamond (Lab)</span>
             </button>
@@ -79,9 +79,9 @@ export default function StoneOptions({tooth, bezel, pave, whDLabRef, whDNatRef, 
             { paveShape !== 'hexagon' &&
                 <button ref={whDNatRef} type="button" disabled={!pave && !bezel} value="whD_nat"
                      onClick={(e) => setStoneColor(e.currentTarget.value)}
-                     className={`${highlightSelected('whD_nat') ? 'lg:border-2 border-3' : 'lg:border-0 border-1' } w-[95%] h-[20dvh] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 px-2 py-3 ${(pave || bezel) ? 'text-slate-950 cursor-pointer' : 'text-slate-400'} flex flex-col items-center justify-center`}>
+                     className={`${highlightSelected('whD_nat') ? 'lg:border-2 border-3' : 'lg:border-0 border-1' } w-[95%] h-[170px] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 px-2 py-3 ${(pave || bezel) ? 'text-slate-950 cursor-pointer' : 'text-slate-400'} flex flex-col items-center justify-center`}>
                     <Image unoptimized={true} loading="eager" fetchPriority="high"
-                           className="lg:w-18 w-32 transition duration-250 opacity-0"
+                           className="lg:w-18 w-30 transition duration-250 opacity-0"
                            onLoad={(e) => startOpacityTransition(e.target)} src={WHD} alt="white-diamond"/>
                     <span className="text-sm lg:text-xs">White Diamond (Natural)</span>
                 </button>
@@ -91,9 +91,9 @@ export default function StoneOptions({tooth, bezel, pave, whDLabRef, whDNatRef, 
             { (paveShape === 'round' || paveShape === 'mosaic') &&
                 <button ref={brDNatRef} type="button" disabled={!pave && !bezel} value="brD_nat"
                      onClick={(e) => setStoneColor(e.currentTarget.value)}
-                     className={`${highlightSelected('brD_nat') ? 'lg:border-2 border-3' : 'lg:border-0 border-1' } w-[95%] h-[20dvh] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 px-2 py-3 ${(pave || bezel) ? 'text-slate-950 cursor-pointer' : 'text-slate-400'} flex flex-col items-center justify-center`}>
+                     className={`${highlightSelected('brD_nat') ? 'lg:border-2 border-3' : 'lg:border-0 border-1' } w-[95%] h-[170px] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 px-2 py-3 ${(pave || bezel) ? 'text-slate-950 cursor-pointer' : 'text-slate-400'} flex flex-col items-center justify-center`}>
                     <Image unoptimized={true} loading="eager" fetchPriority="high"
-                           className="lg:w-18 w-32 transition duration-250 opacity-0"
+                           className="lg:w-18 w-30 transition duration-250 opacity-0"
                            onLoad={(e) => startOpacityTransition(e.target)} src={BRD} alt="brown-diamond"/>
                     <span className="text-sm lg:text-xs">Brown Diamond (Natural)</span>
                 </button>
@@ -103,9 +103,9 @@ export default function StoneOptions({tooth, bezel, pave, whDLabRef, whDNatRef, 
             { ((!bezel && (paveShape === 'round' || paveShape === 'mosaic')) || bezelShape === 'round') &&
                 <button ref={blDNatRef} type="button" disabled={!pave && !bezel} value="blD_nat"
                      onClick={(e) => setStoneColor(e.currentTarget.value)}
-                     className={`${highlightSelected('blD_nat') ? 'lg:border-2 border-3' : 'lg:border-0 border-1' } w-[95%] h-[20dvh] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 px-2 py-3 ${(pave || bezel) ? 'text-slate-950 cursor-pointer' : 'text-slate-400'} flex flex-col items-center justify-center`}>
+                     className={`${highlightSelected('blD_nat') ? 'lg:border-2 border-3' : 'lg:border-0 border-1' } w-[95%] h-[170px] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 px-2 py-3 ${(pave || bezel) ? 'text-slate-950 cursor-pointer' : 'text-slate-400'} flex flex-col items-center justify-center`}>
                     <Image unoptimized={true} loading="eager" fetchPriority="high"
-                           className="lg:w-18 w-32 transition duration-250 opacity-0"
+                           className="lg:w-18 w-30 transition duration-250 opacity-0"
                            onLoad={(e) => startOpacityTransition(e.target)} src={BLD} alt="black-diamond"/>
                     <span className="text-sm lg:text-xs">Black Diamond (Natural)</span>
                 </button>
@@ -113,57 +113,57 @@ export default function StoneOptions({tooth, bezel, pave, whDLabRef, whDNatRef, 
 
             <button ref={rubyRef} type="button" disabled={!pave && !bezel} value="ruby"
                     onClick={(e) => setStoneColor(e.currentTarget.value)}
-                    className={`${highlightSelected('ruby') ? 'lg:border-2 border-3' : 'lg:border-0 border-1' } w-[95%] h-[20dvh] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 px-2 pt-2 pb-3 ${(pave || bezel) ? 'text-slate-950 cursor-pointer' : 'text-slate-400'} flex flex-col items-center justify-center`}>
+                    className={`${highlightSelected('ruby') ? 'lg:border-2 border-3' : 'lg:border-0 border-1' } w-[95%] h-[170px] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 px-2 pt-2 pb-3 ${(pave || bezel) ? 'text-slate-950 cursor-pointer' : 'text-slate-400'} flex flex-col items-center justify-center`}>
                 <Image unoptimized={true} loading="eager" fetchPriority="high"
-                       className="pb-1 lg:w-18 w-32 transition duration-250 opacity-0"
+                       className="pb-1 lg:w-18 w-30 transition duration-250 opacity-0"
                        onLoad={(e) => startOpacityTransition(e.target)} src={Ruby} alt="ruby"/>
                 <span className="text-sm lg:text-xs">Ruby (Lab)</span>
             </button>
             <button ref={emeraldRef} type="button" disabled={!pave && !bezel} value="emerald"
                     onClick={(e) => setStoneColor(e.currentTarget.value)}
-                    className={`${highlightSelected('emerald') ? 'lg:border-2 border-3' : 'lg:border-0 border-1' } w-[95%] h-[20dvh] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 px-2 pt-2 pb-3 ${(pave || bezel) ? 'text-slate-950 cursor-pointer' : 'text-slate-400'} flex flex-col items-center justify-center`}>
+                    className={`${highlightSelected('emerald') ? 'lg:border-2 border-3' : 'lg:border-0 border-1' } w-[95%] h-[170px] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 px-2 pt-2 pb-3 ${(pave || bezel) ? 'text-slate-950 cursor-pointer' : 'text-slate-400'} flex flex-col items-center justify-center`}>
                 <Image unoptimized={true} loading="eager" fetchPriority="high"
-                       className="pb-1 lg:w-18 w-32 transition duration-250 opacity-0"
+                       className="pb-1 lg:w-18 w-30 transition duration-250 opacity-0"
                        onLoad={(e) => startOpacityTransition(e.target)} src={Emerald} alt="emerald"/>
                 <span className="text-sm lg:text-xs">Emerald (Lab)</span>
             </button>
             <button ref={bSapphRef} type="button" disabled={!pave && !bezel} value="bSapph"
                     onClick={(e) => setStoneColor(e.currentTarget.value)}
-                    className={`${highlightSelected('bSapph') ? 'lg:border-2 border-3' : 'lg:border-0 border-1' } w-[95%] h-[20dvh] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-3 ${(pave || bezel) ? 'text-slate-950 cursor-pointer' : 'text-slate-400'} flex flex-col items-center justify-center`}>
+                    className={`${highlightSelected('bSapph') ? 'lg:border-2 border-3' : 'lg:border-0 border-1' } w-[95%] h-[170px] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-3 ${(pave || bezel) ? 'text-slate-950 cursor-pointer' : 'text-slate-400'} flex flex-col items-center justify-center`}>
                 <Image unoptimized={true} loading="eager" fetchPriority="high"
-                       className="lg:w-18 w-32 transition duration-250 opacity-0"
+                       className="lg:w-18 w-30 transition duration-250 opacity-0"
                        onLoad={(e) => startOpacityTransition(e.target)} src={BSapph} alt="blue-sapphire"/>
                 <span className="text-sm lg:text-xs">Blue Sapphire (Lab)</span>
             </button>
             <button ref={ySapphRef} type="button" disabled={!pave && !bezel} value="ySapph"
                     onClick={(e) => setStoneColor(e.currentTarget.value)}
-                    className={`${highlightSelected('ySapph') ? 'lg:border-2 border-3' : 'lg:border-0 border-1' } w-[95%] h-[20dvh] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-3 ${(pave || bezel) ? 'text-slate-950 cursor-pointer' : 'text-slate-400'} flex flex-col items-center justify-center`}>
+                    className={`${highlightSelected('ySapph') ? 'lg:border-2 border-3' : 'lg:border-0 border-1' } w-[95%] h-[170px] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-3 ${(pave || bezel) ? 'text-slate-950 cursor-pointer' : 'text-slate-400'} flex flex-col items-center justify-center`}>
                 <Image unoptimized={true} loading="eager" fetchPriority="high"
-                       className="lg:w-18 w-32 transition duration-250 opacity-0"
+                       className="lg:w-18 w-30 transition duration-250 opacity-0"
                        onLoad={(e) => startOpacityTransition(e.target)} src={YSapph} alt="yellow-sapphire"/>
                 <span className="text-sm lg:text-xs">Yellow Sapphire (Lab)</span>
             </button>
             <button ref={pSapphRef} type="button" disabled={!pave && !bezel} value="pSapph"
                     onClick={(e) => setStoneColor(e.currentTarget.value)}
-                    className={`${highlightSelected('pSapph') ? 'lg:border-2 border-3' : 'lg:border-0 border-1' } w-[95%] h-[20dvh] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-3 ${(pave || bezel) ? 'text-slate-950 cursor-pointer' : 'text-slate-400'} flex flex-col items-center justify-center`}>
+                    className={`${highlightSelected('pSapph') ? 'lg:border-2 border-3' : 'lg:border-0 border-1' } w-[95%] h-[170px] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-3 ${(pave || bezel) ? 'text-slate-950 cursor-pointer' : 'text-slate-400'} flex flex-col items-center justify-center`}>
                 <Image unoptimized={true} loading="eager" fetchPriority="high"
-                       className="lg:w-18 w-32 transition duration-250 opacity-0"
+                       className="lg:w-18 w-30 transition duration-250 opacity-0"
                        onLoad={(e) => startOpacityTransition(e.target)} src={PSapph} alt="pink-sapphire"/>
                 <span className="text-sm lg:text-xs">Pink Sapphire (Lab)</span>
             </button>
             <button ref={aquaRef} type="button" disabled={!pave && !bezel} value="aqua"
                     onClick={(e) => setStoneColor(e.currentTarget.value)}
-                    className={`${highlightSelected('aqua') ? 'lg:border-2 border-3' : 'lg:border-0 border-1' } w-[95%] h-[20vh] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 px-2 pt-2 pb-3 ${(pave || bezel) ? 'text-slate-950 cursor-pointer' : 'text-slate-400'} flex flex-col items-center justify-center`}>
+                    className={`${highlightSelected('aqua') ? 'lg:border-2 border-3' : 'lg:border-0 border-1' } w-[95%] h-[170px] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 px-2 pt-2 pb-3 ${(pave || bezel) ? 'text-slate-950 cursor-pointer' : 'text-slate-400'} flex flex-col items-center justify-center`}>
                 <Image unoptimized={true} loading="eager" fetchPriority="high"
-                       className="pb-1 lg:w-18 w-32 transition duration-250 opacity-0"
+                       className="pb-1 lg:w-18 w-30 transition duration-250 opacity-0"
                        onLoad={(e) => startOpacityTransition(e.target)} src={Aqua} alt="aquamarina"/>
                 <span className="text-sm lg:text-xs">Aquamarine (Lab)</span>
             </button>
             <button ref={amethRef} type="button" disabled={!pave && !bezel} value="ameth"
                     onClick={(e) => setStoneColor(e.currentTarget.value)}
-                    className={`${highlightSelected('ameth') ? 'lg:border-2 border-3' : 'lg:border-0 border-1' } w-[95%] h-[20vh] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 ${pave || !bezel ? 'mb-4' : ''} px-2 pt-2 pb-3 ${(pave || bezel) ? 'text-slate-950 cursor-pointer' : 'text-slate-400'} flex flex-col items-center justify-center`}>
+                    className={`${highlightSelected('ameth') ? 'lg:border-2 border-3' : 'lg:border-0 border-1' } w-[95%] h-[170px] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 ${pave || !bezel ? 'mb-4' : ''} px-2 pt-2 pb-3 ${(pave || bezel) ? 'text-slate-950 cursor-pointer' : 'text-slate-400'} flex flex-col items-center justify-center`}>
                 <Image unoptimized={true} loading="eager" fetchPriority="high"
-                       className="pb-1 lg:w-18 w-32 transition duration-250 opacity-0"
+                       className="pb-1 lg:w-18 w-30 transition duration-250 opacity-0"
                        onLoad={(e) => startOpacityTransition(e.target)} src={Ameth} alt="amethyst"/>
                 <span className="text-sm lg:text-xs">Amethyst (Lab)</span>
             </button>
@@ -171,17 +171,17 @@ export default function StoneOptions({tooth, bezel, pave, whDLabRef, whDNatRef, 
                 <>
                     <button ref={glitchRef} type="button" disabled={!pave} value="glitch"
                             onClick={(e) => setStoneColor(e.currentTarget.value)}
-                            className={`${paveColor === 'glitch' ? 'lg:border-2 border-3' : 'lg:border-0 border-1' } w-[95%] h-[20vh] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 px-2 pt-2 pb-3 ${pave ? 'text-slate-950 cursor-pointer' : 'text-slate-400'} flex flex-col items-center justify-center`}>
+                            className={`${paveColor === 'glitch' ? 'lg:border-2 border-3' : 'lg:border-0 border-1' } w-[95%] h-[170px] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 px-2 pt-2 pb-3 ${pave ? 'text-slate-950 cursor-pointer' : 'text-slate-400'} flex flex-col items-center justify-center`}>
                         <Image unoptimized={true} loading="eager" fetchPriority="high"
-                               className="pb-1 lg:w-18 w-32 transition duration-250 opacity-0"
+                               className="pb-1 lg:w-18 w-30 transition duration-250 opacity-0"
                                onLoad={(e) => startOpacityTransition(e.target)} src={Glitch} alt="glitch"/>
                         <span className="text-sm lg:text-xs">Glitch</span>
                     </button>
                     <button ref={camoRef} type="button" disabled={!pave} value="camo"
                             onClick={(e) => setStoneColor(e.currentTarget.value)}
-                            className={`${paveColor === 'camo' ? 'lg:border-2 border-3' : 'lg:border-0 border-1' } w-[95%] h-[20vh] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 px-2 pt-2 pb-3 ${pave ? 'text-slate-950 cursor-pointer' : 'text-slate-400'} flex flex-col items-center justify-center`}>
+                            className={`${paveColor === 'camo' ? 'lg:border-2 border-3' : 'lg:border-0 border-1' } w-[95%] h-[170px] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 px-2 pt-2 pb-3 ${pave ? 'text-slate-950 cursor-pointer' : 'text-slate-400'} flex flex-col items-center justify-center`}>
                         <Image unoptimized={true} loading="eager" fetchPriority="high"
-                               className="pb-1 lg:w-18 w-32 transition duration-250 opacity-0"
+                               className="pb-1 lg:w-18 w-30 transition duration-250 opacity-0"
                                onLoad={(e) => startOpacityTransition(e.target)} src={Camo} alt="camo"/>
                         <span className="text-sm lg:text-xs">Camo</span>
                     </button>

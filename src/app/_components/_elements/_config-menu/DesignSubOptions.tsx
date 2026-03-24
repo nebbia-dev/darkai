@@ -28,17 +28,17 @@ export default function DesignSubOptions({tooth, type}: { tooth: string|undefine
 
     return (
         <>
-            <div aria-hidden={true} className="h-[20dvh] lg:h-[120px] mb-4 pl-6">
+            <div aria-hidden={true} className="h-[170px] lg:h-[120px] mb-4 pl-6">
             </div>
-            <div aria-hidden={true} className="h-[20dvh] lg:h-[120px] mb-4 pl-6">
+            <div aria-hidden={true} className="h-[170px] lg:h-[120px] mb-4 pl-6">
             </div>
-            <div aria-hidden={true} className="h-[20dvh] lg:h-[120px] mb-4 pl-6">
+            <div aria-hidden={true} className="h-[170px] lg:h-[120px] mb-4 pl-6">
             </div>
             {
                 (tooth === 'cidx' || tooth === 'cisx') &&
-                <div aria-hidden={true} className="h-[20dvh] lg:h-[120px] mb-4 pl-6"></div>
+                <div aria-hidden={true} className="h-[170px] lg:h-[120px] mb-4 pl-6"></div>
             }
-            <div className={`${value?.includes('bezel') || type?.includes('bezel') ? 'block' : 'invisible'} h-[20dvh] lg:h-[120px] mb-4 pl-6 text-center`}>
+            <div className={`${value?.includes('bezel') || type?.includes('bezel') ? 'block' : 'invisible'} h-[170px] lg:h-[120px] mb-4 pl-6 text-center`}>
                 <div className="w-[36px] flex flex-col gap-2 items-center bg-gray-50 rounded-full py-2 border-1">
                     <Tooltip title="Round" placement="right">
                         <button type="button" onClick={(e) => setStoneShape(e.currentTarget.value)} value="round"
@@ -79,7 +79,7 @@ export default function DesignSubOptions({tooth, type}: { tooth: string|undefine
                 </div>
             </div>
             <div
-                className={`${value === 'enamel' || type === 'enamel' ? 'block' : 'invisible'} h-[20dvh] lg:h-[120px] mb-4 pl-6 text-center relative bottom-45 lg:bottom-60`}>
+                className={`${value === 'enamel' || type === 'enamel' ? 'block' : 'invisible'} h-[170px] lg:h-[120px] mb-4 pl-6 text-center relative bottom-50 lg:bottom-60`}>
                 <div className="w-[36px] flex flex-col gap-2 items-center bg-gray-50 rounded-full py-2 border-1">
                     <Tooltip title="Blue" placement="right">
                         <button type="button" value="blue" onClick={(e) => setEnamelColor(e.currentTarget.value)} className="w-[24px] h-[24px] bg-[#0073b6] rounded-full cursor-pointer border-1"></button>
