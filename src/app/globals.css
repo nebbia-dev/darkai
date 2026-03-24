@@ -10,8 +10,8 @@
   --font-sans: var(--font-work);
   --color-foreground: var(--foreground);
   --spacing-nav: 72px;
-  --spacing-page-nav: calc(max(100dvh, 100vh) - 72px);
-  --spacing-tab-height: calc(max(100dvh, 100vh) - 72px - 15vh - 3rem);
+  --spacing-page-nav: calc(100dvh - 72px);
+  --spacing-tab-height: calc(100dvh - 72px - 15vh - 3rem);
   --radius-25xl: 1.35rem;
 }
 
