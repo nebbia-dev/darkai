@@ -1724,7 +1724,7 @@ export default function Configurator() {
     useEffect(() => {
         if(orbitRef.current) {
             resetCameraPosition();
-            doResetControls(undefined);
+            setTimeout(() => doResetControls(undefined), 1000)
         }
     }, [resetControls, nextStep, packagingScene]);
 
@@ -1814,7 +1814,7 @@ export default function Configurator() {
     })
 
     function resetCameraPosition() {
-        if(groupRef.current && orbitRef.current){
+        if(groupRef.current && orbitRef.current) {
             if(groupRef.current.position.x < 0) {
                 orbitRef.current.setAzimuthalAngle(-0.12);
             } else {

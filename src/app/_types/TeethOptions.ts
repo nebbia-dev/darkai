@@ -44,6 +44,18 @@ export interface Enamel {
     cssx: string | undefined,
     cidx: string | undefined,
     cisx: string | undefined,
+    pprsdx: string | undefined,
+    pprssx: string | undefined,
+    ppridx: string | undefined,
+    pprisx: string | undefined,
+    sprsdx: string | undefined,
+    sprssx: string | undefined,
+    spridx: string | undefined,
+    sprisx: string | undefined,
+    msdx: string | undefined,
+    mssx: string | undefined,
+    midx: string | undefined,
+    misx: string | undefined
 }
 export interface Finish {
     [key: string]: 'polished' | 'sandblasted' | 'diamond_cut'
@@ -250,6 +262,18 @@ export interface Stones {
     cssx: Stone,
     cidx: Stone,
     cisx: Stone,
+    pprsdx: Stone,
+    pprssx: Stone,
+    ppridx: Stone,
+    pprisx: Stone,
+    sprsdx: Stone,
+    sprssx: Stone,
+    spridx: Stone,
+    sprisx: Stone,
+    msdx: Stone,
+    mssx: Stone,
+    midx: Stone,
+    misx: Stone
 }
 export interface Preciousness {
     [key: string]: number,

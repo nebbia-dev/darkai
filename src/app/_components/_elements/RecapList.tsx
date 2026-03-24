@@ -41,8 +41,10 @@ export default function RecapList({edit} : {edit:boolean}) {
 
     function resetPackaging() {
         setPackaging('premium', false);
+        setPackaging('text', '', 1);
+        setPackaging('text', '', 2);
         setPackagingScene(false);
-        resetMenu(undefined)
+        resetMenu(undefined);
     }
 
     function setCurrentHover(tooth:string|undefined, e:any) {

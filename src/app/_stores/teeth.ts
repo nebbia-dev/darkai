@@ -374,6 +374,18 @@ export const useTeethStore = create<State>((set, get) => ({
             shape: undefined,
             color: undefined
         },
+        pprsdx: {shape: undefined, color: undefined},
+        pprssx: {shape: undefined, color: undefined},
+        ppridx: {shape: undefined, color: undefined},
+        pprisx: {shape: undefined, color: undefined},
+        sprsdx: {shape: undefined, color: undefined},
+        sprssx: {shape: undefined, color: undefined},
+        spridx: {shape: undefined, color: undefined},
+        sprisx: {shape: undefined, color: undefined},
+        msdx: {shape: undefined, color: undefined},
+        mssx: {shape: undefined, color: undefined},
+        midx: {shape: undefined, color: undefined},
+        misx: {shape: undefined, color: undefined}
     },
     setStone: (tooth, shape, color) =>
         set(
@@ -427,6 +439,18 @@ export const useTeethStore = create<State>((set, get) => ({
         cssx: undefined,
         cidx: undefined,
         cisx: undefined,
+        pprsdx: undefined,
+        pprssx: undefined,
+        ppridx: undefined,
+        pprisx: undefined,
+        sprsdx: undefined,
+        sprssx: undefined,
+        spridx: undefined,
+        sprisx: undefined,
+        msdx: undefined,
+        mssx: undefined,
+        midx: undefined,
+        misx: undefined
     },
     setEnamel: (tooth:string, color:string) =>
         set(
@@ -1142,7 +1166,9 @@ export const useTeethStore = create<State>((set, get) => ({
                 state.teethFinish[key] = value;
             }
 
+            // ??? bug ???
             for(const [key, value] of Object.entries(tooth.stones) as [string, Stone][]) {
+                console.log(key, value);
                 state.teethStones[key].shape = value.shape;
                 state.teethStones[key].color = value.color;
             }
@@ -1283,6 +1309,18 @@ export const useTeethStore = create<State>((set, get) => ({
                                 shape: undefined,
                                     color: undefined
                             },
+                    pprsdx: {shape: undefined, color: undefined},
+                    pprssx: {shape: undefined, color: undefined},
+                    ppridx: {shape: undefined, color: undefined},
+                    pprisx: {shape: undefined, color: undefined},
+                    sprsdx: {shape: undefined, color: undefined},
+                    sprssx: {shape: undefined, color: undefined},
+                    spridx: {shape: undefined, color: undefined},
+                    sprisx: {shape: undefined, color: undefined},
+                    msdx: {shape: undefined, color: undefined},
+                    mssx: {shape: undefined, color: undefined},
+                    midx: {shape: undefined, color: undefined},
+                    misx: {shape: undefined, color: undefined}
                         };
                 state.teethVisibility = {
                             icsdx: false,
@@ -1349,6 +1387,18 @@ export const useTeethStore = create<State>((set, get) => ({
                                 cssx: undefined,
                                 cidx: undefined,
                                 cisx: undefined,
+                    pprsdx: undefined,
+                    pprssx: undefined,
+                    ppridx: undefined,
+                    pprisx: undefined,
+                    sprsdx: undefined,
+                    sprssx: undefined,
+                    spridx: undefined,
+                    sprisx: undefined,
+                    msdx: undefined,
+                    mssx: undefined,
+                    midx: undefined,
+                    misx: undefined
                         };
                 state.currentTooth = undefined;
                 state.activeDefault = undefined;
