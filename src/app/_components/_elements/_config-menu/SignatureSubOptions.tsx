@@ -21,7 +21,7 @@ export default function SignatureSubOptions() {
 
     return (
         <>
-            <div className={`${(signatureVisibility.vamp || value === 'vamp') ? 'block' : 'invisible'} h-[20vh] lg:h-[120px] mb-4 pl-6 text-center`}>
+            <div className={`${(signatureVisibility.vamp || value === 'vamp') ? 'block' : 'invisible'} h-[20dvh] lg:h-[120px] mb-4 pl-6 text-center`}>
                 <div className="w-[36px] flex flex-col gap-2 items-center bg-gray-50 rounded-full py-2 border-1">
                     <Tooltip title="White Gold" placement="right">
                         <button type="button" value="base_white"
@@ -51,7 +51,7 @@ export default function SignatureSubOptions() {
                 </div>
             </div>
             <div
-                className={`${(signatureVisibility.sprinkles || value === 'sprinkles') ? 'block' : 'invisible'} h-[20vh] lg:h-[120px] mb-4 pl-6 text-center`}>
+                className={`${(signatureVisibility.sprinkles || value === 'sprinkles') ? 'block' : 'invisible'} h-[20dvh] lg:h-[120px] mb-4 pl-6 text-center`}>
                 <div className="w-[36px] flex flex-col gap-2 items-center bg-gray-50 rounded-full py-2 border-1">
                     <Tooltip title="White Gold w/ Lab Diamonds" placement="right">
                         <button type="button" value="white_lab"

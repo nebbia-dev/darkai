@@ -47,7 +47,7 @@ export default function Upload() {
                         className="w-[75vw] h-page-nav flex flex-col items-center justify-center mx-auto text-sm">
                         <div className="w-full flex items-center justify-center bg-gray-50 p-6 rounded-3xl border-1">
                             <div
-                                className="w-[50%] border-r border-gray-950/[33%] overflow-y-auto max-h-[calc(70vh-54px)]">
+                                className="w-[50%] border-r border-gray-950/[33%] overflow-y-auto max-h-[calc(70dvh-54px)]">
 
                                 <Accordion elevation={0} sx={{
                                     backgroundColor: '#f9fafb',
@@ -65,7 +65,7 @@ export default function Upload() {
                                         </AccordionSummary>
                                     </div>
                                     <AccordionDetails
-                                        sx={{borderTop: '1px solid #9ca3af', height: 'calc(100% - 100px - 15vh)'}}>
+                                        sx={{borderTop: '1px solid #9ca3af', height: 'calc(100% - 100px - 15dvh)'}}>
 
                                         <form className="flex flex-col gap-2 px-2 pt-2 pb-8">
                                             <label>Name
@@ -170,7 +170,7 @@ export default function Upload() {
                                         </AccordionSummary>
                                     </div>
                                     <AccordionDetails
-                                        sx={{borderTop: '1px solid #9ca3af', height: 'calc(100% - 100px - 15vh)'}}>
+                                        sx={{borderTop: '1px solid #9ca3af', height: 'calc(100% - 100px - 15dvh)'}}>
 
                                         <>
                                             <div className="px-2 pt-2 pb-4">

@@ -39,7 +39,7 @@ export default function UploadScanBackoffice ({userId, scanId}:{userId:OrderInfo
                 ?   <div className="relative">
                         <EditScanIcons sendData={getData} file={file}/>
                     {!file && <Image alt="config"
-                            className="object-cover h-[35vh] w-full pt-4 pl-8"
+                            className="object-cover h-[35dvh] w-full pt-4 pl-8"
                             src={`https://aiuptuoijjmfcxutusbc.supabase.co/storage/v1/object/public/scans/${savedFile? savedFile : scanId}`}
                             width={1000} height={1000} quality={70}
                     />}
@@ -52,7 +52,7 @@ export default function UploadScanBackoffice ({userId, scanId}:{userId:OrderInfo
                     ? <div className="relative">
                         <EditScanIcons sendData={getData} file={file}/>
                         {!file && <Image alt="config"
-                                         className="object-cover h-[35vh] w-full pt-4 pl-8"
+                                         className="object-cover h-[35dvh] w-full pt-4 pl-8"
                                          src={`https://aiuptuoijjmfcxutusbc.supabase.co/storage/v1/object/public/scans/${savedFile}`}
                                          width={1000} height={1000} quality={70}
                         />}
@@ -62,7 +62,7 @@ export default function UploadScanBackoffice ({userId, scanId}:{userId:OrderInfo
                                 type="button" onClick={uploadFile}>Save</button>
                         }
                       </div>
-                    : <div className="pt-4 pl-8 pr-2 h-[30vh] w-full flex items-center justify-center">
+                    : <div className="pt-4 pl-8 pr-2 h-[30dvh] w-full flex items-center justify-center">
                         <div className="flex flex-col gap-2 h-full">
                             <UploadFile theme="light" sendData={getData}/>
                             {file &&

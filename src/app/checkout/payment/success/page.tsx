@@ -4,7 +4,7 @@ export default function Success() {
     return (
         <>
             <div
-                className="w-[60vw] h-[calc(100vh-54px)] flex flex-col items-center justify-center gap-1 mx-auto text-center">
+                className="w-[60vw] h-[calc(100dvh-54px)] flex flex-col items-center justify-center gap-1 mx-auto text-center">
                 <h2 className="font-bold text-2xl mb-6">Your order has been placed!</h2>
                 <p>Check your inbox for the find the purchase receipt. We'll send you the tracking number once your
                     order is shipped.</p>

@@ -22,7 +22,7 @@ export default async function Page() {
 
     return(
         <div className="relative left-[7.5vw] w-[92.5vw]">
-            <div className="bg-gray-100 flex flex-col justify-center h-[15vh]">
+            <div className="bg-gray-100 flex flex-col justify-center h-[15dvh]">
                 <div className="w-[75vw] mx-auto flex items-center justify-between">
                     <h2 className="font-bold text-2xl">Configurations list</h2>
                     <DownloadCsv data={data as unknown as ConfigInfo[]}/>

@@ -16,22 +16,22 @@ export default function PackagingOptions() {
     return (
         <>
             <button type="button" value="out" onClick={(e) => setActiveSubButton(e.currentTarget.value)}
-                    className={`cursor-pointer ${activeSubButton === 'out' ? 'lg:border-2 border-3' : 'lg:border-0 border-1' } w-[95%] h-[20vh] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-2 flex flex-col items-center justify-center`}>
+                    className={`cursor-pointer ${activeSubButton === 'out' ? 'lg:border-2 border-3' : 'lg:border-0 border-1' } w-[95%] h-[20dvh] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-2 flex flex-col items-center justify-center`}>
                 <Image className="w-[80%] transition duration-250 opacity-0" onLoad={(e) => startOpacityTransition(e.target)} unoptimized={true} loading="eager" fetchPriority="high" src={Out} alt="outside"/>
                 <span className="text-sm">Outside</span>
             </button>
             <button type="button" value="in" onClick={(e) => setActiveSubButton(e.currentTarget.value)}
-                    className={`cursor-pointer ${activeSubButton === 'in' ? 'lg:border-2 border-3' : 'lg:border-0 border-1' } w-[95%] h-[20vh] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-2 flex flex-col items-center justify-center`}>
+                    className={`cursor-pointer ${activeSubButton === 'in' ? 'lg:border-2 border-3' : 'lg:border-0 border-1' } w-[95%] h-[20dvh] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-2 flex flex-col items-center justify-center`}>
                 <Image className="pb-1 w-[75%] transition duration-250 opacity-0" onLoad={(e) => startOpacityTransition(e.target)} unoptimized={true} loading="eager" fetchPriority="high" src={In} alt="inside"/>
                 <span className="text-sm">Inside</span>
             </button>
             <button type="button" value="details" onClick={(e) => setActiveSubButton(e.currentTarget.value)}
-                    className={`cursor-pointer ${activeSubButton === 'details' ? 'lg:border-2 border-3' : 'lg:border-0 border-1' } w-[95%] h-[20vh] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-2 flex flex-col items-center justify-center`}>
+                    className={`cursor-pointer ${activeSubButton === 'details' ? 'lg:border-2 border-3' : 'lg:border-0 border-1' } w-[95%] h-[20dvh] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-2 flex flex-col items-center justify-center`}>
                 <Image className="w-[80%] transition duration-250 opacity-0" onLoad={(e) => startOpacityTransition(e.target)} unoptimized={true} loading="eager" fetchPriority="high" src={Details} alt="gold details"/>
                 <span className="text-sm">Gold Details</span>
             </button>
             <button type="button" value="text" onClick={(e) => setActiveSubButton(e.currentTarget.value)}
-                    className={`cursor-pointer ${activeSubButton === 'text' ? 'lg:border-2 border-3' : 'lg:border-0 border-1' } w-[95%] h-[20vh] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 p-2 flex flex-col items-center justify-center`}>
+                    className={`cursor-pointer ${activeSubButton === 'text' ? 'lg:border-2 border-3' : 'lg:border-0 border-1' } w-[95%] h-[20dvh] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 p-2 flex flex-col items-center justify-center`}>
                 <Image className="w-[80%] transition duration-250 opacity-0" onLoad={(e) => startOpacityTransition(e.target)} unoptimized={true} loading="eager" fetchPriority="high" src={Text} alt="custom text"/>
                 <span className="text-sm">Custom Text</span>
             </button>

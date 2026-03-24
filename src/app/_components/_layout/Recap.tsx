@@ -40,7 +40,7 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
 
     return(
         <>
-            <div className={`cursor-auto rounded-3xl lg:mr-[5vw] ${next ? 'h-[calc(100vh-72px-(0.25rem*10))] lg:h-[82.5vh]' : 'h-[82.5vh]'} text-sm`}>
+            <div className={`cursor-auto rounded-3xl lg:mr-[5vw] ${next ? 'h-[calc(100dvh-72px-(0.25rem*10))] lg:h-[82.5dvh]' : 'h-[82.5dvh]'} text-sm`}>
                 {!next
                     ? <div className="flex flex-col items-center justify-end h-full relative lg:static bottom-20">
                         {/* MyConfig Top */}
@@ -57,7 +57,7 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
                         </div>
                         {/* MyConfig Middle w/Recap */}
                         <div
-                            className={`${showRecap && innerWidth >= 1024 ? 'h-[50vh]' : showRecap && innerWidth < 1024 ? 'h-[60vh]' :'h-0'} bg-gray-200/50 lg:transition-[height] lg:duration-500 w-[calc(100%-2px)] relative`}>
+                            className={`${showRecap && innerWidth >= 1024 ? 'h-[50dvh]' : showRecap && innerWidth < 1024 ? 'h-[60dvh]' :'h-0'} bg-gray-200/50 lg:transition-[height] lg:duration-500 w-[calc(100%-2px)] relative`}>
                             <div
                                 className="absolute h-[15%] bottom-0 w-full bg-linear-to-t from-gray-50 to-indigo-0"></div>
                             <RecapList edit={true}/>

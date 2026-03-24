@@ -53,7 +53,7 @@ export default function WritingModal() {
                             : <div>
                                 <p className="text-gray-950">Write an email to your customer</p>
                                 <form className="flex flex-col gap-2 mt-6" onSubmit={(event) => send(event)}>
-                                    <textarea className="w-full rounded bg-stone-200 py-2 px-4 h-[30vh]" placeholder="Your email"
+                                    <textarea className="w-full rounded bg-stone-200 py-2 px-4 h-[30dvh]" placeholder="Your email"
                                            required/>
                                     <div className="w-full text-right mt-4">
                                         <button

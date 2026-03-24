@@ -61,7 +61,7 @@ export default async function Order({params}: { params: Promise<{ orderId: strin
 
     return(
         <div className="relative left-[7.5vw] w-[92.5vw] h-page-nav">
-            <div className="bg-gray-100 h-[15vh] relative">
+            <div className="bg-gray-100 h-[15dvh] relative">
                 <div className="h-full absolute flex items-center justify-center w-[7.5vw]">
                     <BackButton url="/admin/orders"/>
                 </div>

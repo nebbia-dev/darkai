@@ -324,7 +324,7 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
                 <div
                 className={`${
                     (gemBox && (jewelType?.includes('Diamond') || jewelType?.includes('bezel')))
-                        ? 'flex justify-center gap-3' : 'hidden'} absolute top-[-32.5vh] left-[37.75vw] rounded-3xl bg-gray-50 border-1 pb-4 pt-2 pl-8 pr-2 text-sm w-[224px] mb-4`}>
+                        ? 'flex justify-center gap-3' : 'hidden'} absolute top-[-32.5dvh] left-[37.75vw] rounded-3xl bg-gray-50 border-1 pb-4 pt-2 pl-8 pr-2 text-sm w-[224px] mb-4`}>
                     <p className="text-center pt-3">You're choosing
                         the <strong>{jewelType?.includes('bezel') ? 'bezel' : 'pave'}</strong> stone color</p>
                     <div className="">
@@ -353,14 +353,14 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
 
             <div className={`absolute ${!active ? 'hidden' : 'block'} ${
                 (active === '2' && !checkMolar(tooth))
-                    ? 'top-[-25vh]'
+                    ? 'top-[-25dvh]'
                     : (active === '2' && checkMolar(tooth))
-                        ? 'top-[-10vh]'
+                        ? 'top-[-10dvh]'
                         : active === '4' && (jewelType?.includes('enamel') || material === 'base')
-                            ? 'top-[4.5vh]'
+                            ? 'top-[4.5dvh]'
                                 : active === '5' && (material === 'base' || (!jewelType?.includes('bezel') && !pave?.shape))
-                                    ? 'top-[11vh]'
-                                    : 'top-[-25vh]'
+                                    ? 'top-[11dvh]'
+                                    : 'top-[-25dvh]'
             } left-[48px]`}>
 
                 <div
@@ -370,7 +370,7 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
                         || (active === '5' && (material === 'base' || (!jewelType?.includes('bezel') && !pave?.shape)))
                             ? 'h-[186px]'
                             : 'h-[596px]'} 
-                        w-[65vw] lg:w-[200px] bg-gray-50/75 lg:bg-gray-50 rounded-3xl p-8 pr-4 border-1 max-h-[70vh]`}>
+                        w-[65vw] lg:w-[200px] bg-gray-50/75 lg:bg-gray-50 rounded-3xl p-8 pr-4 border-1 max-h-[70dvh]`}>
                     <div onScroll={sync} ref={elementRef} className="overflow-y-auto h-full pl-[2px] pr-4">
                         {renderOptions(active, tooth)}
                     </div>
@@ -379,7 +379,7 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
 
 
             <div
-                className={`${!active ? 'hidden' : 'block'} text-center max-h-[70vh] ${active === '6' ? 'h-[604px] py-4 w-[64px] lg:w-[250px]' : 'h-[596px] py-8 w-[64px]'} absolute left-[72.5vw] lg:left-[240px] top-[-25vh]`}>
+                className={`${!active ? 'hidden' : 'block'} text-center max-h-[70dvh] ${active === '6' ? 'h-[604px] py-4 w-[64px] lg:w-[250px]' : 'h-[596px] py-8 w-[64px]'} absolute left-[72.5vw] lg:left-[240px] top-[-25vh]`}>
                 <div ref={selectorRef} className="whitespace-nowrap overflow-hidden h-full w-full">
                     {renderSubOptions(active, tooth)}
                 </div>
