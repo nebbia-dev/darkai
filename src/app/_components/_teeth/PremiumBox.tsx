@@ -36,43 +36,13 @@ export default function PremiumBox({ref} : {ref:Ref<Group|null>}) {
     useEffect(() => {
         if(firstTextRef.current) {
             (firstTextRef.current as THREE.Mesh).geometry.center();
-            if(customText.secondLine !== '') {
-                (firstTextRef.current as THREE.Mesh).position.set(2.710505431213761e-20, 1.734723475976807e-18, 3.469446951953614e-18);
-            } else {
-                (firstTextRef.current as THREE.Mesh).position.set(-1.0842021724855044e-19, 0, 3.469446951953614e-18);
-            }
         }
 
         if(secondTextRef.current) {
             (secondTextRef.current as THREE.Mesh).geometry.center();
-            if(customText.firstLine !== '') {
-                (secondTextRef.current as THREE.Mesh).position.set(-2.168404344971009e-19, 1.3877787807814457e-17, 1.0408340855860843e-17);
-            } else {
-                (secondTextRef.current as THREE.Mesh).position.set(-1.0842021724855044e-19, 0, 3.469446951953614e-18);
-            }
         }
 
     }, [customText])
-
-    useEffect(() => {
-        if(firstTextRef.current) {
-            (firstTextRef.current as THREE.Mesh).geometry.center();
-            if(customText.secondLine !== '') {
-                (firstTextRef.current as THREE.Mesh).position.set(2.710505431213761e-20, 1.734723475976807e-18, 3.469446951953614e-18);
-            } else {
-                (firstTextRef.current as THREE.Mesh).position.set(-1.0842021724855044e-19, 0, 3.469446951953614e-18);
-            }
-        }
-
-        if(secondTextRef.current) {
-            (secondTextRef.current as THREE.Mesh).geometry.center();
-            if(customText.firstLine !== '') {
-                (secondTextRef.current as THREE.Mesh).position.set(-2.168404344971009e-19, 1.3877787807814457e-17, 1.0408340855860843e-17);
-            } else {
-                (secondTextRef.current as THREE.Mesh).position.set(-1.0842021724855044e-19, 0, 3.469446951953614e-18);
-            }
-        }
-    }, []);
 
     return(
         <>
@@ -80,31 +50,33 @@ export default function PremiumBox({ref} : {ref:Ref<Group|null>}) {
                    // rotation={[0, Math.PI / 4, 0]}
                    // position={[-20.060500000193823, 0, -9.505650000058095]} per l'animazione
             >
-                <group rotation={[Math.PI / 2, Math.PI, Math.PI / 2]} scale={[3.5, 3.5, 3.5]}>
-                    <Center
-                        ref={centerFirstRef}
-                        rotation={[0, 0.91, 1.58]}
-                        scale={[1,1,0.5]}
-                        position={customText.secondLine !== '' ? [-0.001, 0, -0.015] : [0.0275, 0, -0.05]}
-                        visible={customText.firstLine !== ''}
-                    >
-                        <Text3D font="/Archivo_Expanded_Bold.json" size={0.039} ref={firstTextRef}>
-                            {customText.firstLine}
-                            <FullMaterial color={packaging.details} finish="polished"/>
-                        </Text3D>
-                    </Center>
 
-                    <Center
-                        ref={centerSecondRef}
-                        rotation={[0, 0.91, 1.58]}
-                        position={customText.firstLine !== '' ? [0.07, 0, -0.1] : [0.0275, 0, -0.05]}
-                        scale={[1,1,0.5]}
-                        visible={customText.secondLine !== ''}>
-                        <Text3D font="/Archivo_Expanded_Bold.json" size={0.039} ref={secondTextRef}>
-                            {customText.secondLine}
-                            <FullMaterial color={packaging.details} finish="polished"/>
-                        </Text3D>
-                    </Center>
+                <Center
+                    ref={centerFirstRef}
+                    scale={[3.5, 3.5, 1]}
+                    rotation={[-0.65, 0, 0]}
+                    position={customText.secondLine !== '' ? [0, 0, 0.05] : [0, -0.125, 0.15]}
+                    visible={customText.firstLine !== ''}
+                >
+                    <Text3D font="/Archivo_Expanded_Bold.json" size={0.039} ref={firstTextRef}>
+                        {customText.firstLine}
+                        <FullMaterial color={packaging.details} finish="polished"/>
+                    </Text3D>
+                </Center>
+
+                <Center
+                    ref={centerSecondRef}
+                    rotation={[-0.65, 0, 0]}
+                    scale={[3.5, 3.5, 1]}
+                    position={customText.firstLine !== '' ? [0, -0.25, 0.25] : [0, -0.125, 0.15]}
+                    visible={customText.secondLine !== ''}>
+                    <Text3D font="/Archivo_Expanded_Bold.json" size={0.039} ref={secondTextRef}>
+                        {customText.secondLine}
+                        <FullMaterial color={packaging.details} finish="polished"/>
+                    </Text3D>
+                </Center>
+
+                <group rotation={[Math.PI / 2, Math.PI, Math.PI / 2]} scale={[3.5, 3.5, 3.5]}>
 
                     {/*TOP*/}
                     {/*Sportello*/}
