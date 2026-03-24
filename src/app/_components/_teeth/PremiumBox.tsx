@@ -1,5 +1,5 @@
 import React, {Ref, useEffect, useMemo, useRef} from "react";
-import {Center, Text3D, useGLTF, useTexture} from "@react-three/drei";
+import {Text3D, useGLTF, useTexture} from "@react-three/drei";
 import {useTeethStore} from "@/app/_stores/teeth";
 import * as THREE from 'three';
 import {State} from "@/app/_types/State";
@@ -16,8 +16,6 @@ export default function PremiumBox({ref} : {ref:Ref<Group|null>}) {
 
     const firstTextRef = useRef(null);
     const secondTextRef = useRef(null);
-    const centerFirstRef = useRef(null);
-    const centerSecondRef = useRef(null);
 
     const customText = useTeethStore((state: State) => state.packaging.text);
 
@@ -28,10 +26,6 @@ export default function PremiumBox({ref} : {ref:Ref<Group|null>}) {
     const lightDisks = useTexture('/textures/packaging/Light.webp');
     lightDisks.flipY = false;
     const packaging = useTeethStore((state: State) => state.packaging);
-
-    // {x: -1.0842021724855044e-19, y: 0, z: 3.469446951953614e-18} (1 riga di testo);
-    // {x: 2.710505431213761e-20, y: 1.734723475976807e-18, z: 3.469446951953614e-18} riga 1
-    // {x: -2.168404344971009e-19, y: 1.3877787807814457e-17, z: 1.0408340855860843e-17} riga 2
 
     useEffect(() => {
         if(firstTextRef.current) {
@@ -51,30 +45,32 @@ export default function PremiumBox({ref} : {ref:Ref<Group|null>}) {
                    // position={[-20.060500000193823, 0, -9.505650000058095]} per l'animazione
             >
 
-                <Center
-                    ref={centerFirstRef}
-                    scale={[3.5, 3.5, 1]}
-                    rotation={[-0.65, 0, 0]}
-                    position={customText.secondLine !== '' ? [0, 0, 0.05] : [0, -0.125, 0.15]}
-                    visible={customText.firstLine !== ''}
-                >
-                    <Text3D font="/Archivo_Expanded_Bold.json" size={0.039} ref={firstTextRef}>
+                    <Text3D
+                        font="/Archivo_Expanded_Bold.json"
+                        size={0.039}
+                        ref={firstTextRef}
+                        scale={[3.5, 3.5, 1]}
+                        rotation={[-0.65, 0, 0]}
+                        position={customText.secondLine !== '' ? [0, 0, 0.05] : [0, -0.125, 0.15]}
+                        visible={customText.firstLine !== ''}
+                    >
                         {customText.firstLine}
                         <FullMaterial color={packaging.details} finish="polished"/>
                     </Text3D>
-                </Center>
 
-                <Center
-                    ref={centerSecondRef}
-                    rotation={[-0.65, 0, 0]}
-                    scale={[3.5, 3.5, 1]}
-                    position={customText.firstLine !== '' ? [0, -0.25, 0.25] : [0, -0.125, 0.15]}
-                    visible={customText.secondLine !== ''}>
-                    <Text3D font="/Archivo_Expanded_Bold.json" size={0.039} ref={secondTextRef}>
+
+                    <Text3D
+                        font="/Archivo_Expanded_Bold.json"
+                        size={0.039}
+                        ref={secondTextRef}
+                        rotation={[-0.65, 0, 0]}
+                        scale={[3.5, 3.5, 1]}
+                        position={customText.firstLine !== '' ? [0, -0.25, 0.25] : [0, -0.125, 0.15]}
+                        visible={customText.secondLine !== ''}
+                    >
                         {customText.secondLine}
                         <FullMaterial color={packaging.details} finish="polished"/>
                     </Text3D>
-                </Center>
 
                 <group rotation={[Math.PI / 2, Math.PI, Math.PI / 2]} scale={[3.5, 3.5, 3.5]}>
 
