@@ -182,6 +182,7 @@ export default function PackagingSubOptions() {
                     >
                         <input value={customText.firstLine} onKeyDown={(e) => checkBackKeydown(e)}
                                onChange={(e) => checkAndSetPackaging('text', e.currentTarget.value, 1)} type="text"
+                               onTouchStart={(e) => e.preventDefault()}
                                className="border bg-gray-200 rounded-full py-1 px-2 w-full"
                                placeholder="Line 1"
                         />
@@ -199,6 +200,7 @@ export default function PackagingSubOptions() {
 
                         <input value={customText.secondLine} onKeyDown={(e) => checkBackKeydown(e)}
                                onChange={(e) => checkAndSetPackaging('text', e.currentTarget.value, 2)} type="text"
+                               onTouchStart={(e) => e.preventDefault()}
                                className="border bg-gray-200 rounded-full py-1 px-2 w-full"
                                placeholder="Line 2"
                         />
