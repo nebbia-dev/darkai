@@ -69,8 +69,7 @@ export default function Config() {
     }
 
     return (
-        <>
-            <div className="flex flex-col w-[100vw] mx-auto bg-gray-200 relative font-sans">
+            <div className="flex flex-col w-[100vw] mx-auto bg-gray-200 relative font-sans max-h-screen">
                 <div className="absolute w-full flex justify-center z-16">
                     <img className="cursor-auto py-6 w-[132px]" src="/logo.png" alt="darkai logo"/>
                 </div>
@@ -123,6 +122,5 @@ export default function Config() {
                     </div>
                 </div>
             </div>
-        </>
     );
 }
