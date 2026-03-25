@@ -38,6 +38,7 @@ export default function CustomTextInput() {
         }
     }
     function updateCustomText(e:any, lineNumber:number) {
+        e.preventDefault();
         e.stopPropagation();
         if(lineNumber === 1){
             setFirstReset(prev => !prev);
@@ -52,14 +53,20 @@ export default function CustomTextInput() {
         }
     }
 
+    function stop(e:any) {
+        e.stopPropagation();
+        e.preventDefault();
+        document.getElementById('input_line_1')?.focus();
+    }
+
     return (
         <div
             className="lg:static relative lg:right-[100%] z-100 w-full lg:w-[250px] lg:h-[120px] lg:pb-0 pb-6 pt-4 lg:mb-4 lg:pl-6 text-center lg:translate-y-[15%]">
             <div className="flex items-center lg:bg-gray-50 lg:rounded-3xl lg:p-2 lg:border-1 gap-0 max-w-[214px]">
                 <div className="flex flex-col gap-2 items-center relative"
                 >
-                    <input value={customText.firstLine} onKeyDown={(e) => checkBackKeydown(e)}
-                           onClick={(e) => e.stopPropagation()}
+                    <input id="input_line_1" value={customText.firstLine} onKeyDown={(e) => checkBackKeydown(e)}
+                           onClick={(e) => stop(e)}
                            onChange={(e) => checkAndSetPackaging('text', e.currentTarget.value, 1)} type="text"
                            className="border bg-gray-200 rounded-full py-1 px-2 w-full"
                            placeholder="Line 1"
@@ -77,7 +84,7 @@ export default function CustomTextInput() {
                     </div>
 
                     <input value={customText.secondLine} onKeyDown={(e) => checkBackKeydown(e)}
-                           onClick={(e) => e.stopPropagation()}
+                           onClick={(e) => stop(e)}
                            onChange={(e) => checkAndSetPackaging('text', e.currentTarget.value, 2)} type="text"
                            className="border bg-gray-200 rounded-full py-1 px-2 w-full"
                            placeholder="Line 2"
