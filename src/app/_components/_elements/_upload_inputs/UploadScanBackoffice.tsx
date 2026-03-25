@@ -1,6 +1,6 @@
 'use client'
 import {createClient} from "@/utils/supabase/client";
-import UploadFile from "@/app/_components/_elements/_upload/UploadFile";
+import UploadFile from "@/app/_components/_elements/_upload_inputs/UploadFile";
 import {useState} from "react";
 import OrderInfo from "@/app/_types/OrderInfo";
 import Image from "next/image";

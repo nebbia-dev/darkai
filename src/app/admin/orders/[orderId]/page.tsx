@@ -9,7 +9,7 @@ import Image from "next/image";
 import {Write} from "@/app/_components/_icons/Write";
 import {Tooltip} from "@mui/material";
 import Link from 'next/link';
-import UploadScanBackoffice from "@/app/_components/_elements/_upload/UploadScanBackoffice";
+import UploadScanBackoffice from "@/app/_components/_elements/_upload_inputs/UploadScanBackoffice";
 import orderIdConverter from "@/app/_helpers/_converters/orderIdConverter";
 export default async function Order({params}: { params: Promise<{ orderId: string[] }> }){
     const { orderId } = await params;

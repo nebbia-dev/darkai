@@ -1,58 +1,15 @@
-import React, {useState} from "react";
+import React from "react";
 import {useTeethStore} from "@/app/_stores/teeth";
 import {State} from "@/app/_types/State";
-import {Confirm} from "@/app/_components/_icons/Confirm";
-import {Edit} from "@/app/_components/_icons/Edit";
 import {Tooltip} from "@mui/material";
-
-type Text = {
-    firstLine: string,
-    secondLine: string
-}
+import CustomTextInput from "@/app/_components/_elements/_upload_inputs/CustomTextInput";
 
 export default function PackagingSubOptions() {
 
     const value = useTeethStore((state: State) => state.activeSubButton);
     const setPackaging = useTeethStore((state: State) => state.setPackaging);
-    const customText:Text = useTeethStore((state: State) => state.packaging.text);
-    const [firstReset, setFirstReset] = useState<boolean>(false);
-    const [secondReset, setSecondReset] = useState<boolean>(false);
+    const innerWidth = useTeethStore((state:State) => state.innerWidth);
 
-    const [backspace, setBackspace] = useState<boolean>(false);
-
-    function checkAndSetPackaging(type:string, e:any, lineNumber:number) {
-        const line = lineNumber === 1 ? customText.firstLine : customText.secondLine
-        const canvas = document.createElement("canvas");
-        const context = canvas.getContext("2d");
-        const width = context!.measureText(line).width;
-        canvas.remove();
-        if((width <= 73 && !backspace) || backspace) {
-            setPackaging(type, e, lineNumber)
-        }
-    }
-
-    function checkBackKeydown(e:any) {
-        if(e.code === 'Backspace' && !backspace) {
-            setBackspace(true);
-        } else if(e.code !== 'Backspace' && backspace) {
-            setBackspace(false);
-        } else {
-            return;
-        }
-    }
-    function updateCustomText(lineNumber:number) {
-        if(lineNumber === 1){
-            setFirstReset(prev => !prev);
-            if (firstReset) {
-                setPackaging('text', '', 1);
-            }
-        } else if(lineNumber === 2) {
-            setSecondReset(prev => !prev);
-            if (secondReset) {
-                setPackaging('text', '', 2);
-            }
-        }
-    }
 
     return (
         <>
@@ -176,49 +133,7 @@ export default function PackagingSubOptions() {
 
             <div aria-hidden={true} className="lg:hidden block h-[170px] lg:h-[120px] pt-4 mb-4 pl-6"></div>
 
-            <div className={`${value === 'text' ? 'block' : 'invisible'} lg:static absolute right-[100%] bottom-[-20dvh] z-100 w-[250px] h-[20vh] lg:h-[120px] pt-4 mb-4 pl-6 text-center lg:translate-y-[15%]`}>
-                <div className="flex items-center bg-gray-50 rounded-3xl p-2 border-1 gap-0 max-w-[214px]">
-                    <div className="flex flex-col gap-2 items-center relative"
-                    >
-                        <input value={customText.firstLine} onKeyDown={(e) => checkBackKeydown(e)}
-                               onChange={(e) => checkAndSetPackaging('text', e.currentTarget.value, 1)} type="text"
-                               onTouchStart={(e) => e.preventDefault()}
-                               className="border bg-gray-200 rounded-full py-1 px-2 w-full"
-                               placeholder="Line 1"
-                        />
-
-                        <button type="button"
-                                onClick={(e) => updateCustomText(1)}
-                                className={`${customText.firstLine.length > 0 ? 'block' : 'hidden'} 
-                                ${firstReset ? 'border-gray-500 text-gray-500 bg-gray-200' : 'border-green-500 text-green-500 bg-green-200'} 
-                                cursor-pointer absolute top-[2px] right-[2px] border font-bold rounded-full p-0.5`}>
-                            {firstReset
-                                ? <Edit className="w-6 h-6 p-1"/>
-                                : <Confirm className="w-6 h-6"/>
-                            }
-                        </button>
-
-                        <input value={customText.secondLine} onKeyDown={(e) => checkBackKeydown(e)}
-                               onChange={(e) => checkAndSetPackaging('text', e.currentTarget.value, 2)} type="text"
-                               onTouchStart={(e) => e.preventDefault()}
-                               className="border bg-gray-200 rounded-full py-1 px-2 w-full"
-                               placeholder="Line 2"
-                        />
-
-                        <button type="button"
-                                onClick={(e) => updateCustomText(2)}
-                                className={`${customText.secondLine.length > 0 ? 'block' : 'hidden'} 
-                                ${secondReset ? 'border-gray-500 text-gray-500 bg-gray-200' : 'border-green-500 text-green-500 bg-green-200'} 
-                                cursor-pointer absolute top-[44px] right-[2px] border font-bold rounded-full p-0.5`}>
-                            {secondReset
-                                ? <Edit className="w-6 h-6 p-1"/>
-                                : <Confirm className="w-6 h-6"/>
-                            }
-                        </button>
-
-                    </div>
-                </div>
-            </div>
+            {innerWidth >= 1024 && value === 'text' && <CustomTextInput/>}
         </>
     )
 }

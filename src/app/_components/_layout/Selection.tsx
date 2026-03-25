@@ -41,7 +41,7 @@ export default function Selection({activeButton, changeActiveButton} : {activeBu
                         }
                     </div>
                 }
-                <div className="cursor-auto w-full h-[100dvh] lg:h-[calc(100dvh-108px)] flex flex-col justify-center">
+                <div className="cursor-auto w-full relative lg:top-0 top-[40px] h-[calc(100dvh-40px)] lg:h-[calc(100dvh-108px)] flex flex-col justify-center">
                     <nav className="flex flex-col gap-4">
                         <ConfiguratorButton tooth="alwaysActive" inverse={true} value="1" active={activeButton}
                                             onclick={changeActiveButton} label="Signature Designs">

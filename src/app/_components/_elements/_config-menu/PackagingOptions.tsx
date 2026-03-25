@@ -7,6 +7,9 @@ import Out from "@/../public/packaging-icons/out.webp";
 import In from "@/../public/packaging-icons/in.webp";
 import Details from "@/../public/packaging-icons/details.webp";
 import Text from "@/../public/packaging-icons/text.webp";
+import {Edit} from "@/app/_components/_icons/Edit";
+import {Confirm} from "@/app/_components/_icons/Confirm";
+import CustomTextInput from "@/app/_components/_elements/_upload_inputs/CustomTextInput";
 
 export default function PackagingOptions() {
 
@@ -32,7 +35,16 @@ export default function PackagingOptions() {
             </button>
             <button type="button" value="text" onClick={(e) => setActiveSubButton(e.currentTarget.value)}
                     className={`cursor-pointer ${activeSubButton === 'text' ? 'lg:border-2 border-3' : 'lg:border-0 border-1' } w-[95%] h-[170px] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 p-2 flex flex-col items-center justify-center`}>
-                <Image className="w-[80%] transition duration-250 opacity-0 object-cover" onLoad={(e) => startOpacityTransition(e.target)} unoptimized={true} loading="eager" fetchPriority="high" src={Text} alt="custom text"/>
+                {innerWidth < 1024 && activeSubButton === 'text'
+                    ? <CustomTextInput/>
+                    : <Image
+                        className="w-[80%] transition duration-250 opacity-0 object-cover"
+                        onLoad={(e) => startOpacityTransition(e.target)}
+                        unoptimized={true} loading="eager" fetchPriority="high" src={Text} alt="custom text"
+                    />
+                }
+
+
                 <span className="text-sm">Custom Text</span>
             </button>
         </>
