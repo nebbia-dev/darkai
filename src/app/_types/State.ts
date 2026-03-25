@@ -109,6 +109,8 @@ export interface State {
     setPackaging: (prop:string, value:string|boolean, line?:number|undefined) => void,
     innerWidth: number,
     setInnerWidth: (width:number) => void,
+    innerHeight: number,
+    setInnerHeight: (height:number) => void,
     resetBigBar: (state: State, tooth: string) => void,
     resetNeighbours: (state:State, type:string, tooth:string) => void,
     resetSameDiamondDesign: (state:State, type:string, tooth:string) => boolean

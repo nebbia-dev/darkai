@@ -40,9 +40,9 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
 
     return(
         <>
-            <div className={`cursor-auto rounded-3xl lg:mr-[5vw] ${next ? 'h-[calc(100dvh-72px-(0.25rem*10))] lg:h-[82.5dvh]' : 'h-[82.5dvh]'} text-sm`}>
+            <div className={`relative cursor-auto rounded-3xl lg:mr-[5vw] h-[calc(100dvh-124px-(0.25rem*10)-60px)] lg:h-[82.5dvh] ${next ? 'top-[80px]' : 'top-[124px]'} lg:top-[48px] text-sm`}>
                 {!next
-                    ? <div className="flex flex-col items-center justify-end h-full relative lg:static bottom-20">
+                    ? <div className="flex flex-col items-center justify-end h-full relative lg:static bottom-30">
                         {/* MyConfig Top */}
                         <div
                             className={`${!showRecap ? 'border-b-0' : ''} border-1 rounded-t-3xl w-full bg-gray-50 px-6 py-4 text-center flex items-center justify-center gap-2`}>
@@ -57,7 +57,7 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
                         </div>
                         {/* MyConfig Middle w/Recap */}
                         <div
-                            className={`${showRecap && innerWidth >= 1024 ? 'h-[50dvh]' : showRecap && innerWidth < 1024 ? 'h-[60dvh]' :'h-0'} bg-gray-200/50 lg:transition-[height] lg:duration-500 w-[calc(100%-2px)] relative`}>
+                            className={`${showRecap ? 'h-[70%] lg:h-[60dvh]' :'h-0'} bg-gray-200/50 lg:transition-[height] lg:duration-500 w-[calc(100%-2px)] relative`}>
                             <div
                                 className="absolute h-[15%] bottom-0 w-full bg-linear-to-t from-gray-50 to-indigo-0"></div>
                             <RecapList edit={true}/>
@@ -109,7 +109,7 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
                             }
                         </div>
                         <div
-                            className={`${showRecap ? 'h-[45%]' : 'h-0'} lg:transition-[height] lg:duration-500 w-full relative`}>
+                            className={`${showRecap ? 'h-[35dvh] lg:h-[45%]' : 'h-0'} lg:transition-[height] lg:duration-500 w-full relative`}>
                             <div
                                 className="absolute h-[15%] bottom-0 w-full bg-linear-to-t from-gray-50 to-indigo-0"></div>
 
@@ -141,8 +141,8 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
                                 </button>
                                 <Link
                                     href='/checkout/payment'
-                                    className="rounded-3xl bg-slate-950 text-gray-50 px-5 py-2 h-full cursor-pointer">Proceed
-                                    to checkout &rarr;
+                                    className="rounded-3xl bg-slate-950 text-gray-50 px-5 py-2 h-full cursor-pointer">
+                                    {innerWidth >= 1024 ? 'Proceed to c' : 'C'}heckout &rarr;
                                 </Link>
                             </div>
 

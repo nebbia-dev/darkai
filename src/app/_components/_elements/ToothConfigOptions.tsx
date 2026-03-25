@@ -26,6 +26,7 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
     const gemBox = useTeethStore((state: State) => state.showGemTypeBox);
     const showGemBox = useTeethStore((state: State) => state.setShowGemTypeBox);
     const innerWidth = useTeethStore((state:State) => state.innerWidth);
+    const innerHeight = useTeethStore((state:State) => state.innerHeight);
 
     const elementRef = useRef<HTMLDivElement|null>(null);
     const selectorRef = useRef<HTMLDivElement|null>(null);
@@ -352,15 +353,19 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
             </ConfiguratorButton>
 
             <div className={`absolute ${!active ? 'hidden' : 'block'} ${
-                (active === '2' && !checkMolar(tooth))
-                    ? 'top-[-25dvh]'
-                    : (active === '2' && checkMolar(tooth))
+                (active === '2' && checkMolar(tooth))
                         ? 'top-[-10dvh]'
                         : active === '4' && (jewelType?.includes('enamel') || material === 'base')
                             ? 'top-[4.5dvh]'
-                                : active === '5' && (material === 'base' || (!jewelType?.includes('bezel') && !pave?.shape))
-                                    ? 'top-[11dvh]'
-                                    : 'top-[-25dvh]'
+                             : (active === '5' && (material === 'base' || (!jewelType?.includes('bezel') && !pave?.shape)) && (innerWidth/innerHeight >= 0.75 || innerWidth/innerHeight <= 0.57))
+                                ? 'top-[11dvh]'
+                                 : (active === '5' && (material === 'base' || (!jewelType?.includes('bezel') && !pave?.shape)) && (innerWidth/innerHeight < 0.75 || innerWidth/innerHeight > 0.57))
+                                    ? 'top-[7dvh]'
+                                    : (active === '6' && (innerWidth/innerHeight >= 1.70 && innerWidth/innerHeight <= 1.71))
+                                        ? 'top-[-15dvh]'
+                                        : (innerWidth/innerHeight > 0.76 || innerWidth/innerHeight < 0.55)
+                                            ? 'top-[-25dvh]'
+                                            : 'top-[-20dvh]'
             } left-[48px]`}>
 
                 <div
@@ -369,7 +374,10 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
                         || (active === '2' && checkMolar(tooth))
                         || (active === '5' && (material === 'base' || (!jewelType?.includes('bezel') && !pave?.shape)))
                             ? 'h-[186px]'
-                            : 'h-[596px]'} 
+                            : ((innerWidth/innerHeight > 0.74 || innerWidth/innerHeight < 0.55) && innerWidth >= 1024)
+                                ? 'h-[596px]'
+                                : 'h-[800px]'
+                    } 
                         w-[65vw] lg:w-[200px] bg-gray-50/75 lg:bg-gray-50 rounded-3xl p-8 pr-4 border-1 max-h-[70dvh]`}>
                     <div onScroll={sync} ref={elementRef} className="overflow-y-auto h-full pl-[2px] pr-4">
                         {renderOptions(active, tooth)}
@@ -379,7 +387,25 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
 
 
             <div
-                className={`${!active ? 'hidden' : 'block'} text-center max-h-[70dvh] ${active === '6' ? 'h-[604px] py-4 w-[64px] lg:w-[250px]' : 'h-[596px] py-8 w-[64px]'} absolute left-[72.5vw] lg:left-[240px] top-[-25vh]`}>
+                className={`${!active ? 'hidden' : 'block'} w-[64px] text-center max-h-[70dvh] ${
+                    active === '6' 
+                        ? 'py-4 lg:w-[250px]'
+                        : 'py-8'
+                } 
+                ${
+                    active === '6' && ((innerWidth/innerHeight > 0.74 || innerWidth/innerHeight < 0.55) && innerWidth >= 1024)
+                        ? 'h-[604px]'
+                        : active !== '6' && ((innerWidth/innerHeight > 0.74 || innerWidth/innerHeight < 0.55) && innerWidth >= 1024)
+                            ? 'h-[596px]'
+                            : 'h-[800px]'
+                }
+                absolute left-[72.5vw] lg:left-[240px]
+                ${
+                    (innerWidth/innerHeight > 0.76 || innerWidth/innerHeight < 0.55)
+                        ? 'top-[-25dvh]'
+                        : 'top-[-20dvh]'
+                }
+                `}>
                 <div ref={selectorRef} className="whitespace-nowrap overflow-hidden h-full w-full">
                     {renderSubOptions(active, tooth)}
                 </div>

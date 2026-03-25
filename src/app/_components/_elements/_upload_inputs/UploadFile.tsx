@@ -30,7 +30,7 @@ export default function UploadFile({theme, sendData} : {theme:'dark' | 'light', 
     }
 
     return (
-        <div className="w-[33%] h-[176px]">
+        <div className="w-[33%] h-[100px] lg:h-[176px]">
             <label
                 className={`label h-full w-full block ${theme === 'dark' ? 'bg-gray-950/[80%] text-gray-50' : 'bg-gray-50 text-gray-950'} rounded ${selectedFile ? 'p-2' : 'p-8'} cursor-pointer border-[#171717]`}>
                 {

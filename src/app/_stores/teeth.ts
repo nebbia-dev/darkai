@@ -1758,6 +1758,8 @@ export const useTeethStore = create<State>((set, get) => ({
 
     innerWidth: 0,
     setInnerWidth:  (width) => set(() => ({innerWidth: width})),
+    innerHeight: 0,
+    setInnerHeight:  (height) => set(() => ({innerHeight: height})),
 
     // utils to simplify the setType function
     resetBigBar: (state, tooth) => {

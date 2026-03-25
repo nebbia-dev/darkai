@@ -22,11 +22,12 @@ export default function Config() {
     const [showMenu, setShowMenu] = useState<boolean>(false);
     const [showRecap, setShowRecap] = useState<boolean>(false);
     const setInnerWidth = useTeethStore((state) => state.setInnerWidth);
+    const setInnerHeight = useTeethStore((state) => state.setInnerHeight);
 
     useEffect(() => {
-        updateInnerWidth();
-        window.addEventListener('resize', updateInnerWidth);
-        return () => window.removeEventListener('resize', updateInnerWidth);
+        updateInnerSize();
+        window.addEventListener('resize', updateInnerSize);
+        return () => window.removeEventListener('resize', updateInnerSize);
 
     }, [])
 
@@ -35,8 +36,9 @@ export default function Config() {
         setActive(undefined);
     }
 
-    function updateInnerWidth() {
+    function updateInnerSize() {
         setInnerWidth(window.innerWidth);
+        setInnerHeight(window.innerHeight);
         if(window.innerWidth >= 1024) {
             setShowMenu(true);
             setShowRecap(true);
@@ -117,7 +119,7 @@ export default function Config() {
                             </div>
                         }
                     </div>
-                    <div className={`lg:h-page-nav ${nextStep && innerWidth >= 1024  ? 'w-[40vw]' : innerWidth < 1024 ? 'w-[90vw] mx-auto left-[50%] translate-x-[-50%]' : 'w-[30vw]'} ${!showRecap && !nextStep ? 'hidden' : 'block'} absolute z-15 ${nextStep ? 'top-[76px]' : 'top-[124px]'} lg:top-[72px] lg:right-0`}>
+                    <div className={`lg:h-page-nav h-[100dvh] flex justify-center items-center ${nextStep && innerWidth >= 1024  ? 'w-[40vw]' : innerWidth < 1024 ? 'w-[90vw] mx-auto left-[50%] translate-x-[-50%]' : 'w-[30vw]'} ${!showRecap && !nextStep ? 'hidden' : 'block'} absolute z-15 lg:right-0`}>
                         {loaded && <Recap next={nextStep} onclick={setContinue}/>}
                     </div>
                 </div>

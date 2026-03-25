@@ -11,7 +11,7 @@ export default function Upload() {
         <>
             <div className="w-full flex gap-2 mb-2">
                 <UploadFile theme="dark" sendData={getData}/>
-                <div className="pl-6 pr-4 py-4 rounded border border-gray-950/[33%] w-[66%] h-[176px]">
+                <div className="pl-6 pr-4 py-4 rounded border border-gray-950/[33%] w-[66%] h-[100px] lg:h-[176px]">
                     <div className="flex lg:items-center lg:justify-center h-full overflow-y-auto text-center pr-2">
                         <p> If you don't have your dental scan right now, you can still proceed with checkout.
                             You can send us your dental scan in .stl format later at <br/>
