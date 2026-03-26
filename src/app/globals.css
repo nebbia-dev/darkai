@@ -12,7 +12,7 @@
   --spacing-nav: 72px;
   --spacing-page-nav: calc(100dvh - 72px);
   --spacing-tab-height: calc(100dvh - 72px - 15vh - 3rem);
-  --radius-25xl: 1.35rem;
+  --radius-25xl: 1.45rem;
   --radius-35xl: 1.6rem;
   --radius-45xl: 2.15rem;
 }

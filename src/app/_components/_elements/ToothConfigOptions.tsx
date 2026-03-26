@@ -66,6 +66,8 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
     const bubblegumRef = useRef<HTMLButtonElement|null>(null);
     const tribalRef = useRef<HTMLButtonElement|null>(null);
 
+    console.log(innerWidth/innerHeight <= 0.76 && innerWidth/innerHeight >= 0.55, innerWidth/innerHeight)
+
     function renderOptions(active:string|undefined, tooth:string|undefined) {
         switch(active) {
             case "1":
@@ -378,7 +380,7 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
                                 ? 'h-[596px]'
                                 : 'h-[800px]'
                     } 
-                        w-[65vw] lg:w-[200px] bg-gray-50/75 lg:bg-gray-50 rounded-3xl p-8 pr-4 border-1 max-h-[70dvh]`}>
+                        ${(innerWidth/innerHeight <= 0.76 && innerWidth/innerHeight >= 0.57) ? 'w-[33vw]' : 'w-[65vw]'} lg:w-[200px] bg-gray-50/75 lg:bg-gray-50 rounded-3xl p-8 pr-4 border-1 max-h-[70dvh]`}>
                     <div onScroll={sync} ref={elementRef} className="overflow-y-auto h-full pl-[2px] pr-4">
                         {renderOptions(active, tooth)}
                     </div>
@@ -399,7 +401,7 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
                             ? 'h-[596px]'
                             : 'h-[800px]'
                 }
-                absolute left-[72.5vw] lg:left-[240px]
+                absolute ${(innerWidth/innerHeight <= 0.76 && innerWidth/innerHeight >= 0.57) ? 'left-[40.5vw]' : 'left-[72.5vw]'} lg:left-[240px]
                 ${
                     (innerWidth/innerHeight > 0.76 || innerWidth/innerHeight < 0.55)
                         ? 'top-[-25dvh]'

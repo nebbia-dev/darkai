@@ -37,8 +37,9 @@ export default function SignatureSubOptions() {
                     <Tooltip title="Lab Diamonds" placement="right">
                         <button type="button" value="pave_lab"
                                 onClick={(e) => setSignatureDesign('vamp', e.currentTarget.value)}
-                                className="w-[24px] h-[24px] bg-gray-100 border-1 rounded-full cursor-pointer flex items-center justify-center">
+                                className="relative w-[24px] h-[24px] bg-gray-100 border-1 rounded-full cursor-pointer flex items-center justify-center">
                             <Image unoptimized={true} loading="eager" fetchPriority="high" src={Pave} alt="pave-logo"/>
+                            <span className="border-1 border-black absolute top-[-4px] right-[-4px] rounded-full bg-sky-500 text-white text-xs w-4 h-4 flex items-center justify-center">L</span>
                         </button>
                     </Tooltip>
                     <Tooltip title="Natural Diamonds" placement="right">
@@ -56,7 +57,9 @@ export default function SignatureSubOptions() {
                     <Tooltip title="White Gold w/ Lab Diamonds" placement="right">
                         <button type="button" value="white_lab"
                                 onClick={(e) => setSignatureDesign('sprinkles', e.currentTarget.value)}
-                                className="w-[24px] h-[24px] bg-gray-100 rounded-full cursor-pointer border-1">
+                                className="relative w-[24px] h-[24px] bg-gray-100 rounded-full cursor-pointer border-1">
+                            <span
+                                className="border-1 border-black absolute top-[-4px] right-[-4px] rounded-full bg-sky-500 text-white text-xs w-4 h-4 flex items-center justify-center">L</span>
                         </button>
                     </Tooltip>
                     <Tooltip title="White Gold w/ Natural Diamonds" placement="right">
@@ -68,7 +71,9 @@ export default function SignatureSubOptions() {
                     <Tooltip title="Yellow Gold w/ Lab Diamonds" placement="right">
                         <button type="button" value="gold_lab"
                                 onClick={(e) => setSignatureDesign('sprinkles', e.currentTarget.value)}
-                                className="w-[24px] h-[24px] bg-[#e1c487] rounded-full cursor-pointer border-1">
+                                className="relative w-[24px] h-[24px] bg-[#e1c487] rounded-full cursor-pointer border-1">
+                            <span
+                                className="border-1 border-black absolute top-[-4px] right-[-4px] rounded-full bg-sky-500 text-white text-xs w-4 h-4 flex items-center justify-center">L</span>
                         </button>
                     </Tooltip>
                     <Tooltip title="Yellow Gold w/ Natural Diamonds" placement="right">
@@ -80,12 +85,14 @@ export default function SignatureSubOptions() {
                     <Tooltip title="Rose Gold w/ Lab Diamonds" placement="right">
                         <button type="button" value="rose_lab"
                                 onClick={(e) => setSignatureDesign('sprinkles', e.currentTarget.value)}
-                                className="w-[24px] h-[24px] bg-[#de9ca0] rounded-full cursor-pointer border-1">
+                                className="relative w-[24px] h-[24px] bg-[#de9ca0] rounded-full cursor-pointer border-1">
+                            <span
+                                className="border-1 border-black absolute top-[-4px] right-[-4px] rounded-full bg-sky-500 text-white text-xs w-4 h-4 flex items-center justify-center">L</span>
                         </button>
                     </Tooltip>
                     <Tooltip title="Rose Gold w/ Natural Diamonds" placement="right">
-                    <button type="button" value="rose_nat"
-                            onClick={(e) => setSignatureDesign('sprinkles', e.currentTarget.value)}
+                        <button type="button" value="rose_nat"
+                                onClick={(e) => setSignatureDesign('sprinkles', e.currentTarget.value)}
                             className="w-[24px] h-[24px] bg-[#de9ca0] rounded-full cursor-pointer border-1">
                     </button>
                     </Tooltip>
@@ -126,13 +133,17 @@ export default function SignatureSubOptions() {
                     <Tooltip title="Emeralds on Lab Diamonds" placement="right">
                         <button type="button" value="pave_lab"
                                 onClick={(e) => setSignatureDesign('braces', e.currentTarget.value)}
-                                className="w-[24px] h-[24px] gray rounded-full cursor-pointer border-1 flex items-center justify-center">
-                            <Image unoptimized={true} loading="eager" fetchPriority="high" src={Emerald} alt="pave-logo"/>
+                                className="relative w-[24px] h-[24px] gray rounded-full cursor-pointer border-1 flex items-center justify-center">
+                            <Image unoptimized={true} loading="eager" fetchPriority="high" src={Emerald}
+                                   alt="pave-logo"/>
+                            <span
+                                className="border-1 border-black absolute top-[-4px] right-[-4px] rounded-full bg-sky-500 text-white text-xs w-4 h-4 flex items-center justify-center">L</span>
                         </button>
                     </Tooltip>
                 </div>
             </div>
-            <div className={`${(signatureVisibility.tribal || value === 'tribal') ? 'block' : 'invisible'} h-[170px] lg:h-[120px] mb-4 pl-6 text-center`}>
+            <div
+                className={`${(signatureVisibility.tribal || value === 'tribal') ? 'block' : 'invisible'} h-[170px] lg:h-[120px] mb-4 pl-6 text-center`}>
                 <div className="w-[36px] flex flex-col gap-2 items-center bg-gray-50 rounded-full py-2 border-1">
                     <Tooltip title="White Gold" placement="right">
                         <button type="button" value="base_white"
@@ -149,8 +160,10 @@ export default function SignatureSubOptions() {
                     <Tooltip title="Lab Diamonds" placement="right">
                         <button type="button" value="pave_lab"
                                 onClick={(e) => setSignatureDesign('tribal', e.currentTarget.value)}
-                                className="w-[24px] h-[24px] bg-gray-100 rounded-full cursor-pointer border-1 flex items-center justify-center">
+                                className="relative w-[24px] h-[24px] bg-gray-100 rounded-full cursor-pointer border-1 flex items-center justify-center">
                             <Image unoptimized={true} loading="eager" fetchPriority="high" src={Pave} alt="pave-logo"/>
+                            <span
+                                className="border-1 border-black absolute top-[-4px] right-[-4px] rounded-full bg-sky-500 text-white text-xs w-4 h-4 flex items-center justify-center">L</span>
                         </button>
                     </Tooltip>
                     <Tooltip title="Natural Diamonds" placement="right">
@@ -186,8 +199,10 @@ export default function SignatureSubOptions() {
                     <Tooltip title="Lab Diamonds" placement="right">
                         <button type="button" value="pave_lab"
                                 onClick={(e) => setSignatureDesign('cross', e.currentTarget.value)}
-                                className="w-[24px] h-[24px] bg-gray-100 rounded-full cursor-pointer border-1 flex items-center justify-center">
+                                className="relative w-[24px] h-[24px] bg-gray-100 rounded-full cursor-pointer border-1 flex items-center justify-center">
                             <Image unoptimized={true} loading="eager" fetchPriority="high" src={Pave} alt="pave-logo"/>
+                            <span
+                                className="border-1 border-black absolute top-[-4px] right-[-4px] rounded-full bg-sky-500 text-white text-xs w-4 h-4 flex items-center justify-center">L</span>
                         </button>
                     </Tooltip>
                     <Tooltip title="Natural Diamonds" placement="right">
