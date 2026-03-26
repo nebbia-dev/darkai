@@ -35,7 +35,6 @@ export default function RootLayout({
             href="https://www.gstatic.com/draco/versioned/decoders/1.5.5/draco_decoder.wasm"
         />
         <link rel="stylesheet" href="https://use.typekit.net/gqu6jpz.css"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1, interactive-widget=resizes-content"/>
     </head>
     <body>
     <AppRouterCacheProvider>

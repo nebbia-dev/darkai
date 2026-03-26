@@ -39,13 +39,13 @@ export default function Config() {
     function updateInnerSize() {
         setInnerWidth(window.innerWidth);
         setInnerHeight(window.innerHeight);
-        if(window.innerWidth >= 1024) {
-            setShowMenu(true);
-            setShowRecap(true);
-        } else {
-            setShowMenu(false);
-            setShowRecap(false);
-        }
+        // if(window.innerWidth >= 1024) {
+        //     setShowMenu(true);
+        //     setShowRecap(true);
+        // } else {
+        //     setShowMenu(false);
+        //     setShowRecap(false);
+        // }
     }
 
     function closeAllUIs() {
