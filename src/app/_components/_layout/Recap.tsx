@@ -109,7 +109,7 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
                             }
                         </div>
                         <div
-                            className={`${showRecap ? 'h-[70%] lg:h-[45%]' : 'h-0'} lg:transition-[height] lg:duration-500 w-full relative`}>
+                            className={`${showRecap ? 'h-[calc(100%-296px)] lg:h-[45%]' : 'h-0'} lg:transition-[height] lg:duration-500 w-full relative`}>
                             <div
                                 className="absolute h-[15%] bottom-0 w-full bg-linear-to-t from-gray-50 to-indigo-0"></div>
 
