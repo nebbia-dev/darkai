@@ -379,7 +379,7 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
                                 : 'h-[800px]'
                     } 
                         w-[65vw] lg:w-[200px] bg-gray-50/75 lg:bg-gray-50 rounded-3xl p-8 pr-4 border-1 max-h-[70dvh]`}>
-                    <div onScroll={sync} ref={elementRef} className="overflow-y-auto h-full pl-[2px] pr-4">
+                    <div onScroll={sync} ref={elementRef} className="overflow-y-auto flex flex-col-reverse h-full pl-[2px] pr-4">
                         {renderOptions(active, tooth)}
                     </div>
                 </div>
