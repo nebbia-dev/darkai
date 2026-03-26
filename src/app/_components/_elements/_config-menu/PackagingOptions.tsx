@@ -31,20 +31,21 @@ export default function PackagingOptions() {
                 <Image className="transition duration-250 opacity-0 object-cover lg:w-[80%] w-32" onLoad={(e) => startOpacityTransition(e.target)} unoptimized={true} loading="eager" fetchPriority="high" src={Details} alt="gold details"/>
                 <span className="text-sm">Gold Details</span>
             </button>
-            <button type="button" value="text" onClick={(e) => setActiveSubButton(e.currentTarget.value)}
-                    className={`cursor-pointer ${activeSubButton === 'text' ? 'lg:border-2 border-3' : 'lg:border-0 border-1' } w-[95%] h-[170px] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 p-2 flex flex-col items-center justify-center`}>
-                {innerWidth < 1024 && activeSubButton === 'text'
-                    ? <CustomTextInput/>
-                    : <Image
-                        className="transition duration-250 opacity-0 object-cover lg:w-[80%] w-32"
-                        onLoad={(e) => startOpacityTransition(e.target)}
-                        unoptimized={true} loading="eager" fetchPriority="high" src={Text} alt="custom text"
-                    />
-                }
-
-
-                <span className="text-sm">Custom Text</span>
-            </button>
+            <div>
+                <button type="button" value="text" onClick={(e) => setActiveSubButton(e.currentTarget.value)}
+                        className={`cursor-pointer ${activeSubButton === 'text' ? 'lg:border-2 border-3' : 'lg:border-0 border-1' } w-[95%] h-[170px] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 p-2 flex flex-col items-center justify-center`}>
+                    <Image
+                            className={`transition duration-250 opacity-0 object-cover lg:w-[80%] w-32`}
+                            onLoad={(e) => startOpacityTransition(e.target)}
+                            unoptimized={true} loading="eager" fetchPriority="high" src={Text} alt="custom text"
+                        />
+                    <span className="text-sm">Custom Text
+                        {innerWidth < 1024 && activeSubButton === 'text' && ' (below)'
+                        }
+                    </span>
+                </button>
+                {innerWidth < 1024 && activeSubButton === 'text' && <CustomTextInput/> }
+            </div>
         </>
     )
 }

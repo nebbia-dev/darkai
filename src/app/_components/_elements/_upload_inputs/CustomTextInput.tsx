@@ -92,9 +92,9 @@ export default function CustomTextInput() {
 
     return (
         <div
-            className="lg:static relative lg:right-[100%] z-100 w-full lg:w-[250px] lg:h-[120px] lg:pb-0 pb-6 pt-4 lg:mb-4 lg:pl-6 text-center lg:translate-y-[15%]">
-            <div className="flex items-center lg:bg-gray-50 lg:rounded-3xl lg:p-2 lg:border-1 gap-0 max-w-[214px]">
-                <div className="flex flex-col gap-2 items-center relative"
+            className="lg:static lg:right-[100%] w-full lg:w-[250px] lg:h-[120px] lg:pb-0 pb-6 pt-4 lg:mb-4 lg:pl-6 text-center lg:translate-y-[15%]">
+            <div className="flex items-center lg:bg-gray-50 lg:rounded-3xl lg:p-2 lg:border-1 gap-0">
+                <div className="flex flex-col gap-2 items-center w-[95%] mx-auto relative"
                 >
                     <input id="input_line_1" value={customText.firstLine}
                            onKeyDown={(e) => checkBackKeydown(e, 1)}

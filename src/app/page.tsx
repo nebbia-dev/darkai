@@ -103,7 +103,7 @@ export default function Config() {
                         {loaded && !nextStep && <ActionBar/>}
                         {loaded && innerWidth < 1024 && !nextStep &&
                             <div
-                                className="absolute z-16 bottom-10 left-[50%] translate-x-[-50%] border-1 rounded-3xl w-[90%] bg-gray-50 pl-6 pr-2 py-2 flex items-center justify-between mt-4">
+                                className="absolute z-16 bottom-5 left-[50%] translate-x-[-50%] border-1 rounded-3xl w-[90%] bg-gray-50 pl-6 pr-2 py-2 flex items-center justify-between mt-4">
                                 <div>
                                     <h3 className="font-semibold inline">Price: </h3>
                                     <span>{new Intl.NumberFormat("de-DE", {
