@@ -40,7 +40,7 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
 
     return(
         <>
-            <div className={`relative cursor-auto rounded-3xl lg:mr-[5vw] h-[calc(100dvh-124px-(0.25rem*10)-60px)] lg:h-[82.5dvh] ${next ? 'top-[80px]' : 'top-[124px]'} lg:top-[48px] text-sm`}>
+            <div className={`w-full relative cursor-auto rounded-3xl lg:mr-[5vw] ${next ? 'h-[calc(100dvh-(0.25rem*10)-60px)]' : 'h-[calc(100dvh-124px-(0.25rem*10)-60px)]'} lg:h-[82.5dvh] ${next ? 'top-[20px]' : 'top-[124px]'} lg:top-[48px] text-sm`}>
                 {!next
                     ? <div className="flex flex-col items-center justify-end h-full relative lg:static bottom-30">
                         {/* MyConfig Top */}
@@ -57,7 +57,7 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
                         </div>
                         {/* MyConfig Middle w/Recap */}
                         <div
-                            className={`${showRecap ? 'h-[70%] lg:h-[60dvh]' :'h-0'} bg-gray-200/50 lg:transition-[height] lg:duration-500 w-[calc(100%-2px)] relative`}>
+                            className={`${showRecap ? 'h-[80%] lg:h-[60dvh]' :'h-0'} bg-gray-200/50 lg:transition-[height] lg:duration-500 w-[calc(100%-2px)] relative`}>
                             <div
                                 className="absolute h-[15%] bottom-0 w-full bg-linear-to-t from-gray-50 to-indigo-0"></div>
                             <RecapList edit={true}/>
@@ -109,7 +109,7 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
                             }
                         </div>
                         <div
-                            className={`${showRecap ? 'h-[35dvh] lg:h-[45%]' : 'h-0'} lg:transition-[height] lg:duration-500 w-full relative`}>
+                            className={`${showRecap ? 'h-[70%] lg:h-[45%]' : 'h-0'} lg:transition-[height] lg:duration-500 w-full relative`}>
                             <div
                                 className="absolute h-[15%] bottom-0 w-full bg-linear-to-t from-gray-50 to-indigo-0"></div>
 
