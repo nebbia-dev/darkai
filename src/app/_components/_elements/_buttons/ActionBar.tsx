@@ -58,7 +58,7 @@ export default function ActionBar() {
     return(
         <div>
             <div
-                className="absolute flex items-center justify-center gap-4 bottom-35 lg:bottom-20 bigger-bottom left-[50%] translate-x-[-50%] w-2/4">
+                className="absolute flex items-center justify-center gap-4 bottom-35 lg:bottom-20 bigger-bottom left-[50%] translate-x-[-50%] lg:w-2/4 w-full">
                 <Tooltip title="Previous">
                     <button onClick={doUndo} className="bg-white/50 rounded-full border w-8 h-8 bigger-icons p-[6px] cursor-pointer" disabled={resetCamera}>
                         <img src="/action-bar-icons/undo.svg" alt="undo"/>

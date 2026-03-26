@@ -1,7 +1,11 @@
 'use client'
 import {ChangeEvent, useEffect, useState} from "react";
+import {useTeethStore} from "@/app/_stores/teeth";
+import {State} from "@/app/_types/State";
 
 export default function UploadFile({theme, sendData} : {theme:'dark' | 'light', sendData: (arg:File) => void}) {
+
+    const innerWidth = useTeethStore((state:State) => state.innerWidth);
     const [selectedFile, setSelectedFile] = useState<File|undefined>();
     const [preview, setPreview] = useState<string|undefined>();
 
@@ -32,7 +36,7 @@ export default function UploadFile({theme, sendData} : {theme:'dark' | 'light', 
     return (
         <div className="w-[33%] h-[100px] lg:h-[176px]">
             <label
-                className={`label h-full w-full block ${theme === 'dark' ? 'bg-gray-950/[80%] text-gray-50' : 'bg-gray-50 text-gray-950'} rounded ${selectedFile ? 'p-2' : 'p-8'} cursor-pointer border-[#171717]`}>
+                className={`label h-full w-full block ${theme === 'dark' ? 'bg-gray-950/[80%] text-gray-50' : 'bg-gray-50 text-gray-950'} rounded ${selectedFile || innerWidth  < 1024 ? 'p-2' : 'p-8'} cursor-pointer border-[#171717]`}>
                 {
                     selectedFile
                         ?  <img className="rounded-xl w-[90%] h-[122px] object-cover mb-4 mx-auto" src={preview as string} alt="scan-preview"/>
@@ -48,7 +52,7 @@ export default function UploadFile({theme, sendData} : {theme:'dark' | 'light', 
                             </svg>
                         </div>
                 }
-                <span className="text-center line-clamp-2">
+                <span className={`text-center ${innerWidth  < 1024 ? 'line-clamp-1' : 'line-clamp-2'}`}>
                     {selectedFile
                         ? <>{selectedFile.name}</>
                         : "Upload a dental scan"
