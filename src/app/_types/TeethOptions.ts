@@ -217,7 +217,7 @@ export interface SignMaterial {
     [key: string]: string | undefined,
     vamp: 'base_white' | 'pave_lab' | 'pave_nat' | 'base_black' | undefined,
     hammered: 'base_white' | 'base_gold' | 'base_black' | undefined,
-    cross: 'base_white' | 'pave_lab' | 'pave_nat' | 'base_rose' | 'base_black' | undefined,
+    cross: 'base_white' | 'pave_lab' | 'pave_nat' | 'base_rose' | 'base_gold' | undefined,
     bubblegum: 'pink' | 'blue' | 'green' | undefined,
     sprinkles: 'white_lab' | 'gold_lab' | 'rose_lab' | 'white_nat' | 'gold_nat' | 'rose_nat' | undefined,
     tribal: 'base_white' | 'pave_lab' | 'pave_nat' | 'base_gold' | undefined,

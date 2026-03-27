@@ -53,7 +53,7 @@ export default function FinishOptions({tooth, jewelType, visible, signature, pol
             <button ref={polishedRef} disabled={isDisabled('nopave')} onClick={(e) => changePaveShape(e.currentTarget.value)}
                     type="button"
                     value="nopave-pol"
-                    className={`${(finish === 'polished' && !pave?.shape) ? 'lg:border-2 border-3' : 'lg:border-0 border-1' } w-[95%] h-[170px] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 ${jewelType?.includes('enamel') ? '' : 'mb-4' } p-2 ${isDisabled('nopave') ? 'text-slate-400' : 'text-slate-950 cursor-pointer'} flex flex-col items-center justify-center`}>
+                    className={`${(finish === 'polished' && !pave?.shape) ? 'lg:border-2 border-3 border-sky-500' : 'lg:border-0 border-1 border-black' } w-[95%] h-[170px] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 ${jewelType?.includes('enamel') ? '' : 'mb-4' } p-2 ${isDisabled('nopave') ? 'text-slate-400' : 'text-slate-950 cursor-pointer'} flex flex-col items-center justify-center`}>
                 <Image unoptimized={true} loading="eager" fetchPriority="high" className="lg:py-2 pt-2 pb-4 lg:w-16 w-26 transition duration-250 opacity-0 object-cover" onLoad={(e) => startOpacityTransition(e.target)} src={Polished} alt="polished-metal"/>
                 <span className="text-sm">Polished</span>
             </button>
@@ -61,7 +61,7 @@ export default function FinishOptions({tooth, jewelType, visible, signature, pol
                 <button ref={sBlastRef} disabled={isDisabled('nopave')} onClick={(e) => changePaveShape(e.currentTarget.value)}
                      type="button"
                      value="nopave-sblast"
-                     className={`${(finish === 'sandblasted' && !pave?.shape) ? 'lg:border-2 border-3' : 'lg:border-0 border-1' } w-[95%] h-[170px] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-2 ${isDisabled('nopave') ? 'text-slate-400' : 'text-slate-950 cursor-pointer'} flex flex-col items-center justify-center`}>
+                     className={`${(finish === 'sandblasted' && !pave?.shape) ? 'lg:border-2 border-3 border-sky-500' : 'lg:border-0 border-1 border-black' } w-[95%] h-[170px] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-2 ${isDisabled('nopave') ? 'text-slate-400' : 'text-slate-950 cursor-pointer'} flex flex-col items-center justify-center`}>
                 <Image unoptimized={true} loading="eager" fetchPriority="high" className="lg:py-2 pt-2 pb-4 lg:w-16 w-26 transition duration-250 opacity-0 object-cover" onLoad={(e) => startOpacityTransition(e.target)} src={Sandblasted} alt="sandblasted-metal"/>
                 <span className="text-sm">Sandblasted</span>
             </button>}
@@ -69,7 +69,7 @@ export default function FinishOptions({tooth, jewelType, visible, signature, pol
                 <button ref={dCutRef} disabled={isDisabled('nopave')} onClick={(e) => changePaveShape(e.currentTarget.value)}
                      type="button"
                      value="nopave-dcut"
-                     className={`${(finish === 'diamond_cut' && !pave?.shape) ? 'lg:border-2 border-3' : 'lg:border-0 border-1' } w-[95%] h-[170px] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 ${!jewelType?.includes('enamel') ? 'mb-4' : ''} p-2 ${isDisabled('nopave') ? 'text-slate-400' : 'text-slate-950 cursor-pointer'} flex flex-col items-center justify-center`}>
+                     className={`${(finish === 'diamond_cut' && !pave?.shape) ? 'lg:border-2 border-3 border-sky-500' : 'lg:border-0 border-1 border-black' } w-[95%] h-[170px] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 ${!jewelType?.includes('enamel') ? 'mb-4' : ''} p-2 ${isDisabled('nopave') ? 'text-slate-400' : 'text-slate-950 cursor-pointer'} flex flex-col items-center justify-center`}>
                 <Image
                     unoptimized={true}
                     loading="eager"
@@ -81,7 +81,7 @@ export default function FinishOptions({tooth, jewelType, visible, signature, pol
             </button>}
             {(!jewelType || (jewelType.includes('full') || jewelType.includes('bezel'))) &&
                 <button ref={mosaicRef} disabled={isDisabled('pave')} onClick={(e) => changePaveShape(e.currentTarget.value)} type="button" value="mosaic"
-                     className={`${pave?.shape === 'mosaic' ? 'lg:border-2 border-3' : 'lg:border-0 border-1' } w-[95%] h-[170px] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 p-2 mb-4 ${isDisabled('pave') ? 'text-slate-400' : 'text-slate-950 cursor-pointer'} flex flex-col items-center justify-center`}>
+                     className={`${pave?.shape === 'mosaic' ? 'lg:border-2 border-3 border-sky-500' : 'lg:border-0 border-1 border-black' } w-[95%] h-[170px] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 p-2 mb-4 ${isDisabled('pave') ? 'text-slate-400' : 'text-slate-950 cursor-pointer'} flex flex-col items-center justify-center`}>
                 <Image
                     onLoad={(e) => startOpacityTransition(e.target)}
                     unoptimized={true} loading="eager" fetchPriority="high"
@@ -90,7 +90,7 @@ export default function FinishOptions({tooth, jewelType, visible, signature, pol
             </button>}
             {(!jewelType || !jewelType.includes('enamel')) &&
                 <button ref={roundRef} disabled={isDisabled('pave')} onClick={(e) => changePaveShape(e.currentTarget.value)} type="button" value="round"
-                     className={`${pave?.shape === 'round' ? 'lg:border-2 border-3' : 'lg:border-0 border-1' } w-[95%] h-[170px] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 p-2 mb-4 ${isDisabled('pave') ? 'text-slate-400' : 'text-slate-950 cursor-pointer'} flex flex-col items-center justify-center`}>
+                     className={`${pave?.shape === 'round' ? 'lg:border-2 border-3 border-sky-500' : 'lg:border-0 border-1 border-black' } w-[95%] h-[170px] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 p-2 mb-4 ${isDisabled('pave') ? 'text-slate-400' : 'text-slate-950 cursor-pointer'} flex flex-col items-center justify-center`}>
                 <Image
                     onLoad={(e) => startOpacityTransition(e.target)}
                     unoptimized={true} loading="eager" fetchPriority="high"
@@ -99,7 +99,7 @@ export default function FinishOptions({tooth, jewelType, visible, signature, pol
             </button>}
             {(!jewelType || (jewelType.includes('full') || jewelType.includes('bezel'))) &&
                 <button ref={hexRef} disabled={isDisabled('pave')} onClick={(e) => changePaveShape(e.currentTarget.value)} type="button" value="hexagon"
-                     className={`${pave?.shape === 'hexagon' ? 'lg:border-2 border-3' : 'lg:border-0 border-1' } w-[95%] h-[170px] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 p-2 mb-4 ${isDisabled('pave') ? 'text-slate-400' : 'text-slate-950 cursor-pointer'} flex flex-col items-center justify-center`}>
+                     className={`${pave?.shape === 'hexagon' ? 'lg:border-2 border-3 border-sky-500' : 'lg:border-0 border-1 border-black' } w-[95%] h-[170px] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 p-2 mb-4 ${isDisabled('pave') ? 'text-slate-400' : 'text-slate-950 cursor-pointer'} flex flex-col items-center justify-center`}>
                 <Image
                     onLoad={(e) => startOpacityTransition(e.target)}
                     unoptimized={true} loading="eager" fetchPriority="high"
@@ -108,7 +108,7 @@ export default function FinishOptions({tooth, jewelType, visible, signature, pol
             </button>}
             {(!jewelType || (jewelType.includes('full') || jewelType.includes('bezel'))) &&
                 <button ref={princessRef} disabled={isDisabled('pave')} onClick={(e) => changePaveShape(e.currentTarget.value)} type="button" value="princess"
-                     className={`${pave?.shape === 'princess' ? 'lg:border-2 border-3' : 'lg:border-0 border-1' } w-[95%] h-[170px] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 p-2 mb-4 ${isDisabled('pave') ? 'text-slate-400' : 'text-slate-950 cursor-pointer'} flex flex-col items-center justify-center`}>
+                     className={`${pave?.shape === 'princess' ? 'lg:border-2 border-3 border-sky-500' : 'lg:border-0 border-1 border-black' } w-[95%] h-[170px] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 p-2 mb-4 ${isDisabled('pave') ? 'text-slate-400' : 'text-slate-950 cursor-pointer'} flex flex-col items-center justify-center`}>
                 <Image
                     onLoad={(e) => startOpacityTransition(e.target)}
                     unoptimized={true} loading="eager" fetchPriority="high"
@@ -117,7 +117,7 @@ export default function FinishOptions({tooth, jewelType, visible, signature, pol
             </button>}
             {(!jewelType || jewelType !== 'enamel') &&
                 <button ref={baguetteRef} disabled={isDisabled('pave')} onClick={(e) => changePaveShape(e.currentTarget.value)} type="button" value="baguette"
-                     className={`${pave?.shape === 'baguette' ? 'lg:border-2 border-3' : 'lg:border-0 border-1' } w-[95%] h-[170px] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 p-2 ${isDisabled('pave') ? 'text-slate-400' : 'text-slate-950 cursor-pointer'} flex flex-col items-center justify-center`}>
+                     className={`${pave?.shape === 'baguette' ? 'lg:border-2 border-3 border-sky-500' : 'lg:border-0 border-1 border-black' } w-[95%] h-[170px] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 p-2 ${isDisabled('pave') ? 'text-slate-400' : 'text-slate-950 cursor-pointer'} flex flex-col items-center justify-center`}>
                 <Image
                     onLoad={(e) => startOpacityTransition(e.target)}
                     unoptimized={true} loading="eager" fetchPriority="high"

@@ -17,34 +17,32 @@ export default function PackagingOptions() {
     return (
         <>
             <button type="button" value="out" onClick={(e) => setActiveSubButton(e.currentTarget.value)}
-                    className={`cursor-pointer ${activeSubButton === 'out' ? 'lg:border-2 border-3' : 'lg:border-0 border-1' } w-[95%] h-[170px] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-2 flex flex-col items-center justify-center`}>
+                    className={`cursor-pointer ${activeSubButton === 'out' ? 'lg:border-2 border-3 border-sky-500' : 'lg:border-0 border-1 border-black' } w-[95%] h-[170px] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-2 flex flex-col items-center justify-center`}>
                 <Image className="transition duration-250 opacity-0 object-cover lg:w-[80%] w-32" onLoad={(e) => startOpacityTransition(e.target)} unoptimized={true} loading="eager" fetchPriority="high" src={Out} alt="outside"/>
                 <span className="text-sm">Outside</span>
             </button>
             <button type="button" value="in" onClick={(e) => setActiveSubButton(e.currentTarget.value)}
-                    className={`cursor-pointer ${activeSubButton === 'in' ? 'lg:border-2 border-3' : 'lg:border-0 border-1' } w-[95%] h-[170px] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-2 flex flex-col items-center justify-center`}>
+                    className={`cursor-pointer ${activeSubButton === 'in' ? 'lg:border-2 border-3 border-sky-500' : 'lg:border-0 border-1 border-black' } w-[95%] h-[170px] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-2 flex flex-col items-center justify-center`}>
                 <Image className="pb-1 transition duration-250 opacity-0 object-cover lg:w-[75%] w-32" onLoad={(e) => startOpacityTransition(e.target)} unoptimized={true} loading="eager" fetchPriority="high" src={In} alt="inside"/>
                 <span className="text-sm">Inside</span>
             </button>
             <button type="button" value="details" onClick={(e) => setActiveSubButton(e.currentTarget.value)}
-                    className={`cursor-pointer ${activeSubButton === 'details' ? 'lg:border-2 border-3' : 'lg:border-0 border-1' } w-[95%] h-[170px] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-2 flex flex-col items-center justify-center`}>
+                    className={`cursor-pointer ${activeSubButton === 'details' ? 'lg:border-2 border-3 border-sky-500' : 'lg:border-0 border-1 border-black' } w-[95%] h-[170px] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-2 flex flex-col items-center justify-center`}>
                 <Image className="transition duration-250 opacity-0 object-cover lg:w-[80%] w-32" onLoad={(e) => startOpacityTransition(e.target)} unoptimized={true} loading="eager" fetchPriority="high" src={Details} alt="gold details"/>
                 <span className="text-sm">Gold Details</span>
             </button>
             <div>
+                {innerWidth < 1024 && activeSubButton === 'text' && <CustomTextInput/> }
+
                 <button type="button" value="text" onClick={(e) => setActiveSubButton(e.currentTarget.value)}
-                        className={`cursor-pointer ${activeSubButton === 'text' ? 'lg:border-2 border-3' : 'lg:border-0 border-1' } w-[95%] h-[170px] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 p-2 flex flex-col items-center justify-center`}>
+                        className={`cursor-pointer ${activeSubButton === 'text' ? 'lg:border-2 border-3 border-sky-500' : 'lg:border-0 border-1 border-black' } w-[95%] h-[170px] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 p-2 flex flex-col items-center justify-center`}>
                     <Image
                             className={`transition duration-250 opacity-0 object-cover lg:w-[80%] w-32`}
                             onLoad={(e) => startOpacityTransition(e.target)}
                             unoptimized={true} loading="eager" fetchPriority="high" src={Text} alt="custom text"
                         />
-                    <span className="text-sm">Custom Text
-                        {innerWidth < 1024 && activeSubButton === 'text' && ' (below)'
-                        }
-                    </span>
+                    <span className="text-sm">Custom Text</span>
                 </button>
-                {innerWidth < 1024 && activeSubButton === 'text' && <CustomTextInput/> }
             </div>
         </>
     )

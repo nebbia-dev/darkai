@@ -18,6 +18,8 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
     const takeScreenshot = useTeethStore((state:State) => state.setIsScreenshotNeeded);
     const setPreciousness = useTeethStore((state:State) => state.setTeethPreciousness);
     const innerWidth = useTeethStore((state:State) => state.innerWidth);
+    const history = useTeethStore((state:State) => state.history);
+    const packaging = useTeethStore((state: State) => state.packaging);
     function toggleRecap() {
         setShowRecap(prev => !prev);
     }
@@ -90,7 +92,7 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
                                         currency: "EUR"
                                     }).format(total)}</span>
                                 </div>
-                                <button className="rounded-3xl bg-slate-950 text-gray-50 px-5 py-2 h-full cursor-pointer"
+                                <button disabled={(history.length === 0 || total === 0) && !packaging.premium} className={`rounded-3xl ${(history.length === 0 || total === 0) && !packaging.premium ? 'bg-gray-300' : 'bg-slate-950 cursor-pointer'} text-gray-50 px-5 py-2 h-full`}
                                         onClick={onclick}>Continue &rarr;</button>
                             </div>
                         }

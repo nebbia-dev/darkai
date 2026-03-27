@@ -39,7 +39,7 @@ export default function UploadFile({theme, sendData} : {theme:'dark' | 'light', 
                 className={`label h-full w-full block ${theme === 'dark' ? 'bg-gray-950/[80%] text-gray-50' : 'bg-gray-50 text-gray-950'} rounded ${selectedFile || innerWidth  < 1024 ? 'p-2' : 'p-8'} cursor-pointer border-[#171717]`}>
                 {
                     selectedFile
-                        ?  <img className="rounded-xl w-[90%] h-[122px] object-cover mb-4 mx-auto" src={preview as string} alt="scan-preview"/>
+                        ?  <img className="rounded-xl w-[90%] h-[100%] lg:h-[122px] object-cover lg:mb-4 mx-auto" src={preview as string} alt="scan-preview"/>
                         :
                             <div className="w-full flex justify-center mb-2">
                             <svg xmlns="http://www.w3.org/2000/svg" width="48px" height="48px" viewBox="0 0 24 24">
@@ -53,9 +53,11 @@ export default function UploadFile({theme, sendData} : {theme:'dark' | 'light', 
                         </div>
                 }
                 <span className={`text-center ${innerWidth  < 1024 ? 'line-clamp-1' : 'line-clamp-2'}`}>
-                    {selectedFile
-                        ? <>{selectedFile.name}</>
-                        : "Upload a dental scan"
+                    {selectedFile && innerWidth  < 1024
+                        ? ''
+                        : selectedFile && innerWidth  >= 1024
+                            ? <>{selectedFile.name}</>
+                            : "Upload a dental scan"
                     }
                 </span>
                 <input type="file" onChange={handleChange}/>
