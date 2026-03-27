@@ -1,6 +1,6 @@
 'use client'
 import Link from 'next/link';
-import {useState} from "react";
+import React, {useState} from "react";
 import {MuiTelInput} from "mui-tel-input";
 import {Accordion, AccordionDetails, AccordionSummary} from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -33,21 +33,25 @@ export default function Upload() {
 
     return(
         <>
+            <div className="fixed w-full flex justify-center z-16">
+                <img className="cursor-auto py-6 w-[132px]" src="/logo.png" alt="darkai logo"/>
+            </div>
             {isSending
                 ? <div className="w-[75vw] h-page-nav flex flex-col items-center justify-center mx-auto">
                     <div className="w-full text-center">
                         <span className="loader mb-8 inline-block mx-auto"></span>
                         <h2 className="text-gray-950 mx-auto">Processing your transaction...</h2>
                     </div>
-                  </div>
+                </div>
                 : sent
                     ? <></>
                     :
                     <div
-                        className="w-[75vw] h-page-nav flex flex-col items-center justify-center mx-auto text-sm">
-                        <div className="w-full flex items-center justify-center bg-gray-50 p-6 rounded-3xl border-1">
+                        className="w-[90%] lg:w-[75vw] lg:h-page-nav flex flex-col items-center justify-center mx-auto text-sm">
+                        <div
+                            className="mt-12 w-full h-[calc(100dvh-(0.25rem*16)-60px)] lg:h-auto flex lg:flex-row flex-col overflow-y-auto lg:overflow-y-none lg:items-center lg:justify-center lg:bg-gray-50 p-6 lg:rounded-3xl lg:border-1">
                             <div
-                                className="w-[50%] border-r border-gray-950/[33%] overflow-y-auto max-h-[calc(70dvh-54px)]">
+                                className="w-full lg:w-[50%] lg:border-r lg:border-gray-950/[33%] lg:overflow-y-auto lg:max-h-[calc(70dvh-54px)]">
 
                                 <Accordion elevation={0} sx={{
                                     backgroundColor: '#f9fafb',
@@ -289,7 +293,7 @@ export default function Upload() {
                                 </Accordion>
 
                             </div>
-                            <div className="w-[50%] px-6 py-4">
+                            <div className="w-full lg:w-[50%] px-6 py-4 border-t-1 border-black/40 lg:border-t-0">
                                 <form className="flex flex-col gap-4 px-2 pt-2 pb-8 justify-center h-full">
                                     <label>Card number
                                         <input className="w-full bg-stone-200 rounded py-2 px-4"
@@ -331,9 +335,11 @@ export default function Upload() {
                                 </form>
                             </div>
                         </div>
-                        <div className="border-1 rounded-3xl w-full bg-gray-50 px-2 py-2 flex items-center justify-between mt-4 mx-auto">
-                            <Link className="border-1 rounded-3xl text-slate-950 bg-gray-50 px-5 py-2 h-full cursor-pointer"
-                                  href="/">&larr; Back
+                        <div
+                            className="fixed lg:static bottom-5 border-1 rounded-3xl lg:w-full w-[90%] bg-gray-50 px-2 py-2 flex items-center justify-between mt-4 mx-auto">
+                            <Link
+                                className="border-1 rounded-3xl text-slate-950 bg-gray-50 px-5 py-2 h-full cursor-pointer"
+                                href="/">&larr; Back
                             </Link>
                             <button className="rounded-3xl bg-slate-950 text-gray-50 px-5 py-2 h-full cursor-pointer"
                                     type="button" onClick={pay}>Proceed to payment &rarr;</button>
