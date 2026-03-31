@@ -28,6 +28,8 @@ export default function Config() {
 
     useEffect(() => {
         updateInnerSize();
+        window.addEventListener('resize', updateInnerSize);
+        return () => window.removeEventListener('resize', updateInnerSize);
     }, [])
 
     function setContinue() {
@@ -36,15 +38,15 @@ export default function Config() {
     }
 
     function updateInnerSize() {
-        setInnerWidth(window.innerWidth);
-        setInnerHeight(window.innerHeight);
-        if(window.innerWidth >= 1024) {
+        if(window.innerWidth >= 1024 && (innerWidth < 1024 || innerWidth === 0)) {
             setShowMenu(true);
             setShowRecap(true);
-        } else {
+        } else if(window.innerWidth < 1024 && (innerWidth >= 1024 || innerWidth === 0)) {
             setShowMenu(false);
             setShowRecap(false);
         }
+        setInnerWidth(window.innerWidth);
+        setInnerHeight(window.innerHeight);
     }
 
     function closeAllUIs() {
