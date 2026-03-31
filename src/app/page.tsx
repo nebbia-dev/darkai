@@ -17,6 +17,7 @@ export default function Config() {
     const innerWidth = useTeethStore((state:State) => state.innerWidth);
     const loaded = useTeethStore((state) => state.loaded);
     const activeButton = useTeethStore((state) => state.activeButton);
+    const activeSubButton = useTeethStore((state) => state.activeSubButton);
     const changeActiveButton = useTeethStore((state) => state.setActiveButton);
     const setActive = useTeethStore((state: State) => state.setActiveTooth);
     const [showMenu, setShowMenu] = useState<boolean>(false);
@@ -32,19 +33,25 @@ export default function Config() {
         return () => window.removeEventListener('resize', updateInnerSize);
     }, [])
 
+    useEffect(() => {
+        if(activeSubButton !== 'text') {
+            console.log(activeSubButton)
+            if (innerWidth >= 1024) {
+                setShowMenu(true);
+                setShowRecap(true);
+            } else if (innerWidth < 1024) {
+                setShowMenu(false);
+                setShowRecap(false);
+            }
+        }
+    }, [innerWidth])
+
     function setContinue() {
         setNextStep(!nextStep);
         setActive(undefined);
     }
 
     function updateInnerSize() {
-        if(window.innerWidth >= 1024 && (innerWidth < 1024 || innerWidth === 0)) {
-            setShowMenu(true);
-            setShowRecap(true);
-        } else if(window.innerWidth < 1024 && (innerWidth >= 1024 || innerWidth === 0)) {
-            setShowMenu(false);
-            setShowRecap(false);
-        }
         setInnerWidth(window.innerWidth);
         setInnerHeight(window.innerHeight);
     }

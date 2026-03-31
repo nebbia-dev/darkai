@@ -66,8 +66,6 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
     const bubblegumRef = useRef<HTMLButtonElement|null>(null);
     const tribalRef = useRef<HTMLButtonElement|null>(null);
 
-    console.log(innerWidth/innerHeight <= 0.76 && innerWidth/innerHeight >= 0.55, innerWidth/innerHeight)
-
     function renderOptions(active:string|undefined, tooth:string|undefined) {
         switch(active) {
             case "1":
