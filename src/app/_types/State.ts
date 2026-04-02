@@ -35,6 +35,8 @@ interface TempPrices {
 }
 
 export interface State {
+    bufferConfigImage: Buffer | undefined,
+    setBufferConfigImage: (buffer:Buffer) => void,
     envMap: Texture | CubeTexture | undefined,
     hovered: string|undefined,
     teethGeometry: FBX,

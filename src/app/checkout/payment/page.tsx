@@ -7,28 +7,85 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import {useTeethStore} from "@/app/_stores/teeth";
 import {State} from "@/app/_types/State";
 import {useRouter} from "next/navigation";
+import {createClient} from "@/utils/supabase/client";
+import PersonalData from "@/app/_types/PersonalData";
 export default function Upload() {
     const router = useRouter();
     const history = useTeethStore((state:State) => state.history);
-    // const preciousness = useTeethStore((state:State) => state.teethPreciousness);
-    const [value, setValue] = useState<string>();
+    const [billingData, setBillingData] = useState<PersonalData>({
+        lastname: '',
+        name: '',
+        city: '',
+        postalCode: '',
+        state: '',
+        email: '',
+        phone: '',
+        address: '',
+    });
+    const [shippingData, setShippingData] = useState<PersonalData>({
+        lastname: '',
+        name: '',
+        city: '',
+        postalCode: '',
+        state: '',
+        email: '',
+        phone: '',
+        address: '',
+    });
+    const [error, setError] = useState<boolean>(false);
     // DA RE-INSERIRE QUANDO VERRA' ABILITATA L'OPZIONE DEL RITIRO PRESSO GLI AFFILIATI
     // const [shippingOption, setShippingOption] = useState<string|undefined>(undefined);
     const [differentShipOpts, setDifferentShipOpts] = useState<boolean>(false);
-    function handleChange(newValue: string) {
-        setValue(newValue);
+    function handlePhoneChange(newValue: string) {
+        setBillingData({...billingData, phone:newValue});
+    }
+
+    function handleShipPhoneChange(newValue: string) {
+        setBillingData({...shippingData, phone:newValue});
     }
 
     const [isSending, setIsSending] = useState<boolean>(false);
     const [sent, setSent] = useState<boolean>(false);
-    function pay() {
+    async function pay() {
         console.log(JSON.stringify(history[history.length-1][0]));
         setIsSending(true);
-        setTimeout(() => {
+        if(differentShipOpts && (
+            shippingData.name === ''
+            || shippingData.lastname === ''
+            || shippingData.address === ''
+            || shippingData.city === ''
+            || shippingData.state === ''
+            || shippingData.phone === ''
+            || shippingData.postalCode === ''
+        )) {
+            setIsSending(false);
+            return;
+        }
+        if(billingData.name === ''
+            || billingData.lastname === ''
+            || billingData.address === ''
+            || billingData.city === ''
+            || billingData.state === ''
+            || billingData.phone === ''
+            || billingData.postalCode === ''
+            || billingData.email === ''
+        ) {
+            setIsSending(false);
+            return;
+        }
+        try {
+            const supabase = createClient();
+            const { data, error } = await supabase
+                .from('Customers')
+                .insert({ name: 'Mordor' })
+                .select();
+            console.log(data);
             setIsSending(false);
             setSent(true);
             router.push('/checkout/payment/success');
-        }, 1000)
+        } catch(error) {
+            console.log(error);
+        }
     }
 
     return(
@@ -49,7 +106,7 @@ export default function Upload() {
                     <div
                         className="w-[90%] lg:w-[75vw] lg:h-page-nav flex flex-col items-center justify-center mx-auto text-sm">
                         <div
-                            className="mt-12 w-full h-[calc(100dvh-(0.25rem*16)-60px)] lg:h-auto flex lg:flex-row flex-col overflow-y-auto lg:overflow-y-none lg:items-center lg:justify-center lg:bg-gray-50 p-6 lg:rounded-3xl lg:border-1">
+                            className={`mt-18 w-full ${error ? 'h-[calc(100dvh-(0.25rem*38)-60px)]' : 'h-[calc(100dvh-(0.25rem*28)-60px)]'} lg:h-auto flex lg:flex-row flex-col overflow-y-auto lg:overflow-y-none lg:items-center lg:justify-center lg:bg-gray-50 p-6 lg:rounded-3xl lg:border-1`}>
                             <div
                                 className="w-full lg:w-[50%] lg:border-r lg:border-gray-950/[33%] lg:overflow-y-auto lg:max-h-[calc(70dvh-54px)]">
 
@@ -76,6 +133,11 @@ export default function Upload() {
                                                 <input className="w-full bg-stone-200 rounded py-2 px-4"
                                                        type="text"
                                                        placeholder="Type your name"
+                                                       value={billingData.name}
+                                                       onChange={(e) => setBillingData({
+                                                           ...billingData,
+                                                           name: e.currentTarget.value
+                                                       })}
                                                        required
                                                 />
                                             </label>
@@ -83,6 +145,11 @@ export default function Upload() {
                                                 <input className="w-full bg-stone-200 rounded py-2 px-4"
                                                        type="text"
                                                        placeholder="Type your last name"
+                                                       value={billingData.lastname}
+                                                       onChange={(e) => setBillingData({
+                                                           ...billingData,
+                                                           lastname: e.currentTarget.value
+                                                       })}
                                                        required
                                                 />
                                             </label>
@@ -90,6 +157,11 @@ export default function Upload() {
                                                 <input className="w-full bg-stone-200 rounded py-2 px-4"
                                                        type="text"
                                                        placeholder="Type your address"
+                                                       value={billingData.address}
+                                                       onChange={(e) => setBillingData({
+                                                           ...billingData,
+                                                           address: e.currentTarget.value
+                                                       })}
                                                        required
                                                 />
                                             </label>
@@ -97,6 +169,11 @@ export default function Upload() {
                                                 <input className="w-full bg-stone-200 rounded py-2 px-4"
                                                        type="text"
                                                        placeholder="Type your city"
+                                                       value={billingData.city}
+                                                       onChange={(e) => setBillingData({
+                                                           ...billingData,
+                                                           city: e.currentTarget.value
+                                                       })}
                                                        required
                                                 />
                                             </label>
@@ -104,6 +181,11 @@ export default function Upload() {
                                                 <input className="w-full bg-stone-200 rounded py-2 px-4"
                                                        type="number"
                                                        placeholder="Type your postal code"
+                                                       value={billingData.postalCode}
+                                                       onChange={(e) => setBillingData({
+                                                           ...billingData,
+                                                           postalCode: e.currentTarget.value
+                                                       })}
                                                        required
                                                 />
                                             </label>
@@ -111,6 +193,11 @@ export default function Upload() {
                                                 <input className="w-full bg-stone-200 rounded py-2 px-4"
                                                        type="text"
                                                        placeholder="Type your state"
+                                                       value={billingData.state}
+                                                       onChange={(e) => setBillingData({
+                                                           ...billingData,
+                                                           state: e.currentTarget.value
+                                                       })}
                                                        required
                                                 />
                                             </label>
@@ -118,6 +205,11 @@ export default function Upload() {
                                                 <input className="w-full bg-stone-200 rounded py-2 px-4"
                                                        type="email"
                                                        placeholder="Type your email address"
+                                                       value={billingData.email}
+                                                       onChange={(e) => setBillingData({
+                                                           ...billingData,
+                                                           email: e.currentTarget.value
+                                                       })}
                                                        required
                                                 />
                                             </label>
@@ -149,8 +241,9 @@ export default function Upload() {
                                                         },
                                                     }}
                                                                  placeholder="Enter your phone number"
-                                                                 value={value}
-                                                                 onChange={handleChange}/>
+                                                                 value={billingData.phone}
+                                                                 onChange={handlePhoneChange}
+                                                    />
                                                 </div>
                                             </label>
                                         </form>
@@ -209,6 +302,11 @@ export default function Upload() {
                                                         <input className="w-full bg-stone-200 rounded py-2 px-4"
                                                                type="text"
                                                                placeholder="Type your name"
+                                                               value={shippingData.name}
+                                                               onChange={(e) => setBillingData({
+                                                                   ...shippingData,
+                                                                   name: e.currentTarget.value
+                                                               })}
                                                                required
                                                         />
                                                     </label>
@@ -216,6 +314,11 @@ export default function Upload() {
                                                         <input className="w-full bg-stone-200 rounded py-2 px-4"
                                                                type="text"
                                                                placeholder="Type your last name"
+                                                               value={shippingData.lastname}
+                                                               onChange={(e) => setBillingData({
+                                                                   ...shippingData,
+                                                                   lastname: e.currentTarget.value
+                                                               })}
                                                                required
                                                         />
                                                     </label>
@@ -223,6 +326,11 @@ export default function Upload() {
                                                         <input className="w-full bg-stone-200 rounded py-2 px-4"
                                                                type="text"
                                                                placeholder="Type your address"
+                                                               value={shippingData.address}
+                                                               onChange={(e) => setBillingData({
+                                                                   ...shippingData,
+                                                                   address: e.currentTarget.value
+                                                               })}
                                                                required
                                                         />
                                                     </label>
@@ -237,6 +345,11 @@ export default function Upload() {
                                                         <input className="w-full bg-stone-200 rounded py-2 px-4"
                                                                type="number"
                                                                placeholder="Type your postal code"
+                                                               value={shippingData.postalCode}
+                                                               onChange={(e) => setBillingData({
+                                                                   ...shippingData,
+                                                                   postalCode: e.currentTarget.value
+                                                               })}
                                                                required
                                                         />
                                                     </label>
@@ -244,13 +357,11 @@ export default function Upload() {
                                                         <input className="w-full bg-stone-200 rounded py-2 px-4"
                                                                type="text"
                                                                placeholder="Type your state"
-                                                               required
-                                                        />
-                                                    </label>
-                                                    <label>Email address
-                                                        <input className="w-full bg-stone-200 rounded py-2 px-4"
-                                                               type="email"
-                                                               placeholder="Type your email address"
+                                                               value={shippingData.state}
+                                                               onChange={(e) => setBillingData({
+                                                                   ...shippingData,
+                                                                   state: e.currentTarget.value
+                                                               })}
                                                                required
                                                         />
                                                     </label>
@@ -282,8 +393,8 @@ export default function Upload() {
                                                                 },
                                                             }}
                                                                          placeholder="Enter your phone number"
-                                                                         value={value}
-                                                                         onChange={handleChange}/>
+                                                                         value={shippingData.phone}
+                                                                         onChange={handleShipPhoneChange}/>
                                                         </div>
                                                     </label>
                                                 </form>
@@ -335,6 +446,11 @@ export default function Upload() {
                                 </form>
                             </div>
                         </div>
+
+                        {/*<div*/}
+                        {/*    className="fixed lg:static bottom-20 border-1 border-red-500 rounded-3xl lg:w-full w-[90%] bg-red-100 px-2 py-2 flex items-center justify-between mt-4 mx-auto">*/}
+                        {/*    Please insert all info*/}
+                        {/*</div>*/}
                         <div
                             className="fixed lg:static bottom-5 border-1 rounded-3xl lg:w-full w-[90%] bg-gray-50 px-2 py-2 flex items-center justify-between mt-4 mx-auto">
                             <Link

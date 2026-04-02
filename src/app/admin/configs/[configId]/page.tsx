@@ -60,7 +60,7 @@ export default async function Config({params}: { params: Promise<{ configId: str
                     <BackButton url="/admin/configs"/>
                 </div>
                 <div className="h-full flex flex-col justify-center">
-                    <h1 className="font-bold text-2xl w-[75vw] mx-auto">Configuration {confIdConverter(data?.[0].config_id)} </h1>
+                    <h1 className="font-bold text-2xl w-[75vw] mx-auto">Configuration {confIdConverter(data?.[0].id)} </h1>
                 </div>
             </div>
             <div className="w-[80%] mx-auto h-tab-height mb-[3rem] flex justify-center">

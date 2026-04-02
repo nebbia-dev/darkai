@@ -1705,19 +1705,25 @@ export default function Configurator() {
     const setLoaded = useTeethStore((state: State) => state.setLoaded);
     const packagingScene = useTeethStore((state: State) => state.packagingScene);
     const innerWidth = useTeethStore((state: State) => state.innerWidth);
+    const setBufferConfigImage = useTeethStore((state : State) => state.setBufferConfigImage);
 
     useEffect(() => {
         if(screenshot && orbitRef.current) {
-            console.log('say cheese')
             orbitRef.current.reset();
+            resetCameraPosition();
             setTimeout(() => {
                 const link = document.createElement('a');
                 link.setAttribute('download', 'canvas.png');
                 gl.render(scene, camera);
                 link.setAttribute('href', gl.domElement.toDataURL('image/png').replace('image/png', 'image/octet-stream'));
-                link.click();
+                const base64Image = link.getAttribute('href');
+                const base64 = (base64Image as string).split('base64,')[1]
+                const buffer = Buffer.from(base64, 'base64');
+                setBufferConfigImage(buffer);
+                console.log(buffer);
+                // link.click();
                 resetScreenShot(undefined);
-            }, 200)
+            }, 500)
         }
     }, [screenshot]);
 

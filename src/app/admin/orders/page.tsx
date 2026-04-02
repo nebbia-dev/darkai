@@ -43,7 +43,7 @@ export default async function Page() {
                                 className={`${index % 2 !== 0 ? 'border-t border-b border-t-gray-400 border-b-gray-400' : 'bg-gray-100'}`}>
                                 <td scope="row" className="text-right h-[2rem] px-2">
                                     <span className="w-[7.5vw] inline-block text-center">
-                                        {orderIdConverter(order.order_id)}
+                                        {orderIdConverter(order.id)}
                                     </span>
                                 </td>
                                 <td className="text-center h-[4rem] pr-2 pl-[5%]">{dateConverter(order.created_at)}</td>

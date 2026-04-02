@@ -16,7 +16,7 @@ export default async function Order({params}: { params: Promise<{ orderId: strin
     const supabase = await createClient();
     const {data, error } = await supabase
         .from('Orders')
-        .select('id, order_id, shipping, created_at, status, shippingAddress, total, user_id(' +
+        .select('id, shipping, created_at, status, shippingAddress, total, user_id(' +
             'id, name, lastname, email, phone, scan), config(id, config, screen) ')
         .eq('id', orderId);
 
@@ -66,7 +66,7 @@ export default async function Order({params}: { params: Promise<{ orderId: strin
                     <BackButton url="/admin/orders"/>
                 </div>
                 <div className="h-full flex flex-col justify-center">
-                    <h1 className="font-bold text-2xl w-[75vw] mx-auto">Order {orderIdConverter((data as unknown as OrderInfo[])?.[0].order_id)} </h1>
+                    <h1 className="font-bold text-2xl w-[75vw] mx-auto">Order {orderIdConverter((data as unknown as OrderInfo[])?.[0].id)} </h1>
 
                     <div className="w-[75vw] mx-auto mt-2">
                         <h3 className="inline">Order status: </h3>

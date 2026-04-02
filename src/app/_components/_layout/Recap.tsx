@@ -4,11 +4,12 @@ import Upload from "@/app/_components/_elements/_upload_inputs/Upload";
 import {Modal} from "@mui/material";
 import {useTeethStore} from "@/app/_stores/teeth";
 import {State} from "@/app/_types/State";
-import Link from 'next/link';
 import RecapList from "@/app/_components/_elements/RecapList";
 import {Dropdown} from "@/app/_components/_icons/Dropdown";
+import {useRouter} from "next/navigation";
 
 export default function Recap({next, onclick} : {next:boolean, onclick:() => void }){
+    const router = useRouter();
     const teethPreciousness = useTeethStore((state:State) => state.teethPreciousness);
     const total = useTeethStore((state:State) => state.total);
     const [showRecap, setShowRecap] = useState<boolean>(true);
@@ -38,6 +39,13 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
             setIsSending(false);
             setSent(true);
         }, 1000)
+    }
+
+    function saveTempConfig() {
+        takeScreenshot(true);
+        setTimeout(() => {
+            router.push('/checkout/payment');
+        }, 550)
     }
 
     return(
@@ -141,11 +149,11 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
                                     onClick={() => setOpen(true)}
                                     className="rounded-3xl bg-slate-950 text-gray-50 px-5 py-2 h-full cursor-pointer">Save
                                 </button>
-                                <Link
-                                    href='/checkout/payment'
+                                <button
+                                    onClick={saveTempConfig}
                                     className="rounded-3xl bg-slate-950 text-gray-50 px-5 py-2 h-full cursor-pointer">
                                     {innerWidth >= 1024 ? 'Proceed to c' : 'C'}heckout &rarr;
-                                </Link>
+                                </button>
                             </div>
 
                         </div>

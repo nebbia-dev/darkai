@@ -1,4 +1,5 @@
 import {History} from "@/app/_types/TeethOptions";
+import PersonalData from "@/app/_types/PersonalData";
 
 export default interface OrderInfo {
     config: {
@@ -10,18 +11,8 @@ export default interface OrderInfo {
     id: number,
     shipping: boolean,
     total: number,
-    shippingAddress: {
-        address: string,
-        city: string,
-        email: string,
-        lastname: string,
-        name: string,
-        phone: string,
-        postalCode: string,
-        state: string
-    },
+    shippingAddress: PersonalData,
     status: 'In production' | 'Shipped' | 'Delivered' | 'New' | 'Canceled' | undefined,
-    order_id: number,
     user_id: {
         id: number,
         email: string,
