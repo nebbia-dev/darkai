@@ -378,7 +378,7 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
                                 ? 'h-[596px]'
                                 : 'h-[800px]'
                     } 
-                        ${(innerWidth/innerHeight <= 0.76 && innerWidth/innerHeight >= 0.57) ? 'w-[33vw]' : 'w-[65vw]'} lg:w-[200px] bg-gray-50/75 lg:bg-gray-50 rounded-3xl p-8 pr-4 border-1 max-h-[70dvh]`}>
+                        w-[65vw] lg:w-[200px] bg-gray-50/75 lg:bg-gray-50 rounded-3xl p-8 pr-4 border-1 max-h-[70dvh]`}>
                     <div onScroll={sync} ref={elementRef} className="overflow-y-auto h-full pl-[2px] pr-4">
                         {renderOptions(active, tooth)}
                     </div>
@@ -387,7 +387,7 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
 
 
             <div
-                className={`${!active ? 'hidden' : 'block'} w-[64px] text-center max-h-[70dvh] ${
+                className={`${!active ? 'hidden' : 'block'} w-[64px] text-center max-h-[70dvh] absolute left-[72.5vw] lg:left-[240px] ${
                     active === '6' 
                         ? 'py-4 lg:w-[250px]'
                         : 'py-8'
@@ -399,7 +399,6 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
                             ? 'h-[596px]'
                             : 'h-[800px]'
                 }
-                absolute ${(innerWidth/innerHeight <= 0.76 && innerWidth/innerHeight >= 0.57) ? 'left-[40.5vw]' : 'left-[72.5vw]'} lg:left-[240px]
                 ${
                     (innerWidth/innerHeight > 0.76 || innerWidth/innerHeight < 0.55)
                         ? 'top-[-25dvh]'

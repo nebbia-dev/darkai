@@ -44,50 +44,57 @@ export default function SignatureOptions({crossRef, vampRef, bubblegumRef, sprin
     return (
         <>
             <button ref={vampRef} type="button" value="vamp"
-                    className={`${signature.vamp ? 'border-2 border-sky-500 rounded-3xl' : ''} cursor-pointer flex items-center justify-center w-[95%] h-[170px] lg:h-[120px] mx-auto mb-4`}
+                    style={{ backgroundImage: "url('/signatures-icons/sfondo.webp')", backgroundSize: "100% 100%" }}
+                    className={`${signature.vamp ? 'border-2 border-sky-500' : ''} rounded-3xl cursor-pointer flex items-center justify-center w-[95%] h-[170px] lg:h-[120px] mx-auto mb-4`}
                     onClick={(e) => setSignatureDesign(e.currentTarget.value)}>
-                <Image unoptimized={true} loading="eager" fetchPriority="high" className="border-1 border-1 h-full transition duration-250 opacity-0 object-cover rounded-25xl" onLoad={(e) => startOpacityTransition(e.target)}
+                <Image unoptimized={true} loading="eager" fetchPriority="high" className="border-1 border-1 h-full object-contain transition duration-250 opacity-0 rounded-25xl" onLoad={(e) => startOpacityTransition(e.target)}
                      src={Vamp} alt="vamp-logo"/>
             </button>
             <button ref={sprinklesRef} type="button" value="sprinkles"
-                    className={`${signature.sprinkles ? 'border-2 border-sky-500 rounded-3xl' : ''} cursor-pointer flex items-center justify-center w-[95%] h-[170px] lg:h-[120px] mx-auto mb-4`}
+                    style={{ backgroundImage: "url('/signatures-icons/sfondo.webp')", backgroundSize: "100% 100%" }}
+                    className={`${signature.sprinkles ? 'border-2 border-sky-500' : ''} rounded-3xl cursor-pointer flex items-center justify-center w-[95%] h-[170px] lg:h-[120px] mx-auto mb-4`}
                     onClick={(e) => setSignatureDesign(e.currentTarget.value)}>
-                <Image unoptimized={true} loading="eager" fetchPriority="high" className="border-1 h-full transition duration-250 opacity-0 object-cover rounded-25xl" onLoad={(e) => startOpacityTransition(e.target)}
+                <Image unoptimized={true} loading="eager" fetchPriority="high" className="border-1 h-full object-contain transition duration-250 opacity-0 rounded-25xl" onLoad={(e) => startOpacityTransition(e.target)}
                      src={Sprinkles}
                      alt="sprinkles-logo"/>
             </button>
             <button ref={bubblegumRef} type="button" value="bubblegum"
-                    className={`${signature.bubblegum ? 'border-2 border-sky-500 rounded-3xl' : ''} cursor-pointer flex items-center justify-center w-[95%] h-[170px] lg:h-[120px] mx-auto mb-4`}
+                    style={{ backgroundImage: "url('/signatures-icons/sfondo.webp')", backgroundSize: "100% 100%" }}
+                    className={`${signature.bubblegum ? 'border-2 border-sky-500' : ''} rounded-3xl cursor-pointer flex items-center justify-center w-[95%] h-[170px] lg:h-[120px] mx-auto mb-4`}
                     onClick={(e) => setSignatureDesign(e.currentTarget.value)}>
-                <Image unoptimized={true} loading="eager" fetchPriority="high" className="border-1 h-full transition duration-250 opacity-0 object-cover rounded-25xl" onLoad={(e) => startOpacityTransition(e.target)}
+                <Image unoptimized={true} loading="eager" fetchPriority="high" className="border-1 h-full object-contain transition duration-250 opacity-0 rounded-25xl" onLoad={(e) => startOpacityTransition(e.target)}
                      src={Bubblegum}
                      alt="bubblegum-logo"/>
             </button>
             <button ref={bracesRef} type="button" value="braces"
-                    className={`${signature.braces ? 'border-2 border-sky-500 rounded-3xl' : ''} cursor-pointer flex items-center justify-center w-[95%] h-[170px] lg:h-[120px] mx-auto mb-4`}
+                    style={{ backgroundImage: "url('/signatures-icons/sfondo.webp')", backgroundSize: "100% 100%" }}
+                    className={`${signature.braces ? 'border-2 border-sky-500' : ''} rounded-3xl cursor-pointer flex items-center justify-center w-[95%] h-[170px] lg:h-[120px] mx-auto mb-4`}
                     onClick={(e) => setSignatureDesign(e.currentTarget.value)}>
-                <Image unoptimized={true} loading="eager" fetchPriority="high" className="border-1 h-full transition duration-250 opacity-0 object-cover rounded-25xl" onLoad={(e) => startOpacityTransition(e.target)}
+                <Image unoptimized={true} loading="eager" fetchPriority="high" className="border-1 h-full object-contain transition duration-250 opacity-0 rounded-25xl" onLoad={(e) => startOpacityTransition(e.target)}
                      src={Braces}
                      alt="braces-logo"/>
             </button>
             <button ref={tribalRef} type="button" value="tribal"
-                    className={`${signature.tribal ? 'border-2 border-sky-500 rounded-3xl' : ''} cursor-pointer flex items-center justify-center w-[95%] h-[170px] lg:h-[120px] mx-auto mb-4`}
+                    style={{ backgroundImage: "url('/signatures-icons/sfondo.webp')", backgroundSize: "100% 100%" }}
+                    className={`${signature.tribal ? 'border-2 border-sky-500' : ''} rounded-3xl cursor-pointer flex items-center justify-center w-[95%] h-[170px] lg:h-[120px] mx-auto mb-4`}
                     onClick={(e) => setSignatureDesign(e.currentTarget.value)}>
-                <Image unoptimized={true} loading="eager" fetchPriority="high" className="border-1 h-full transition duration-250 opacity-0 object-cover rounded-25xl" onLoad={(e) => startOpacityTransition(e.target)}
+                <Image unoptimized={true} loading="eager" fetchPriority="high" className="border-1 h-full object-contain transition duration-250 opacity-0 rounded-25xl" onLoad={(e) => startOpacityTransition(e.target)}
                      src={Tribal}
                      alt="tribals-logo"/>
             </button>
             <button ref={crossRef} type="button" value="cross"
-                    className={`${signature.cross ? 'border-2 border-sky-500 rounded-3xl' : ''} cursor-pointer flex items-center justify-center w-[95%] h-[170px] lg:h-[120px] mx-auto mb-4`}
+                    style={{ backgroundImage: "url('/signatures-icons/sfondo.webp')", backgroundSize: "100% 100%" }}
+                    className={`${signature.cross ? 'border-2 border-sky-500' : ''} rounded-3xl cursor-pointer flex items-center justify-center w-[95%] h-[170px] lg:h-[120px] mx-auto mb-4`}
                     onClick={(e) => setSignatureDesign(e.currentTarget.value)}>
-                <Image unoptimized={true} loading="eager" fetchPriority="high" className="border-1 h-full transition duration-250 opacity-0 object-cover rounded-25xl" onLoad={(e) => startOpacityTransition(e.target)}
+                <Image unoptimized={true} loading="eager" fetchPriority="high" className="border-1 h-full object-contain transition duration-250 opacity-0 rounded-25xl" onLoad={(e) => startOpacityTransition(e.target)}
                      src={Cross}
                      alt="cross-logo"/>
             </button>
             <button ref={hammeredRef} type="button" value="hammered"
-                    className={`${signature.hammered ? 'border-2 border-sky-500 rounded-3xl' : ''} cursor-pointer flex items-center justify-center w-[95%] h-[170px] lg:h-[120px] mx-auto`}
+                    style={{ backgroundImage: "url('/signatures-icons/sfondo.webp')", backgroundSize: "100% 100%" }}
+                    className={`${signature.hammered ? 'border-2 border-sky-500' : ''} rounded-3xl cursor-pointer flex items-center justify-center w-[95%] h-[170px] lg:h-[120px] mx-auto`}
                     onClick={(e) => setSignatureDesign(e.currentTarget.value)}>
-                <Image unoptimized={true} loading="eager" fetchPriority="high" className="border-1 h-full transition duration-250 opacity-0 object-cover rounded-25xl" onLoad={(e) => startOpacityTransition(e.target)}
+                <Image unoptimized={true} loading="eager" fetchPriority="high" className="border-1 h-full object-contain transition duration-250 opacity-0 rounded-25xl" onLoad={(e) => startOpacityTransition(e.target)}
                      src={Hammered}
                      alt="hammered-logo"/>
             </button>
