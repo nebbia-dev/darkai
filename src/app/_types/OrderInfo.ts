@@ -2,7 +2,7 @@ import {History} from "@/app/_types/TeethOptions";
 import PersonalData from "@/app/_types/PersonalData";
 
 export default interface OrderInfo {
-    config: {
+    config_id: {
         id: number,
         config: History,
         screen: string|undefined|null

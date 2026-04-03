@@ -17,7 +17,7 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-export async function sendMail({sendTo, subject, text, html}: {sendTo?: string; subject: string; text: string; html?: string; }) {
+export async function sendMail({sendTo, subject, text, html, image}: {sendTo?: string, subject: string, text: string, html?: string, image?: string }) {
     try {
         const isVerified = await transporter.verify();
         const info = await transporter.sendMail({
@@ -26,8 +26,11 @@ export async function sendMail({sendTo, subject, text, html}: {sendTo?: string; 
             subject: subject,
             text: text,
             html: html ? html : '',
+            attachments: [{
+                filename: 'yourConfig.png',
+                path: image
+            }]
         });
-        console.log('sent quaso');
     } catch (error) {
         console.error('Something Went Wrong', SMTP_SERVER_USERNAME, SMTP_SERVER_PASSWORD, error);
         return;

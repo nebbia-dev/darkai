@@ -7,11 +7,18 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import {useTeethStore} from "@/app/_stores/teeth";
 import {State} from "@/app/_types/State";
 import {useRouter} from "next/navigation";
-import {createClient} from "@/utils/supabase/client";
 import PersonalData from "@/app/_types/PersonalData";
-export default function Upload() {
+import createCustomer from "@/app/_helpers/_db-interactions/createCustomer";
+import uploadScan from "@/app/_helpers/_db-interactions/uploadScan";
+import createConfig from "@/app/_helpers/_db-interactions/createConfig";
+import uploadConfig from "@/app/_helpers/_db-interactions/uploadConfig";
+import createOrder from "@/app/_helpers/_db-interactions/createOrder";
+export default function Payment() {
     const router = useRouter();
     const history = useTeethStore((state:State) => state.history);
+    const bufferConfigImage = useTeethStore((state:State) => state.bufferConfigImage);
+    const scanImage = useTeethStore((state:State) => state.scanImage);
+    const total = useTeethStore((state:State) => state.total);
     const [billingData, setBillingData] = useState<PersonalData>({
         lastname: '',
         name: '',
@@ -32,23 +39,29 @@ export default function Upload() {
         phone: '',
         address: '',
     });
-    const [error, setError] = useState<boolean>(false);
+    const [error, setError] = useState<boolean|string>(false);
     // DA RE-INSERIRE QUANDO VERRA' ABILITATA L'OPZIONE DEL RITIRO PRESSO GLI AFFILIATI
     // const [shippingOption, setShippingOption] = useState<string|undefined>(undefined);
     const [differentShipOpts, setDifferentShipOpts] = useState<boolean>(false);
     function handlePhoneChange(newValue: string) {
         setBillingData({...billingData, phone:newValue});
+        if(error) {
+            setError(false)
+        }
     }
 
     function handleShipPhoneChange(newValue: string) {
         setBillingData({...shippingData, phone:newValue});
+        if(error) {
+            setError(false)
+        }
     }
 
     const [isSending, setIsSending] = useState<boolean>(false);
     const [sent, setSent] = useState<boolean>(false);
     async function pay() {
-        console.log(JSON.stringify(history[history.length-1][0]));
         setIsSending(true);
+        let shippingJson;
         if(differentShipOpts && (
             shippingData.name === ''
             || shippingData.lastname === ''
@@ -59,6 +72,7 @@ export default function Upload() {
             || shippingData.postalCode === ''
         )) {
             setIsSending(false);
+            setError('The shipping information is incomplete');
             return;
         }
         if(billingData.name === ''
@@ -71,18 +85,44 @@ export default function Upload() {
             || billingData.email === ''
         ) {
             setIsSending(false);
+            setError('The billing information is incomplete');
             return;
         }
+        if(differentShipOpts) {
+            shippingJson = shippingData;
+        } else {
+            shippingJson = {...billingData};
+            delete shippingJson.email;
+        }
+        // console.log(billingData, shippingJson, bufferConfigImage, scanImage);
+        // server action? - YES
+        // create Customer + retrieve id - YES
+        // upload scan + update Customer (if scan is present) - YES
+        // create Config + retrieve id
+        // upload config + update Config
+        // create Order w/ Customer id + Config id
+
         try {
-            const supabase = createClient();
-            const { data, error } = await supabase
-                .from('Customers')
-                .insert({ name: 'Mordor' })
-                .select();
-            console.log(data);
+
+            const customer = await createCustomer(billingData);
+            const number = Math.random() * 100 + Math.cos(Math.random() * 100);
+            if(scanImage.scan && customer) {
+                await uploadScan(scanImage, number, customer[0].id);
+            }
+
+            const config = await createConfig(history[history.length-1][0], total);
+            if(bufferConfigImage && config) {
+                await uploadConfig(bufferConfigImage, number, config[0].id);
+            }
+
+            if(customer && config) {
+                await createOrder(customer[0].id, config[0].id, total, shippingJson);
+            }
+
             setIsSending(false);
             setSent(true);
             router.push('/checkout/payment/success');
+
         } catch(error) {
             console.log(error);
         }
@@ -134,10 +174,15 @@ export default function Upload() {
                                                        type="text"
                                                        placeholder="Type your name"
                                                        value={billingData.name}
-                                                       onChange={(e) => setBillingData({
-                                                           ...billingData,
-                                                           name: e.currentTarget.value
-                                                       })}
+                                                       onChange={(e) => {
+                                                           setBillingData({
+                                                               ...billingData,
+                                                               name: e.currentTarget.value
+                                                           });
+                                                           if(error) {
+                                                               setError(false)
+                                                           }
+                                                       }}
                                                        required
                                                 />
                                             </label>
@@ -146,10 +191,15 @@ export default function Upload() {
                                                        type="text"
                                                        placeholder="Type your last name"
                                                        value={billingData.lastname}
-                                                       onChange={(e) => setBillingData({
-                                                           ...billingData,
-                                                           lastname: e.currentTarget.value
-                                                       })}
+                                                       onChange={(e) => {
+                                                           setBillingData({
+                                                               ...billingData,
+                                                               lastname: e.currentTarget.value
+                                                           });
+                                                           if(error) {
+                                                               setError(false)
+                                                           }
+                                                       }}
                                                        required
                                                 />
                                             </label>
@@ -158,10 +208,15 @@ export default function Upload() {
                                                        type="text"
                                                        placeholder="Type your address"
                                                        value={billingData.address}
-                                                       onChange={(e) => setBillingData({
-                                                           ...billingData,
-                                                           address: e.currentTarget.value
-                                                       })}
+                                                       onChange={(e) => {
+                                                           setBillingData({
+                                                               ...billingData,
+                                                               address: e.currentTarget.value
+                                                           });
+                                                           if(error) {
+                                                               setError(false)
+                                                           }
+                                                       }}
                                                        required
                                                 />
                                             </label>
@@ -170,10 +225,15 @@ export default function Upload() {
                                                        type="text"
                                                        placeholder="Type your city"
                                                        value={billingData.city}
-                                                       onChange={(e) => setBillingData({
-                                                           ...billingData,
-                                                           city: e.currentTarget.value
-                                                       })}
+                                                       onChange={(e) => {
+                                                           setBillingData({
+                                                               ...billingData,
+                                                               city: e.currentTarget.value
+                                                           });
+                                                           if(error) {
+                                                               setError(false)
+                                                           }
+                                                       }}
                                                        required
                                                 />
                                             </label>
@@ -182,10 +242,15 @@ export default function Upload() {
                                                        type="number"
                                                        placeholder="Type your postal code"
                                                        value={billingData.postalCode}
-                                                       onChange={(e) => setBillingData({
-                                                           ...billingData,
-                                                           postalCode: e.currentTarget.value
-                                                       })}
+                                                       onChange={(e) => {
+                                                           setBillingData({
+                                                               ...billingData,
+                                                               postalCode: e.currentTarget.value
+                                                           });
+                                                           if(error) {
+                                                               setError(false)
+                                                           }
+                                                       }}
                                                        required
                                                 />
                                             </label>
@@ -194,10 +259,15 @@ export default function Upload() {
                                                        type="text"
                                                        placeholder="Type your state"
                                                        value={billingData.state}
-                                                       onChange={(e) => setBillingData({
-                                                           ...billingData,
-                                                           state: e.currentTarget.value
-                                                       })}
+                                                       onChange={(e) => {
+                                                           setBillingData({
+                                                               ...billingData,
+                                                               state: e.currentTarget.value
+                                                           });
+                                                           if(error) {
+                                                               setError(false)
+                                                           }
+                                                       }}
                                                        required
                                                 />
                                             </label>
@@ -206,10 +276,15 @@ export default function Upload() {
                                                        type="email"
                                                        placeholder="Type your email address"
                                                        value={billingData.email}
-                                                       onChange={(e) => setBillingData({
-                                                           ...billingData,
-                                                           email: e.currentTarget.value
-                                                       })}
+                                                       onChange={(e) => {
+                                                           setBillingData({
+                                                               ...billingData,
+                                                               email: e.currentTarget.value
+                                                           });
+                                                           if(error) {
+                                                               setError(false)
+                                                           }
+                                                       }}
                                                        required
                                                 />
                                             </label>
@@ -303,10 +378,15 @@ export default function Upload() {
                                                                type="text"
                                                                placeholder="Type your name"
                                                                value={shippingData.name}
-                                                               onChange={(e) => setBillingData({
-                                                                   ...shippingData,
-                                                                   name: e.currentTarget.value
-                                                               })}
+                                                               onChange={(e) => {
+                                                                   setShippingData({
+                                                                       ...shippingData,
+                                                                       name: e.currentTarget.value
+                                                                   });
+                                                                   if(error) {
+                                                                       setError(false)
+                                                                   }
+                                                               }}
                                                                required
                                                         />
                                                     </label>
@@ -315,10 +395,15 @@ export default function Upload() {
                                                                type="text"
                                                                placeholder="Type your last name"
                                                                value={shippingData.lastname}
-                                                               onChange={(e) => setBillingData({
-                                                                   ...shippingData,
-                                                                   lastname: e.currentTarget.value
-                                                               })}
+                                                               onChange={(e) => {
+                                                                   setShippingData({
+                                                                       ...shippingData,
+                                                                       lastname: e.currentTarget.value
+                                                                   });
+                                                                   if(error) {
+                                                                       setError(false)
+                                                                   }
+                                                               }}
                                                                required
                                                         />
                                                     </label>
@@ -327,10 +412,15 @@ export default function Upload() {
                                                                type="text"
                                                                placeholder="Type your address"
                                                                value={shippingData.address}
-                                                               onChange={(e) => setBillingData({
-                                                                   ...shippingData,
-                                                                   address: e.currentTarget.value
-                                                               })}
+                                                               onChange={(e) => {
+                                                                   setShippingData({
+                                                                       ...shippingData,
+                                                                       address: e.currentTarget.value
+                                                                   });
+                                                                   if(error) {
+                                                                       setError(false)
+                                                                   }
+                                                               }}
                                                                required
                                                         />
                                                     </label>
@@ -338,6 +428,15 @@ export default function Upload() {
                                                         <input className="w-full bg-stone-200 rounded py-2 px-4"
                                                                type="text"
                                                                placeholder="Type your city"
+                                                               onChange={(e) => {
+                                                                   setShippingData({
+                                                                       ...shippingData,
+                                                                       city: e.currentTarget.value
+                                                                   });
+                                                                   if(error) {
+                                                                       setError(false)
+                                                                   }
+                                                               }}
                                                                required
                                                         />
                                                     </label>
@@ -346,10 +445,15 @@ export default function Upload() {
                                                                type="number"
                                                                placeholder="Type your postal code"
                                                                value={shippingData.postalCode}
-                                                               onChange={(e) => setBillingData({
-                                                                   ...shippingData,
-                                                                   postalCode: e.currentTarget.value
-                                                               })}
+                                                               onChange={(e) => {
+                                                                   setShippingData({
+                                                                       ...shippingData,
+                                                                       postalCode: e.currentTarget.value
+                                                                   });
+                                                                   if(error) {
+                                                                       setError(false)
+                                                                   }
+                                                               }}
                                                                required
                                                         />
                                                     </label>
@@ -358,10 +462,15 @@ export default function Upload() {
                                                                type="text"
                                                                placeholder="Type your state"
                                                                value={shippingData.state}
-                                                               onChange={(e) => setBillingData({
-                                                                   ...shippingData,
-                                                                   state: e.currentTarget.value
-                                                               })}
+                                                               onChange={(e) => {
+                                                                   setShippingData({
+                                                                       ...shippingData,
+                                                                       state: e.currentTarget.value
+                                                                   });
+                                                                   if(error) {
+                                                                       setError(false)
+                                                                   }
+                                                               }}
                                                                required
                                                         />
                                                     </label>
@@ -447,10 +556,12 @@ export default function Upload() {
                             </div>
                         </div>
 
-                        {/*<div*/}
-                        {/*    className="fixed lg:static bottom-20 border-1 border-red-500 rounded-3xl lg:w-full w-[90%] bg-red-100 px-2 py-2 flex items-center justify-between mt-4 mx-auto">*/}
-                        {/*    Please insert all info*/}
-                        {/*</div>*/}
+                        {error &&
+                            <div
+                                className="fixed lg:static bottom-20 border-1 border-red-500 rounded-3xl lg:w-full w-[90%] bg-red-100 px-2 py-2 flex items-center justify-between mt-4 mx-auto">
+                                {error}
+                            </div>
+                        }
                         <div
                             className="fixed lg:static bottom-5 border-1 rounded-3xl lg:w-full w-[90%] bg-gray-50 px-2 py-2 flex items-center justify-between mt-4 mx-auto">
                             <Link

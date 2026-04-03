@@ -17,15 +17,15 @@ export default async function Order({params}: { params: Promise<{ orderId: strin
     const {data, error } = await supabase
         .from('Orders')
         .select('id, shipping, created_at, status, shippingAddress, total, user_id(' +
-            'id, name, lastname, email, phone, scan), config(id, config, screen) ')
+            'id, name, lastname, email, phone, scan), config_id(id, config, screen) ')
         .eq('id', orderId);
 
     const teethConfig: {[key: string]:string} = {};
     const jewelsConfig:{[key: string]:string[]} = {};
 
-    Object.entries((data as unknown as OrderInfo[])?.[0].config.config.visible).forEach(tooth => {
+    Object.entries((data as unknown as OrderInfo[])?.[0]['config_id'].config.visible).forEach(tooth => {
         if (!tooth[1]) return null;
-        const toothProp = (data as unknown as OrderInfo[])?.[0].config.config;
+        const toothProp = (data as unknown as OrderInfo[])?.[0]['config_id'].config;
         if (tooth[0] === 'cisx' && (!(toothProp) || toothProp.type[tooth[0]] === 'bigBar' || toothProp.type[tooth[0]] === 'bigBarDiamond')) return null;
         if (tooth[0] === 'icisx' && (!(toothProp) || toothProp.type[tooth[0]] === 'bar' || toothProp.type[tooth[0]] === 'barDiamond')) return null;
         if (tooth[0] === 'icssx' && (!(toothProp) || toothProp.type[tooth[0]] === 'bar' || toothProp.type[tooth[0]] === 'barDiamond')) return null;
@@ -82,8 +82,8 @@ export default async function Order({params}: { params: Promise<{ orderId: strin
                             <div className="mb-4">
                                 <h3 className="w-full py-1 px-3 bg-gray-200 mb-3">Composition</h3>
                                 <ul>
-                                    {(data as unknown as OrderInfo[])?.[0].config.config.preciousness
-                                        && Object.entries((data as unknown as OrderInfo[])?.[0].config.config.preciousness as Preciousness).map(feat => {
+                                    {(data as unknown as OrderInfo[])?.[0]['config_id'].config.preciousness
+                                        && Object.entries((data as unknown as OrderInfo[])?.[0]['config_id'].config.preciousness as Preciousness).map(feat => {
                                             return <li key={feat[0] + feat[1]}
                                                        className="pl-2">{firstCapital(feat[0])}: {feat[1]}</li>
                                         })
@@ -135,7 +135,7 @@ export default async function Order({params}: { params: Promise<{ orderId: strin
                         <div className="w-full">
                             <Image alt="config"
                                    className="object-cover w-full"
-                                   src={`https://aiuptuoijjmfcxutusbc.supabase.co/storage/v1/object/public/configs/${(data as unknown as OrderInfo[])?.[0].config.screen}`}
+                                   src={`https://aiuptuoijjmfcxutusbc.supabase.co/storage/v1/object/public/configs/${(data as unknown as OrderInfo[])?.[0]['config_id'].screen}`}
                                    width={1000} height={1000} quality={70}/>
                         </div>
                     </div>

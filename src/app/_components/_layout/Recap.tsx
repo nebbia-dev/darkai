@@ -7,9 +7,11 @@ import {State} from "@/app/_types/State";
 import RecapList from "@/app/_components/_elements/RecapList";
 import {Dropdown} from "@/app/_components/_icons/Dropdown";
 import {useRouter} from "next/navigation";
+import {sendMail} from "@/utils/nodemailer/sendMail";
 
 export default function Recap({next, onclick} : {next:boolean, onclick:() => void }){
     const router = useRouter();
+    const bufferConfigImage = useTeethStore((state:State) => state.bufferConfigImage);
     const teethPreciousness = useTeethStore((state:State) => state.teethPreciousness);
     const total = useTeethStore((state:State) => state.total);
     const [showRecap, setShowRecap] = useState<boolean>(true);
@@ -27,18 +29,21 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
     function setCarat(e:any) {
         setPreciousness(Number(e));
     }
-    function download(e:FormEvent) {
+    async function download(e:FormEvent) {
         e.preventDefault();
         setIsSending(true);
-        setTimeout(() => {
-            takeScreenshot(true);
             // TODO:
             // - set Nodemailer to SEND the email with the current configuration and the screenshot
             // - save the configuration in the local storage
             // - IF the checkbox is checked, SAVE name, email address and config in the Newsletter table
-            setIsSending(false);
-            setSent(true);
-        }, 1000)
+        await sendMail({
+                sendTo: 'barbara.sandrolini@gmail.com',
+                subject: 'New config!',
+                text: 'Your new Grill!',
+                image: bufferConfigImage
+        });
+        setIsSending(false);
+        setSent(true);
     }
 
     function saveTempConfig() {
@@ -146,7 +151,10 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
                             }
                             <div className="flex gap-2 items-center">
                                 <button
-                                    onClick={() => setOpen(true)}
+                                    onClick={() => {
+                                        setOpen(true);
+                                        takeScreenshot(true)
+                                    }}
                                     className="rounded-3xl bg-slate-950 text-gray-50 px-5 py-2 h-full cursor-pointer">Save
                                 </button>
                                 <button

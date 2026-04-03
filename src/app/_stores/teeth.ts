@@ -11,6 +11,14 @@ export const useTeethStore = create<State>((set, get) => ({
     // state and method to save the Buffer image of the config screenshot while waiting for the customer to pay
     bufferConfigImage: undefined,
     setBufferConfigImage: (buffer) => set({bufferConfigImage: buffer}),
+    scanImage: { scan: undefined, type: undefined },
+    setScanImage: (scan, type) =>
+        set(
+            produce((state) => {
+                    state.scanImage.scan = scan;
+                    state.scanImage.type = type;
+                }
+            )),
     // state and method to take a screenshot of the Canvas when needed
     // (the useThree hook needed to perform this task can be used only inside the Canvas)
     isScreenshotNeeded: undefined,

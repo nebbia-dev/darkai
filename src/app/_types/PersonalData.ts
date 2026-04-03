@@ -4,7 +4,7 @@ export default interface PersonalData {
     city: string,
     postalCode: string,
     state: string,
-    email: string,
+    email?: string | undefined,
     phone: string,
     address: string,
 }

@@ -1,10 +1,15 @@
-'use client'
 import UploadFile from "@/app/_components/_elements/_upload_inputs/UploadFile";
-import {useState} from "react";
+import {useTeethStore} from "@/app/_stores/teeth";
+import {State} from "@/app/_types/State";
 export default function Upload() {
-    const [file, setFile] = useState<File|undefined>();
+    const setScanImage = useTeethStore((state:State) => state.setScanImage);
+
     function getData(newFile:File) {
-        setFile(newFile);
+        const reader = new FileReader();
+        reader.readAsArrayBuffer(newFile);
+        reader.onload = () => {
+            setScanImage(reader.result as ArrayBuffer, newFile.type);
+        };
     }
 
     return(

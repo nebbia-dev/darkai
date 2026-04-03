@@ -1717,11 +1717,7 @@ export default function Configurator() {
                 gl.render(scene, camera);
                 link.setAttribute('href', gl.domElement.toDataURL('image/png').replace('image/png', 'image/octet-stream'));
                 const base64Image = link.getAttribute('href');
-                const base64 = (base64Image as string).split('base64,')[1]
-                const buffer = Buffer.from(base64, 'base64');
-                setBufferConfigImage(buffer);
-                console.log(buffer);
-                // link.click();
+                setBufferConfigImage(base64Image as string);
                 resetScreenShot(undefined);
             }, 500)
         }
