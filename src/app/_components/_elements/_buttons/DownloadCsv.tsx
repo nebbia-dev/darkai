@@ -24,7 +24,7 @@ export default function DownloadCsv({data} : {data: CustomerInfo[]| ConfigInfo[]
                 arr.push(['Configuration ID', 'Date', 'Total', 'Configurator outcome']);
                 data?.forEach(el => {
                     arr.push([
-                        removeCommas(confIdConverter((el as unknown as ConfigInfo).config_id)),
+                        removeCommas(confIdConverter((el as unknown as ConfigInfo).id)),
                         removeCommas(dateConverter((el as unknown as ConfigInfo).created_at)),
                         removeCommas((el as unknown as ConfigInfo).total.toString()) + '€',
                         (el as unknown as ConfigInfo).orderStatus ? removeCommas((el as unknown as ConfigInfo).orderStatus) : "Order not finalized",
@@ -36,7 +36,7 @@ export default function DownloadCsv({data} : {data: CustomerInfo[]| ConfigInfo[]
                 arr.push(['Order ID', 'Date', 'Customer', 'Total', 'Status']);
                 data?.forEach(el => {
                     arr.push([
-                        removeCommas(orderIdConverter((el as unknown as OrderInfo).order_id)),
+                        removeCommas(orderIdConverter((el as unknown as OrderInfo).id)),
                         removeCommas(dateConverter((el as unknown as OrderInfo).created_at)),
                         removeCommas((el as unknown as OrderInfo).user_id.name) + ' ' + removeCommas((el as unknown as OrderInfo).user_id.lastname),
                         removeCommas((el as unknown as OrderInfo).total.toString()) + '€',
@@ -50,7 +50,7 @@ export default function DownloadCsv({data} : {data: CustomerInfo[]| ConfigInfo[]
                 data?.forEach(el => {
                     arr.push([
                         removeCommas((el as unknown as CustomerInfo).user_id.name) + ' ' + removeCommas((el as unknown as CustomerInfo).user_id.lastname),
-                        removeCommas((el as unknown as CustomerInfo).user_id.email),
+                        removeCommas((el as unknown as CustomerInfo).user_id.email as string),
                         removeCommas((el as unknown as CustomerInfo).user_id.city),
                         removeCommas((el as unknown as CustomerInfo).user_id.postalCode),
                         removeCommas((el as unknown as CustomerInfo).user_id.state),
