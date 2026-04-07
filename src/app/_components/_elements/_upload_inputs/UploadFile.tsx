@@ -28,13 +28,12 @@ export default function UploadFile({theme, sendData} : {theme:'dark' | 'light', 
             setSelectedFile(undefined);
             return;
         }
-
         setSelectedFile(e.target.files[0]);
         sendData(e.target.files[0]);
     }
 
     return (
-        <div className="w-[33%] h-[100px] lg:h-[176px]">
+        <div className={`${theme === 'dark' ? 'w-[33%]' : 'w-full'} h-[100px] lg:h-[176px]`}>
             <label
                 className={`label h-full w-full block ${theme === 'dark' ? 'bg-gray-950/[80%] text-gray-50' : 'bg-gray-50 text-gray-950'} rounded ${selectedFile || innerWidth  < 1024 ? 'p-2' : 'p-8'} cursor-pointer border-[#171717]`}>
                 {

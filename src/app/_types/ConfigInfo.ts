@@ -1,4 +1,4 @@
-import {History} from "@/app/_types/TeethOptions";
+import {History, Packaging} from "@/app/_types/TeethOptions";
 
 export default interface ConfigInfo {
     config: History
@@ -6,5 +6,6 @@ export default interface ConfigInfo {
     id: number,
     orderStatus: string,
     screen: string,
-    total: number
+    total: number,
+    config_pack: Packaging
 }

@@ -19,6 +19,7 @@ export default function Payment() {
     const bufferConfigImage = useTeethStore((state:State) => state.bufferConfigImage);
     const scanImage = useTeethStore((state:State) => state.scanImage);
     const total = useTeethStore((state:State) => state.total);
+    const packaging = useTeethStore((state: State) => state.packaging);
     const [billingData, setBillingData] = useState<PersonalData>({
         lastname: '',
         name: '',
@@ -110,7 +111,7 @@ export default function Payment() {
                 await uploadScan(scanImage, number, customer[0].id);
             }
 
-            const config = await createConfig(history[history.length-1][0], total);
+            const config = await createConfig(history[history.length-1][0], total, packaging);
             if(bufferConfigImage && config) {
                 await uploadConfig(bufferConfigImage, number, config[0].id);
             }

@@ -31,7 +31,16 @@ export default function Config() {
     useEffect(() => {
         updateInnerSize();
         window.addEventListener('resize', updateInnerSize);
-        return () => window.removeEventListener('resize', updateInnerSize);
+        window.addEventListener('orientationchange', updateInnerSize);
+        window.visualViewport?.addEventListener('resize', updateInnerSize);
+        window.visualViewport?.addEventListener('scroll', updateInnerSize);
+
+        return () => {
+            window.removeEventListener('resize', updateInnerSize);
+            window.removeEventListener('orientationchange', updateInnerSize);
+            window.visualViewport?.removeEventListener('resize', updateInnerSize);
+            window.visualViewport?.removeEventListener('scroll', updateInnerSize);
+        };
     }, [])
 
     useEffect(() => {
@@ -53,8 +62,10 @@ export default function Config() {
     }
 
     function updateInnerSize() {
-        setInnerWidth(window.innerWidth);
-        setInnerHeight(window.innerHeight);
+        const viewport = window.visualViewport;
+
+        setInnerWidth(Math.round(viewport?.width ?? window.innerWidth));
+        setInnerHeight(Math.round(viewport?.height ?? window.innerHeight));
     }
 
     function closeAllUIs() {

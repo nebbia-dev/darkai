@@ -8,7 +8,7 @@ export default function AdminLayout({
 }>) {
 
   return (
-    <div>
+    <div className="relative top-[72px]">
         <SideMenu/>
         {children}
     </div>

@@ -27,6 +27,11 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
     const showGemBox = useTeethStore((state: State) => state.setShowGemTypeBox);
     const innerWidth = useTeethStore((state:State) => state.innerWidth);
     const innerHeight = useTeethStore((state:State) => state.innerHeight);
+    const viewportRatio = innerHeight > 0 ? innerWidth / innerHeight : 1;
+    const shortLandscapeViewport = innerWidth >= 1024 && innerHeight <= 720 && viewportRatio >= 1.55;
+    const optionPanelTopClass = (viewportRatio > 0.76 || viewportRatio < 0.55) ? 'top-[-25dvh]' : 'top-[-20dvh]';
+    const packagingPanelTopClass = shortLandscapeViewport ? 'top-[-15dvh]' : optionPanelTopClass;
+    const compactDesktopPanel = ((viewportRatio > 0.74 || viewportRatio < 0.55) && innerWidth >= 1024);
 
     const elementRef = useRef<HTMLDivElement|null>(null);
     const selectorRef = useRef<HTMLDivElement|null>(null);
@@ -357,15 +362,13 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
                         ? 'top-[-10dvh]'
                         : active === '4' && (jewelType?.includes('enamel') || material === 'base')
                             ? 'top-[4.5dvh]'
-                             : (active === '5' && (material === 'base' || (!jewelType?.includes('bezel') && !pave?.shape)) && (innerWidth/innerHeight >= 0.75 || innerWidth/innerHeight <= 0.57))
+                             : (active === '5' && (material === 'base' || (!jewelType?.includes('bezel') && !pave?.shape)) && (viewportRatio >= 0.75 || viewportRatio <= 0.57))
                                 ? 'top-[11dvh]'
-                                 : (active === '5' && (material === 'base' || (!jewelType?.includes('bezel') && !pave?.shape)) && (innerWidth/innerHeight < 0.75 || innerWidth/innerHeight > 0.57))
+                                 : (active === '5' && (material === 'base' || (!jewelType?.includes('bezel') && !pave?.shape)) && (viewportRatio < 0.75 || viewportRatio > 0.57))
                                     ? 'top-[7dvh]'
-                                    : (active === '6' && (innerWidth/innerHeight >= 1.70 && innerWidth/innerHeight <= 1.71))
-                                        ? 'top-[-15dvh]'
-                                        : (innerWidth/innerHeight > 0.76 || innerWidth/innerHeight < 0.55)
-                                            ? 'top-[-25dvh]'
-                                            : 'top-[-20dvh]'
+                                    : active === '6'
+                                        ? packagingPanelTopClass
+                                        : optionPanelTopClass
             } left-[48px]`}>
 
                 <div
@@ -374,7 +377,7 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
                         || (active === '2' && checkMolar(tooth))
                         || (active === '5' && (material === 'base' || (!jewelType?.includes('bezel') && !pave?.shape)))
                             ? 'h-[186px]'
-                            : ((innerWidth/innerHeight > 0.74 || innerWidth/innerHeight < 0.55) && innerWidth >= 1024)
+                            : compactDesktopPanel
                                 ? 'h-[596px]'
                                 : 'h-[800px]'
                     } 
@@ -393,17 +396,13 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
                         : 'py-8'
                 } 
                 ${
-                    active === '6' && ((innerWidth/innerHeight > 0.74 || innerWidth/innerHeight < 0.55) && innerWidth >= 1024)
+                    active === '6' && compactDesktopPanel
                         ? 'h-[604px]'
-                        : active !== '6' && ((innerWidth/innerHeight > 0.74 || innerWidth/innerHeight < 0.55) && innerWidth >= 1024)
+                        : active !== '6' && compactDesktopPanel
                             ? 'h-[596px]'
                             : 'h-[800px]'
                 }
-                ${
-                    (innerWidth/innerHeight > 0.76 || innerWidth/innerHeight < 0.55)
-                        ? 'top-[-25dvh]'
-                        : 'top-[-20dvh]'
-                }
+                ${active === '6' ? packagingPanelTopClass : optionPanelTopClass}
                 `}>
                 <div ref={selectorRef} className="whitespace-nowrap overflow-hidden h-full w-full">
                     {renderSubOptions(active, tooth)}

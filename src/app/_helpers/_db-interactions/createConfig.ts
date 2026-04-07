@@ -1,8 +1,8 @@
 'use server'
 import {createClient} from "@/utils/supabase/server";
-import {History} from "@/app/_types/TeethOptions";
+import {History, Packaging} from "@/app/_types/TeethOptions";
 
-export default async function createConfig(config:History, total:number) {
+export default async function createConfig(config:History, total:number, packaging:Packaging) {
     const supabase = await createClient();
     const { data, error } = await supabase
         .from('Configs')
@@ -10,6 +10,7 @@ export default async function createConfig(config:History, total:number) {
             orderStatus: 'Completed',
             config: config,
             total: total,
+            config_pack: packaging
         })
         .select();
     console.log(error)

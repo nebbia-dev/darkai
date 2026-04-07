@@ -292,7 +292,6 @@ export interface History {
     signatureVisible: SignVisibility,
     signatureMaterial: SignMaterial
 }
-
 export interface HistoryPack {
     packaging: Packaging
 }
@@ -311,7 +310,6 @@ export interface Neighbours {
     cidx: undefined|string,
     cisx: undefined|string,
 }
-
 export interface Packaging {
     [key: string]: boolean|string|{firstLine: string, secondLine: string}
     premium: boolean,

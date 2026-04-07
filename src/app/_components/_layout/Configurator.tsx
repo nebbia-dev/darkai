@@ -1715,10 +1715,22 @@ export default function Configurator() {
                 const link = document.createElement('a');
                 link.setAttribute('download', 'canvas.png');
                 gl.render(scene, camera);
-                link.setAttribute('href', gl.domElement.toDataURL('image/png').replace('image/png', 'image/octet-stream'));
-                const base64Image = link.getAttribute('href');
-                setBufferConfigImage(base64Image as string);
-                resetScreenShot(undefined);
+
+                const sourceCanvas = gl.domElement;
+                const exportCanvas = document.createElement('canvas');
+                exportCanvas.width = sourceCanvas.width;
+                exportCanvas.height = sourceCanvas.height;
+
+                const ctx = exportCanvas.getContext('2d');
+                if (ctx) {
+                    ctx.fillStyle = '#ffffff';
+                    ctx.fillRect(0, 0, exportCanvas.width, exportCanvas.height);
+                    ctx.drawImage(sourceCanvas, 0, 0);
+
+                    const base64Image = exportCanvas.toDataURL('image/png').replace('image/png', 'image/octet-stream');
+                    setBufferConfigImage(base64Image as string);
+                    resetScreenShot(undefined);
+                }
             }, 500)
         }
     }, [screenshot]);

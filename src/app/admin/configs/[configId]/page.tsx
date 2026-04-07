@@ -6,6 +6,10 @@ import {Preciousness} from "@/app/_types/TeethOptions";
 
 import Image from "next/image";
 import confIdConverter from "@/app/_helpers/_converters/confIdConverter";
+import {Tooltip} from "@mui/material";
+import {Trash} from "@/app/_components/_icons/Trash";
+import elabVelvetName from "@/app/_helpers/_string-modders/elabVelvetName";
+import elabMaterial from "@/app/_helpers/_string-modders/elabMaterial";
 export default async function Config({params}: { params: Promise<{ configId: string[] }> }){
     const { configId } = await params;
     const supabase = await createClient();
@@ -106,10 +110,39 @@ export default async function Config({params}: { params: Promise<{ configId: str
                                 </ul>
                             </div>
 
+                            {data?.[0]['config_pack'] &&
+                                <div className="mb-4">
+                                    <div className="flex justify-between items-center mb-1">
+                                        <h4 className="font-semibold">
+                                            Premium Box
+                                        </h4>
+                                    </div>
+                                    {/*type + material*/}
+                                    <p className="pl-2">
+                                        {firstCapital(data?.[0]['config_pack'].out)} box w/ {elabVelvetName(data?.[0]['config_pack'].in)} velvet
+                                        and {elabMaterial(data?.[0]['config_pack'].details, 'gold')} gold details
+                                    </p>
+                                    {(data?.[0]['config_pack'].text.firstLine.length > 0 || data?.[0]['config_pack'].text.secondLine.length > 0) &&
+                                        <p className="pl-2">
+                                            Custom text: {
+                                                    data?.[0]['config_pack'].text.firstLine && data?.[0]['config_pack'].text.secondLine
+                                                        ? <span><br/>1) {data?.[0]['config_pack'].text.firstLine}<br/>2) {data?.[0]['config_pack'].text.secondLine}</span>
+                                                        : data?.[0]['config_pack'].text.firstLine !== ''
+                                                            ? data?.[0]['config_pack'].text.firstLine
+                                                            : data?.[0]['config_pack'].text.secondLine
+                                                }
+                                        </p>
+                                    }
+                                </div>
+                            }
+
                             <div className="mb-4">
                                 <h3 className="w-full py-1 px-3 bg-gray-200 mb-3">Total</h3>
                                 <p className="pl-2 mb-2">
-                                    {new Intl.NumberFormat("it-IT", { style: "currency", currency: "EUR" }).format(data?.[0].total)}
+                                    {new Intl.NumberFormat("it-IT", {
+                                        style: "currency",
+                                        currency: "EUR"
+                                    }).format(data?.[0].total)}
                                 </p>
                             </div>
                         </div>

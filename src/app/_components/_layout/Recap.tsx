@@ -1,7 +1,7 @@
 'use client'
 import {FormEvent, useState} from "react";
 import Upload from "@/app/_components/_elements/_upload_inputs/Upload";
-import {Modal, Tooltip} from "@mui/material";
+import {Modal} from "@mui/material";
 import {useTeethStore} from "@/app/_stores/teeth";
 import {State} from "@/app/_types/State";
 import RecapList from "@/app/_components/_elements/RecapList";
