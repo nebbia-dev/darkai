@@ -1,27 +1,29 @@
 'use client'
 import {FormEvent, useState} from "react";
 import Upload from "@/app/_components/_elements/_upload_inputs/Upload";
-import {Modal} from "@mui/material";
+import {Modal, Tooltip} from "@mui/material";
 import {useTeethStore} from "@/app/_stores/teeth";
 import {State} from "@/app/_types/State";
 import RecapList from "@/app/_components/_elements/RecapList";
 import {Dropdown} from "@/app/_components/_icons/Dropdown";
 import {useRouter} from "next/navigation";
 import {sendMail} from "@/utils/nodemailer/sendMail";
+import generateConfigHtml from "@/app/_helpers/_string-modders/generateConfigHtml";
 
 export default function Recap({next, onclick} : {next:boolean, onclick:() => void }){
     const router = useRouter();
     const bufferConfigImage = useTeethStore((state:State) => state.bufferConfigImage);
     const teethPreciousness = useTeethStore((state:State) => state.teethPreciousness);
     const total = useTeethStore((state:State) => state.total);
+    const teethPrices = useTeethStore((state:State) => state.teethPrices);
     const [showRecap, setShowRecap] = useState<boolean>(true);
     const [open, setOpen] = useState<boolean>(false);
     const [isSending, setIsSending] = useState<boolean>(false);
     const [sent, setSent] = useState<boolean>(false);
-    const takeScreenshot = useTeethStore((state:State) => state.setIsScreenshotNeeded);
     const setPreciousness = useTeethStore((state:State) => state.setTeethPreciousness);
     const innerWidth = useTeethStore((state:State) => state.innerWidth);
     const history = useTeethStore((state:State) => state.history);
+    const currentStep = useTeethStore((state:State) => state.currentHistory - 1);
     const packaging = useTeethStore((state: State) => state.packaging);
     function toggleRecap() {
         setShowRecap(prev => !prev);
@@ -40,17 +42,15 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
                 sendTo: 'barbara.sandrolini@gmail.com',
                 subject: 'New config!',
                 text: 'Your new Grill!',
-                image: bufferConfigImage
+                html: generateConfigHtml(teethPrices, history, currentStep, packaging),
+                image: bufferConfigImage,
         });
         setIsSending(false);
         setSent(true);
     }
 
     function saveTempConfig() {
-        takeScreenshot(true);
-        setTimeout(() => {
-            router.push('/checkout/payment');
-        }, 550)
+        router.push('/checkout/payment');
     }
 
     return(
@@ -151,10 +151,7 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
                             }
                             <div className="flex gap-2 items-center">
                                 <button
-                                    onClick={() => {
-                                        setOpen(true);
-                                        takeScreenshot(true)
-                                    }}
+                                    onClick={() => setOpen(true)}
                                     className="rounded-3xl bg-slate-950 text-gray-50 px-5 py-2 h-full cursor-pointer">Save
                                 </button>
                                 <button

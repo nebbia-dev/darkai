@@ -24,6 +24,7 @@ export default function Config() {
     const [showRecap, setShowRecap] = useState<boolean>(false);
     const setInnerWidth = useTeethStore((state) => state.setInnerWidth);
     const setInnerHeight = useTeethStore((state) => state.setInnerHeight);
+    const takeScreenshot = useTeethStore((state:State) => state.setIsScreenshotNeeded);
     const history = useTeethStore((state:State) => state.history);
     const packaging = useTeethStore((state: State) => state.packaging);
 
@@ -35,7 +36,6 @@ export default function Config() {
 
     useEffect(() => {
         if(activeSubButton !== 'text') {
-            console.log(activeSubButton)
             if (innerWidth >= 1024) {
                 setShowMenu(true);
                 setShowRecap(true);
@@ -47,6 +47,7 @@ export default function Config() {
     }, [innerWidth])
 
     function setContinue() {
+        takeScreenshot(true);
         setNextStep(!nextStep);
         setActive(undefined);
     }

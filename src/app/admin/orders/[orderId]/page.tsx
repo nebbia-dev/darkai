@@ -20,6 +20,8 @@ export default async function Order({params}: { params: Promise<{ orderId: strin
             'id, name, lastname, email, phone, scan), config_id(id, config, screen) ')
         .eq('id', orderId);
 
+    console.log(data)
+
     const teethConfig: {[key: string]:string} = {};
     const jewelsConfig:{[key: string]:string[]} = {};
 

@@ -7,14 +7,15 @@ import EditScanIcons from "@/app/_components/_elements/_buttons/EditScanIcons";
 import uploadScan from "@/app/_helpers/_db-interactions/uploadScan";
 export default function UploadScanBackoffice ({userId, scanId}:{userId:OrderInfo['user_id']['id'], scanId:OrderInfo['user_id']['scan']}) {
     const [buffer, setBuffer] = useState<{ scan: ArrayBuffer|undefined, type: string|undefined }|undefined>({ scan: undefined, type: undefined });
-    const [savedFile, setSavedFile] = useState<string|undefined>();
+    const [savedFile, setSavedFile] = useState<string|undefined>(undefined);
     const [file, setFile] = useState<File|undefined>();
     async function upload() {
         if(buffer?.scan && buffer?.type){
             const number = Math.random() * 100 + Math.cos(Math.random() * 100);
             await uploadScan(buffer, number, userId);
             setSavedFile(number + '.' + buffer.type.split("/")[1]);
-            setBuffer(undefined);
+            setBuffer({ scan: undefined, type: undefined });
+            setFile(undefined);
         }
     }
 
@@ -32,12 +33,12 @@ export default function UploadScanBackoffice ({userId, scanId}:{userId:OrderInfo
             {scanId
                 ?   <div className="relative">
                         <EditScanIcons sendData={getData} file={file}/>
-                    {!buffer && <Image alt="config"
+                    {!buffer?.scan && <Image alt="config"
                             className="object-cover h-[35dvh] w-full pt-4 pl-8"
                             src={`https://aiuptuoijjmfcxutusbc.supabase.co/storage/v1/object/public/scans/${savedFile? savedFile : scanId}`}
                             width={1000} height={1000} quality={70}
                     />}
-                    {buffer &&
+                    {buffer?.scan &&
                         <button className="cursor-pointer py-2 px-4 rounded-full bg-gray-950 text-gray-50 w-[calc(100%-2.5rem)] mt-2 ml-8 mr-2"
                                 type="button" onClick={upload}>Save</button>
                     }
@@ -45,12 +46,12 @@ export default function UploadScanBackoffice ({userId, scanId}:{userId:OrderInfo
                 : savedFile
                     ? <div className="relative">
                         <EditScanIcons sendData={getData} file={file}/>
-                        {!buffer && <Image alt="config"
+                        {!buffer?.scan && <Image alt="config"
                                          className="object-cover h-[35dvh] w-full pt-4 pl-8"
                                          src={`https://aiuptuoijjmfcxutusbc.supabase.co/storage/v1/object/public/scans/${savedFile}`}
                                          width={1000} height={1000} quality={70}
                         />}
-                        {buffer &&
+                        {!buffer?.scan &&
                             <button
                                 className="cursor-pointer py-2 px-4 rounded-full bg-gray-950 text-gray-50 w-[calc(100%-2.5rem)] mt-2 ml-8 mr-2"
                                 type="button" onClick={upload}>Save</button>
