@@ -16,6 +16,7 @@ import createOrder from "@/app/_helpers/_db-interactions/createOrder";
 import RecapList from "@/app/_components/_elements/RecapList";
 import CountrySelect from "@/app/_components/_elements/CountrySelect";
 import updateConfig from "@/app/_helpers/_db-interactions/updateConfig";
+import findShippingFees from "@/app/_helpers/_checkers/findShippingFees";
 export default function Payment() {
     const router = useRouter();
     const history = useTeethStore((state:State) => state.history);
@@ -24,6 +25,7 @@ export default function Payment() {
     const savedConfig = useTeethStore((state:State) => state.savedConfig);
     const total = useTeethStore((state:State) => state.total);
     const packaging = useTeethStore((state: State) => state.packaging);
+    const [shippingFees, setShippingFees] = useState<number|undefined>();
     const [billingData, setBillingData] = useState<PersonalData>({
         lastname: '',
         name: '',
@@ -63,9 +65,44 @@ export default function Payment() {
         }
     }
 
+    function handleStateChange(newValue: string) {
+        const fees = findShippingFees(newValue);
+        if(!fees) {
+            setError('Attention: we do not ship to this country. Please add a valid address in the shipping address options');
+            if(shippingData.state === '') {
+                setBillingData({...billingData, state:newValue});
+            }
+            setShippingFees(undefined);
+            return;
+        } else {
+            setBillingData({...billingData, state:newValue});
+            if(shippingData.state === '') {
+                setShippingFees(fees);
+            }
+            if(error) {
+                setError(false);
+            }
+        }
+    }
+
+    function handleStateShipChange(newValue: string) {
+        const fees = findShippingFees(newValue);
+        if(!fees) {
+            setError('Attention: we do not ship to this country');
+            setShippingFees(undefined);
+            return;
+        } else {
+            setShippingData({...shippingData, state:newValue});
+            setShippingFees(fees)
+            if(error) {
+                setError(false)
+            }
+        }
+
+    }
+
     const [isSending, setIsSending] = useState<boolean>(false);
     const [sent, setSent] = useState<boolean>(false);
-
 
     async function pay() {
         setIsSending(true);
@@ -96,6 +133,12 @@ export default function Payment() {
             setError('The billing information is incomplete');
             return;
         }
+
+        if((!findShippingFees(billingData.state) && shippingData.state === '') || (differentShipOpts && !findShippingFees(shippingData.state))) {
+            setError('Unfortunately we do not ship to this country');
+            return
+        }
+
         if(differentShipOpts) {
             shippingJson = shippingData;
         } else {
@@ -298,15 +341,7 @@ export default function Payment() {
                                                 <CountrySelect
                                                     value={billingData.state}
                                                     placeholder="Select your state"
-                                                    onChange={(newValue) => {
-                                                        setBillingData({
-                                                            ...billingData,
-                                                            state: newValue
-                                                        });
-                                                        if (error) {
-                                                            setError(false)
-                                                        }
-                                                    }}
+                                                    onChange={handleStateChange}
                                                     required
                                                 />
                                             </label>
@@ -491,15 +526,7 @@ export default function Payment() {
                                                         <CountrySelect
                                                             value={shippingData.state}
                                                             placeholder="Select your state"
-                                                            onChange={(newValue) => {
-                                                                setShippingData({
-                                                                    ...shippingData,
-                                                                    state: newValue
-                                                                });
-                                                                if(error) {
-                                                                    setError(false)
-                                                                }
-                                                            }}
+                                                            onChange={handleStateShipChange}
                                                             required
                                                         />
                                                     </label>
@@ -566,6 +593,19 @@ export default function Payment() {
                                     <AccordionDetails
                                         sx={{borderTop: '1px solid #9ca3af', height: 'calc(100% - 100px - 15dvh)'}}>
                                         <RecapList edit={false}/>
+                                        <div className="pl-5 pr-3 py-4">
+                                            <p className="font-semibold px-2">Express Insured Shipment<br/>
+                                                <span className="w-full font-medium text-left mt-1.5">
+                                                {shippingFees
+                                                    ? new Intl.NumberFormat("de-DE", {
+                                                        style: "currency",
+                                                        currency: "EUR"
+                                                    }).format(shippingFees)
+                                                    : '-'
+                                                }
+                                                </span>
+                                            </p>
+                                        </div>
                                     </AccordionDetails>
                                 </Accordion>
 
