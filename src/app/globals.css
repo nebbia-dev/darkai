@@ -230,9 +230,9 @@ input[type="file"] {
   border: 0;
 }
 
-input[type="text"]:focus {
-  outline: 2px solid #171717;
-}
+/*input[type="text"]:focus {*/
+/*  outline: 2px solid #171717;*/
+/*}*/
 input[type="email"]:focus {
   outline: 2px solid #171717;
 }

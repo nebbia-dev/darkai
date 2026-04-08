@@ -13,6 +13,8 @@ import uploadScan from "@/app/_helpers/_db-interactions/uploadScan";
 import createConfig from "@/app/_helpers/_db-interactions/createConfig";
 import uploadConfig from "@/app/_helpers/_db-interactions/uploadConfig";
 import createOrder from "@/app/_helpers/_db-interactions/createOrder";
+import RecapList from "@/app/_components/_elements/RecapList";
+import CountrySelect from "@/app/_components/_elements/CountrySelect";
 export default function Payment() {
     const router = useRouter();
     const history = useTeethStore((state:State) => state.history);
@@ -44,6 +46,14 @@ export default function Payment() {
     // DA RE-INSERIRE QUANDO VERRA' ABILITATA L'OPZIONE DEL RITIRO PRESSO GLI AFFILIATI
     // const [shippingOption, setShippingOption] = useState<string|undefined>(undefined);
     const [differentShipOpts, setDifferentShipOpts] = useState<boolean>(false);
+
+    // const flags = {};
+    // countries.all.forEach(country => {
+    //     flags[country.alpha2] = "fi fi-" + country.alpha2.toLowerCase()
+    // })
+    //
+    // console.log(countries)
+
     function handlePhoneChange(newValue: string) {
         setBillingData({...billingData, phone:newValue});
         if(error) {
@@ -52,7 +62,7 @@ export default function Payment() {
     }
 
     function handleShipPhoneChange(newValue: string) {
-        setBillingData({...shippingData, phone:newValue});
+        setShippingData({...shippingData, phone:newValue});
         if(error) {
             setError(false)
         }
@@ -60,74 +70,79 @@ export default function Payment() {
 
     const [isSending, setIsSending] = useState<boolean>(false);
     const [sent, setSent] = useState<boolean>(false);
-    async function pay() {
-        setIsSending(true);
-        let shippingJson;
-        if(differentShipOpts && (
-            shippingData.name === ''
-            || shippingData.lastname === ''
-            || shippingData.address === ''
-            || shippingData.city === ''
-            || shippingData.state === ''
-            || shippingData.phone === ''
-            || shippingData.postalCode === ''
-        )) {
-            setIsSending(false);
-            setError('The shipping information is incomplete');
-            return;
-        }
-        if(billingData.name === ''
-            || billingData.lastname === ''
-            || billingData.address === ''
-            || billingData.city === ''
-            || billingData.state === ''
-            || billingData.phone === ''
-            || billingData.postalCode === ''
-            || billingData.email === ''
-        ) {
-            setIsSending(false);
-            setError('The billing information is incomplete');
-            return;
-        }
-        if(differentShipOpts) {
-            shippingJson = shippingData;
-        } else {
-            shippingJson = {...billingData};
-            delete shippingJson.email;
-        }
-        // console.log(billingData, shippingJson, bufferConfigImage, scanImage);
-        // server action? - YES
-        // create Customer + retrieve id - YES
-        // upload scan + update Customer (if scan is present) - YES
-        // create Config + retrieve id
-        // upload config + update Config
-        // create Order w/ Customer id + Config id
 
-        try {
-
-            const customer = await createCustomer(billingData);
-            const number = Math.random() * 100 + Math.cos(Math.random() * 100);
-            if(scanImage.scan && customer) {
-                await uploadScan(scanImage, number, customer[0].id);
-            }
-
-            const config = await createConfig(history[history.length-1][0], total, packaging);
-            if(bufferConfigImage && config) {
-                await uploadConfig(bufferConfigImage, number, config[0].id);
-            }
-
-            if(customer && config) {
-                await createOrder(customer[0].id, config[0].id, total, shippingJson);
-            }
-
-            setIsSending(false);
-            setSent(true);
-            router.push('/checkout/payment/success');
-
-        } catch(error) {
-            console.log(error);
-        }
+    function pay() {
+        console.log(billingData)
     }
+
+    // async function pay() {
+    //     setIsSending(true);
+    //     let shippingJson;
+    //     if(differentShipOpts && (
+    //         shippingData.name === ''
+    //         || shippingData.lastname === ''
+    //         || shippingData.address === ''
+    //         || shippingData.city === ''
+    //         || shippingData.state === ''
+    //         || shippingData.phone === ''
+    //         || shippingData.postalCode === ''
+    //     )) {
+    //         setIsSending(false);
+    //         setError('The shipping information is incomplete');
+    //         return;
+    //     }
+    //     if(billingData.name === ''
+    //         || billingData.lastname === ''
+    //         || billingData.address === ''
+    //         || billingData.city === ''
+    //         || billingData.state === ''
+    //         || billingData.phone === ''
+    //         || billingData.postalCode === ''
+    //         || billingData.email === ''
+    //     ) {
+    //         setIsSending(false);
+    //         setError('The billing information is incomplete');
+    //         return;
+    //     }
+    //     if(differentShipOpts) {
+    //         shippingJson = shippingData;
+    //     } else {
+    //         shippingJson = {...billingData};
+    //         delete shippingJson.email;
+    //     }
+    //     // console.log(billingData, shippingJson, bufferConfigImage, scanImage);
+    //     // server action? - YES
+    //     // create Customer + retrieve id - YES
+    //     // upload scan + update Customer (if scan is present) - YES
+    //     // create Config + retrieve id
+    //     // upload config + update Config
+    //     // create Order w/ Customer id + Config id
+    //
+    //     try {
+    //
+    //         const customer = await createCustomer(billingData);
+    //         const number = Math.random() * 100 + Math.cos(Math.random() * 100);
+    //         if(scanImage.scan && customer) {
+    //             await uploadScan(scanImage, number, customer[0].id);
+    //         }
+    //
+    //         const config = await createConfig(history[history.length-1][0], total, packaging);
+    //         if(bufferConfigImage && config) {
+    //             await uploadConfig(bufferConfigImage, number, config[0].id);
+    //         }
+    //
+    //         if(customer && config) {
+    //             await createOrder(customer[0].id, config[0].id, total, shippingJson);
+    //         }
+    //
+    //         setIsSending(false);
+    //         setSent(true);
+    //         router.push('/checkout/payment/success');
+    //
+    //     } catch(error) {
+    //         console.log(error);
+    //     }
+    // }
 
     return(
         <>
@@ -256,20 +271,19 @@ export default function Payment() {
                                                 />
                                             </label>
                                             <label>State
-                                                <input className="w-full bg-stone-200 rounded py-2 px-4"
-                                                       type="text"
-                                                       placeholder="Type your state"
-                                                       value={billingData.state}
-                                                       onChange={(e) => {
-                                                           setBillingData({
-                                                               ...billingData,
-                                                               state: e.currentTarget.value
-                                                           });
-                                                           if(error) {
-                                                               setError(false)
-                                                           }
-                                                       }}
-                                                       required
+                                                <CountrySelect
+                                                    value={billingData.state}
+                                                    placeholder="Select your state"
+                                                    onChange={(newValue) => {
+                                                        setBillingData({
+                                                            ...billingData,
+                                                            state: newValue
+                                                        });
+                                                        if(error) {
+                                                            setError(false)
+                                                        }
+                                                    }}
+                                                    required
                                                 />
                                             </label>
                                             <label>Email address
@@ -296,6 +310,7 @@ export default function Payment() {
                                                         backgroundColor: '#e7e5e4',
                                                         borderRadius: '0.25rem',
                                                         "& .MuiOutlinedInput-root": {
+                                                            fontSize: '0.875rem',
                                                             "& fieldset": {
                                                                 borderWidth: '0px',
                                                             },
@@ -310,9 +325,15 @@ export default function Payment() {
                                                         "& .MuiInputBase-input": {
                                                             "&.MuiOutlinedInput-input": {
                                                                 color: '#171717',
+                                                                fontSize: '0.875rem',
+                                                                lineHeight: '1.25rem',
                                                                 paddingTop: '0.5rem',
                                                                 paddingBottom: '0.5rem',
-                                                                paddingRight: '1rem'
+                                                                paddingRight: '1rem',
+                                                                "&::placeholder": {
+                                                                    fontSize: '0.875rem',
+                                                                    opacity: 0.5,
+                                                                },
                                                             },
                                                         },
                                                     }}
@@ -459,20 +480,19 @@ export default function Payment() {
                                                         />
                                                     </label>
                                                     <label>State
-                                                        <input className="w-full bg-stone-200 rounded py-2 px-4"
-                                                               type="text"
-                                                               placeholder="Type your state"
-                                                               value={shippingData.state}
-                                                               onChange={(e) => {
-                                                                   setShippingData({
-                                                                       ...shippingData,
-                                                                       state: e.currentTarget.value
-                                                                   });
-                                                                   if(error) {
-                                                                       setError(false)
-                                                                   }
-                                                               }}
-                                                               required
+                                                        <CountrySelect
+                                                            value={shippingData.state}
+                                                            placeholder="Select your state"
+                                                            onChange={(newValue) => {
+                                                                setShippingData({
+                                                                    ...shippingData,
+                                                                    state: newValue
+                                                                });
+                                                                if(error) {
+                                                                    setError(false)
+                                                                }
+                                                            }}
+                                                            required
                                                         />
                                                     </label>
                                                     <label>Phone
@@ -482,6 +502,7 @@ export default function Payment() {
                                                                 backgroundColor: '#e7e5e4',
                                                                 borderRadius: '0.25rem',
                                                                 "& .MuiOutlinedInput-root": {
+                                                                    fontSize: '0.875rem',
                                                                     "& fieldset": {
                                                                         borderWidth: '0px',
                                                                     },
@@ -496,9 +517,15 @@ export default function Payment() {
                                                                 "& .MuiInputBase-input": {
                                                                     "&.MuiOutlinedInput-input": {
                                                                         color: '#171717',
+                                                                        fontSize: '0.875rem',
+                                                                        lineHeight: '1.25rem',
                                                                         paddingTop: '0.5rem',
                                                                         paddingBottom: '0.5rem',
-                                                                        paddingRight: '1rem'
+                                                                        paddingRight: '1rem',
+                                                                        "&::placeholder": {
+                                                                            fontSize: '0.875rem',
+                                                                            opacity: 1,
+                                                                        },
                                                                     },
                                                                 },
                                                             }}
@@ -510,6 +537,27 @@ export default function Payment() {
                                                 </form>
                                             }
                                         </>
+                                    </AccordionDetails>
+                                </Accordion>
+
+                                <Accordion elevation={0} sx={{
+                                    backgroundColor: '#f9fafb',
+                                    '&:before': {height: '0px'},
+                                    '&.Mui-expanded': {margin: 0},
+                                }}>
+                                    <div className="flex items-center justify-center border-t border-[#9ca3af]">
+                                        <AccordionSummary expandIcon={<ExpandMoreIcon/>} sx={{
+                                            height: '100px',
+                                            px: 8,
+                                            width: '90%',
+                                            '&.MuiAccordionSummary-root': {paddingLeft: '2rem', paddingRight: '2rem'},
+                                        }}>
+                                            <h2>Recap (shipping fees included)</h2>
+                                        </AccordionSummary>
+                                    </div>
+                                    <AccordionDetails
+                                        sx={{borderTop: '1px solid #9ca3af', height: 'calc(100% - 100px - 15dvh)'}}>
+                                        <RecapList edit={false}/>
                                     </AccordionDetails>
                                 </Accordion>
 

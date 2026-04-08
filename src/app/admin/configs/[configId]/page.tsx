@@ -6,8 +6,6 @@ import {Preciousness} from "@/app/_types/TeethOptions";
 
 import Image from "next/image";
 import confIdConverter from "@/app/_helpers/_converters/confIdConverter";
-import {Tooltip} from "@mui/material";
-import {Trash} from "@/app/_components/_icons/Trash";
 import elabVelvetName from "@/app/_helpers/_string-modders/elabVelvetName";
 import elabMaterial from "@/app/_helpers/_string-modders/elabMaterial";
 export default async function Config({params}: { params: Promise<{ configId: string[] }> }){

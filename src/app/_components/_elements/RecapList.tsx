@@ -96,7 +96,11 @@ export default function RecapList({edit} : {edit:boolean}) {
                         history[currentStep][0].signatureVisible[signature[0]] &&
                         <li key={signature[0]}
                             className={`${teethSignature[signature[0]].includes(activeTooth as string) ? 'lg:bg-white/50' : ''}
-                                ${teethSignature[signature[0]].includes(hovered as string) ? 'lg:border-black' : 'lg:border-gray-200/50'}
+                                ${!edit 
+                                    ? 'border-transparent' 
+                                    : teethSignature[signature[0]].includes(hovered as string) 
+                                        ? 'lg:border-black' 
+                                        : 'lg:border-gray-200/50'}
                                 cursor-pointer mb-4 rounded p-2 lg:border`}
                         >
                             {/*tooth name*/}
@@ -155,7 +159,11 @@ export default function RecapList({edit} : {edit:boolean}) {
                             className={`
                                 ${checkDoubleTeeth(tooth[0], tooth[1]) ? 'hidden' : 'block'} 
                                 ${checkDoubleTeethActive(tooth[0], tooth[1]) ? 'lg:bg-white/50' : ''}
-                                ${checkDoubleTeethHover(tooth[0], tooth[1]) ? 'lg:border-black' : 'lg:border-gray-200/50'}
+                                ${!edit
+                                    ? 'border-transparent'
+                                    : checkDoubleTeethHover(tooth[0], tooth[1]) 
+                                        ? 'lg:border-black' 
+                                        : 'lg:border-gray-200/50'}
                                 cursor-pointer mb-4 rounded p-2 lg:border`}
                         >
                             {/*tooth name*/}
