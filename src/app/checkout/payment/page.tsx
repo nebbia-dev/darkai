@@ -1,28 +1,31 @@
 'use client'
 import Link from 'next/link';
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {MuiTelInput} from "mui-tel-input";
 import {Accordion, AccordionDetails, AccordionSummary} from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import {useTeethStore} from "@/app/_stores/teeth";
 import {State} from "@/app/_types/State";
-import {useRouter} from "next/navigation";
 import PersonalData from "@/app/_types/PersonalData";
-import createCustomer from "@/app/_helpers/_db-interactions/createCustomer";
-import uploadScan from "@/app/_helpers/_db-interactions/uploadScan";
-import createConfig from "@/app/_helpers/_db-interactions/createConfig";
-import uploadConfig from "@/app/_helpers/_db-interactions/uploadConfig";
-import createOrder from "@/app/_helpers/_db-interactions/createOrder";
 import RecapList from "@/app/_components/_elements/RecapList";
 import CountrySelect from "@/app/_components/_elements/CountrySelect";
-import updateConfig from "@/app/_helpers/_db-interactions/updateConfig";
 import findShippingFees from "@/app/_helpers/_checkers/findShippingFees";
+import {StripeCheckout} from "@/app/_components/_elements/StripeCheckout";
+import {prepareCheckout} from "@/app/_stripe/prepareCheckout";
+
+type PreparedCheckout = {
+    clientSecret: string,
+    orderId: number,
+    configId: number,
+    finalTotal: number,
+}
+
 export default function Payment() {
-    const router = useRouter();
     const history = useTeethStore((state:State) => state.history);
     const bufferConfigImage = useTeethStore((state:State) => state.bufferConfigImage);
     const scanImage = useTeethStore((state:State) => state.scanImage);
     const savedConfig = useTeethStore((state:State) => state.savedConfig);
+    const setSavedConfig = useTeethStore((state:State) => state.setSavedConfig);
     const total = useTeethStore((state:State) => state.total);
     const packaging = useTeethStore((state: State) => state.packaging);
     const [shippingFees, setShippingFees] = useState<number|undefined>();
@@ -66,47 +69,64 @@ export default function Payment() {
     }
 
     function handleStateChange(newValue: string) {
-        const fees = findShippingFees(newValue);
-        if(!fees) {
-            setError('Attention: we do not ship to this country. Please add a valid address in the shipping address options');
-            if(shippingData.state === '') {
-                setBillingData({...billingData, state:newValue});
-            }
-            setShippingFees(undefined);
-            return;
-        } else {
-            setBillingData({...billingData, state:newValue});
-            if(shippingData.state === '') {
-                setShippingFees(fees);
-            }
-            if(error) {
+        setBillingData({...billingData, state:newValue});
+
+        if (differentShipOpts) {
+            if (error) {
                 setError(false);
             }
+            return;
+        }
+
+        const fees = findShippingFees(newValue);
+        if(fees === null) {
+            setError('Attention: we do not ship to this country. Please add a valid address in the shipping address options');
+            return;
+        }
+
+        if(error) {
+            setError(false);
         }
     }
 
     function handleStateShipChange(newValue: string) {
+        setShippingData({...shippingData, state:newValue});
         const fees = findShippingFees(newValue);
-        if(!fees) {
+        if(fees === null) {
             setError('Attention: we do not ship to this country');
-            setShippingFees(undefined);
             return;
-        } else {
-            setShippingData({...shippingData, state:newValue});
-            setShippingFees(fees)
-            if(error) {
-                setError(false)
-            }
         }
 
+        if(error) {
+            setError(false)
+        }
     }
 
-    const [isSending, setIsSending] = useState<boolean>(false);
-    const [sent, setSent] = useState<boolean>(false);
+    const [isPreparingCheckout, setIsPreparingCheckout] = useState<boolean>(false);
+    const [preparedCheckout, setPreparedCheckout] = useState<PreparedCheckout | null>(null);
 
-    async function pay() {
-        setIsSending(true);
-        let shippingJson;
+    useEffect(() => {
+        const shippingState = differentShipOpts ? shippingData.state : billingData.state;
+
+        if (shippingState === '') {
+            setShippingFees(undefined);
+            return;
+        }
+
+        const fees = findShippingFees(shippingState);
+        if (fees === null) {
+            setShippingFees(undefined);
+            return;
+        }
+
+        setShippingFees(fees);
+    }, [billingData.state, differentShipOpts, shippingData.state]);
+
+    useEffect(() => {
+        setPreparedCheckout((currentPreparedCheckout) => currentPreparedCheckout ? null : currentPreparedCheckout);
+    }, [billingData, differentShipOpts, shippingData]);
+
+    async function handlePrepareCheckout() {
         if(differentShipOpts && (
             shippingData.name === ''
             || shippingData.lastname === ''
@@ -116,10 +136,10 @@ export default function Payment() {
             || shippingData.phone === ''
             || shippingData.postalCode === ''
         )) {
-            setIsSending(false);
             setError('The shipping information is incomplete');
             return;
         }
+
         if(billingData.name === ''
             || billingData.lastname === ''
             || billingData.address === ''
@@ -129,60 +149,44 @@ export default function Payment() {
             || billingData.postalCode === ''
             || billingData.email === ''
         ) {
-            setIsSending(false);
             setError('The billing information is incomplete');
             return;
         }
 
-        if((!findShippingFees(billingData.state) && shippingData.state === '') || (differentShipOpts && !findShippingFees(shippingData.state))) {
+        const currentShippingState = differentShipOpts ? shippingData.state : billingData.state;
+        if (currentShippingState === '' || findShippingFees(currentShippingState) === null) {
             setError('Unfortunately we do not ship to this country');
-            return
+            return;
         }
 
-        if(differentShipOpts) {
-            shippingJson = shippingData;
-        } else {
-            shippingJson = {...billingData};
-            delete shippingJson.email;
-        }
-        // console.log(billingData, shippingJson, bufferConfigImage, scanImage);
-        // server action? - YES
-        // create Customer + retrieve id - YES
-        // upload scan + update Customer (if scan is present) - YES
-        // create Config + retrieve id
-        // upload config + update Config
-        // create Order w/ Customer id + Config id
+        setIsPreparingCheckout(true);
 
         try {
+            const checkout = await prepareCheckout({
+                billingData,
+                shippingData,
+                differentShipOpts,
+                currentConfig: history[history.length - 1]?.[0],
+                total,
+                packaging,
+                bufferConfigImage,
+                scanImage,
+                savedConfig,
+            });
 
-            const customer = await createCustomer(billingData);
-            const number = Math.random() * 100 + Math.cos(Math.random() * 100);
-            if(scanImage.scan && customer) {
-                await uploadScan(scanImage, number, customer[0].id);
-            }
-
-            if(savedConfig) {
-                await updateConfig(savedConfig);
-                if(customer && savedConfig) {
-                    await createOrder(customer[0].id, savedConfig, total, shippingJson);
-                }
-
-            } else {
-                const config = await createConfig(history[history.length-1][0], total, packaging, 'Completed');
-                if(bufferConfigImage && config) {
-                    await uploadConfig(bufferConfigImage, number, config[0].id);
-                }
-                if(customer && config) {
-                    await createOrder(customer[0].id, config[0].id, total, shippingJson);
-                }
-            }
-
-            setIsSending(false);
-            setSent(true);
-            router.push('/checkout/payment/success');
-
-        } catch(error) {
-            console.log(error);
+            setPreparedCheckout({
+                clientSecret: checkout.clientSecret,
+                orderId: checkout.orderId,
+                configId: checkout.configId,
+                finalTotal: checkout.finalTotal,
+            });
+            setSavedConfig(checkout.configId);
+            setError(false);
+        } catch(err) {
+            setPreparedCheckout(null);
+            setError(err instanceof Error ? err.message : 'Unable to initialize the payment');
+        } finally {
+            setIsPreparingCheckout(false);
         }
     }
 
@@ -191,17 +195,7 @@ export default function Payment() {
             <div className="fixed w-full flex justify-center z-16">
                 <img className="cursor-auto py-6 w-[132px]" src="/logo.png" alt="darkai logo"/>
             </div>
-            {isSending
-                ? <div className="w-[75vw] h-page-nav flex flex-col items-center justify-center mx-auto">
-                    <div className="w-full text-center">
-                        <span className="loader mb-8 inline-block mx-auto"></span>
-                        <h2 className="text-gray-950 mx-auto">Processing your transaction...</h2>
-                    </div>
-                </div>
-                : sent
-                    ? <></>
-                    :
-                    <div
+            <div
                         className="w-[90%] lg:w-[75vw] lg:h-page-nav flex flex-col items-center justify-center mx-auto text-sm">
                         <div
                             className={`mt-18 w-full ${error ? 'h-[calc(100dvh-(0.25rem*38)-60px)]' : 'h-[calc(100dvh-(0.25rem*28)-60px)]'} lg:h-auto flex lg:flex-row flex-col overflow-y-auto lg:overflow-y-none lg:items-center lg:justify-center lg:bg-gray-50 p-6 lg:rounded-3xl lg:border-1`}>
@@ -596,7 +590,7 @@ export default function Payment() {
                                         <div className="pl-5 pr-3 py-4">
                                             <p className="font-semibold px-2">Express Insured Shipment<br/>
                                                 <span className="w-full font-medium text-left mt-1.5">
-                                                {shippingFees
+                                                {shippingFees !== undefined
                                                     ? new Intl.NumberFormat("de-DE", {
                                                         style: "currency",
                                                         currency: "EUR"
@@ -610,46 +604,49 @@ export default function Payment() {
                                 </Accordion>
 
                             </div>
-                            <div className="w-full lg:w-[50%] px-6 py-4 border-t-1 border-black/40 lg:border-t-0">
-                                <form className="flex flex-col gap-4 px-2 pt-2 pb-8 justify-center h-full">
-                                    <label>Card number
-                                        <input className="w-full bg-stone-200 rounded py-2 px-4"
-                                               type="text"
-                                               placeholder="Enter your debit/credit card number"
-                                               required
+                            <div className="h-full overflow-y-auto w-full lg:w-[50%] px-6 py-4 border-t-1 border-black/40 lg:border-t-0">
+                                {preparedCheckout
+                                    ? <div className="h-full min-h-[420px]">
+                                        <div className="mb-4 rounded-2xl border border-stone-300 bg-stone-50 px-4 py-3 text-sm text-stone-700">
+                                            Secure payment ready. Final amount:
+                                            {' '}
+                                            <span className="font-semibold text-stone-950">
+                                                {new Intl.NumberFormat("de-DE", {
+                                                    style: "currency",
+                                                    currency: "EUR"
+                                                }).format(preparedCheckout.finalTotal)}
+                                            </span>
+                                        </div>
+                                        <StripeCheckout
+                                            key={preparedCheckout.clientSecret}
+                                            clientSecret={preparedCheckout.clientSecret}
                                         />
-                                    </label>
-                                    <div className="flex gap-4">
-                                        <label>Expiration date
-                                            <input className="w-full bg-stone-200 rounded py-2 px-4"
-                                                   type="text"
-                                                   placeholder="__/__"
-                                                   required
-                                            />
-                                        </label>
-                                        <label>CVV
-                                            <input className="w-full bg-stone-200 rounded py-2 px-4"
-                                                   type="number"
-                                                   placeholder="CVV"
-                                                   required
-                                            />
-                                        </label>
                                     </div>
-                                    <label className="flex items-center gap-2 mt-4">
-                                        <input
-                                            type="checkbox"
-                                            required
-                                        />
-                                        I agree with the terms and conditions
-                                    </label>
-                                    <label className="flex items-center gap-2 mt-[-1rem]">
-                                        <input
-                                            type="checkbox"
-                                            required
-                                        />
-                                        I read and accept the privacy policy
-                                    </label>
-                                </form>
+                                    : <div className="h-full min-h-[420px] rounded-3xl border border-dashed border-stone-400 bg-stone-100/70 px-6 py-8 flex flex-col items-center justify-center text-center">
+                                        {isPreparingCheckout
+                                            ? <>
+                                                <span className="loader mb-6 inline-block"></span>
+                                                <h2 className="text-base font-semibold text-stone-950">Preparing your secure payment...</h2>
+                                                <p className="mt-2 max-w-md text-stone-600">
+                                                    We are saving your configuration and creating the Stripe session.
+                                                </p>
+                                            </>
+                                            : <>
+                                                <h2 className="text-base font-semibold text-stone-950">Payment will appear here</h2>
+                                                <p className="mt-2 max-w-md text-stone-600">
+                                                    Complete the billing and shipping details, then prepare the checkout to load the embedded Stripe payment form on this page.
+                                                </p>
+                                                <button
+                                                    className="mt-6 rounded-3xl border border-stone-950 bg-stone-950 px-5 py-2 text-white cursor-pointer"
+                                                    type="button"
+                                                    onClick={handlePrepareCheckout}
+                                                >
+                                                    Prepare payment
+                                                </button>
+                                            </>
+                                        }
+                                    </div>
+                                }
                             </div>
                         </div>
 
@@ -665,12 +662,20 @@ export default function Payment() {
                                 className="border-1 rounded-3xl text-slate-950 bg-gray-50 px-5 py-2 h-full cursor-pointer"
                                 href="/">&larr; Back
                             </Link>
-                            <button className="rounded-3xl bg-slate-950 text-gray-50 px-5 py-2 h-full cursor-pointer"
-                                    type="button" onClick={pay}>Proceed to payment &rarr;</button>
+                            <button
+                                className={`border-1 rounded-3xl px-5 py-2 h-full ${
+                                    preparedCheckout
+                                        ? 'border-stone-300 bg-stone-200 text-stone-600 cursor-default'
+                                        : 'border-slate-950 bg-slate-950 text-white cursor-pointer'
+                                } disabled:opacity-60 disabled:cursor-not-allowed`}
+                                type="button"
+                                disabled={isPreparingCheckout || preparedCheckout !== null}
+                                onClick={handlePrepareCheckout}
+                            >
+                                {isPreparingCheckout ? 'Preparing...' : preparedCheckout ? 'Payment ready' : 'Prepare payment'}
+                            </button>
                         </div>
                     </div>
-
-            }
         </>
     )
 }

@@ -23,7 +23,7 @@ export default function Success() {
                 <div className="flex items-center justify-center mx-auto mt-6">
                     <Link
                         className="fixed lg:static bottom-5 cursor-pointer py-2 px-4 rounded-full border text-gray-950 mr-4"
-                        href="/">&larr; Back to the configurator
+                        href="/public">&larr; Back to the configurator
                     </Link>
                 </div>
             </div>

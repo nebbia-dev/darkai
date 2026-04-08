@@ -12,7 +12,7 @@ export default interface OrderInfo {
     shipping: boolean,
     total: number,
     shippingAddress: PersonalData,
-    status: 'In production' | 'Shipped' | 'Delivered' | 'New' | 'Canceled' | undefined,
+    status: 'Pending payment' | 'In production' | 'Shipped' | 'Delivered' | 'New' | 'Canceled' | undefined,
     user_id: {
         id: number,
         email: string,
