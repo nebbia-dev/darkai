@@ -41,6 +41,8 @@ export interface State {
     setScanImage: (scan:ArrayBuffer, type:string) => void,
     savedConfig: number|undefined,
     setSavedConfig: (id:number|undefined) => void,
+    isTouch: boolean,
+    setIsTouch: (bool:boolean) => void,
     envMap: Texture | CubeTexture | undefined,
     hovered: string|undefined,
     teethGeometry: FBX,

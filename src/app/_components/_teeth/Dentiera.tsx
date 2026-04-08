@@ -30,8 +30,8 @@ export default function Dentiera() {
     props.metalnessMap.flipY = false;
     props.roughnessMap.flipY = false;
     props.aoMap.flipY = false;
-
-    const innerWidth = useTeethStore((state:State) => state.innerWidth);
+    
+    const isTouch = useTeethStore((state: State) => state.isTouch);
     const nextStep = useTeethStore((state) => state.nextStep);
     const hovered = useTeethStore((state: State) => state.hovered);
     const setHover = useTeethStore((state: State) => state.setHover);
@@ -50,7 +50,7 @@ export default function Dentiera() {
     }, []);
 
     function hover(e:any, tooth:string|undefined) {
-        if(innerWidth >= 1024){
+        if(!isTouch){
             e.stopPropagation();
             if ((clock.getElapsedTime() - lastHover < 0.1) && hovered) {
                 return;
@@ -61,7 +61,7 @@ export default function Dentiera() {
     }
 
     function hoverBase(e:any) {
-        if(innerWidth >= 1024) {
+        if(!isTouch) {
             e.stopPropagation();
             if (clock.getElapsedTime() - lastHover > 0.1 && hovered) {
                 setHover(undefined);
@@ -160,7 +160,7 @@ export default function Dentiera() {
                   material={dentieraMaterial}
             >
                   {outline && <Outlines thickness={10} color="hotpink"/>}
-                  {innerWidth >= 1024 && hovered && <Outlines thickness={10} color="yellow"/>}
+                  {!isTouch && hovered && <Outlines thickness={10} color="yellow"/>}
             </mesh>
         )
     })
@@ -172,7 +172,7 @@ export default function Dentiera() {
                   material={dentieraMaterial}
             >
                   {outline && <Outlines thickness={10} color="hotpink"/>}
-                  {innerWidth >= 1024 && hovered && <Outlines thickness={10} color="yellow"/>}
+                  {!isTouch && hovered && <Outlines thickness={10} color="yellow"/>}
             </mesh>
         )
     })
@@ -184,7 +184,7 @@ export default function Dentiera() {
                   material={dentieraMaterial}
             >
                   {outline && <Outlines thickness={10} color="hotpink"/>}
-                  {innerWidth >= 1024 && hovered && <Outlines thickness={10} color="yellow"/>}
+                  {!isTouch && hovered && <Outlines thickness={10} color="yellow"/>}
             </mesh>
         )
     })
@@ -196,7 +196,7 @@ export default function Dentiera() {
                   material={dentieraMaterial}
             >
                   {outline && <Outlines thickness={10} color="hotpink"/>}
-                  {innerWidth >= 1024 && hovered && <Outlines thickness={10} color="yellow"/>}
+                  {!isTouch && hovered && <Outlines thickness={10} color="yellow"/>}
             </mesh>
         )
     })
@@ -209,7 +209,7 @@ export default function Dentiera() {
                   material={dentieraMaterial}
             >
                   {outline && <Outlines thickness={10} color="hotpink"/>}
-                  {innerWidth >= 1024 && hovered && <Outlines thickness={10} color="yellow"/>}
+                  {!isTouch && hovered && <Outlines thickness={10} color="yellow"/>}
             </mesh>
         )
     })
@@ -221,7 +221,7 @@ export default function Dentiera() {
                   material={dentieraMaterial}
             >
                   {outline && <Outlines thickness={10} color="hotpink"/>}
-                  {innerWidth >= 1024 && hovered && <Outlines thickness={10} color="yellow"/>}
+                  {!isTouch && hovered && <Outlines thickness={10} color="yellow"/>}
             </mesh>
         )
     })
@@ -233,7 +233,7 @@ export default function Dentiera() {
                   material={dentieraMaterial}
             >
                   {outline && <Outlines thickness={10} color="hotpink"/>}
-                  {innerWidth >= 1024 && hovered && <Outlines thickness={10} color="yellow"/>}
+                  {!isTouch && hovered && <Outlines thickness={10} color="yellow"/>}
             </mesh>
         )
     })
@@ -245,7 +245,7 @@ export default function Dentiera() {
                   material={dentieraMaterial}
             >
                   {outline && <Outlines thickness={10} color="hotpink"/>}
-                  {innerWidth >= 1024 && hovered && <Outlines thickness={10} color="yellow"/>}
+                  {!isTouch && hovered && <Outlines thickness={10} color="yellow"/>}
             </mesh>
         )
     })
@@ -258,7 +258,7 @@ export default function Dentiera() {
                   material={dentieraMaterial}
             >
                   {outline && <Outlines thickness={10} color="hotpink"/>}
-                  {innerWidth >= 1024 && hovered && <Outlines thickness={10} color="yellow"/>}
+                  {!isTouch && hovered && <Outlines thickness={10} color="yellow"/>}
             </mesh>
         )
     })
@@ -270,7 +270,7 @@ export default function Dentiera() {
                   material={dentieraMaterial}
             >
                   {outline && <Outlines thickness={10} color="hotpink"/>}
-                  {innerWidth >= 1024 && hovered && <Outlines thickness={10} color="yellow"/>}
+                  {!isTouch && hovered && <Outlines thickness={10} color="yellow"/>}
             </mesh>
         )
     })
@@ -282,7 +282,7 @@ export default function Dentiera() {
                   material={dentieraMaterial}
             >
                   {outline && <Outlines thickness={10} color="hotpink"/>}
-                  {innerWidth >= 1024 && hovered && <Outlines thickness={10} color="yellow"/>}
+                  {!isTouch && hovered && <Outlines thickness={10} color="yellow"/>}
             </mesh>
         )
     })
@@ -294,7 +294,7 @@ export default function Dentiera() {
                   material={dentieraMaterial}
             >
                   {outline && <Outlines thickness={10} color="hotpink"/>}
-                  {innerWidth >= 1024 && hovered && <Outlines thickness={10} color="yellow"/>}
+                  {!isTouch && hovered && <Outlines thickness={10} color="yellow"/>}
             </mesh>
         )
     })
@@ -307,7 +307,7 @@ export default function Dentiera() {
                   material={dentieraMaterial}
             >
                 {outline && <Outlines thickness={10} color="hotpink"/>}
-                {innerWidth >= 1024 && hovered && <Outlines thickness={10} color="yellow"/>}
+                {!isTouch && hovered && <Outlines thickness={10} color="yellow"/>}
             </mesh>
         )
     })
@@ -319,7 +319,7 @@ export default function Dentiera() {
                   material={dentieraMaterial}
             >
                 {outline && <Outlines thickness={10} color="hotpink"/>}
-                {innerWidth >= 1024 && hovered && <Outlines thickness={10} color="yellow"/>}
+                {!isTouch && hovered && <Outlines thickness={10} color="yellow"/>}
             </mesh>
         )
     })
@@ -331,7 +331,7 @@ export default function Dentiera() {
                   material={dentieraMaterial}
             >
                 {outline && <Outlines thickness={10} color="hotpink"/>}
-                {innerWidth >= 1024 && hovered && <Outlines thickness={10} color="yellow"/>}
+                {!isTouch && hovered && <Outlines thickness={10} color="yellow"/>}
             </mesh>
         )
     })
@@ -344,7 +344,7 @@ export default function Dentiera() {
                   material={dentieraMaterial}
             >
                 {outline && <Outlines thickness={10} color="hotpink"/>}
-                {innerWidth >= 1024 && hovered && <Outlines thickness={10} color="yellow"/>}
+                {!isTouch && hovered && <Outlines thickness={10} color="yellow"/>}
             </mesh>
         )
     })
@@ -356,7 +356,7 @@ export default function Dentiera() {
                   material={dentieraMaterial}
             >
                 {outline && <Outlines thickness={10} color="hotpink"/>}
-                {innerWidth >= 1024 && hovered && <Outlines thickness={10} color="yellow"/>}
+                {!isTouch && hovered && <Outlines thickness={10} color="yellow"/>}
             </mesh>
         )
     })
@@ -368,7 +368,7 @@ export default function Dentiera() {
                   material={dentieraMaterial}
             >
                 {outline && <Outlines thickness={10} color="hotpink"/>}
-                {innerWidth >= 1024 && hovered && <Outlines thickness={10} color="yellow"/>}
+                {!isTouch && hovered && <Outlines thickness={10} color="yellow"/>}
             </mesh>
         )
     })
@@ -381,7 +381,7 @@ export default function Dentiera() {
                   material={dentieraMaterial}
             >
                 {outline && <Outlines thickness={10} color="hotpink"/>}
-                {innerWidth >= 1024 && hovered && <Outlines thickness={10} color="yellow"/>}
+                {!isTouch && hovered && <Outlines thickness={10} color="yellow"/>}
             </mesh>
         )
     })
@@ -393,7 +393,7 @@ export default function Dentiera() {
                   material={dentieraMaterial}
             >
                 {outline && <Outlines thickness={10} color="hotpink"/>}
-                {innerWidth >= 1024 && hovered && <Outlines thickness={10} color="yellow"/>}
+                {!isTouch && hovered && <Outlines thickness={10} color="yellow"/>}
             </mesh>
         )
     })
@@ -405,7 +405,7 @@ export default function Dentiera() {
                   material={dentieraMaterial}
             >
                 {outline && <Outlines thickness={10} color="hotpink"/>}
-                {innerWidth >= 1024 && hovered && <Outlines thickness={10} color="yellow"/>}
+                {!isTouch && hovered && <Outlines thickness={10} color="yellow"/>}
             </mesh>
         )
     })
@@ -418,7 +418,7 @@ export default function Dentiera() {
                   material={dentieraMaterial}
             >
                 {outline && <Outlines thickness={10} color="hotpink"/>}
-                {innerWidth >= 1024 && hovered && <Outlines thickness={10} color="yellow"/>}
+                {!isTouch && hovered && <Outlines thickness={10} color="yellow"/>}
             </mesh>
         )
     })
@@ -430,7 +430,7 @@ export default function Dentiera() {
                   material={dentieraMaterial}
             >
                 {outline && <Outlines thickness={10} color="hotpink"/>}
-                {innerWidth >= 1024 && hovered && <Outlines thickness={10} color="yellow"/>}
+                {!isTouch && hovered && <Outlines thickness={10} color="yellow"/>}
             </mesh>
         )
     })
@@ -442,7 +442,7 @@ export default function Dentiera() {
                   material={dentieraMaterial}
             >
                 {outline && <Outlines thickness={10} color="hotpink"/>}
-                {innerWidth >= 1024 && hovered && <Outlines thickness={10} color="yellow"/>}
+                {!isTouch && hovered && <Outlines thickness={10} color="yellow"/>}
             </mesh>
         )
     })

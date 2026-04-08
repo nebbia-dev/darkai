@@ -8,6 +8,7 @@ import Recap from "@/app/_components/_layout/Recap";
 import {State} from "@/app/_types/State";
 import { Close, Menu } from "@mui/icons-material";
 import {Box} from "@/app/_components/_icons/Box";
+import isTouchDevice from "@/app/_helpers/_checkers/isTouchDevice";
 
 export default function Config() {
 
@@ -25,11 +26,15 @@ export default function Config() {
     const setInnerWidth = useTeethStore((state) => state.setInnerWidth);
     const setInnerHeight = useTeethStore((state) => state.setInnerHeight);
     const takeScreenshot = useTeethStore((state:State) => state.setIsScreenshotNeeded);
+    const setIsTouch = useTeethStore((state:State) => state.setIsTouch);
     const history = useTeethStore((state:State) => state.history);
     const packaging = useTeethStore((state: State) => state.packaging);
 
     useEffect(() => {
         updateInnerSize();
+        if(isTouchDevice()) {
+            setIsTouch(true)
+        }
         window.addEventListener('resize', updateInnerSize);
         window.addEventListener('orientationchange', updateInnerSize);
         window.visualViewport?.addEventListener('resize', updateInnerSize);

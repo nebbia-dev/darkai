@@ -11,6 +11,7 @@ export const useTeethStore = create<State>((set, get) => ({
     // state and method to save the Buffer image of the config screenshot while waiting for the customer to pay
     bufferConfigImage: undefined,
     setBufferConfigImage: (buffer) => set({bufferConfigImage: buffer}),
+    // state and method to save the ArrayBuffer image of the dental scan
     scanImage: { scan: undefined, type: undefined },
     setScanImage: (scan, type) =>
         set(
@@ -19,6 +20,10 @@ export const useTeethStore = create<State>((set, get) => ({
                     state.scanImage.type = type;
                 }
             )),
+    // state and method to check is the device is touch
+    isTouch: false,
+    setIsTouch: (bool) => set({isTouch:bool}),
+    // state and method to set the id of the new config row saved in the db
     savedConfig: undefined,
     setSavedConfig: (id) => set({savedConfig: id}),
     // state and method to take a screenshot of the Canvas when needed
