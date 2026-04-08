@@ -39,6 +39,8 @@ export interface State {
     setBufferConfigImage: (buffer:string) => void,
     scanImage: { scan: ArrayBuffer|undefined, type: string | undefined },
     setScanImage: (scan:ArrayBuffer, type:string) => void,
+    savedConfig: number|undefined,
+    setSavedConfig: (id:number|undefined) => void,
     envMap: Texture | CubeTexture | undefined,
     hovered: string|undefined,
     teethGeometry: FBX,

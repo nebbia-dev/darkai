@@ -9,6 +9,8 @@ import {Dropdown} from "@/app/_components/_icons/Dropdown";
 import {useRouter} from "next/navigation";
 import {sendMail} from "@/utils/nodemailer/sendMail";
 import generateConfigHtml from "@/app/_helpers/_string-modders/generateConfigHtml";
+import createConfig from "@/app/_helpers/_db-interactions/createConfig";
+import uploadConfig from "@/app/_helpers/_db-interactions/uploadConfig";
 
 export default function Recap({next, onclick} : {next:boolean, onclick:() => void }){
     const router = useRouter();
@@ -19,8 +21,10 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
     const [showRecap, setShowRecap] = useState<boolean>(true);
     const [open, setOpen] = useState<boolean>(false);
     const [isSending, setIsSending] = useState<boolean>(false);
+    const [emailInfo, setEmailInfo] = useState<{name: string, email:string}>({name: '', email:''})
     const [sent, setSent] = useState<boolean>(false);
     const setPreciousness = useTeethStore((state:State) => state.setTeethPreciousness);
+    const setSavedConfigId = useTeethStore((state:State) => state.setSavedConfig);
     const innerWidth = useTeethStore((state:State) => state.innerWidth);
     const history = useTeethStore((state:State) => state.history);
     const currentStep = useTeethStore((state:State) => state.currentHistory - 1);
@@ -31,15 +35,28 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
     function setCarat(e:any) {
         setPreciousness(Number(e));
     }
-    async function download(e:FormEvent) {
+    async function send(e:FormEvent) {
         e.preventDefault();
+
+        if(emailInfo.name === '' || emailInfo.email === '') {
+            return
+        }
         setIsSending(true);
+
+        const number = Math.random() * 100 + Math.cos(Math.random() * 100);
+        const config = await createConfig(history[history.length-1][0], total, packaging, 'Not completed');
+        if(config) {
+            setSavedConfigId(config[0].id);
+        }
+        if(bufferConfigImage && config) {
+            await uploadConfig(bufferConfigImage, number, config[0].id);
+        }
             // TODO:
             // - set Nodemailer to SEND the email with the current configuration and the screenshot
             // - save the configuration in the local storage
             // - IF the checkbox is checked, SAVE name, email address and config in the Newsletter table
         await sendMail({
-                sendTo: 'barbara.sandrolini@gmail.com',
+                sendTo: emailInfo.email,
                 subject: 'New config!',
                 text: 'Your new Grill!',
                 html: generateConfigHtml(teethPrices, history, currentStep, packaging),
@@ -191,17 +208,21 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
                             : <div>
                                 <p className="text-gray-950">In order to save your configuration, tell us to whom we may
                                     send it!</p>
-                                <form className="flex flex-col gap-2 mt-6" onSubmit={(event) => download(event)}>
-                                    <input className="w-full rounded bg-stone-200 py-2 px-4" placeholder="Your name"
+                                <form className="flex flex-col gap-2 mt-6" onSubmit={(event) => send(event)}>
+                                    <input className="w-full rounded bg-stone-200 py-2 px-4 focus:outline-black" placeholder="Your name"
                                            type="text"
+                                           value={emailInfo.name}
+                                           onChange={(e) => setEmailInfo({...emailInfo, name: e.currentTarget.value})}
                                            required/>
                                     <input className="w-full rounded bg-stone-200 py-2 px-4" placeholder="Your email"
                                            type="email"
+                                           value={emailInfo.email}
+                                           onChange={(e) => setEmailInfo({...emailInfo, email: e.currentTarget.value})}
                                            required/>
-                                    <label className="flex items-baseline lg:items-center gap-2 mt-2">
-                                        <input className="mr-4 min-w-[4.5vw] min-h-[4.5vw] lg:min-w-auto lg:min-h-auto" type="checkbox"/>
-                                        I'd like to receive more information about Darkai products
-                                    </label>
+                                    {/*<label className="flex items-baseline lg:items-center gap-2 mt-2">*/}
+                                    {/*    <input className="mr-4 min-w-[4.5vw] min-h-[4.5vw] lg:min-w-auto lg:min-h-auto" type="checkbox"/>*/}
+                                    {/*    I'd like to receive more information about Darkai products*/}
+                                    {/*</label>*/}
                                     <div className="w-full text-right mt-4">
                                         <button
                                             className="cursor-pointer py-2 px-4 rounded-full border text-gray-950 mr-4"

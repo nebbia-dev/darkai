@@ -19,6 +19,8 @@ export const useTeethStore = create<State>((set, get) => ({
                     state.scanImage.type = type;
                 }
             )),
+    savedConfig: undefined,
+    setSavedConfig: (id) => set({savedConfig: id}),
     // state and method to take a screenshot of the Canvas when needed
     // (the useThree hook needed to perform this task can be used only inside the Canvas)
     isScreenshotNeeded: undefined,

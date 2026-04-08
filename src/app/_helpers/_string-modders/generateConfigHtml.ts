@@ -7,6 +7,7 @@ import elabMaterial from "@/app/_helpers/_string-modders/elabMaterial";
 import elabStoneName from "@/app/_helpers/_string-modders/elabStoneName";
 import {History, Packaging, Prices} from "@/app/_types/TeethOptions";
 import elabVelvetName from "@/app/_helpers/_string-modders/elabVelvetName";
+import checkDoubleTeeth from "@/app/_helpers/_checkers/checkDoubleTeeth";
 
 export default function generateConfigHtml(teethPrices:Prices, history:History[][], currentStep:number, packaging:Packaging) {
 
@@ -36,7 +37,14 @@ export default function generateConfigHtml(teethPrices:Prices, history:History[]
     {history.length > 0 && Object.entries(history[currentStep][0].type).map(tooth => {
 
         if(history[currentStep][0].visible[tooth[0]]) {
-            html += "<li><h4>" + (((tooth[1] === 'bar' || tooth[1] === 'barDiamond') && (tooth[0] === 'icssx' || tooth[0] === 'icisx')) || ((tooth[1] === 'bigBar' || tooth[1] === 'bigBarDiamond') && tooth[0] === 'cisx')
+            if(checkDoubleTeeth(tooth[0], tooth[1])) {
+                return;
+            }
+            html += "<li><h4>" + (
+                (
+                    ((tooth[1] === 'bar' || tooth[1] === 'barDiamond') && (tooth[0] === 'icssx' || tooth[0] === 'icisx'))
+                    || ((tooth[1] === 'bigBar' || tooth[1] === 'bigBarDiamond') && tooth[0] === 'cisx')
+                )
                 ? elabToothName(tooth[0], true)
                 : elabToothName(tooth[0], false)) + "</h4>" + "<p>" + (tooth[1] === 'enamel'
                     ? firstCapital(history[currentStep][0].enamel[tooth[0]] as string) + ' ' + elabDesignName(tooth[1])
@@ -50,7 +58,11 @@ export default function generateConfigHtml(teethPrices:Prices, history:History[]
                 html += "<p>" + firstCapital(history[currentStep][0].pave[tooth[0]].shape as string) + " pave w/ " + elabStoneName(history[currentStep][0].pave[tooth[0]].color as string) + "</p>"
             }
 
-            html += "<p>" + (((tooth[1] === 'bar' || tooth[1] === 'barDiamond') && (tooth[0] === 'icssx' || tooth[0] === 'icisx')) || ((tooth[1] === 'bigBar' || tooth[1] === 'bigBarDiamond') && tooth[0] === 'cisx')
+            html += "<p>" + (
+                (
+                    ((tooth[1] === 'bar' || tooth[1] === 'barDiamond') && (tooth[0] === 'icssx' || tooth[0] === 'icisx'))
+                    || ((tooth[1] === 'bigBar' || tooth[1] === 'bigBarDiamond') && tooth[0] === 'cisx')
+                )
                 ? new Intl.NumberFormat("de-DE", {
                     style: "currency",
                     currency: "EUR"

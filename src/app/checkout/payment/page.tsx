@@ -15,11 +15,13 @@ import uploadConfig from "@/app/_helpers/_db-interactions/uploadConfig";
 import createOrder from "@/app/_helpers/_db-interactions/createOrder";
 import RecapList from "@/app/_components/_elements/RecapList";
 import CountrySelect from "@/app/_components/_elements/CountrySelect";
+import updateConfig from "@/app/_helpers/_db-interactions/updateConfig";
 export default function Payment() {
     const router = useRouter();
     const history = useTeethStore((state:State) => state.history);
     const bufferConfigImage = useTeethStore((state:State) => state.bufferConfigImage);
     const scanImage = useTeethStore((state:State) => state.scanImage);
+    const savedConfig = useTeethStore((state:State) => state.savedConfig);
     const total = useTeethStore((state:State) => state.total);
     const packaging = useTeethStore((state: State) => state.packaging);
     const [billingData, setBillingData] = useState<PersonalData>({
@@ -47,13 +49,6 @@ export default function Payment() {
     // const [shippingOption, setShippingOption] = useState<string|undefined>(undefined);
     const [differentShipOpts, setDifferentShipOpts] = useState<boolean>(false);
 
-    // const flags = {};
-    // countries.all.forEach(country => {
-    //     flags[country.alpha2] = "fi fi-" + country.alpha2.toLowerCase()
-    // })
-    //
-    // console.log(countries)
-
     function handlePhoneChange(newValue: string) {
         setBillingData({...billingData, phone:newValue});
         if(error) {
@@ -71,78 +66,82 @@ export default function Payment() {
     const [isSending, setIsSending] = useState<boolean>(false);
     const [sent, setSent] = useState<boolean>(false);
 
-    function pay() {
-        console.log(billingData)
-    }
 
-    // async function pay() {
-    //     setIsSending(true);
-    //     let shippingJson;
-    //     if(differentShipOpts && (
-    //         shippingData.name === ''
-    //         || shippingData.lastname === ''
-    //         || shippingData.address === ''
-    //         || shippingData.city === ''
-    //         || shippingData.state === ''
-    //         || shippingData.phone === ''
-    //         || shippingData.postalCode === ''
-    //     )) {
-    //         setIsSending(false);
-    //         setError('The shipping information is incomplete');
-    //         return;
-    //     }
-    //     if(billingData.name === ''
-    //         || billingData.lastname === ''
-    //         || billingData.address === ''
-    //         || billingData.city === ''
-    //         || billingData.state === ''
-    //         || billingData.phone === ''
-    //         || billingData.postalCode === ''
-    //         || billingData.email === ''
-    //     ) {
-    //         setIsSending(false);
-    //         setError('The billing information is incomplete');
-    //         return;
-    //     }
-    //     if(differentShipOpts) {
-    //         shippingJson = shippingData;
-    //     } else {
-    //         shippingJson = {...billingData};
-    //         delete shippingJson.email;
-    //     }
-    //     // console.log(billingData, shippingJson, bufferConfigImage, scanImage);
-    //     // server action? - YES
-    //     // create Customer + retrieve id - YES
-    //     // upload scan + update Customer (if scan is present) - YES
-    //     // create Config + retrieve id
-    //     // upload config + update Config
-    //     // create Order w/ Customer id + Config id
-    //
-    //     try {
-    //
-    //         const customer = await createCustomer(billingData);
-    //         const number = Math.random() * 100 + Math.cos(Math.random() * 100);
-    //         if(scanImage.scan && customer) {
-    //             await uploadScan(scanImage, number, customer[0].id);
-    //         }
-    //
-    //         const config = await createConfig(history[history.length-1][0], total, packaging);
-    //         if(bufferConfigImage && config) {
-    //             await uploadConfig(bufferConfigImage, number, config[0].id);
-    //         }
-    //
-    //         if(customer && config) {
-    //             await createOrder(customer[0].id, config[0].id, total, shippingJson);
-    //         }
-    //
-    //         setIsSending(false);
-    //         setSent(true);
-    //         router.push('/checkout/payment/success');
-    //
-    //     } catch(error) {
-    //         console.log(error);
-    //     }
-    // }
+    async function pay() {
+        setIsSending(true);
+        let shippingJson;
+        if(differentShipOpts && (
+            shippingData.name === ''
+            || shippingData.lastname === ''
+            || shippingData.address === ''
+            || shippingData.city === ''
+            || shippingData.state === ''
+            || shippingData.phone === ''
+            || shippingData.postalCode === ''
+        )) {
+            setIsSending(false);
+            setError('The shipping information is incomplete');
+            return;
+        }
+        if(billingData.name === ''
+            || billingData.lastname === ''
+            || billingData.address === ''
+            || billingData.city === ''
+            || billingData.state === ''
+            || billingData.phone === ''
+            || billingData.postalCode === ''
+            || billingData.email === ''
+        ) {
+            setIsSending(false);
+            setError('The billing information is incomplete');
+            return;
+        }
+        if(differentShipOpts) {
+            shippingJson = shippingData;
+        } else {
+            shippingJson = {...billingData};
+            delete shippingJson.email;
+        }
+        // console.log(billingData, shippingJson, bufferConfigImage, scanImage);
+        // server action? - YES
+        // create Customer + retrieve id - YES
+        // upload scan + update Customer (if scan is present) - YES
+        // create Config + retrieve id
+        // upload config + update Config
+        // create Order w/ Customer id + Config id
+
+        try {
+
+            const customer = await createCustomer(billingData);
+            const number = Math.random() * 100 + Math.cos(Math.random() * 100);
+            if(scanImage.scan && customer) {
+                await uploadScan(scanImage, number, customer[0].id);
+            }
+
+            if(savedConfig) {
+                await updateConfig(savedConfig);
+                if(customer && savedConfig) {
+                    await createOrder(customer[0].id, savedConfig, total, shippingJson);
+                }
+
+            } else {
+                const config = await createConfig(history[history.length-1][0], total, packaging, 'Completed');
+                if(bufferConfigImage && config) {
+                    await uploadConfig(bufferConfigImage, number, config[0].id);
+                }
+                if(customer && config) {
+                    await createOrder(customer[0].id, config[0].id, total, shippingJson);
+                }
+            }
+
+            setIsSending(false);
+            setSent(true);
+            router.push('/checkout/payment/success');
+
+        } catch(error) {
+            console.log(error);
+        }
+    }
 
     return(
         <>
@@ -186,88 +185,113 @@ export default function Payment() {
 
                                         <form className="flex flex-col gap-2 px-2 pt-2 pb-8">
                                             <label>Name
-                                                <input className="w-full bg-stone-200 rounded py-2 px-4"
-                                                       type="text"
-                                                       placeholder="Type your name"
-                                                       value={billingData.name}
-                                                       onChange={(e) => {
-                                                           setBillingData({
-                                                               ...billingData,
-                                                               name: e.currentTarget.value
-                                                           });
-                                                           if(error) {
-                                                               setError(false)
-                                                           }
-                                                       }}
-                                                       required
+                                                <input
+                                                    className="w-full bg-stone-200 rounded py-2 px-4 focus:outline-black"
+                                                    type="text"
+                                                    placeholder="Type your name"
+                                                    value={billingData.name}
+                                                    onChange={(e) => {
+                                                        setBillingData({
+                                                            ...billingData,
+                                                            name: e.currentTarget.value
+                                                        });
+                                                        if (error) {
+                                                            setError(false)
+                                                        }
+                                                    }}
+                                                    required
                                                 />
                                             </label>
                                             <label>Last name
+                                                <input
+                                                    className="w-full bg-stone-200 rounded py-2 px-4 focus:outline-black"
+                                                    type="text"
+                                                    placeholder="Type your last name"
+                                                    value={billingData.lastname}
+                                                    onChange={(e) => {
+                                                        setBillingData({
+                                                            ...billingData,
+                                                            lastname: e.currentTarget.value
+                                                        });
+                                                        if (error) {
+                                                            setError(false)
+                                                        }
+                                                    }}
+                                                    required
+                                                />
+                                            </label>
+
+                                            <label>Email address
                                                 <input className="w-full bg-stone-200 rounded py-2 px-4"
-                                                       type="text"
-                                                       placeholder="Type your last name"
-                                                       value={billingData.lastname}
+                                                       type="email"
+                                                       placeholder="Type your email address"
+                                                       value={billingData.email}
                                                        onChange={(e) => {
                                                            setBillingData({
                                                                ...billingData,
-                                                               lastname: e.currentTarget.value
+                                                               email: e.currentTarget.value
                                                            });
-                                                           if(error) {
+                                                           if (error) {
                                                                setError(false)
                                                            }
                                                        }}
                                                        required
                                                 />
                                             </label>
+
                                             <label>Address
-                                                <input className="w-full bg-stone-200 rounded py-2 px-4"
-                                                       type="text"
-                                                       placeholder="Type your address"
-                                                       value={billingData.address}
-                                                       onChange={(e) => {
-                                                           setBillingData({
-                                                               ...billingData,
-                                                               address: e.currentTarget.value
-                                                           });
-                                                           if(error) {
-                                                               setError(false)
-                                                           }
-                                                       }}
-                                                       required
+                                                <input
+                                                    className="w-full bg-stone-200 rounded py-2 px-4 focus:outline-black"
+                                                    type="text"
+                                                    placeholder="Type your address"
+                                                    value={billingData.address}
+                                                    onChange={(e) => {
+                                                        setBillingData({
+                                                            ...billingData,
+                                                            address: e.currentTarget.value
+                                                        });
+                                                        if (error) {
+                                                            setError(false)
+                                                        }
+                                                    }}
+                                                    required
                                                 />
                                             </label>
+
                                             <label>City
-                                                <input className="w-full bg-stone-200 rounded py-2 px-4"
-                                                       type="text"
-                                                       placeholder="Type your city"
-                                                       value={billingData.city}
-                                                       onChange={(e) => {
-                                                           setBillingData({
-                                                               ...billingData,
-                                                               city: e.currentTarget.value
-                                                           });
-                                                           if(error) {
-                                                               setError(false)
-                                                           }
-                                                       }}
-                                                       required
+                                                <input
+                                                    className="w-full bg-stone-200 rounded py-2 px-4 focus:outline-black"
+                                                    type="text"
+                                                    placeholder="Type your city"
+                                                    value={billingData.city}
+                                                    onChange={(e) => {
+                                                        setBillingData({
+                                                            ...billingData,
+                                                            city: e.currentTarget.value
+                                                        });
+                                                        if (error) {
+                                                            setError(false)
+                                                        }
+                                                    }}
+                                                    required
                                                 />
                                             </label>
                                             <label>Postal code
-                                                <input className="w-full bg-stone-200 rounded py-2 px-4"
-                                                       type="number"
-                                                       placeholder="Type your postal code"
-                                                       value={billingData.postalCode}
-                                                       onChange={(e) => {
-                                                           setBillingData({
-                                                               ...billingData,
-                                                               postalCode: e.currentTarget.value
-                                                           });
-                                                           if(error) {
-                                                               setError(false)
-                                                           }
-                                                       }}
-                                                       required
+                                                <input
+                                                    className="w-full bg-stone-200 rounded py-2 px-4 focus:outline-black"
+                                                    type="number"
+                                                    placeholder="Type your postal code"
+                                                    value={billingData.postalCode}
+                                                    onChange={(e) => {
+                                                        setBillingData({
+                                                            ...billingData,
+                                                            postalCode: e.currentTarget.value
+                                                        });
+                                                        if (error) {
+                                                            setError(false)
+                                                        }
+                                                    }}
+                                                    required
                                                 />
                                             </label>
                                             <label>State
@@ -279,30 +303,14 @@ export default function Payment() {
                                                             ...billingData,
                                                             state: newValue
                                                         });
-                                                        if(error) {
+                                                        if (error) {
                                                             setError(false)
                                                         }
                                                     }}
                                                     required
                                                 />
                                             </label>
-                                            <label>Email address
-                                                <input className="w-full bg-stone-200 rounded py-2 px-4"
-                                                       type="email"
-                                                       placeholder="Type your email address"
-                                                       value={billingData.email}
-                                                       onChange={(e) => {
-                                                           setBillingData({
-                                                               ...billingData,
-                                                               email: e.currentTarget.value
-                                                           });
-                                                           if(error) {
-                                                               setError(false)
-                                                           }
-                                                       }}
-                                                       required
-                                                />
-                                            </label>
+
                                             <label>Phone
                                                 <div>
                                                     <MuiTelInput sx={{
@@ -396,7 +404,7 @@ export default function Payment() {
                                             {differentShipOpts &&
                                                 <form className="flex flex-col gap-2 px-2 pt-2 pb-8">
                                                     <label>Name
-                                                        <input className="w-full bg-stone-200 rounded py-2 px-4"
+                                                        <input className="w-full bg-stone-200 rounded py-2 px-4 focus:outline-black"
                                                                type="text"
                                                                placeholder="Type your name"
                                                                value={shippingData.name}
@@ -413,7 +421,7 @@ export default function Payment() {
                                                         />
                                                     </label>
                                                     <label>Last name
-                                                        <input className="w-full bg-stone-200 rounded py-2 px-4"
+                                                        <input className="w-full bg-stone-200 rounded py-2 px-4 focus:outline-black"
                                                                type="text"
                                                                placeholder="Type your last name"
                                                                value={shippingData.lastname}
@@ -430,7 +438,7 @@ export default function Payment() {
                                                         />
                                                     </label>
                                                     <label>Address
-                                                        <input className="w-full bg-stone-200 rounded py-2 px-4"
+                                                        <input className="w-full bg-stone-200 rounded py-2 px-4 focus:outline-black"
                                                                type="text"
                                                                placeholder="Type your address"
                                                                value={shippingData.address}
@@ -447,7 +455,7 @@ export default function Payment() {
                                                         />
                                                     </label>
                                                     <label>City
-                                                        <input className="w-full bg-stone-200 rounded py-2 px-4"
+                                                        <input className="w-full bg-stone-200 rounded py-2 px-4 focus:outline-black"
                                                                type="text"
                                                                placeholder="Type your city"
                                                                onChange={(e) => {
@@ -524,7 +532,7 @@ export default function Payment() {
                                                                         paddingRight: '1rem',
                                                                         "&::placeholder": {
                                                                             fontSize: '0.875rem',
-                                                                            opacity: 1,
+                                                                            opacity: 0.5,
                                                                         },
                                                                     },
                                                                 },
