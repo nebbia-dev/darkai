@@ -7,7 +7,7 @@ import {State} from "@/app/_types/State";
 import RecapList from "@/app/_components/_elements/RecapList";
 import {Dropdown} from "@/app/_components/_icons/Dropdown";
 import {useRouter} from "next/navigation";
-import {sendMail} from "@/utils/nodemailer/sendMail";
+import {sendMail} from "@/lib/nodemailer/sendMail";
 import generateConfigHtml from "@/app/_helpers/_string-modders/generateConfigHtml";
 import createConfig from "@/app/_helpers/_db-interactions/createConfig";
 import uploadConfig from "@/app/_helpers/_db-interactions/uploadConfig";

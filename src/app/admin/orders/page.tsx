@@ -1,21 +1,28 @@
-import {createClient} from "@/utils/supabase/server";
+import {createClient} from "@/lib/supabase/server";
 import dateConverter from "@/app/_helpers/_converters/dateConverter";
 import Link from 'next/link';
 import orderIdConverter from "@/app/_helpers/_converters/orderIdConverter";
 import DownloadCsv from "@/app/_components/_elements/_buttons/DownloadCsv";
 import OrderInfo from "@/app/_types/OrderInfo";
+import {redirect} from "next/navigation";
 export default async function Page() {
+
     const supabase = await createClient();
-    let { data, error } = await supabase
+
+    let { data:orderInfo, error:orderError } = await supabase
         .from('Orders')
         .select('*, user_id(id, name, lastname)');
-    console.log(data)
+
+    if(orderError) {
+        console.log(orderError);
+    }
+
     return(
         <div className="relative left-[7.5vw] w-[92.5vw]">
             <div className="bg-gray-100 flex flex-col justify-center h-[15dvh]">
                 <div className="w-[75vw] mx-auto flex items-center justify-between">
                     <h2 className="font-bold text-2xl">Orders list</h2>
-                    <DownloadCsv data={data as unknown as OrderInfo[]}/>
+                    <DownloadCsv data={orderInfo as unknown as OrderInfo[]}/>
                 </div>
                 <h3 className="w-[75vw] mx-auto mt-2">List of all completed orders</h3>
             </div>
@@ -38,7 +45,7 @@ export default async function Page() {
                     </tr>
                     </thead>
                         <tbody>
-                        {data?.map((order, index) => (
+                        {orderInfo?.map((order, index) => (
                             <tr key={order.id}
                                 className={`${index % 2 !== 0 ? 'border-t border-b border-t-gray-400 border-b-gray-400' : 'bg-gray-100'}`}>
                                 <td scope="row" className="text-right h-[2rem] px-2">

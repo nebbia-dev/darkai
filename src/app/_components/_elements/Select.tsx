@@ -1,8 +1,8 @@
 'use client'
 import {useState} from "react";
 import OrderInfo from "@/app/_types/OrderInfo";
-import {createClient} from "@/utils/supabase/client";
-import {sendMail} from "@/utils/nodemailer/sendMail";
+import {createClient} from "@/lib/supabase/client";
+import {sendMail} from "@/lib/nodemailer/sendMail";
 
 export default function Select({st, orderId}:{st:OrderInfo["status"], orderId:OrderInfo["id"]}) {
     console.log('id ', orderId);

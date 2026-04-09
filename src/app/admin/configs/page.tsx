@@ -1,18 +1,20 @@
-import {createClient} from "@/utils/supabase/server";
+import {createClient} from "@/lib/supabase/server";
 import dateConverter from "@/app/_helpers/_converters/dateConverter";
 import Link from 'next/link';
 import confIdConverter from "@/app/_helpers/_converters/confIdConverter";
 import DownloadCsv from "@/app/_components/_elements/_buttons/DownloadCsv";
 import ConfigInfo from "@/app/_types/ConfigInfo";
+import {redirect} from "next/navigation";
 export default async function Page() {
     const supabase = await createClient();
-    let { data, error } = await supabase
+
+    let { data:configs, error:configsError } = await supabase
         .from('Configs')
         .select('*');
     let { data:orders, error:ordersError } = await supabase
         .from('Orders')
         .select('status, config');
-    data?.forEach(config => {
+    configs?.forEach(config => {
         orders?.forEach(order => {
             if(config.id === order.config) {
                 config['orderStatus'] = 'Completed'
@@ -20,12 +22,16 @@ export default async function Page() {
         })
     })
 
+    if(ordersError || configsError) {
+        console.log(ordersError ?? configsError);
+    }
+
     return(
         <div className="relative left-[7.5vw] w-[92.5vw]">
             <div className="bg-gray-100 flex flex-col justify-center h-[15dvh]">
                 <div className="w-[75vw] mx-auto flex items-center justify-between">
                     <h2 className="font-bold text-2xl">Configurations list</h2>
-                    <DownloadCsv data={data as unknown as ConfigInfo[]}/>
+                    <DownloadCsv data={configs as unknown as ConfigInfo[]}/>
                 </div>
                 <h3 className="w-[75vw] mx-auto mt-2">List of all configurations</h3>
             </div>
@@ -46,7 +52,7 @@ export default async function Page() {
                     </tr>
                     </thead>
                         <tbody>
-                        {data?.map((config, index) => (
+                        {configs?.map((config, index) => (
                             <tr key={config.id}
                                 className={`${index % 2 !== 0 ? 'border-t border-b border-t-gray-400 border-b-gray-400' : 'bg-gray-100'}`}>
                                 <td scope="row" className="text-right h-[2rem] px-2">

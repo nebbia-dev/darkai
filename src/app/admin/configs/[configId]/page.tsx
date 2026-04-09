@@ -1,4 +1,4 @@
-import {createClient} from "@/utils/supabase/server";
+import {createClient} from "@/lib/supabase/server";
 import elabToothName from "@/app/_helpers/_string-modders/elabToothName";
 import firstCapital from "@/app/_helpers/_string-modders/firstCapital";
 import BackButton from "@/app/_components/_elements/_buttons/BackButton";
@@ -8,20 +8,27 @@ import Image from "next/image";
 import confIdConverter from "@/app/_helpers/_converters/confIdConverter";
 import elabVelvetName from "@/app/_helpers/_string-modders/elabVelvetName";
 import elabMaterial from "@/app/_helpers/_string-modders/elabMaterial";
+import {redirect} from "next/navigation";
 export default async function Config({params}: { params: Promise<{ configId: string[] }> }){
-    const { configId } = await params;
+
     const supabase = await createClient();
-    const {data, error } = await supabase
+
+    const { configId } = await params;
+    const {data:config, error:configError } = await supabase
         .from('Configs')
         .select('*')
         .eq('id', configId);
 
+    if(configError) {
+        console.log(configError)
+    }
+
     const teethConfig: {[key: string]:string} = {};
     const jewelsConfig:{[key: string]:string[]} = {};
 
-    Object.entries(data?.[0].config.visible).forEach(tooth => {
+    Object.entries(config?.[0].config.visible).forEach(tooth => {
         if (!tooth[1]) return null;
-        const toothProp = data?.[0].config;
+        const toothProp = config?.[0].config;
         if (tooth[0] === 'cisx' && (!(toothProp) || toothProp.type[tooth[0]] === 'bigBar' || toothProp.type[tooth[0]] === 'bigBarDiamond')) return null;
         if (tooth[0] === 'icisx' && (!(toothProp) || toothProp.type[tooth[0]] === 'bar' || toothProp.type[tooth[0]] === 'barDiamond')) return null;
         if (tooth[0] === 'icssx' && (!(toothProp) || toothProp.type[tooth[0]] === 'bar' || toothProp.type[tooth[0]] === 'barDiamond')) return null;
@@ -62,7 +69,7 @@ export default async function Config({params}: { params: Promise<{ configId: str
                     <BackButton url="/admin/configs"/>
                 </div>
                 <div className="h-full flex flex-col justify-center">
-                    <h1 className="font-bold text-2xl w-[75vw] mx-auto">Configuration {confIdConverter(data?.[0].id)} </h1>
+                    <h1 className="font-bold text-2xl w-[75vw] mx-auto">Configuration {confIdConverter(config?.[0].id)} </h1>
                 </div>
             </div>
             <div className="w-[80%] mx-auto h-tab-height mb-[3rem] flex justify-center">
@@ -73,8 +80,8 @@ export default async function Config({params}: { params: Promise<{ configId: str
                             <div className="mb-4">
                                 <h3 className="w-full py-1 px-3 bg-gray-200 mb-3">Composition</h3>
                                 <ul>
-                                    {data?.[0].config.preciousness
-                                        && Object.entries(data?.[0].config.preciousness as Preciousness).map(feat => {
+                                    {config?.[0].config.preciousness
+                                        && Object.entries(config?.[0].config.preciousness as Preciousness).map(feat => {
                                             return <li key={feat[0] + feat[1]}
                                                        className="pl-2">{firstCapital(feat[0])}: {feat[1]}</li>
                                         })
@@ -108,7 +115,7 @@ export default async function Config({params}: { params: Promise<{ configId: str
                                 </ul>
                             </div>
 
-                            {data?.[0]['config_pack'] &&
+                            {config?.[0]['config_pack'] &&
                                 <div className="mb-4">
                                     <div className="flex justify-between items-center mb-1">
                                         <h4 className="font-semibold">
@@ -117,17 +124,17 @@ export default async function Config({params}: { params: Promise<{ configId: str
                                     </div>
                                     {/*type + material*/}
                                     <p className="pl-2">
-                                        {firstCapital(data?.[0]['config_pack'].out)} box w/ {elabVelvetName(data?.[0]['config_pack'].in)} velvet
-                                        and {elabMaterial(data?.[0]['config_pack'].details, 'gold')} gold details
+                                        {firstCapital(config?.[0]['config_pack'].out)} box w/ {elabVelvetName(config?.[0]['config_pack'].in)} velvet
+                                        and {elabMaterial(config?.[0]['config_pack'].details, 'gold')} gold details
                                     </p>
-                                    {(data?.[0]['config_pack'].text.firstLine.length > 0 || data?.[0]['config_pack'].text.secondLine.length > 0) &&
+                                    {(config?.[0]['config_pack'].text.firstLine.length > 0 || config?.[0]['config_pack'].text.secondLine.length > 0) &&
                                         <p className="pl-2">
                                             Custom text: {
-                                                    data?.[0]['config_pack'].text.firstLine && data?.[0]['config_pack'].text.secondLine
-                                                        ? <span><br/>1) {data?.[0]['config_pack'].text.firstLine}<br/>2) {data?.[0]['config_pack'].text.secondLine}</span>
-                                                        : data?.[0]['config_pack'].text.firstLine !== ''
-                                                            ? data?.[0]['config_pack'].text.firstLine
-                                                            : data?.[0]['config_pack'].text.secondLine
+                                                    config?.[0]['config_pack'].text.firstLine && config?.[0]['config_pack'].text.secondLine
+                                                        ? <span><br/>1) {config?.[0]['config_pack'].text.firstLine}<br/>2) {config?.[0]['config_pack'].text.secondLine}</span>
+                                                        : config?.[0]['config_pack'].text.firstLine !== ''
+                                                            ? config?.[0]['config_pack'].text.firstLine
+                                                            : config?.[0]['config_pack'].text.secondLine
                                                 }
                                         </p>
                                     }
@@ -140,7 +147,7 @@ export default async function Config({params}: { params: Promise<{ configId: str
                                     {new Intl.NumberFormat("it-IT", {
                                         style: "currency",
                                         currency: "EUR"
-                                    }).format(data?.[0].total)}
+                                    }).format(config?.[0].total)}
                                 </p>
                             </div>
                         </div>
@@ -152,7 +159,7 @@ export default async function Config({params}: { params: Promise<{ configId: str
                         <div className="w-full">
                             <Image alt="config"
                                    className="object-cover w-full"
-                                   src={`https://aiuptuoijjmfcxutusbc.supabase.co/storage/v1/object/public/configs/${data?.[0].screen}`}
+                                   src={`https://aiuptuoijjmfcxutusbc.supabase.co/storage/v1/object/public/configs/${config?.[0].screen}`}
                                    width={1000} height={1000} quality={70}/>
                         </div>
                     </div>

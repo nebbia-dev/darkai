@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import {produce} from "immer";
 import {State} from "@/app/_types/State";
 // import firstCapital from "@/app/_helpers/_string-modders/firstCapital";
-import json from "@/utils/prices.json";
+import json from "@/lib/prices.json";
 import {Pave, Stone} from "@/app/_types/TeethOptions";
 // import {createClient} from "@/utils/supabase/client";
 

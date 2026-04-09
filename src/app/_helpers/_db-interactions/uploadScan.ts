@@ -1,5 +1,5 @@
 'use server'
-import {createClient} from "@/utils/supabase/server";
+import {createClient} from "@/lib/supabase/server";
 
 export default async function uploadScan(buffer:{ scan: ArrayBuffer|undefined, type: string | undefined }, number:Number, userId:Number) {
     const ext = buffer.type?.split('/')[1];
