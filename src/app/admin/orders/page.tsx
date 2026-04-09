@@ -4,7 +4,6 @@ import Link from 'next/link';
 import orderIdConverter from "@/app/_helpers/_converters/orderIdConverter";
 import DownloadCsv from "@/app/_components/_elements/_buttons/DownloadCsv";
 import OrderInfo from "@/app/_types/OrderInfo";
-import {redirect} from "next/navigation";
 export default async function Page() {
 
     const supabase = await createClient();

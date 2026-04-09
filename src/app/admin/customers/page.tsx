@@ -2,7 +2,6 @@ import {createClient} from "@/lib/supabase/server";
 import dateConverter from "@/app/_helpers/_converters/dateConverter";
 import CustomerInfo from "@/app/_types/CustomerInfo";
 import DownloadCsv from "@/app/_components/_elements/_buttons/DownloadCsv";
-import {redirect} from "next/navigation";
 export default async function Page() {
 
     const supabase = await createClient();

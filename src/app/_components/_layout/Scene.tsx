@@ -1,6 +1,6 @@
 'use client'
 import {Canvas} from '@react-three/fiber';
-import Configurator from "@/app/_components/_layout/Configurator";
+import CanvasR3F from "@/app/_components/_layout/CanvasR3F";
 import React, {Suspense} from "react";
 import {useTeethStore} from "@/app/_stores/teeth";
 import LoadedMaterials from "@/app/_components/_layout/LoadedMaterials";
@@ -29,7 +29,7 @@ export default function Scene() {
             <Canvas camera={{fov: 20, near: 0.1, far: 100, position: [0, 3, (innerWidth >= 1024 ? 27 : 42)]}} dpr={[1, 2]} frameloop="demand">
                 {/*<Perf/>*/}
                 <Suspense fallback={<Loading/>}>
-                    <Configurator/>
+                    <CanvasR3F/>
                 </Suspense>
                 <Suspense fallback={null}>
                     <LoadedMaterials/>

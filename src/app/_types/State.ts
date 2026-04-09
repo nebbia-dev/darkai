@@ -12,7 +12,7 @@ import {
     Stones, Visibility, History, Neighbours, HistoryPack, Packaging
 } from "@/app/_types/TeethOptions";
 
-interface TempPrices {
+export interface TempPrices {
     base: any[],
     bezel: {
         [key: string]: any[],
@@ -71,6 +71,7 @@ export interface State {
     setShowGemTypeBox: (value:boolean) => void,
     loaded: boolean,
     prices: TempPrices | undefined | null,
+    setPrices: (prices:any) => void,
     total: number,
     isScreenshotNeeded: boolean | undefined,
     resetControls: boolean | undefined,
@@ -98,7 +99,6 @@ export interface State {
     unsetLastActivatedTooth: () => void,
     resetTooth: (tooth:string) => void,
     setLoaded: (bool:boolean) => void,
-    fetchPrices: () => void,
     undo: () => void,
     redo: () => void,
     undoPack: () => void,

@@ -10,8 +10,6 @@ import {Write} from "@/app/_components/_icons/Write";
 import {Tooltip} from "@mui/material";
 import Link from 'next/link';
 import UploadScanBackoffice from "@/app/_components/_elements/_upload_inputs/UploadScanBackoffice";
-import orderIdConverter from "@/app/_helpers/_converters/orderIdConverter";
-import {redirect} from "next/navigation";
 import elabVelvetName from "@/app/_helpers/_string-modders/elabVelvetName";
 import elabMaterial from "@/app/_helpers/_string-modders/elabMaterial";
 import elabSignatureName from "@/app/_helpers/_string-modders/elabSignatureName";
@@ -77,7 +75,7 @@ export default async function Order({params}: { params: Promise<{ orderId: strin
                     <BackButton url="/admin/orders"/>
                 </div>
                 <div className="h-full flex flex-col justify-center">
-                    <h1 className="font-bold text-2xl w-[75vw] mx-auto">Order {orderIdConverter((order as unknown as OrderInfo[])?.[0].id)} </h1>
+                    <h1 className="font-bold text-2xl w-[75vw] mx-auto">Order {(order as unknown as OrderInfo[])?.[0].id} </h1>
 
                     <div className="w-[75vw] mx-auto mt-2">
                         <h3 className="inline">Order status: </h3>
