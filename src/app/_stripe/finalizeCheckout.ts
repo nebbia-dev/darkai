@@ -1,5 +1,5 @@
 'use server'
-import {createClient} from "@/lib/supabase/server";
+import {createClient} from "@/lib/supabase/serverSU";
 
 export async function finalizeCheckout(orderId: number, configId: number) {
     const supabase = await createClient();

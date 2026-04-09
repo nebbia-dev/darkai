@@ -1,5 +1,5 @@
 'use server'
-import {createClient} from "@/lib/supabase/server";
+import {createClient} from "@/lib/supabase/serverSU";
 
 export default async function updateConfig(configId:Number) {
     const supabase = await createClient();

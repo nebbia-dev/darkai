@@ -1,5 +1,5 @@
 'use server'
-import {createClient} from "@/lib/supabase/server";
+import {createClient} from "@/lib/supabase/serverSU";
 import {History, Packaging} from "@/app/_types/TeethOptions";
 
 export default async function createConfig(config:History, total:number, packaging:Packaging, orderStatus:string) {

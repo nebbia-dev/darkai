@@ -1,10 +1,11 @@
-import {History} from "@/app/_types/TeethOptions";
+import {History, Packaging} from "@/app/_types/TeethOptions";
 import PersonalData from "@/app/_types/PersonalData";
 
 export default interface OrderInfo {
     config_id: {
         id: number,
         config: History,
+        config_pack: Packaging,
         screen: string|undefined|null
     },
     created_at: Date,

@@ -8,7 +8,9 @@ import Image from "next/image";
 import confIdConverter from "@/app/_helpers/_converters/confIdConverter";
 import elabVelvetName from "@/app/_helpers/_string-modders/elabVelvetName";
 import elabMaterial from "@/app/_helpers/_string-modders/elabMaterial";
-import {redirect} from "next/navigation";
+import OrderInfo from "@/app/_types/OrderInfo";
+import elabSignatureName from "@/app/_helpers/_string-modders/elabSignatureName";
+import elabSignatureGold from "@/app/_helpers/_string-modders/elabSignatureGold";
 export default async function Config({params}: { params: Promise<{ configId: string[] }> }){
 
     const supabase = await createClient();
@@ -92,6 +94,27 @@ export default async function Config({params}: { params: Promise<{ configId: str
                             <div className="mb-4">
                                 <h3 className="w-full py-1 px-3 bg-gray-200 mb-3">Products</h3>
                                 <ul className="mb-2">
+
+                                    {
+                                        Object.entries(config?.[0].config.signatureVisible).map(signature => {
+                                            if(signature[1]) {
+                                                return(
+                                                    <li className="mb-2 pl-2" key={signature[0]}>
+                                                        <span
+                                                            className="font-semibold">{elabSignatureName(signature[0])}</span>
+                                                        <ul>
+                                                            <li className="flex items-center gap-1">
+                                                                <span
+                                                                    className="inline-block w-1 h-1 bg-black rounded-full"></span>
+                                                                {elabSignatureGold(config?.[0].config.signatureMaterial[signature[0]], signature[0])}
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                )
+                                            }
+                                        })
+                                    }
+
                                     {
                                         Object.entries(jewelsConfig).map(jewel => {
                                             return (

@@ -1,17 +1,10 @@
-import { createServerClient } from "@supabase/ssr";
+import {CookieOptions, createServerClient} from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
-import { hasEnvVars } from "../utils";
 
 export async function updateSession(request: NextRequest) {
     let supabaseResponse = NextResponse.next({
         request,
     });
-
-    // If the env vars are not set, skip proxy check. You can remove this
-    // once you setup the project.
-    if (!hasEnvVars) {
-        return supabaseResponse;
-    }
 
     // With Fluid compute, don't put this client in a global environment
     // variable. Always create a new one on each request.
@@ -23,14 +16,14 @@ export async function updateSession(request: NextRequest) {
                 getAll() {
                     return request.cookies.getAll();
                 },
-                setAll(cookiesToSet) {
-                    cookiesToSet.forEach(({ name, value }) =>
+                setAll(cookiesToSet: any[]) {
+                    cookiesToSet.forEach(({ name, value } : { name:string, value:string }) =>
                         request.cookies.set(name, value),
                     );
                     supabaseResponse = NextResponse.next({
                         request,
                     });
-                    cookiesToSet.forEach(({ name, value, options }) =>
+                    cookiesToSet.forEach(({ name, value, options }: { name:string, value:string, options:CookieOptions }) =>
                         supabaseResponse.cookies.set(name, value, options),
                     );
                 },

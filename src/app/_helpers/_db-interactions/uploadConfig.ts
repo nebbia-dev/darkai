@@ -1,5 +1,5 @@
 'use server'
-import {createClient} from "@/lib/supabase/server";
+import {createClient} from "@/lib/supabase/serverSU";
 
 export default async function uploadConfig(base64:any, number:Number, configId:Number) {
     const baseString = (base64 as string).split('base64,')[1];

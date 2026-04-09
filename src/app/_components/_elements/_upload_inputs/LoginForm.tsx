@@ -50,7 +50,7 @@ export default function LoginForm({user} : LoginProps) {
     }, [supabase])
 
     return (
-        <div className="w-[20vw] h-page-nav flex flex-col items-center justify-center mx-auto">
+        <div className="w-[20vw] h-page-nav flex flex-col items-center justify-center mx-auto relative top-[36px]">
             {isSending
                 ? <div className="w-full text-center">
                     <span className="loader mb-8 inline-block mx-auto"></span>

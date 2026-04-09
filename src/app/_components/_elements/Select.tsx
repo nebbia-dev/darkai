@@ -1,17 +1,13 @@
 'use client'
 import {useState} from "react";
 import OrderInfo from "@/app/_types/OrderInfo";
-import {createClient} from "@/lib/supabase/client";
 import {sendMail} from "@/lib/nodemailer/sendMail";
+import updateOrderStatus from "@/app/_helpers/_db-interactions/updateOrderStatus";
 
 export default function Select({st, orderId}:{st:OrderInfo["status"], orderId:OrderInfo["id"]}) {
     console.log('id ', orderId);
     async function updateStatus(newStatus:string) {
-        const supabase = await createClient();
-        const { data, error } = await supabase
-            .from('Orders')
-            .update({ status: newStatus })
-            .eq('id', orderId)
+        await updateOrderStatus(orderId, newStatus)
         // TODO:
         // - set Nodemailer to SEND the customer email telling her the order status has changed
         await sendMail({sendTo: 'barbara.sandrolini@gmail.com', subject:'Order status updated', text:'Your order has been updated. Current status: ' + newStatus} );

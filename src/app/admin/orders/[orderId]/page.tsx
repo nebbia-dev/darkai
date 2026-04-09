@@ -12,6 +12,10 @@ import Link from 'next/link';
 import UploadScanBackoffice from "@/app/_components/_elements/_upload_inputs/UploadScanBackoffice";
 import orderIdConverter from "@/app/_helpers/_converters/orderIdConverter";
 import {redirect} from "next/navigation";
+import elabVelvetName from "@/app/_helpers/_string-modders/elabVelvetName";
+import elabMaterial from "@/app/_helpers/_string-modders/elabMaterial";
+import elabSignatureName from "@/app/_helpers/_string-modders/elabSignatureName";
+import elabSignatureGold from "@/app/_helpers/_string-modders/elabSignatureGold";
 export default async function Order({params}: { params: Promise<{ orderId: string[] }> }){
 
     const supabase = await createClient();
@@ -20,7 +24,7 @@ export default async function Order({params}: { params: Promise<{ orderId: strin
     const {data:order, error:orderError } = await supabase
         .from('Orders')
         .select('id, shipping, created_at, status, shippingAddress, total, user_id(' +
-            'id, name, lastname, email, phone, scan), config_id(id, config, screen) ')
+            'id, name, lastname, email, phone, scan), config_id(id, config, screen, config_pack) ')
         .eq('id', orderId);
 
     if(orderError) {
@@ -100,7 +104,27 @@ export default async function Order({params}: { params: Promise<{ orderId: strin
 
                             <div className="mb-4">
                                 <h3 className="w-full py-1 px-3 bg-gray-200 mb-3">Products</h3>
+
                                 <ul className="mb-2">
+                                    {
+                                        Object.entries((order as unknown as OrderInfo[])?.[0]['config_id'].config.signatureVisible).map(signature => {
+                                            if(signature[1]) {
+                                                return(
+                                                    <li className="mb-2 pl-2" key={signature[0]}>
+                                                        <span
+                                                            className="font-semibold">{elabSignatureName(signature[0])}</span>
+                                                        <ul>
+                                                            <li className="flex items-center gap-1">
+                                                                <span
+                                                                    className="inline-block w-1 h-1 bg-black rounded-full"></span>
+                                                                {elabSignatureGold((order as unknown as OrderInfo[])?.[0]['config_id'].config.signatureMaterial[signature[0]], signature[0])}
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                )
+                                            }
+                                        })
+                                    }
                                     {
                                         Object.entries(jewelsConfig).map(jewel => {
                                             return (
@@ -122,6 +146,31 @@ export default async function Order({params}: { params: Promise<{ orderId: strin
                                         })
                                     }
                                 </ul>
+                                {(order as unknown as OrderInfo[])?.[0]['config_id']['config_pack'] &&
+                                    <div className="mb-4">
+                                        <div className="flex justify-between items-center mb-1">
+                                            <h4 className="font-semibold">
+                                                Premium Box
+                                            </h4>
+                                        </div>
+                                        {/*type + material*/}
+                                        <p className="pl-2">
+                                            {firstCapital((order as unknown as OrderInfo[])?.[0]['config_id']['config_pack'].out)} box w/ {elabVelvetName((order as unknown as OrderInfo[])?.[0]['config_id']['config_pack'].in)} velvet
+                                            and {elabMaterial((order as unknown as OrderInfo[])?.[0]['config_id']['config_pack'].details, 'gold')} gold details
+                                        </p>
+                                        {((order as unknown as OrderInfo[])?.[0]['config_id']['config_pack'].text.firstLine.length > 0 || (order as unknown as OrderInfo[])?.[0]['config_id']['config_pack'].text.secondLine.length > 0) &&
+                                            <p className="pl-2">
+                                                Custom text: {
+                                                (order as unknown as OrderInfo[])?.[0]['config_id']['config_pack'].text.firstLine && (order as unknown as OrderInfo[])?.[0]['config_id']['config_pack'].text.secondLine
+                                                    ? <span><br/>1) {(order as unknown as OrderInfo[])?.[0]['config_id']['config_pack'].text.firstLine}<br/>2) {(order as unknown as OrderInfo[])?.[0]['config_id']['config_pack'].text.secondLine}</span>
+                                                    : (order as unknown as OrderInfo[])?.[0]['config_id']['config_pack'].text.firstLine !== ''
+                                                        ? (order as unknown as OrderInfo[])?.[0]['config_id']['config_pack'].text.firstLine
+                                                        : (order as unknown as OrderInfo[])?.[0]['config_id']['config_pack'].text.secondLine
+                                            }
+                                            </p>
+                                        }
+                                    </div>
+                                }
                             </div>
 
                             <div className="mb-4">

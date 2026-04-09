@@ -1,5 +1,5 @@
 'use server'
-import {createClient} from "@/lib/supabase/server";
+import {createClient} from "@/lib/supabase/serverSU";
 import PersonalData from "@/app/_types/PersonalData";
 
 export default async function createOrder(

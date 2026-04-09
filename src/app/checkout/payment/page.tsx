@@ -53,6 +53,7 @@ export default function Payment() {
     // DA RE-INSERIRE QUANDO VERRA' ABILITATA L'OPZIONE DEL RITIRO PRESSO GLI AFFILIATI
     // const [shippingOption, setShippingOption] = useState<string|undefined>(undefined);
     const [differentShipOpts, setDifferentShipOpts] = useState<boolean>(false);
+    const [uploadedScanPath, setUploadedScanPath] = useState<string|undefined>(undefined);
 
     function handlePhoneChange(newValue: string) {
         setBillingData({...billingData, phone:newValue});
@@ -103,6 +104,7 @@ export default function Payment() {
     }
 
     const [isPreparingCheckout, setIsPreparingCheckout] = useState<boolean>(false);
+    const [isUploadingScan, setIsUploadingScan] = useState<boolean>(false);
     const [preparedCheckout, setPreparedCheckout] = useState<PreparedCheckout | null>(null);
 
     useEffect(() => {
@@ -124,7 +126,50 @@ export default function Payment() {
 
     useEffect(() => {
         setPreparedCheckout((currentPreparedCheckout) => currentPreparedCheckout ? null : currentPreparedCheckout);
-    }, [billingData, differentShipOpts, shippingData]);
+    }, [billingData, differentShipOpts, scanImage, shippingData]);
+
+    useEffect(() => {
+        setUploadedScanPath(undefined);
+    }, [scanImage]);
+
+    async function uploadScanBeforeCheckout() {
+        if (!scanImage.scan) {
+            return undefined;
+        }
+
+        if (uploadedScanPath) {
+            return uploadedScanPath;
+        }
+
+        setIsUploadingScan(true);
+
+        try {
+            const formData = new FormData();
+            const extension = scanImage.type?.split('/')[1]?.split('+')[0] || 'bin';
+            const blob = new Blob(
+                [scanImage.scan],
+                {type: scanImage.type || 'application/octet-stream'},
+            );
+
+            formData.append('file', blob, `scan.${extension}`);
+
+            const response = await fetch('/api/upload-scan', {
+                method: 'POST',
+                body: formData,
+            });
+
+            const payload = await response.json().catch(() => null) as {fileName?: string, error?: string} | null;
+
+            if (!response.ok || !payload?.fileName) {
+                throw new Error(payload?.error || 'Unable to upload the dental scan');
+            }
+
+            setUploadedScanPath(payload.fileName);
+            return payload.fileName;
+        } finally {
+            setIsUploadingScan(false);
+        }
+    }
 
     async function handlePrepareCheckout() {
         if(differentShipOpts && (
@@ -162,6 +207,7 @@ export default function Payment() {
         setIsPreparingCheckout(true);
 
         try {
+            const currentUploadedScanPath = await uploadScanBeforeCheckout();
             const checkout = await prepareCheckout({
                 billingData,
                 shippingData,
@@ -170,7 +216,7 @@ export default function Payment() {
                 total,
                 packaging,
                 bufferConfigImage,
-                scanImage,
+                uploadedScanPath: currentUploadedScanPath,
                 savedConfig,
             });
 
@@ -626,9 +672,14 @@ export default function Payment() {
                                         {isPreparingCheckout
                                             ? <>
                                                 <span className="loader mb-6 inline-block"></span>
-                                                <h2 className="text-base font-semibold text-stone-950">Preparing your secure payment...</h2>
+                                                <h2 className="text-base font-semibold text-stone-950">
+                                                    {isUploadingScan ? 'Uploading your dental scan...' : 'Preparing your secure payment...'}
+                                                </h2>
                                                 <p className="mt-2 max-w-md text-stone-600">
-                                                    We are saving your configuration and creating the Stripe session.
+                                                    {isUploadingScan
+                                                        ? 'We are uploading your scan before starting the Stripe checkout session.'
+                                                        : 'We are saving your configuration and creating the Stripe session.'
+                                                    }
                                                 </p>
                                             </>
                                             : <>
@@ -672,7 +723,7 @@ export default function Payment() {
                                 disabled={isPreparingCheckout || preparedCheckout !== null}
                                 onClick={handlePrepareCheckout}
                             >
-                                {isPreparingCheckout ? 'Preparing...' : preparedCheckout ? 'Payment ready' : 'Prepare payment'}
+                                {isUploadingScan ? 'Uploading scan...' : isPreparingCheckout ? 'Preparing...' : preparedCheckout ? 'Payment ready' : 'Prepare payment'}
                             </button>
                         </div>
                     </div>

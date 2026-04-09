@@ -4,15 +4,9 @@ import createCustomer from "@/app/_helpers/_db-interactions/createCustomer";
 import createOrder from "@/app/_helpers/_db-interactions/createOrder";
 import findShippingFees from "@/app/_helpers/_checkers/findShippingFees";
 import uploadConfig from "@/app/_helpers/_db-interactions/uploadConfig";
-import uploadScan from "@/app/_helpers/_db-interactions/uploadScan";
 import PersonalData from "@/app/_types/PersonalData";
 import {History, Packaging} from "@/app/_types/TeethOptions";
 import {stripe} from "@/app/_stripe/stripe";
-
-type ScanImage = {
-    scan: ArrayBuffer | undefined,
-    type: string | undefined,
-}
 
 type PrepareCheckoutInput = {
     billingData: PersonalData,
@@ -22,7 +16,7 @@ type PrepareCheckoutInput = {
     total: number,
     packaging: Packaging,
     bufferConfigImage: string | undefined,
-    scanImage: ScanImage,
+    uploadedScanPath: string | undefined,
     savedConfig: number | undefined,
 }
 
@@ -55,7 +49,7 @@ export async function prepareCheckout({
     total,
     packaging,
     bufferConfigImage,
-    scanImage,
+    uploadedScanPath,
     savedConfig,
 }: PrepareCheckoutInput): Promise<PrepareCheckoutResult> {
     if (!isPersonalDataComplete(billingData, true)) {
@@ -78,17 +72,13 @@ export async function prepareCheckout({
         throw new Error('No configuration found to associate with this checkout');
     }
 
-    const customer = await createCustomer(billingData);
+    const customer = await createCustomer(billingData, uploadedScanPath);
     if (!customer?.[0]?.id) {
         throw new Error('Unable to create the customer record');
     }
 
     const customerId = customer[0].id;
     const number = Math.random() * 100 + Math.cos(Math.random() * 100);
-
-    if (scanImage.scan) {
-        await uploadScan(scanImage, number, customerId);
-    }
 
     let configId = savedConfig;
 
