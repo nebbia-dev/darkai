@@ -181,7 +181,7 @@ export default async function Config({params}: { params: Promise<{ configId: str
                             <Image alt="config"
                                    className="object-cover w-full"
                                    src={`https://aiuptuoijjmfcxutusbc.supabase.co/storage/v1/object/public/configs/${config?.[0].screen}`}
-                                   width={1000} height={1000} quality={70}/>
+                                   width={1000} height={1000} quality={70} unoptimized={true}/>
                         </div>
                     </div>
                 </div>
