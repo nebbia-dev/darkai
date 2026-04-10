@@ -1,10 +1,7 @@
 import { create } from 'zustand';
 import {produce} from "immer";
 import {State} from "@/app/_types/State";
-// import firstCapital from "@/app/_helpers/_string-modders/firstCapital";
-import json from "@/lib/prices.json";
 import {Pave, Stone} from "@/app/_types/TeethOptions";
-// import {createClient} from "@/utils/supabase/client";
 
 export const useTeethStore = create<State>((set, get) => ({
 
@@ -1690,6 +1687,7 @@ export const useTeethStore = create<State>((set, get) => ({
             produce((state) => {
                 state.teethPreciousness.carats = carats;
                 get().calcTotal(state);
+                get().setHistory(state);
             })
         ),
 

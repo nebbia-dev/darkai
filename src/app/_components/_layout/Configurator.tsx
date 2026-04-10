@@ -5,11 +5,10 @@ import React, {useEffect, useState} from "react";
 import ActionBar from "@/app/_components/_elements/_buttons/ActionBar";
 import {useTeethStore} from "@/app/_stores/teeth";
 import Recap from "@/app/_components/_layout/Recap";
-import {State, TempPrices} from "@/app/_types/State";
+import {State} from "@/app/_types/State";
 import { Close, Menu } from "@mui/icons-material";
 import {Box} from "@/app/_components/_icons/Box";
 import isTouchDevice from "@/app/_helpers/_checkers/isTouchDevice";
-import fetchPrices from "@/app/_helpers/_db-interactions/fetchPrices";
 
 export default function Configurator({fetchedPrices} : {fetchedPrices:any}) {
 
@@ -30,7 +29,6 @@ export default function Configurator({fetchedPrices} : {fetchedPrices:any}) {
     const setIsTouch = useTeethStore((state:State) => state.setIsTouch);
     const history = useTeethStore((state:State) => state.history);
     const packaging = useTeethStore((state: State) => state.packaging);
-    const prices = useTeethStore((state: State) => state.prices);
     const setPrices = useTeethStore((state: State) => state.setPrices);
 
     useEffect(() => {
@@ -127,7 +125,6 @@ export default function Configurator({fetchedPrices} : {fetchedPrices:any}) {
                     {innerWidth < 1024 && (showMenu || showRecap || nextStep) && <div className="w-screen h-[100dvh] absolute z-15 bg-gray-50/75"></div>}
                     <div
                         className={`h-[100dvh] lg:h-page-nav ${activeButton ? 'w-[10vw]' : innerWidth < 1024 ? 'w-full' : 'w-[25vw]'} ${nextStep || !showMenu ? 'hidden' : 'block'} absolute z-20 left-0 lg:top-[72px]`}>
-                        <button onClick={()=> console.log(prices)}>Halo</button>
                         {loaded && <Selection activeButton={activeButton} changeActiveButton={changeActiveButton}/>}
                     </div>
 

@@ -13,6 +13,7 @@ import elabSignatureGold from "@/app/_helpers/_string-modders/elabSignatureGold"
 import checkDoubleTeeth from "@/app/_helpers/_checkers/checkDoubleTeeth";
 import checkDoubleTeethActive from "@/app/_helpers/_checkers/checkDoubleTeethActive";
 import checkDoubleTeethHover from "@/app/_helpers/_checkers/checkDoubleTeethHover";
+import React from "react";
 
 export default function RecapList({edit} : {edit:boolean}) {
 
@@ -221,6 +222,22 @@ export default function RecapList({edit} : {edit:boolean}) {
                                 }).format(300)
                         }</p>
                         <p className="mt-2 p-2 bg-gray-100 rounded">Note: the premium box is optional.<br/>If you don't choose one, a standard box will be included with your order free of charge.</p>
+                    </li>
+                }
+
+                {
+                    !edit &&
+                    <li className="py-4 border-t font-semibold">
+                        <p className="px-2">Total<br/>
+                            <span className="w-full text-left mt-1.5">
+                            {new Intl.NumberFormat("de-DE", {
+                                style: "currency",
+                                currency: "EUR"
+                            }).format(total)
+
+                            }
+                        </span>
+                        </p>
                     </li>
                 }
             </ul>
