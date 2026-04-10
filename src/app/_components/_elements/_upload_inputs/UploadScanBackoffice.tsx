@@ -36,7 +36,7 @@ export default function UploadScanBackoffice ({userId, scanId}:{userId:OrderInfo
                     {!buffer?.scan && <Image alt="config"
                             className="object-cover h-[35dvh] w-full pt-4 pl-8"
                             src={`https://aiuptuoijjmfcxutusbc.supabase.co/storage/v1/object/public/scans/${savedFile? savedFile : scanId}`}
-                            width={1000} height={1000} quality={70}
+                            width={1000} height={1000} quality={70} unoptimized={true}
                     />}
                     {buffer?.scan &&
                         <button className="cursor-pointer py-2 px-4 rounded-full bg-gray-950 text-gray-50 w-[calc(100%-2.5rem)] mt-2 ml-8 mr-2"
