@@ -14,6 +14,7 @@ import elabVelvetName from "@/app/_helpers/_string-modders/elabVelvetName";
 import elabMaterial from "@/app/_helpers/_string-modders/elabMaterial";
 import elabSignatureName from "@/app/_helpers/_string-modders/elabSignatureName";
 import elabSignatureGold from "@/app/_helpers/_string-modders/elabSignatureGold";
+import orderIdConverter from "@/app/_helpers/_converters/orderIdConverter";
 export default async function Order({params}: { params: Promise<{ orderId: string[] }> }){
 
     const supabase = await createClient();
@@ -75,11 +76,11 @@ export default async function Order({params}: { params: Promise<{ orderId: strin
                     <BackButton url="/admin/orders"/>
                 </div>
                 <div className="h-full flex flex-col justify-center">
-                    <h1 className="font-bold text-2xl w-[75vw] mx-auto">Order {(order as unknown as OrderInfo[])?.[0].id} </h1>
+                    <h1 className="font-bold text-2xl w-[75vw] mx-auto">Order {orderIdConverter((order as unknown as OrderInfo[])?.[0].id)} </h1>
 
                     <div className="w-[75vw] mx-auto mt-2">
                         <h3 className="inline">Order status: </h3>
-                        <Select st={(order as unknown as OrderInfo[])?.[0].status} orderId={(order as unknown as OrderInfo[])?.[0].id as number}/>
+                        <Select email={(order as unknown as OrderInfo[])?.[0].user_id.email} st={(order as unknown as OrderInfo[])?.[0].status} orderId={(order as unknown as OrderInfo[])?.[0].id as number}/>
                     </div>
                 </div>
             </div>
