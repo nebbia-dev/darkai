@@ -109,7 +109,7 @@ export async function prepareCheckout({
         throw new Error('Unable to create the order record');
     }
 
-    const domainURL = process.env.DOMAIN || "http://localhost:3000";
+    const domainURL = process.env.NEXT_PUBLIC_DOMAIN || "http://localhost:3000";
     const returnUrl = `${domainURL}/checkout/payment/return?session_id={CHECKOUT_SESSION_ID}`;
 
     const session = await stripe.checkout.sessions.create({
