@@ -18,7 +18,7 @@ export default async function fetchPrices() {
         .select('*');
 
     const [whDLab_b, whDNat_b, brDLab_b, brDNat_b, blDLab_b, blDNat_b, stone_b]:any[] = [[],[],[],[],[],[],[]]
-    const [whDLab_p, whDNat_p, brDLab_p, brDNat_p, blDLab_p, blDNat_p, stone_p, camo, glitch]:any[] = [[],[],[],[],[],[],[],[],[]]
+    const [whDLab_p, whDNat_p, brDLab_p, brDNat_p, blDLab_p, blDNat_p, stone_p, camo_p, glitch_p]:any[] = [[],[],[],[],[],[],[],[],[]]
 
     for(let bezel of bezels!) {
         switch(bezel.stone) {
@@ -66,10 +66,10 @@ export default async function fetchPrices() {
                 blDNat_p.push(pave);
                 break;
             case 'camo':
-                camo.push(pave);
+                camo_p.push(pave);
                 break;
             case 'glitch':
-                glitch.push(pave);
+                glitch_p.push(pave);
                 break;
             default:
                 stone_p.push(pave);
@@ -80,6 +80,6 @@ export default async function fetchPrices() {
     return {'base': base, 'bezel': {
                         whDLab_b, whDNat_b, brDLab_b, brDNat_b, blDLab_b, blDNat_b, stone_b
                     }, 'pave': {
-                        whDLab_p, whDNat_p, brDLab_p, brDNat_p, blDLab_p, blDNat_p, stone_p, camo, glitch
+                        whDLab_p, whDNat_p, brDLab_p, brDNat_p, blDLab_p, blDNat_p, stone_p, camo_p, glitch_p
                     }, 'signature':signature}
 }
