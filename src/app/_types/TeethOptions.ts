@@ -4,7 +4,7 @@ export type Material = 'base' | 'gold' | 'white' | 'rose' | 'black'
 
 export type FinishType = 'polished' | 'sandblasted' | 'diamond_cut'
 
-export type Design = 'full' | 'frame' | 'enamel' | 'bar' | 'bigBar' | 'bezel' | 'fullDiamond' | 'frameDiamond' | 'barDiamond' | 'bigBarDiamond' | 'bezelDiamond'
+export type Design = 'signature' | 'full' | 'frame' | 'enamel' | 'bar' | 'bigBar' | 'bezel' | 'fullDiamond' | 'frameDiamond' | 'barDiamond' | 'bigBarDiamond' | 'bezelDiamond'
 
 export interface Pave {
     shape: 'round' |  'princess' | 'baguette' | 'hexagon' | 'mosaic' | undefined,
