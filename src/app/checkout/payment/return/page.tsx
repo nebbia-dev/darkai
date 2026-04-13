@@ -1,5 +1,4 @@
-import {redirect} from "next/navigation";
-import {resolveCheckoutReturn} from "@/app/_helpers/_stripe/resolveCheckoutReturn";
+import PaymentReturnClient from "@/app/_components/_elements/PaymentReturnClient";
 
 type PaymentReturnPageProps = {
     searchParams: Promise<{
@@ -10,7 +9,5 @@ type PaymentReturnPageProps = {
 export default async function PaymentReturnPage({searchParams}: PaymentReturnPageProps) {
     const {session_id: sessionId} = await searchParams;
 
-    const redirectTo = await resolveCheckoutReturn(sessionId);
-
-    redirect(redirectTo);
+    return <PaymentReturnClient sessionId={sessionId}/>;
 }
