@@ -36,7 +36,7 @@ export default function PaymentReturnClient({sessionId}: PaymentReturnClientProp
         async function finalizeOrder() {
             try {
                 const response = await fetch(
-                    `/checkout/payment/return/finalize?session_id=${encodeURIComponent(currentSessionId)}`,
+                    `/api/paymentFinalization?session_id=${encodeURIComponent(currentSessionId)}`,
                     {
                         method: 'GET',
                         cache: 'no-store',
