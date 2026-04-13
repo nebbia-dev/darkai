@@ -73,7 +73,7 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
                     sendTo: emailInfo.email,
                     subject: 'New config!',
                     text: 'Your new Grill!',
-                    html: generateConfigHtml(teethPrices, history, currentStep, packaging),
+                    html: generateConfigHtml(teethPrices, history, currentStep, packaging, total),
                     image: imageUrl,
             });
             setSent(true);

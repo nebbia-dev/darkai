@@ -9,7 +9,7 @@ import {History, Packaging, Prices} from "@/app/_types/TeethOptions";
 import elabVelvetName from "@/app/_helpers/_string-modders/elabVelvetName";
 import checkDoubleTeeth from "@/app/_helpers/_checkers/checkDoubleTeeth";
 
-export default function generateConfigHtml(teethPrices:Prices, history:History[][], currentStep:number, packaging:Packaging) {
+export default function generateConfigHtml(teethPrices:Prices, history:History[][], currentStep:number, packaging:Packaging, total?:number|undefined) {
 
     let html = '';
 
@@ -87,5 +87,25 @@ export default function generateConfigHtml(teethPrices:Prices, history:History[]
         }).format(300) + "</p></li>"
     }
 
+    if(total) {
+        html += '<p><strong> Total: ' + new Intl.NumberFormat("de-DE", {
+            style: "currency",
+            currency: "EUR"
+        }).format(total) + '</strong></p>'
+    }
+
     return html;
+}
+
+export function generateConfigReceiptDescription(teethPrices:Prices, history:History[][], currentStep:number, packaging:Packaging) {
+    const html = generateConfigHtml(teethPrices, history, currentStep, packaging);
+
+    return html
+        .replace(/<\/li>/gi, '\n')
+        .replace(/<\/(h4|p)>/gi, '\n')
+        .replace(/<li>/gi, '')
+        .replace(/<[^>]+>/g, '')
+        .replace(/&nbsp;/gi, ' ')
+        .replace(/\n{2,}/g, '\n')
+        .trim();
 }

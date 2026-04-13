@@ -1,7 +1,7 @@
 import {headers} from "next/headers";
 import Stripe from "stripe";
-import {stripe} from "@/app/_stripe/stripe";
-import {finalizeCheckout} from "@/app/_stripe/finalizeCheckout";
+import {stripe} from "@/app/_helpers/_stripe/stripe";
+import {finalizeCheckout} from "@/app/_helpers/_stripe/finalizeCheckout";
 
 export async function POST(request: Request) {
     const webhookSecret = process.env.NEXT_STRIPE_WEBHOOK_SECRET;

@@ -8,6 +8,7 @@ import elabVelvetName from "@/app/_helpers/_string-modders/elabVelvetName";
 import elabSignatureGold from "@/app/_helpers/_string-modders/elabSignatureGold";
 import {History, Packaging} from "@/app/_types/TeethOptions";
 import React from "react";
+import checkDoubleTeeth from "@/app/_helpers/_checkers/checkDoubleTeeth";
 
 export default function CheckoutRecap({history, packaging, total, shippingFees} : {history:History|undefined, packaging:Packaging, total:number, shippingFees:number|undefined}) {
 
@@ -76,12 +77,13 @@ export default function CheckoutRecap({history, packaging, total, shippingFees} 
                             return (
                                 history.visible[tooth[0]] &&
                                 <li key={tooth[0]}
-                                    className='cursor-pointer rounded p-2 lg:border border-transparent'
+                                    className={`${checkDoubleTeeth(tooth[0], tooth[1]) ? 'hidden' : 'block'} cursor-pointer rounded p-2 lg:border border-transparent`}
                                 >
                                     {/*tooth name*/}
                                     <div className="flex justify-between items-center mb-1">
                                         <h4 className="font-semibold">
-                                            {((tooth[1] === 'bar' || tooth[1] === 'barDiamond') && (tooth[0] === 'icssx' || tooth[0] === 'icisx')) || ((tooth[1] === 'bigBar' || tooth[1] === 'bigBarDiamond') && tooth[0] === 'cisx')
+                                            {((tooth[1] === 'bar' || tooth[1] === 'barDiamond') && (tooth[0] === 'icssx' || tooth[0] === 'icisx'))
+                                            || ((tooth[1] === 'bigBar' || tooth[1] === 'bigBarDiamond') && tooth[0] === 'cisx')
                                                 ? elabToothName(tooth[0], true)
                                                 : elabToothName(tooth[0], false)
                                             }

@@ -3,6 +3,7 @@ import React, {useEffect, useState} from "react";
 import {useRouter} from "next/navigation";
 import {createClient} from "@/lib/supabase/client";
 import { User } from "@supabase/supabase-js";
+import Link from "next/link";
 
 type LoginProps = {
     user: User | null;
@@ -79,10 +80,15 @@ export default function LoginForm({user} : LoginProps) {
                             </button>
                         </form>
                     </div>
-                    : <div className="rounded border flex flex-col items-center px-6 py-8 w-full">
+                    : <div className="rounded border flex flex-col items-center justify-center px-6 py-8 w-full">
                         <h2 className="font-bold text-2xl mb-4">You're logged in!</h2>
+                        <Link
+                            href="/admin/orders"
+                            className="w-[90%] text-center cursor-pointer py-2 px-4 rounded border bg-gray-950 text-gray-50 mt-4"
+                        >Go to backoffice &rarr;
+                        </Link>
                         <button
-                            className="cursor-pointer py-2 px-4 rounded border bg-gray-950 text-gray-50 mt-4"
+                            className="w-[90%] text-center cursor-pointer py-2 px-4 rounded border bg-gray-50 border mt-4"
                             type="button"
                             onClick={logout}
                         >Logout &rarr;

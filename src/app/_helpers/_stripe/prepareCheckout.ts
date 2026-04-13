@@ -4,9 +4,10 @@ import createCustomer from "@/app/_helpers/_db-interactions/createCustomer";
 import createOrder from "@/app/_helpers/_db-interactions/createOrder";
 import findShippingFees from "@/app/_helpers/_checkers/findShippingFees";
 import updateConfigScreen from "@/app/_helpers/_db-interactions/updateConfigScreen";
+import {generateConfigReceiptDescription} from "@/app/_helpers/_string-modders/generateConfigHtml";
 import PersonalData from "@/app/_types/PersonalData";
 import {History, Packaging} from "@/app/_types/TeethOptions";
-import {stripe} from "@/app/_stripe/stripe";
+import {stripe} from "@/app/_helpers/_stripe/stripe";
 
 type PrepareCheckoutInput = {
     billingData: PersonalData,
@@ -99,6 +100,9 @@ export async function prepareCheckout({
         await updateConfigScreen(configId, uploadedConfigPath);
     }
 
+    const receiptDescription = currentConfig
+        ? generateConfigReceiptDescription(currentConfig.prices, [[currentConfig]], 0, packaging)
+        : undefined;
     const finalConfigId = configId;
     const finalTotal = total + shippingFees;
     const order = await createOrder(customerId, finalConfigId, finalTotal, shippingAddress, 'Pending payment');
@@ -118,7 +122,7 @@ export async function prepareCheckout({
                     currency: 'eur',
                     unit_amount: Math.round(finalTotal * 100),
                     product_data: {
-                        name: 'Darkai order',
+                        name: 'Your Darkai order',
                     },
                 },
                 quantity: 1,
@@ -127,6 +131,10 @@ export async function prepareCheckout({
         mode: "payment",
         payment_method_types: ['card'],
         customer_email: billingData.email,
+        payment_intent_data: {
+            description: receiptDescription,
+            receipt_email: billingData.email,
+        },
         client_reference_id: String(order[0].id),
         metadata: {
             orderId: String(order[0].id),

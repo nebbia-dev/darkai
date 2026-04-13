@@ -10,7 +10,7 @@ import PersonalData from "@/app/_types/PersonalData";
 import CountrySelect from "@/app/_components/_elements/CountrySelect";
 import findShippingFees from "@/app/_helpers/_checkers/findShippingFees";
 import {StripeCheckout} from "@/app/_components/_elements/StripeCheckout";
-import {prepareCheckout} from "@/app/_stripe/prepareCheckout";
+import {prepareCheckout} from "@/app/_helpers/_stripe/prepareCheckout";
 import CheckoutRecap from "@/app/_components/_elements/CheckoutRecap";
 import calcTotal from "@/app/_helpers/_calculators/calcTotal";
 import {History} from "@/app/_types/TeethOptions";
