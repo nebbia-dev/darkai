@@ -14,7 +14,8 @@ export default function Loading() {
             className="font-sans opacity-100 transition duration-1500 w-[100vw] px-12 h-[100dvh] flex justify-center items-center absolute z-30 bg-black">
             <div
                 className="opacity-100 transition duration-1000 flex flex-col justify-center items-center">
-                <h1 className="font-bold text-gray-50 mx-auto text-4xl mb-4">DARKAI</h1>
+                {/*<h1 className="font-bold text-gray-50 mx-auto text-4xl mb-4">DARKAI</h1>*/}
+                <img className="mb-4 w-[132px]" src="/darkai_white.webp" alt="darkai logo"/>
                 <p className="text-gray-50 text-center text-lg mb-10">
                     the world's first dental jewelry design interface
                 </p>
