@@ -41,6 +41,11 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
         if(emailInfo.name === '' || emailInfo.email === '') {
             return
         }
+
+        if(!bufferConfigImage) {
+            return
+        }
+
         setIsSending(true);
 
         const number = Math.random() * 100 + Math.cos(Math.random() * 100);
@@ -230,7 +235,8 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
                                         </button>
                                         <button
                                             className="cursor-pointer py-2 px-4 rounded-full bg-gray-950 text-gray-50"
-                                            type="submit">Send
+                                            type="submit"
+                                        >Send
                                         </button>
                                     </div>
                                 </form>

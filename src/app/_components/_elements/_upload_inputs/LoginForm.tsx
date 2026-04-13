@@ -68,7 +68,7 @@ export default function LoginForm({user} : LoginProps) {
                             </label>
                             <label>Password
                                 <input className="w-full bg-stone-200 rounded py-2 px-4" value={password}
-                                       type="text" onChange={(e) => setPassword(e.currentTarget.value)}
+                                       type="password" onChange={(e) => setPassword(e.currentTarget.value)}
                                        required
                                 />
                             </label>

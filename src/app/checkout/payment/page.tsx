@@ -213,6 +213,11 @@ export default function Checkout() {
             return;
         }
 
+        if(!bufferConfigImage) {
+            setError('No configuration screenshot was found');
+            return;
+        }
+
         const currentShippingState = differentShipOpts ? shippingData.state : billingData.state;
         if (currentShippingState === '' || findShippingFees(currentShippingState) === null) {
             setError('Unfortunately we do not ship to this country');

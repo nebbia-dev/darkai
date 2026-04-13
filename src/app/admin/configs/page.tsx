@@ -12,10 +12,10 @@ export default async function Page() {
         .select('*');
     let { data:orders, error:ordersError } = await supabase
         .from('Orders')
-        .select('status, config');
+        .select('status, config_id');
     configs?.forEach(config => {
         orders?.forEach(order => {
-            if(config.id === order.config) {
+            if(config.id === order.config_id) {
                 config['orderStatus'] = 'Completed'
             }
         })
