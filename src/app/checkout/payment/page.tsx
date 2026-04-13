@@ -14,6 +14,7 @@ import {prepareCheckout} from "@/app/_stripe/prepareCheckout";
 import CheckoutRecap from "@/app/_components/_elements/CheckoutRecap";
 import calcTotal from "@/app/_helpers/_calculators/calcTotal";
 import {History} from "@/app/_types/TeethOptions";
+import {dataUrlToFile, uploadToStorage} from "@/app/_helpers/_uploads/uploadToStorage";
 
 type PreparedCheckout = {
     clientSecret: string,
@@ -56,6 +57,7 @@ export default function Checkout() {
     // const [shippingOption, setShippingOption] = useState<string|undefined>(undefined);
     const [differentShipOpts, setDifferentShipOpts] = useState<boolean>(false);
     const [uploadedScanPath, setUploadedScanPath] = useState<string|undefined>(undefined);
+    const [uploadedConfigPath, setUploadedConfigPath] = useState<string|undefined>(undefined);
 
     function handlePhoneChange(newValue: string) {
         setBillingData({...billingData, phone:newValue});
@@ -113,6 +115,7 @@ export default function Checkout() {
 
     const [isPreparingCheckout, setIsPreparingCheckout] = useState<boolean>(false);
     const [isUploadingScan, setIsUploadingScan] = useState<boolean>(false);
+    const [isUploadingConfig, setIsUploadingConfig] = useState<boolean>(false);
     const [preparedCheckout, setPreparedCheckout] = useState<PreparedCheckout | null>(null);
 
     useEffect(() => {
@@ -140,6 +143,10 @@ export default function Checkout() {
         setUploadedScanPath(undefined);
     }, [scanImage]);
 
+    useEffect(() => {
+        setUploadedConfigPath(undefined);
+    }, [bufferConfigImage]);
+
     async function calcFinalRecap(e:any) {
         if(!e.currentTarget.classList.contains('Mui-expanded') && (!finalConfig.config || finalConfig.total === 0)) {
             const {config, total} = await calcTotal(history[history.length - 1]?.[0], packaging);
@@ -159,30 +166,40 @@ export default function Checkout() {
         setIsUploadingScan(true);
 
         try {
-            const formData = new FormData();
             const extension = scanImage.type?.split('/')[1]?.split('+')[0] || 'bin';
-            const blob = new Blob(
+            const file = new File(
                 [scanImage.scan],
+                `scan.${extension}`,
                 {type: scanImage.type || 'application/octet-stream'},
             );
+            const uploadedScan = await uploadToStorage('scans', file);
 
-            formData.append('file', blob, `scan.${extension}`);
-
-            const response = await fetch('/api/upload-scan', {
-                method: 'POST',
-                body: formData,
-            });
-
-            const payload = await response.json().catch(() => null) as {fileName?: string, error?: string} | null;
-
-            if (!response.ok || !payload?.fileName) {
-                throw new Error(payload?.error || 'Unable to upload the dental scan');
-            }
-
-            setUploadedScanPath(payload.fileName);
-            return payload.fileName;
+            setUploadedScanPath(uploadedScan.path);
+            return uploadedScan.path;
         } finally {
             setIsUploadingScan(false);
+        }
+    }
+
+    async function uploadConfigBeforeCheckout() {
+        if (!bufferConfigImage || savedConfig) {
+            return undefined;
+        }
+
+        if (uploadedConfigPath) {
+            return uploadedConfigPath;
+        }
+
+        setIsUploadingConfig(true);
+
+        try {
+            const file = await dataUrlToFile(bufferConfigImage, 'config');
+            const uploadedConfig = await uploadToStorage('configs', file);
+
+            setUploadedConfigPath(uploadedConfig.path);
+            return uploadedConfig.path;
+        } finally {
+            setIsUploadingConfig(false);
         }
     }
 
@@ -229,6 +246,7 @@ export default function Checkout() {
         try {
             const {config, total} = await calcTotal(history[history.length - 1]?.[0], packaging);
             const currentUploadedScanPath = await uploadScanBeforeCheckout();
+            const currentUploadedConfigPath = await uploadConfigBeforeCheckout();
             const checkout = await prepareCheckout({
                 billingData,
                 shippingData,
@@ -236,7 +254,7 @@ export default function Checkout() {
                 currentConfig: config,
                 total,
                 packaging,
-                bufferConfigImage,
+                uploadedConfigPath: currentUploadedConfigPath,
                 uploadedScanPath: currentUploadedScanPath,
                 savedConfig,
             });
@@ -687,12 +705,18 @@ export default function Checkout() {
                                     ? <>
                                         <span className="loader mb-6 inline-block"></span>
                                         <h2 className="text-base font-semibold text-stone-950">
-                                            {isUploadingScan ? 'Uploading your dental scan...' : 'Preparing your secure payment...'}
+                                            {isUploadingScan
+                                                ? 'Uploading your dental scan...'
+                                                : isUploadingConfig
+                                                    ? 'Uploading your configuration preview...'
+                                                    : 'Preparing your secure payment...'}
                                         </h2>
                                         <p className="mt-2 max-w-md text-stone-600">
                                             {isUploadingScan
                                                 ? 'We are uploading your scan before starting the Stripe checkout session.'
-                                                : 'We are saving your configuration and creating the Stripe session.'
+                                                : isUploadingConfig
+                                                    ? 'We are uploading your configuration preview before creating the Stripe session.'
+                                                    : 'We are saving your configuration and creating the Stripe session.'
                                             }
                                         </p>
                                     </>
@@ -737,7 +761,15 @@ export default function Checkout() {
                         disabled={isPreparingCheckout || preparedCheckout !== null}
                         onClick={handlePrepareCheckout}
                     >
-                        {isUploadingScan ? 'Uploading scan...' : isPreparingCheckout ? 'Preparing...' : preparedCheckout ? 'Payment ready' : 'Prepare payment'}
+                        {isUploadingScan
+                            ? 'Uploading scan...'
+                            : isUploadingConfig
+                                ? 'Uploading preview...'
+                                : isPreparingCheckout
+                                    ? 'Preparing...'
+                                    : preparedCheckout
+                                        ? 'Payment ready'
+                                        : 'Prepare payment'}
                     </button>
                 </div>
             </div>

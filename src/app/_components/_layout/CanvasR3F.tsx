@@ -1712,8 +1712,6 @@ export default function CanvasR3F() {
             orbitRef.current.reset();
             resetCameraPosition();
             setTimeout(() => {
-                const link = document.createElement('a');
-                link.setAttribute('download', 'canvas.png');
                 gl.render(scene, camera);
 
                 const sourceCanvas = gl.domElement;
@@ -1727,7 +1725,7 @@ export default function CanvasR3F() {
                     ctx.fillRect(0, 0, exportCanvas.width, exportCanvas.height);
                     ctx.drawImage(sourceCanvas, 0, 0);
 
-                    const base64Image = exportCanvas.toDataURL('image/png').replace('image/png', 'image/octet-stream');
+                    const base64Image = exportCanvas.toDataURL('image/png');
                     setBufferConfigImage(base64Image as string);
                     resetScreenShot(undefined);
                 }

@@ -17,19 +17,30 @@ const transporter = nodemailer.createTransport({
     }
 });
 
+function getAttachmentName(image: string) {
+    try {
+        const pathName = new URL(image).pathname;
+        return pathName.split('/').pop() || 'yourConfig.png';
+    } catch {
+        return 'yourConfig.png';
+    }
+}
+
 export async function sendMail({sendTo, subject, text, html, image}: {sendTo?: string, subject: string, text: string, html?: string, image?: string }) {
     try {
-        const isVerified = await transporter.verify();
-        const info = await transporter.sendMail({
+        await transporter.verify();
+        await transporter.sendMail({
             from: `"Darkai Lab" ${SITE_MAIL_SENDER}`,
             to: sendTo,
             subject: subject,
             text: text,
             html: html ? html : '',
-            attachments: [{
-                filename: 'yourConfig.png',
-                path: image
-            }]
+            attachments: image
+                ? [{
+                    filename: getAttachmentName(image),
+                    path: image
+                }]
+                : []
         });
     } catch (error) {
         console.error('Something Went Wrong', SMTP_SERVER_USERNAME, SMTP_SERVER_PASSWORD, error);

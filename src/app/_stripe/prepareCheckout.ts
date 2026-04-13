@@ -3,7 +3,7 @@ import createConfig from "@/app/_helpers/_db-interactions/createConfig";
 import createCustomer from "@/app/_helpers/_db-interactions/createCustomer";
 import createOrder from "@/app/_helpers/_db-interactions/createOrder";
 import findShippingFees from "@/app/_helpers/_checkers/findShippingFees";
-import uploadConfig from "@/app/_helpers/_db-interactions/uploadConfig";
+import updateConfigScreen from "@/app/_helpers/_db-interactions/updateConfigScreen";
 import PersonalData from "@/app/_types/PersonalData";
 import {History, Packaging} from "@/app/_types/TeethOptions";
 import {stripe} from "@/app/_stripe/stripe";
@@ -15,7 +15,7 @@ type PrepareCheckoutInput = {
     currentConfig: History | undefined,
     total: number,
     packaging: Packaging,
-    bufferConfigImage: string | undefined,
+    uploadedConfigPath: string | undefined,
     uploadedScanPath: string | undefined,
     savedConfig: number | undefined,
 }
@@ -48,7 +48,7 @@ export async function prepareCheckout({
     currentConfig,
     total,
     packaging,
-    bufferConfigImage,
+    uploadedConfigPath,
     uploadedScanPath,
     savedConfig,
 }: PrepareCheckoutInput): Promise<PrepareCheckoutResult> {
@@ -78,8 +78,6 @@ export async function prepareCheckout({
     }
 
     const customerId = customer[0].id;
-    const number = Math.random() * 100 + Math.cos(Math.random() * 100);
-
     let configId = savedConfig;
 
     if (!configId) {
@@ -91,14 +89,14 @@ export async function prepareCheckout({
 
         const newConfigId = config[0].id;
         configId = newConfigId;
-
-        if (bufferConfigImage) {
-            await uploadConfig(bufferConfigImage, number, newConfigId);
-        }
     }
 
     if (!configId) {
         throw new Error('Unable to determine the configuration record');
+    }
+
+    if (uploadedConfigPath) {
+        await updateConfigScreen(configId, uploadedConfigPath);
     }
 
     const finalConfigId = configId;

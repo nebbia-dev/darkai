@@ -4,16 +4,18 @@ import {useState} from "react";
 import OrderInfo from "@/app/_types/OrderInfo";
 import Image from "next/image";
 import EditScanIcons from "@/app/_components/_elements/_buttons/EditScanIcons";
-import uploadScan from "@/app/_helpers/_db-interactions/uploadScan";
+import updateCustomerScan from "@/app/_helpers/_db-interactions/updateCustomerScan";
+import {uploadToStorage} from "@/app/_helpers/_uploads/uploadToStorage";
 export default function UploadScanBackoffice ({userId, scanId}:{userId:OrderInfo['user_id']['id'], scanId:OrderInfo['user_id']['scan']}) {
     const [buffer, setBuffer] = useState<{ scan: ArrayBuffer|undefined, type: string|undefined }|undefined>({ scan: undefined, type: undefined });
     const [savedFile, setSavedFile] = useState<string|undefined>(undefined);
     const [file, setFile] = useState<File|undefined>();
     async function upload() {
-        if(buffer?.scan && buffer?.type){
-            const number = Math.random() * 100 + Math.cos(Math.random() * 100);
-            await uploadScan(buffer, number, userId);
-            setSavedFile(number + '.' + buffer.type.split("/")[1]);
+        if(buffer?.scan && file){
+            const uploadedScan = await uploadToStorage('scans', file);
+
+            await updateCustomerScan(userId, uploadedScan.path);
+            setSavedFile(uploadedScan.path);
             setBuffer({ scan: undefined, type: undefined });
             setFile(undefined);
         }

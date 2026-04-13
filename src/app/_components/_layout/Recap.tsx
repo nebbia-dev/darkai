@@ -10,7 +10,8 @@ import {useRouter} from "next/navigation";
 import {sendMail} from "@/lib/nodemailer/sendMail";
 import generateConfigHtml from "@/app/_helpers/_string-modders/generateConfigHtml";
 import createConfig from "@/app/_helpers/_db-interactions/createConfig";
-import uploadConfig from "@/app/_helpers/_db-interactions/uploadConfig";
+import updateConfigScreen from "@/app/_helpers/_db-interactions/updateConfigScreen";
+import {dataUrlToFile, uploadToStorage} from "@/app/_helpers/_uploads/uploadToStorage";
 
 export default function Recap({next, onclick} : {next:boolean, onclick:() => void }){
     const router = useRouter();
@@ -48,27 +49,37 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
 
         setIsSending(true);
 
-        const number = Math.random() * 100 + Math.cos(Math.random() * 100);
-        const config = await createConfig(history[history.length-1][0], total, packaging, 'Not completed');
-        if(config) {
-            setSavedConfigId(config[0].id);
-        }
-        if(bufferConfigImage && config) {
-            await uploadConfig(bufferConfigImage, number, config[0].id);
-        }
+        try {
+            const config = await createConfig(history[history.length-1][0], total, packaging, 'Not completed');
+
+            if(config) {
+                setSavedConfigId(config[0].id);
+            }
+
+            let imageUrl: string | undefined;
+
+            if (config?.[0]?.id) {
+                const file = await dataUrlToFile(bufferConfigImage, 'config');
+                const uploadedConfig = await uploadToStorage('configs', file);
+
+                await updateConfigScreen(config[0].id, uploadedConfig.path);
+                imageUrl = uploadedConfig.publicUrl;
+            }
+
             // TODO:
-            // - set Nodemailer to SEND the email with the current configuration and the screenshot
             // - save the configuration in the local storage
             // - IF the checkbox is checked, SAVE name, email address and config in the Newsletter table
-        await sendMail({
-                sendTo: emailInfo.email,
-                subject: 'New config!',
-                text: 'Your new Grill!',
-                html: generateConfigHtml(teethPrices, history, currentStep, packaging),
-                image: bufferConfigImage,
-        });
-        setIsSending(false);
-        setSent(true);
+            await sendMail({
+                    sendTo: emailInfo.email,
+                    subject: 'New config!',
+                    text: 'Your new Grill!',
+                    html: generateConfigHtml(teethPrices, history, currentStep, packaging),
+                    image: imageUrl,
+            });
+            setSent(true);
+        } finally {
+            setIsSending(false);
+        }
     }
 
     function saveTempConfig() {
