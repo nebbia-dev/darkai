@@ -9,7 +9,7 @@ import {
     SignatureTeeth,
     SignMaterial,
     SignVisibility,
-    Stones, Visibility, History, Neighbours, HistoryPack, Packaging
+    Stones, Visibility, History, Neighbours, HistoryPack, Packaging, Design
 } from "@/app/_types/TeethOptions";
 
 export interface TempPrices {
@@ -89,7 +89,7 @@ export interface State {
     setHover: (tooth: string|undefined) => void,
     setGeometry: (fbx:FBX) => void,
     setMaterial: (tooth:string, color:string) => void,
-    setType: (tooth:string, type:string) => void,
+    setType: (tooth:string, type:Design) => void,
     setPave: (tooth:string, pave:string, color:string|undefined) => void,
     setStone: (tooth:string, shape:string, color:string) => void,
     setEnamel: (tooth:string, color:string) => void,
@@ -120,13 +120,13 @@ export interface State {
     innerHeight: number,
     setInnerHeight: (height:number) => void,
     resetBigBar: (state: State, tooth: string) => void,
-    resetNeighbours: (state:State, type:string, tooth:string) => void,
-    resetSameDiamondDesign: (state:State, type:string, tooth:string) => boolean
-    changeDiamondDesign: (state:State, type:string, tooth:string) => boolean,
-    changeDiamondDesignBB: (state:State, type:string, tooth:string) => boolean,
-    manageBigBar: (state:State, type:string, tooth:string) => void,
-    manageCentralBar: (state:State, type:string, tooth:string) => void,
-    managePreviousBigBar: (state:State, type:string, tooth:string) => void
-    managePreviousCentralBar: (state:State, type:string, tooth:string) => void,
-    manageDefault: (state:State, type:string, tooth:string) => void
+    resetNeighbours: (state:State, type:Design, tooth:string) => void,
+    resetSameDiamondDesign: (state:State, type:Design, tooth:string) => boolean
+    changeDiamondDesign: (state:State, type:Design, tooth:string) => boolean,
+    changeDiamondDesignBB: (state:State, type:Design, tooth:string) => boolean,
+    manageBigBar: (state:State, type:Design, tooth:string) => void,
+    manageCentralBar: (state:State, type:Design, tooth:string) => void,
+    managePreviousBigBar: (state:State, type:Design, tooth:string) => void
+    managePreviousCentralBar: (state:State, type:Design, tooth:string) => void,
+    manageDefault: (state:State, type:Design, tooth:string) => void
 }

@@ -1,121 +1,138 @@
-export interface Materials {
-    // mettere i colori
-    [key: string]: string
-    icsdx: string,
-    icssx: string,
-    icidx: string,
-    icisx: string,
-    ilsdx: string,
-    ilssx: string,
-    ilidx: string,
-    ilisx: string,
-    csdx: string,
-    cssx: string,
-    cidx: string,
-    cisx: string,
+export type EnamelColor = "blue" | "turquoise" | "green" | "yellow" | "orange" | "red" | "pink" | "purple" | "ivory" | "brown" | "black" | undefined
 
-    pprsdx: string,
-    pprssx: string,
-    ppridx: string,
-    pprisx: string,
+export type Material = 'base' | 'gold' | 'white' | 'rose' | 'black'
 
-    sprsdx: string,
-    sprssx: string,
-    spridx: string,
-    sprisx: string,
+export type FinishType = 'polished' | 'sandblasted' | 'diamond_cut'
 
-    msdx: string,
-    mssx: string,
-    midx: string,
-    misx: string
+export type Design = 'full' | 'frame' | 'enamel' | 'bar' | 'bigBar' | 'bezel' | 'fullDiamond' | 'frameDiamond' | 'barDiamond' | 'bigBarDiamond' | 'bezelDiamond'
+
+export interface Pave {
+    shape: 'round' |  'princess' | 'baguette' | 'hexagon' | 'mosaic' | undefined,
+    color: string | undefined
 }
+export interface Stone {
+    // aggiungere i colori
+    shape: 'round' |  'princess' | 'baguette' | 'drop' | 'heart' | 'marquise' | undefined,
+    color: string | undefined
+}
+
+export interface Materials {
+    [key: string]: Material
+    icsdx: Material,
+    icssx: Material,
+    icidx: Material,
+    icisx: Material,
+    ilsdx: Material,
+    ilssx: Material,
+    ilidx: Material,
+    ilisx: Material,
+    csdx: Material,
+    cssx: Material,
+    cidx: Material,
+    cisx: Material,
+
+    pprsdx: Material,
+    pprssx: Material,
+    ppridx: Material,
+    pprisx: Material,
+
+    sprsdx: Material,
+    sprssx: Material,
+    spridx: Material,
+    sprisx: Material,
+
+    msdx: Material,
+    mssx: Material,
+    midx: Material,
+    misx: Material
+}
+
 export interface Enamel {
     // mettere i colori
-    [key: string]: string |undefined
-    icsdx: string | undefined,
-    icssx: string | undefined,
-    icidx: string | undefined,
-    icisx: string | undefined,
-    ilsdx: string | undefined,
-    ilssx: string | undefined,
-    ilidx: string | undefined,
-    ilisx: string | undefined,
-    csdx: string | undefined,
-    cssx: string | undefined,
-    cidx: string | undefined,
-    cisx: string | undefined,
-    pprsdx: string | undefined,
-    pprssx: string | undefined,
-    ppridx: string | undefined,
-    pprisx: string | undefined,
-    sprsdx: string | undefined,
-    sprssx: string | undefined,
-    spridx: string | undefined,
-    sprisx: string | undefined,
-    msdx: string | undefined,
-    mssx: string | undefined,
-    midx: string | undefined,
-    misx: string | undefined
+    [key: string]: EnamelColor
+    icsdx: EnamelColor,
+    icssx: EnamelColor,
+    icidx: EnamelColor,
+    icisx: EnamelColor,
+    ilsdx: EnamelColor,
+    ilssx: EnamelColor,
+    ilidx: EnamelColor,
+    ilisx: EnamelColor,
+    csdx: EnamelColor,
+    cssx: EnamelColor,
+    cidx: EnamelColor,
+    cisx: EnamelColor,
+    pprsdx: EnamelColor,
+    pprssx: EnamelColor,
+    ppridx: EnamelColor,
+    pprisx: EnamelColor,
+    sprsdx: EnamelColor,
+    sprssx: EnamelColor,
+    spridx: EnamelColor,
+    sprisx: EnamelColor,
+    msdx: EnamelColor,
+    mssx: EnamelColor,
+    midx: EnamelColor,
+    misx: EnamelColor
 }
 export interface Finish {
-    [key: string]: 'polished' | 'sandblasted' | 'diamond_cut'
-    icsdx: 'polished' | 'sandblasted' | 'diamond_cut',
-    icssx: 'polished' | 'sandblasted' | 'diamond_cut',
-    icidx: 'polished' | 'sandblasted' | 'diamond_cut',
-    icisx: 'polished' | 'sandblasted' | 'diamond_cut',
-    ilsdx: 'polished' | 'sandblasted' | 'diamond_cut',
-    ilssx: 'polished' | 'sandblasted' | 'diamond_cut',
-    ilidx: 'polished' | 'sandblasted' | 'diamond_cut',
-    ilisx: 'polished' | 'sandblasted' | 'diamond_cut',
-    csdx: 'polished' | 'sandblasted' | 'diamond_cut',
-    cssx: 'polished' | 'sandblasted' | 'diamond_cut',
-    cidx: 'polished' | 'sandblasted' | 'diamond_cut',
-    cisx: 'polished' | 'sandblasted' | 'diamond_cut',
-    pprsdx: 'polished' | 'sandblasted' | 'diamond_cut',
-    pprssx: 'polished' | 'sandblasted' | 'diamond_cut',
-    ppridx: 'polished' | 'sandblasted' | 'diamond_cut',
-    pprisx: 'polished' | 'sandblasted' | 'diamond_cut',
+    [key: string]: FinishType
+    icsdx: FinishType,
+    icssx: FinishType,
+    icidx: FinishType,
+    icisx: FinishType,
+    ilsdx: FinishType,
+    ilssx: FinishType,
+    ilidx: FinishType,
+    ilisx: FinishType,
+    csdx: FinishType,
+    cssx: FinishType,
+    cidx: FinishType,
+    cisx: FinishType,
+    pprsdx: FinishType,
+    pprssx: FinishType,
+    ppridx: FinishType,
+    pprisx: FinishType,
 
-    sprsdx: 'polished' | 'sandblasted' | 'diamond_cut',
-    sprssx: 'polished' | 'sandblasted' | 'diamond_cut',
-    spridx: 'polished' | 'sandblasted' | 'diamond_cut',
-    sprisx: 'polished' | 'sandblasted' | 'diamond_cut',
+    sprsdx: FinishType,
+    sprssx: FinishType,
+    spridx: FinishType,
+    sprisx: FinishType,
 
-    msdx: 'polished' | 'sandblasted' | 'diamond_cut',
-    mssx: 'polished' | 'sandblasted' | 'diamond_cut',
-    midx: 'polished' | 'sandblasted' | 'diamond_cut',
-    misx: 'polished' | 'sandblasted' | 'diamond_cut'
+    msdx: FinishType,
+    mssx: FinishType,
+    midx: FinishType,
+    misx: FinishType
 }
 export interface JewelTypes {
-    // mettere i tipi di design
-    [key: string]: string
-    icsdx: string,
-    icssx: string,
-    icidx: string,
-    icisx: string,
-    ilsdx: string,
-    ilssx: string,
-    ilidx: string,
-    ilisx: string,
-    csdx: string,
-    cssx: string,
-    cidx: string,
-    cisx: string,
+    [key: string]: Design
+    icsdx: Design,
+    icssx: Design,
+    icidx: Design,
+    icisx: Design,
+    ilsdx: Design,
+    ilssx: Design,
+    ilidx: Design,
+    ilisx: Design,
+    csdx: Design,
+    cssx: Design,
+    cidx: Design,
+    cisx: Design,
 
-    pprsdx: string,
-    pprssx: string,
-    ppridx: string,
-    pprisx: string,
+    pprsdx: Design,
+    pprssx: Design,
+    ppridx: Design,
+    pprisx: Design,
 
-    sprsdx: string,
-    sprssx: string,
-    spridx: string,
-    sprisx: string,
+    sprsdx: Design,
+    sprssx: Design,
+    spridx: Design,
+    sprisx: Design,
 
-    msdx: string,
-    mssx: string,
-    midx: string,
-    misx: string
+    msdx: Design,
+    mssx: Design,
+    midx: Design,
+    misx: Design
 
 }
 export interface Paves {
@@ -147,9 +164,32 @@ export interface Paves {
     midx: Pave,
     misx: Pave
 }
-export interface Pave {
-    shape: 'round' |  'princess' | 'baguette' | 'hexagon' | 'mosaic' | undefined,
-    color: string | undefined
+export interface Stones {
+    [key: string]: Stone
+    icsdx: Stone,
+    icssx: Stone,
+    icidx: Stone,
+    icisx: Stone,
+    ilsdx: Stone,
+    ilssx: Stone,
+    ilidx: Stone,
+    ilisx: Stone,
+    csdx: Stone,
+    cssx: Stone,
+    cidx: Stone,
+    cisx: Stone,
+    pprsdx: Stone,
+    pprssx: Stone,
+    ppridx: Stone,
+    pprisx: Stone,
+    sprsdx: Stone,
+    sprssx: Stone,
+    spridx: Stone,
+    sprisx: Stone,
+    msdx: Stone,
+    mssx: Stone,
+    midx: Stone,
+    misx: Stone
 }
 export interface Prices {
     [key: string]: number
@@ -243,38 +283,7 @@ export interface SignVisibility {
     tribal: boolean,
     braces: boolean
 }
-export interface Stone {
-    // aggiungere i colori
-    shape: 'round' |  'princess' | 'baguette' | 'drop' | 'heart' | 'marquise' | undefined,
-    color: string | undefined
-}
-export interface Stones {
-    [key: string]: Stone
-    icsdx: Stone,
-    icssx: Stone,
-    icidx: Stone,
-    icisx: Stone,
-    ilsdx: Stone,
-    ilssx: Stone,
-    ilidx: Stone,
-    ilisx: Stone,
-    csdx: Stone,
-    cssx: Stone,
-    cidx: Stone,
-    cisx: Stone,
-    pprsdx: Stone,
-    pprssx: Stone,
-    ppridx: Stone,
-    pprisx: Stone,
-    sprsdx: Stone,
-    sprssx: Stone,
-    spridx: Stone,
-    sprisx: Stone,
-    msdx: Stone,
-    mssx: Stone,
-    midx: Stone,
-    misx: Stone
-}
+
 export interface Preciousness {
     [key: string]: number,
     carats: number,
