@@ -10,7 +10,7 @@ export default async function createConfig(config:History, total:number, packagi
             orderStatus: orderStatus,
             config: config,
             total: total,
-            config_pack: packaging.premium ? packaging.premium : null
+            config_pack: packaging.premium ? packaging : null
         })
         .select();
     console.log(error)
