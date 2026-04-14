@@ -9,6 +9,7 @@ import {State} from "@/app/_types/State";
 import { Close, Menu } from "@mui/icons-material";
 import {Box} from "@/app/_components/_icons/Box";
 import isTouchDevice from "@/app/_helpers/_checkers/isTouchDevice";
+import Tutorial from "@/app/_components/_elements/Tutorial";
 
 export default function Configurator({fetchedPrices} : {fetchedPrices:any}) {
 
@@ -105,10 +106,13 @@ export default function Configurator({fetchedPrices} : {fetchedPrices:any}) {
                 {loaded && innerWidth < 1024 && !nextStep &&
                     <div
                         className="z-29 absolute top-[70px] left-[50%] translate-x-[-50%] w-[90%] flex items-center justify-between">
-                        <button onClick={() => toggleUI('menu')} type="button"
-                                className="bg-gray-50 border-1 rounded-full w-10 h-10 flex items-center justify-center">
-                            <Box className="w-8 h-8 p-1"/>
-                        </button>
+                        <div className="flex gap-4">
+                            <button onClick={() => toggleUI('menu')} type="button"
+                                    className="bg-gray-50 border-1 rounded-full w-10 h-10 flex items-center justify-center">
+                                <Box className="w-8 h-8 p-1"/>
+                            </button>
+                            <Tutorial activeButton={activeButton}/>
+                        </div>
                         {(showMenu || showRecap) &&
                             <button onClick={closeAllUIs} type="button"
                                  className="bg-gray-50 border-1 rounded-full w-10 h-10">
@@ -141,7 +145,7 @@ export default function Configurator({fetchedPrices} : {fetchedPrices:any}) {
                                         currency: "EUR"
                                     }).format(total)}</span>
                                 </div>
-                                <button disabled={(history.length === 0 || total === 0) && !packaging} className={`rounded-3xl ${(history.length === 0 || total === 0) && !packaging ? 'bg-gray-300' : 'bg-slate-950 cursor-pointer'} text-gray-50 px-5 py-2 h-full`}
+                                <button disabled={history.length === 0 || total === 0 || (total === 300 && packaging) as boolean} className={`rounded-3xl ${history.length === 0 || total === 0 || (total === 300 && packaging) as boolean ? 'bg-gray-300' : 'bg-slate-950 cursor-pointer'} text-gray-50 px-5 py-2 h-full`}
                                         onClick={setContinue}>Continue &rarr;</button>
                             </div>
                         }
