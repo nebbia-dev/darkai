@@ -69,7 +69,6 @@ export default function RecapList({edit} : {edit:boolean}) {
                 }
                 {history.length > 0 && Object.entries(history[currentStep][0].signatureVisible).map(signature => {
 
-                    {/*https://stackoverflow.com/questions/48223852/how-to-conditionally-add-or-not-onclick-on-a-div-in-react*/}
                     return (
                         history[currentStep][0].signatureVisible[signature[0]] &&
                         <li key={signature[0]}

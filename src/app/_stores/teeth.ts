@@ -237,12 +237,25 @@ export const useTeethStore = create<State>((set, get) => ({
 
                 // if the jewel type corresponds to a signature design, that signature design
                 // visibility and material are reset. Then, the design type of all the teeth
-                // included in the signature array is reset to 'full'
+                // included in the signature array is reset to 'full'. The second part covers the hammered frames special case
                 if(Object.keys(state.teethSignature).includes(state.teethJewelType[tooth])) {
                     state.signatureMaterial[state.teethJewelType[tooth]] = undefined;
                     state.signatureVisibility[state.teethJewelType[tooth]] = false;
 
                     for(let value of Object.values(state.teethSignature[state.teethJewelType[tooth]])) {
+                        state.teethJewelType[value as string] = 'full'
+                    }
+                }
+                // EXCEPTION: reset of the hammered frames signature when a spacer on a neighbouring tooth is selected
+                // EXCEPTION: reset of the hammered frames signature when something different from a spacer is selected on ICSDX
+                if(state.signatureVisibility.hammered && (
+                    ((tooth === 'cssx' || tooth === 'ilidx') && type.includes('bar'))
+                    || (tooth === 'icsdx' && (type.includes('full') || type.includes('frame') || type.includes('bezel') || type === 'enamel'))
+                )) {
+                    state.signatureMaterial.hammered = undefined;
+                    state.signatureVisibility.hammered = false;
+
+                    for(let value of Object.values(state.teethSignature.hammered)) {
                         state.teethJewelType[value as string] = 'full'
                     }
                 }
@@ -855,7 +868,7 @@ export const useTeethStore = create<State>((set, get) => ({
     },
     teethSignature: {
         vamp: ['csdx', 'cssx'],
-        hammered: ['ilsdx', 'ilssx', 'icidx', 'icisx', 'ilidx', 'ilisx'],
+        hammered: ['ilsdx', 'ilssx', 'icidx', 'icisx', 'ilisx'],
         cross: ['icsdx', 'icssx'],
         bubblegum: ['icsdx', 'icssx', 'ilsdx', 'ilssx'],
         sprinkles: ['csdx', 'cssx', 'ilsdx', 'ilssx'],
@@ -894,6 +907,24 @@ export const useTeethStore = create<State>((set, get) => ({
                         } else {
                             state.signatureVisibility[key] = false;
                             state.signatureMaterial[key] = undefined;
+                        }
+                    }
+
+                    // Hammered frames special case
+                    if(signature === 'hammered' && (
+                        (state.teethJewelType.cssx.includes('bar') || state.teethJewelType.ilidx.includes('bar'))
+                        || (state.teethJewelType.icsdx.includes('full') || state.teethJewelType.icsdx.includes('frame') || state.teethJewelType.icsdx.includes('bezel') || state.teethJewelType.icsdx.includes === 'enamel')
+                    )) {
+                        if(state.teethJewelType.cssx.includes('bar')) {
+                            get().resetList(state, 'cssx');
+                        }
+
+                        if(state.teethJewelType.ilidx.includes('bar')) {
+                            get().resetList(state, 'ilidx');
+                        }
+
+                        if(state.teethJewelType.icsdx.includes('full') || state.teethJewelType.icsdx.includes('frame') || state.teethJewelType.icsdx.includes('bezel') || state.teethJewelType.icsdx.includes === 'enamel') {
+                            get().resetList(state, 'icsdx');
                         }
                     }
 
