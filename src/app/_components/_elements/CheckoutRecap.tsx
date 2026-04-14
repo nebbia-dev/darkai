@@ -124,7 +124,7 @@ export default function CheckoutRecap({history, packaging, total, shippingFees} 
                             )
                         })}
 
-                        {packaging.premium &&
+                        {packaging &&
                             <li className="rounded p-2">
                                 {/*tooth name*/}
                                 <div className="flex justify-between items-center mb-1">

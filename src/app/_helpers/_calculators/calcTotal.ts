@@ -160,7 +160,7 @@ export default async function calcTotal(config:History, packaging:Packaging) {
         }
     }
 
-    if(packaging.premium) {
+    if(packaging) {
         total += 300;
     }
 

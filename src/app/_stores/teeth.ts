@@ -781,7 +781,7 @@ export const useTeethStore = create<State>((set, get) => ({
                         state.hovered = undefined;
                     }
                     if(button === '6') {
-                        state.packaging.premium = true;
+                        state.packaging = { out: 'black', in: 'black', details: 'gold', text: {firstLine: '', secondLine: ''}};
                         state.hovered = undefined;
                         state.currentTooth = undefined;
                         get().setHistoryPack(state);
@@ -945,13 +945,7 @@ export const useTeethStore = create<State>((set, get) => ({
         ),
 
     // state and methods to set packaging
-    packaging:{
-        premium: false,
-        out: 'black',
-        in: 'black',
-        details: 'gold',
-        text: {firstLine: '', secondLine: ''}
-    },
+    packaging: undefined,
     setPackaging: (prop:string, value:string|boolean, line?:number|undefined) => {
         set(
             produce((state) => {
@@ -971,10 +965,6 @@ export const useTeethStore = create<State>((set, get) => ({
                 }
 
                 get().setHistoryPack(state);
-
-                if(prop === 'premium' && value === false) {
-                    get().calcTotal(state);
-                }
             })
         )
     },
@@ -1484,40 +1474,51 @@ export const useTeethStore = create<State>((set, get) => ({
             })
         ),
     resetHistoryPackStep: (state) => {
-        for(const box of state.historyPack[state.currentHistoryPack - 1]) {
-            for(const [key, value] of Object.entries(box.packaging)) {
-                state.packaging[key] = value;
-            }
+        if(state.packaging) {
+            for(const box of state.historyPack[state.currentHistoryPack - 1]) {
+                for(const [key, value] of Object.entries(box.packaging)) {
+                    state.packaging[key] = value;
+                }
 
+            }
         }
     },
-    resetPack: () => {
+    resetPack: (hard) => {
         set(
             produce((state) => {
-                // update current history step
-                if(state.currentHistoryPack < state.historyPack.length) {
-                    state.historyPack = state.historyPack.splice(0, state.currentHistoryPack);
-                }
-                state.currentHistoryPack++;
 
-                state.packaging = {
-                    premium: true,
-                    out: 'black',
-                    in: 'black',
-                    details: 'gold',
-                    text: {firstLine: '', secondLine: ''}
+                if(hard) {
+                    state.packaging = undefined;
+                    get().calcTotal(state);
+                } else {
+
+                    // update current history step
+                    if(state.currentHistoryPack < state.historyPack.length) {
+                        state.historyPack = state.historyPack.splice(0, state.currentHistoryPack);
+                    }
+                    state.currentHistoryPack++;
+
+                    state.packaging = {
+                        out: 'black',
+                        in: 'black',
+                        details: 'gold',
+                        text: {firstLine: '', secondLine: ''}
+                    }
+
+                    get().setHistoryPack(state);
                 }
 
-                get().setHistoryPack(state);
             })
         );
     },
     setHistoryPack: (state) => {
-        state.historyPack = [...state.historyPack,
-            [{
-                packaging: state.packaging,
-            }]
-        ];
+        if(state.packaging) {
+            state.historyPack = [...state.historyPack,
+                [{
+                    packaging: state.packaging,
+                }]
+            ];
+        }
     },
 
     // states and method to calculate the total price of the current configuration
@@ -1699,7 +1700,7 @@ export const useTeethStore = create<State>((set, get) => ({
                 }
             }
 
-            if(state.packaging.premium) {
+            if(state.packaging) {
                 state.total += 300;
             }
 

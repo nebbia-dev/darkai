@@ -138,7 +138,7 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
                                         currency: "EUR"
                                     }).format(total)}</span>
                                 </div>
-                                <button disabled={(history.length === 0 || total === 0) && !packaging.premium} className={`rounded-3xl ${(history.length === 0 || total === 0) && !packaging.premium ? 'bg-gray-300' : 'bg-slate-950 cursor-pointer'} text-gray-50 px-5 py-2 h-full`}
+                                <button disabled={history.length === 0 || total === 0 || (total === 300 && packaging) as boolean} className={`rounded-3xl ${(history.length === 0 || total === 0 || (total === 300 && packaging)) ? 'bg-gray-300' : 'bg-slate-950 cursor-pointer'} text-gray-50 px-5 py-2 h-full`}
                                         onClick={onclick}>Continue &rarr;</button>
                             </div>
                         }

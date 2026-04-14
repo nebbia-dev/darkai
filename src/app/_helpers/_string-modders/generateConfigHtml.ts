@@ -9,7 +9,7 @@ import {History, Packaging, Prices} from "@/app/_types/TeethOptions";
 import elabVelvetName from "@/app/_helpers/_string-modders/elabVelvetName";
 import checkDoubleTeeth from "@/app/_helpers/_checkers/checkDoubleTeeth";
 
-export default function generateConfigHtml(teethPrices:Prices, history:History[][], currentStep:number, packaging:Packaging, total?:number|undefined) {
+export default function generateConfigHtml(teethPrices:Prices, history:History[][], currentStep:number, packaging:Packaging|undefined, total?:number|undefined) {
 
     let html = '';
 
@@ -74,7 +74,7 @@ export default function generateConfigHtml(teethPrices:Prices, history:History[]
         }
 
         })}
-    if(packaging.premium) {
+    if(packaging) {
         html += "<li><h4>Premium Box</h4> <p>" + firstCapital(packaging.out) + " box w/ " + elabVelvetName(packaging.in) + " velvet and " + elabMaterial(packaging.details, 'gold') + " gold details</p>"
 
         if((packaging.text.firstLine.length > 0 || packaging.text.secondLine.length > 0)) {

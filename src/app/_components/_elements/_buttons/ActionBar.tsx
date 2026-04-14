@@ -49,7 +49,7 @@ export default function ActionBar() {
 
     function doReset() {
         if(activeButton === '6') {
-            resetPack();
+            resetPack(false);
         } else {
             reset();
         }

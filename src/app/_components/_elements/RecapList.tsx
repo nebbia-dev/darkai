@@ -29,7 +29,7 @@ export default function RecapList({edit} : {edit:boolean}) {
     const resetTooth = useTeethStore((state: State) => state.resetTooth);
     const resetSignature = useTeethStore((state: State) => state.resetSignature);
     const packaging = useTeethStore((state: State) => state.packaging);
-    const setPackaging = useTeethStore((state: State) => state.setPackaging);
+    const resetPack = useTeethStore((state: State) => state.resetPack);
     const packagingScene = useTeethStore((state: State) => state.packagingScene);
     const setPackagingScene = useTeethStore((state: State) => state.setPackagingScene);
     const resetMenu = useTeethStore((state: State) => state.setActiveButton);
@@ -44,9 +44,7 @@ export default function RecapList({edit} : {edit:boolean}) {
     }
 
     function resetPackaging() {
-        setPackaging('premium', false);
-        setPackaging('text', '', 1);
-        setPackaging('text', '', 2);
+        resetPack(true);
         setPackagingScene(false);
         resetMenu(undefined);
     }
@@ -56,13 +54,11 @@ export default function RecapList({edit} : {edit:boolean}) {
         setHover(tooth);
     }
 
-
-
     return (
         <div className="pl-5 pr-3 py-4 h-full">
             <ul className="pr-2 h-full overflow-y-auto">
                 {((history.length === 0 || total === 0)
-                        && !packaging.premium) &&
+                        && !packaging) &&
                     <li className="w-full h-full flex items-center justify-center">
                         <p>Start your design</p>
                     </li>
@@ -192,7 +188,7 @@ export default function RecapList({edit} : {edit:boolean}) {
                     )
                 })}
 
-                {packaging.premium &&
+                {packaging &&
                     <li className="rounded p-2">
                         {/*tooth name*/}
                         <div className="flex justify-between items-center mb-1">

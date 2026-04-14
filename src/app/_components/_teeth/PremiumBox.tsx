@@ -14,18 +14,18 @@ import BoxMaterialInf from "@/app/_components/_materials/BoxMaterialInf";
 
 export default function PremiumBox({ref} : {ref:Ref<Group|null>}) {
 
-    const firstTextRef = useRef(null);
-    const secondTextRef = useRef(null);
+    const packaging = useTeethStore((state: State) => state.packaging);
+    if(!packaging) return null;
 
-    const customText = useTeethStore((state: State) => state.packaging.text);
+    const firstTextRef = useRef(null);
+    const customText = useTeethStore((state: State) => state.packaging!.text);
+    const secondTextRef = useRef(null);
 
     const premiumBox = useMemo(() => {
         return useGLTF('/models/Packaging.glb')
     }, []);
-
     const lightDisks = useTexture('/textures/packaging/Light.webp');
     lightDisks.flipY = false;
-    const packaging = useTeethStore((state: State) => state.packaging);
 
     useEffect(() => {
         if(firstTextRef.current) {

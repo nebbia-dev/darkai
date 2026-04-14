@@ -321,7 +321,6 @@ export interface Neighbours {
 }
 export interface Packaging {
     [key: string]: boolean|string|{firstLine: string, secondLine: string}
-    premium: boolean,
     out: string,
     in: string,
     details: string,

@@ -35,7 +35,7 @@ export default function UploadFile({theme, sendData} : {theme:'dark' | 'light', 
     return (
         <div className={`${theme === 'dark' ? 'w-[33%]' : 'w-full'} h-[100px] lg:h-[176px]`}>
             <label
-                className={`label h-full w-full block ${theme === 'dark' ? 'bg-gray-950/[80%] text-gray-50' : 'bg-gray-50 text-gray-950'} rounded ${selectedFile || innerWidth  < 1024 ? 'p-2' : 'p-8'} cursor-pointer border-[#171717]`}>
+                className={`flex flex-col justify-center label h-full w-full block ${theme === 'dark' ? 'bg-gray-950/[80%] text-gray-50' : 'bg-gray-50 text-gray-950'} rounded ${selectedFile || innerWidth  < 1024 ? 'p-2' : 'p-8'} cursor-pointer border-[#171717]`}>
                 {
                     selectedFile
                         ?  <img className="rounded-xl w-[90%] h-[100%] lg:h-[122px] object-cover lg:mb-4 mx-auto" src={preview as string} alt="scan-preview"/>

@@ -2,7 +2,7 @@
 import {createClient} from "@/lib/supabase/serverSU";
 import {History, Packaging} from "@/app/_types/TeethOptions";
 
-export default async function createConfig(config:History, total:number, packaging:Packaging, orderStatus:string) {
+export default async function createConfig(config:History, total:number, packaging:Packaging|undefined, orderStatus:string) {
     const supabase = await createClient();
     const { data, error } = await supabase
         .from('Configs')
@@ -10,7 +10,7 @@ export default async function createConfig(config:History, total:number, packagi
             orderStatus: orderStatus,
             config: config,
             total: total,
-            config_pack: packaging.premium ? packaging : null
+            config_pack: packaging ? packaging : null
         })
         .select();
     console.log(error)
