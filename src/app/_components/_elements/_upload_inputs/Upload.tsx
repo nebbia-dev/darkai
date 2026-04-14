@@ -8,7 +8,7 @@ export default function Upload() {
         const reader = new FileReader();
         reader.readAsArrayBuffer(newFile);
         reader.onload = () => {
-            setScanImage(reader.result as ArrayBuffer, newFile.type);
+            setScanImage(reader.result as ArrayBuffer, newFile.type || undefined, newFile.name);
         };
     }
 

@@ -9,7 +9,28 @@ type UploadTargetResponse = {
     error?: string,
 };
 
+function getFileExtension(file: File) {
+    if (!file.name.includes('.')) {
+        return undefined;
+    }
+
+    return file.name.split('.').pop()?.toLowerCase();
+}
+
+function getContentType(file: File) {
+    if (file.type) {
+        return file.type;
+    }
+
+    if (getFileExtension(file) === 'stl') {
+        return 'model/stl';
+    }
+
+    return 'application/octet-stream';
+}
+
 export async function uploadToStorage(bucket: UploadBucket, file: File) {
+    const contentType = getContentType(file);
     const targetResponse = await fetch('/api/storage/upload-target', {
         method: 'POST',
         headers: {
@@ -17,7 +38,7 @@ export async function uploadToStorage(bucket: UploadBucket, file: File) {
         },
         body: JSON.stringify({
             bucket,
-            contentType: file.type,
+            contentType,
             fileName: file.name,
         }),
     });
@@ -34,7 +55,7 @@ export async function uploadToStorage(bucket: UploadBucket, file: File) {
         .from(bucket)
         .uploadToSignedUrl(targetPayload.path, targetPayload.token, file, {
             cacheControl: '3600',
-            contentType: file.type || 'application/octet-stream',
+            contentType,
         });
 
     if (error) {

@@ -9,6 +9,7 @@ import elabVelvetName from "@/app/_helpers/_string-modders/elabVelvetName";
 import elabMaterial from "@/app/_helpers/_string-modders/elabMaterial";
 import elabSignatureName from "@/app/_helpers/_string-modders/elabSignatureName";
 import elabSignatureGold from "@/app/_helpers/_string-modders/elabSignatureGold";
+import elabStoneName from "@/app/_helpers/_string-modders/elabStoneName";
 export default async function Config({params}: { params: Promise<{ configId: string[] }> }){
 
     const supabase = await createClient();
@@ -47,8 +48,8 @@ export default async function Config({params}: { params: Promise<{ configId: str
                                             : toothProp.type[tooth[0]].replace('Diamond', '') === 'bigBar'
                                                 ? 'spacer'
                                                 : toothProp.type[tooth[0]].replace('Diamond', ''))
-                                + (toothProp.type[tooth[0]].includes('Diamond') ? ' with ' + toothProp.pave[tooth[0]].color + ' ' + toothProp.pave[tooth[0]].shape + ' pave' : '')
-                                + (toothProp.stones[tooth[0]].shape ? '. Gem: ' + toothProp.stones[tooth[0]].color as string + ', ' + toothProp.stones[tooth[0]].shape as string + ' cut' : '');
+                                + (toothProp.type[tooth[0]].includes('Diamond') ? ' with ' + elabStoneName(toothProp.pave[tooth[0]].color) + ' ' + toothProp.pave[tooth[0]].shape + ' pave' : '')
+                                + (toothProp.stones[tooth[0]].shape ? '. Gem: ' + elabStoneName(toothProp.stones[tooth[0]].color as string) + ', ' + toothProp.stones[tooth[0]].shape as string + ' cut' : '');
 
         teethConfig[propName as string] = propValue;
 

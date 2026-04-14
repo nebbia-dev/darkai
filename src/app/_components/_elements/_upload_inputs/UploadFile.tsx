@@ -1,5 +1,5 @@
 'use client'
-import {ChangeEvent, useEffect, useState} from "react";
+import {ChangeEvent, useState} from "react";
 import {useTeethStore} from "@/app/_stores/teeth";
 import {State} from "@/app/_types/State";
 
@@ -7,27 +7,18 @@ export default function UploadFile({theme, sendData} : {theme:'dark' | 'light', 
 
     const innerWidth = useTeethStore((state:State) => state.innerWidth);
     const [selectedFile, setSelectedFile] = useState<File|undefined>();
-    const [preview, setPreview] = useState<string|undefined>();
-
-    // create a preview as a side effect, whenever selected file is changed
-    useEffect(() => {
-        if (!selectedFile) {
-            setPreview(undefined);
-            return
-        }
-
-        const objectUrl = URL.createObjectURL(selectedFile);
-        setPreview(objectUrl);
-
-        // free memory when ever this component is unmounted
-        return () => URL.revokeObjectURL(objectUrl)
-    }, [selectedFile])
 
     function handleChange(e:ChangeEvent<HTMLInputElement>) {
         if (!e.target.files || e.target.files.length === 0) {
             setSelectedFile(undefined);
             return;
         }
+
+        if (!e.target.files[0].name.toLowerCase().endsWith('.stl')) {
+            setSelectedFile(undefined);
+            return;
+        }
+
         setSelectedFile(e.target.files[0]);
         sendData(e.target.files[0]);
     }
@@ -38,7 +29,16 @@ export default function UploadFile({theme, sendData} : {theme:'dark' | 'light', 
                 className={`flex flex-col justify-center label h-full w-full block ${theme === 'dark' ? 'bg-gray-950/[80%] text-gray-50' : 'bg-gray-50 text-gray-950'} rounded ${selectedFile || innerWidth  < 1024 ? 'p-2' : 'p-8'} cursor-pointer border-[#171717]`}>
                 {
                     selectedFile
-                        ?  <img className="rounded-xl w-[90%] h-[100%] lg:h-[122px] object-cover lg:mb-4 mx-auto" src={preview as string} alt="scan-preview"/>
+                        ? <div className="rounded-xl w-[90%] h-[100%] lg:h-[122px] border border-current/20 lg:mb-4 mx-auto flex flex-col items-center justify-center px-4 text-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48px" height="48px" viewBox="0 0 24 24" className="mb-2">
+                                <g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5">
+                                    <path d="M7 3.5h6l4 4V20a.5.5 0 0 1-.5.5h-9A3.5 3.5 0 0 1 4 17V7A3.5 3.5 0 0 1 7.5 3.5"/>
+                                    <path d="M13 3.5V8h4"/>
+                                    <path d="M8 13h6m-6 3h4"/>
+                                </g>
+                            </svg>
+                            <span className="font-medium">STL file selected</span>
+                        </div>
                         :
                             <div className="w-full flex justify-center mb-2">
                             <svg xmlns="http://www.w3.org/2000/svg" width="48px" height="48px" viewBox="0 0 24 24">
@@ -53,13 +53,13 @@ export default function UploadFile({theme, sendData} : {theme:'dark' | 'light', 
                 }
                 <span className={`text-center ${innerWidth  < 1024 ? 'line-clamp-1' : 'line-clamp-2'}`}>
                     {selectedFile && innerWidth  < 1024
-                        ? ''
+                        ? selectedFile.name
                         : selectedFile && innerWidth  >= 1024
                             ? <>{selectedFile.name}</>
-                            : "Upload a dental scan"
+                            : "Upload a dental scan (.stl)"
                     }
                 </span>
-                <input type="file" onChange={handleChange}/>
+                <input type="file" accept=".stl" onChange={handleChange}/>
             </label>
         </div>
     )

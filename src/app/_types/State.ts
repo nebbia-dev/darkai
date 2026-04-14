@@ -37,8 +37,8 @@ export interface TempPrices {
 export interface State {
     bufferConfigImage: string | undefined,
     setBufferConfigImage: (buffer:string) => void,
-    scanImage: { scan: ArrayBuffer|undefined, type: string | undefined },
-    setScanImage: (scan:ArrayBuffer, type:string) => void,
+    scanImage: { scan: ArrayBuffer|undefined, type: string | undefined, name: string | undefined },
+    setScanImage: (scan:ArrayBuffer, type:string | undefined, name:string) => void,
     savedConfig: number|undefined,
     setSavedConfig: (id:number|undefined) => void,
     isTouch: boolean,

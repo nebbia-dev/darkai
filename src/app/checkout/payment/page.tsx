@@ -166,11 +166,14 @@ export default function Checkout() {
         setIsUploadingScan(true);
 
         try {
-            const extension = scanImage.type?.split('/')[1]?.split('+')[0] || 'bin';
+            const extension = scanImage.name?.split('.').pop()?.toLowerCase()
+                || scanImage.type?.split('/')[1]?.split('+')[0]
+                || 'bin';
+            const fileName = scanImage.name || `scan.${extension}`;
             const file = new File(
                 [scanImage.scan],
-                `scan.${extension}`,
-                {type: scanImage.type || 'application/octet-stream'},
+                fileName,
+                {type: scanImage.type || (extension === 'stl' ? 'model/stl' : 'application/octet-stream')},
             );
             const uploadedScan = await uploadToStorage('scans', file);
 
