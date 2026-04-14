@@ -4,7 +4,7 @@ import fetchPrices from "@/app/_helpers/_db-interactions/fetchPrices";
 import {History, Packaging} from "@/app/_types/TeethOptions";
 import {TempPrices} from "@/app/_types/State";
 
-export default async function calcTotal(config:History, packaging:Packaging) {
+export default async function calcTotal(config:History, packaging:Packaging|undefined) {
     const response = await fetchPrices();
     const prices:TempPrices = {base: response.base!, bezel: response.bezel, pave: response.pave! as any, signature: response.signature!}
     let total = 0;

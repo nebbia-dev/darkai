@@ -5,14 +5,12 @@ import React, {useState} from "react";
 import {useTeethStore} from "@/app/_stores/teeth";
 import {State} from "@/app/_types/State";
 
-type Text = {
-    firstLine: string,
-    secondLine: string
-}
-
 export default function CustomTextInput() {
 
-    const customText:Text = useTeethStore((state: State) => state.packaging.text);
+    const customText = useTeethStore((state: State) => state.packaging?.text);
+
+    if(!customText) return null;
+
     const innerWidth = useTeethStore((state:State) => state.innerWidth);
     const [firstReset, setFirstReset] = useState<boolean>(false);
     const [secondReset, setSecondReset] = useState<boolean>(false);
@@ -22,25 +20,27 @@ export default function CustomTextInput() {
     const setPackaging = useTeethStore((state: State) => state.setPackaging);
 
     function checkAndSetPackaging(type:string, e:any, lineNumber:number) {
-        const line = lineNumber === 1 ? customText.firstLine : customText.secondLine
-        const canvas = document.createElement("canvas");
-        const context = canvas.getContext("2d");
-        const width = context!.measureText(line).width;
-        canvas.remove();
-        if((width <= 73 && !backspace) || backspace) {
-            setPackaging(type, e, lineNumber)
+        if(customText) {
+            const line = lineNumber === 1 ? customText.firstLine : customText.secondLine
+            const canvas = document.createElement("canvas");
+            const context = canvas.getContext("2d");
+            const width = context!.measureText(line).width;
+            canvas.remove();
+            if((width <= 73 && !backspace) || backspace) {
+                setPackaging(type, e, lineNumber)
+            }
         }
     }
     function checkBackKeydown(e:any, lineNumber:number) {
         if(e.code === 'Space' && innerWidth < 1024) {
             e.preventDefault();
             if(lineNumber === 1){
-                const partOne = customText.firstLine.slice(0, caret[lineNumber]);
-                const partTwo = customText.firstLine.slice(caret[lineNumber], customText.firstLine.length);
+                const partOne = customText!.firstLine.slice(0, caret[lineNumber]);
+                const partTwo = customText!.firstLine.slice(caret[lineNumber], customText!.firstLine.length);
                 checkAndSetPackaging('text', partOne + " " + partTwo, lineNumber)
             } else if(lineNumber === 2) {
-                const partOne = customText.secondLine.slice(0, caret[lineNumber]);
-                const partTwo = customText.secondLine.slice(caret[lineNumber], customText.secondLine.length);
+                const partOne = customText!.secondLine.slice(0, caret[lineNumber]);
+                const partTwo = customText!.secondLine.slice(caret[lineNumber], customText!.secondLine.length);
                 checkAndSetPackaging('text', partOne + " " + partTwo, lineNumber)
             }
         }

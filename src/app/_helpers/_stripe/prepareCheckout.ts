@@ -15,7 +15,7 @@ type PrepareCheckoutInput = {
     differentShipOpts: boolean,
     currentConfig: History | undefined,
     total: number,
-    packaging: Packaging,
+    packaging: Packaging|undefined,
     uploadedConfigPath: string | undefined,
     uploadedScanPath: string | undefined,
     savedConfig: number | undefined,

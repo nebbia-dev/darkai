@@ -97,7 +97,7 @@ export default function generateConfigHtml(teethPrices:Prices, history:History[]
     return html;
 }
 
-export function generateConfigReceiptDescription(teethPrices:Prices, history:History[][], currentStep:number, packaging:Packaging) {
+export function generateConfigReceiptDescription(teethPrices:Prices, history:History[][], currentStep:number, packaging:Packaging|undefined) {
     const html = generateConfigHtml(teethPrices, history, currentStep, packaging);
 
     return html

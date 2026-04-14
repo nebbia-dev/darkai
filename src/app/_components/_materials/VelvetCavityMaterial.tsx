@@ -4,7 +4,7 @@ import {useEnvironment, useTexture} from "@react-three/drei";
 import * as THREE from "three";
 
 export default function VelvetCavityMaterial() {
-    const color = useTeethStore((state:State) => state.packaging.in);
+    const color = useTeethStore((state:State) => state.packaging?.in);
 
     const envMap = useEnvironment({
         // files: "envMaps/rosendal_park_sunset_puresky_1k.exr"

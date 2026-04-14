@@ -10,7 +10,7 @@ import {History, Packaging} from "@/app/_types/TeethOptions";
 import React from "react";
 import checkDoubleTeeth from "@/app/_helpers/_checkers/checkDoubleTeeth";
 
-export default function CheckoutRecap({history, packaging, total, shippingFees} : {history:History|undefined, packaging:Packaging, total:number, shippingFees:number|undefined}) {
+export default function CheckoutRecap({history, packaging, total, shippingFees} : {history:History|undefined, packaging:Packaging|undefined, total:number, shippingFees:number|undefined}) {
 
     return (
         <>
