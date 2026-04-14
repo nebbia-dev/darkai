@@ -115,13 +115,13 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
                             <div className="flex gap-4 items-center">
                                 <span className="font-medium inline-block w-[72px]">Carats:</span>
                                 <div className="flex justify-evenly gap-4 w-full">
-                                    <button type="button" className={`${teethPreciousness.carats === 10 ? 'font-medium border-sky-400 bg-sky-400 text-gray-50' : 'border-slate-950 bg-gray-50 text-slate-950'} border-1 px-4 py-2 rounded-full cursor-pointer`} value="10"
+                                    <button disabled={history.length === 0 || total === 0 || (total === 300 && packaging) as boolean} type="button" className={`${history.length === 0 || total === 0 || (total === 300 && packaging) as boolean ? '' : 'cursor-pointer'} ${teethPreciousness.carats === 10 && (history.length !== 0 && total > 300) ? 'font-medium border-sky-400 bg-sky-400 text-gray-50' : 'border-slate-950 bg-gray-50 text-slate-950'} border-1 px-4 py-2 rounded-full`} value="10"
                                             onClick={(e) => setCarat(e.currentTarget.value)}>10K
                                     </button>
-                                    <button type="button" className={`${teethPreciousness.carats === 14 ? 'font-medium border-sky-400 bg-sky-400 text-gray-50' : 'border-slate-950 bg-gray-50 text-slate-950'} border-1 px-4 py-2 rounded-full cursor-pointer`} value="14"
+                                    <button disabled={history.length === 0 || total === 0 || (total === 300 && packaging) as boolean} type="button" className={`${history.length === 0 || total === 0 || (total === 300 && packaging) as boolean ? '' : 'cursor-pointer'} ${teethPreciousness.carats === 14 && (history.length !== 0 && total > 300) ? 'font-medium border-sky-400 bg-sky-400 text-gray-50' : 'border-slate-950 bg-gray-50 text-slate-950'} border-1 px-4 py-2 rounded-full`} value="14"
                                             onClick={(e) => setCarat(e.currentTarget.value)}>14K
                                     </button>
-                                    <button type="button" className={`${teethPreciousness.carats === 18 ? 'font-medium border-sky-400 bg-sky-400 text-gray-50' : 'border-slate-950 bg-gray-50 text-slate-950'} border-1 px-4 py-2 rounded-full cursor-pointer`} value="18"
+                                    <button disabled={history.length === 0 || total === 0 || (total === 300 && packaging) as boolean} type="button" className={`${history.length === 0 || total === 0 || (total === 300 && packaging) as boolean ? '' : 'cursor-pointer'} ${teethPreciousness.carats === 18 && (history.length !== 0 && total > 300) ? 'font-medium border-sky-400 bg-sky-400 text-gray-50' : 'border-slate-950 bg-gray-50 text-slate-950'} border-1 px-4 py-2 rounded-full`} value="18"
                                             onClick={(e) => setCarat(e.currentTarget.value)}>18K
                                     </button>
                                 </div>

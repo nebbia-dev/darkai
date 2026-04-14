@@ -1435,6 +1435,7 @@ export const useTeethStore = create<State>((set, get) => ({
                 state.activeButton = undefined;
                 state.activeSubButton = undefined;
                 get().setHistory(state);
+                get().calcTotal(state);
             })
         );
     },

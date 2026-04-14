@@ -106,13 +106,13 @@ export default function Configurator({fetchedPrices} : {fetchedPrices:any}) {
                 {loaded && innerWidth < 1024 && !nextStep &&
                     <div
                         className="z-29 absolute top-[70px] left-[50%] translate-x-[-50%] w-[90%] flex items-center justify-between">
-                        <div className="flex gap-4">
+                        {/*<div className="flex gap-4">*/}
                             <button onClick={() => toggleUI('menu')} type="button"
                                     className="bg-gray-50 border-1 rounded-full w-10 h-10 flex items-center justify-center">
                                 <Box className="w-8 h-8 p-1"/>
                             </button>
-                            <Tutorial activeButton={activeButton}/>
-                        </div>
+                            {/*<Tutorial activeButton={activeButton}/>*/}
+                        {/*</div>*/}
                         {(showMenu || showRecap) &&
                             <button onClick={closeAllUIs} type="button"
                                  className="bg-gray-50 border-1 rounded-full w-10 h-10">
