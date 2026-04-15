@@ -782,7 +782,9 @@ export const useTeethStore = create<State>((set, get) => ({
                         state.hovered = undefined;
                     }
                     if(button === '6') {
-                        state.packaging = { out: 'black', in: 'black', details: 'gold', text: {firstLine: '', secondLine: ''}};
+                        if(!state.packaging) {
+                            state.packaging = { out: 'black', in: 'black', details: 'gold', text: {firstLine: '', secondLine: ''}};
+                        }
                         state.hovered = undefined;
                         state.currentTooth = undefined;
                         get().setHistoryPack(state);
@@ -1456,6 +1458,27 @@ export const useTeethStore = create<State>((set, get) => ({
             }]
         ];
     },
+
+    // setSavedConfig: (savedConfig) => {
+    //     set(
+    //         produce((state) => {
+    //             state.teethJewelType = savedConfig.type;
+    //             state.teethMaterial = savedConfig.material;
+    //             state.teethStones = savedConfig.stones;
+    //             state.teethPaves = savedConfig.pave;
+    //             state.teethEnamel = savedConfig.enamel;
+    //             state.teethFinish = savedConfig.finish;
+    //             state.teethVisibility = savedConfig.visible;
+    //             state.teethPrices = savedConfig.prices;
+    //             state.teethPreciousness = savedConfig.preciousness;
+    //             state.signatureVisibility = savedConfig.signatureVisible;
+    //             state.signatureMaterial = savedConfig.signatureMaterial;
+    //
+    //             get().setHistory(state);
+    //             get().calcTotal(state);
+    //         })
+    //     )
+    // },
 
     // states and methods to set the PACKAGING configuration steps
     // history and navigate among the various step of the user experience

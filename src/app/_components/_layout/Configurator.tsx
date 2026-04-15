@@ -29,15 +29,25 @@ export default function Configurator({fetchedPrices} : {fetchedPrices:any}) {
     const takeScreenshot = useTeethStore((state:State) => state.setIsScreenshotNeeded);
     const setIsTouch = useTeethStore((state:State) => state.setIsTouch);
     const history = useTeethStore((state:State) => state.history);
+    const currentStep = useTeethStore((state:State) => state.currentHistory - 1);
     const packaging = useTeethStore((state: State) => state.packaging);
     const setPrices = useTeethStore((state: State) => state.setPrices);
+    const setSavedConfig = useTeethStore((state: State) => state.setSavedConfig);
+
 
     useEffect(() => {
         updateInnerSize();
         setPrices(fetchedPrices);
+
+        // const savedConfig = localStorage.getItem("DARKAI Configuration");
+        // if(savedConfig) {
+        //     setSavedConfig(JSON.parse(savedConfig))
+        // }
+
         if(isTouchDevice()) {
             setIsTouch(true)
         }
+
         window.addEventListener('resize', updateInnerSize);
         window.addEventListener('orientationchange', updateInnerSize);
         window.visualViewport?.addEventListener('resize', updateInnerSize);
@@ -65,6 +75,7 @@ export default function Configurator({fetchedPrices} : {fetchedPrices:any}) {
 
     function setContinue() {
         takeScreenshot(true);
+        localStorage.setItem("DARKAI Configuration", JSON.stringify(history[currentStep][0]));
         setNextStep(!nextStep);
         setActive(undefined);
     }

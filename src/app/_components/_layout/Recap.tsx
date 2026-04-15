@@ -50,7 +50,7 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
         setIsSending(true);
 
         try {
-            const config = await createConfig(history[history.length-1][0], total, packaging, 'Not completed');
+            const config = await createConfig(history[currentStep][0], total, packaging, 'Not completed');
 
             if(config) {
                 setSavedConfigId(config[0].id);
