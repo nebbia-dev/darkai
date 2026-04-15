@@ -1,7 +1,7 @@
 'use client'
 import Scene from "@/app/_components/_layout/Scene";
 import Selection from "@/app/_components/_layout/Selection";
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import ActionBar from "@/app/_components/_elements/_buttons/ActionBar";
 import {useTeethStore} from "@/app/_stores/teeth";
 import Recap from "@/app/_components/_layout/Recap";
@@ -12,6 +12,7 @@ import isTouchDevice from "@/app/_helpers/_checkers/isTouchDevice";
 import Tutorial from "@/app/_components/_elements/Tutorial";
 
 export default function Configurator({fetchedPrices} : {fetchedPrices:any}) {
+    const previousIsMobileLayout = useRef<boolean | null>(null);
 
     const nextStep = useTeethStore((state) => state.nextStep);
     const setNextStep = useTeethStore((state) => state.setNextStep);
@@ -32,17 +33,23 @@ export default function Configurator({fetchedPrices} : {fetchedPrices:any}) {
     const currentStep = useTeethStore((state:State) => state.currentHistory - 1);
     const packaging = useTeethStore((state: State) => state.packaging);
     const setPrices = useTeethStore((state: State) => state.setPrices);
-    const setSavedConfig = useTeethStore((state: State) => state.setSavedConfig);
+    const setSavedConfig = useTeethStore((state: State) => state.setLocalSavedConfig);
 
 
     useEffect(() => {
         updateInnerSize();
         setPrices(fetchedPrices);
 
-        // const savedConfig = localStorage.getItem("DARKAI Configuration");
-        // if(savedConfig) {
-        //     setSavedConfig(JSON.parse(savedConfig))
-        // }
+        const savedConfig = localStorage.getItem("DARKAI Configuration");
+        const savedConfigPack = localStorage.getItem("DARKAI Configuration Pack");
+
+        if(savedConfig) {
+            if(savedConfigPack) {
+                setSavedConfig(JSON.parse(savedConfig), JSON.parse(savedConfigPack));
+            } else {
+                setSavedConfig(JSON.parse(savedConfig), undefined);
+            }
+        }
 
         if(isTouchDevice()) {
             setIsTouch(true)
@@ -62,20 +69,47 @@ export default function Configurator({fetchedPrices} : {fetchedPrices:any}) {
     }, [])
 
     useEffect(() => {
-        if(activeSubButton !== 'text') {
-            if (innerWidth >= 1024) {
-                setShowMenu(true);
-                setShowRecap(true);
-            } else if (innerWidth < 1024) {
+        const isMobileLayout = innerWidth < 1024;
+
+        if (previousIsMobileLayout.current === null) {
+            previousIsMobileLayout.current = isMobileLayout;
+
+            if (activeSubButton !== 'text') {
+                if (isMobileLayout) {
+                    setShowMenu(false);
+                    setShowRecap(false);
+                } else {
+                    setShowMenu(true);
+                    setShowRecap(true);
+                }
+            }
+
+            return;
+        }
+
+        if (previousIsMobileLayout.current === isMobileLayout) {
+            return;
+        }
+
+        previousIsMobileLayout.current = isMobileLayout;
+
+        if (activeSubButton !== 'text') {
+            if (isMobileLayout) {
                 setShowMenu(false);
                 setShowRecap(false);
+            } else {
+                setShowMenu(true);
+                setShowRecap(true);
             }
         }
-    }, [innerWidth])
+    }, [activeSubButton, innerWidth])
 
     function setContinue() {
         takeScreenshot(true);
         localStorage.setItem("DARKAI Configuration", JSON.stringify(history[currentStep][0]));
+        if(packaging) {
+            localStorage.setItem("DARKAI Configuration Pack", JSON.stringify(packaging));
+        }
         setNextStep(!nextStep);
         setActive(undefined);
     }
@@ -156,7 +190,7 @@ export default function Configurator({fetchedPrices} : {fetchedPrices:any}) {
                                         currency: "EUR"
                                     }).format(total)}</span>
                                 </div>
-                                <button disabled={history.length === 0 || total === 0 || (total === 300 && packaging) as boolean} className={`rounded-3xl ${history.length === 0 || total === 0 || (total === 300 && packaging) as boolean ? 'bg-gray-300' : 'bg-slate-950 cursor-pointer'} text-gray-50 px-5 py-2 h-full`}
+                                <button type="button" disabled={history.length === 0 || total === 0 || (total === 300 && packaging) as boolean} className={`rounded-3xl ${history.length === 0 || total === 0 || (total === 300 && packaging) as boolean ? 'bg-gray-300' : 'bg-slate-950 cursor-pointer'} text-gray-50 px-5 py-2 h-full`}
                                         onClick={setContinue}>Continue &rarr;</button>
                             </div>
                         }

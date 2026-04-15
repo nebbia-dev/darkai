@@ -111,6 +111,7 @@ export interface State {
     calcTotal: (state:State) => void,
     setHistory: (state:State) => void,
     setHistoryPack: (state:State) => void,
+    setLocalSavedConfig: (savedConfig:History, savedConfigPack:Packaging|undefined) => void,
     resetList: (state:State, tooth:string) => void,
     packagingScene: boolean,
     packaging: Packaging | undefined,

@@ -30,6 +30,7 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
     const history = useTeethStore((state:State) => state.history);
     const currentStep = useTeethStore((state:State) => state.currentHistory - 1);
     const packaging = useTeethStore((state: State) => state.packaging);
+
     function toggleRecap() {
         setShowRecap(prev => !prev);
     }
@@ -105,7 +106,7 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
                         </div>
                         {/* MyConfig Middle w/Recap */}
                         <div
-                            className={`${showRecap ? 'h-[80%] lg:h-[60dvh]' :'h-0'} bg-gray-200/50 lg:transition-[height] lg:duration-500 w-[calc(100%-2px)] relative`}>
+                            className={`${showRecap ? 'h-[calc(100dvh-348px)] lg:h-[60dvh]' :'h-0'} bg-gray-200/50 lg:transition-[height] lg:duration-500 w-[calc(100%-2px)] relative`}>
                             <div
                                 className="absolute h-[15%] bottom-0 w-full bg-linear-to-t from-gray-50 to-indigo-0"></div>
                             <RecapList edit={true}/>
@@ -157,7 +158,7 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
                             }
                         </div>
                         <div
-                            className={`${showRecap ? 'h-[calc(100%-364px)] lg:h-[45%]' : 'h-0'} lg:transition-[height] lg:duration-500 w-full relative`}>
+                            className={`${showRecap ? 'h-[calc(100%-364px)] lg:h-[calc(45%-72px)]' : 'h-0'} lg:transition-[height] lg:duration-500 w-full relative`}>
                             <div
                                 className="absolute h-[15%] bottom-0 w-full bg-linear-to-t from-gray-50 to-indigo-0"></div>
 

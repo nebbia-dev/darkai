@@ -15,7 +15,7 @@ export default function Scene() {
         <>
             <div
                 id="loader"
-                className={`${loaded ? 'opacity-0' : 'opacity-100'} transition duration-1500 w-[100vw] px-12 h-[100dvh] flex justify-center items-center absolute z-30 bg-black`}>
+                className={`${loaded ? 'opacity-0 pointer-events-none' : 'opacity-100'} transition duration-1500 w-[100vw] px-12 h-[100dvh] flex justify-center items-center absolute z-30 bg-black`}>
                 <div
                     className={`${loaded ? 'opacity-0' : 'opacity-100'} transition duration-1000 flex flex-col justify-center items-center`}>
                     {/*<h1 className="font-bold text-gray-50 mx-auto text-4xl mb-4">DARKAI</h1>*/}

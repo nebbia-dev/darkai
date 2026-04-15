@@ -1459,26 +1459,36 @@ export const useTeethStore = create<State>((set, get) => ({
         ];
     },
 
-    // setSavedConfig: (savedConfig) => {
-    //     set(
-    //         produce((state) => {
-    //             state.teethJewelType = savedConfig.type;
-    //             state.teethMaterial = savedConfig.material;
-    //             state.teethStones = savedConfig.stones;
-    //             state.teethPaves = savedConfig.pave;
-    //             state.teethEnamel = savedConfig.enamel;
-    //             state.teethFinish = savedConfig.finish;
-    //             state.teethVisibility = savedConfig.visible;
-    //             state.teethPrices = savedConfig.prices;
-    //             state.teethPreciousness = savedConfig.preciousness;
-    //             state.signatureVisibility = savedConfig.signatureVisible;
-    //             state.signatureMaterial = savedConfig.signatureMaterial;
-    //
-    //             get().setHistory(state);
-    //             get().calcTotal(state);
-    //         })
-    //     )
-    // },
+    setLocalSavedConfig: (savedConfig, savedConfigPack) => {
+        set(
+            produce((state) => {
+
+                if(state.currentHistory < state.history.length) {
+                    state.history = state.history.splice(0, state.currentHistory);
+                }
+                state.currentHistory++;
+
+                state.teethJewelType = savedConfig.type;
+                state.teethMaterial = savedConfig.material;
+                state.teethStones = savedConfig.stones;
+                state.teethPaves = savedConfig.pave;
+                state.teethEnamel = savedConfig.enamel;
+                state.teethFinish = savedConfig.finish;
+                state.teethVisibility = savedConfig.visible;
+                state.teethPrices = savedConfig.prices;
+                state.teethPreciousness = savedConfig.preciousness;
+                state.signatureVisibility = savedConfig.signatureVisible;
+                state.signatureMaterial = savedConfig.signatureMaterial;
+
+                if(savedConfigPack) {
+                    state.packaging = savedConfigPack;
+                }
+
+                get().setHistory(state);
+                get().calcTotal(state);
+            })
+        )
+    },
 
     // states and methods to set the PACKAGING configuration steps
     // history and navigate among the various step of the user experience
@@ -1742,9 +1752,13 @@ export const useTeethStore = create<State>((set, get) => ({
     setTeethPreciousness: (carats:number) =>
         set(
             produce((state) => {
+                if(state.currentHistory < state.history.length) {
+                    state.history = state.history.splice(0, state.currentHistory);
+                }
+                state.currentHistory++;
                 state.teethPreciousness.carats = carats;
-                get().calcTotal(state);
                 get().setHistory(state);
+                get().calcTotal(state);
             })
         ),
 
