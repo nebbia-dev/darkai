@@ -103,24 +103,26 @@ export default function Tutorial({activeButton}:{activeButton: string|undefined}
                 <div
                     className={`top-[64px] left-[-144%] w-[90dvw] lg:left-[15%] lg:top-[-150%] lg:w-[500px] absolute flex flex-col border border-gray-950/[33%] text-sm bg-gray-100 rounded z-50`}>
                     <button
-                        className="bg-gray-50 border rounded-full py-1 px-1.5 absolute top-[50%] right-[2%] z-60 cursor-pointer"
+                        type="button"
+                        className="flex items-center justify-center bg-gray-50 border rounded-full py-1 px-1.5 absolute top-[50%] right-[2%] z-60 cursor-pointer"
                         onClick={() => changeStep('next')}>&rarr;
                     </button>
                     <div className="relative">
                         <video
                             key={videoStep}
                             src={`/video/step${videoStep}.mp4`}
-                            className="rounded h-[300px]"
+                            className="rounded h-[280px]"
                             autoPlay={true}
                             loop={true}
                             onLoadedData={handleVideoLoadedData}
                         ></video>
                         <div
-                            className={`h-[300px] pointer-events-none absolute inset-0 rounded bg-gray-100 transition-opacity duration-500 ${showWhiteOverlay ? 'opacity-100' : 'opacity-0'}`}
+                            className={`h-[280px] pointer-events-none absolute inset-0 rounded bg-gray-100 transition-opacity duration-500 ${showWhiteOverlay ? 'opacity-100' : 'opacity-0'}`}
                         ></div>
                     </div>
                     <button
-                        className="bg-gray-50 border rounded-full py-1 px-1.5 absolute top-[50%] left-[2%] z-60 cursor-pointer"
+                        type="button"
+                        className="flex items-center justify-center bg-gray-50 border rounded-full py-1 px-1.5 absolute top-[50%] left-[2%] z-60 cursor-pointer"
                         onClick={() => changeStep('prev')}>&larr;
                     </button>
                 </div>

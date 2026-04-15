@@ -47,6 +47,10 @@ export default function RecapList({edit} : {edit:boolean}) {
         resetPack(true);
         setPackagingScene(false);
         resetMenu(undefined);
+        const savedPack = localStorage.getItem("DARKAI Configuration Pack");
+        if(savedPack) {
+            localStorage.removeItem("DARKAI Configuration Pack");
+        }
     }
 
     function setCurrentHover(tooth:string|undefined, e:any) {
