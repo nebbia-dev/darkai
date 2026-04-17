@@ -133,6 +133,37 @@ body {
   cursor: pointer;
 }
 
+#checkout {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: clip;
+  box-sizing: border-box;
+}
+
+#checkout > div {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: clip;
+  box-sizing: border-box;
+}
+
+@media (max-width: 1023px) {
+  #checkout,
+  #checkout > div {
+    min-height: 840px;
+  }
+
+  #checkout iframe {
+    display: block;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: 840px !important;
+    height: 840px !important;
+  }
+}
+
 .loader {
   width: calc(80px / cos(45deg));
   height: 14px;

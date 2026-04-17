@@ -11,7 +11,7 @@ export const StripeCheckout = ({clientSecret}: {clientSecret: string}) => {
     const options = { clientSecret };
 
     return (
-        <div id="checkout">
+        <div id="checkout" className="w-full min-w-0 max-w-full">
             <EmbeddedCheckoutProvider stripe={stripePromise} options={options}>
                 <EmbeddedCheckout />
             </EmbeddedCheckoutProvider>

@@ -15,6 +15,8 @@ import CheckoutRecap from "@/app/_components/_elements/CheckoutRecap";
 import calcTotal from "@/app/_helpers/_calculators/calcTotal";
 import {History} from "@/app/_types/TeethOptions";
 import {dataUrlToFile, uploadToStorage} from "@/app/_helpers/_uploads/uploadToStorage";
+import TermsAndConditions from "@/app/_components/_elements/docs/TermsAndConditions";
+import PrivacyPolicy from "@/app/_components/_elements/docs/PrivacyPolicy";
 
 type PreparedCheckout = {
     clientSecret: string,
@@ -58,6 +60,11 @@ export default function Checkout() {
     const [differentShipOpts, setDifferentShipOpts] = useState<boolean>(false);
     const [uploadedScanPath, setUploadedScanPath] = useState<string|undefined>(undefined);
     const [uploadedConfigPath, setUploadedConfigPath] = useState<string|undefined>(undefined);
+    const [isPreparingCheckout, setIsPreparingCheckout] = useState<boolean>(false);
+    const [isUploadingScan, setIsUploadingScan] = useState<boolean>(false);
+    const [isUploadingConfig, setIsUploadingConfig] = useState<boolean>(false);
+    const [preparedCheckout, setPreparedCheckout] = useState<PreparedCheckout | null>(null);
+    const [modal, setModal] = useState<'terms'|'privacy'|undefined>();
 
     function handlePhoneChange(newValue: string) {
         setBillingData({...billingData, phone:newValue});
@@ -113,12 +120,7 @@ export default function Checkout() {
         }
     }
 
-    const [isPreparingCheckout, setIsPreparingCheckout] = useState<boolean>(false);
-    const [isUploadingScan, setIsUploadingScan] = useState<boolean>(false);
-    const [isUploadingConfig, setIsUploadingConfig] = useState<boolean>(false);
-    const [preparedCheckout, setPreparedCheckout] = useState<PreparedCheckout | null>(null);
-
-    useEffect(() => {
+   useEffect(() => {
         const shippingState = differentShipOpts ? shippingData.state : billingData.state;
 
         if (shippingState === '') {
@@ -284,11 +286,12 @@ export default function Checkout() {
                 <img className="cursor-auto py-6 w-[132px]" src="/logo.png" alt="darkai logo"/>
             </div>
             <div
-                className="w-[90%] lg:w-[75vw] lg:h-page-nav flex flex-col items-center justify-center mx-auto text-sm">
+                className="w-full px-3 sm:w-[90%] sm:px-0 lg:w-[75vw] lg:h-page-nav flex flex-col items-center justify-center mx-auto text-sm">
                 <div
-                    className={`mt-18 w-full ${error ? 'h-[calc(100dvh-(0.25rem*38)-60px)]' : 'h-[calc(100dvh-(0.25rem*28)-60px)]'} lg:h-auto flex lg:flex-row flex-col overflow-y-auto lg:overflow-y-none lg:items-center lg:justify-center lg:bg-gray-50 p-6 lg:rounded-3xl lg:border-1`}>
-                    <div
-                        className="w-full lg:w-[50%] lg:border-r lg:border-gray-950/[33%] lg:overflow-y-auto lg:max-h-[calc(70dvh-54px)]">
+                    className={`mt-18 w-full ${error ? 'h-[calc(100dvh-(0.25rem*52)-60px)]' : 'h-[calc(100dvh-(0.25rem*40)-60px)]'} flex lg:h-auto lg:flex-row flex-col overflow-y-auto lg:overflow-y-hidden lg:items-center lg:justify-center lg:bg-gray-50 p-3 sm:p-4 lg:p-6 lg:pb-6 lg:rounded-3xl lg:border-1`}>
+                    <div className="w-full lg:w-[50%] lg:h-full">
+                        <div
+                        className="w-full lg:h-full lg:border-r lg:border-gray-950/[33%] lg:overflow-y-auto lg:max-h-[calc(70dvh-54px)]">
 
                         <Accordion elevation={0} sx={{
                             backgroundColor: '#f9fafb',
@@ -522,70 +525,74 @@ export default function Checkout() {
                                     {differentShipOpts &&
                                         <form className="flex flex-col gap-2 px-2 pt-2 pb-8">
                                             <label>Name
-                                                <input className="w-full bg-stone-200 rounded py-2 px-4 focus:outline-black"
-                                                       type="text"
-                                                       placeholder="Type your name"
-                                                       value={shippingData.name}
-                                                       onChange={(e) => {
-                                                           setShippingData({
-                                                               ...shippingData,
-                                                               name: e.currentTarget.value
-                                                           });
-                                                           if(error) {
-                                                               setError(false)
-                                                           }
-                                                       }}
-                                                       required
+                                                <input
+                                                    className="w-full bg-stone-200 rounded py-2 px-4 focus:outline-black"
+                                                    type="text"
+                                                    placeholder="Type your name"
+                                                    value={shippingData.name}
+                                                    onChange={(e) => {
+                                                        setShippingData({
+                                                            ...shippingData,
+                                                            name: e.currentTarget.value
+                                                        });
+                                                        if (error) {
+                                                            setError(false)
+                                                        }
+                                                    }}
+                                                    required
                                                 />
                                             </label>
                                             <label>Last name
-                                                <input className="w-full bg-stone-200 rounded py-2 px-4 focus:outline-black"
-                                                       type="text"
-                                                       placeholder="Type your last name"
-                                                       value={shippingData.lastname}
-                                                       onChange={(e) => {
-                                                           setShippingData({
-                                                               ...shippingData,
-                                                               lastname: e.currentTarget.value
-                                                           });
-                                                           if(error) {
-                                                               setError(false)
-                                                           }
-                                                       }}
-                                                       required
+                                                <input
+                                                    className="w-full bg-stone-200 rounded py-2 px-4 focus:outline-black"
+                                                    type="text"
+                                                    placeholder="Type your last name"
+                                                    value={shippingData.lastname}
+                                                    onChange={(e) => {
+                                                        setShippingData({
+                                                            ...shippingData,
+                                                            lastname: e.currentTarget.value
+                                                        });
+                                                        if (error) {
+                                                            setError(false)
+                                                        }
+                                                    }}
+                                                    required
                                                 />
                                             </label>
                                             <label>Address
-                                                <input className="w-full bg-stone-200 rounded py-2 px-4 focus:outline-black"
-                                                       type="text"
-                                                       placeholder="Type your address"
-                                                       value={shippingData.address}
-                                                       onChange={(e) => {
-                                                           setShippingData({
-                                                               ...shippingData,
-                                                               address: e.currentTarget.value
-                                                           });
-                                                           if(error) {
-                                                               setError(false)
-                                                           }
-                                                       }}
-                                                       required
+                                                <input
+                                                    className="w-full bg-stone-200 rounded py-2 px-4 focus:outline-black"
+                                                    type="text"
+                                                    placeholder="Type your address"
+                                                    value={shippingData.address}
+                                                    onChange={(e) => {
+                                                        setShippingData({
+                                                            ...shippingData,
+                                                            address: e.currentTarget.value
+                                                        });
+                                                        if (error) {
+                                                            setError(false)
+                                                        }
+                                                    }}
+                                                    required
                                                 />
                                             </label>
                                             <label>City
-                                                <input className="w-full bg-stone-200 rounded py-2 px-4 focus:outline-black"
-                                                       type="text"
-                                                       placeholder="Type your city"
-                                                       onChange={(e) => {
-                                                           setShippingData({
-                                                               ...shippingData,
-                                                               city: e.currentTarget.value
-                                                           });
-                                                           if(error) {
-                                                               setError(false)
-                                                           }
-                                                       }}
-                                                       required
+                                                <input
+                                                    className="w-full bg-stone-200 rounded py-2 px-4 focus:outline-black"
+                                                    type="text"
+                                                    placeholder="Type your city"
+                                                    onChange={(e) => {
+                                                        setShippingData({
+                                                            ...shippingData,
+                                                            city: e.currentTarget.value
+                                                        });
+                                                        if (error) {
+                                                            setError(false)
+                                                        }
+                                                    }}
+                                                    required
                                                 />
                                             </label>
                                             <label>Postal code
@@ -598,7 +605,7 @@ export default function Checkout() {
                                                                ...shippingData,
                                                                postalCode: e.currentTarget.value
                                                            });
-                                                           if(error) {
+                                                           if (error) {
                                                                setError(false)
                                                            }
                                                        }}
@@ -663,7 +670,7 @@ export default function Checkout() {
                             '&:before': {height: '0px'},
                             '&.Mui-expanded': {margin: 0},
                         }}
-                        onClick={(e) => calcFinalRecap(e)}
+                                   onClick={(e) => calcFinalRecap(e)}
                         >
                             <div className="flex items-center justify-center border-t border-[#9ca3af]">
                                 <AccordionSummary expandIcon={<ExpandMoreIcon/>} sx={{
@@ -679,16 +686,19 @@ export default function Checkout() {
                             <AccordionDetails
                                 sx={{borderTop: '1px solid #9ca3af', height: 'calc(100% - 100px - 15dvh)'}}>
 
-                                <CheckoutRecap history={finalConfig.config} packaging={packaging} total={finalConfig.total} shippingFees={shippingFees}/>
+                                <CheckoutRecap history={finalConfig.config} packaging={packaging}
+                                               total={finalConfig.total} shippingFees={shippingFees}/>
 
                             </AccordionDetails>
                         </Accordion>
 
                     </div>
-                    <div className="h-full overflow-y-auto w-full lg:w-[50%] px-6 py-4 border-t-1 border-black/40 lg:border-t-0">
+                    </div>
+                    <div className="min-h-[420px] w-full min-w-0 max-w-full overflow-x-hidden h-full lg:overflow-y-auto lg:w-[50%] px-0 py-4 sm:px-2 lg:px-6 border-t-1 border-black/40 lg:border-t-0">
                         {preparedCheckout
-                            ? <div className="h-full min-h-[420px]">
-                                <div className="mb-4 rounded-2xl border border-stone-300 bg-stone-50 px-4 py-3 text-sm text-stone-700">
+                            ? <div className="w-full min-w-0 lg:h-full">
+                                <div
+                                    className="mb-4 rounded-2xl border border-stone-300 bg-stone-50 px-4 py-3 text-sm text-stone-700">
                                     Secure payment ready. Final amount:
                                     {' '}
                                     <span className="font-semibold text-stone-950">
@@ -703,7 +713,8 @@ export default function Checkout() {
                                     clientSecret={preparedCheckout.clientSecret}
                                 />
                             </div>
-                            : <div className="h-full min-h-[420px] rounded-3xl border border-dashed border-stone-400 bg-stone-100/70 px-6 py-8 flex flex-col items-center justify-center text-center">
+                            : <div
+                                className="min-h-[420px] rounded-3xl border border-dashed border-stone-400 bg-stone-100/70 px-6 py-8 lg:h-full flex flex-col items-center justify-center text-center">
                                 {isPreparingCheckout
                                     ? <>
                                         <span className="loader mb-6 inline-block"></span>
@@ -724,9 +735,11 @@ export default function Checkout() {
                                         </p>
                                     </>
                                     : <>
-                                        <h2 className="text-base font-semibold text-stone-950">Payment will appear here</h2>
+                                        <h2 className="text-base font-semibold text-stone-950">Payment will appear
+                                            here</h2>
                                         <p className="mt-2 max-w-md text-stone-600">
-                                            Complete the billing and shipping details, then prepare the checkout to load the embedded Stripe payment form on this page.
+                                            Complete the billing and shipping details, then prepare the checkout to load
+                                            the embedded Stripe payment form on this page.
                                         </p>
                                         <button
                                             className="mt-6 rounded-3xl border border-stone-950 bg-stone-950 px-5 py-2 text-white cursor-pointer"
@@ -744,10 +757,17 @@ export default function Checkout() {
 
                 {error &&
                     <div
-                        className="fixed lg:static bottom-20 border-1 border-red-500 rounded-3xl lg:w-full w-[90%] bg-red-100 px-2 py-2 flex items-center justify-between mt-4 mx-auto">
+                        className="fixed lg:static bottom-20 border-1 border-red-500 rounded-2xl lg:w-full w-[90%] bg-red-100 px-4 py-2 flex items-center justify-between mt-4 mx-auto">
                         {error}
                     </div>
                 }
+                <div
+                    className={`fixed lg:static ${error ? 'bottom-31' : 'bottom-20'} border-1 rounded-3xl lg:rounded-2xl lg:w-full w-[90%] px-4 py-2 flex gap-2 items-center mt-4 mx-auto`}>
+                    <input type="checkbox" className="cursor-pointer"/>
+                    <label> I have read and accepted the <span className="underline cursor-pointer"
+                              onClick={() => setModal('terms')}>terms and conditions</span> and <span
+                        className="underline cursor-pointer" onClick={() => setModal('privacy')}>privacy policy</span></label>
+                </div>
                 <div
                     className="fixed lg:static bottom-5 border-1 rounded-3xl lg:w-full w-[90%] bg-gray-50 px-2 py-2 flex items-center justify-between mt-4 mx-auto">
                     <Link
@@ -776,6 +796,8 @@ export default function Checkout() {
                     </button>
                 </div>
             </div>
+            <TermsAndConditions open={modal === 'terms'} setClose={() =>setModal(undefined)}/>
+            <PrivacyPolicy open={modal === 'privacy'} setClose={() =>setModal(undefined)}/>
         </>
     )
 }

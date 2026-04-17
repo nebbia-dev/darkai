@@ -1124,9 +1124,7 @@ export const useTeethStore = create<State>((set, get) => ({
                 state.teethFinish[key] = value;
             }
 
-            // ??? bug ???
             for(const [key, value] of Object.entries(tooth.stones) as [string, Stone][]) {
-                console.log(key, value);
                 state.teethStones[key].shape = value.shape;
                 state.teethStones[key].color = value.color;
             }
@@ -1156,6 +1154,20 @@ export const useTeethStore = create<State>((set, get) => ({
                 state.signatureMaterial[key] = value;
             }
         }
+
+        localStorage.setItem("DARKAI Configuration", JSON.stringify({
+            type: state.teethJewelType,
+            material: state.teethMaterial,
+            stones: state.teethStones,
+            pave: state.teethPaves,
+            enamel: state.teethEnamel,
+            finish: state.teethFinish,
+            visible: state.teethVisibility,
+            prices: state.teethPrices,
+            preciousness: state.teethPreciousness,
+            signatureVisible: state.signatureVisibility,
+            signatureMaterial: state.signatureMaterial
+        }));
     },
     reset: () => {
         set(
@@ -1438,6 +1450,8 @@ export const useTeethStore = create<State>((set, get) => ({
                 state.activeSubButton = undefined;
                 get().setHistory(state);
                 get().calcTotal(state);
+
+                localStorage.removeItem("DARKAI Configuration");
             })
         );
     },
@@ -1457,6 +1471,20 @@ export const useTeethStore = create<State>((set, get) => ({
                 signatureMaterial: state.signatureMaterial
             }]
         ];
+
+        localStorage.setItem("DARKAI Configuration", JSON.stringify({
+            type: state.teethJewelType,
+            material: state.teethMaterial,
+            stones: state.teethStones,
+            pave: state.teethPaves,
+            enamel: state.teethEnamel,
+            finish: state.teethFinish,
+            visible: state.teethVisibility,
+            prices: state.teethPrices,
+            preciousness: state.teethPreciousness,
+            signatureVisible: state.signatureVisibility,
+            signatureMaterial: state.signatureMaterial
+        }));
     },
 
     setLocalSavedConfig: (savedConfig, savedConfigPack) => {
@@ -1516,6 +1544,9 @@ export const useTeethStore = create<State>((set, get) => ({
                 }
 
             }
+            localStorage.setItem("DARKAI Configuration Pack", JSON.stringify({
+                packaging: state.packaging,
+            }));
         }
     },
     resetPack: (hard) => {
@@ -1553,6 +1584,10 @@ export const useTeethStore = create<State>((set, get) => ({
                     packaging: state.packaging,
                 }]
             ];
+
+            localStorage.setItem("DARKAI Configuration Pack", JSON.stringify({
+                packaging: state.packaging,
+            }));
         }
     },
 
