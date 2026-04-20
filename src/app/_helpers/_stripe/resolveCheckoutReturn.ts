@@ -1,5 +1,6 @@
 import {stripe} from "@/app/_helpers/_stripe/stripe";
 import {finalizeCheckout} from "@/app/_helpers/_stripe/finalizeCheckout";
+import {isCheckoutSessionPaymentConfirmed} from "@/app/_helpers/_stripe/isCheckoutSessionPaymentConfirmed";
 
 function wait(ms: number) {
     return new Promise((resolve) => setTimeout(resolve, ms));
@@ -13,7 +14,7 @@ export async function resolveCheckoutReturn(sessionId?: string) {
     for (let attempt = 0; attempt < 5; attempt++) {
         const session = await stripe.checkout.sessions.retrieve(sessionId);
 
-        if (session.payment_status === 'paid' || session.status === 'complete') {
+        if (isCheckoutSessionPaymentConfirmed(session)) {
             const orderId = Number(session.metadata?.orderId);
             const configId = Number(session.metadata?.configId);
 
@@ -21,6 +22,10 @@ export async function resolveCheckoutReturn(sessionId?: string) {
                 await finalizeCheckout(orderId, configId);
             }
 
+            return '/checkout/payment/success';
+        }
+
+        if (session.status === 'complete') {
             return '/checkout/payment/success';
         }
 

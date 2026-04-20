@@ -16,6 +16,7 @@ import elabSignatureName from "@/app/_helpers/_string-modders/elabSignatureName"
 import elabSignatureGold from "@/app/_helpers/_string-modders/elabSignatureGold";
 import orderIdConverter from "@/app/_helpers/_converters/orderIdConverter";
 import elabStoneName from "@/app/_helpers/_string-modders/elabStoneName";
+import {buildPublicStorageUrl} from "@/lib/supabase/buildPublicStorageUrl";
 export default async function Order({params}: { params: Promise<{ orderId: string[] }> }){
 
     const supabase = await createClient();
@@ -191,7 +192,7 @@ export default async function Order({params}: { params: Promise<{ orderId: strin
                         <div className="w-full">
                             <Image alt="config"
                                    className="object-cover w-full"
-                                   src={`https://aiuptuoijjmfcxutusbc.supabase.co/storage/v1/object/public/configs/${(order as unknown as OrderInfo[])?.[0]['config_id'].screen}`}
+                                   src={buildPublicStorageUrl('configs', (order as unknown as OrderInfo[])?.[0]['config_id'].screen)}
                                    width={1000} height={1000} quality={70} unoptimized={true}/>
                         </div>
                     </div>

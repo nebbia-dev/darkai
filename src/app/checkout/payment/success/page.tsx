@@ -8,7 +8,7 @@ export default function Success() {
                 <img className="cursor-auto py-6 w-[132px]" src="/logo.png" alt="darkai logo"/>
             </div>
             <div
-                className="relative top-[72px] lg:mt-0 w-[85vw] lg:w-[60vw] h-[calc(100dvh-(0.25rem*5)-60px-72px)] lg:h-[calc(100dvh-54px)] flex flex-col items-center justify-center gap-1 mx-auto text-center">
+                className="relative top-[72px] lg:mt-0 w-[85vw] lg:w-[60vw] h-[calc(100dvh-(0.25rem*5)-60px-72px)] lg:h-[calc(100dvh-128px)] flex flex-col items-center justify-center gap-1 mx-auto text-center">
                 <h2 className="font-bold text-2xl mb-6">Your order has been placed!</h2>
                 <p>Check your inbox for the find the purchase receipt. We'll send you the tracking number once your
                     order is shipped.</p>

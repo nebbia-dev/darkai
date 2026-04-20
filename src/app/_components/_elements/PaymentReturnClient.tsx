@@ -81,7 +81,7 @@ export default function PaymentReturnClient({sessionId}: PaymentReturnClientProp
                 <img className="cursor-auto py-6 w-[132px]" src="/logo.png" alt="darkai logo"/>
             </div>
             <div
-                className="relative top-[72px] lg:mt-0 w-[85vw] lg:w-[60vw] h-[calc(100dvh-(0.25rem*5)-60px-72px)] lg:h-[calc(100dvh-54px)] flex flex-col items-center justify-center mx-auto text-center">
+                className="relative top-[72px] lg:mt-0 w-[85vw] lg:w-[60vw] h-[calc(100dvh-(0.25rem*5)-60px-72px)] lg:h-[calc(100dvh-128px)] flex flex-col items-center justify-center mx-auto text-center">
                 <span className="loader mb-8 inline-block"></span>
                 <h2 className="font-bold text-2xl mb-3">{statusMessage}</h2>
                 <p className="max-w-xl">{helperMessage}</p>

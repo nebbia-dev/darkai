@@ -29,6 +29,20 @@ type PrepareCheckoutResult = {
     finalTotal: number,
 }
 
+const klarnaEligibleEurCountries = new Map([
+    ['Austria', 10000],
+    ['Belgium', 10000],
+    ['Finland', 10000],
+    ['France', 4000],
+    ['Germany', 10000],
+    ['Greece', 4000],
+    ['Ireland', 4000],
+    ['Italy', 4000],
+    ['Netherlands', 5000],
+    ['Portugal', 4000],
+    ['Spain', 10000],
+]);
+
 function isPersonalDataComplete(data: PersonalData, needsEmail: boolean) {
     return !(
         data.name === ''
@@ -40,6 +54,17 @@ function isPersonalDataComplete(data: PersonalData, needsEmail: boolean) {
         || data.postalCode === ''
         || (needsEmail && !data.email)
     );
+}
+
+function getPaymentMethodTypes(country: string, total: number): Array<'card' | 'klarna'> {
+    const paymentMethodTypes: Array<'card' | 'klarna'> = ['card'];
+    const klarnaMaxAmount = klarnaEligibleEurCountries.get(country);
+
+    if (klarnaMaxAmount && total > 0 && total <= klarnaMaxAmount) {
+        paymentMethodTypes.push('klarna');
+    }
+
+    return paymentMethodTypes;
 }
 
 export async function prepareCheckout({
@@ -113,6 +138,7 @@ export async function prepareCheckout({
 
     const domainURL = process.env.NEXT_PUBLIC_DOMAIN || "http://localhost:3000";
     const returnUrl = `${domainURL}/checkout/payment/return?session_id={CHECKOUT_SESSION_ID}`;
+    const paymentMethodTypes = getPaymentMethodTypes(shippingCountry, finalTotal);
 
     const session = await stripe.checkout.sessions.create({
         ui_mode: "embedded_page",
@@ -129,7 +155,7 @@ export async function prepareCheckout({
             }
         ],
         mode: "payment",
-        payment_method_types: ['card'],
+        payment_method_types: paymentMethodTypes,
         customer_email: billingData.email,
         payment_intent_data: {
             description: receiptDescription,

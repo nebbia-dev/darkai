@@ -5,9 +5,10 @@ import OrderInfo from "@/app/_types/OrderInfo";
 import EditScanIcons from "@/app/_components/_elements/_buttons/EditScanIcons";
 import updateCustomerScan from "@/app/_helpers/_db-interactions/updateCustomerScan";
 import {uploadToStorage} from "@/app/_helpers/_uploads/uploadToStorage";
+import {buildPublicStorageUrl} from "@/lib/supabase/buildPublicStorageUrl";
 
 function buildScanUrl(scanPath: string) {
-    return `https://aiuptuoijjmfcxutusbc.supabase.co/storage/v1/object/public/scans/${scanPath}`;
+    return buildPublicStorageUrl('scans', scanPath);
 }
 
 export default function UploadScanBackoffice ({userId, scanId}:{userId:OrderInfo['user_id']['id'], scanId:OrderInfo['user_id']['scan']}) {

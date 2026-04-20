@@ -10,6 +10,7 @@ import elabMaterial from "@/app/_helpers/_string-modders/elabMaterial";
 import elabSignatureName from "@/app/_helpers/_string-modders/elabSignatureName";
 import elabSignatureGold from "@/app/_helpers/_string-modders/elabSignatureGold";
 import elabStoneName from "@/app/_helpers/_string-modders/elabStoneName";
+import {buildPublicStorageUrl} from "@/lib/supabase/buildPublicStorageUrl";
 export default async function Config({params}: { params: Promise<{ configId: string[] }> }){
 
     const supabase = await createClient();
@@ -181,7 +182,7 @@ export default async function Config({params}: { params: Promise<{ configId: str
                         <div className="w-full">
                             <Image alt="config"
                                    className="object-cover w-full"
-                                   src={`https://aiuptuoijjmfcxutusbc.supabase.co/storage/v1/object/public/configs/${config?.[0].screen}`}
+                                   src={buildPublicStorageUrl('configs', config?.[0].screen)}
                                    width={1000} height={1000} quality={70} unoptimized={true}/>
                         </div>
                     </div>

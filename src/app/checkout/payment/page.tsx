@@ -763,10 +763,9 @@ export default function Checkout() {
                 }
                 <div
                     className={`fixed lg:static ${error ? 'bottom-31' : 'bottom-20'} border-1 rounded-3xl lg:rounded-2xl lg:w-full w-[90%] px-4 py-2 flex gap-2 items-center mt-4 mx-auto`}>
-                    <input type="checkbox" className="cursor-pointer"/>
-                    <label> I have read and accepted the <span className="underline cursor-pointer"
+                    <p>By proceeding, I declare that I have read and accepted the <span className="underline cursor-pointer"
                               onClick={() => setModal('terms')}>terms and conditions</span> and <span
-                        className="underline cursor-pointer" onClick={() => setModal('privacy')}>privacy policy</span></label>
+                        className="underline cursor-pointer" onClick={() => setModal('privacy')}>privacy policy</span></p>
                 </div>
                 <div
                     className="fixed lg:static bottom-5 border-1 rounded-3xl lg:w-full w-[90%] bg-gray-50 px-2 py-2 flex items-center justify-between mt-4 mx-auto">
