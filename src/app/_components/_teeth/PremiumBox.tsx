@@ -1,5 +1,5 @@
 import React, {Ref, useEffect, useMemo, useRef} from "react";
-import {Center, Text3D, useGLTF, useTexture} from "@react-three/drei";
+import {Text3D, useGLTF, useTexture} from "@react-three/drei";
 import {useTeethStore} from "@/app/_stores/teeth";
 import * as THREE from 'three';
 import {State} from "@/app/_types/State";
@@ -14,18 +14,18 @@ import BoxMaterialInf from "@/app/_components/_materials/BoxMaterialInf";
 
 export default function PremiumBox({ref} : {ref:Ref<Group|null>}) {
 
-    const firstTextRef = useRef(null);
-    const secondTextRef = useRef(null);
+    const packaging = useTeethStore((state: State) => state.packaging);
+    if(!packaging) return null;
 
-    const customText = useTeethStore((state: State) => state.packaging.text);
+    const firstTextRef = useRef(null);
+    const customText = useTeethStore((state: State) => state.packaging!.text);
+    const secondTextRef = useRef(null);
 
     const premiumBox = useMemo(() => {
         return useGLTF('/models/Packaging.glb')
     }, []);
-
     const lightDisks = useTexture('/textures/packaging/Light.webp');
     lightDisks.flipY = false;
-    const packaging = useTeethStore((state: State) => state.packaging);
 
     useEffect(() => {
         if(firstTextRef.current) {
@@ -38,36 +38,41 @@ export default function PremiumBox({ref} : {ref:Ref<Group|null>}) {
 
     }, [customText])
 
-    // single line: position={[-0.001, 0, -0.09]}
-    // double line: 1st: position={[-0.045, 0, -0.04]}; 2nd: position={[0.02, 0, -0.12]}
-
     return(
         <>
             <group ref={ref}
                    // rotation={[0, Math.PI / 4, 0]}
                    // position={[-20.060500000193823, 0, -9.505650000058095]} per l'animazione
             >
-                <group rotation={[Math.PI / 2, Math.PI, Math.PI / 2]} scale={[3.5, 3.5, 3.5]}>
-                    <Center
-                        rotation={[0, 0.91, 1.58]}
-                        position={customText.secondLine !== '' ? [-0.045, 0, -0.04] : [-0.001, 0, -0.09]}
+
+                    <Text3D
+                        font="/Archivo_Expanded_Bold.json"
+                        size={0.039}
+                        ref={firstTextRef}
+                        scale={[3.5, 3.5, 1]}
+                        rotation={[-0.65, 0, 0]}
+                        position={customText.secondLine !== '' ? [0, 0, 0.05] : [0, -0.125, 0.15]}
                         visible={customText.firstLine !== ''}
                     >
-                        <Text3D font="/Archivo_Expanded_Bold.json" size={0.039} ref={firstTextRef}>
-                            {customText.firstLine}
-                            <FullMaterial color={packaging.details} finish="polished"/>
-                        </Text3D>
-                    </Center>
+                        {customText.firstLine}
+                        <FullMaterial color={packaging.details} finish="polished"/>
+                    </Text3D>
 
-                    <Center
-                        rotation={[0, 0.91, 1.58]}
-                        position={customText.firstLine !== '' ? [0.02, 0, -0.12] : [-0.001, 0, -0.09]}
-                        visible={customText.secondLine !== ''}>
-                        <Text3D font="/Archivo_Expanded_Bold.json" size={0.039} ref={secondTextRef}>
-                            {customText.secondLine}
-                            <FullMaterial color={packaging.details} finish="polished"/>
-                        </Text3D>
-                    </Center>
+
+                    <Text3D
+                        font="/Archivo_Expanded_Bold.json"
+                        size={0.039}
+                        ref={secondTextRef}
+                        rotation={[-0.65, 0, 0]}
+                        scale={[3.5, 3.5, 1]}
+                        position={customText.firstLine !== '' ? [0, -0.25, 0.25] : [0, -0.125, 0.15]}
+                        visible={customText.secondLine !== ''}
+                    >
+                        {customText.secondLine}
+                        <FullMaterial color={packaging.details} finish="polished"/>
+                    </Text3D>
+
+                <group rotation={[Math.PI / 2, Math.PI, Math.PI / 2]} scale={[3.5, 3.5, 3.5]}>
 
                     {/*TOP*/}
                     {/*Sportello*/}

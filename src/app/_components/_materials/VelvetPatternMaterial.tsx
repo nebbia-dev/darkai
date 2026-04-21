@@ -4,7 +4,7 @@ import {useEnvironment, useTexture} from "@react-three/drei";
 import * as THREE from "three";
 
 export default function VelvetPatternMaterial() {
-    const color = useTeethStore((state:State) => state.packaging.in);
+    const color = useTeethStore((state:State) => state.packaging?.in);
     // const envMap = useTeethStore((state: State) => state.envMap);
 
     const envMap = useEnvironment({

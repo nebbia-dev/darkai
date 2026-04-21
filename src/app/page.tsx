@@ -1,48 +1,27 @@
-'use client'
-import Scene from "@/app/_components/_layout/Scene";
-import Selection from "@/app/_components/_layout/Selection";
+import fetchPrices from "@/app/_helpers/_db-interactions/fetchPrices";
+import Configurator from "@/app/_components/_layout/Configurator";
 import React from "react";
-import ActionBar from "@/app/_components/_elements/_buttons/ActionBar";
-import {useTeethStore} from "@/app/_stores/teeth";
-import Recap from "@/app/_components/_layout/Recap";
-import {State} from "@/app/_types/State";
 
-export default function Config() {
-
-    const nextStep = useTeethStore((state) => state.nextStep);
-    const setNextStep = useTeethStore((state) => state.setNextStep);
-    const loaded = useTeethStore((state) => state.loaded);
-    const activeButton = useTeethStore((state) => state.activeButton);
-    const changeActiveButton = useTeethStore((state) => state.setActiveButton);
-    const setActive = useTeethStore((state: State) => state.setActiveTooth);
-
-    function setContinue() {
-        setNextStep(!nextStep);
-        setActive(undefined);
-    }
-
+export default async function Home() {
+    // const prices = await fetchPrices();
 
     return (
         <>
-            <div className="flex flex-col w-[100vw] mx-auto bg-gray-200 relative font-sans">
-                <div className="absolute w-full flex justify-center ">
-                    <img className="cursor-auto py-6 w-[132px]" src="/logo.png" alt="darkai logo"/>
-                </div>
-                <div className="flex flex-row w-full">
-                    <div
-                        className={`h-page-nav ${activeButton ? 'w-[10vw]' : 'w-[25vw]'} ${nextStep ? 'hidden' : 'block'} absolute z-15 left-0 top-[72px]`}>
-                        {loaded && <Selection activeButton={activeButton} changeActiveButton={changeActiveButton}/>}
-                    </div>
-
-                    <div className={`h-[100vh] w-full mx-auto`}>
-                        <Scene/>
-                        {loaded && !nextStep && <ActionBar/>}
-                    </div>
-                    <div className={`h-page-nav ${nextStep ? 'w-[40vw]' : 'w-[30vw]'} absolute z-15 top-[72px] right-0`}>
-                        {loaded && <Recap next={nextStep} onclick={setContinue}/>}
+            <div
+                className="font-sans opacity-100 w-[100vw] px-12 h-[100dvh] flex justify-center items-center absolute z-30 bg-black">
+                <div
+                    className="opacity-100 flex flex-col justify-center items-center">
+                    {/*<h1 className="font-bold text-gray-50 mx-auto text-4xl mb-4">DARKAI</h1>*/}
+                    <img className="mb-4 w-[132px]" src="/darkai_white.webp" alt="darkai logo"/>
+                    <p className="text-gray-50 text-center text-lg mb-10">
+                        the world's first dental jewelry design interface
+                    </p>
+                    <div className="max-w-[80%] border border-white rounded-2xl px-8 py-6 text-gray-50 text-center text-lg">
+                        <p className="w-full">The configurator is still under construction, it will be available soon</p>
                     </div>
                 </div>
             </div>
         </>
+        // <Configurator fetchedPrices={prices}/>
     );
 }

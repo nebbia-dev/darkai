@@ -25,6 +25,13 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
     const signatures = useTeethStore((state: State) => state.signatureVisibility);
     const gemBox = useTeethStore((state: State) => state.showGemTypeBox);
     const showGemBox = useTeethStore((state: State) => state.setShowGemTypeBox);
+    const innerWidth = useTeethStore((state:State) => state.innerWidth);
+    const innerHeight = useTeethStore((state:State) => state.innerHeight);
+    const viewportRatio = innerHeight > 0 ? innerWidth / innerHeight : 1;
+    const shortLandscapeViewport = innerWidth >= 1024 && innerHeight <= 720 && viewportRatio >= 1.55;
+    const optionPanelTopClass = (viewportRatio > 0.76 || viewportRatio < 0.55) ? 'top-[-25dvh]' : 'top-[-20dvh]';
+    const packagingPanelTopClass = shortLandscapeViewport ? 'top-[-15dvh]' : optionPanelTopClass;
+    const compactDesktopPanel = ((viewportRatio > 0.74 || viewportRatio < 0.55) && innerWidth >= 1024);
 
     const elementRef = useRef<HTMLDivElement|null>(null);
     const selectorRef = useRef<HTMLDivElement|null>(null);
@@ -319,15 +326,18 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
 
         <div className="relative flex flex-col gap-4">
 
-            <div
+            {innerWidth >= 1024 &&
+                <div
                 className={`${
-                    (gemBox && (jewelType?.includes('Diamond') || jewelType?.includes('bezel'))) 
-                        ? 'flex justify-center gap-3' : 'hidden' } absolute top-[-32.5vh] left-[37.75vw] rounded-3xl bg-gray-50 border-1 pb-4 pt-2 pl-8 pr-2 text-sm w-[224px] mb-4`}>
-                <p className="text-center pt-3">You're choosing the <strong>{jewelType?.includes('bezel') ? 'bezel' : 'pave'}</strong> stone color</p>
-                <div className="">
-                    <Close className="cursor-pointer w-5 h-5" onClick={() => showGemBox(false)}/>
+                    (gemBox && (jewelType?.includes('Diamond') || jewelType?.includes('bezel')))
+                        ? 'flex justify-center gap-3' : 'hidden'} absolute top-[-32.5dvh] left-[37.75vw] rounded-3xl bg-gray-50 border-1 pb-4 pt-2 pl-8 pr-2 text-sm w-[224px] mb-4`}>
+                    <p className="text-center pt-3">You're choosing
+                        the <strong>{jewelType?.includes('bezel') ? 'bezel' : 'pave'}</strong> stone color</p>
+                    <div className="">
+                        <Close className="cursor-pointer w-5 h-5" onClick={() => showGemBox(false)}/>
+                    </div>
                 </div>
-            </div>
+            }
 
 
             <ConfiguratorButton inverse={false} value="2" active={active} onclick={onclick} tooth={tooth}
@@ -348,15 +358,17 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
             </ConfiguratorButton>
 
             <div className={`absolute ${!active ? 'hidden' : 'block'} ${
-                (active === '2' && !checkMolar(tooth))
-                    ? 'top-[-25vh]'
-                    : (active === '2' && checkMolar(tooth))
-                        ? 'top-[-10vh]'
+                (active === '2' && checkMolar(tooth))
+                        ? 'top-[-10dvh]'
                         : active === '4' && (jewelType?.includes('enamel') || material === 'base')
-                            ? 'top-[4.5vh]'
-                                : active === '5' && (material === 'base' || (!jewelType?.includes('bezel') && !pave?.shape))
-                                    ? 'top-[11vh]'
-                                    : 'top-[-25vh]'
+                            ? 'top-[4.5dvh]'
+                             : (active === '5' && (material === 'base' || (!jewelType?.includes('bezel') && !pave?.shape)) && (viewportRatio >= 0.75 || viewportRatio <= 0.57))
+                                ? 'top-[11dvh]'
+                                 : (active === '5' && (material === 'base' || (!jewelType?.includes('bezel') && !pave?.shape)) && (viewportRatio < 0.75 || viewportRatio > 0.57))
+                                    ? 'top-[7dvh]'
+                                    : active === '6'
+                                        ? packagingPanelTopClass
+                                        : optionPanelTopClass
             } left-[48px]`}>
 
                 <div
@@ -365,8 +377,11 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
                         || (active === '2' && checkMolar(tooth))
                         || (active === '5' && (material === 'base' || (!jewelType?.includes('bezel') && !pave?.shape)))
                             ? 'h-[186px]'
-                            : 'h-[596px]'} 
-                        w-[200px] bg-gray-50 rounded-3xl p-8 pr-4 border-1 max-h-[70vh]`}>
+                            : compactDesktopPanel
+                                ? 'h-[596px]'
+                                : 'h-[800px]'
+                    } 
+                        w-[65vw] lg:w-[200px] bg-gray-50/75 lg:bg-gray-50 rounded-3xl p-8 pr-4 border-1 max-h-[70dvh]`}>
                     <div onScroll={sync} ref={elementRef} className="overflow-y-auto h-full pl-[2px] pr-4">
                         {renderOptions(active, tooth)}
                     </div>
@@ -375,7 +390,20 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
 
 
             <div
-                className={`${!active ? 'hidden' : 'block'} pups text-center max-h-[70vh] ${active === '6' ? 'h-[604px] py-4 w-[250px]' : 'h-[596px] py-8 w-[64px]'} absolute left-[240px] top-[-25vh]`}>
+                className={`${!active ? 'hidden' : 'block'} w-[64px] text-center max-h-[70dvh] absolute left-[72.5vw] lg:left-[240px] ${
+                    active === '6' 
+                        ? 'py-4 lg:w-[250px]'
+                        : 'py-8'
+                } 
+                ${
+                    active === '6' && compactDesktopPanel
+                        ? 'h-[604px]'
+                        : active !== '6' && compactDesktopPanel
+                            ? 'h-[596px]'
+                            : 'h-[800px]'
+                }
+                ${active === '6' ? packagingPanelTopClass : optionPanelTopClass}
+                `}>
                 <div ref={selectorRef} className="whitespace-nowrap overflow-hidden h-full w-full">
                     {renderSubOptions(active, tooth)}
                 </div>

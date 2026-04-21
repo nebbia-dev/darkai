@@ -1,27 +1,19 @@
-import {History} from "@/app/_types/TeethOptions";
+import {History, Packaging} from "@/app/_types/TeethOptions";
+import PersonalData from "@/app/_types/PersonalData";
 
 export default interface OrderInfo {
-    config: {
+    config_id: {
         id: number,
         config: History,
+        config_pack: Packaging,
         screen: string|undefined|null
     },
     created_at: Date,
     id: number,
     shipping: boolean,
     total: number,
-    shippingAddress: {
-        address: string,
-        city: string,
-        email: string,
-        lastname: string,
-        name: string,
-        phone: string,
-        postalCode: string,
-        state: string
-    },
-    status: 'In produzione' | 'Spedito' | 'Consegnato' | 'Nuovo' | 'Annullato' | undefined,
-    order_id: number,
+    shippingAddress: PersonalData,
+    status: 'Pending payment' | 'In production' | 'Shipped' | 'Delivered' | 'New' | 'Canceled' | undefined,
     user_id: {
         id: number,
         email: string,

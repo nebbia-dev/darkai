@@ -33,47 +33,47 @@ export default function DesignOptions({tooth, fullRef, frameRef, barRef, bigBarR
     return (
         <>
             <button ref={fullRef} type="button" value="full"
-                    className={`${jewelType?.includes('full') && material && material !== 'base' ? 'border-2' : ''} w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 ${!checkMolar(tooth) ? 'mb-4 px-2 pb-2 pt-4' : ''} text-center cursor-pointer`}
+                    className={`${jewelType?.includes('full') && material && material !== 'base' ? 'lg:border-2 border-3 border-sky-500' : 'lg:border-0 border-1 border-black'} w-[95%] h-[170px] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 ${!checkMolar(tooth) ? 'mb-4 px-2 pb-2 pt-4' : ''} flex flex-col items-center justify-center cursor-pointer`}
                     onClick={(e) => setDesign(e.currentTarget.value)}>
-                    <Image className="transition duration-250 opacity-0" onLoad={(e) => startOpacityTransition(e.target)} unoptimized={true} loading="eager" fetchPriority="high" src={Full} alt="full-design"/>
+                    <Image className="transition duration-250 opacity-0 object-cover lg:w-24 w-46" onLoad={(e) => startOpacityTransition(e.target)} unoptimized={true} loading="eager" fetchPriority="high" src={Full} alt="full-design"/>
                     <span className="text-sm">Full</span>
             </button>
             {!checkMolar(tooth) &&
                 <>
                     <button ref={frameRef} type="button" value="frame"
-                            className={`${jewelType?.includes('frame') && material && material !== 'base' ? 'border-2' : ''} w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 px-2 pb-2 pt-4 text-center cursor-pointer`}
+                            className={`${jewelType?.includes('frame') && material && material !== 'base' ? 'lg:border-2 border-3 border-sky-500' : 'lg:border-0 border-1 border-black'} w-[95%] h-[170px] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 px-2 pb-2 pt-4 flex flex-col items-center justify-center cursor-pointer`}
                             onClick={(e) => setDesign(e.currentTarget.value)}>
-                        <Image className="transition duration-250 opacity-0" onLoad={(e) => startOpacityTransition(e.target)} unoptimized={true} loading="eager" fetchPriority="high" src={Frame} alt="frame-design"/>
+                        <Image className="transition duration-250 opacity-0 object-cover lg:w-24 w-46" onLoad={(e) => startOpacityTransition(e.target)} unoptimized={true} loading="eager" fetchPriority="high" src={Frame} alt="frame-design"/>
                         <span className="text-sm">Frame</span>
                     </button>
                     <button ref={barRef} type="button" value="bar"
-                            className={`${jewelType?.includes('bar') && material && material !== 'base' ? 'border-2' : ''} w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 px-2 pb-2 pt-4 text-center cursor-pointer`}
+                            className={`${jewelType?.includes('bar') && material && material !== 'base' ? 'lg:border-2 border-3 border-sky-500' : 'lg:border-0 border-1 border-black'} w-[95%] h-[170px] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 px-2 pb-2 pt-4 flex flex-col items-center justify-center cursor-pointer`}
                             onClick={(e) => setDesign(e.currentTarget.value)}>
-                        <Image className="transition duration-250 opacity-0" onLoad={(e) => startOpacityTransition(e.target)} unoptimized={true} loading="eager" fetchPriority="high" src={Spacer} alt="spacer-design"/>
+                        <Image className="transition duration-250 opacity-0 object-cover lg:w-24 w-46" onLoad={(e) => startOpacityTransition(e.target)} unoptimized={true} loading="eager" fetchPriority="high" src={Spacer} alt="spacer-design"/>
                         <span className="text-sm">Spacer</span>
                     </button>
                 </>
             }
             {(tooth === 'cidx' || tooth === 'cisx') &&
                 <button ref={bigBarRef} type="button" value="bigBar"
-                        className={`${jewelType?.includes('bigBar') && material && material !== 'base' ? 'border-2' : ''} w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 px-2 pb-2 pt-4 text-center cursor-pointer`}
+                        className={`${jewelType?.includes('bigBar') && material && material !== 'base' ? 'lg:border-2 border-3 border-sky-500' : 'lg:border-0 border-1 border-black'} w-[95%] h-[170px] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 px-2 pb-2 pt-4 flex flex-col items-center justify-center cursor-pointer`}
                         onClick={(e) => setDesign(e.currentTarget.value)}>
-                    <Image className="transition duration-250 opacity-0" onLoad={(e) => startOpacityTransition(e.target)} unoptimized={true} loading="eager" fetchPriority="high" src={Bar} alt="bar-design"/>
+                    <Image className="transition duration-250 opacity-0 object-cover lg:w-24 w-46" onLoad={(e) => startOpacityTransition(e.target)} unoptimized={true} loading="eager" fetchPriority="high" src={Bar} alt="bar-design"/>
                     <span className="text-sm">Bar</span>
                 </button>
             }
             {!checkMolar(tooth) &&
                 <>
                     <button ref={bezelRef} type="button" value="bezel"
-                            className={`${jewelType?.includes('bezel') && material && material !== 'base' ? 'border-2' : ''} w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 px-2 pb-2 pt-4 text-center cursor-pointer`}
+                            className={`${jewelType?.includes('bezel') && material && material !== 'base' ? 'lg:border-2 border-3 border-sky-500' : 'lg:border-0 border-1 border-black'} w-[95%] h-[170px] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 px-2 pb-2 pt-4 flex flex-col items-center justify-center cursor-pointer`}
                             onClick={(e) => setDesign(e.currentTarget.value)}>
-                        <Image className="transition duration-250 opacity-0" onLoad={(e) => startOpacityTransition(e.target)} unoptimized={true} loading="eager" fetchPriority="high" src={Bezel} alt="bezel-design"/>
+                        <Image className="transition duration-250 opacity-0 object-cover lg:w-24 w-46" onLoad={(e) => startOpacityTransition(e.target)} unoptimized={true} loading="eager" fetchPriority="high" src={Bezel} alt="bezel-design"/>
                         <span className="text-sm">Bezel</span>
                     </button>
                     <button ref={enamelRef} type="button" value="enamel"
-                            className={`${jewelType?.includes('enamel') && material && material !== 'base' ? 'border-2' : ''} w-[95%] h-[120px] mx-auto rounded-3xl bg-stone-200 px-2 pb-2 pt-4 text-center cursor-pointer`}
+                            className={`${jewelType?.includes('enamel') && material && material !== 'base' ? 'lg:border-2 border-3 border-sky-500' : 'lg:border-0 border-1 border-black'} w-[95%] h-[170px] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 px-2 pb-2 pt-4 flex flex-col items-center justify-center cursor-pointer`}
                             onClick={(e) => setDesign(e.currentTarget.value)}>
-                        <Image className="transition duration-250 opacity-0" onLoad={(e) => startOpacityTransition(e.target)} unoptimized={true} loading="eager" fetchPriority="high" src={Enamel} alt="enamel-design"/>
+                        <Image className="transition duration-250 opacity-0 object-cover lg:w-24 w-46" onLoad={(e) => startOpacityTransition(e.target)} unoptimized={true} loading="eager" fetchPriority="high" src={Enamel} alt="enamel-design"/>
                         <span className="text-sm">Enamel</span>
                     </button>
                 </>

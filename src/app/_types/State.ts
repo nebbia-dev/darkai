@@ -9,10 +9,10 @@ import {
     SignatureTeeth,
     SignMaterial,
     SignVisibility,
-    Stones, Visibility, History, Neighbours, HistoryPack, Packaging
+    Stones, Visibility, History, Neighbours, HistoryPack, Packaging, Design
 } from "@/app/_types/TeethOptions";
 
-interface TempPrices {
+export interface TempPrices {
     base: any[],
     bezel: {
         [key: string]: any[],
@@ -35,6 +35,14 @@ interface TempPrices {
 }
 
 export interface State {
+    bufferConfigImage: string | undefined,
+    setBufferConfigImage: (buffer:string) => void,
+    scanImage: { scan: ArrayBuffer|undefined, type: string | undefined, name: string | undefined },
+    setScanImage: (scan:ArrayBuffer, type:string | undefined, name:string) => void,
+    savedConfig: number|undefined,
+    setSavedConfig: (id:number|undefined) => void,
+    isTouch: boolean,
+    setIsTouch: (bool:boolean) => void,
     envMap: Texture | CubeTexture | undefined,
     hovered: string|undefined,
     teethGeometry: FBX,
@@ -63,6 +71,7 @@ export interface State {
     setShowGemTypeBox: (value:boolean) => void,
     loaded: boolean,
     prices: TempPrices | undefined | null,
+    setPrices: (prices:any) => void,
     total: number,
     isScreenshotNeeded: boolean | undefined,
     resetControls: boolean | undefined,
@@ -80,7 +89,7 @@ export interface State {
     setHover: (tooth: string|undefined) => void,
     setGeometry: (fbx:FBX) => void,
     setMaterial: (tooth:string, color:string) => void,
-    setType: (tooth:string, type:string) => void,
+    setType: (tooth:string, type:Design) => void,
     setPave: (tooth:string, pave:string, color:string|undefined) => void,
     setStone: (tooth:string, shape:string, color:string) => void,
     setEnamel: (tooth:string, color:string) => void,
@@ -90,7 +99,6 @@ export interface State {
     unsetLastActivatedTooth: () => void,
     resetTooth: (tooth:string) => void,
     setLoaded: (bool:boolean) => void,
-    fetchPrices: () => void,
     undo: () => void,
     redo: () => void,
     undoPack: () => void,
@@ -99,12 +107,27 @@ export interface State {
     resetHistoryPackStep: (state:State) => void,
     resetSignature: (signature: string) => void,
     reset: () => void,
-    resetPack: () => void,
+    resetPack: (hard:boolean) => void,
     calcTotal: (state:State) => void,
     setHistory: (state:State) => void,
     setHistoryPack: (state:State) => void,
+    setLocalSavedConfig: (savedConfig:History, savedConfigPack:Packaging|undefined) => void,
     resetList: (state:State, tooth:string) => void,
     packagingScene: boolean,
-    packaging: Packaging,
-    setPackaging: (prop:string, value:string|boolean, line?:number|undefined) => void
+    packaging: Packaging | undefined,
+    setPackaging: (prop:string, value:string|boolean, line?:number|undefined) => void,
+    innerWidth: number,
+    setInnerWidth: (width:number) => void,
+    innerHeight: number,
+    setInnerHeight: (height:number) => void,
+    resetBigBar: (state: State, tooth: string) => void,
+    resetNeighbours: (state:State, type:Design, tooth:string) => void,
+    resetSameDiamondDesign: (state:State, type:Design, tooth:string) => boolean
+    changeDiamondDesign: (state:State, type:Design, tooth:string) => boolean,
+    changeDiamondDesignBB: (state:State, type:Design, tooth:string) => boolean,
+    manageBigBar: (state:State, type:Design, tooth:string) => void,
+    manageCentralBar: (state:State, type:Design, tooth:string) => void,
+    managePreviousBigBar: (state:State, type:Design, tooth:string) => void
+    managePreviousCentralBar: (state:State, type:Design, tooth:string) => void,
+    manageDefault: (state:State, type:Design, tooth:string) => void
 }

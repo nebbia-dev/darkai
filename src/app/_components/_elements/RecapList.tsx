@@ -10,6 +10,10 @@ import elabSignatureName from "@/app/_helpers/_string-modders/elabSignatureName"
 import {Trash} from "@/app/_components/_icons/Trash";
 import elabVelvetName from "@/app/_helpers/_string-modders/elabVelvetName";
 import elabSignatureGold from "@/app/_helpers/_string-modders/elabSignatureGold";
+import checkDoubleTeeth from "@/app/_helpers/_checkers/checkDoubleTeeth";
+import checkDoubleTeethActive from "@/app/_helpers/_checkers/checkDoubleTeethActive";
+import checkDoubleTeethHover from "@/app/_helpers/_checkers/checkDoubleTeethHover";
+import React from "react";
 
 export default function RecapList({edit} : {edit:boolean}) {
 
@@ -25,7 +29,7 @@ export default function RecapList({edit} : {edit:boolean}) {
     const resetTooth = useTeethStore((state: State) => state.resetTooth);
     const resetSignature = useTeethStore((state: State) => state.resetSignature);
     const packaging = useTeethStore((state: State) => state.packaging);
-    const setPackaging = useTeethStore((state: State) => state.setPackaging);
+    const resetPack = useTeethStore((state: State) => state.resetPack);
     const packagingScene = useTeethStore((state: State) => state.packagingScene);
     const setPackagingScene = useTeethStore((state: State) => state.setPackagingScene);
     const resetMenu = useTeethStore((state: State) => state.setActiveButton);
@@ -40,9 +44,13 @@ export default function RecapList({edit} : {edit:boolean}) {
     }
 
     function resetPackaging() {
-        setPackaging('premium', false);
+        resetPack(true);
         setPackagingScene(false);
-        resetMenu(undefined)
+        resetMenu(undefined);
+        const savedPack = localStorage.getItem("DARKAI Configuration Pack");
+        if(savedPack) {
+            localStorage.removeItem("DARKAI Configuration Pack");
+        }
     }
 
     function setCurrentHover(tooth:string|undefined, e:any) {
@@ -50,52 +58,27 @@ export default function RecapList({edit} : {edit:boolean}) {
         setHover(tooth);
     }
 
-    function checkDoubleTeeth(tooth:string, jewel:string) {
-        return ((jewel === 'bar' || jewel === 'barDiamond') && (tooth === 'icsdx' || tooth === 'icidx')) || ((jewel === 'bigBar' || jewel === 'bigBarDiamond') && tooth === 'cidx');
-    }
-
-    function checkDoubleTeethHover(tooth:string, jewel:string) {
-        if(tooth === 'icssx' && hovered === 'icsdx' && (jewel === 'bar' || jewel === 'barDiamond')) {
-            return true;
-        } else if(tooth === 'icisx' && hovered === 'icidx' && (jewel === 'bar' || jewel === 'barDiamond')) {
-            return true;
-        }else if(tooth === 'cisx' && hovered === 'cidx' && (jewel === 'bigBar' || jewel === 'bigBarDiamond')) {
-            return true;
-        } else {
-            return tooth === hovered;
-        }
-    }
-
-    function checkDoubleTeethActive(tooth:string, jewel:string) {
-        if(tooth === 'icssx' && activeTooth === 'icsdx' && (jewel === 'bar' || jewel === 'barDiamond')) {
-            return true;
-        } else if(tooth === 'icisx' && activeTooth === 'icidx' && (jewel === 'bar' || jewel === 'barDiamond')) {
-            return true;
-        }else if(tooth === 'cisx' && activeTooth === 'cidx' && (jewel === 'bigBar' || jewel === 'bigBarDiamond')) {
-            return true;
-        } else {
-            return tooth === activeTooth;
-        }
-    }
-
     return (
         <div className="pl-5 pr-3 py-4 h-full">
             <ul className="pr-2 h-full overflow-y-auto">
                 {((history.length === 0 || total === 0)
-                        && !packaging.premium) &&
+                        && !packaging) &&
                     <li className="w-full h-full flex items-center justify-center">
                         <p>Start your design</p>
                     </li>
                 }
                 {history.length > 0 && Object.entries(history[currentStep][0].signatureVisible).map(signature => {
 
-                    {/*https://stackoverflow.com/questions/48223852/how-to-conditionally-add-or-not-onclick-on-a-div-in-react*/}
                     return (
                         history[currentStep][0].signatureVisible[signature[0]] &&
                         <li key={signature[0]}
-                            className={`${teethSignature[signature[0]].includes(activeTooth as string) ? 'bg-white/50' : ''}
-                                ${teethSignature[signature[0]].includes(hovered as string) ? 'border-black' : 'border-gray-200/50'}
-                                cursor-pointer mb-4 rounded p-2 border`}
+                            className={`${teethSignature[signature[0]].includes(activeTooth as string) ? 'lg:bg-white/50' : ''}
+                                ${!edit 
+                                    ? 'border-transparent' 
+                                    : teethSignature[signature[0]].includes(hovered as string) 
+                                        ? 'lg:border-black' 
+                                        : 'lg:border-gray-200/50'}
+                                cursor-pointer mb-4 rounded p-2 lg:border`}
                         >
                             {/*tooth name*/}
                             <div className="flex justify-between items-center mb-1">
@@ -152,9 +135,13 @@ export default function RecapList({edit} : {edit:boolean}) {
                                             })}
                             className={`
                                 ${checkDoubleTeeth(tooth[0], tooth[1]) ? 'hidden' : 'block'} 
-                                ${checkDoubleTeethActive(tooth[0], tooth[1]) ? 'bg-white/50' : ''}
-                                ${checkDoubleTeethHover(tooth[0], tooth[1]) ? 'border-black' : 'border-gray-200/50'}
-                                cursor-pointer mb-4 rounded p-2 border`}
+                                ${checkDoubleTeethActive(tooth[0], tooth[1], activeTooth) ? 'lg:bg-white/50' : ''}
+                                ${!edit
+                                    ? 'border-transparent'
+                                    : checkDoubleTeethHover(tooth[0], tooth[1], hovered) 
+                                        ? 'lg:border-black' 
+                                        : 'lg:border-gray-200/50'}
+                                cursor-pointer mb-4 rounded p-2 lg:border`}
                         >
                             {/*tooth name*/}
                             <div className="flex justify-between items-center mb-1">
@@ -205,7 +192,7 @@ export default function RecapList({edit} : {edit:boolean}) {
                     )
                 })}
 
-                {packaging.premium &&
+                {packaging &&
                     <li className="rounded p-2">
                         {/*tooth name*/}
                         <div className="flex justify-between items-center mb-1">
@@ -234,6 +221,22 @@ export default function RecapList({edit} : {edit:boolean}) {
                                 }).format(300)
                         }</p>
                         <p className="mt-2 p-2 bg-gray-100 rounded">Note: the premium box is optional.<br/>If you don't choose one, a standard box will be included with your order free of charge.</p>
+                    </li>
+                }
+
+                {
+                    !edit &&
+                    <li className="py-4 border-t font-semibold">
+                        <p className="px-2">Total<br/>
+                            <span className="w-full text-left mt-1.5">
+                            {new Intl.NumberFormat("de-DE", {
+                                style: "currency",
+                                currency: "EUR"
+                            }).format(total)
+
+                            }
+                        </span>
+                        </p>
                     </li>
                 }
             </ul>

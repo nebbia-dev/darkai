@@ -5,7 +5,11 @@ export default function elabSignatureGold(material:string|undefined, signature:s
         let gold;
         switch(signature) {
             case 'bubblegum':
-                gold = firstCapital(material) + ' on yellow gold';
+                gold = firstCapital(material) +
+                    (material === 'pink'
+                        ? ' on yellow gold'
+                        : ' on white gold'
+                    );
                 break;
             case 'braces':
                 gold = (material.includes("base") ? 'Lab rubies' : 'Lab emeralds') + ' on white gold';

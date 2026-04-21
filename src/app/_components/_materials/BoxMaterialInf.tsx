@@ -3,7 +3,7 @@ import {State} from "@/app/_types/State";
 import {useTexture} from "@react-three/drei";
 
 export default function BoxMaterialInf() {
-    const color = useTeethStore((state: State) => state.packaging.out);
+    const color = useTeethStore((state: State) => state.packaging?.out);
     const envMap = useTeethStore((state: State) => state.envMap);
 
     const box = useTexture('textures/packaging/Inferiore.webp');
