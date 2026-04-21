@@ -3,14 +3,36 @@ import {useState} from "react";
 import OrderInfo from "@/app/_types/OrderInfo";
 import {sendMail} from "@/lib/nodemailer/sendMail";
 import updateOrderStatus from "@/app/_helpers/_db-interactions/updateOrderStatus";
+import {buildOrderStatusEmail} from "@/app/_helpers/_emailers/buildOrderStatusEmail";
 
-export default function Select({email, st, orderId}:{email:string, st:OrderInfo["status"], orderId:OrderInfo["id"]}) {
+export default function Select({
+    email,
+    st,
+    orderId,
+    customerName,
+    total,
+}:{
+    email:string,
+    st:OrderInfo["status"],
+    orderId:OrderInfo["id"],
+    customerName?: string,
+    total?: number,
+}) {
     console.log('id ', orderId);
     async function updateStatus(newStatus:string) {
         await updateOrderStatus(orderId, newStatus)
-        // TODO:
-        // - set Nodemailer to SEND the customer email telling her the order status has changed
-        await sendMail({sendTo: email, subject:'Order status updated', text:'Your order has been updated. Current status: ' + newStatus} );
+        const orderStatusEmail = buildOrderStatusEmail({
+            customerName,
+            orderId,
+            status: newStatus as Exclude<OrderInfo["status"], undefined>,
+            total,
+        });
+        await sendMail({
+            sendTo: email,
+            subject: orderStatusEmail.subject,
+            text: orderStatusEmail.text,
+            html: orderStatusEmail.html,
+        });
         setStatus(newStatus);
     }
 

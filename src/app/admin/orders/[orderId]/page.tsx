@@ -82,7 +82,13 @@ export default async function Order({params}: { params: Promise<{ orderId: strin
 
                     <div className="w-[75vw] mx-auto mt-2">
                         <h3 className="inline">Order status: </h3>
-                        <Select email={(order as unknown as OrderInfo[])?.[0].user_id.email} st={(order as unknown as OrderInfo[])?.[0].status} orderId={(order as unknown as OrderInfo[])?.[0].id as number}/>
+                        <Select
+                            email={(order as unknown as OrderInfo[])?.[0].user_id.email}
+                            st={(order as unknown as OrderInfo[])?.[0].status}
+                            orderId={(order as unknown as OrderInfo[])?.[0].id as number}
+                            customerName={`${(order as unknown as OrderInfo[])?.[0].user_id.name} ${(order as unknown as OrderInfo[])?.[0].user_id.lastname}`}
+                            total={(order as unknown as OrderInfo[])?.[0].total}
+                        />
                     </div>
                 </div>
             </div>

@@ -8,10 +8,10 @@ import RecapList from "@/app/_components/_elements/RecapList";
 import {Dropdown} from "@/app/_components/_icons/Dropdown";
 import {useRouter} from "next/navigation";
 import {sendMail} from "@/lib/nodemailer/sendMail";
-import generateConfigHtml from "@/app/_helpers/_string-modders/generateConfigHtml";
 import createConfig from "@/app/_helpers/_db-interactions/createConfig";
 import updateConfigScreen from "@/app/_helpers/_db-interactions/updateConfigScreen";
 import {dataUrlToFile, uploadToStorage} from "@/app/_helpers/_uploads/uploadToStorage";
+import {buildConfigEmail} from "@/app/_helpers/_emailers/buildConfigEmail";
 
 export default function Recap({next, onclick} : {next:boolean, onclick:() => void }){
     const router = useRouter();
@@ -67,14 +67,24 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
                 imageUrl = uploadedConfig.publicUrl;
             }
 
+            const configEmail = buildConfigEmail({
+                recipientName: emailInfo.name,
+                teethPrices,
+                history,
+                currentStep,
+                packaging,
+                total,
+                imageUrl,
+            });
+
             // TODO:
             // - save the configuration in the local storage
             // - IF the checkbox is checked, SAVE name, email address and config in the Newsletter table
             await sendMail({
                     sendTo: emailInfo.email,
-                    subject: 'New config!',
-                    text: 'Your new Grill!',
-                    html: generateConfigHtml(teethPrices, history, currentStep, packaging, total),
+                    subject: 'Your DARKAI configuration recap',
+                    text: configEmail.text,
+                    html: configEmail.html,
                     image: imageUrl,
             });
             setSent(true);
