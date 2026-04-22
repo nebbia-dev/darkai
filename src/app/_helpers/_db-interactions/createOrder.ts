@@ -21,6 +21,11 @@ export default async function createOrder(
             config_id: configId
         })
         .select();
-    console.log(error)
+
+    if (error) {
+        console.error('Unable to create order', error);
+        throw new Error('Unable to create the order record');
+    }
+
     return data;
 }

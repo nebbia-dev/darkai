@@ -24,6 +24,7 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
     const [isSending, setIsSending] = useState<boolean>(false);
     const [emailInfo, setEmailInfo] = useState<{name: string, email:string}>({name: '', email:''})
     const [sent, setSent] = useState<boolean>(false);
+    const [sendError, setSendError] = useState<string | undefined>(undefined);
     const setPreciousness = useTeethStore((state:State) => state.setTeethPreciousness);
     const setSavedConfigId = useTeethStore((state:State) => state.setSavedConfig);
     const innerWidth = useTeethStore((state:State) => state.innerWidth);
@@ -49,6 +50,7 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
         }
 
         setIsSending(true);
+        setSendError(undefined);
 
         try {
             const config = await createConfig(history[currentStep][0], total, packaging, 'Not completed');
@@ -80,14 +82,24 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
             // TODO:
             // - save the configuration in the local storage
             // - IF the checkbox is checked, SAVE name, email address and config in the Newsletter table
-            await sendMail({
-                    sendTo: emailInfo.email,
-                    subject: 'Your DARKAI configuration recap',
-                    text: configEmail.text,
-                    html: configEmail.html,
-                    image: imageUrl,
+            const mailResult = await sendMail({
+                sendTo: emailInfo.email,
+                subject: 'Your DARKAI configuration recap',
+                text: configEmail.text,
+                html: configEmail.html,
+                image: imageUrl,
             });
+
+            if (!mailResult.ok) {
+                setSendError(mailResult.error);
+                setSent(false);
+                return;
+            }
+
             setSent(true);
+        } catch {
+            setSent(false);
+            setSendError('Unable to save and send the configuration right now');
         } finally {
             setIsSending(false);
         }
@@ -235,6 +247,9 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
                             : <div>
                                 <p className="text-gray-950">In order to save your configuration, tell us to whom we may
                                     send it!</p>
+                                {sendError &&
+                                    <p className="text-sm text-red-700 mt-4">{sendError}</p>
+                                }
                                 <form className="flex flex-col gap-2 mt-6" onSubmit={(event) => send(event)}>
                                     <input className="w-full rounded bg-stone-200 py-2 px-4 focus:outline-black" placeholder="Your name"
                                            type="text"

@@ -10,7 +10,8 @@ export const GET = async (request: NextRequest) => {
     try {
         const redirectTo = await resolveCheckoutReturn(stripeSessionId || undefined);
         return NextResponse.json({redirectTo});
-    } catch {
+    } catch (error) {
+        console.error('Unable to resolve checkout return', error);
         return NextResponse.json(
             {
                 error: 'Unable to confirm the payment status',

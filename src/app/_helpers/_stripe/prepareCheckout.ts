@@ -7,7 +7,8 @@ import updateConfigScreen from "@/app/_helpers/_db-interactions/updateConfigScre
 import {generateConfigReceiptDescription} from "@/app/_helpers/_string-modders/generateConfigHtml";
 import PersonalData from "@/app/_types/PersonalData";
 import {History, Packaging} from "@/app/_types/TeethOptions";
-import {stripe} from "@/app/_helpers/_stripe/stripe";
+import {getStripe} from "@/app/_helpers/_stripe/stripe";
+import {getSiteUrl} from "@/lib/server/runtimeConfig";
 
 type PrepareCheckoutInput = {
     billingData: PersonalData,
@@ -21,13 +22,21 @@ type PrepareCheckoutInput = {
     savedConfig: number | undefined,
 }
 
-type PrepareCheckoutResult = {
+type PrepareCheckoutSuccess = {
+    ok: true,
     clientSecret: string,
     sessionId: string,
     orderId: number,
     configId: number,
     finalTotal: number,
 }
+
+type PrepareCheckoutFailure = {
+    ok: false,
+    error: string,
+}
+
+export type PrepareCheckoutResult = PrepareCheckoutSuccess | PrepareCheckoutFailure;
 
 const klarnaEligibleEurCountries = new Map([
     ['Austria', 10000],
@@ -67,6 +76,14 @@ function getPaymentMethodTypes(country: string, total: number): Array<'card' | '
     return paymentMethodTypes;
 }
 
+function normalizePrepareCheckoutError(error: unknown) {
+    if (error instanceof Error && error.message.trim().length > 0) {
+        return error.message;
+    }
+
+    return 'Unable to initialize the payment';
+}
+
 export async function prepareCheckout({
     billingData,
     shippingData,
@@ -78,107 +95,117 @@ export async function prepareCheckout({
     uploadedScanPath,
     savedConfig,
 }: PrepareCheckoutInput): Promise<PrepareCheckoutResult> {
-    if (!isPersonalDataComplete(billingData, true)) {
-        throw new Error('The billing information is incomplete');
-    }
-
-    if (differentShipOpts && !isPersonalDataComplete(shippingData, false)) {
-        throw new Error('The shipping information is incomplete');
-    }
-
-    const shippingAddress = differentShipOpts ? shippingData : {...billingData, email: undefined};
-    const shippingCountry = shippingAddress.state;
-    const shippingFees = findShippingFees(shippingCountry);
-
-    if (shippingFees === null) {
-        throw new Error('Unfortunately we do not ship to this country');
-    }
-
-    if (!savedConfig && !currentConfig) {
-        throw new Error('No configuration found to associate with this checkout');
-    }
-
-    const customer = await createCustomer(billingData, uploadedScanPath);
-    if (!customer?.[0]?.id) {
-        throw new Error('Unable to create the customer record');
-    }
-
-    const customerId = customer[0].id;
-    let configId = savedConfig;
-
-    if (!configId) {
-        const config = await createConfig(currentConfig as History, total, packaging, 'Not completed');
-
-        if (!config?.[0]?.id) {
-            throw new Error('Unable to create the configuration record');
+    try {
+        if (!isPersonalDataComplete(billingData, true)) {
+            throw new Error('The billing information is incomplete');
         }
 
-        const newConfigId = config[0].id;
-        configId = newConfigId;
-    }
+        if (differentShipOpts && !isPersonalDataComplete(shippingData, false)) {
+            throw new Error('The shipping information is incomplete');
+        }
 
-    if (!configId) {
-        throw new Error('Unable to determine the configuration record');
-    }
+        const shippingAddress = differentShipOpts ? shippingData : {...billingData, email: undefined};
+        const shippingCountry = shippingAddress.state;
+        const shippingFees = findShippingFees(shippingCountry);
 
-    if (uploadedConfigPath) {
-        await updateConfigScreen(configId, uploadedConfigPath);
-    }
+        if (shippingFees === null) {
+            throw new Error('Unfortunately we do not ship to this country');
+        }
 
-    const receiptDescription = currentConfig
-        ? generateConfigReceiptDescription(currentConfig.prices, [[currentConfig]], 0, packaging)
-        : undefined;
-    const finalConfigId = configId;
-    const finalTotal = total + shippingFees;
-    const order = await createOrder(customerId, finalConfigId, finalTotal, shippingAddress, 'Pending payment');
+        if (!savedConfig && !currentConfig) {
+            throw new Error('No configuration found to associate with this checkout');
+        }
 
-    if (!order?.[0]?.id) {
-        throw new Error('Unable to create the order record');
-    }
+        const customer = await createCustomer(billingData, uploadedScanPath);
+        if (!customer?.[0]?.id) {
+            throw new Error('Unable to create the customer record');
+        }
 
-    const domainURL = process.env.NEXT_PUBLIC_DOMAIN || "http://localhost:3000";
-    const returnUrl = `${domainURL}/checkout/payment/return?session_id={CHECKOUT_SESSION_ID}`;
-    const paymentMethodTypes = getPaymentMethodTypes(shippingCountry, finalTotal);
+        const customerId = customer[0].id;
+        let configId = savedConfig;
 
-    const session = await stripe.checkout.sessions.create({
-        ui_mode: "embedded_page",
-        line_items: [
-            {
-                price_data: {
-                    currency: 'eur',
-                    unit_amount: Math.round(finalTotal * 100),
-                    product_data: {
-                        name: 'Your Darkai order',
-                    },
-                },
-                quantity: 1,
+        if (!configId) {
+            const config = await createConfig(currentConfig as History, total, packaging, 'Not completed');
+
+            if (!config?.[0]?.id) {
+                throw new Error('Unable to create the configuration record');
             }
-        ],
-        mode: "payment",
-        payment_method_types: paymentMethodTypes,
-        customer_email: billingData.email,
-        payment_intent_data: {
-            description: receiptDescription,
-            receipt_email: billingData.email,
-        },
-        client_reference_id: String(order[0].id),
-        metadata: {
-            orderId: String(order[0].id),
-            configId: String(finalConfigId),
-            customerId: String(customerId),
-        },
-        return_url: returnUrl,
-    });
 
-    if (!session.client_secret) {
-        throw new Error('Error initiating Stripe session');
+            const newConfigId = config[0].id;
+            configId = newConfigId;
+        }
+
+        if (!configId) {
+            throw new Error('Unable to determine the configuration record');
+        }
+
+        if (uploadedConfigPath) {
+            await updateConfigScreen(configId, uploadedConfigPath);
+        }
+
+        const receiptDescription = currentConfig
+            ? generateConfigReceiptDescription(currentConfig.prices, [[currentConfig]], 0, packaging)
+            : undefined;
+        const finalConfigId = configId;
+        const finalTotal = total + shippingFees;
+        const order = await createOrder(customerId, finalConfigId, finalTotal, shippingAddress, 'Pending payment');
+
+        if (!order?.[0]?.id) {
+            throw new Error('Unable to create the order record');
+        }
+
+        const domainURL = getSiteUrl();
+        const returnUrl = new URL('/checkout/payment/return?session_id={CHECKOUT_SESSION_ID}', domainURL).toString();
+        const paymentMethodTypes = getPaymentMethodTypes(shippingCountry, finalTotal);
+
+        const session = await getStripe().checkout.sessions.create({
+            ui_mode: "embedded_page",
+            line_items: [
+                {
+                    price_data: {
+                        currency: 'eur',
+                        unit_amount: Math.round(finalTotal * 100),
+                        product_data: {
+                            name: 'Your Darkai order',
+                        },
+                    },
+                    quantity: 1,
+                }
+            ],
+            mode: "payment",
+            payment_method_types: paymentMethodTypes,
+            customer_email: billingData.email,
+            payment_intent_data: {
+                description: receiptDescription,
+                receipt_email: billingData.email,
+            },
+            client_reference_id: String(order[0].id),
+            metadata: {
+                orderId: String(order[0].id),
+                configId: String(finalConfigId),
+                customerId: String(customerId),
+            },
+            return_url: returnUrl,
+        });
+
+        if (!session.client_secret) {
+            throw new Error('Error initiating Stripe session');
+        }
+
+        return {
+            ok: true,
+            clientSecret: session.client_secret,
+            sessionId: session.id,
+            orderId: order[0].id,
+            configId: finalConfigId,
+            finalTotal,
+        };
+    } catch (error) {
+        console.error('Unable to prepare Stripe checkout', error);
+
+        return {
+            ok: false,
+            error: normalizePrepareCheckoutError(error),
+        };
     }
-
-    return {
-        clientSecret: session.client_secret,
-        sessionId: session.id,
-        orderId: order[0].id,
-        configId: finalConfigId,
-        finalTotal,
-    };
 }
