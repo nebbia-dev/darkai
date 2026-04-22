@@ -64,14 +64,12 @@ function readRequiredEnv(description: string, names: string[]) {
 export function getStripeSecretKey() {
     return readRequiredEnv('Stripe secret key', [
         'STRIPE_SECRET_KEY',
-        'NEXT_STRIPE_SECRET_KEY',
     ]);
 }
 
 export function getStripeWebhookSecret() {
     return readRequiredEnv('Stripe webhook secret', [
         'STRIPE_WEBHOOK_SECRET',
-        'NEXT_STRIPE_WEBHOOK_SECRET',
     ]);
 }
 
@@ -106,18 +104,15 @@ export function getSmtpConfig(): SmtpConfig | null {
     const host = readFirstEnv([
         'SMTP_SERVER_HOST',
         'SMTP_HOST',
-        'NEXT_SMTP_SERVER_HOST',
     ]);
     const username = readFirstEnv([
         'SMTP_SERVER_USERNAME',
         'SMTP_USERNAME',
-        'NEXT_SMTP_SERVER_USERNAME',
     ]);
     const explicitSender = readFirstEnv([
         'SITE_MAIL_SENDER',
         'SMTP_FROM_EMAIL',
         'MAIL_FROM',
-        'NEXT_SITE_MAIL_SENDER',
     ]);
     const sender = explicitSender || (username?.includes('@') ? username : undefined);
 
@@ -129,7 +124,6 @@ export function getSmtpConfig(): SmtpConfig | null {
         readFirstEnv([
             'SMTP_SERVER_PORT',
             'SMTP_PORT',
-            'NEXT_SMTP_SERVER_PORT',
         ]),
         587,
     );
@@ -141,7 +135,6 @@ export function getSmtpConfig(): SmtpConfig | null {
             readFirstEnv([
                 'SMTP_SERVER_SECURE',
                 'SMTP_SECURE',
-                'NEXT_SMTP_SERVER_SECURE',
             ]),
             port === 465,
         ),
@@ -149,18 +142,15 @@ export function getSmtpConfig(): SmtpConfig | null {
         password: readFirstEnv([
             'SMTP_SERVER_PASSWORD',
             'SMTP_PASSWORD',
-            'NEXT_SMTP_SERVER_PASSWORD',
         ]),
         sender,
         senderName: readFirstEnv([
             'SITE_MAIL_SENDER_NAME',
             'SMTP_FROM_NAME',
-            'NEXT_SITE_MAIL_SENDER_NAME',
         ]) || 'Darkai Lab',
         allowInvalidTls: parseBoolean(
             readFirstEnv([
                 'SMTP_TLS_INSECURE',
-                'NEXT_SMTP_TLS_INSECURE',
             ]),
             false,
         ),
