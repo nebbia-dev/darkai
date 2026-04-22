@@ -7,7 +7,7 @@ import updateConfigScreen from "@/app/_helpers/_db-interactions/updateConfigScre
 import {generateConfigReceiptDescription} from "@/app/_helpers/_string-modders/generateConfigHtml";
 import PersonalData from "@/app/_types/PersonalData";
 import {History, Packaging} from "@/app/_types/TeethOptions";
-import {stripe} from "@/app/_helpers/_stripe/stripe";
+import {getStripe} from "@/app/_helpers/_stripe/stripe";
 
 type PrepareCheckoutInput = {
     billingData: PersonalData,
@@ -139,7 +139,7 @@ export async function prepareCheckout({
         const domainURL = process.env.NEXT_PUBLIC_DOMAIN || "http://localhost:3000";
         const returnUrl = `${domainURL}/checkout/payment/return?session_id={CHECKOUT_SESSION_ID}`;
 
-        const session = await stripe.checkout.sessions.create({
+        const session = await getStripe().checkout.sessions.create({
             ui_mode: "embedded_page",
             line_items: [
                 {

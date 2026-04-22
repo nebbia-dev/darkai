@@ -1,11 +1,11 @@
 import {headers} from "next/headers";
 import Stripe from "stripe";
-import {stripe} from "@/app/_helpers/_stripe/stripe";
+import {getStripe} from "@/app/_helpers/_stripe/stripe";
 import {finalizeCheckout} from "@/app/_helpers/_stripe/finalizeCheckout";
 import {isCheckoutSessionPaymentConfirmed} from "@/app/_helpers/_stripe/isCheckoutSessionPaymentConfirmed";
 
 export async function POST(request: Request) {
-    const webhookSecret = process.env.NEXT_STRIPE_WEBHOOK_SECRET;
+    const webhookSecret = process.env['NEXT_STRIPE_WEBHOOK_SECRET'];
 
     if (!webhookSecret) {
         return new Response('Missing STRIPE_WEBHOOK_SECRET', {status: 500});
@@ -22,7 +22,7 @@ export async function POST(request: Request) {
     let event: Stripe.Event;
 
     try {
-        event = stripe.webhooks.constructEvent(body, signature, webhookSecret);
+        event = getStripe().webhooks.constructEvent(body, signature, webhookSecret);
     } catch (error) {
         return new Response(`Webhook signature verification failed: ${(error as Error).message}`, {status: 400});
     }

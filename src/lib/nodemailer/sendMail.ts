@@ -1,18 +1,16 @@
 'use server'
 import nodemailer from 'nodemailer';
 
-const SMTP_SERVER_HOST = process.env.NEXT_SMTP_SERVER_HOST;
-const SMTP_SERVER_USERNAME = process.env.NEXT_SMTP_SERVER_USERNAME;
-const SMTP_SERVER_PASSWORD = process.env.NEXT_SMTP_SERVER_PASSWORD;
-const SITE_MAIL_SENDER = process.env.NEXT_SITE_MAIL_SENDER;
-const SMTP_SERVER_PORT = Number(process.env.NEXT_SMTP_SERVER_PORT || 587);
-
 type SendMailResult = {
     ok: true,
 } | {
     ok: false,
     error: string,
 };
+
+function readRuntimeEnv(name: string) {
+    return process.env[name];
+}
 
 function getAttachmentName(image: string) {
     try {
@@ -23,17 +21,23 @@ function getAttachmentName(image: string) {
     }
 }
 
-function buildFromAddress() {
-    if (!SITE_MAIL_SENDER) {
+function buildFromAddress(siteMailSender: string | undefined) {
+    if (!siteMailSender) {
         return undefined;
     }
 
-    return `"Darkai Lab" <${SITE_MAIL_SENDER}>`;
+    return `"Darkai Lab" <${siteMailSender}>`;
 }
 
 export async function sendMail({sendTo, subject, text, html, image}: {sendTo?: string, subject: string, text: string, html?: string, image?: string }): Promise<SendMailResult> {
     try {
-        if (!SMTP_SERVER_HOST || !SMTP_SERVER_USERNAME || !SMTP_SERVER_PASSWORD || !SITE_MAIL_SENDER) {
+        const smtpServerHost = readRuntimeEnv('NEXT_SMTP_SERVER_HOST');
+        const smtpServerUsername = readRuntimeEnv('NEXT_SMTP_SERVER_USERNAME');
+        const smtpServerPassword = readRuntimeEnv('NEXT_SMTP_SERVER_PASSWORD');
+        const siteMailSender = readRuntimeEnv('NEXT_SITE_MAIL_SENDER');
+        const smtpServerPort = Number(readRuntimeEnv('NEXT_SMTP_SERVER_PORT') || 587);
+
+        if (!smtpServerHost || !smtpServerUsername || !smtpServerPassword || !siteMailSender) {
             return {
                 ok: false,
                 error: 'Email service is not configured',
@@ -41,12 +45,12 @@ export async function sendMail({sendTo, subject, text, html, image}: {sendTo?: s
         }
 
         const transporter = nodemailer.createTransport({
-            host: SMTP_SERVER_HOST,
-            port: Number.isFinite(SMTP_SERVER_PORT) ? SMTP_SERVER_PORT : 587,
-            secure: SMTP_SERVER_PORT === 465,
+            host: smtpServerHost,
+            port: Number.isFinite(smtpServerPort) ? smtpServerPort : 587,
+            secure: smtpServerPort === 465,
             auth: {
-                user: SMTP_SERVER_USERNAME,
-                pass: SMTP_SERVER_PASSWORD,
+                user: smtpServerUsername,
+                pass: smtpServerPassword,
             },
             tls: {
                 rejectUnauthorized: false,
@@ -54,7 +58,7 @@ export async function sendMail({sendTo, subject, text, html, image}: {sendTo?: s
         });
 
         await transporter.sendMail({
-            from: buildFromAddress(),
+            from: buildFromAddress(siteMailSender),
             to: sendTo,
             subject: subject,
             text: text,

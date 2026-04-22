@@ -1,5 +1,25 @@
 import Stripe from "stripe";
 
-export const stripe = new Stripe(process.env.NEXT_STRIPE_SECRET_KEY!, {
-    apiVersion: "2025-12-15.clover",
-});
+let stripeClient: Stripe | undefined;
+
+function readRuntimeEnv(name: string) {
+    return process.env[name];
+}
+
+export function getStripe() {
+    if (stripeClient) {
+        return stripeClient;
+    }
+
+    const stripeSecretKey = readRuntimeEnv('NEXT_STRIPE_SECRET_KEY');
+
+    if (!stripeSecretKey) {
+        throw new Error('Stripe secret key is missing');
+    }
+
+    stripeClient = new Stripe(stripeSecretKey, {
+        apiVersion: "2025-12-15.clover",
+    });
+
+    return stripeClient;
+}
