@@ -1,6 +1,7 @@
 'use server'
 import {CookieOptions, createServerClient} from "@supabase/ssr";
 import { cookies } from "next/headers";
+import {readRuntimeEnv} from "@/lib/server/readRuntimeEnv";
 
 /**
  * Especially important if using Fluid compute: Don't put this client in a
@@ -9,7 +10,7 @@ import { cookies } from "next/headers";
  */
 export async function createClient() {
     const cookieStore = await cookies();
-    const supabaseServiceRoleKey = process.env['NEXT_SUPABASE_SECRET_KEY'];
+    const supabaseServiceRoleKey = readRuntimeEnv(['NEXT', 'SUPABASE', 'SECRET', 'KEY']);
 
     return createServerClient(
         process.env.NEXT_PUBLIC_SUPABASE_URL!,

@@ -3,9 +3,10 @@ import Stripe from "stripe";
 import {getStripe} from "@/app/_helpers/_stripe/stripe";
 import {finalizeCheckout} from "@/app/_helpers/_stripe/finalizeCheckout";
 import {isCheckoutSessionPaymentConfirmed} from "@/app/_helpers/_stripe/isCheckoutSessionPaymentConfirmed";
+import {readRuntimeEnv} from "@/lib/server/readRuntimeEnv";
 
 export async function POST(request: Request) {
-    const webhookSecret = process.env['NEXT_STRIPE_WEBHOOK_SECRET'];
+    const webhookSecret = readRuntimeEnv(['NEXT', 'STRIPE', 'WEBHOOK', 'SECRET']);
 
     if (!webhookSecret) {
         return new Response('Missing STRIPE_WEBHOOK_SECRET', {status: 500});

@@ -1,17 +1,14 @@
 import Stripe from "stripe";
+import {readRuntimeEnv} from "@/lib/server/readRuntimeEnv";
 
 let stripeClient: Stripe | undefined;
-
-function readRuntimeEnv(name: string) {
-    return process.env[name];
-}
 
 export function getStripe() {
     if (stripeClient) {
         return stripeClient;
     }
 
-    const stripeSecretKey = readRuntimeEnv('NEXT_STRIPE_SECRET_KEY');
+    const stripeSecretKey = readRuntimeEnv(['NEXT', 'STRIPE', 'SECRET', 'KEY']);
 
     if (!stripeSecretKey) {
         throw new Error('Stripe secret key is missing');

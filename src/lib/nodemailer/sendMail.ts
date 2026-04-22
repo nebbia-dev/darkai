@@ -1,5 +1,6 @@
 'use server'
 import nodemailer from 'nodemailer';
+import {readRuntimeEnv} from "@/lib/server/readRuntimeEnv";
 
 type SendMailResult = {
     ok: true,
@@ -7,10 +8,6 @@ type SendMailResult = {
     ok: false,
     error: string,
 };
-
-function readRuntimeEnv(name: string) {
-    return process.env[name];
-}
 
 function getAttachmentName(image: string) {
     try {
@@ -31,11 +28,11 @@ function buildFromAddress(siteMailSender: string | undefined) {
 
 export async function sendMail({sendTo, subject, text, html, image}: {sendTo?: string, subject: string, text: string, html?: string, image?: string }): Promise<SendMailResult> {
     try {
-        const smtpServerHost = readRuntimeEnv('NEXT_SMTP_SERVER_HOST');
-        const smtpServerUsername = readRuntimeEnv('NEXT_SMTP_SERVER_USERNAME');
-        const smtpServerPassword = readRuntimeEnv('NEXT_SMTP_SERVER_PASSWORD');
-        const siteMailSender = readRuntimeEnv('NEXT_SITE_MAIL_SENDER');
-        const smtpServerPort = Number(readRuntimeEnv('NEXT_SMTP_SERVER_PORT') || 587);
+        const smtpServerHost = readRuntimeEnv(['NEXT', 'SMTP', 'SERVER', 'HOST']);
+        const smtpServerUsername = readRuntimeEnv(['NEXT', 'SMTP', 'SERVER', 'USERNAME']);
+        const smtpServerPassword = readRuntimeEnv(['NEXT', 'SMTP', 'SERVER', 'PASSWORD']);
+        const siteMailSender = readRuntimeEnv(['NEXT', 'SITE', 'MAIL', 'SENDER']);
+        const smtpServerPort = Number(readRuntimeEnv(['NEXT', 'SMTP', 'SERVER', 'PORT']) || 587);
 
         if (!smtpServerHost || !smtpServerUsername || !smtpServerPassword || !siteMailSender) {
             return {
