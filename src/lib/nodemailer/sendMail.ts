@@ -1,13 +1,21 @@
 'use server'
 import nodemailer from 'nodemailer';
-import {getSmtpConfig} from "@/lib/server/runtimeConfig";
-
-type SendMailResult = {
-    ok: true,
-} | {
-    ok: false,
-    error: string,
-};
+const SMTP_SERVER_HOST = process.env.NEXT_SMTP_SERVER_HOST;
+const SMTP_SERVER_USERNAME = process.env.NEXT_SMTP_SERVER_USERNAME;
+const SMTP_SERVER_PASSWORD = process.env.NEXT_SMTP_SERVER_PASSWORD;
+const SITE_MAIL_SENDER = process.env.NEXT_SITE_MAIL_SENDER;
+const transporter = nodemailer.createTransport({
+    host: SMTP_SERVER_HOST,
+    port: 587,
+    secure: false,
+    auth: {
+        user: SMTP_SERVER_USERNAME,
+        pass: SMTP_SERVER_PASSWORD,
+    },
+    tls: {
+        rejectUnauthorized: false,
+    }
+});
 
 function getAttachmentName(image: string) {
     try {
@@ -18,38 +26,11 @@ function getAttachmentName(image: string) {
     }
 }
 
-function buildFromField(senderName: string, sender: string) {
-    return `"${senderName.replace(/"/g, '\\"')}" <${sender}>`;
-}
-
-export async function sendMail({sendTo, subject, text, html, image}: {sendTo?: string, subject: string, text: string, html?: string, image?: string }): Promise<SendMailResult> {
+export async function sendMail({sendTo, subject, text, html, image}: {sendTo?: string, subject: string, text: string, html?: string, image?: string }) {
     try {
-        const smtpConfig = getSmtpConfig();
-
-        if (!smtpConfig) {
-            return {
-                ok: false,
-                error: 'Email service is not configured',
-            };
-        }
-
-        const transporter = nodemailer.createTransport({
-            host: smtpConfig.host,
-            port: smtpConfig.port,
-            secure: smtpConfig.secure,
-            auth: smtpConfig.username && smtpConfig.password
-                ? {
-                    user: smtpConfig.username,
-                    pass: smtpConfig.password,
-                }
-                : undefined,
-            tls: {
-                rejectUnauthorized: !smtpConfig.allowInvalidTls,
-            }
-        });
-
+        await transporter.verify();
         await transporter.sendMail({
-            from: buildFromField(smtpConfig.senderName, smtpConfig.sender),
+            from: `"Darkai Lab" ${SITE_MAIL_SENDER}`,
             to: sendTo,
             subject: subject,
             text: text,
@@ -61,18 +42,8 @@ export async function sendMail({sendTo, subject, text, html, image}: {sendTo?: s
                 }]
                 : []
         });
-
-        return {ok: true};
     } catch (error) {
-        console.error('Unable to send email', {
-            sendTo,
-            subject,
-            error: error instanceof Error ? error.message : error,
-        });
-
-        return {
-            ok: false,
-            error: 'Unable to send the email right now',
-        };
+        console.error('Something Went Wrong', SMTP_SERVER_USERNAME, SMTP_SERVER_PASSWORD, error);
+        return;
     }
 }

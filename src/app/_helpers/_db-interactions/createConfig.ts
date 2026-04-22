@@ -13,11 +13,6 @@ export default async function createConfig(config:History, total:number, packagi
             config_pack: packaging ? packaging : null
         })
         .select();
-
-    if (error) {
-        console.error('Unable to create configuration', error);
-        throw new Error('Unable to create the configuration record');
-    }
-
+    console.log(error)
     return data;
 }

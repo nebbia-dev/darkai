@@ -20,29 +20,20 @@ export default function Select({
 }) {
     console.log('id ', orderId);
     async function updateStatus(newStatus:string) {
-        try {
-            await updateOrderStatus(orderId, newStatus)
-            const orderStatusEmail = buildOrderStatusEmail({
-                customerName,
-                orderId,
-                status: newStatus as Exclude<OrderInfo["status"], undefined>,
-                total,
-            });
-            const mailResult = await sendMail({
-                sendTo: email,
-                subject: orderStatusEmail.subject,
-                text: orderStatusEmail.text,
-                html: orderStatusEmail.html,
-            });
-
-            if (!mailResult.ok) {
-                console.error('Unable to send order status email', mailResult.error);
-            }
-
-            setStatus(newStatus);
-        } catch (error) {
-            console.error('Unable to update order status', error);
-        }
+        await updateOrderStatus(orderId, newStatus)
+        const orderStatusEmail = buildOrderStatusEmail({
+            customerName,
+            orderId,
+            status: newStatus as Exclude<OrderInfo["status"], undefined>,
+            total,
+        });
+        await sendMail({
+            sendTo: email,
+            subject: orderStatusEmail.subject,
+            text: orderStatusEmail.text,
+            html: orderStatusEmail.html,
+        });
+        setStatus(newStatus);
     }
 
     const [status, setStatus] = useState<string|undefined>(st);

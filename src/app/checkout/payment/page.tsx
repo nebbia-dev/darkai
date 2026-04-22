@@ -264,12 +264,6 @@ export default function Checkout() {
                 savedConfig,
             });
 
-            if (!checkout.ok) {
-                setPreparedCheckout(null);
-                setError(checkout.error);
-                return;
-            }
-
             setPreparedCheckout({
                 clientSecret: checkout.clientSecret,
                 orderId: checkout.orderId,

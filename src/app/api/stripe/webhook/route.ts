@@ -1,18 +1,14 @@
 import {headers} from "next/headers";
 import Stripe from "stripe";
-import {getStripe} from "@/app/_helpers/_stripe/stripe";
+import {stripe} from "@/app/_helpers/_stripe/stripe";
 import {finalizeCheckout} from "@/app/_helpers/_stripe/finalizeCheckout";
 import {isCheckoutSessionPaymentConfirmed} from "@/app/_helpers/_stripe/isCheckoutSessionPaymentConfirmed";
-import {getStripeWebhookSecret} from "@/lib/server/runtimeConfig";
 
 export async function POST(request: Request) {
-    let webhookSecret: string;
+    const webhookSecret = process.env.NEXT_STRIPE_WEBHOOK_SECRET;
 
-    try {
-        webhookSecret = getStripeWebhookSecret();
-    } catch (error) {
-        console.error('Stripe webhook is not configured correctly', error);
-        return new Response('Stripe webhook is not configured', {status: 500});
+    if (!webhookSecret) {
+        return new Response('Missing STRIPE_WEBHOOK_SECRET', {status: 500});
     }
 
     const signature = (await headers()).get('stripe-signature');
@@ -26,7 +22,7 @@ export async function POST(request: Request) {
     let event: Stripe.Event;
 
     try {
-        event = getStripe().webhooks.constructEvent(body, signature, webhookSecret);
+        event = stripe.webhooks.constructEvent(body, signature, webhookSecret);
     } catch (error) {
         return new Response(`Webhook signature verification failed: ${(error as Error).message}`, {status: 400});
     }
@@ -44,12 +40,7 @@ export async function POST(request: Request) {
             && Number.isFinite(orderId)
             && Number.isFinite(configId)
         ) {
-            try {
-                await finalizeCheckout(orderId, configId);
-            } catch (error) {
-                console.error('Unable to finalize the checkout after webhook confirmation', error);
-                return new Response('Unable to finalize the confirmed checkout', {status: 500});
-            }
+            await finalizeCheckout(orderId, configId);
         }
     }
 

@@ -18,11 +18,5 @@ export default async function createCustomer(billingData:PersonalData, scan:stri
             scan: scan ?? null,
         })
         .select();
-
-    if (error) {
-        console.error('Unable to create customer', error);
-        throw new Error('Unable to create the customer record');
-    }
-
     return data;
 }
