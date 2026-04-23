@@ -251,7 +251,9 @@ export const useTeethStore = create<State>((set, get) => ({
                 // EXCEPTION: reset of the hammered frames signature when something different from a spacer is selected on ICSDX
                 if(state.signatureVisibility.hammered && (
                     ((tooth === 'cssx' || tooth === 'ilidx') && type.includes('bar'))
-                    || (tooth === 'icsdx' && (type.includes('full') || type.includes('frame') || type.includes('bezel') || type === 'enamel'))
+                    || (tooth === 'icsdx' && (type.includes('full') || type.includes('frame') || type.includes('bezel') || type === 'enamel')
+                    || ((tooth === 'cisx' || tooth === 'cidx') && type.includes('bigBar'))
+                    )
                 )) {
                     state.signatureMaterial.hammered = undefined;
                     state.signatureVisibility.hammered = false;
@@ -929,6 +931,11 @@ export const useTeethStore = create<State>((set, get) => ({
                         if(state.teethJewelType.icsdx.includes('full') || state.teethJewelType.icsdx.includes('frame') || state.teethJewelType.icsdx.includes('bezel') || state.teethJewelType.icsdx.includes === 'enamel') {
                             get().resetList(state, 'icsdx');
                         }
+                    }
+
+                    if(signature === 'hammered' && state.teethJewelType.cisx.includes('bigBar')) {
+                        get().resetList(state, 'cisx');
+                        get().resetList(state, 'cidx');
                     }
 
                 } else if(state.signatureVisibility[signature] && mainMenu){
