@@ -434,16 +434,12 @@ export const useTeethStore = create<State>((set, get) => ({
                 state.currentHistory++;
 
                 // stone toggler
-
                 if(shape === 'prev') {
-                    if(state.teethStones[tooth].shape === undefined) {
-                        state.teethStones[tooth].shape = 'marquise';
-                    }
                     state.teethStones[tooth].color = color;
 
                 } else if(color === 'prev') {
-                    if(state.teethStones[tooth].color === undefined) {
-                        state.teethStones[tooth].color = 'bSapph';
+                    if(state.teethStones[tooth].color === 'blD_nat') {
+                        state.teethStones[tooth].color = 'whD_lab'
                     }
                     state.teethStones[tooth].shape = shape;
                 } else {
@@ -734,13 +730,35 @@ export const useTeethStore = create<State>((set, get) => ({
                     if((tooth === 'cidx' || tooth === 'cisx') && state.teethJewelType[tooth] === 'bigBarDiamond') {
                         state.teethPaves.cidx.shape = pave;
                         state.teethPaves.cisx.shape = pave;
+                        if(state.teethPaves[tooth].color === 'brD_nat' || state.teethPaves[tooth].color === 'blD_nat') {
+                            state.teethPaves.cidx.color = 'whD_lab';
+                            state.teethPaves.cisx.color = 'whD_lab';
+                        }
                     } else if ((tooth === 'icsdx' || tooth === 'icssx') && state.teethJewelType[tooth] === 'barDiamond') {
                         state.teethPaves.icsdx.shape = pave;
                         state.teethPaves.icssx.shape = pave;
+                        if(state.teethPaves[tooth].color === 'brD_nat' || state.teethPaves[tooth].color === 'blD_nat') {
+                            state.teethPaves.icsdx.color = 'whD_lab';
+                            state.teethPaves.icssx.color = 'whD_lab';
+                        }
                     } else if ((tooth === 'icidx' || tooth === 'icisx') && state.teethJewelType[tooth] === 'barDiamond') {
                         state.teethPaves.icidx.shape = pave;
                         state.teethPaves.icisx.shape = pave;
+                        if(state.teethPaves[tooth].color === 'brD_nat' || state.teethPaves[tooth].color === 'blD_nat') {
+                            state.teethPaves.icidx.color = 'whD_lab';
+                            state.teethPaves.icisx.color = 'whD_lab';
+                        }
                     } else {
+                        if((state.teethPaves[tooth].shape === 'round'
+                            && (state.teethPaves[tooth].color === 'glitch' || state.teethPaves[tooth].color === 'camo'))
+                            || ((state.teethPaves[tooth].shape === 'round' || state.teethPaves[tooth].shape === 'mosaic')
+                                && (state.teethPaves[tooth].color === 'brD_nat' || state.teethPaves[tooth].color === 'blD_nat')
+                                && (pave !== 'round' && pave !== 'mosaic'))
+                            || (pave === 'hexagon'
+                                && (state.teethPaves[tooth].color.includes('_') && state.teethPaves[tooth].color !== 'whD_lab'))
+                        ) {
+                            state.teethPaves[tooth].color = 'whD_lab';
+                        }
                         state.teethPaves[tooth].shape = pave;
                     }
                     // instead, if shape === 'prev', it means you're changing the gem color

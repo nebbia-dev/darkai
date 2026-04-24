@@ -76,7 +76,7 @@ export default function StoneOptions({tooth, bezel, pave, whDLabRef, whDNatRef, 
             </button>
 
             {/*NO pave hex*/}
-            { paveShape !== 'hexagon' &&
+            { (bezel || paveShape !== 'hexagon') &&
                 <button ref={whDNatRef} type="button" disabled={!pave && !bezel} value="whD_nat"
                      onClick={(e) => setStoneColor(e.currentTarget.value)}
                      className={`${highlightSelected('whD_nat') ? 'lg:border-2 border-3 border-sky-500' : 'lg:border-0 border-1 border-black' } w-[95%] h-[170px] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 px-2 py-3 ${(pave || bezel) ? 'text-slate-950 cursor-pointer' : 'text-slate-400'} flex flex-col items-center justify-center`}>
@@ -167,7 +167,7 @@ export default function StoneOptions({tooth, bezel, pave, whDLabRef, whDNatRef, 
                        onLoad={(e) => startOpacityTransition(e.target)} src={Ameth} alt="amethyst"/>
                 <span className="text-sm lg:text-xs">Amethyst (Lab)</span>
             </button>
-            {!bezel && jewelType?.includes('full') &&
+            {!bezel && jewelType?.includes('full') && paveShape === 'round' &&
                 <>
                     <button ref={glitchRef} type="button" disabled={!pave} value="glitch"
                             onClick={(e) => setStoneColor(e.currentTarget.value)}
