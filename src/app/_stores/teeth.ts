@@ -1123,6 +1123,8 @@ export const useTeethStore = create<State>((set, get) => ({
         set(
             produce((state) => {
                 state.currentHistory = state.currentHistory - 1;
+                state.activeButton = undefined;
+                state.activeSubButton = undefined;
                 get().resetHistoryStep(state);
                 get().calcTotal(state);
             })
@@ -1131,6 +1133,8 @@ export const useTeethStore = create<State>((set, get) => ({
         set(
             produce((state) => {
                 state.currentHistory = state.currentHistory + 1;
+                state.activeButton = undefined;
+                state.activeSubButton = undefined;
                 get().resetHistoryStep(state);
                 get().calcTotal(state);
             })
