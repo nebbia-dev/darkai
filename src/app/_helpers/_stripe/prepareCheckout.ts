@@ -113,7 +113,7 @@ export async function prepareCheckout({
 
         const shippingAddress = differentShipOpts ? shippingData : {...billingData, email: undefined};
         const shippingCountry = shippingAddress.state;
-        const shippingFees = findShippingFees(shippingCountry);
+        const shippingFees = await findShippingFees(shippingCountry);
 
         if (shippingFees === null) {
             throw new Error('Unfortunately we do not ship to this country');

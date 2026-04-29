@@ -80,7 +80,7 @@ export default function Checkout() {
         }
     }
 
-    function handleStateChange(newValue: string) {
+    async function handleStateChange(newValue: string) {
         setBillingData({...billingData, state:newValue});
 
         if (differentShipOpts) {
@@ -90,12 +90,13 @@ export default function Checkout() {
             return;
         }
 
-        const fees = findShippingFees(newValue);
+        const fees = await findShippingFees(newValue);
         if(fees === null) {
             setError('Attention: we do not ship to this country. Please add a valid address in the shipping address options');
             return;
         } else {
             if (!differentShipOpts) {
+
                 setShippingFees(fees);
             }
         }
@@ -105,9 +106,9 @@ export default function Checkout() {
         }
     }
 
-    function handleStateShipChange(newValue: string) {
+    async function handleStateShipChange(newValue: string) {
         setShippingData({...shippingData, state:newValue});
-        const fees = findShippingFees(newValue);
+        const fees = await findShippingFees(newValue);
         if(fees === null) {
             setError('Attention: we do not ship to this country');
             return;
@@ -128,13 +129,15 @@ export default function Checkout() {
             return;
         }
 
-        const fees = findShippingFees(shippingState);
-        if (fees === null) {
-            setShippingFees(undefined);
-            return;
-        }
+       findShippingFees(shippingState).then(fees => {
+           if (fees === null) {
+               setShippingFees(undefined);
+               return;
+           }
 
-        setShippingFees(fees);
+           setShippingFees(fees);
+       })
+
     }, [billingData.state, differentShipOpts, shippingData.state]);
 
     useEffect(() => {

@@ -1,4 +1,8 @@
-export default function findShippingFees(country:string) {
+'use server'
+import {createClient} from "@/lib/supabase/serverSU";
+
+export default async function findShippingFees(country:string) {
+    let fee;
     const noShipping = [
         'Iran',
         'Palestine',
@@ -69,22 +73,27 @@ export default function findShippingFees(country:string) {
         'Belarus',
     ];
 
-    if(noShipping.includes(country)) {
-        return null;
-    } else if(europe.includes(country)) {
-        return 25;
-    } else if(uk.includes(country)) {
-        return 55;
-    } else if(us.includes(country)) {
-        return 50;
-    } else if(canada.includes(country)) {
-        return 55;
-    } else if(internationalZero.includes(country)) {
-        return 45;
-    } else if(internationalOne.includes(country)) {
-        return 60;
-    } else {
-        return 55;
-    }
+    const supabase = await createClient();
+    let { data, error } = await supabase
+        .from('Shipping_Fees')
+        .select('*');
 
+        if(noShipping.includes(country)) {
+            fee = null;
+        } else if(europe.includes(country)) {
+            fee = data?.filter(el => el.zone === 'europe')[0].price;
+        } else if(uk.includes(country)) {
+            fee = data?.filter(el => el.zone === 'uk')[0].price;
+        } else if(us.includes(country)) {
+            fee = data?.filter(el => el.zone === 'us')[0].price;
+        } else if(canada.includes(country)) {
+            fee = data?.filter(el => el.zone === 'canada')[0].price;
+        } else if(internationalZero.includes(country)) {
+            fee = data?.filter(el => el.zone === 'internationalZero')[0].price;
+        } else if(internationalOne.includes(country)) {
+            fee = data?.filter(el => el.zone === 'internationalOne')[0].price;
+        } else {
+            fee = data?.filter(el => el.zone === 'internationalTwo')[0].price;
+        }
+    return fee;
 }
