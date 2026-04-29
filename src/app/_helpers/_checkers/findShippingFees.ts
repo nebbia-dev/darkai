@@ -72,7 +72,7 @@ export default function findShippingFees(country:string) {
     if(noShipping.includes(country)) {
         return null;
     } else if(europe.includes(country)) {
-        return 25;
+        return 1;
     } else if(uk.includes(country)) {
         return 55;
     } else if(us.includes(country)) {
