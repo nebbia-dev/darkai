@@ -1,21 +1,13 @@
 'use server'
 import nodemailer from 'nodemailer';
-const SMTP_SERVER_HOST = process.env.NEXT_SMTP_SERVER_HOST;
-const SMTP_SERVER_USERNAME = process.env.NEXT_SMTP_SERVER_USERNAME;
-const SMTP_SERVER_PASSWORD = process.env.NEXT_SMTP_SERVER_PASSWORD;
-const SITE_MAIL_SENDER = process.env.NEXT_SITE_MAIL_SENDER;
-const transporter = nodemailer.createTransport({
-    host: SMTP_SERVER_HOST,
-    port: 587,
-    secure: false,
-    auth: {
-        user: SMTP_SERVER_USERNAME,
-        pass: SMTP_SERVER_PASSWORD,
-    },
-    tls: {
-        rejectUnauthorized: false,
-    }
-});
+import {readRuntimeEnv} from "@/lib/server/readRuntimeEnv";
+
+type SendMailResult = {
+    ok: true,
+} | {
+    ok: false,
+    error: string,
+};
 
 function getAttachmentName(image: string) {
     try {
@@ -26,11 +18,44 @@ function getAttachmentName(image: string) {
     }
 }
 
-export async function sendMail({sendTo, subject, text, html, image}: {sendTo?: string, subject: string, text: string, html?: string, image?: string }) {
+function buildFromAddress(siteMailSender: string | undefined) {
+    if (!siteMailSender) {
+        return undefined;
+    }
+
+    return `"Darkai Lab" <${siteMailSender}>`;
+}
+
+export async function sendMail({sendTo, subject, text, html, image}: {sendTo?: string, subject: string, text: string, html?: string, image?: string }): Promise<SendMailResult> {
     try {
-        await transporter.verify();
+        const smtpServerHost = readRuntimeEnv(['NEXT', 'SMTP', 'SERVER', 'HOST']);
+        const smtpServerUsername = readRuntimeEnv(['NEXT', 'SMTP', 'SERVER', 'USERNAME']);
+        const smtpServerPassword = readRuntimeEnv(['NEXT', 'SMTP', 'SERVER', 'PASSWORD']);
+        const siteMailSender = readRuntimeEnv(['NEXT', 'SITE', 'MAIL', 'SENDER']);
+        const smtpServerPort = Number(readRuntimeEnv(['NEXT', 'SMTP', 'SERVER', 'PORT']) || 587);
+
+        if (!smtpServerHost || !smtpServerUsername || !smtpServerPassword || !siteMailSender) {
+            return {
+                ok: false,
+                error: 'Email service is not configured',
+            };
+        }
+
+        const transporter = nodemailer.createTransport({
+            host: smtpServerHost,
+            port: Number.isFinite(smtpServerPort) ? smtpServerPort : 587,
+            secure: smtpServerPort === 465,
+            auth: {
+                user: smtpServerUsername,
+                pass: smtpServerPassword,
+            },
+            tls: {
+                rejectUnauthorized: false,
+            }
+        });
+
         await transporter.sendMail({
-            from: `"Darkai Lab" ${SITE_MAIL_SENDER}`,
+            from: buildFromAddress(siteMailSender),
             to: sendTo,
             subject: subject,
             text: text,
@@ -42,8 +67,18 @@ export async function sendMail({sendTo, subject, text, html, image}: {sendTo?: s
                 }]
                 : []
         });
+
+        return {ok: true};
     } catch (error) {
-        console.error('Something Went Wrong', SMTP_SERVER_USERNAME, SMTP_SERVER_PASSWORD, error);
-        return;
+        console.error('Unable to send email', {
+            sendTo,
+            subject,
+            error: error instanceof Error ? error.message : error,
+        });
+
+        return {
+            ok: false,
+            error: 'Unable to send the email right now',
+        };
     }
 }
