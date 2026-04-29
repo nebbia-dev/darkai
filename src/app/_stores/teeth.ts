@@ -866,7 +866,6 @@ export const useTeethStore = create<State>((set, get) => ({
                         state.showGemTypeBox = false;
                     }
                 }
-
             })
         ),
     unsetLastActivatedTooth: () => set({lastActivatedTooth: undefined}),
@@ -1114,7 +1113,7 @@ export const useTeethStore = create<State>((set, get) => ({
 
     // states and method to fetch and save the prices from the db
     prices: undefined,
-    setPrices: (prices) => set({prices:{base: prices.base, bezel: prices.bezel, pave: prices.pave, signature: prices.signature}}),
+    setPrices: (prices) => set({prices:{base: prices.base, bezel: prices.bezel, pave: prices.pave, signature: prices.signature, packaging: prices.packaging}}),
     // states and methods to set the configuration steps history and
     // navigate among the various step of the user experience
     history: [],
@@ -1538,7 +1537,7 @@ export const useTeethStore = create<State>((set, get) => ({
                 state.signatureMaterial = savedConfig.signatureMaterial;
 
                 if(savedConfigPack) {
-                    state.packaging = savedConfigPack;
+                    state.packaging = savedConfigPack.packaging;
                 }
 
                 get().setHistory(state);
@@ -1646,7 +1645,8 @@ export const useTeethStore = create<State>((set, get) => ({
         mssx: 0,
         midx: 0,
         misx: 0,
-        signature: 0
+        signature: 0,
+        packaging: 0
     },
     total: 0,
     calcTotal: (state) => {
@@ -1800,7 +1800,10 @@ export const useTeethStore = create<State>((set, get) => ({
             }
 
             if(state.packaging) {
-                state.total += 300;
+                state.teethPrices.packaging = state.prices.packaging[0].price
+                state.total += state.prices.packaging[0].price;
+            } else {
+                state.teethPrices.packaging = 0;
             }
 
             if (state.hovered) {

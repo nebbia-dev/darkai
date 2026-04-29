@@ -31,7 +31,8 @@ export interface TempPrices {
         camo_p: any[],
         glitch_p: any[],
     },
-    signature: any[]
+    signature: any[],
+    packaging: any[]
 }
 
 export interface State {

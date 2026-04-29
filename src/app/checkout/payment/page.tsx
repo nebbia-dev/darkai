@@ -428,10 +428,10 @@ export default function Checkout() {
                                             required
                                         />
                                     </label>
-                                    <label>State
+                                    <label>Country
                                         <CountrySelect
                                             value={billingData.state}
-                                            placeholder="Select your state"
+                                            placeholder="Select your country"
                                             onChange={handleStateChange}
                                             required
                                         />
@@ -618,10 +618,10 @@ export default function Checkout() {
                                                        required
                                                 />
                                             </label>
-                                            <label>State
+                                            <label>Country
                                                 <CountrySelect
                                                     value={shippingData.state}
-                                                    placeholder="Select your state"
+                                                    placeholder="Select your country"
                                                     onChange={handleStateShipChange}
                                                     required
                                                 />
@@ -752,7 +752,7 @@ export default function Checkout() {
                                             type="button"
                                             onClick={handlePrepareCheckout}
                                         >
-                                            Prepare payment
+                                            Go to payment
                                         </button>
                                     </>
                                 }
@@ -797,7 +797,7 @@ export default function Checkout() {
                                     ? 'Preparing...'
                                     : preparedCheckout
                                         ? 'Payment ready'
-                                        : 'Prepare payment'}
+                                        : 'Go to payment'}
                     </button>
                 </div>
             </div>

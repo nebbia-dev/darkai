@@ -93,7 +93,7 @@ export function buildConfigSummaryItems(teethPrices:Prices, history:History[][],
         items.push({
             title: 'Premium Box',
             details,
-            price: 300,
+            price: teethPrices.packaging,
         });
     }
 
