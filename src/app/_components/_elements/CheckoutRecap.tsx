@@ -150,7 +150,7 @@ export default function CheckoutRecap({history, packaging, total, shippingFees} 
                                 }</p>
                                 <p className="mt-2 p-2 bg-gray-100 rounded">Note: the premium box is optional.<br/>If
                                     you don't
-                                    choose one, a standard box will be included with your order free of charge.</p>
+                                    choose one, a standard box will be included with your order.</p>
                             </li>
                         }
 
