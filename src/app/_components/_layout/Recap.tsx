@@ -84,7 +84,7 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
             // - IF the checkbox is checked, SAVE name, email address and config in the Newsletter table
             const mailResult = await sendMail({
                 sendTo: emailInfo.email,
-                subject: 'Your DARKAI configuration recap',
+                subject: 'Your DARKAI Grillz configuration',
                 text: configEmail.text,
                 html: configEmail.html,
                 image: imageUrl,

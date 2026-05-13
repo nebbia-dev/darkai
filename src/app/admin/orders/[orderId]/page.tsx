@@ -92,7 +92,7 @@ export default async function Order({params}: { params: Promise<{ orderId: strin
                     </div>
                 </div>
             </div>
-            <div className="w-[80%] mx-auto h-tab-height mb-[3rem] flex justify-center">
+            <div className="w-[90%] mx-auto h-tab-height mb-[3rem] flex justify-center">
                 <div className="w-[33vw] py-8 pr-8">
                     <h2 className="font-semibold mb-4">Configuration</h2>
                     <div className="overflow-y-auto h-full">
@@ -204,7 +204,7 @@ export default async function Order({params}: { params: Promise<{ orderId: strin
                     </div>
                 </div>
                 <div className="w-[33vw] h-full overflow-y-auto pt-8 border-l border-gray-400">
-                    <div className="flex flex-col gap-4 pb-4 border-b border-gray-400 pl-8">
+                    <div className="flex flex-col gap-4 pb-4 border-b border-gray-400 px-8">
                         <div>
                             <h3 className="font-semibold">Customer</h3>
                             <p className="pl-2">{((order as unknown as OrderInfo[]) as OrderInfo[])?.[0].user_id.name} {(order as unknown as OrderInfo[])?.[0].user_id.lastname}</p>
@@ -233,6 +233,7 @@ export default async function Order({params}: { params: Promise<{ orderId: strin
                                     <li className="pl-2">Address: {(order as unknown as OrderInfo[])?.[0].shippingAddress.address}, {(order as unknown as OrderInfo[])?.[0].shippingAddress.postalCode} {(order as unknown as OrderInfo[])?.[0].shippingAddress.city} - {(order as unknown as OrderInfo[])?.[0].shippingAddress.state}
                                     </li>
                                     <li className="pl-2">Phone: {(order as unknown as OrderInfo[])?.[0].shippingAddress.phone}</li>
+                                    <li className="pl-2">Email: {(order as unknown as OrderInfo[])?.[0].shippingAddress.email}</li>
                                 </ul>
                                 : <p className="pl-2">Pick up in store</p>
                             }

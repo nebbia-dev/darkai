@@ -34,8 +34,8 @@ export function buildConfigEmail({
         value: formatEmailCurrency(item.price),
     }));
     const intro = recipientName?.trim().length
-        ? `Hi ${recipientName.trim()}, here is the recap of the configuration you saved on DARKAI. We kept the details below so you can review everything before moving forward with your order.`
-        : `Here is the recap of the configuration you saved on DARKAI. We kept the details below so you can review everything before moving forward with your order.`;
+        ? `Hi ${recipientName.trim()}, here is the configuration you saved on DARKAI. We kept the details below so you can review everything before moving forward with your order.`
+        : `Here is the configuration you saved on DARKAI. We kept the details below so you can review everything before moving forward with your order.`;
 
     const sections = [
         ...(imageUrl ? [renderImageSection('Saved preview', imageUrl)] : []),
@@ -43,8 +43,8 @@ export function buildConfigEmail({
     ];
 
     const html = renderTransactionalEmail({
-        preheader: 'Your DARKAI configuration recap is ready.',
-        headerLabel: 'Configuration recap',
+        preheader: 'Your DARKAI Grillz configuration is ready.',
+        headerLabel: 'Grillz Configuration',
         title: 'Your configuration is ready',
         intro,
         action: {
@@ -52,7 +52,7 @@ export function buildConfigEmail({
             url: siteUrl,
         },
         secondaryLinkLabel: 'Contact support',
-        secondaryLinkUrl: 'mailto:support@darkai-lab.com',
+        secondaryLinkUrl: 'mailto:studio@darkai-lab.com',
         sections,
         footerNote: 'Need a hand before checkout? Write to support@darkai-lab.com and our team will help you refine your configuration.',
     });

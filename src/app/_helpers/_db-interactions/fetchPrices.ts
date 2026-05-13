@@ -16,6 +16,9 @@ export default async function fetchPrices() {
     let { data: signature, error: errorSignature } = await supabase
         .from('Signature')
         .select('*');
+    let { data: packaging, error: errorPackaging } = await supabase
+        .from('Packaging')
+        .select('*');
 
     const [whDLab_b, whDNat_b, brDLab_b, brDNat_b, blDLab_b, blDNat_b, stone_b]:any[] = [[],[],[],[],[],[],[]]
     const [whDLab_p, whDNat_p, brDLab_p, brDNat_p, blDLab_p, blDNat_p, stone_p, camo_p, glitch_p]:any[] = [[],[],[],[],[],[],[],[],[]]
@@ -81,5 +84,5 @@ export default async function fetchPrices() {
                         whDLab_b, whDNat_b, brDLab_b, brDNat_b, blDLab_b, blDNat_b, stone_b
                     }, 'pave': {
                         whDLab_p, whDNat_p, brDLab_p, brDNat_p, blDLab_p, blDNat_p, stone_p, camo_p, glitch_p
-                    }, 'signature':signature}
+                    }, 'signature':signature, 'packaging': packaging}
 }

@@ -12,7 +12,7 @@ import {getStripe} from "@/app/_helpers/_stripe/stripe";
 type PrepareCheckoutInput = {
     billingData: PersonalData,
     shippingData: PersonalData,
-    differentShipOpts: boolean,
+    billingDifferentFromShipping: boolean,
     currentConfig: History | undefined,
     total: number,
     packaging: Packaging|undefined,
@@ -94,7 +94,7 @@ function buildReceiptDescription(receiptDescription: string | undefined) {
 export async function prepareCheckout({
     billingData,
     shippingData,
-    differentShipOpts,
+    billingDifferentFromShipping,
     currentConfig,
     total,
     packaging,
@@ -103,17 +103,20 @@ export async function prepareCheckout({
     savedConfig,
 }: PrepareCheckoutInput): Promise<PrepareCheckoutResult | PrepareCheckoutErrorResult> {
     try {
-        if (!isPersonalDataComplete(billingData, true)) {
-            throw new Error('The billing information is incomplete');
-        }
-
-        if (differentShipOpts && !isPersonalDataComplete(shippingData, false)) {
+        if (!isPersonalDataComplete(shippingData, true)) {
             throw new Error('The shipping information is incomplete');
         }
 
-        const shippingAddress = differentShipOpts ? shippingData : {...billingData, email: undefined};
+        if (billingDifferentFromShipping && !isPersonalDataComplete(billingData, true)) {
+            throw new Error('The billing information is incomplete');
+        }
+
+        const customerData = billingDifferentFromShipping
+            ? billingData
+            : shippingData;
+        const shippingAddress = shippingData;
         const shippingCountry = shippingAddress.state;
-        const shippingFees = findShippingFees(shippingCountry);
+        const shippingFees = await findShippingFees(shippingCountry);
 
         if (shippingFees === null) {
             throw new Error('Unfortunately we do not ship to this country');
@@ -123,7 +126,7 @@ export async function prepareCheckout({
             throw new Error('No configuration found to associate with this checkout');
         }
 
-        const customer = await createCustomer(billingData, uploadedScanPath);
+        const customer = await createCustomer(customerData, uploadedScanPath);
         if (!customer?.[0]?.id) {
             throw new Error('Unable to create the customer record');
         }
@@ -181,10 +184,10 @@ export async function prepareCheckout({
             ],
             mode: "payment",
             payment_method_types: paymentMethodTypes,
-            customer_email: billingData.email,
+            customer_email: customerData.email,
             payment_intent_data: {
                 description: receiptDescription,
-                receipt_email: billingData.email,
+                receipt_email: customerData.email,
             },
             client_reference_id: String(order[0].id),
             metadata: {

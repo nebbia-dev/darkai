@@ -6,7 +6,7 @@ import {TempPrices} from "@/app/_types/State";
 
 export default async function calcTotal(config:History, packaging:Packaging|undefined) {
     const response = await fetchPrices();
-    const prices:TempPrices = {base: response.base!, bezel: response.bezel, pave: response.pave! as any, signature: response.signature!}
+    const prices:TempPrices = {base: response.base!, bezel: response.bezel, pave: response.pave! as any, signature: response.signature!, packaging:response.packaging!}
     let total = 0;
 
     for (let [tooth, price] of Object.entries(config.prices)) {
@@ -161,7 +161,7 @@ export default async function calcTotal(config:History, packaging:Packaging|unde
     }
 
     if(packaging) {
-        total += 300;
+        total += prices.packaging[0].price;
     }
 
     return {config, total}

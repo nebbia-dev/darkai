@@ -221,7 +221,9 @@ export interface Prices {
     midx: number,
     misx: number,
 
-    signature: number
+    signature: number,
+
+    packaging: number
 }
 export interface Visibility {
     [key: string]: boolean

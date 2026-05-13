@@ -175,7 +175,7 @@ export default function StoneOptions({tooth, bezel, pave, whDLabRef, whDNatRef, 
                         <Image unoptimized={true} loading="eager" fetchPriority="high"
                                className="pb-1 lg:w-18 w-30 transition duration-250 opacity-0"
                                onLoad={(e) => startOpacityTransition(e.target)} src={Glitch} alt="glitch"/>
-                        <span className="text-sm lg:text-xs">Glitch</span>
+                        <span className="text-sm lg:text-xs">Glitch (Lab)</span>
                     </button>
                     <button ref={camoRef} type="button" disabled={!pave} value="camo"
                             onClick={(e) => setStoneColor(e.currentTarget.value)}
@@ -183,7 +183,7 @@ export default function StoneOptions({tooth, bezel, pave, whDLabRef, whDNatRef, 
                         <Image unoptimized={true} loading="eager" fetchPriority="high"
                                className="pb-1 lg:w-18 w-30 transition duration-250 opacity-0"
                                onLoad={(e) => startOpacityTransition(e.target)} src={Camo} alt="camo"/>
-                        <span className="text-sm lg:text-xs">Camo</span>
+                        <span className="text-sm lg:text-xs">Camo (Lab)</span>
                     </button>
                 </>
             }

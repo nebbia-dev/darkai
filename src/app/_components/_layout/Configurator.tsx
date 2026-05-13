@@ -39,7 +39,6 @@ export default function Configurator({fetchedPrices} : {fetchedPrices:any}) {
     useEffect(() => {
         updateInnerSize();
         setPrices(fetchedPrices);
-
         const savedConfig = localStorage.getItem("DARKAI Configuration");
         const savedConfigPack = localStorage.getItem("DARKAI Configuration Pack");
 

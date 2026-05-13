@@ -57,7 +57,7 @@ export default function Checkout() {
     const [error, setError] = useState<boolean|string>(false);
     // DA RE-INSERIRE QUANDO VERRA' ABILITATA L'OPZIONE DEL RITIRO PRESSO GLI AFFILIATI
     // const [shippingOption, setShippingOption] = useState<string|undefined>(undefined);
-    const [differentShipOpts, setDifferentShipOpts] = useState<boolean>(false);
+    const [billingDifferentFromShipping, setBillingDifferentFromShipping] = useState<boolean>(false);
     const [uploadedScanPath, setUploadedScanPath] = useState<string|undefined>(undefined);
     const [uploadedConfigPath, setUploadedConfigPath] = useState<string|undefined>(undefined);
     const [isPreparingCheckout, setIsPreparingCheckout] = useState<boolean>(false);
@@ -65,6 +65,19 @@ export default function Checkout() {
     const [isUploadingConfig, setIsUploadingConfig] = useState<boolean>(false);
     const [preparedCheckout, setPreparedCheckout] = useState<PreparedCheckout | null>(null);
     const [modal, setModal] = useState<'terms'|'privacy'|undefined>();
+
+    function isCheckoutPersonalDataComplete(data: PersonalData, needsEmail: boolean) {
+        return !(
+            data.name === ''
+            || data.lastname === ''
+            || data.address === ''
+            || data.city === ''
+            || data.state === ''
+            || data.phone === ''
+            || data.postalCode === ''
+            || (needsEmail && !data.email)
+        );
+    }
 
     function handlePhoneChange(newValue: string) {
         setBillingData({...billingData, phone:newValue});
@@ -80,34 +93,17 @@ export default function Checkout() {
         }
     }
 
-    function handleStateChange(newValue: string) {
+    async function handleStateChange(newValue: string) {
         setBillingData({...billingData, state:newValue});
-
-        if (differentShipOpts) {
-            if (error) {
-                setError(false);
-            }
-            return;
-        }
-
-        const fees = findShippingFees(newValue);
-        if(fees === null) {
-            setError('Attention: we do not ship to this country. Please add a valid address in the shipping address options');
-            return;
-        } else {
-            if (!differentShipOpts) {
-                setShippingFees(fees);
-            }
-        }
 
         if(error) {
             setError(false);
         }
     }
 
-    function handleStateShipChange(newValue: string) {
+    async function handleStateShipChange(newValue: string) {
         setShippingData({...shippingData, state:newValue});
-        const fees = findShippingFees(newValue);
+        const fees = await findShippingFees(newValue);
         if(fees === null) {
             setError('Attention: we do not ship to this country');
             return;
@@ -121,25 +117,27 @@ export default function Checkout() {
     }
 
    useEffect(() => {
-        const shippingState = differentShipOpts ? shippingData.state : billingData.state;
+        const shippingState = shippingData.state;
 
         if (shippingState === '') {
             setShippingFees(undefined);
             return;
         }
 
-        const fees = findShippingFees(shippingState);
-        if (fees === null) {
-            setShippingFees(undefined);
-            return;
-        }
+       findShippingFees(shippingState).then(fees => {
+           if (fees === null) {
+               setShippingFees(undefined);
+               return;
+           }
 
-        setShippingFees(fees);
-    }, [billingData.state, differentShipOpts, shippingData.state]);
+           setShippingFees(fees);
+       })
+
+    }, [shippingData.state]);
 
     useEffect(() => {
         setPreparedCheckout((currentPreparedCheckout) => currentPreparedCheckout ? null : currentPreparedCheckout);
-    }, [billingData, differentShipOpts, scanImage, shippingData]);
+    }, [billingData, billingDifferentFromShipping, scanImage, shippingData]);
 
     useEffect(() => {
         setUploadedScanPath(undefined);
@@ -209,28 +207,12 @@ export default function Checkout() {
     }
 
     async function handlePrepareCheckout() {
-        if(differentShipOpts && (
-            shippingData.name === ''
-            || shippingData.lastname === ''
-            || shippingData.address === ''
-            || shippingData.city === ''
-            || shippingData.state === ''
-            || shippingData.phone === ''
-            || shippingData.postalCode === ''
-        )) {
+        if(!isCheckoutPersonalDataComplete(shippingData, true)) {
             setError('The shipping information is incomplete');
             return;
         }
 
-        if(billingData.name === ''
-            || billingData.lastname === ''
-            || billingData.address === ''
-            || billingData.city === ''
-            || billingData.state === ''
-            || billingData.phone === ''
-            || billingData.postalCode === ''
-            || billingData.email === ''
-        ) {
+        if(billingDifferentFromShipping && !isCheckoutPersonalDataComplete(billingData, true)) {
             setError('The billing information is incomplete');
             return;
         }
@@ -240,11 +222,13 @@ export default function Checkout() {
             return;
         }
 
-        const currentShippingState = differentShipOpts ? shippingData.state : billingData.state;
-        if (currentShippingState === '' || findShippingFees(currentShippingState) === null) {
+        const currentShippingState = shippingData.state;
+        const currentShippingFees = await findShippingFees(currentShippingState);
+        if (currentShippingState === '' || currentShippingFees === null) {
             setError('Unfortunately we do not ship to this country');
             return;
         }
+        setShippingFees(currentShippingFees);
 
         setIsPreparingCheckout(true);
 
@@ -255,7 +239,7 @@ export default function Checkout() {
             const checkout = await prepareCheckout({
                 billingData,
                 shippingData,
-                differentShipOpts,
+                billingDifferentFromShipping,
                 currentConfig: config,
                 total,
                 packaging,
@@ -311,7 +295,7 @@ export default function Checkout() {
                                     width: '90%',
                                     '&.MuiAccordionSummary-root': {paddingLeft: '2rem', paddingRight: '2rem'},
                                 }}>
-                                    <h2>Billing information</h2>
+                                    <h2>Shipping information</h2>
                                 </AccordionSummary>
                             </div>
                             <AccordionDetails
@@ -323,10 +307,10 @@ export default function Checkout() {
                                             className="w-full bg-stone-200 rounded py-2 px-4 focus:outline-black"
                                             type="text"
                                             placeholder="Type your name"
-                                            value={billingData.name}
+                                            value={shippingData.name}
                                             onChange={(e) => {
-                                                setBillingData({
-                                                    ...billingData,
+                                                setShippingData({
+                                                    ...shippingData,
                                                     name: e.currentTarget.value
                                                 });
                                                 if (error) {
@@ -341,10 +325,10 @@ export default function Checkout() {
                                             className="w-full bg-stone-200 rounded py-2 px-4 focus:outline-black"
                                             type="text"
                                             placeholder="Type your last name"
-                                            value={billingData.lastname}
+                                            value={shippingData.lastname}
                                             onChange={(e) => {
-                                                setBillingData({
-                                                    ...billingData,
+                                                setShippingData({
+                                                    ...shippingData,
                                                     lastname: e.currentTarget.value
                                                 });
                                                 if (error) {
@@ -359,10 +343,10 @@ export default function Checkout() {
                                         <input className="w-full bg-stone-200 rounded py-2 px-4"
                                                type="email"
                                                placeholder="Type your email address"
-                                               value={billingData.email}
+                                               value={shippingData.email}
                                                onChange={(e) => {
-                                                   setBillingData({
-                                                       ...billingData,
+                                                   setShippingData({
+                                                       ...shippingData,
                                                        email: e.currentTarget.value
                                                    });
                                                    if (error) {
@@ -378,10 +362,10 @@ export default function Checkout() {
                                             className="w-full bg-stone-200 rounded py-2 px-4 focus:outline-black"
                                             type="text"
                                             placeholder="Type your address"
-                                            value={billingData.address}
+                                            value={shippingData.address}
                                             onChange={(e) => {
-                                                setBillingData({
-                                                    ...billingData,
+                                                setShippingData({
+                                                    ...shippingData,
                                                     address: e.currentTarget.value
                                                 });
                                                 if (error) {
@@ -397,10 +381,10 @@ export default function Checkout() {
                                             className="w-full bg-stone-200 rounded py-2 px-4 focus:outline-black"
                                             type="text"
                                             placeholder="Type your city"
-                                            value={billingData.city}
+                                            value={shippingData.city}
                                             onChange={(e) => {
-                                                setBillingData({
-                                                    ...billingData,
+                                                setShippingData({
+                                                    ...shippingData,
                                                     city: e.currentTarget.value
                                                 });
                                                 if (error) {
@@ -415,10 +399,10 @@ export default function Checkout() {
                                             className="w-full bg-stone-200 rounded py-2 px-4 focus:outline-black"
                                             type="number"
                                             placeholder="Type your postal code"
-                                            value={billingData.postalCode}
+                                            value={shippingData.postalCode}
                                             onChange={(e) => {
-                                                setBillingData({
-                                                    ...billingData,
+                                                setShippingData({
+                                                    ...shippingData,
                                                     postalCode: e.currentTarget.value
                                                 });
                                                 if (error) {
@@ -428,11 +412,11 @@ export default function Checkout() {
                                             required
                                         />
                                     </label>
-                                    <label>State
+                                    <label>Country
                                         <CountrySelect
-                                            value={billingData.state}
-                                            placeholder="Select your state"
-                                            onChange={handleStateChange}
+                                            value={shippingData.state}
+                                            placeholder="Select your country"
+                                            onChange={handleStateShipChange}
                                             required
                                         />
                                     </label>
@@ -472,8 +456,8 @@ export default function Checkout() {
                                                 },
                                             }}
                                                          placeholder="Enter your phone number"
-                                                         value={billingData.phone}
-                                                         onChange={handlePhoneChange}
+                                                         value={shippingData.phone}
+                                                         onChange={handleShipPhoneChange}
                                             />
                                         </div>
                                     </label>
@@ -495,7 +479,7 @@ export default function Checkout() {
                                     width: '90%',
                                     '&.MuiAccordionSummary-root': {paddingLeft: '2rem', paddingRight: '2rem'},
                                 }}>
-                                    <h2>Shipping</h2>
+                                    <h2>Billing information</h2>
                                 </AccordionSummary>
                             </div>
                             <AccordionDetails
@@ -503,24 +487,23 @@ export default function Checkout() {
 
                                 <>
                                     <div className="px-2 pt-2 pb-4">
-                                        <p className="mb-2">Do you want to ship your package to an address
-                                            different from the
-                                            billing address?</p>
+                                        <p className="mb-2">Do you want to use a billing address different from the
+                                            shipping address?</p>
                                         <div>
                                             <label className="flex items-center gap-2 cursor-pointer">
-                                                <input className="cursor-pointer" type="radio" name="diffShip"
+                                                <input className="cursor-pointer" type="radio" name="diffBilling"
                                                        value="0"
-                                                       checked={!differentShipOpts}
-                                                       onChange={() => setDifferentShipOpts(false)}
+                                                       checked={!billingDifferentFromShipping}
+                                                       onChange={() => setBillingDifferentFromShipping(false)}
                                                        required
                                                 />
                                                 No
                                             </label>
                                             <label className="flex items-center gap-2 cursor-pointer">
-                                                <input className="cursor-pointer" type="radio" name="diffShip"
+                                                <input className="cursor-pointer" type="radio" name="diffBilling"
                                                        value="1"
-                                                       checked={differentShipOpts}
-                                                       onChange={() => setDifferentShipOpts(true)}
+                                                       checked={billingDifferentFromShipping}
+                                                       onChange={() => setBillingDifferentFromShipping(true)}
                                                        required
                                                 />
                                                 Yes
@@ -528,17 +511,17 @@ export default function Checkout() {
                                         </div>
                                     </div>
 
-                                    {differentShipOpts &&
+                                    {billingDifferentFromShipping &&
                                         <form className="flex flex-col gap-2 px-2 pt-2 pb-8">
                                             <label>Name
                                                 <input
                                                     className="w-full bg-stone-200 rounded py-2 px-4 focus:outline-black"
                                                     type="text"
                                                     placeholder="Type your name"
-                                                    value={shippingData.name}
+                                                    value={billingData.name}
                                                     onChange={(e) => {
-                                                        setShippingData({
-                                                            ...shippingData,
+                                                        setBillingData({
+                                                            ...billingData,
                                                             name: e.currentTarget.value
                                                         });
                                                         if (error) {
@@ -553,10 +536,10 @@ export default function Checkout() {
                                                     className="w-full bg-stone-200 rounded py-2 px-4 focus:outline-black"
                                                     type="text"
                                                     placeholder="Type your last name"
-                                                    value={shippingData.lastname}
+                                                    value={billingData.lastname}
                                                     onChange={(e) => {
-                                                        setShippingData({
-                                                            ...shippingData,
+                                                        setBillingData({
+                                                            ...billingData,
                                                             lastname: e.currentTarget.value
                                                         });
                                                         if (error) {
@@ -566,15 +549,32 @@ export default function Checkout() {
                                                     required
                                                 />
                                             </label>
+                                            <label>Email address
+                                                <input className="w-full bg-stone-200 rounded py-2 px-4"
+                                                       type="email"
+                                                       placeholder="Type your email address"
+                                                       value={billingData.email}
+                                                       onChange={(e) => {
+                                                           setBillingData({
+                                                               ...billingData,
+                                                               email: e.currentTarget.value
+                                                           });
+                                                           if (error) {
+                                                               setError(false)
+                                                           }
+                                                       }}
+                                                       required
+                                                />
+                                            </label>
                                             <label>Address
                                                 <input
                                                     className="w-full bg-stone-200 rounded py-2 px-4 focus:outline-black"
                                                     type="text"
                                                     placeholder="Type your address"
-                                                    value={shippingData.address}
+                                                    value={billingData.address}
                                                     onChange={(e) => {
-                                                        setShippingData({
-                                                            ...shippingData,
+                                                        setBillingData({
+                                                            ...billingData,
                                                             address: e.currentTarget.value
                                                         });
                                                         if (error) {
@@ -589,9 +589,10 @@ export default function Checkout() {
                                                     className="w-full bg-stone-200 rounded py-2 px-4 focus:outline-black"
                                                     type="text"
                                                     placeholder="Type your city"
+                                                    value={billingData.city}
                                                     onChange={(e) => {
-                                                        setShippingData({
-                                                            ...shippingData,
+                                                        setBillingData({
+                                                            ...billingData,
                                                             city: e.currentTarget.value
                                                         });
                                                         if (error) {
@@ -605,10 +606,10 @@ export default function Checkout() {
                                                 <input className="w-full bg-stone-200 rounded py-2 px-4"
                                                        type="number"
                                                        placeholder="Type your postal code"
-                                                       value={shippingData.postalCode}
+                                                       value={billingData.postalCode}
                                                        onChange={(e) => {
-                                                           setShippingData({
-                                                               ...shippingData,
+                                                           setBillingData({
+                                                               ...billingData,
                                                                postalCode: e.currentTarget.value
                                                            });
                                                            if (error) {
@@ -618,11 +619,11 @@ export default function Checkout() {
                                                        required
                                                 />
                                             </label>
-                                            <label>State
+                                            <label>Country
                                                 <CountrySelect
-                                                    value={shippingData.state}
-                                                    placeholder="Select your state"
-                                                    onChange={handleStateShipChange}
+                                                    value={billingData.state}
+                                                    placeholder="Select your country"
+                                                    onChange={handleStateChange}
                                                     required
                                                 />
                                             </label>
@@ -661,8 +662,8 @@ export default function Checkout() {
                                                         },
                                                     }}
                                                                  placeholder="Enter your phone number"
-                                                                 value={shippingData.phone}
-                                                                 onChange={handleShipPhoneChange}/>
+                                                                 value={billingData.phone}
+                                                                 onChange={handlePhoneChange}/>
                                                 </div>
                                             </label>
                                         </form>
@@ -752,7 +753,7 @@ export default function Checkout() {
                                             type="button"
                                             onClick={handlePrepareCheckout}
                                         >
-                                            Prepare payment
+                                            Go to payment
                                         </button>
                                     </>
                                 }
@@ -797,7 +798,7 @@ export default function Checkout() {
                                     ? 'Preparing...'
                                     : preparedCheckout
                                         ? 'Payment ready'
-                                        : 'Prepare payment'}
+                                        : 'Go to payment'}
                     </button>
                 </div>
             </div>

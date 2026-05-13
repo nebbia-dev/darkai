@@ -23,7 +23,7 @@ function buildFromAddress(siteMailSender: string | undefined) {
         return undefined;
     }
 
-    return `"Darkai Lab" <${siteMailSender}>`;
+    return `"Darkai Studio" <${siteMailSender}>`;
 }
 
 export async function sendMail({sendTo, subject, text, html, image}: {sendTo?: string, subject: string, text: string, html?: string, image?: string }): Promise<SendMailResult> {
