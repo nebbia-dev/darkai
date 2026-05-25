@@ -12,6 +12,7 @@ import createConfig from "@/app/_helpers/_db-interactions/createConfig";
 import updateConfigScreen from "@/app/_helpers/_db-interactions/updateConfigScreen";
 import {dataUrlToFile, uploadToStorage} from "@/app/_helpers/_uploads/uploadToStorage";
 import {buildConfigEmail} from "@/app/_helpers/_emailers/buildConfigEmail";
+import Iubenda from "@/app/_components/_layout/Iubenda";
 
 export default function Recap({next, onclick} : {next:boolean, onclick:() => void }){
     const router = useRouter();
@@ -220,6 +221,7 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
                         </div>
                     </div>
                 }
+                {innerWidth >= 1024 && <Iubenda/>}
             </div>
             <Modal
                 open={open}
