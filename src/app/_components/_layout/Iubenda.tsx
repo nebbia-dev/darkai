@@ -2,7 +2,7 @@ import Script from "next/script";
 
 export default function Iubenda() {
     return (
-        <div id="iubenda" className="w-full mt-4 text-lg lg:text-sm underline">
+        <div id="iubenda" className="lg:mt-12 w-full mt-4 text-lg lg:text-sm underline">
             <div className="w-[90%] lg:mt-0 mt-[148px] flex flex-col lg:flex-row items-center justify-center gap-2 mx-auto pb-4">
                 <a href="https://www.iubenda.com/privacy-policy/77378144"
                    target="_blank" rel="noopener noreferrer"

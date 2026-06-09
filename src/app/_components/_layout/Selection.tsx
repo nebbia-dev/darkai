@@ -5,6 +5,7 @@ import {useTeethStore} from "@/app/_stores/teeth";
 import {State} from "@/app/_types/State";
 import ConfiguratorButton from "@/app/_components/_elements/_buttons/ConfiguratorButton";
 import Tutorial from "@/app/_components/_elements/Tutorial";
+import Iubenda from "@/app/_components/_layout/Iubenda";
 
 export default function Selection({activeButton, changeActiveButton} : {activeButton: string|undefined, changeActiveButton:(value:string) => void }) {
     const activeTooth = useTeethStore((state: State) => state.currentTooth);
@@ -12,7 +13,7 @@ export default function Selection({activeButton, changeActiveButton} : {activeBu
 
     return (
         <>
-            <div className="flex-col flex w-[20vw] pl-[6vw] lg:pl-[5vw]">
+            <div className="flex-col flex w-[20vw] pl-[6vw] lg:pl-[5vw] relative">
                 {innerWidth >= 1024 &&
                     <Tutorial activeButton={activeButton}/>
                 }
@@ -35,6 +36,11 @@ export default function Selection({activeButton, changeActiveButton} : {activeBu
                         </ConfiguratorButton>
                     </nav>
                 </div>
+                {innerWidth >= 1024 &&
+                    <div className="absolute z-20 left-10 w-[20vw] bottom-6">
+                        <Iubenda/>
+                    </div>
+                }
             </div>
         </>
     )
