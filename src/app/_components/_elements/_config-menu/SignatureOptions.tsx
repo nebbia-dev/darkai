@@ -48,7 +48,7 @@ export default function SignatureOptions({crossRef, vampRef, bubblegumRef, sprin
                     className={`${signature.vamp ? 'border-2 border-sky-500' : ''} rounded-3xl cursor-pointer flex items-center justify-center w-[95%] h-[170px] lg:h-[120px] mx-auto mb-4`}
                     onClick={(e) => setSignatureDesign(e.currentTarget.value)}>
                 <Image unoptimized={true} loading="eager" fetchPriority="high" className="border-1 border-1 h-full object-contain transition duration-250 opacity-0 rounded-25xl" onLoad={(e) => startOpacityTransition(e.target)}
-                     src={Vamp} alt="vamp-logo"/>
+                     src={Vamp} alt="DARKAI configurator vamp canines grillz design"/>
             </button>
             <button ref={sprinklesRef} type="button" value="sprinkles"
                     style={{ backgroundImage: "url('/signatures-icons/sfondo.webp')", backgroundSize: "100% 100%" }}
@@ -56,7 +56,7 @@ export default function SignatureOptions({crossRef, vampRef, bubblegumRef, sprin
                     onClick={(e) => setSignatureDesign(e.currentTarget.value)}>
                 <Image unoptimized={true} loading="eager" fetchPriority="high" className="border-1 h-full object-contain transition duration-250 opacity-0 rounded-25xl" onLoad={(e) => startOpacityTransition(e.target)}
                      src={Sprinkles}
-                     alt="sprinkles-logo"/>
+                     alt="DARKAI configurator sprinkles grillz design"/>
             </button>
             <button ref={bubblegumRef} type="button" value="bubblegum"
                     style={{ backgroundImage: "url('/signatures-icons/sfondo.webp')", backgroundSize: "100% 100%" }}
@@ -64,7 +64,7 @@ export default function SignatureOptions({crossRef, vampRef, bubblegumRef, sprin
                     onClick={(e) => setSignatureDesign(e.currentTarget.value)}>
                 <Image unoptimized={true} loading="eager" fetchPriority="high" className="border-1 h-full object-contain transition duration-250 opacity-0 rounded-25xl" onLoad={(e) => startOpacityTransition(e.target)}
                      src={Bubblegum}
-                     alt="bubblegum-logo"/>
+                     alt="DARKAI configurator bubble gum grillz design"/>
             </button>
             <button ref={bracesRef} type="button" value="braces"
                     style={{ backgroundImage: "url('/signatures-icons/sfondo.webp')", backgroundSize: "100% 100%" }}
@@ -72,7 +72,7 @@ export default function SignatureOptions({crossRef, vampRef, bubblegumRef, sprin
                     onClick={(e) => setSignatureDesign(e.currentTarget.value)}>
                 <Image unoptimized={true} loading="eager" fetchPriority="high" className="border-1 h-full object-contain transition duration-250 opacity-0 rounded-25xl" onLoad={(e) => startOpacityTransition(e.target)}
                      src={Braces}
-                     alt="braces-logo"/>
+                     alt="DARKAI configurator braces grillz design"/>
             </button>
             <button ref={tribalRef} type="button" value="tribal"
                     style={{ backgroundImage: "url('/signatures-icons/sfondo.webp')", backgroundSize: "100% 100%" }}
@@ -80,7 +80,7 @@ export default function SignatureOptions({crossRef, vampRef, bubblegumRef, sprin
                     onClick={(e) => setSignatureDesign(e.currentTarget.value)}>
                 <Image unoptimized={true} loading="eager" fetchPriority="high" className="border-1 h-full object-contain transition duration-250 opacity-0 rounded-25xl" onLoad={(e) => startOpacityTransition(e.target)}
                      src={Tribal}
-                     alt="tribals-logo"/>
+                     alt="DARKAI configurator tribals grillz design"/>
             </button>
             <button ref={crossRef} type="button" value="cross"
                     style={{ backgroundImage: "url('/signatures-icons/sfondo.webp')", backgroundSize: "100% 100%" }}
@@ -88,7 +88,7 @@ export default function SignatureOptions({crossRef, vampRef, bubblegumRef, sprin
                     onClick={(e) => setSignatureDesign(e.currentTarget.value)}>
                 <Image unoptimized={true} loading="eager" fetchPriority="high" className="border-1 h-full object-contain transition duration-250 opacity-0 rounded-25xl" onLoad={(e) => startOpacityTransition(e.target)}
                      src={Cross}
-                     alt="cross-logo"/>
+                     alt="DARKAI configurator cross grillz design"/>
             </button>
             <button ref={hammeredRef} type="button" value="hammered"
                     style={{ backgroundImage: "url('/signatures-icons/sfondo.webp')", backgroundSize: "100% 100%" }}
@@ -96,7 +96,7 @@ export default function SignatureOptions({crossRef, vampRef, bubblegumRef, sprin
                     onClick={(e) => setSignatureDesign(e.currentTarget.value)}>
                 <Image unoptimized={true} loading="eager" fetchPriority="high" className="border-1 h-full object-contain transition duration-250 opacity-0 rounded-25xl" onLoad={(e) => startOpacityTransition(e.target)}
                      src={Hammered}
-                     alt="hammered-logo"/>
+                     alt="DARKAI configurator hammered grillz design"/>
             </button>
         </>
     )

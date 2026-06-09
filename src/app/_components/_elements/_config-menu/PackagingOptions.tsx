@@ -18,17 +18,23 @@ export default function PackagingOptions() {
         <>
             <button type="button" value="out" onClick={(e) => setActiveSubButton(e.currentTarget.value)}
                     className={`cursor-pointer ${activeSubButton === 'out' ? 'lg:border-2 border-3 border-sky-500' : 'lg:border-0 border-1 border-black' } w-[95%] h-[170px] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-2 flex flex-col items-center justify-center`}>
-                <Image className="transition duration-250 opacity-0 object-cover lg:w-[80%] w-32" onLoad={(e) => startOpacityTransition(e.target)} unoptimized={true} loading="eager" fetchPriority="high" src={Out} alt="outside"/>
+                <Image className="transition duration-250 opacity-0 object-cover lg:w-[80%] w-32"
+                       onLoad={(e) => startOpacityTransition(e.target)}
+                       unoptimized={true} loading="eager" fetchPriority="high" src={Out} alt="DARKAI configurator packaging outer box"/>
                 <span className="text-sm">Outside</span>
             </button>
             <button type="button" value="in" onClick={(e) => setActiveSubButton(e.currentTarget.value)}
                     className={`cursor-pointer ${activeSubButton === 'in' ? 'lg:border-2 border-3 border-sky-500' : 'lg:border-0 border-1 border-black' } w-[95%] h-[170px] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-2 flex flex-col items-center justify-center`}>
-                <Image className="pb-1 transition duration-250 opacity-0 object-cover lg:w-[75%] w-32" onLoad={(e) => startOpacityTransition(e.target)} unoptimized={true} loading="eager" fetchPriority="high" src={In} alt="inside"/>
+                <Image className="pb-1 transition duration-250 opacity-0 object-cover lg:w-[75%] w-32"
+                       onLoad={(e) => startOpacityTransition(e.target)}
+                       unoptimized={true} loading="eager" fetchPriority="high" src={In} alt="DARKAI configurator packaging inner box"/>
                 <span className="text-sm">Inside</span>
             </button>
             <button type="button" value="details" onClick={(e) => setActiveSubButton(e.currentTarget.value)}
                     className={`cursor-pointer ${activeSubButton === 'details' ? 'lg:border-2 border-3 border-sky-500' : 'lg:border-0 border-1 border-black' } w-[95%] h-[170px] lg:h-[120px] mx-auto rounded-3xl bg-stone-200 mb-4 p-2 flex flex-col items-center justify-center`}>
-                <Image className="transition duration-250 opacity-0 object-cover lg:w-[80%] w-32" onLoad={(e) => startOpacityTransition(e.target)} unoptimized={true} loading="eager" fetchPriority="high" src={Details} alt="gold details"/>
+                <Image className="transition duration-250 opacity-0 object-cover lg:w-[80%] w-32"
+                       onLoad={(e) => startOpacityTransition(e.target)}
+                       unoptimized={true} loading="eager" fetchPriority="high" src={Details} alt="DARKAI configurator packaging gold details"/>
                 <span className="text-sm">Gold Details</span>
             </button>
             <div>
@@ -39,7 +45,7 @@ export default function PackagingOptions() {
                     <Image
                             className={`transition duration-250 opacity-0 object-cover lg:w-[80%] w-32`}
                             onLoad={(e) => startOpacityTransition(e.target)}
-                            unoptimized={true} loading="eager" fetchPriority="high" src={Text} alt="custom text"
+                            unoptimized={true} loading="eager" fetchPriority="high" src={Text} alt="DARKAI configurator packaging custom text field"
                         />
                     <span className="text-sm">Custom Text</span>
                 </button>

@@ -342,19 +342,19 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
 
             <ConfiguratorButton inverse={false} value="2" active={active} onclick={onclick} tooth={tooth}
                                 label="Grillz Type">
-                <img src="/config-menu-svgs/grillz.webp" className="pl-[0.5px]" alt="design-option-logo"/>
+                <img src="/config-menu-svgs/grillz.webp" className="pl-[0.5px]" alt="DARKAI configurator grillz type icon with a single tooth"/>
             </ConfiguratorButton>
             <ConfiguratorButton inverse={false} value="3" active={active} onclick={onclick} tooth={tooth}
                                 label="Gold Color">
-                <img className="px-[0.75px]" src="/config-menu-svgs/gold.webp" alt="gold-option-logo"/>
+                <img className="px-[0.75px]" src="/config-menu-svgs/gold.webp" alt="DARKAI configurator gold bar icon"/>
             </ConfiguratorButton>
             <ConfiguratorButton inverse={false} value="4" active={active} onclick={onclick} tooth={tooth}
                                 label="Setting / Finishing">
-                <img src="/config-menu-svgs/finishing.webp" className="pt-0.5" alt="colors-option-logo"/>
+                <img src="/config-menu-svgs/finishing.webp" className="pt-0.5" alt="DARKAI configurator settings icon with light blue diamond"/>
             </ConfiguratorButton>
             <ConfiguratorButton inverse={false} value="5" active={active} onclick={onclick} tooth={tooth}
                                 label="Stone Color">
-                <img src="/config-menu-svgs/colors.webp" alt="color-option-logo"/>
+                <img src="/config-menu-svgs/colors.webp" alt="DARKAI configurator stones icon with color picker"/>
             </ConfiguratorButton>
 
             <div className={`absolute ${!active ? 'hidden' : 'block'} ${

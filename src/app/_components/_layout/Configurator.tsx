@@ -162,7 +162,7 @@ export default function Configurator({fetchedPrices} : {fetchedPrices:any}) {
     return (
             <div className="flex flex-col w-[100vw] mx-auto bg-gray-200 relative font-sans max-h-[100dvh]">
                 <div className="absolute w-full flex justify-center z-16">
-                    <img className="cursor-auto py-6 w-[132px]" src="/logo.png" alt="darkai logo"/>
+                    <img className="cursor-auto py-6 w-[132px]" src="/logo.png" alt="DARKAI script logo"/>
                 </div>
                 {loaded && innerWidth < 1024 && !nextStep &&
                     <div

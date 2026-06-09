@@ -46,7 +46,7 @@ export default function SignatureSubOptions() {
                         <button type="button" value="pave_nat"
                                 onClick={(e) => setSignatureDesign('vamp', e.currentTarget.value)}
                                 className={`relative w-[24px] h-[24px] bg-gray-100 ${signatureMaterial.vamp === 'pave_nat' ? 'border-2 border-sky-500' : 'border-1 border-black'} rounded-full cursor-pointer flex items-center justify-center`}>
-                            <Image unoptimized={true} loading="eager" fetchPriority="high" src={Pave} alt="pave-logo"/>
+                            <Image unoptimized={true} loading="eager" fetchPriority="high" src={Pave} alt="DARKAI configurator stones pave icon"/>
                         </button>
                     </Tooltip>
                 </div>
@@ -133,7 +133,7 @@ export default function SignatureSubOptions() {
                                 onClick={(e) => setSignatureDesign('braces', e.currentTarget.value)}
                                 className={`relative w-[24px] h-[24px] bg-gray-100 ${signatureMaterial.braces === 'base_white' ? 'border-2 border-sky-500' : 'border-1 border-black'} rounded-full cursor-pointer flex items-center justify-center`}
                         >
-                            <Image unoptimized={true} loading="eager" fetchPriority="high" src={Ruby} alt="pave-logo"/>
+                            <Image unoptimized={true} loading="eager" fetchPriority="high" src={Ruby} alt="DARKAI configurator stones pave icon"/>
                         </button>
                     </Tooltip>
                     <Tooltip title="Emeralds on Lab Diamonds" placement="right">
@@ -141,7 +141,7 @@ export default function SignatureSubOptions() {
                                 onClick={(e) => setSignatureDesign('braces', e.currentTarget.value)}
                                 className={`relative w-[24px] h-[24px] bg-gray-100 ${signatureMaterial.braces === 'pave_lab' ? 'border-2 border-sky-500' : 'border-1 border-black'} rounded-full cursor-pointer flex items-center justify-center`}>
                             <Image unoptimized={true} loading="eager" fetchPriority="high" src={Emerald}
-                                   alt="pave-logo"/>
+                                   alt="DARKAI configurator stones pave icon"/>
                             <span
                                 className="border-1 border-black absolute top-[-4px] right-[-4px] rounded-full bg-sky-500 text-white text-xs w-4 h-4 flex items-center justify-center">L</span>
                         </button>
@@ -168,7 +168,7 @@ export default function SignatureSubOptions() {
                         <button type="button" value="pave_lab"
                                 onClick={(e) => setSignatureDesign('tribal', e.currentTarget.value)}
                                 className={`relative w-[24px] h-[24px] bg-gray-100 ${signatureMaterial.tribal === 'pave_lab' ? 'border-2 border-sky-500' : 'border-1 border-black'} rounded-full cursor-pointer flex items-center justify-center`}>
-                            <Image unoptimized={true} loading="eager" fetchPriority="high" src={Pave} alt="pave-logo"/>
+                            <Image unoptimized={true} loading="eager" fetchPriority="high" src={Pave} alt="DARKAI configurator stones pave icon"/>
                             <span
                                 className="border-1 border-black absolute top-[-4px] right-[-4px] rounded-full bg-sky-500 text-white text-xs w-4 h-4 flex items-center justify-center">L</span>
                         </button>
@@ -177,7 +177,7 @@ export default function SignatureSubOptions() {
                         <button type="button" value="pave_nat"
                                 onClick={(e) => setSignatureDesign('tribal', e.currentTarget.value)}
                                 className={`relative w-[24px] h-[24px] bg-gray-100 ${signatureMaterial.tribal === 'pave_nat' ? 'border-2 border-sky-500' : 'border-1 border-black'} rounded-full cursor-pointer flex items-center justify-center`}>
-                            <Image unoptimized={true} loading="eager" fetchPriority="high" src={Pave} alt="pave-logo"/>
+                            <Image unoptimized={true} loading="eager" fetchPriority="high" src={Pave} alt="DARKAI configurator stones pave icon"/>
                         </button>
                     </Tooltip>
                 </div>
@@ -208,7 +208,7 @@ export default function SignatureSubOptions() {
                         <button type="button" value="pave_lab"
                                 onClick={(e) => setSignatureDesign('cross', e.currentTarget.value)}
                                 className={`relative w-[24px] h-[24px] bg-gray-100 ${signatureMaterial.cross === 'pave_lab' ? 'border-2 border-sky-500' : 'border-1 border-black'} rounded-full cursor-pointer flex items-center justify-center`}>
-                            <Image unoptimized={true} loading="eager" fetchPriority="high" src={Pave} alt="pave-logo"/>
+                            <Image unoptimized={true} loading="eager" fetchPriority="high" src={Pave} alt="DARKAI configurator stones pave icon"/>
                             <span
                                 className="border-1 border-black absolute top-[-4px] right-[-4px] rounded-full bg-sky-500 text-white text-xs w-4 h-4 flex items-center justify-center">L</span>
                         </button>
@@ -217,7 +217,7 @@ export default function SignatureSubOptions() {
                         <button type="button" value="pave_nat"
                                 onClick={(e) => setSignatureDesign('cross', e.currentTarget.value)}
                                 className={`relative w-[24px] h-[24px] bg-gray-100 ${signatureMaterial.cross === 'pave_nat' ? 'border-2 border-sky-500' : 'border-1 border-black'} rounded-full cursor-pointer flex items-center justify-center`}>
-                            <Image unoptimized={true} loading="eager" fetchPriority="high" src={Pave} alt="pave-logo"/>
+                            <Image unoptimized={true} loading="eager" fetchPriority="high" src={Pave} alt="DARKAI configurator stones pave icon"/>
                         </button>
                     </Tooltip>
 
