@@ -21,8 +21,8 @@ export default function Selection({activeButton, changeActiveButton} : {activeBu
                     <nav className="flex flex-col gap-4">
                         <ConfiguratorButton tooth="alwaysActive" inverse={true} value="1" active={activeButton}
                                             onclick={changeActiveButton} label="Signature Designs">
-                            <img src="/config-menu-svgs/Vector.svg" alt="signature-logo"/>
-                            <img className="ml-0.5" src="/config-menu-svgs/Vector-2.svg" alt="signature-logo"/>
+                            <img src="/config-menu-svgs/Vector.svg" alt="DARKAI configurator signature design icon with a capital D"/>
+                            <img className="ml-0.5" src="/config-menu-svgs/Vector-2.svg" alt="DARKAI configurator signature design icon with a capital I"/>
                         </ConfiguratorButton>
                         <span aria-hidden={true} className="relative z-20 inline-block h-[2px] w-10 bg-slate-950"></span>
                         <ToothConfigOptions tooth={activeTooth} active={activeButton} onclick={changeActiveButton}/>
@@ -31,7 +31,7 @@ export default function Selection({activeButton, changeActiveButton} : {activeBu
                         {/*PACKAGING BUTTON*/}
                         <ConfiguratorButton tooth="alwaysActive" inverse={false} value="6" active={activeButton}
                                             onclick={changeActiveButton} label="Packaging (Opt.)">
-                            <img className="p-0.5" src="/config-menu-svgs/packaging.webp" alt="packaging-option-logo"/>
+                            <img className="p-0.5" src="/config-menu-svgs/packaging.webp" alt="DARKAI configurator packaging icon"/>
                         </ConfiguratorButton>
                     </nav>
                 </div>

@@ -61,23 +61,23 @@ export default function ActionBar() {
                 className="absolute flex items-center justify-center gap-4 bottom-35 lg:bottom-20 bigger-bottom left-[50%] translate-x-[-50%] lg:w-2/4 w-full">
                 <Tooltip title="Previous">
                     <button onClick={doUndo} className="bg-white/50 rounded-full border w-8 h-8 bigger-icons p-[6px] cursor-pointer" disabled={resetCamera}>
-                        <img src="/action-bar-icons/undo.svg" alt="undo"/>
+                        <img src="/action-bar-icons/undo.svg" alt="DARKAI configurator undo icon"/>
                     </button>
                 </Tooltip>
                 <Tooltip title="Next">
                     <button onClick={doRedo} className="bg-white/50 rounded-full border w-8 h-8 bigger-icons p-[6px] cursor-pointer" disabled={resetCamera}>
-                        <img className="scale-x-[-1]" src="/action-bar-icons/undo.svg" alt="redo"/>
+                        <img className="scale-x-[-1]" src="/action-bar-icons/undo.svg" alt="DARKAI configurator redo icon"/>
                     </button>
                 </Tooltip>
 
                 <Tooltip title="Reset camera">
                     <button onClick={resetControls} className="bg-white/50 rounded-full border w-8 h-8 bigger-icons p-[6px] cursor-pointer" disabled={resetCamera} >
-                        <img src="/action-bar-icons/reset-view.svg" alt="reset-view"/>
+                        <img src="/action-bar-icons/reset-view.svg" alt="DARKAI configurator reset view icon"/>
                     </button>
                 </Tooltip>
                 <Tooltip title="Reset configuration">
                     <button onClick={doReset} className="bg-white/50 rounded-full border w-8 h-8 bigger-icons p-[6px] cursor-pointer" disabled={resetCamera}>
-                        <img src="/action-bar-icons/reset-config.svg" alt="reset-configuration"/>
+                        <img src="/action-bar-icons/reset-config.svg" alt="DARKAI configurator reset icon"/>
                     </button>
                 </Tooltip>
             </div>

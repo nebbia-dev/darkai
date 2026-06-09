@@ -45,37 +45,42 @@ export default function DesignSubOptions({tooth, type}: { tooth: string|undefine
                     <Tooltip title="Round" placement="right">
                         <button type="button" onClick={(e) => setStoneShape(e.currentTarget.value)} value="round"
                                 className={`relative w-[24px] h-[24px] bg-stone-200 ${stoneShape === 'round' ? 'border-2 border-sky-500' : 'border-1 border-black'} rounded-full cursor-pointer flex items-center justify-center`}>
-                            <Image unoptimized={true} loading="eager" fetchPriority="high" src={Circle} alt="circle-bezel"/>
+                            <Image unoptimized={true} loading="eager" fetchPriority="high" src={Circle}
+                                   alt="DARKAI configurator round bezel grillz type"/>
                         </button>
                     </Tooltip>
                     <Tooltip title="Heart" placement="right">
                         <button type="button" onClick={(e) => setStoneShape(e.currentTarget.value)} value="heart"
                                 className={`relative w-[24px] h-[24px] bg-stone-200 ${stoneShape === 'heart' ? 'border-2 border-sky-500' : 'border-1 border-black'} rounded-full cursor-pointer flex items-center justify-center`}>
-                            <Image unoptimized={true} loading="eager" fetchPriority="high" className="pt-[0.15em] px-[0.1em]" src={Heart} alt="heart-bezel"/>
+                            <Image unoptimized={true} loading="eager" fetchPriority="high"
+                                   className="pt-[0.15em] px-[0.1em]" src={Heart} alt="DARKAI configurator heart bezel grillz type"/>
                         </button>
                     </Tooltip>
                     <Tooltip title="Drop" placement="right">
                         <button type="button" onClick={(e) => setStoneShape(e.currentTarget.value)} value="drop"
                                 className={`relative w-[24px] h-[24px] bg-stone-200 ${stoneShape === 'drop' ? 'border-2 border-sky-500' : 'border-1 border-black'} rounded-full cursor-pointer flex items-center justify-center`}>
-                            <Image unoptimized={true} loading="eager" fetchPriority="high" className="pt-[0.05em]" src={Drop} alt="tear-bezel"/>
+                            <Image unoptimized={true} loading="eager" fetchPriority="high"
+                                   className="pt-[0.05em]" src={Drop} alt="DARKAI configurator tear bezel grillz type"/>
                         </button>
                     </Tooltip>
                     <Tooltip title="Marquise" placement="right">
                         <button type="button" onClick={(e) => setStoneShape(e.currentTarget.value)} value="marquise"
                                 className={`relative w-[24px] h-[24px] bg-stone-200 ${stoneShape === 'marquise' ? 'border-2 border-sky-500' : 'border-1 border-black'} rounded-full cursor-pointer flex items-center justify-center`}>
-                            <Image unoptimized={true} loading="eager" fetchPriority="high" className="pl-[1px]" src={Marquise} alt="marquise-bezel"/>
+                            <Image unoptimized={true} loading="eager" fetchPriority="high"
+                                   className="pl-[1px]" src={Marquise} alt="DARKAI configurator marquise bezel grillz type"/>
                         </button>
                     </Tooltip>
                     <Tooltip title="Princess" placement="right">
                         <button type="button" onClick={(e) => setStoneShape(e.currentTarget.value)} value="princess"
                                 className={`relative w-[24px] h-[24px] bg-stone-200 ${stoneShape === 'princess' ? 'border-2 border-sky-500' : 'border-1 border-black'} rounded-full cursor-pointer flex items-center justify-center`}>
-                            <Image unoptimized={true} loading="eager" fetchPriority="high" src={Princess} alt="princess-bezel"/>
+                            <Image unoptimized={true} loading="eager" fetchPriority="high" src={Princess} alt="DARKAI configurator princess bezel grillz type"/>
                         </button>
                     </Tooltip>
                     <Tooltip title="Baguette" placement="right">
                         <button type="button" onClick={(e) => setStoneShape(e.currentTarget.value)} value="baguette"
                                 className={`relative w-[24px] h-[24px] bg-stone-200 ${stoneShape === 'baguette' ? 'border-2 border-sky-500' : 'border-1 border-black'} rounded-full cursor-pointer flex items-center justify-center`}>
-                            <Image unoptimized={true} loading="eager" fetchPriority="high" className="pt-[0.025em]" src={Baguette} alt="baguette-bezel"/>
+                            <Image unoptimized={true} loading="eager" fetchPriority="high"
+                                   className="pt-[0.025em]" src={Baguette} alt="DARKAI configurator baguette grillz type"/>
                         </button>
                     </Tooltip>
                 </div>

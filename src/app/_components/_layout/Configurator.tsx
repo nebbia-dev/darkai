@@ -9,7 +9,8 @@ import {State} from "@/app/_types/State";
 import { Close, Menu } from "@mui/icons-material";
 import {Box} from "@/app/_components/_icons/Box";
 import isTouchDevice from "@/app/_helpers/_checkers/isTouchDevice";
-import Tutorial from "@/app/_components/_elements/Tutorial";
+// import Tutorial from "@/app/_components/_elements/Tutorial";
+import Iubenda from "@/app/_components/_layout/Iubenda";
 
 export default function Configurator({fetchedPrices} : {fetchedPrices:any}) {
     const previousIsMobileLayout = useRef<boolean | null>(null);
@@ -25,6 +26,7 @@ export default function Configurator({fetchedPrices} : {fetchedPrices:any}) {
     const setActive = useTeethStore((state: State) => state.setActiveTooth);
     const [showMenu, setShowMenu] = useState<boolean>(false);
     const [showRecap, setShowRecap] = useState<boolean>(false);
+    const [showInfo, setShowInfo] = useState<boolean>(false);
     const setInnerWidth = useTeethStore((state) => state.setInnerWidth);
     const setInnerHeight = useTeethStore((state) => state.setInnerHeight);
     const takeScreenshot = useTeethStore((state:State) => state.setIsScreenshotNeeded);
@@ -125,18 +127,33 @@ export default function Configurator({fetchedPrices} : {fetchedPrices:any}) {
         setShowRecap(false);
     }
 
-    function toggleUI(ui:"menu"|"recap") {
+    function toggleUI(ui:"menu"|"recap"|"info") {
         switch(ui) {
             case "menu":
                 setShowMenu(prev => !prev);
                 if(showRecap) {
-                    setShowRecap(false)
+                    setShowRecap(false);
+                }
+                if(showInfo) {
+                    setShowInfo(false);
                 }
                 break;
             case "recap":
                 setShowRecap(prev => !prev);
                 if(showMenu) {
-                    setShowMenu(false)
+                    setShowMenu(false);
+                }
+                if(showInfo) {
+                    setShowInfo(false);
+                }
+                break;
+            case "info":
+                setShowInfo(prev => !prev);
+                if(showMenu) {
+                    setShowMenu(false);
+                }
+                if(showRecap) {
+                    setShowRecap(false);
                 }
                 break;
         }
@@ -145,7 +162,7 @@ export default function Configurator({fetchedPrices} : {fetchedPrices:any}) {
     return (
             <div className="flex flex-col w-[100vw] mx-auto bg-gray-200 relative font-sans max-h-[100dvh]">
                 <div className="absolute w-full flex justify-center z-16">
-                    <img className="cursor-auto py-6 w-[132px]" src="/logo.png" alt="darkai logo"/>
+                    <img className="cursor-auto py-6 w-[132px]" src="/logo.png" alt="DARKAI script logo"/>
                 </div>
                 {loaded && innerWidth < 1024 && !nextStep &&
                     <div
@@ -157,10 +174,15 @@ export default function Configurator({fetchedPrices} : {fetchedPrices:any}) {
                             </button>
                             {/*<Tutorial activeButton={activeButton}/>*/}
                         {/*</div>*/}
-                        {(showMenu || showRecap) &&
+                        {(showMenu || showRecap)
+                            ?
                             <button onClick={closeAllUIs} type="button"
-                                 className="bg-gray-50 border-1 rounded-full w-10 h-10">
+                                    className="bg-gray-50 border-1 rounded-full w-10 h-10">
                                 <Close className="mb-[1px]"/>
+                            </button>
+                            : <button onClick={() => toggleUI('info')} type="button"
+                                      className="bg-gray-50 border-1 rounded-full w-10 h-10 flex items-center justify-center">
+                                <span className="text-xl px-1 pb-1 pt-1.5">i</span>
                             </button>
                         }
                         <button onClick={() => toggleUI('recap')} type="button"
@@ -170,10 +192,16 @@ export default function Configurator({fetchedPrices} : {fetchedPrices:any}) {
                     </div>
                 }
                 <div className="flex flex-row w-full">
-                    {innerWidth < 1024 && (showMenu || showRecap || nextStep) && <div className="w-screen h-[100dvh] absolute z-15 bg-gray-50/75"></div>}
+                    {innerWidth < 1024 && (showMenu || showRecap || showInfo || nextStep) &&
+                        <div className="w-screen h-[100dvh] absolute z-15 bg-gray-50/75"></div>}
                     <div
                         className={`h-[100dvh] lg:h-page-nav ${activeButton ? 'w-[10vw]' : innerWidth < 1024 ? 'w-full' : 'w-[25vw]'} ${nextStep || !showMenu ? 'hidden' : 'block'} absolute z-20 left-0 lg:top-[72px]`}>
                         {loaded && <Selection activeButton={activeButton} changeActiveButton={changeActiveButton}/>}
+                    </div>
+
+                    <div
+                        className={`h-[100dvh] lg:h-page-nav w-full lg:hidden ${nextStep || !showInfo ? 'hidden' : 'block'} absolute z-20 left-0 lg:top-[72px]`}>
+                        <Iubenda/>
                     </div>
 
                     <div className={`h-[100dvh] w-full mx-auto relative`}>
@@ -189,12 +217,15 @@ export default function Configurator({fetchedPrices} : {fetchedPrices:any}) {
                                         currency: "EUR"
                                     }).format(total)}</span>
                                 </div>
-                                <button type="button" disabled={history.length === 0 || total === 0 || (total === 300 && packaging) as boolean} className={`rounded-3xl ${history.length === 0 || total === 0 || (total === 300 && packaging) as boolean ? 'bg-gray-300' : 'bg-slate-950 cursor-pointer'} text-gray-50 px-5 py-2 h-full`}
+                                <button type="button"
+                                        disabled={history.length === 0 || total === 0 || (total === 300 && packaging) as boolean}
+                                        className={`rounded-3xl ${history.length === 0 || total === 0 || (total === 300 && packaging) as boolean ? 'bg-gray-300' : 'bg-slate-950 cursor-pointer'} text-gray-50 px-5 py-2 h-full`}
                                         onClick={setContinue}>Continue &rarr;</button>
                             </div>
                         }
                     </div>
-                    <div className={`lg:h-page-nav h-[100dvh] flex justify-center items-center ${nextStep && innerWidth >= 1024  ? 'w-[40vw]' : innerWidth < 1024 ? 'w-[90vw] mx-auto left-[50%] translate-x-[-50%]' : 'w-[30vw]'} ${!showRecap && !nextStep ? 'hidden' : 'block'} absolute z-15 lg:right-0`}>
+                    <div
+                        className={`lg:h-page-nav h-[100dvh] flex justify-center items-center ${nextStep && innerWidth >= 1024 ? 'w-[40vw]' : innerWidth < 1024 ? 'w-[90vw] mx-auto left-[50%] translate-x-[-50%]' : 'w-[30vw]'} ${!showRecap && !nextStep ? 'hidden' : 'block'} absolute z-15 lg:right-0`}>
                         {loaded && <Recap next={nextStep} onclick={setContinue}/>}
                     </div>
                 </div>
