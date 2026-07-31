@@ -14,9 +14,7 @@ export function getStripe() {
         throw new Error('Stripe secret key is missing');
     }
 
-    stripeClient = new Stripe(stripeSecretKey, {
-        apiVersion: "2025-12-15.clover",
-    });
+    stripeClient = new Stripe(stripeSecretKey);
 
     return stripeClient;
 }

@@ -209,7 +209,4 @@ Il repository include `netlify.toml` e `@netlify/plugin-nextjs`. Nel pannello Ne
 
 ## Stato dei controlli automatici
 
-Al momento il repository non contiene una suite di test automatizzati. Sono inoltre presenti due controlli da riallineare prima di usarli in CI:
-
-- con Next.js 16 lo script `next lint` presente in `package.json` deve essere sostituito con un comando ESLint CLI;
-- il type-check della build richiede che `apiVersion` in `src/app/_helpers/_stripe/stripe.ts` sia allineata alla versione supportata dallo Stripe SDK installato.
+Al momento il repository non contiene una suite di test automatizzati. Inoltre, con Next.js 16 lo script `next lint` presente in `package.json` deve essere sostituito con un comando ESLint CLI prima di poter essere usato come controllo CI.
