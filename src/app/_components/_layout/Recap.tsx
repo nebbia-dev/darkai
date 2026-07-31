@@ -28,6 +28,7 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
     const setPreciousness = useTeethStore((state:State) => state.setTeethPreciousness);
     const setSavedConfigId = useTeethStore((state:State) => state.setSavedConfig);
     const innerWidth = useTeethStore((state:State) => state.innerWidth);
+    const innerHeight = useTeethStore((state:State) => state.innerHeight);
     const history = useTeethStore((state:State) => state.history);
     const currentStep = useTeethStore((state:State) => state.currentHistory - 1);
     const packaging = useTeethStore((state: State) => state.packaging);
@@ -128,7 +129,7 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
                         </div>
                         {/* MyConfig Middle w/Recap */}
                         <div
-                            className={`${showRecap ? 'h-[calc(100dvh-348px)] lg:h-[60dvh]' :'h-0'} bg-gray-200/50 lg:transition-[height] lg:duration-500 w-[calc(100%-2px)] relative`}>
+                            className={`${showRecap ? 'h-[calc(100dvh-348px)]' :'h-0'} bg-gray-200/50 lg:transition-[height] lg:duration-500 w-[calc(100%-2px)] relative`}>
                             <div
                                 className="absolute h-[15%] bottom-0 w-full bg-linear-to-t from-gray-50 to-indigo-0"></div>
                             <RecapList edit={true}/>
@@ -180,7 +181,7 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
                             }
                         </div>
                         <div
-                            className={`${showRecap ? 'h-[calc(100%-364px)] lg:h-[calc(45%-72px)]' : 'h-0'} lg:transition-[height] lg:duration-500 w-full relative`}>
+                            className={`${showRecap && (innerHeight < 624 && innerWidth > 1024) ? 'h-[calc(100%-364px)] lg:h-[calc(100dvh-348px)]': showRecap ? 'h-[calc(100%-364px)] lg:h-[calc(100dvh-548px)]' : 'h-0'} lg:transition-[height] lg:duration-500 w-full relative`}>
                             <div
                                 className="absolute h-[15%] bottom-0 w-full bg-linear-to-t from-gray-50 to-indigo-0"></div>
 
@@ -188,8 +189,10 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
                         </div>
 
                         {/* Upload */}
-                        <div className="border-1 rounded-b-3xl w-full bg-gray-50 px-6 pt-4 pb-6">
-                            <Upload/>
+                        <div className={`${innerHeight < 624 && innerWidth > 1024 ? 'max-h-[30dvh]' : ''} border-1 rounded-b-3xl w-full bg-gray-50 px-6 pt-4 pb-6`}>
+                            <div className="h-full overflow-y-auto">
+                                <Upload/>
+                            </div>
                         </div>
 
                         {/* Nav Buttons */}
