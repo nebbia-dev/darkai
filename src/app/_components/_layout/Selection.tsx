@@ -10,6 +10,7 @@ import Iubenda from "@/app/_components/_layout/Iubenda";
 export default function Selection({activeButton, changeActiveButton} : {activeButton: string|undefined, changeActiveButton:(value:string) => void }) {
     const activeTooth = useTeethStore((state: State) => state.currentTooth);
     const innerWidth = useTeethStore((state:State) => state.innerWidth);
+    const innerHeight = useTeethStore((state:State) => state.innerHeight);
 
     return (
         <>
@@ -36,8 +37,8 @@ export default function Selection({activeButton, changeActiveButton} : {activeBu
                         </ConfiguratorButton>
                     </nav>
                 </div>
-                {innerWidth >= 1024 &&
-                    <div className="absolute z-20 left-10 w-[20vw] bottom-6">
+                {innerWidth >= 1024  &&
+                    <div className={`absolute z-20 left-10 w-[20vw] ${innerHeight < 640 ? 'top-[-96px]' : 'bottom-6'}`}>
                         <Iubenda/>
                     </div>
                 }
