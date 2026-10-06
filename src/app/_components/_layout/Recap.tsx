@@ -80,9 +80,6 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
                 imageUrl,
             });
 
-            // TODO:
-            // - save the configuration in the local storage
-            // - IF the checkbox is checked, SAVE name, email address and config in the Newsletter table
             const mailResult = await sendMail({
                 sendTo: emailInfo.email,
                 subject: 'Your DARKAI Grillz configuration',
@@ -108,6 +105,11 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
 
     function saveTempConfig() {
         router.push('/checkout/payment');
+    }
+
+    function closeAndReset() {
+        setOpen(false);
+        setSent(false);
     }
 
     return(
@@ -225,6 +227,7 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
                 }
                 {/*{innerWidth >= 1024 && <Iubenda/>}*/}
             </div>
+
             <Modal
                 open={open}
                 onClose={() => setOpen(false)}
@@ -243,7 +246,7 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
                                 <p className="text-gray-950">Your configuration has been sent to you!</p>
                                 <div className="w-full text-right mt-6">
                                     <button className="cursor-pointer py-2 px-4 rounded-full border text-gray-950"
-                                            type="button" onClick={() => setOpen(false)}>Close
+                                            type="button" onClick={closeAndReset}>Close
                                     </button>
                                 </div>
                             </div>
@@ -272,7 +275,7 @@ export default function Recap({next, onclick} : {next:boolean, onclick:() => voi
                                     <div className="w-full text-right mt-4">
                                         <button
                                             className="cursor-pointer py-2 px-4 rounded-full border text-gray-950 mr-4"
-                                            type="button" onClick={() => setOpen(false)}>Close
+                                            type="button" onClick={closeAndReset}>Close
                                         </button>
                                         <button
                                             className="cursor-pointer py-2 px-4 rounded-full bg-gray-950 text-gray-50"

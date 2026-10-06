@@ -233,15 +233,13 @@ export default function Checkout() {
         setIsPreparingCheckout(true);
 
         try {
-            const {config, total} = await calcTotal(history[history.length - 1]?.[0], packaging);
             const currentUploadedScanPath = await uploadScanBeforeCheckout();
             const currentUploadedConfigPath = await uploadConfigBeforeCheckout();
             const checkout = await prepareCheckout({
                 billingData,
                 shippingData,
                 billingDifferentFromShipping,
-                currentConfig: config,
-                total,
+                currentConfig: history[history.length - 1]?.[0],
                 packaging,
                 uploadedConfigPath: currentUploadedConfigPath,
                 uploadedScanPath: currentUploadedScanPath,

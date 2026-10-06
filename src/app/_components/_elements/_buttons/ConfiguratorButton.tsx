@@ -30,6 +30,13 @@ export default function ConfiguratorButton({tooth, inverse, children, onclick, v
                     Select a tooth to start
                 </div>
             }
+
+            {value === '1000' && hover &&
+                <div className="border-1 bg-gray-50 px-3 py-2 text-sm rounded absolute z-50 left-[44px] top-[50%] translate-y-[-50%] whitespace-nowrap">
+                    Click to generate a preset
+                </div>
+            }
+
             </div>
     )
 }

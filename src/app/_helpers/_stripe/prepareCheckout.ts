@@ -4,17 +4,18 @@ import createCustomer from "@/app/_helpers/_db-interactions/createCustomer";
 import createOrder from "@/app/_helpers/_db-interactions/createOrder";
 import findShippingFees from "@/app/_helpers/_checkers/findShippingFees";
 import updateConfigScreen from "@/app/_helpers/_db-interactions/updateConfigScreen";
+import calcTotal from "@/app/_helpers/_calculators/calcTotal";
 import {generateConfigReceiptDescription} from "@/app/_helpers/_string-modders/generateConfigHtml";
 import PersonalData from "@/app/_types/PersonalData";
 import {History, Packaging} from "@/app/_types/TeethOptions";
 import {getStripe} from "@/app/_helpers/_stripe/stripe";
+import {createClient} from "@/lib/supabase/serverSU";
 
 type PrepareCheckoutInput = {
     billingData: PersonalData,
     shippingData: PersonalData,
     billingDifferentFromShipping: boolean,
     currentConfig: History | undefined,
-    total: number,
     packaging: Packaging|undefined,
     uploadedConfigPath: string | undefined,
     uploadedScanPath: string | undefined,
@@ -91,12 +92,41 @@ function buildReceiptDescription(receiptDescription: string | undefined) {
         : receiptDescription;
 }
 
+async function getCheckoutConfiguration(
+    currentConfig: History | undefined,
+    packaging: Packaging | undefined,
+    savedConfig: number | undefined,
+) {
+    if (!savedConfig) {
+        if (!currentConfig) {
+            throw new Error('No configuration found to associate with this checkout');
+        }
+
+        return {config: currentConfig, packaging};
+    }
+
+    const supabase = await createClient();
+    const {data, error} = await supabase
+        .from('Configs')
+        .select('config, config_pack')
+        .eq('id', savedConfig)
+        .maybeSingle();
+
+    if (error || !data?.config) {
+        throw new Error('Unable to load the saved configuration');
+    }
+
+    return {
+        config: data.config as History,
+        packaging: (data.config_pack ?? undefined) as Packaging | undefined,
+    };
+}
+
 export async function prepareCheckout({
     billingData,
     shippingData,
     billingDifferentFromShipping,
     currentConfig,
-    total,
     packaging,
     uploadedConfigPath,
     uploadedScanPath,
@@ -122,8 +152,14 @@ export async function prepareCheckout({
             throw new Error('Unfortunately we do not ship to this country');
         }
 
-        if (!savedConfig && !currentConfig) {
-            throw new Error('No configuration found to associate with this checkout');
+        const checkoutConfiguration = await getCheckoutConfiguration(currentConfig, packaging, savedConfig);
+        const {
+            config: pricedConfig,
+            total: calculatedTotal,
+        } = await calcTotal(checkoutConfiguration.config, checkoutConfiguration.packaging);
+
+        if (!Number.isFinite(calculatedTotal) || calculatedTotal <= 0) {
+            throw new Error('Unable to calculate a valid order total');
         }
 
         const customer = await createCustomer(customerData, uploadedScanPath);
@@ -135,7 +171,12 @@ export async function prepareCheckout({
         let configId = savedConfig;
 
         if (!configId) {
-            const config = await createConfig(currentConfig as History, total, packaging, 'Not completed');
+            const config = await createConfig(
+                pricedConfig,
+                calculatedTotal,
+                checkoutConfiguration.packaging,
+                'Not completed',
+            );
 
             if (!config?.[0]?.id) {
                 throw new Error('Unable to create the configuration record');
@@ -153,11 +194,14 @@ export async function prepareCheckout({
             await updateConfigScreen(configId, uploadedConfigPath);
         }
 
-        const receiptDescription = currentConfig
-            ? buildReceiptDescription(generateConfigReceiptDescription(currentConfig.prices, [[currentConfig]], 0, packaging))
-            : undefined;
+        const receiptDescription = buildReceiptDescription(generateConfigReceiptDescription(
+            pricedConfig.prices,
+            [[pricedConfig]],
+            0,
+            checkoutConfiguration.packaging,
+        ));
         const finalConfigId = configId;
-        const finalTotal = total + shippingFees;
+        const finalTotal = calculatedTotal + shippingFees;
         const order = await createOrder(customerId, finalConfigId, finalTotal, shippingAddress, 'Pending payment');
 
         if (!order?.[0]?.id) {

@@ -30,7 +30,7 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
     const viewportRatio = innerHeight > 0 ? innerWidth / innerHeight : 1;
     const shortLandscapeViewport = innerWidth >= 1024 && innerHeight <= 720 && viewportRatio >= 1.55;
     const optionPanelTopClass = (viewportRatio > 0.76 || viewportRatio < 0.55) ? 'top-[-25dvh]' : 'top-[-20dvh]';
-    const packagingPanelTopClass = shortLandscapeViewport ? 'top-[-15dvh]' : optionPanelTopClass;
+    const packagingPanelTopClass = (shortLandscapeViewport || innerHeight >= 980) ? 'top-[-15dvh]' : optionPanelTopClass;
     const compactDesktopPanel = ((viewportRatio > 0.74 || viewportRatio < 0.55) && innerWidth >= 1024);
 
     const elementRef = useRef<HTMLDivElement|null>(null);
@@ -358,17 +358,21 @@ export default function ToothConfigOptions({tooth, onclick, active} : {tooth: st
             </ConfiguratorButton>
 
             <div className={`absolute ${!active ? 'hidden' : 'block'} ${
-                (active === '2' && checkMolar(tooth))
-                        ? 'top-[-10dvh]'
-                        : active === '4' && (jewelType?.includes('enamel') || material === 'base')
-                            ? 'top-[4.5dvh]'
-                             : (active === '5' && (material === 'base' || (!jewelType?.includes('bezel') && !pave?.shape)) && (viewportRatio >= 0.75 || viewportRatio <= 0.57))
-                                ? 'top-[11dvh]'
-                                 : (active === '5' && (material === 'base' || (!jewelType?.includes('bezel') && !pave?.shape)) && (viewportRatio < 0.75 || viewportRatio > 0.57))
-                                    ? 'top-[7dvh]'
-                                    : active === '6'
-                                        ? packagingPanelTopClass
-                                        : optionPanelTopClass
+                (active === '2' && checkMolar(tooth) && innerHeight > 980)
+                        ? 'top-[-6dvh]'
+                            :   (active === '2' && checkMolar(tooth))
+                                ? 'top-[-10dvh]'
+                                : active === '4' && (jewelType?.includes('enamel') || material === 'base')
+                                    ? 'top-[4.5dvh]'
+                                    : (active === '5' && (material === 'base' || (!jewelType?.includes('bezel') && !pave?.shape)) && innerHeight > 980)
+                                        ? 'top-[7.5dvh]'
+                                         : (active === '5' && (material === 'base' || (!jewelType?.includes('bezel') && !pave?.shape)) && (viewportRatio >= 0.75 || viewportRatio <= 0.57))
+                                            ? 'top-[11dvh]'
+                                             : (active === '5' && (material === 'base' || (!jewelType?.includes('bezel') && !pave?.shape)) && (viewportRatio < 0.75 || viewportRatio > 0.57))
+                                                ? 'top-[7dvh]'
+                                                : active === '6'
+                                                    ? packagingPanelTopClass
+                                                    : optionPanelTopClass
             } left-[48px]`}>
 
                 <div
