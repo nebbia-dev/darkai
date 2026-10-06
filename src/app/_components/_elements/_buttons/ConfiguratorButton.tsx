@@ -1,7 +1,7 @@
 'use client'
 import React, {useState} from "react";
 
-export default function ConfiguratorButton({tooth, inverse, children, onclick, value, active, label} : {tooth:string|undefined, inverse:boolean, children: React.ReactNode, onclick: (value?:string) => void, value: string, active: string|undefined, label:string}) {
+export default function ConfiguratorButton({tooth, inverse, children, onclick, value, active, label} : {tooth:string|undefined, inverse:boolean, children: React.ReactNode, onclick: (value:string) => void, value: string, active: string|undefined, label:string}) {
     const [hover, setHover] = useState<boolean>(false);
     function hovering(bool:boolean) {
         setHover(bool);
@@ -9,7 +9,7 @@ export default function ConfiguratorButton({tooth, inverse, children, onclick, v
     }
     return (
             <div className={`relative ${active ? 'max-w-[64px]' : ''}`} onMouseEnter={() => hovering(true)} onMouseLeave={() => hovering(false)}>
-                <button type="button" disabled={!tooth} value={value} className="flex gap-4 items-center text-lg lg:text-sm cursor-pointer" onClick={value !== '1000' ? (e) => onclick(e.currentTarget.value) : () => onclick()}>
+                <button type="button" disabled={!tooth} value={value} className="flex gap-4 items-center text-lg lg:text-sm cursor-pointer" onClick={(e) => onclick(e.currentTarget.value)}>
                     <div className="relative">
                         <div className={`${active === value ? 'border-2 ' : 'border-1'} ${inverse ? 'bg-slate-950 text-gray-50' : 'bg-gray-50 text-slate-950'} p-0.5 rounded-full flex items-center justify-center w-10 h-10 relative z-20`}>
                             {children}

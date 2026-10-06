@@ -7,6 +7,7 @@ import ConfiguratorButton from "@/app/_components/_elements/_buttons/Configurato
 import Tutorial from "@/app/_components/_elements/Tutorial";
 import Iubenda from "@/app/_components/_layout/Iubenda";
 import presets from '@/lib/presets.json'
+import {History} from "@/app/_types/TeethOptions";
 
 export default function Selection({activeButton, changeActiveButton} : {activeButton: string|undefined, changeActiveButton:(value:string) => void }) {
     const activeTooth = useTeethStore((state: State) => state.currentTooth);
@@ -15,9 +16,7 @@ export default function Selection({activeButton, changeActiveButton} : {activeBu
     const setSavedConfig = useTeethStore((state: State) => state.setLocalSavedConfig);
 
     function getRandomPreset() {
-        const n = Math.floor(Math.random() * (14 + 1));
-        console.log(n);
-        return n;
+        return Math.floor(Math.random() * (14 + 1));
     }
 
     return (
@@ -34,7 +33,7 @@ export default function Selection({activeButton, changeActiveButton} : {activeBu
                             <img src="/config-menu-svgs/Vector.svg" alt="DARKAI configurator signature design icon with a capital D"/>
                             <img className="ml-0.5" src="/config-menu-svgs/Vector-2.svg" alt="DARKAI configurator signature design icon with a capital I"/>
                         </ConfiguratorButton>
-                        <ConfiguratorButton tooth="alwaysActive" inverse={false} onclick={() => setSavedConfig(presets[getRandomPreset()], undefined)}
+                        <ConfiguratorButton tooth="alwaysActive" inverse={false} onclick={() => setSavedConfig(presets[getRandomPreset()] as History, undefined)}
                                             value="1000" active="" label="Presets">
                             <img src="/config-menu-svgs/presets.svg"
                                  alt="DARKAI configurator presets design icon"/>
