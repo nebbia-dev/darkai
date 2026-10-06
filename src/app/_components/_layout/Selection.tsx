@@ -6,11 +6,19 @@ import {State} from "@/app/_types/State";
 import ConfiguratorButton from "@/app/_components/_elements/_buttons/ConfiguratorButton";
 import Tutorial from "@/app/_components/_elements/Tutorial";
 import Iubenda from "@/app/_components/_layout/Iubenda";
+import presets from '@/lib/presets.json'
 
 export default function Selection({activeButton, changeActiveButton} : {activeButton: string|undefined, changeActiveButton:(value:string) => void }) {
     const activeTooth = useTeethStore((state: State) => state.currentTooth);
     const innerWidth = useTeethStore((state:State) => state.innerWidth);
     const innerHeight = useTeethStore((state:State) => state.innerHeight);
+    const setSavedConfig = useTeethStore((state: State) => state.setLocalSavedConfig);
+
+    function getRandomPreset() {
+        const n = Math.floor(Math.random() * (14 + 1));
+        console.log(n);
+        return n;
+    }
 
     return (
         <>
@@ -26,7 +34,13 @@ export default function Selection({activeButton, changeActiveButton} : {activeBu
                             <img src="/config-menu-svgs/Vector.svg" alt="DARKAI configurator signature design icon with a capital D"/>
                             <img className="ml-0.5" src="/config-menu-svgs/Vector-2.svg" alt="DARKAI configurator signature design icon with a capital I"/>
                         </ConfiguratorButton>
-                        <span aria-hidden={true} className="relative z-20 inline-block h-[2px] w-10 bg-slate-950"></span>
+                        <ConfiguratorButton tooth="alwaysActive" inverse={false} onclick={() => setSavedConfig(presets[getRandomPreset()], undefined)}
+                                            value="1000" active="" label="Presets">
+                            <img src="/config-menu-svgs/presets.svg"
+                                 alt="DARKAI configurator presets design icon"/>
+                        </ConfiguratorButton>
+                        <span aria-hidden={true}
+                              className="relative z-20 inline-block h-[2px] w-10 bg-slate-950"></span>
                         <ToothConfigOptions tooth={activeTooth} active={activeButton} onclick={changeActiveButton}/>
                         <span aria-hidden={true} className="relative z-20 inline-block h-[2px] w-10 bg-slate-950"></span>
 

@@ -1516,6 +1516,11 @@ export const useTeethStore = create<State>((set, get) => ({
     },
 
     setLocalSavedConfig: (savedConfig, savedConfigPack) => {
+        const config = structuredClone(savedConfig);
+        const configPack = savedConfigPack
+            ? structuredClone(savedConfigPack)
+            : undefined;
+
         set(
             produce((state) => {
 
@@ -1524,20 +1529,20 @@ export const useTeethStore = create<State>((set, get) => ({
                 }
                 state.currentHistory++;
 
-                state.teethJewelType = savedConfig.type;
-                state.teethMaterial = savedConfig.material;
-                state.teethStones = savedConfig.stones;
-                state.teethPaves = savedConfig.pave;
-                state.teethEnamel = savedConfig.enamel;
-                state.teethFinish = savedConfig.finish;
-                state.teethVisibility = savedConfig.visible;
-                state.teethPrices = savedConfig.prices;
-                state.teethPreciousness = savedConfig.preciousness;
-                state.signatureVisibility = savedConfig.signatureVisible;
-                state.signatureMaterial = savedConfig.signatureMaterial;
+                state.teethJewelType = config.type;
+                state.teethMaterial = config.material;
+                state.teethStones = config.stones;
+                state.teethPaves = config.pave;
+                state.teethEnamel = config.enamel;
+                state.teethFinish = config.finish;
+                state.teethVisibility = config.visible;
+                state.teethPrices = config.prices;
+                state.teethPreciousness = config.preciousness;
+                state.signatureVisibility = config.signatureVisible;
+                state.signatureMaterial = config.signatureMaterial;
 
                 if(savedConfigPack) {
-                    state.packaging = savedConfigPack.packaging;
+                    state.packaging = configPack!.packaging;
                 }
 
                 get().setHistory(state);
@@ -2432,6 +2437,3 @@ export const useTeethStore = create<State>((set, get) => ({
         }
     }
 }))
-
-// initial data fetch, to do with Tanstack Query
-// useTeethStore.getState().fetchPrices();
