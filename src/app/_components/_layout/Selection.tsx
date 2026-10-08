@@ -1,5 +1,5 @@
 'use client'
-import React from "react";
+import React, {useState} from "react";
 import ToothConfigOptions from "@/app/_components/_elements/ToothConfigOptions";
 import {useTeethStore} from "@/app/_stores/teeth";
 import {State} from "@/app/_types/State";
@@ -14,9 +14,23 @@ export default function Selection({activeButton, changeActiveButton} : {activeBu
     const innerWidth = useTeethStore((state:State) => state.innerWidth);
     const innerHeight = useTeethStore((state:State) => state.innerHeight);
     const setSavedConfig = useTeethStore((state: State) => state.setLocalSavedConfig);
+    const [shownPresets, setShownPresets] = useState<number[]>([1, 2]);
 
     function getRandomPreset() {
         return Math.floor(Math.random() * (14 + 1));
+    }
+
+    function setRandomPreset() {
+        const usedPresets = shownPresets.length === 15 ? [] : shownPresets;
+
+        let random = getRandomPreset();
+
+        while(usedPresets.indexOf(random) !== -1) {
+            random = getRandomPreset();
+        }
+
+        setSavedConfig(presets[random] as History, undefined);
+        setShownPresets([...usedPresets, random])
     }
 
     return (
@@ -33,7 +47,7 @@ export default function Selection({activeButton, changeActiveButton} : {activeBu
                             <img src="/config-menu-svgs/Vector.svg" alt="DARKAI configurator signature design icon with a capital D"/>
                             <img className="ml-0.5" src="/config-menu-svgs/Vector-2.svg" alt="DARKAI configurator signature design icon with a capital I"/>
                         </ConfiguratorButton>
-                        <ConfiguratorButton tooth="alwaysActive" inverse={false} onclick={() => setSavedConfig(presets[getRandomPreset()] as History, undefined)}
+                        <ConfiguratorButton tooth="alwaysActive" inverse={false} onclick={() => setRandomPreset()}
                                             value="1000" active="" label="Presets">
                             <img src="/config-menu-svgs/presets.svg"
                                  alt="DARKAI configurator presets design icon"/>
